@@ -1,19 +1,29 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
+
 //id값으로 스크롤
 import { Link } from "react-scroll";
 //아이콘
+import { Badge } from "@material-ui/core";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import PersonIcon from "@mui/icons-material/Person";
 import InfoIcon from "@mui/icons-material/Info";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 
-function FixedBtn() {
+function FixedBtn(props) {
+  const [isRead, setIsRead] = React.useState(false);
+  const user_id = useSelector((state) => state.user.user);
+
+  const notiCheck = () => {
+    setIsRead(true);
+    props._onClick();
+  };
+
   return (
     <React.Fragment>
       <BtnWrap>
-        {" "}
         <Link to="1" smooth={true}>
           <Up>
             <ArrowUpwardIcon />
@@ -31,10 +41,17 @@ function FixedBtn() {
           <PersonIcon />
           <span>마이페이지</span>
         </Follow>
-        <Noti>
-          <NotificationsIcon />
-          <span>알림</span>
-        </Noti>
+        <Badge
+          color="secondary"
+          badgeContent={0}
+          overlap="circular"
+          invisible={isRead}
+        >
+          <Noti onClick={notiCheck}>
+            <NotificationsIcon />
+            <span>알림</span>
+          </Noti>
+        </Badge>
       </BtnWrap>
     </React.Fragment>
   );
@@ -220,3 +237,7 @@ const Up = styled.div`
 `;
 
 export default FixedBtn;
+
+FixedBtn.defaultProps = {
+  _onClick: () => {},
+};
