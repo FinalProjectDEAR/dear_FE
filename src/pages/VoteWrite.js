@@ -27,16 +27,16 @@ function VoteWrite() {
   const imageLeft = useRef();
   const imageRight = useRef();
 
-  const selectFile = (num) => {
+  const selectFile = (where) => {
     const reader = new FileReader();
-    console.log(num);
-    if (num === 1) {
+    console.log(where);
+    if (where === "left") {
       const file = imageLeft.current.files[0];
       console.log("이미지 파일형태 확인", file);
       reader.readAsDataURL(file);
       reader.onloadend = () => {
         setLeftPreview(reader.result);
-        dispatch(imageActions.uploadImage(file, num));
+        dispatch(imageActions.uploadImage(file, where));
       };
     } else {
       const file = imageRight.current.files[0];
@@ -44,7 +44,7 @@ function VoteWrite() {
       reader.readAsDataURL(file);
       reader.onloadend = () => {
         setRightPreview(reader.result);
-        dispatch(imageActions.uploadImage(file, num));
+        dispatch(imageActions.uploadImage(file, where));
       };
     }
   };
@@ -103,178 +103,278 @@ function VoteWrite() {
 
   return (
     <React.Fragment>
-      <div id="wrapper" width="70%" margin="10% auto">
-        <div
-          id="container"
-          width="60%"
-          margin="0px auto"
-          borderLine="3px solid orange"
-        >
-          <div id="title" display="flex" justifyContent="flex-start">
-            <div width="20%" padding="0px 10px">
-              <Text textAlign="left">제목</Text>
-            </div>
-            <div width="80%">
-              <Input
-                value={title}
-                _onChange={(e) => {
-                  setTitle(e.target.value);
-                }}
-              />
-            </div>
-          </div>
-          <div id="content" display="flex" justifyContent="flex-start">
-            <div width="20%" padding="0px 10px">
-              <Text textAlign="left">
-                투표내용 <br />
-                (200자 미만)
-              </Text>
-            </div>
-            <div width="80%">
-              <Input
-                multiLine
-                _onKeyUp={checkLength}
-                maxlength="200"
-                placeholder=" 투표 내용을 입력해주세요."
-                value={contents}
-                rows={3}
-                _onChange={(e) => {
-                  setContents(e.target.value);
-                }}
-              />
-              <Text textAlign="right" margin="0px 5px">
-                {textLength}/ 200자
-              </Text>
-            </div>
-          </div>
-          <div id="typeselect" display="flex" justifyContent="flex-start">
-            <div width="20%" padding="0px 10px">
-              <Text textAlign="left">투표선택지</Text>
-            </div>
-            <div width="15%">
-              <Button
-                text="이미지 포함"
-                _onClick={() => {
-                  imageVote();
-                }}
-              />
-            </div>
-          </div>
+      <VoteWrapper>
+        <LineBox>
+          <Text margin="0px" batang weight="500" size="16px">
+            간단한 고민을 투표로 물어보세요!{" "}
+          </Text>
+          <Text margin="0px 10px" weight="300" size="14px">
+            <span style={{ color: "red", marginRight: "4px" }}>*</span>필수입력
+          </Text>
+        </LineBox>
+        <InputBox>
+          <Text textAlign="left" weight="400" size="16px" color="#999999">
+            투표 질문
+            <span style={{ color: "red", marginRight: "4px" }}>*</span>
+          </Text>
+          <Input
+            margin="0px"
+            padding="16px"
+            placeholder="질문할 내용을 20자 이내로 입력해주세요."
+            value={title}
+            _onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+          />
+        </InputBox>
+        <InputBox>
+          <Text
+            textAlign="left"
+            margin="0px"
+            weight="400"
+            size="16px"
+            color="#999999"
+          >
+            투표 내용
+            <span style={{ color: "red", marginRight: "4px" }}>*</span>
+          </Text>
+          <Text textAlign="right" margin="0px" weight="300" size="14px">
+            {textLength}/ 200자
+          </Text>
+          <Input
+            margin="0px"
+            padding="16px"
+            multiLine
+            _onKeyUp={checkLength}
+            maxlength="200"
+            placeholder=" 구체적인 내용을 200자 이내로 입력해주세요."
+            value={contents}
+            rows={4}
+            _onChange={(e) => {
+              setContents(e.target.value);
+            }}
+          />
+        </InputBox>
+        <LineBox>
+          <Text textAlign="left" weight="400" size="16px" color="#999999">
+            투표 유형
+            <span style={{ color: "red", marginRight: "4px" }}>*</span>
+          </Text>
+          <CheckBox>
+            <input
+              type="radio"
+              name="type"
+              value="letter"
+              onChange={() => {
+                setImageVote(false);
+              }}
+            />
+            글
+          </CheckBox>
+          <CheckBox>
+            <input
+              type="radio"
+              name="type"
+              value="image"
+              onChange={() => {
+                setImageVote(true);
+              }}
+            />
+            이미지
+          </CheckBox>
+        </LineBox>
 
-          {imgVote ? (
-            <div width="80%" is_flex margin="20px auto">
-              <div id="select1">
-                <img
-                  shape="rectangle"
-                  src={leftPreview ? leftPreview : uploadImg}
-                  alt="선택지1"
-                />
-                <div id="input" width="50%" margin="0px auto">
-                  <FileInput
-                    id="leftImage"
-                    type="file"
-                    ref={imageLeft}
-                    onChange={() => {
-                      selectFile(1);
-                    }}
-                  />
-                  <ImgButton htmlFor="leftImage">1번 이미지 등록 </ImgButton>
-                  <Input
-                    placeholder=" 1번 선택지"
-                    value={voteLeft}
-                    _onChange={(e) => {
-                      setVoteLeft(e.target.value);
-                    }}
-                  />
-                </div>
-              </div>
-              <div items="center" margin="auto">
-                <Text bold size="30px">
-                  VS
-                </Text>
-              </div>
-              <div id="select2">
-                <img
-                  shape="rectangle"
-                  src={rightPreview ? rightPreview : uploadImg}
-                  alt="선택지2"
-                />
-                <div id="input" width="50%" margin="0px auto">
-                  <FileInput
-                    id="rightImage"
-                    type="file"
-                    ref={imageRight}
-                    onChange={() => {
-                      selectFile(2);
-                    }}
-                  />
-                  <ImgButton htmlFor="rightImage">2번 이미지 등록 </ImgButton>
-                  <Input
-                    placeholder=" 2번 선택지"
-                    value={voteRight}
-                    _onChange={(e) => {
-                      setVoteRight(e.target.value);
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div width="80%" margin="20px auto">
-              <div id="select1">
-                <Input
-                  placeholder=" 1번 선택지"
-                  value={voteLeft}
-                  _onChange={(e) => {
-                    setVoteLeft(e.target.value);
+        {imgVote ? (
+          <ImageBox>
+            <FileBox>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <ImgButton htmlFor="leftImage">이미지 등록</ImgButton>
+                <Image src={leftPreview ? leftPreview : uploadImg} />
+                <FileInput
+                  id="leftImage"
+                  type="file"
+                  ref={imageLeft}
+                  onChange={() => {
+                    selectFile("left");
                   }}
                 />
               </div>
-
-              <div items="center" margin="auto">
-                <Text bold size="30px">
-                  VS
-                </Text>
-              </div>
-              <div id="select2">
-                <Input
-                  placeholder=" 2번 선택지"
-                  value={voteRight}
-                  _onChange={(e) => {
-                    setVoteRight(e.target.value);
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <ImgButton htmlFor="rightImage">이미지 등록</ImgButton>
+                <Image src={rightPreview ? rightPreview : uploadImg} />
+                <FileInput
+                  id="rightImage"
+                  type="file"
+                  ref={imageRight}
+                  onChange={() => {
+                    selectFile("right");
                   }}
                 />
               </div>
-            </div>
-          )}
+            </FileBox>
+            <LineBox>
+              <Input
+                margin="0px"
+                padding="16px"
+                placeholder="첫번째 답변을 5자 이내로 입력해주세요."
+                value={voteLeft}
+                _onChange={(e) => {
+                  setVoteLeft(e.target.value);
+                }}
+              />
 
+              <Text weight="500" size="18px" margin="0px 46px">
+                VS
+              </Text>
+              <Input
+                margin="0px"
+                padding="16px"
+                placeholder="두번째 답변을 5자 이내로 입력해주세요."
+                value={voteRight}
+                _onChange={(e) => {
+                  setVoteRight(e.target.value);
+                }}
+              />
+            </LineBox>
+          </ImageBox>
+        ) : (
+          <VoteBox>
+            <Input
+              margin="0px"
+              padding="16px"
+              placeholder="첫번째 답변을 5자 이내로 입력해주세요."
+              value={voteLeft}
+              _onChange={(e) => {
+                setVoteLeft(e.target.value);
+              }}
+            />
+
+            <Text weight="500" size="18px" margin="0px 46px">
+              VS
+            </Text>
+            <Input
+              margin="0px"
+              padding="16px"
+              placeholder="두번째 답변을 5자 이내로 입력해주세요."
+              value={voteRight}
+              _onChange={(e) => {
+                setVoteRight(e.target.value);
+              }}
+            />
+          </VoteBox>
+        )}
+        <LineBox>
           <Button
-            margin="20px 0px"
-            width="30%"
+            bg="#7A37BE"
+            margin="60px auto"
+            width="212px"
             text="투표등록"
             _onClick={uploadVote}
           />
-        </div>
-      </div>
+        </LineBox>
+      </VoteWrapper>
     </React.Fragment>
   );
 }
 
 export default VoteWrite;
 
+const VoteWrapper = styled.div`
+  width: 994px;
+  height: px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 60px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+`;
+
+const LineBox = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 8px 0px;
+`;
+
+const Title = styled.div`
+  display: flex;
+  width: 20%;
+  height: 60px;
+  box-sizing: border-box;
+  padding: 18px 0px;
+`;
+
+const CheckBox = styled.div`
+  display: flex;
+  align-items: center;
+  width: auto;
+  height: 24px;
+  margin: 10px;
+`;
+
+const VoteBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  width: 664px;
+  margin: 0px auto;
+  box-sizing: border-box;
+`;
+
+const ImageBox = styled.div`
+  width: 664px;
+  margin: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+`;
+
+const Image = styled.label`
+  width: 264px;
+  box-sizing: border-box;
+  height: 144px;
+  background: #f2f2f2;
+  border-radius: 10px;
+  margin: 10px;
+  background-image: url("${(props) => props.src}");
+  background-size: cover;
+  position: relative;
+`;
+
+const InputBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* justify-content: space-around; */
+  margin: 20px 0px;
+`;
+
 const FileInput = styled.input`
   display: none;
 `;
 
+const FileBox = styled.div`
+  margin: "5px";
+  display: flex;
+  justify-content: space-between;
+`;
+
 const ImgButton = styled.label`
   border: none;
-  background-color: #0095f6;
-  color: #fff;
+  background-color: #999;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
-  width: 100%;
-  margin: 10px 0px;
+  color: #fff;
+  width: 30%;
+  margin: 0px 10px;
   padding: 5px;
   display: flex;
   align-items: center;

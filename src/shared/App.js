@@ -18,6 +18,9 @@ import Login from "../pages/Login";
 import KakaoAuthHandle from "../pages/KakaoAuthHandle";
 import Signup from "../pages/Signup";
 import MemberInfo from "../pages/MemberInfo";
+import VoteWrite from "../pages/VoteWrite";
+import VoteDetail from "../pages/VoteDetail";
+import VoteList from "../components/VoteList";
 
 function App() {
   return (
@@ -29,6 +32,9 @@ function App() {
           <Route path="/user/kakao/callback" component={KakaoAuthHandle} />
           <Route path="/signup" exact component={Signup} />
           <Route path="/info" exact component={MemberInfo} />
+          <Route path="/voteWrite" exact component={VoteWrite} />
+          <Route path="/voteDetail/:postId" component={VoteDetail} />
+          <Route path="/voteList" component={VoteList} />
           <Section />
         </Wrapper>
         <Footer />

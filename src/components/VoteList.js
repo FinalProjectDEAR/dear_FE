@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as voteActions } from "../redux/modules/vote";
+import { history } from "../redux/configureStore";
 
 import { Text } from "../elements";
 import styled from "styled-components";
@@ -24,9 +25,11 @@ const VoteList = (props) => {
   const settings = {
     dots: true,
     infinite: true,
-    slidesToShow: 4,
+    slidesToShow: 2,
     slidesToScroll: 1,
     autoplay: true,
+    rows: 2,
+    slidesPerRow: 1,
     autoplaySpeed: 3000,
     pauseOnHover: true,
   };
@@ -34,8 +37,8 @@ const VoteList = (props) => {
   const voteList = useSelector((state) => state.vote.voteList);
   return (
     <RankingWrapper>
-      <Text textAlign="left" weight="500">
-        디어상담소 TOP 10 투표
+      <Text textAlign="left" weight="700" size="18px" color="#2E2A32">
+        지금 뜨거운 투표
       </Text>
       <RankingContainer>
         <Slider {...settings} dotsClass="dotStyle">
@@ -53,6 +56,20 @@ const VoteList = (props) => {
           <VoteCard />
           <VoteCard />
         </Slider>
+        <Text
+          margin="20px"
+          textAlign="left"
+          weight="500"
+          size="16px"
+          color="#948A9E"
+          deco="underLine"
+          cursor="pointer"
+          _onClick={() => {
+            history.push("");
+          }}
+        >
+          진행중인 투표 더보기 >
+        </Text>
       </RankingContainer>
     </RankingWrapper>
   );

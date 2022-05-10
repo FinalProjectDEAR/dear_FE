@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 import { Text, Button, Input, ColorBadge } from "../elements";
+import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
 import image01 from "../assets/image01.png";
 import image02 from "../assets/image02.png";
 
@@ -14,6 +15,12 @@ function VoteCard(props) {
     <React.Fragment>
       <CardWrapper>
         <LineBox>
+          <Text wordBreak weigh="500" size="16px" color="#999999">
+            {props.title}
+          </Text>
+        </LineBox>
+        <LineBox>
+          <VoteTitle> {props.vote[0].imageTitle}</VoteTitle>
           <ProgressBar>
             <Highlight
               width={
@@ -22,36 +29,15 @@ function VoteCard(props) {
               }
             />
           </ProgressBar>
+          <VoteTitle> {props.vote[1].imageTitle}</VoteTitle>
         </LineBox>
         <LineBox>
-          <Text weight="400" size="18px" color="#2E2A32">
-            {props.vote[0].imageTitle} vs {props.vote[1].imageTitle}
-          </Text>
-        </LineBox>
-        <LineBox>
-          <Text
-            wordBreak
-            batang
-            margin="12px"
-            weigh="300"
-            size="14px"
-            color="#666666"
-          >
-            {props.title}
-          </Text>
-        </LineBox>
-        <BottomBox>
-          <Text color="#2E2A32" weight="300" size="14px">
+          <PeopleRoundedIcon style={{ width: "16.5px", color: "#999999" }} />
+          <Text color="#61586A" weight="300" size="12px" margin="0px 5px">
             {/* {totalCount}명 참여중 */}
             165명 참여중
           </Text>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <ColorBadge bg="#40D39C" size="12" border="1px solid #2E2A32" />
-            <Text color="#2E2A32" weight="300" size="14px" margin="0px 5px">
-              {props.nickname}
-            </Text>
-          </div>
-        </BottomBox>
+        </LineBox>
       </CardWrapper>
     </React.Fragment>
   );
@@ -81,16 +67,21 @@ VoteCard.defaultProps = {
 };
 
 const CardWrapper = styled.div`
-  width: 278px;
-  height: 200px;
-  padding: 0px 30px;
+  width: 588px;
+  height: 180px;
+  margin: 12px;
+  padding: 10px 30px;
   box-sizing: border-box;
+  display: block;
+
   background: #fafafa;
   border-radius: 10px;
   cursor: pointer;
+  filter: drop-shadow(0px 0px 20px rgba(172, 151, 197, 0.25));
 `;
 
 const LineBox = styled.div`
+  margin: 5px 0px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -105,20 +96,34 @@ const BottomBox = styled.div`
   align-items: center;
 `;
 
+const VoteTitle = styled.div`
+  width: 120px;
+  height: 47px;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 14px;
+  background: #7a37be;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 300;
+  border-radius: 25px;
+`;
+
 const ProgressBar = styled.div`
   display: flex;
   align-items: center;
-  background-color: #d53253;
+  background-color: #bb9ed8;
   width: 80%;
   height: 10px;
   margin: 25px auto;
-  border-radius: 3px;
 `;
 
 const Highlight = styled.div`
-  background-color: #ffd05b;
+  background-color: #eee7f5;
   transition: 1s;
   width: ${(props) => props.width};
   height: 10px;
-  border-radius: 3px;
 `;
