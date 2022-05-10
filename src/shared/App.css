@@ -1,5 +1,10 @@
 .App {
   text-align: center;
+  height: 100%;
+  background: linear-gradient(161.09deg, #e3e7f1 12.68%, #e6d6e3 88.48%);
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
+    "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR",
+    "Malgun Gothic", sans-serif;
 }
 
 .App-logo {
@@ -35,4 +40,14 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.kopubbatang * {
+  font-family: "KoPub Batang", serif;
+}
+
+* {
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
+    "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR",
+    "Malgun Gothic", sans-serif;
 }
