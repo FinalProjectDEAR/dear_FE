@@ -38,19 +38,12 @@ const likeComment = createAction(LIKE, (commentId, likes) => ({
 //서버에서 댓글 가져오기
 const getCommentDB = (postId) => {
   // console.log(postId);
-  const myToken = localStorage.getItem("accessToken");
   return function (dispatch, getState, { history }) {
     try {
-      api
-        .get(
-          `anonypost/${postId}/comment`,
-
-          { headers: { Authorization: `Bearer ${myToken}` } }
-        )
-        .then((res) => {
-          // console.log("댓글가져오기", res.data);
-          dispatch(getComment(res.data));
-        });
+      api.get(`anonypost/${postId}/comment`, {}).then((res) => {
+        // console.log("댓글가져오기", res.data);
+        dispatch(getComment(res.data));
+      });
     } catch (err) {
       console.log("댓글가져오기", err);
       window.alert("댓글정보를 가져올 수 없습니다.");
@@ -60,18 +53,13 @@ const getCommentDB = (postId) => {
 
 //서버에게 댓글 보내기
 const addCommentDB = (comment, postId) => {
-  const myToken = localStorage.getItem("accessToken");
   return function (dispatch, getState, { history }) {
-    console.log("댓글추가하기!", comment.comment, postId);
+    // console.log("댓글추가하기!", comment.comment, postId);
     try {
       api
-        .post(`anonypost/board/${postId}/comment`, comment.comment, {
-          headers: {
-            Authorization: `Bearer ${myToken}`,
-          },
-        })
+        .post(`anonypost/board/${postId}/comment`, comment.comment)
         .then((res) => {
-          console.log("댓글 추가", res.data.data);
+          // console.log("댓글 추가", res.data.data);
           dispatch(addComment(res.data.data));
         });
     } catch (err) {
@@ -82,22 +70,13 @@ const addCommentDB = (comment, postId) => {
 };
 //댓글 수정하기
 const editCommentDB = (comment_id, comment, postId) => {
-  console.log("댓글수정하기", comment_id, comment, postId);
-  const myToken = localStorage.getItem("accessToken");
+  // console.log("댓글수정하기", comment_id, comment, postId);
   return function (dispatch, getState, { history }) {
     try {
       api
-        .put(
-          `anonypost/board/${postId}/comment/${comment_id}`,
-          { comment },
-          {
-            headers: {
-              Authorization: `Bearer ${myToken}`,
-            },
-          }
-        )
+        .put(`anonypost/board/${postId}/comment/${comment_id}`, { comment })
         .then((res) => {
-          console.log("댓글 수정", res);
+          // console.log("댓글 수정", res);
           dispatch(editComment(comment_id, comment));
         });
     } catch (err) {
@@ -109,17 +88,11 @@ const editCommentDB = (comment_id, comment, postId) => {
 //댓글삭제하기
 const delCommentDB = (payload) => {
   // console.log("댓글 삭제", payload.comment_id, payload.postId);
-  const myToken = localStorage.getItem("accessToken");
   return function (dispatch, getState, { history }) {
     try {
       api
         .delete(
-          `anonypost/board/${payload.postId}/comment/${payload.comment_id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${myToken}`,
-            },
-          }
+          `anonypost/board/${payload.postId}/comment/${payload.comment_id}`
         )
         .then(() => {
           dispatch(delComment(payload.comment_id));
@@ -132,19 +105,10 @@ const delCommentDB = (payload) => {
 //댓글 좋아요
 const likeCommentDB = (postId, commentId) => {
   console.log("댓글 좋아요", postId, commentId);
-  const myToken = localStorage.getItem("accessToken");
   return function (dispatch, getState, { history }) {
     try {
       api
-        .post(
-          `anonypost/board/${postId}/commentLikes/${commentId}`,
-          {},
-          {
-            headers: {
-              Authorization: `Bearer ${myToken}`,
-            },
-          }
-        )
+        .post(`anonypost/board/${postId}/commentLikes/${commentId}`, {})
         .then((res) => {
           console.log("댓글좋아요 Res", res);
           dispatch(likeComment(commentId, res.data.data.likes));
@@ -169,7 +133,7 @@ export default handleActions(
       }),
     [EDIT]: (state, action) =>
       produce(state, (draft) => {
-        console.log("댓글 수정 리듀서", action.payload);
+        // console.log("댓글 수정 리듀서", action.payload);
         let idx = draft.comments.findIndex((c) => {
           return parseInt(c.commentId) === parseInt(action.payload.commentId);
         });
@@ -195,7 +159,6 @@ export default handleActions(
             e.likes = action.payload.likes;
           }
         });
-        //..좋아요는 어떻게 하는거지?
       }),
   },
   initialState

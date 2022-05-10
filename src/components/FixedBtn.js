@@ -84,7 +84,7 @@ const Desc = styled.div`
   order: 0;
   flex-grow: 0;
   margin: 20px 0px;
-  border-radius: 100%;
+  border-radius: 50%;
   background-color: white;
   border: none;
   color: #61586a;
@@ -122,7 +122,7 @@ const Message = styled.div`
   order: 1;
   flex-grow: 0;
   margin: 20px 0px;
-  border-radius: 100%;
+  border-radius: 50%;
   background-color: white;
   border: none;
   color: #61586a;
@@ -158,7 +158,7 @@ const Follow = styled.div`
   order: 2;
   flex-grow: 0;
   margin: 20px 0px;
-  border-radius: 100%;
+  border-radius: 50%;
   background-color: white;
   border: none;
   color: #61586a;
@@ -194,7 +194,7 @@ const Noti = styled.div`
   order: 3;
   flex-grow: 0;
   margin: 20px 0px;
-  border-radius: 100%;
+  border-radius: 50%;
   background-color: white;
   border: none;
   color: #61586a;
@@ -229,7 +229,7 @@ const Up = styled.div`
   order: 4;
   flex-grow: 0;
   margin: 20px 0px;
-  border-radius: 100%;
+  border-radius: 50%;
   background-color: #61586a;
   color: white;
   border: none;

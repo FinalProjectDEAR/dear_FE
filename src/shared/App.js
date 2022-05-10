@@ -5,8 +5,6 @@ import styled from "styled-components";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configureStore";
 
-import { Text, Button, Input } from "../elements";
-
 import { Switch } from "react-router-dom";
 import { Route } from "react-router-dom";
 
@@ -18,6 +16,14 @@ import Login from "../pages/Login";
 import KakaoAuthHandle from "../pages/KakaoAuthHandle";
 import Signup from "../pages/Signup";
 import MemberInfo from "../pages/MemberInfo";
+import PostList from "../pages/PostList";
+import PostWrite from "../pages/PostWrite";
+import PostDetail from "../pages/PostDetail";
+import Main from "../pages/Main";
+import Review from "../pages/Review";
+import CommentList from "../components/CommentList";
+import PostEdit from "../pages/PostEdit";
+import FixedBtn from "../components/FixedBtn";
 import VoteWrite from "../pages/VoteWrite";
 import VoteDetail from "../pages/VoteDetail";
 import VoteList from "../components/VoteList";
@@ -32,12 +38,21 @@ function App() {
           <Route path="/user/kakao/callback" component={KakaoAuthHandle} />
           <Route path="/signup" exact component={Signup} />
           <Route path="/info" exact component={MemberInfo} />
+          <Route path="/commentList" exact component={CommentList} />
+          <Route path="/main" exact component={Main} />
+          <Route path="/postList" exact component={PostList} />
+          <Route path="/postWrite" exact component={PostWrite} />
+          <Route path="/postDetail/:postId" exact component={PostDetail} />
+          <Route path="/review" exact component={Review} />
+          <Route path="/postEdit/:postId" exact component={PostEdit} />
           <Route path="/voteWrite" exact component={VoteWrite} />
           <Route path="/voteDetail/:postId" component={VoteDetail} />
           <Route path="/voteList" component={VoteList} />
           <Section />
         </Wrapper>
+        <Section />
         <Footer />
+        <FixedBtn />
       </ConnectedRouter>
     </div>
   );

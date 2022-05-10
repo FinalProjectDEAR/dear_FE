@@ -24,6 +24,7 @@ function PostDetail(props) {
   }, []);
   //상세페이지 가져오기
   const post = useSelector((state) => state.post.detailPost);
+  // console.log(post);
   const image = post?.imgUrl;
   const memberId = post?.memberId;
 
@@ -110,7 +111,7 @@ function PostDetail(props) {
                 수정하기
               </Text>
             </Button>
-            <Button _onClick={onRemove}>
+            <Button _onClick={onRemove} cursor="pointer">
               <Text color="#ffffff" size="16.5px" margin="1px 0 0 0">
                 삭제하기
               </Text>
@@ -131,7 +132,6 @@ function PostDetail(props) {
             </Button>
           </div>
         )}
-
         <CommentWrite postId={postId} />
         <CommentList />
       </Wrap>
@@ -300,6 +300,7 @@ const Img = styled.img`
   margin-top: 10px;
   margin-left: 10px;
   &:hover {
+    transition: 0.4s;
     transform: scale(4.9);
     -webkit-transform: scale(4.9);
     -moz-transform: scale(4.9);
