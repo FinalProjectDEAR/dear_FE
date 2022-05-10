@@ -13,7 +13,8 @@ function PostEdit() {
   const history = useHistory();
   const dispatch = useDispatch();
   const params = useParams();
-  const postId = params.postId;
+  const postId = parseInt(params.postId);
+  console.log(postId);
   // //상세페이지에 있는 정보 가져오기
   React.useEffect(() => {
     if (postId) dispatch(actionCreators.getDetailDB(postId));
@@ -108,6 +109,10 @@ function PostEdit() {
   let newFiles = [];
   let editUrl = [];
   files.map((e, i) => {
+    if (newFiles > 4) {
+      console.log("리듀서에 3장 넘게 들어간 경우");
+      return;
+    }
     if (e) {
       newFiles.push(e);
       console.log("새로운 사진", newFiles);
@@ -204,51 +209,54 @@ function PostEdit() {
           </ContentWrap>
           <PhotoWrap>
             <Title>첨부파일</Title>
-            <PhotoContainer>
-              <PhotoDesc>사진은 최대 3장 업로드 가능합니다.</PhotoDesc>
-              <PhotoUpload>
-                <label>
-                  <img
-                    src="https://res.kurly.com/pc/ico/1806/img_add_thumb_x2.png"
-                    style={{
-                      width: "20px",
-                      marginTop: "33px",
-                    }}
-                    alt="이미지플러스"
-                  />
-                  <input
-                    type="file"
-                    onChange={selectFile}
-                    ref={fileInput}
-                    multiple="multiple"
-                    accept=".jpg,.png"
-                  />
-                </label>
-              </PhotoUpload>
-              <PhotoDiv>
-                {imgPreview.map((image, id) => {
-                  return (
-                    <PhotoDiv>
-                      <Img
-                        key={id}
-                        style={{
-                          width: "80px",
-                          marginTop: "5px",
-                        }}
-                        src={image}
-                        alt={`${image}-${id}`}
-                      />
-                      <BiX
-                        type="button"
-                        onClick={() => {
-                          CancelImage(image, id);
-                        }}
-                      />
-                    </PhotoDiv>
-                  );
-                })}
-              </PhotoDiv>
-            </PhotoContainer>
+            <div>
+              <PhotoDesc>사진은 최대 3장 업로드 가능합니다.</PhotoDesc>{" "}
+              <PhotoContainer>
+                <PhotoUpload>
+                  <label>
+                    <img
+                      src="https://res.kurly.com/pc/ico/1806/img_add_thumb_x2.png"
+                      style={{
+                        width: "20px",
+                        marginTop: "33px",
+                      }}
+                      alt="이미지플러스"
+                    />
+                    <input
+                      type="file"
+                      onChange={selectFile}
+                      ref={fileInput}
+                      multiple="multiple"
+                      accept=".jpg,.png"
+                    />
+                  </label>
+                </PhotoUpload>
+                <PhotoDiv>
+                  {imgPreview &&
+                    imgPreview.map((image, id) => {
+                      return (
+                        <PhotoDiv>
+                          <Img
+                            key={id}
+                            style={{
+                              width: "80px",
+                              marginTop: "5px",
+                            }}
+                            src={image}
+                            alt={`${image}-${id}`}
+                          />
+                          <BiX
+                            type="button"
+                            onClick={() => {
+                              CancelImage(image, id);
+                            }}
+                          />
+                        </PhotoDiv>
+                      );
+                    })}
+                </PhotoDiv>
+              </PhotoContainer>
+            </div>
           </PhotoWrap>
           <BtnWrap>
             <Button
@@ -447,6 +455,7 @@ const Img = styled.img`
   width: 80px;
   height: 80px;
   &:hover {
+    transition: 0.4s;
     transform: scale(4.9);
     -webkit-transform: scale(4.9);
     -moz-transform: scale(4.9);
@@ -455,7 +464,7 @@ const Img = styled.img`
   }
 `;
 const PhotoContainer = styled.div`
-  /* div로 묶어줘야 모양이 나옴.. */
+  display: flex;
 `;
 const BtnWrap = styled.div`
   display: flex;

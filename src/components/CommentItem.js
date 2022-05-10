@@ -35,7 +35,7 @@ const CommentItem = (props) => {
   const [textLength, setTextLength] = React.useState(0);
   //defaultValue가 아닌 진짜 Value로 불러오기 위한 작업
   useEffect(() => {
-    console.log("유즈이펙트 시작한다~~");
+    // console.log("유즈이펙트 시작한다~~");
     setComment(comments);
   }, [props]);
   //글자 수 제한

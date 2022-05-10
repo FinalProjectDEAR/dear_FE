@@ -25,14 +25,14 @@ const Footer = () => {
 };
 
 const FooterWrapper = styled.div`
-  background-color: green;
+  background-color: #cdb4db;
   height: 300px;
   width: 100%;
   margin: auto;
   position: absolute;
 `;
 const FooterBox = styled.div`
-  background: yellow;
+  background-color: #bb9ed8;
 `;
 const GitBtn = styled.button`
   border: none;

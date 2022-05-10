@@ -158,51 +158,53 @@ function PostWrite() {
           </ContentWrap>
           <PhotoWrap>
             <Title>첨부파일</Title>
-            <PhotoContainer>
+            <div>
               <PhotoDesc>사진은 최대 3장 업로드 가능합니다.</PhotoDesc>
-              <PhotoUpload>
-                <label>
-                  <img
-                    src="https://res.kurly.com/pc/ico/1806/img_add_thumb_x2.png"
-                    style={{
-                      width: "20px",
-                      marginTop: "33px",
-                    }}
-                    alt="이미지플러스"
-                  />
-                  <input
-                    type="file"
-                    onChange={selectFile}
-                    ref={fileInput}
-                    multiple="multiple"
-                    accept=".jpg,.png"
-                  />
-                </label>
-              </PhotoUpload>
-              <PhotoDiv>
-                {imgPreview.map((image, id) => {
-                  return (
-                    <PhotoDiv>
-                      <Img
-                        key={id}
-                        style={{
-                          width: "80px",
-                          marginTop: "5px",
-                        }}
-                        src={`${image}` ? `${image}` : null}
-                        alt={`${image}-${id}`}
-                      />
-                      <BiX
-                        type="button"
-                        onClick={() => {
-                          CancelImage(image, id);
-                        }}
-                      />
-                    </PhotoDiv>
-                  );
-                })}
-              </PhotoDiv>
-            </PhotoContainer>
+              <PhotoContainer>
+                <PhotoUpload>
+                  <label>
+                    <img
+                      src="https://res.kurly.com/pc/ico/1806/img_add_thumb_x2.png"
+                      style={{
+                        width: "20px",
+                        marginTop: "33px",
+                      }}
+                      alt="이미지플러스"
+                    />
+                    <input
+                      type="file"
+                      onChange={selectFile}
+                      ref={fileInput}
+                      multiple="multiple"
+                      accept=".jpg,.png"
+                    />
+                  </label>
+                </PhotoUpload>
+                <PhotoDiv>
+                  {imgPreview.map((image, id) => {
+                    return (
+                      <PhotoDiv>
+                        <Img
+                          key={id}
+                          style={{
+                            width: "80px",
+                            marginTop: "5px",
+                          }}
+                          src={`${image}` ? `${image}` : null}
+                          alt={`${image}-${id}`}
+                        />
+                        <BiX
+                          type="button"
+                          onClick={() => {
+                            CancelImage(image, id);
+                          }}
+                        />
+                      </PhotoDiv>
+                    );
+                  })}
+                </PhotoDiv>
+              </PhotoContainer>
+            </div>
           </PhotoWrap>
           <BtnWrap>
             <Button
@@ -329,6 +331,7 @@ const Select = styled.select`
   align-items: center;
   padding: 12px 20px;
   margin-left: 40px;
+  cursor: pointer;
 `;
 const TitleInputWrap = styled.div`
   position: absolute;
@@ -394,6 +397,7 @@ const PhotoUpload = styled.div`
   margin: 10px;
   padding-bottom: 10px;
   display: block;
+  cursor: pointer;
   /* background-color: #f5f4f5; */
   border-radius: 13px;
   input[type="file"] {
@@ -414,6 +418,7 @@ const Img = styled.img`
   width: 80px;
   height: 80px;
   &:hover {
+    transition: 0.4s;
     transform: scale(4.9);
     -webkit-transform: scale(4.9);
     -moz-transform: scale(4.9);
@@ -422,7 +427,7 @@ const Img = styled.img`
   }
 `;
 const PhotoContainer = styled.div`
-  /* div로 묶어줘야 모양이 나옴.. */
+  display: flex;
 `;
 const BtnWrap = styled.div`
   display: flex;

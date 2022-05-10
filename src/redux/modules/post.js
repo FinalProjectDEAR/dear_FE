@@ -53,19 +53,12 @@ const getPostDB = () => {
 // 게시판 상세페이지 서버에서 받아오기
 const getDetailDB = (postId) => {
   // console.log(postId);
-  const myToken = localStorage.getItem("accessToken");
   return function (dispatch, getState, { history }) {
     try {
-      api
-        .get(
-          `anonypost/board/${postId}`,
-
-          { headers: { Authorization: `Bearer ${myToken}` } }
-        )
-        .then((res) => {
-          // console.log("포스트 상세보기 get", res.data.data);
-          dispatch(getDetail(res.data.data));
-        });
+      api.get(`anonypost/board/${postId}`, {}).then((res) => {
+        console.log("포스트 상세보기 get", res.data.data);
+        dispatch(getDetail(res.data.data));
+      });
     } catch (err) {
       console.log("포스트 상세보기", err);
       window.alert("게시글 정보를 가져올 수 없습니다.");
@@ -103,31 +96,36 @@ const addPostDB = (payload) => {
   };
 };
 
-//수정하기 테스트 남음 파일 관련 키값 정해지면!
+//수정하기 테스트 남음
 const editPostDB = (payload) => {
   console.log("포스트 수정하기 payload", payload);
   return async function (dispatch, getState, { history }) {
     try {
       const formData = new FormData();
+      //기존사진url
       payload.editUrl.map((e, idx) => {
-        return formData.append("기존 사진 url", e);
+        return formData.append("existedURL", e);
       });
+      //수정사진파일
       payload.newFiles.map((e, idx) => {
-        return formData.append("수정 사진 파일 ", e);
+        return formData.append("files", e);
       });
       formData.append("title", payload.title);
       formData.append("category", payload.category);
       formData.append("contents", payload.contents);
-
-      // const { data } = await apis.edit(formData, {
-      //   headers: {
-      //     "Content-Type": "multipart/form-data",
-      //   },
-      // });
-      // console.log("포스트추가하기", data);
+      const { data } = await api.put(
+        `anonypost/board/${payload.postId}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log("포스트 수정하기", data);
       dispatch(editPost({}));
     } catch (err) {
-      console.log("포스트 수정하기", err);
+      console.log("포스트 수정하기 에러", err);
     }
   };
 };
