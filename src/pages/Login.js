@@ -73,6 +73,7 @@ const Login = () => {
           <ButtonBox>
             <Button
               bg=" #61586A"
+              cursor="pointer"
               shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
               text="로그인"
               _onClick={() => {
@@ -83,6 +84,7 @@ const Login = () => {
               bg="transparent"
               border="1px solid #61586A;"
               margin="10px 0px"
+              cursor="pointer"
               shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
               _onClick={() => {
                 history.push("/signup");

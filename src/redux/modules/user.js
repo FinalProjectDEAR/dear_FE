@@ -9,6 +9,7 @@ const LOG_OUT = "LOG_OUT";
 const GET_USER = "GET_USER";
 const SET_USER = "SET_USER";
 const GET_INFO = "GET_INFO";
+const SET_MSG = "SET_MSG";
 
 // action creators
 const logOut = createAction(LOG_OUT, (memberId) => memberId);
@@ -22,6 +23,7 @@ const getInfo = createAction(
     userInfo, followList, historyList, postList
   )
 );
+const setMessage = createAction(SET_MSG, (msg) => msg);
 
 // initialState
 const initialState = {
@@ -31,6 +33,7 @@ const initialState = {
   userInfo: null,
   followList: null,
   historyList: null,
+  msg: "",
 };
 
 // middleware actions
@@ -193,10 +196,12 @@ const dupMemberIdDB = (memberId) => {
         }
       );
       console.log(data);
-      window.alert("사용가능한 아이디입니다.");
+      const msg = "사용 가능한 아이디 입니다.";
+      dispatch(setMessage(msg));
     } catch (err) {
       console.log("아이디 중복조회 실패", err);
-      window.alert("중복된 아이디입니다.");
+      const msg = "사용 할 수 없는 아이디 입니다.";
+      dispatch(setMessage(msg));
     }
   };
 };
@@ -207,9 +212,12 @@ const dupNicknameDB = (nickname) => {
       console.log("중복체크DB", nickname);
       const { data } = await apis.nickCheck(nickname);
       console.log("서버응답", data);
+      const msg = "사용 가능한 닉네임 입니다.";
+      dispatch(setMessage(msg));
     } catch (err) {
       console.log("닉네임 중복조회 실패", err);
-      window.alert("다시 시도해주세요.");
+      const msg = "사용 할 수 없는 닉네임 입니다.";
+      dispatch(setMessage(msg));
     }
   };
 };
@@ -234,6 +242,11 @@ export default handleActions(
         draft.followList = action.payload.followList;
         draft.historyList = action.payload.historyList;
         draft.postList = action.payload.postList;
+      }),
+    [SET_MSG]: (state, action) =>
+      produce(state, (draft) => {
+        console.log("메세지 리덕스", action.payload);
+        draft.msg = action.payload;
       }),
   },
   initialState
