@@ -20,10 +20,14 @@ import PostList from "../pages/PostList";
 import PostWrite from "../pages/PostWrite";
 import PostDetail from "../pages/PostDetail";
 import Main from "../pages/Main";
-import Review from "../pages/Review";
+import ResReview from "../pages/ResReview";
+import ReqReview from "../pages/ReqReview";
 import CommentList from "../components/CommentList";
 import PostEdit from "../pages/PostEdit";
 import FixedBtn from "../components/FixedBtn";
+import VoteWrite from "../pages/VoteWrite";
+import VoteDetail from "../pages/VoteDetail";
+import VoteList from "../components/VoteList";
 
 function App() {
   return (
@@ -40,8 +44,13 @@ function App() {
           <Route path="/postList" exact component={PostList} />
           <Route path="/postWrite" exact component={PostWrite} />
           <Route path="/postDetail/:postId" exact component={PostDetail} />
-          <Route path="/review" exact component={Review} />
+          <Route path="/resReview" exact component={ResReview} />
+          <Route path="/reqReview" exact component={ReqReview} />
           <Route path="/postEdit/:postId" exact component={PostEdit} />
+          <Route path="/voteWrite" exact component={VoteWrite} />
+          <Route path="/voteDetail/:postId" component={VoteDetail} />
+          <Route path="/voteList" component={VoteList} />
+          <Section />
         </Wrapper>
         <Section />
         <Footer />

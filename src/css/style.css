@@ -91,13 +91,13 @@ body {
   left: 0;
   width: 20px;
   height: 20px;
-  content: "��";
+  content: '•';
   text-align: center;
-  opacity: 0.75;
-  color: #6d6968;
+  opacity: .75;
+  color: #6D6968;
 }
 
 .dotStyle li.slick-active button:before {
-  opacity: 0.75;
+  opacity: .75;
   color: #ffffff;
 }
