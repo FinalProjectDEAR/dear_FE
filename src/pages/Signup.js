@@ -67,16 +67,19 @@ const Signup = () => {
               }}
               value={memberId}
             />
-            <Button
-              width="32%"
-              margin="0px 10px"
-              borderRadius="22px"
-              bg="#948A9E"
-              text="중복조회"
-              _onClick={() => {
-                dupCheck(memberId);
-              }}
-            />
+            <ButtonBox>
+              <Button
+                width="110px"
+                margin="0px 10px"
+                borderRadius="22px"
+                bg="#948A9E"
+                cursor="pointer"
+                text="중복확인"
+                _onClick={() => {
+                  dupCheck(memberId);
+                }}
+              />
+            </ButtonBox>
           </IdBox>
           <PasswordBox>
             <Input
@@ -162,4 +165,5 @@ const PasswordBox = styled.div`
 const ButtonBox = styled.div`
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
