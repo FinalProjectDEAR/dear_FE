@@ -34,7 +34,8 @@ const Circle = styled.div`
   border-radius: var(--size);
   box-shadow: ${(props) => props.shadow};
   background-color: ${(props) => props.bg};
-  border: ${(props) => props.border}; ;
+  border: ${(props) => props.border};
+  cursor: ${(props) => props.cursor};
 `;
 
 export default ColorBadge;
