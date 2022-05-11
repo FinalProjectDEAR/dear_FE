@@ -32,28 +32,54 @@ const getReviewDB = () => {
   };
 };
 //고민러 후기 작성
-const addReviewReqDB = (payload) => {
-  console.log("고민러 후기추가하기 payload", payload);
+const addReviewReqDB = (resMemberId, goodResTag, badResTag, serviceComment) => {
+  console.log(
+    "고민러 후기 미듈웨어",
+    resMemberId,
+    goodResTag,
+    badResTag,
+    serviceComment
+  );
   return function (dispatch, getState, { history }) {
     try {
-      api.post("/chat/request/review", { payload }).then((res) => {
-        console.log("후기추가하기", res);
-        dispatch(addReview(res));
-      });
+      api
+        .post("/chat/request/review", {
+          resMemberId: resMemberId,
+          goodResTag: goodResTag,
+          badResTag: badResTag,
+          serviceComment: serviceComment,
+        })
+        .then((res) => {
+          console.log("후기추가하기", res);
+          dispatch(addReview(res));
+        });
     } catch (err) {
       console.log("고민러 후기추가하기error", err);
     }
   };
 };
 //리스너 후기 작성
-const addReviewResDB = (payload) => {
-  console.log("리스너 후기추가하기 payload", payload);
+const addReviewResDB = (resMemberId, goodResTag, badResTag, serviceComment) => {
+  console.log(
+    "리스너 후기 미듈웨어",
+    resMemberId,
+    goodResTag,
+    badResTag,
+    serviceComment
+  );
   return function (dispatch, getState, { history }) {
     try {
-      api.post("/chat/response/review", { payload }).then((res) => {
-        console.log("후기추가하기", res);
-        dispatch(addReview(res));
-      });
+      api
+        .post("/chat/response/review", {
+          resMemberId: resMemberId,
+          goodResTag: goodResTag,
+          badResTag: badResTag,
+          serviceComment: serviceComment,
+        })
+        .then((res) => {
+          console.log("후기추가하기", res);
+          dispatch(addReview(res));
+        });
     } catch (err) {
       console.log("리스너 후기추가하기error", err);
     }
