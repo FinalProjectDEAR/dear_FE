@@ -1,27 +1,42 @@
 import React, { Component } from "react";
-import OpenViduAudioComponent from "./OvVideo";
 
 import styled from "styled-components";
-import { Text, Button, ColorBadge } from "../elements";
+import { ColorBadge } from "../elements";
 
 function UserAudioComponent(props) {
-  console.log(props);
-  const clientData = props.streamManager.stream.connection.data;
-  const name = clientData.split("%")[2];
-  console.log(name);
+  console.log("streamManager:", props);
+  const audioRef = React.useRef();
+
+  React.useEffect(() => {
+    if (props.streamManager && !!audioRef) {
+      props.streamManager.addVideoElement(audioRef.current);
+    }
+    return () => {};
+  }, []);
 
   return (
-    <div>
-      {props.streamManager !== undefined ? (
-        <div>
-          <OpenViduAudioComponent streamManager={props.streamManager} />
-          <div>
-            <p>{name}</p>
-          </div>
-        </div>
-      ) : null}
-    </div>
+    <OuterCircle
+      streamManager={props.streamManager}
+      autoPlay={true}
+      ref={audioRef}
+    >
+      <ColorBadge bg={props.color} size="60" position="absolute" />
+    </OuterCircle>
   );
 }
 
 export default UserAudioComponent;
+
+const OuterCircle = styled.video`
+  --size: 70px;
+  width: var(--size);
+  height: var(--size);
+  border-radius: var(--size);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 4px solid #948a9e;
+  background-color: #fff;
+  position: relative;
+  margin: 0px 20px;
+`;

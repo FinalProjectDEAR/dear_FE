@@ -98,21 +98,21 @@ function ResChatStart() {
   return (
     <React.Fragment>
       <RequestContainer>
-        <LineBox>
+        <TitleBox>
           <Text batang weight="500" size="20px" textAlign="left">
             여러분의 고민에 대해 알려주세요!
           </Text>
           <Text margin="0px 10px" weight="300" size="14px">
             <span style={{ color: "red", marginRight: "4px" }}>*</span>필수입력
           </Text>
-        </LineBox>
+        </TitleBox>
         <LineBox>
-          <Title>
+          <ChatInfoBox>
             <Text weight="500" size="16px" color="#999999">
               한 줄 고민
               <span style={{ color: "red", marginLeft: "4px" }}>*</span>
             </Text>
-          </Title>
+          </ChatInfoBox>
           <InputBox>
             <Input
               padding="16px"
@@ -125,12 +125,12 @@ function ResChatStart() {
           </InputBox>
         </LineBox>
         <LineBox>
-          <Title>
+          <ChatInfoBox>
             <Text weight="500" size="16px" color="#999999">
               상담 카테고리
               <span style={{ color: "red", marginLeft: "4px" }}>*</span>
             </Text>
-          </Title>
+          </ChatInfoBox>
           <InputBox>
             <CheckBox>
               <input
@@ -293,43 +293,17 @@ function ResChatStart() {
                 })
               : null}
           </FileBox>
-
-          {/* <div>
-            {previewImg !== null || previewImg.length !== 0 ? (
-              previewImg.map((item, idx) => {
-                return (
-                  <Picture src={previewImg[idx]} key={idx}>
-                    <Deletebtn
-                      onClick={() => {
-                        deleteFile(idx);
-                      }}
-                    >
-                      x
-                    </Deletebtn>
-                  </Picture>
-                );
-              })
-            ) : (
-              <></>
-            )}
-          </div> */}
         </LineBox>
-        <div id="category">
-          <div>
-            <div id="title"></div>
-            <div id="input"></div>
-          </div>
-        </div>
-        <div>
+        <LineBox>
           <Button
-            margin="60px 0px"
+            margin="40px auto"
             width="210px"
             bg="#7A37BE"
-            text="리스너 매칭"
+            text="고민 신청하기"
             cursor="pointer"
             _onClick={submit}
           />
-        </div>
+        </LineBox>
       </RequestContainer>
     </React.Fragment>
   );
@@ -340,10 +314,16 @@ const RequestContainer = styled.div`
   width: 840px;
   height: 640px;
   margin: 80px auto;
-  padding: 70px 60px;
+  padding: 40px 60px;
   box-sizing: border-box;
   background: #ffffff;
   border-radius: 20px;
+`;
+
+const TitleBox = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 `;
 
 const LineBox = styled.div`
@@ -352,20 +332,11 @@ const LineBox = styled.div`
   margin: 16px 0px;
 `;
 
-const Title = styled.div`
-  display: flex;
-  width: 20%;
-  height: 60px;
-  box-sizing: border-box;
-  padding: 18px 0px;
-`;
-
 const ChatInfoBox = styled.div`
   display: flex;
   width: 28%;
   height: 60px;
   box-sizing: border-box;
-  padding: 18px 0px;
 `;
 
 const FileBox = styled.div`
@@ -427,30 +398,6 @@ const FileTag = styled.div`
   align-items: center;
   background: #f8f8f8;
   border-radius: 4px;
-`;
-
-const Picture = styled.div`
-  width: 100px;
-  height: 100px;
-  border: 1px solid rgba(0, 0, 0, 0.07);
-  margin: 10px;
-  border-radius: 3px;
-  background-image: url("${(props) => props.src}");
-  background-size: cover;
-  position: relative;
-`;
-const Deletebtn = styled.div`
-  color: #fff;
-  font-size: 3px;
-  text-align: center;
-  line-height: 13px;
-  width: 15px;
-  height: 15px;
-  border-radius: 15px;
-  /* position: absolute;
-  right: -5px;
-  top: -5px; */
-  cursor: pointer;
 `;
 
 const Deletebutton = styled.div`
