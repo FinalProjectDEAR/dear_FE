@@ -9,47 +9,42 @@ function Post(props) {
 
   return (
     <React.Fragment>
-      <OnePost
+      <PostWrapper
         onClick={() => {
           history.push(`/PostDetail/${postId}`);
         }}
       >
-        <PostData
-          style={{
-            textAlign: "left",
-            marginLeft: "3%",
-            width: "100%",
-          }}
-        >
-          <Text batang>{props.item.title}</Text>
-        </PostData>
-
-        <PostData
-          style={{
-            width: "100%",
-            marginRight: "8%",
-            textAlign: "right",
-          }}
-        >
-          {props.item.createAt}
-        </PostData>
-      </OnePost>
+        <Title>
+          <Text batang size="12px" color="#333333" weight="500">
+            {props.item.title}
+          </Text>
+        </Title>
+        <Date>
+          <Text batang size="12px" color="#333333" weight="500">
+            {props.item.createAt}
+          </Text>
+        </Date>
+      </PostWrapper>
     </React.Fragment>
   );
 }
-const OnePost = styled.div`
-  color: #4c4c4c;
+const PostWrapper = styled.div`
+  color: #333333;
   display: flex;
-  border-top: 1px solid #e2e2e2;
-  font-weight: 400;
+  width: 100%;
+  height: 45px;
+  display: flex;
+  vertical-align: middle;
+  justify-content: space-between;
+  align-items: center;
   font-size: 12px;
+  border-bottom: 1px solid #cccccc;
 `;
-
-const PostData = styled.div`
-  padding: 25px 0px 23px 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+const Title = styled.div`
+  padding-left: 60px;
+`;
+const Date = styled.div`
+  padding-right: 60px;
 `;
 
 export default Post;

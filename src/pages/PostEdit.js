@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import { Text, Button, Input } from "../elements/index";
+import { ReactComponent as ImageUPload } from "../assets/파일첨부.svg";
+import styled from "styled-components";
 
 import { BiX } from "react-icons/bi";
 
@@ -14,7 +15,6 @@ function PostEdit() {
   const dispatch = useDispatch();
   const params = useParams();
   const postId = parseInt(params.postId);
-  console.log(postId);
   // //상세페이지에 있는 정보 가져오기
   React.useEffect(() => {
     if (postId) dispatch(actionCreators.getDetailDB(postId));
@@ -29,7 +29,7 @@ function PostEdit() {
   const [textLength, setTextLength] = React.useState(0);
   //defaultValue가 아닌 진짜 Value로 불러오기 위한 작업
   useEffect(() => {
-    console.log("유즈이펙트 시작한다~~");
+    // console.log("유즈이펙트 시작한다~~");
     setTitle(post?.title);
     setContent(post?.contents);
     setCategory(post?.category);
@@ -154,251 +154,278 @@ function PostEdit() {
   };
   return (
     <React.Fragment>
-      <PostWrap>
-        <TitleWrap>
-          <TitleContainer>상담 수정하기</TitleContainer>
-        </TitleWrap>
+      <WriteWrapper>
+        <TitleContainer>
+          <TitleBox>수정하기</TitleBox>
+        </TitleContainer>
+        <CategoryWrapper>
+          <Title>카테고리</Title>
+          <Select
+            name="category"
+            form="myForm"
+            onChange={SelectCategory}
+            value={category || ""}
+          >
+            <option value="null">카테고리 선택</option>
+            <option value="썸">썸</option>
+            <option value="고백">고백</option>
+            <option value="연애중">연애중</option>
+            <option value="19금">19금</option>
+            <option value="재회">재회</option>
+            <option value="이별">이별</option>
+            <option value="기타">기타</option>
+          </Select>
+        </CategoryWrapper>
+        <TitleWrapper>
+          <Title>제목</Title>
 
-        <WriteWrap>
-          <CategoryWrap>
-            <Title>카테고리</Title>
-
-            <Select
-              name="category"
-              form="myForm"
-              onChange={SelectCategory}
-              value={category || ""}
-            >
-              <option value="null">카테고리 선택</option>
-              <option value="썸">썸</option>
-              <option value="고백">고백</option>
-              <option value="연애중">연애중</option>
-              <option value="19금">19금</option>
-              <option value="재회">재회</option>
-              <option value="이별">이별</option>
-              <option value="기타">기타</option>
-            </Select>
-          </CategoryWrap>
-          <TitleInputWrap>
-            <Title>제목</Title>
-            <InputWrap>
-              <Input
-                placeholder="제목을 입력해주세요."
-                onChange={(e) => {
-                  setTitle(e.target.value);
-                }}
-                value={title || ""}
-              />
-            </InputWrap>
-          </TitleInputWrap>
-          <ContentWrap>
-            <Title>내용</Title>
-            <TextWrap>
-              <Input
-                placeholder="내용을 입력해주세요. (최소 20자 이상)"
-                _onChange={(e) => {
-                  setContent(e.target.value);
-                }}
-                _onKeyUp={checkMaxLength}
-                value={contents || ""}
-                multiLine
-                maxlength="1000"
-                rows={16}
-              />
-            </TextWrap>
-          </ContentWrap>
-          <PhotoWrap>
-            <Title>첨부파일</Title>
-            <div>
-              <PhotoDesc>사진은 최대 3장 업로드 가능합니다.</PhotoDesc>{" "}
-              <PhotoContainer>
-                <PhotoUpload>
-                  <label>
-                    <img
+          <Input
+            placeholder="제목을 입력해주세요."
+            _onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+            value={title || ""}
+          />
+        </TitleWrapper>
+        <ContentWrapper>
+          <Title>내용</Title>
+          <TextWrapper>
+            <Input
+              placeholder="내용을 입력해주세요. (최소 20자 이상)"
+              _onChange={(e) => {
+                setContent(e.target.value);
+              }}
+              _onKeyUp={checkMaxLength}
+              value={contents || ""}
+              multiLine
+              maxlength="1000"
+              rows={16}
+            />
+          </TextWrapper>
+        </ContentWrapper>
+        <ImageWrapper>
+          <Title>첨부파일</Title>
+          <div>
+            <PhotoContainer>
+              <PhotoUpload>
+                <label>
+                  {/* <img
                       src="https://res.kurly.com/pc/ico/1806/img_add_thumb_x2.png"
                       style={{
                         width: "20px",
                         marginTop: "33px",
                       }}
                       alt="이미지플러스"
-                    />
-                    <input
-                      type="file"
-                      onChange={selectFile}
-                      ref={fileInput}
-                      multiple="multiple"
-                      accept=".jpg,.png"
-                    />
-                  </label>
-                </PhotoUpload>
-                <PhotoDiv>
-                  {imgPreview &&
-                    imgPreview.map((image, id) => {
-                      return (
-                        <PhotoDiv>
-                          <Img
-                            key={id}
-                            style={{
-                              width: "80px",
-                              marginTop: "5px",
-                            }}
-                            src={image}
-                            alt={`${image}-${id}`}
-                          />
-                          <BiX
-                            type="button"
-                            onClick={() => {
-                              CancelImage(image, id);
-                            }}
-                          />
-                        </PhotoDiv>
-                      );
-                    })}
-                </PhotoDiv>
-              </PhotoContainer>
-            </div>
-          </PhotoWrap>
-          <BtnWrap>
-            <Button
-              _onClick={() => {
-                history.goBack();
-              }}
-              width="120px"
-              height="42px"
-              bg="#FFFFFF;"
-              border="1px solid #948A9E;"
-              cursor="pointer"
-            >
-              <Text margin="1px 0 0 0" color="#333333;">
-                뒤로 가기
-              </Text>
-            </Button>
-            <Button
-              _onClick={editPost}
-              width="120px"
-              height="42px"
-              bg="#61586A"
-              cursor="pointer"
-            >
-              <Text size="16.5px" margin="1px 0 0 0" color="white">
-                수정하기
-              </Text>
-            </Button>
-          </BtnWrap>
-        </WriteWrap>
-      </PostWrap>
+                    /> */}
+                  <ImageUPload />
+                  <input
+                    type="file"
+                    onChange={selectFile}
+                    ref={fileInput}
+                    multiple="multiple"
+                    accept=".jpg,.png"
+                  />
+                </label>
+              </PhotoUpload>{" "}
+              <PhotoDesc>사진은 최대 3장 업로드 가능합니다.</PhotoDesc>
+              <PhotoDiv>
+                {imgPreview &&
+                  imgPreview.map((image, id) => {
+                    return (
+                      <PhotoDiv>
+                        <Img
+                          key={id}
+                          style={{
+                            width: "80px",
+                            marginTop: "5px",
+                          }}
+                          src={image}
+                          alt={`${image}-${id}`}
+                        />
+                        <BiX
+                          type="button"
+                          onClick={() => {
+                            CancelImage(image, id);
+                          }}
+                        />
+                      </PhotoDiv>
+                    );
+                  })}
+              </PhotoDiv>
+            </PhotoContainer>
+          </div>
+        </ImageWrapper>
+        <BtnWrap>
+          <Button
+            _onClick={() => {
+              history.goBack();
+            }}
+            width="120px"
+            height="42px"
+            bg="#FFFFFF;"
+            border="1px solid #948A9E;"
+            cursor="pointer"
+          >
+            <Text margin="1px 0 0 0" color="#333333;">
+              뒤로 가기
+            </Text>
+          </Button>
+          <Button
+            _onClick={editPost}
+            width="120px"
+            height="42px"
+            bg="#61586A"
+            cursor="pointer"
+          >
+            <Text size="16.5px" margin="1px 0 0 0" color="white">
+              수정하기
+            </Text>
+          </Button>
+        </BtnWrap>
+      </WriteWrapper>
     </React.Fragment>
   );
 }
-const PostWrap = styled.div`
+
+const WriteWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 40px;
-  position: absolute;
-  max-width: 1200px;
-  height: 847px;
-  left: 360px;
-  top: 245px;
-  background-color: #ffffff;
+  max-width: 1032px;
+  width: 100%;
+  height: 861px;
+  margin: auto;
+  margin-top: 30px;
+  background: #ffffff;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 10px;
-  box-sizing: border-box;
 `;
-const TitleWrap = styled.div`
+
+const TitleContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-end;
-  padding: 0px 0px 14px 40px;
-  position: static;
-  width: 1087px;
-  height: 80px;
-  left: 40px;
-  top: 40px;
+  padding: 0px 0px 10px 40px;
+  gap: 660px;
+  width: 952px;
+  height: 60px;
   flex: none;
   order: 0;
   flex-grow: 0;
-  margin: 0px 0px;
-  /* background-color: yellow; */
+  /* background: orange; */
 `;
-const TitleContainer = styled.div`
-  position: static;
-  width: 130px;
+const TitleBox = styled.div`
+  width: 98px;
   height: 30px;
-  left: 40px;
-  top: 36px;
+  font-family: "Pretendard";
+  font-style: normal;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 18px;
   line-height: 30px;
-  margin-bottom: 14px;
   color: #2e2a32;
-  /* background-color: red; */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
 `;
-const WriteWrap = styled.div`
-  position: static;
-  width: 1120px;
-  height: 687px;
-  left: 40px;
-  top: 120px;
-  /* background-color: violet; */
-  box-sizing: border-box;
+
+const SubTitleBox = styled.div`
+  width: 158px;
+  height: 14px;
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 14px;
+  color: #999999;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
 `;
-const CategoryWrap = styled.div`
-  position: absolute;
-  width: 1120px;
-  height: 62px;
-  left: 40px;
-  top: 120px;
-  /* background-color: orange; */
+const TitleWrapper = styled.div`
   display: flex;
-  /* border-top: 1px solid #666666; */
+  flex-direction: row;
+  padding: 10px 0px;
+  gap: 20px;
+  width: 952px;
+  height: 60px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  border-bottom: 1px solid #e6e6e6;
+  /* background: pink; */
+`;
+const CategoryWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding: 10px 0px;
+  gap: 20px;
+  width: 952px;
+  height: 60px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  border-bottom: 1px solid #e6e6e6;
+  border-top: 1px solid #948a9e;
 `;
 const Title = styled.div`
-  width: 200px;
-  height: 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px 0px 5px 40px;
+  gap: 10px;
+  width: 160px;
+  height: 28px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  border-right: 1px solid #cccccc;
+  color: #666666;
 `;
 const Select = styled.select`
   width: 181px;
   height: 42px;
-  /* background: #f5f4f5; */
+  background: #f5f4f5;
   border-radius: 20px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 12px 20px;
-  margin-left: 40px;
+  margin-left: 10px;
+  cursor: pointer;
 `;
-const TitleInputWrap = styled.div`
-  position: absolute;
-  width: 1120px;
-  height: 60px;
-  left: 40px;
-  top: 180px;
+const ContentWrapper = styled.div`
   display: flex;
-  /* background-color: green; */
+  flex-direction: row;
+  padding: 10px 0px;
+  gap: 20px;
+  width: 952px;
+  height: 303px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  border-bottom: 1px solid #e6e6e6;
+
+  /* background: pink; */
 `;
-const InputWrap = styled.div`
-  position: static;
-  width: 860px;
-  height: 40px;
-  left: 240px;
-  top: 10px;
-`;
-const ContentWrap = styled.div`
-  position: absolute;
-  width: 1120px;
-  height: 305px;
-  left: 40px;
-  top: 240px;
-  display: flex;
-  /* background-color: #8ecae6; */
-`;
-const TextWrap = styled.div`
-  /* box-sizing: border-box; */
+const TextWrapper = styled.div`
   width: 860px;
   height: 295px;
+`;
+const ImageWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding: 10px 0px;
+  gap: 20px;
+  width: 952px;
+  height: 182px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  border-bottom: 1px solid #e6e6e6;
+  /* background: green; */
 `;
 const PhotoWrap = styled.div`
   display: flex;
@@ -416,7 +443,7 @@ const PhotoDesc = styled.div`
   height: 18px;
   left: 0px;
   top: 5px;
-  padding: 10 10px;
+  padding-left: 10px;
   font-size: 12px;
   text-align: center;
   color: #666;
@@ -428,15 +455,16 @@ const PhotoDiv = styled.div`
   flex-direction: row;
 `;
 const PhotoUpload = styled.div`
-  text-align: center;
-  width: 80px;
-  height: 80px;
-  border: 1px solid #dddfe1;
-  margin: 10px;
-  padding-bottom: 10px;
-  display: block;
   /* background-color: #f5f4f5; */
-  border-radius: 13px;
+  /* text-align: center; */
+  /* width: 80px;
+  height: 80px; */
+  /* border: 1px solid #dddfe1; */
+  /* margin: 10px; */
+  /* padding-bottom: 10px; */
+  display: block;
+  cursor: pointer;
+  /* border-radius: 13px; */
   input[type="file"] {
     position: absolute;
     width: 0;
@@ -469,14 +497,16 @@ const PhotoContainer = styled.div`
 const BtnWrap = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
-  padding: 20px 0px 0px;
-  margin-left: 10px;
-  position: absolute;
-  width: 1120px;
-  height: 62px;
-  left: 40px;
-  top: 745px;
+  margin: auto;
+  /* padding: 20px 0px 0px; */
+  gap: 20px;
+  width: 952px;
+  height: 60px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  justify-content: space-between;
+  /* background: pink; */
 `;
 export default PostEdit;
