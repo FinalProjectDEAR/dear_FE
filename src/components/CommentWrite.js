@@ -1,5 +1,6 @@
 import React from "react";
-import { Text, Button } from "../elements";
+import styled from "styled-components";
+import { Text, Button, Input } from "../elements";
 
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators } from "../redux/modules/comment";
@@ -35,27 +36,65 @@ const CommentWrite = (props) => {
   };
   return (
     <React.Fragment>
-      <div style={{ display: "flex" }}>
-        <input
-          placeholder="선플은 선택이 아닌 의무입니다! (최소 10자 이상)"
-          onChange={(e) => {
-            setComment(e.target.value);
-          }}
-          onKeyUp={checkMaxLength}
-          value={comment}
-          style={{ width: "3700px" }}
-        />
-        <div style={{ display: "flex" }}>
+      <CommentWriteWrapper>
+        <TextWrapper>
+          <Input
+            placeholder="선플은 선택이 아닌 의무입니다! (최소 10자 이상)"
+            _onChange={(e) => {
+              setComment(e.target.value);
+            }}
+            _onKeyUp={checkMaxLength}
+            value={comment}
+            multiLine
+            maxlength="200"
+            rows={7}
+          />
+        </TextWrapper>
+
+        <BtnWrapper>
           {/* <Text textAlign="right" margin="0px 5px">
             {textLength}/ 200자
           </Text> */}
-          <Button width="200px" _onClick={addComment}>
-            댓글등록
+          <Button bg="#948A9E" width="200px" _onClick={addComment}>
+            댓글쓰기
           </Button>
-        </div>
-      </div>
+        </BtnWrapper>
+      </CommentWriteWrapper>
     </React.Fragment>
   );
 };
-
+const CommentWriteWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  width: 1032px;
+  height: 231px;
+  background: #ffffff;
+  box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
+  border-radius: 10px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+`;
+const TextWrapper = styled.div`
+  width: 952px;
+  height: 140px;
+  /* border: 1px solid red; */
+  margin: 0px auto;
+`;
+const BtnWrapper = styled.div`
+  display: flex;
+  margin: 0px auto;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 0px 0px;
+  gap: 673px;
+  width: 952px;
+  height: 51px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  /* border: 1px solid red; */
+`;
 export default CommentWrite;

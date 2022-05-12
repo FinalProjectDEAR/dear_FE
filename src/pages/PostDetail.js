@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams, useHistory } from "react-router-dom";
+import { ReactComponent as ThumbUp } from "../assets/post-select.svg";
 import styled from "styled-components";
 import { Text, Button } from "../elements/index";
 //페이지 관련
@@ -16,6 +17,7 @@ function PostDetail(props) {
   const history = useHistory();
   const dispatch = useDispatch();
   //공감해요 버튼
+  const [like, setLike] = React.useState(false);
   const [count, setCount] = React.useState(0);
   //포스트 상세 조회 가져오기, 댓글리스트가져오기
   React.useEffect(() => {
@@ -29,7 +31,7 @@ function PostDetail(props) {
   const memberId = post?.memberId;
 
   const loginUser = localStorage.getItem("memberId");
-  console.log(memberId, loginUser);
+  // console.log(memberId, loginUser);
 
   const deletePost = () => {
     dispatch(actionCreators.deletePostDB(postId));
@@ -48,228 +50,204 @@ function PostDetail(props) {
   // }
   return (
     <React.Fragment>
-      <Wrap>
-        <ReviewTitle>익명 상담 작성하기</ReviewTitle>
-        <WriteWrap>
-          <CategoryWrap>
-            <CommentTitle>카테고리</CommentTitle>
-            <CommentTitleBorder1>{post?.category}</CommentTitleBorder1>
-          </CategoryWrap>
-          <TitleWrap>
-            <CommentTitle>제목</CommentTitle>
-            <CommentTitleBorder1>
-              <CommentTitleDiv>{post?.title}</CommentTitleDiv>
-            </CommentTitleBorder1>
-          </TitleWrap>
-
-          <CommentTextWrap>
-            <CommentTextTitle style={{ height: "210px" }}>
-              후기작성
-            </CommentTextTitle>
-            <CommentTitleBorder2>
-              <CommentText>{post?.contents}</CommentText>
-            </CommentTitleBorder2>
-            <CommentTitleBorder3 />
-          </CommentTextWrap>
-          <CommentPhotoWrap>
-            <CommentPhotoTitle style={{ height: "150px" }}>
-              사진파일
-            </CommentPhotoTitle>
-            <PhotoDivWrap>
-              <PhotoDiv>
-                <PhotoUpload1>
-                  {/* <Img src={post?.imgUrl} /> */}
-                  <PhotoWrap>
-                    {image &&
-                      image.map((image, id) => {
-                        return (
-                          <Img
-                            key={id}
-                            style={{
-                              width: "80px",
-                              marginTop: "5px",
-                            }}
-                            src={`${image}` ? `${image}` : null}
-                            alt={`${image}-${id}`}
-                          />
-                        );
-                      })}
-                  </PhotoWrap>
-                </PhotoUpload1>
-              </PhotoDiv>
-            </PhotoDivWrap>
-          </CommentPhotoWrap>
-        </WriteWrap>
+      <BtnContainer>
+        <Button
+          text="목록"
+          bg="#948A9E"
+          color="white"
+          width="140px"
+          _onClick={() => {
+            history.push("/postList");
+          }}
+          cursor="pointer"
+        />
         {memberId === loginUser ? (
-          <div style={{ display: "flex" }}>
+          <div>
             <Button
+              text="수정하기"
+              bg="#948A9E"
+              color="white"
+              width="140px"
+              cursor="pointer"
               _onClick={() => {
                 history.push(`/PostEdit/${postId}`);
               }}
-            >
-              <Text color="#ffffff" size="16.5px" margin="1px 0 0 0">
-                수정하기
-              </Text>
-            </Button>
-            <Button _onClick={onRemove} cursor="pointer">
-              <Text color="#ffffff" size="16.5px" margin="1px 0 0 0">
-                삭제하기
-              </Text>
-            </Button>
-          </div>
-        ) : (
-          <div style={{ margin: "20px" }}>
+            />
             <Button
-              _onClick={() => {
-                {
-                  setCount(+1);
-                }
-              }}
-            >
-              <Text color="#ffffff" size="16.5px" margin="1px 0 0 0">
-                공감해요 {count}
-              </Text>
-            </Button>
+              text="삭제하기"
+              bg="#61586A"
+              color="white"
+              width="140px"
+              _onClick={onRemove}
+              cursor="pointer"
+            />
           </div>
-        )}
-        <CommentWrite postId={postId} />
+        ) : null}
+      </BtnContainer>
+      <DetailWrapper>
+        <CategoryBox>
+          <Title>카테고리</Title>
+          <TitleContent>{post?.category}</TitleContent>
+        </CategoryBox>
+        <TitleBox>
+          <Title>제목</Title>
+          <TitleContent>{post?.title}</TitleContent>
+        </TitleBox>
+        <ContentBox>{post?.contents}</ContentBox>
+        <CommentPhotoWrap>
+          <PhotoDivWrap>
+            <PhotoDiv>
+              <PhotoUpload1>
+                {/* <Img src={post?.imgUrl} /> */}
+                <PhotoWrap>
+                  {image &&
+                    image.map((image, id) => {
+                      return (
+                        <Img
+                          key={id}
+                          style={{
+                            width: "80px",
+                            marginTop: "5px",
+                          }}
+                          src={`${image}` ? `${image}` : null}
+                          alt={`${image}-${id}`}
+                        />
+                      );
+                    })}
+                </PhotoWrap>
+              </PhotoUpload1>
+            </PhotoDiv>
+          </PhotoDivWrap>
+        </CommentPhotoWrap>
+        <IsLike
+          onClick={() => {
+            {
+              setCount(+1);
+            }
+          }}
+        >
+          <Thumb
+            like={like}
+            // onClick={() => {
+            //   setLike(!like);
+            // }}
+          >
+            <ThumbUp />
+          </Thumb>
+          <Text weight="700" color="#333333" cursor="pointer">
+            <span style={{ color: "#7A37BE" }}>{count}</span>
+          </Text>
+        </IsLike>
+      </DetailWrapper>
+      <CommentWrapper>
         <CommentList />
-      </Wrap>
+        <CommentWrite postId={postId} />
+      </CommentWrapper>
     </React.Fragment>
   );
 }
-const Wrap = styled.div`
-  max-width: 820px;
-  display: inline-block;
+const CommentWrapper = styled.div`
+  /* border: 1px solid red; */
+  margin: 200px auto 0px auto;
+  width: 1032px;
 `;
-const ReviewTitle = styled.div`
-  height: 50px;
-  font-weight: 700;
-  font-size: 24px;
-  color: #333;
+const BtnContainer = styled.div`
   display: flex;
-  margin-left: 28px;
+  width: 1032px;
+  /* border: 1px solid pink; */
+  margin: 40px auto 15px auto;
+  align-items: flex-start;
+  justify-content: space-between;
 `;
-const TitleWrap = styled.div`
-  height: 50px;
-  display: flex;
-  align-items: center;
-  align-content: center;
+const DetailWrapper = styled.div`
+  margin: auto;
+  width: 1032px;
+  height: 450px;
+  /* border: 1px solid red; */
 `;
-const CategoryWrap = styled.div`
-  height: 50px;
-  display: flex;
-  align-items: center;
-  align-content: center;
-  margin-top: 5px;
-`;
-const WriteWrap = styled.div`
-  width: 820px;
-`;
-const CommentTitleBorder1 = styled.div`
-  padding: 10px 0px 1px 10px;
-  width: 550px;
-  display: flex;
-`;
-const CommentTitleBorder2 = styled.div`
-  padding: 10px 0px 10px 10px;
-  width: 550px;
-  display: flex;
-  margin-top: 130px;
-`;
-const CommentTitleBorder3 = styled.div`
-  padding: 10px 0px 10px 10px;
-  width: 550px;
-  display: flex;
-  margin-top: 331px;
-  margin-left: -670px;
-`;
-const CommentTitle = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 165px;
-  height: 100%;
-  border-top: 1px solid #dddfe1;
-  background-color: #f7f7f7;
-  font-size: 12px;
-  color: #666;
-`;
-const CommentTitleDiv = styled.div`
-  display: flex;
-  width: 96%;
-  height: 34px;
-  padding: 10px 10px;
-  border: 1px solid #dddfe1;
-  font-size: 12px;
-  color: #000;
-  line-height: 18px;
-  outline: none;
-  margin-top: -4px;
+const CategoryBox = styled.div`
   box-sizing: border-box;
-`;
-const CommentTextWrap = styled.div`
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-top: -16%;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  width: 1032px;
+  height: 45px;
+  border-top: 1px solid #666666;
+  border-bottom: 1px solid #cccccc;
 `;
-const CommentTextTitle = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 39px;
-  padding: 0 10px;
-  width: 148px;
-  height: 100%;
-  border-top: 1px solid #dddfe1;
-  background-color: #f7f7f7;
-  font-size: 12px;
-  color: #666;
-  text-overflow: hidden;
-  text-align: center;
-`;
-const CommentText = styled.div`
-  display: flex;
-  width: 96%;
-  height: 200px;
-  padding: 10px 10px;
-  border: 1px solid #dddfe1;
-  font-size: 12px;
-  color: #000;
-  line-height: 18px;
-  outline: none;
-  margin-top: 1px;
-  margin-bottom: 100px;
-  resize: none;
-  text-align: left;
+const TitleBox = styled.div`
   box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  width: 1032px;
+  height: 45px;
+  border-bottom: 1px solid #666666;
+`;
+const Title = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px 40px;
+  gap: 10px;
+  width: 130px;
+  height: 45px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+`;
+const TitleContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px 0px 0px 40px;
+  gap: 10px;
+  width: 782px;
+  height: 45px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  font-family: "KoPub Batang";
+`;
+const ContentBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 30px 40px;
+  gap: 10px;
+  width: 1032px;
+  height: 360px;
+`;
+const IsLike = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 30px;
+  gap: 10px;
+  margin: auto;
+  width: 119px;
+  height: 24px;
+
+  /* border: 1px solid red; */
+`;
+
+const Thumb = styled.button`
+  background-color: ${(props) => (props.commentLike ? "#7A37BE" : "#ddddd")};
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
 `;
 const CommentPhotoWrap = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-top: -133px;
+  /* margin-top: -133px; */
 `;
 const PhotoDivWrap = styled.div`
   display: flex;
   flex-direction: column;
-`;
-const CommentPhotoTitle = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 41px;
-  padding: 0 10px;
-  width: 150px;
-  height: 100%;
-  border-top: 1px solid #dddfe1;
-  border-bottom: 1px solid #dddfe1;
-  background-color: #f7f7f7;
-  font-size: 12px;
-  color: #666;
-  text-overflow: hidden;
-  text-align: center;
 `;
 const PhotoDiv = styled.div`
   display: flex;
@@ -288,17 +266,15 @@ const PhotoUpload1 = styled.div`
   text-align: center;
   width: 80px;
   height: 80px;
-  margin: 10px 0;
-  border: none;
-  margin: 10px;
-  margin-top: 40px;
+  /* border: 1px solid red; */
   padding-bottom: 10px;
   display: block;
+  border: 1px solid red;
 `;
 const Img = styled.img`
   width: 100%;
   margin-top: 10px;
-  margin-left: 10px;
+  margin-left: 15px;
   &:hover {
     transition: 0.4s;
     transform: scale(4.9);
