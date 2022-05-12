@@ -98,14 +98,14 @@ function ResChatStart() {
   return (
     <React.Fragment>
       <RequestContainer>
-        <LineBox>
+        <TitleBox>
           <Text batang weight="500" size="20px" textAlign="left">
             여러분의 고민에 대해 알려주세요!
           </Text>
           <Text margin="0px 10px" weight="300" size="14px">
             <span style={{ color: "red", marginRight: "4px" }}>*</span>필수입력
           </Text>
-        </LineBox>
+        </TitleBox>
         <LineBox>
           <ChatInfoBox>
             <Text weight="500" size="16px" color="#999999">
@@ -293,30 +293,10 @@ function ResChatStart() {
                 })
               : null}
           </FileBox>
-
-          {/* <div>
-            {previewImg !== null || previewImg.length !== 0 ? (
-              previewImg.map((item, idx) => {
-                return (
-                  <Picture src={previewImg[idx]} key={idx}>
-                    <Deletebtn
-                      onClick={() => {
-                        deleteFile(idx);
-                      }}
-                    >
-                      x
-                    </Deletebtn>
-                  </Picture>
-                );
-              })
-            ) : (
-              <></>
-            )}
-          </div> */}
         </LineBox>
         <LineBox>
           <Button
-            margin="60px auto"
+            margin="40px auto"
             width="210px"
             bg="#7A37BE"
             text="고민 신청하기"
@@ -334,10 +314,16 @@ const RequestContainer = styled.div`
   width: 840px;
   height: 640px;
   margin: 80px auto;
-  padding: 70px 60px;
+  padding: 40px 60px;
   box-sizing: border-box;
   background: #ffffff;
   border-radius: 20px;
+`;
+
+const TitleBox = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 `;
 
 const LineBox = styled.div`
@@ -351,7 +337,6 @@ const ChatInfoBox = styled.div`
   width: 28%;
   height: 60px;
   box-sizing: border-box;
-  padding: 18px 0px;
 `;
 
 const FileBox = styled.div`
@@ -413,30 +398,6 @@ const FileTag = styled.div`
   align-items: center;
   background: #f8f8f8;
   border-radius: 4px;
-`;
-
-const Picture = styled.div`
-  width: 100px;
-  height: 100px;
-  border: 1px solid rgba(0, 0, 0, 0.07);
-  margin: 10px;
-  border-radius: 3px;
-  background-image: url("${(props) => props.src}");
-  background-size: cover;
-  position: relative;
-`;
-const Deletebtn = styled.div`
-  color: #fff;
-  font-size: 3px;
-  text-align: center;
-  line-height: 13px;
-  width: 15px;
-  height: 15px;
-  border-radius: 15px;
-  /* position: absolute;
-  right: -5px;
-  top: -5px; */
-  cursor: pointer;
 `;
 
 const Deletebutton = styled.div`

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useIn } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { history } from "../redux/configureStore";
 import { actionCreators as chatActions } from "../redux/modules/chat";
@@ -6,19 +6,17 @@ import { OpenVidu } from "openvidu-browser";
 
 import styled from "styled-components";
 import { Text, Button, ColorBadge } from "../elements";
-import UserVideoComponent from "../components/UserVideoComponent";
-import OpenViduAudioComponent from "../components/OvVideo";
+import UserAudioComponent from "../components/UserAudioComponent";
+import Timer from "../components/Timer";
+import Loading from "../pages/Loading";
 
 function AudioChat(props) {
-  const dispatch = useDispatch();
+  const nickname = localStorage.getItem("nickname");
   const token = useSelector((state) => state.chat.roomAuthInfo.token);
   const sessionId = useSelector((state) => state.chat.roomAuthInfo.sessionId);
   const role = useSelector((state) => state.chat.roomAuthInfo.role);
-  console.log("역할", role);
-  const nickname = localStorage.getItem("nickname");
 
   const chatInfo = useSelector((state) => state.chat.chatInfo);
-  const fileList = useSelector((state) => state.chat.chatInfo.fileList);
 
   const [mySessionId, setMySessionId] = React.useState("");
   const [session, setSession] = React.useState(undefined);
@@ -26,77 +24,74 @@ function AudioChat(props) {
   const [publisher, setPublisher] = React.useState(undefined);
   const [subscribers, setSubscribers] = React.useState([]);
   const [isSub, setIsSub] = React.useState(false);
+  const [targetTime, setTargetTime] = React.useState("");
+  const [isConnect, setIsConnect] = React.useState(false);
 
-  // //추가 willunmount
-  // const onbeforeunload = (event) => {
-  //   //크롬에서는 표준에 따른 기본동작을 방지하기 위해 아래 두게 설정
-  //   event.preventDefault();
-  //   event.returnValue = "";
-  //   leaveSession();
-  // };
+  // 오디오채팅 (오픈비듀)
+  const onbeforeunload = (event) => {
+    //크롬에서는 표준에 따른 기본동작을 방지하기 위해 아래 두게 설정
+    event.preventDefault();
+    event.returnValue = "";
+    leaveSession();
+  };
 
-  // React.useEffect(() => {
-  //   window.addEventListener("beforeunload", onbeforeunload);
-  //   const connectSession = () => {
-  //     const OV = new OpenVidu();
-  //     console.log("커넥트 시도");
+  React.useEffect(() => {
+    window.addEventListener("beforeunload", onbeforeunload);
+    const connectSession = () => {
+      const OV = new OpenVidu();
+      console.log("커넥트 시도");
 
-  //     var mySession = OV.initSession();
+      var mySession = OV.initSession();
 
-  //     mySession.on("streamCreated", (event) => {
-  //       var subscriber = mySession.subscribe(event.stream, undefined);
-  //       var subscriberList = subscribers;
-  //       subscriberList.push(subscriber);
-  //       console.log("구독자 리스트", subscriberList);
-  //       setSubscribers(subscriberList);
+      mySession.on("streamCreated", (event) => {
+        var subscriber = mySession.subscribe(event.stream, undefined);
+        var subscriberList = subscribers;
+        subscriberList.push(subscriber);
+        console.log("구독자 리스트", subscriberList);
+        setSubscribers([...subscribers, ...subscriberList]);
 
-  //       if (subscribers.length > 0) {
-  //         console.log(subscribers);
-  //         let now = new Date();
-  //         console.log("매칭됐어!");
-  //         console.log("구독자 생길때 시간 ", now);
-  //       } else {
-  //         console.log("매칭중이야");
-  //         setIsSub(false);
-  //         console.log(isSub);
-  //       }
-  //     });
+        let date = new Date();
+        let target = date.setMinutes(date.getMinutes() + 10);
+        setTargetTime(target);
+        setIsConnect(true);
+        console.log("매칭됐어! 타겟시간: ", targetTime);
+      });
 
-  //     mySession
-  //       .connect(token, { clientData: nickname })
-  //       .then(async () => {
-  //         var devices = await OV.getDevices();
-  //         console.log(devices);
-  //         var videoDevices = devices.filter(
-  //           (device) => device.kind === "videoinput"
-  //         );
+      mySession
+        .connect(token, { clientData: nickname })
+        .then(async () => {
+          var devices = await OV.getDevices();
+          console.log(devices);
+          var videoDevices = devices.filter(
+            (device) => device.kind === "videoinput"
+          );
 
-  //         let publisher = OV.initPublisher(undefined, {
-  //           audioSource: undefined,
-  //           videoSource: videoDevices[0].deviceId,
-  //           publishAudio: true,
-  //           publishVideo: true,
-  //           resolution: "640x480",
-  //           frameRate: 30,
-  //           insertMode: "APPEND",
-  //           mirror: false,
-  //         });
+          let publisher = OV.initPublisher(undefined, {
+            audioSource: undefined,
+            videoSource: videoDevices[0].deviceId,
+            publishAudio: true,
+            publishVideo: true,
+            resolution: "640x480",
+            frameRate: 30,
+            insertMode: "APPEND",
+            mirror: false,
+          });
 
-  //         mySession.publish(publisher);
-  //         setMainStreamManager(publisher);
-  //         setPublisher(publisher);
-  //       })
-  //       .catch((err) => {
-  //         console.log("커넥팅 실패", err.code, err.message);
-  //       });
-  //   };
+          mySession.publish(publisher);
+          setMainStreamManager(publisher);
+          setPublisher(publisher);
+        })
+        .catch((err) => {
+          console.log("커넥팅 실패", err.code, err.message);
+        });
+    };
 
-  //   connectSession();
+    connectSession();
 
-  //   return () => {
-  //     window.removeEventListener("beforeunload", onbeforeunload);
-  //   };
-  // }, []);
+    return () => {
+      window.removeEventListener("beforeunload", onbeforeunload);
+    };
+  }, []);
 
   const leaveSession = () => {
     const mySession = session;
@@ -111,6 +106,8 @@ function AudioChat(props) {
     history.replace("/startreq");
   };
 
+  // 타이머
+
   return (
     <React.Fragment>
       {/* {role === "request" || subscribers.length > 0 ? ( */}
@@ -118,81 +115,37 @@ function AudioChat(props) {
         <ChatContainer>
           {/* {role === "request" && publisher !== undefined ? ( */}
           <TapeBox>
-            <ColorBadge
-              border="4px solid #948A9E"
-              bg="#fff"
-              size="77"
-              position="relative"
-              margin="0px 20px"
+            <UserAudioComponent
               streamManager={mainStreamManager}
-            >
-              <ColorBadge bg="#D62020" size="68" position="absolute" />
-            </ColorBadge>
-            <Timer>
-              <Text weight="700" size="20px" margin="5px">
-                9:40
-              </Text>
-              <div style={{ display: "flex", justifyContent: "center" }}>
-                <ColorBadge size="6" bg="#948A9E" margin="0px 2px" />
-                <ColorBadge size="6" bg="#948A9E" margin="0px 2px" />
-                <ColorBadge size="6" bg="#948A9E" margin="0px 2px" />
-                <ColorBadge size="6" bg="#948A9E" margin="0px 2px" />
-                <ColorBadge size="6" bg="#948A9E" margin="0px 2px" />
-              </div>
-            </Timer>
-            <ColorBadge
-              border="4px solid #fff"
-              bg="#fff"
-              size="77"
-              position="relative"
-              margin="0px 20px"
+              // color={chatInfo.reqColor}
+              color="#c9c9"
+            />
+            <Timer targetTime={targetTime} />
+            <UserAudioComponent
               streamManager={subscribers[0]}
-            >
-              <ColorBadge bg="#FFD05B" size="68" position="absolute" />
-            </ColorBadge>
+              color="#c88"
+              // color={chatInfo.resColor}
+            />
           </TapeBox>
           {/* ) : null} */}
 
           {/* {role === "response" && publisher !== undefined ? (
             <TapeBox>
-              <ColorBadge
-                border="4px solid #948A9E"
-                bg="#fff"
-                size="77"
-                position="relative"
-                margin="0px 20px"
+              <UserAudioComponent
                 streamManager={subscribers[0]}
-              >
-                <ColorBadge bg="#D62020" size="68" position="absolute" />
-              </ColorBadge>
-              <Timer>
-                <Text weight="700" size="20px" margin="5px">
-                  9:40
-                </Text>
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  <ColorBadge size="6" bg="#948A9E" margin="0px 2px" />
-                  <ColorBadge size="6" bg="#948A9E" margin="0px 2px" />
-                  <ColorBadge size="6" bg="#948A9E" margin="0px 2px" />
-                  <ColorBadge size="6" bg="#948A9E" margin="0px 2px" />
-                  <ColorBadge size="6" bg="#948A9E" margin="0px 2px" />
-                </div>
-              </Timer>
-              <ColorBadge
-                border="4px solid #fff"
-                bg="#fff"
-                size="77"
-                position="relative"
-                margin="0px 20px"
+                color={chatInfo.reqColor}
+              />
+              <Timer />
+              <UserAudioComponent
                 streamManager={mainStreamManager}
-              >
-                <ColorBadge bg="#FFD05B" size="68" position="absolute" />
-              </ColorBadge>
+                color={chatInfo.resColor}
+              />
             </TapeBox>
           ) : null} */}
 
           <div style={{ display: "flex", justifyContent: "center" }}>
             <UserBox>
-              {/* <Text>{requestName}</Text> */}
+              {/* <Text>{chatInfo.reqNickname}</Text> */}
               <Text weight="500" size="16px">
                 비둘기구구절절구구
               </Text>
@@ -229,7 +182,7 @@ function AudioChat(props) {
               </TagBox>
             </UserBox>
             <UserBox>
-              {/* <Text>{requestName}</Text> */}
+              {/* <Text>{chatInfo.resNickname}</Text> */}
               <Text weight="500" size="16px">
                 내맘이야
               </Text>
@@ -259,7 +212,7 @@ function AudioChat(props) {
         </ChatContainer>
         <BottomBox>
           <VoiceBtnBox></VoiceBtnBox>
-          <Button bg="#7A37BE" margin="0px 10px">
+          <Button bg={isConnect ? "#7A37BE" : "#999999"} margin="0px 10px">
             ON AIR
           </Button>
           <Button bg="#EEE7F5" color="#7A37BE" margin="0px 10px">
@@ -275,15 +228,9 @@ function AudioChat(props) {
           </Button>
         </BottomBox>
       </ChatWrapper>
-      {/* ) : (
-        <ChatWrapper>
-          <ChatContainer>
-            <TitleBox>
-              <Text>로딩중!!!</Text>
-            </TitleBox>
-          </ChatContainer>
-        </ChatWrapper>
-      )} */}
+      {/* ) : ( */}
+      {/* <Loading /> */}
+      {/* )} */}
     </React.Fragment>
   );
 }
@@ -324,13 +271,6 @@ const TapeBox = styled.div`
   background: #ffffff;
 `;
 
-const Timer = styled.div`
-  width: 110px;
-  height: 44px;
-  background: #f8f8f8;
-  border-radius: 4px;
-`;
-
 const UserBox = styled.div`
   width: 151px;
   height: 94px;
@@ -338,13 +278,12 @@ const UserBox = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 0px;
-  margin: 10px 30px;
+  margin: 0px 40px;
 `;
 
 const TagBox = styled.div`
   width: 151px;
   display: grid;
-  margin: 5px 0px;
   grid-template-columns: repeat(2, minmax(25%, auto));
   grid-row: 2;
 `;
@@ -360,7 +299,7 @@ const Tag = styled.div`
 
 const BottomBox = styled.div`
   height: 40px;
-  margin: 30px auto;
+  margin: 17px auto;
   padding: 0px 113px;
   display: flex;
   justify-content: space-between;

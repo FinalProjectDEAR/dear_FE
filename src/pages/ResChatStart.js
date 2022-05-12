@@ -175,7 +175,7 @@ const ResContainer = styled.div`
   margin: auto;
   width: 840px;
   height: 324px;
-  padding: 40px 40px;
+  padding: 30px 40px;
   box-sizing: border-box;
   background: #ffffff;
   border-radius: 20px;
@@ -183,7 +183,8 @@ const ResContainer = styled.div`
 
 const LineBox = styled.div`
   display: flex;
-  margin: 10px auto;
+  align-items: center;
+  margin: 0px auto;
 `;
 
 const ChatInfoBox = styled.div`
@@ -192,7 +193,6 @@ const ChatInfoBox = styled.div`
   align-items: center;
   width: 30%;
   box-sizing: border-box;
-  padding: 18px 0px;
 `;
 
 const CheckBox = styled.div`
