@@ -8,7 +8,7 @@ import { ReactComponent as Love } from "../assets/board-cate4.svg";
 import { ReactComponent as Broken } from "../assets/board-cate5.svg";
 import { ReactComponent as Again } from "../assets/board-cate6.svg";
 import { ReactComponent as Nineteen } from "../assets/board-cate7.svg";
-import { ReactComponent as Gitar } from "../assets/board-cate8.svg";
+import { ReactComponent as Etc } from "../assets/board-cate8.svg";
 
 import { useHistory } from "react-router-dom";
 import { actionCreators } from "../redux/modules/post";
@@ -20,30 +20,13 @@ function PostList(props) {
   const mytoken = localStorage.getItem("accessToken");
   const dispatch = useDispatch();
   const history = useHistory();
-  const [category, setCategory] = React.useState([
-    "전체",
-    "투표",
-    "썸",
-    "연애중",
-    "이별",
-    "재회",
-    "19+",
-    "기타",
-  ]);
+
   //게시글 전체 조회
   React.useEffect(() => {
     dispatch(actionCreators.getPostDB());
   }, []);
   const _postList = useSelector((state) => state.post.post);
-  //작성,수정페이지로 가는 버튼
-  const write = () => {
-    if (!mytoken) {
-      window.alert("로그인 한 회원만 작성이 가능합니다!");
-      return;
-    } else {
-      history.push("/postWrite");
-    }
-  };
+
   return (
     <React.Fragment>
       <InfoWrapper id="1">
@@ -153,7 +136,7 @@ function PostList(props) {
               history.push("/기타");
             }}
           >
-            <Gitar />
+            <Etc />
             기타
           </CategoryBtn>
         </CateGoryWrapper>
