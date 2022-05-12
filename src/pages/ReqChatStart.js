@@ -107,12 +107,12 @@ function ResChatStart() {
           </Text>
         </LineBox>
         <LineBox>
-          <Title>
+          <ChatInfoBox>
             <Text weight="500" size="16px" color="#999999">
               한 줄 고민
               <span style={{ color: "red", marginLeft: "4px" }}>*</span>
             </Text>
-          </Title>
+          </ChatInfoBox>
           <InputBox>
             <Input
               padding="16px"
@@ -125,12 +125,12 @@ function ResChatStart() {
           </InputBox>
         </LineBox>
         <LineBox>
-          <Title>
+          <ChatInfoBox>
             <Text weight="500" size="16px" color="#999999">
               상담 카테고리
               <span style={{ color: "red", marginLeft: "4px" }}>*</span>
             </Text>
-          </Title>
+          </ChatInfoBox>
           <InputBox>
             <CheckBox>
               <input
@@ -314,22 +314,16 @@ function ResChatStart() {
             )}
           </div> */}
         </LineBox>
-        <div id="category">
-          <div>
-            <div id="title"></div>
-            <div id="input"></div>
-          </div>
-        </div>
-        <div>
+        <LineBox>
           <Button
-            margin="60px 0px"
+            margin="60px auto"
             width="210px"
             bg="#7A37BE"
-            text="리스너 매칭"
+            text="고민 신청하기"
             cursor="pointer"
             _onClick={submit}
           />
-        </div>
+        </LineBox>
       </RequestContainer>
     </React.Fragment>
   );
@@ -350,14 +344,6 @@ const LineBox = styled.div`
   display: flex;
   align-items: center;
   margin: 16px 0px;
-`;
-
-const Title = styled.div`
-  display: flex;
-  width: 20%;
-  height: 60px;
-  box-sizing: border-box;
-  padding: 18px 0px;
 `;
 
 const ChatInfoBox = styled.div`
