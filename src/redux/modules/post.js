@@ -56,7 +56,7 @@ const getDetailDB = (postId) => {
   return function (dispatch, getState, { history }) {
     try {
       api.get(`anonypost/board/${postId}`, {}).then((res) => {
-        console.log("포스트 상세보기 get", res.data.data);
+        // console.log("포스트 상세보기 get", res.data.data);
         dispatch(getDetail(res.data.data));
       });
     } catch (err) {
@@ -68,7 +68,7 @@ const getDetailDB = (postId) => {
 
 //post 서버로 보내기
 const addPostDB = (payload) => {
-  console.log("포스트 추가하기", payload);
+  // console.log("포스트 추가하기", payload);
   return async function (dispatch, getState, { history }) {
     try {
       const formData = new FormData();
@@ -85,7 +85,7 @@ const addPostDB = (payload) => {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log("포스트추가하기", data.data);
+      // console.log("포스트추가하기", data.data);
       dispatch(addPost(data.data));
       //등록함과 동시에 리덕스에 남아있는 사진파일들 리셋해주기
       dispatch(imgActions.resetFile());
@@ -123,7 +123,7 @@ const editPostDB = (payload) => {
         }
       );
       console.log("포스트 수정하기", data);
-      dispatch(editPost({}));
+      history.push(`/postDetail/${payload.postId}`);
     } catch (err) {
       console.log("포스트 수정하기 에러", err);
     }
