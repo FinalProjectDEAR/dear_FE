@@ -340,49 +340,47 @@ function MemberInfo() {
                   연애유형
                 </Text>
               </Subject>
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <InputBox>
-                  <CheckBox>
-                    <input
-                      type="radio"
-                      name="loveType"
-                      value="본인이 연하"
-                      onChange={(e) => {
-                        setLoveType(e.target.value);
-                      }}
-                    />
-                    <Text weight="300" size="14px" color="#333333">
-                      본인이 연하
-                    </Text>
-                  </CheckBox>
-                  <CheckBox>
-                    <input
-                      type="radio"
-                      name="loveType"
-                      value="동갑"
-                      onChange={(e) => {
-                        setLoveType(e.target.value);
-                      }}
-                    />
-                    <Text weight="300" size="14px" color="#333333">
-                      동갑
-                    </Text>
-                  </CheckBox>
-                  <CheckBox>
-                    <input
-                      type="radio"
-                      name="loveType"
-                      value="본인이 연상"
-                      onChange={(e) => {
-                        setLoveType(e.target.value);
-                      }}
-                    />
-                    <Text weight="300" size="14px" color="#333333">
-                      본인이 연상
-                    </Text>
-                  </CheckBox>
-                </InputBox>
-              </div>
+              <InputBox>
+                <CheckBox>
+                  <input
+                    type="radio"
+                    name="loveType"
+                    value="본인이 연하"
+                    onChange={(e) => {
+                      setLoveType(e.target.value);
+                    }}
+                  />
+                  <Text weight="300" size="14px" color="#333333">
+                    본인이 연하
+                  </Text>
+                </CheckBox>
+                <CheckBox>
+                  <input
+                    type="radio"
+                    name="loveType"
+                    value="동갑"
+                    onChange={(e) => {
+                      setLoveType(e.target.value);
+                    }}
+                  />
+                  <Text weight="300" size="14px" color="#333333">
+                    동갑
+                  </Text>
+                </CheckBox>
+                <CheckBox>
+                  <input
+                    type="radio"
+                    name="loveType"
+                    value="본인이 연상"
+                    onChange={(e) => {
+                      setLoveType(e.target.value);
+                    }}
+                  />
+                  <Text weight="300" size="14px" color="#333333">
+                    본인이 연상
+                  </Text>
+                </CheckBox>
+              </InputBox>
             </LineBox>
             <LineBox>
               <Subject>
@@ -390,49 +388,47 @@ function MemberInfo() {
                   연애기간
                 </Text>
               </Subject>
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <InputBox>
-                  <CheckBox>
-                    <input
-                      type="radio"
-                      name="lovePeriod"
-                      value="6개월 미만"
-                      onChange={(e) => {
-                        setLovePeriod(e.target.value);
-                      }}
-                    />
-                    <Text weight="300" size="14px" color="#333333">
-                      6개월 미만
-                    </Text>
-                  </CheckBox>
-                  <CheckBox>
-                    <input
-                      type="radio"
-                      name="lovePeriod"
-                      value="6개월 ~ 2년 미만"
-                      onChange={(e) => {
-                        setLovePeriod(e.target.value);
-                      }}
-                    />
-                    <Text weight="300" size="14px" color="#333333">
-                      6개월 ~ 2년 미만
-                    </Text>
-                  </CheckBox>
-                  <CheckBox>
-                    <input
-                      type="radio"
-                      name="lovePeriod"
-                      value="3년 이상"
-                      onChange={(e) => {
-                        setLovePeriod(e.target.value);
-                      }}
-                    />
-                    <Text weight="300" size="14px" color="#333333">
-                      3년 이상
-                    </Text>
-                  </CheckBox>
-                </InputBox>
-              </div>
+              <InputBox>
+                <CheckBox>
+                  <input
+                    type="radio"
+                    name="lovePeriod"
+                    value="6개월 미만"
+                    onChange={(e) => {
+                      setLovePeriod(e.target.value);
+                    }}
+                  />
+                  <Text weight="300" size="14px" color="#333333">
+                    6개월 미만
+                  </Text>
+                </CheckBox>
+                <CheckBox>
+                  <input
+                    type="radio"
+                    name="lovePeriod"
+                    value="6개월 ~ 2년 미만"
+                    onChange={(e) => {
+                      setLovePeriod(e.target.value);
+                    }}
+                  />
+                  <Text weight="300" size="14px" color="#333333">
+                    6개월 ~ 2년 미만
+                  </Text>
+                </CheckBox>
+                <CheckBox>
+                  <input
+                    type="radio"
+                    name="lovePeriod"
+                    value="3년 이상"
+                    onChange={(e) => {
+                      setLovePeriod(e.target.value);
+                    }}
+                  />
+                  <Text weight="300" size="14px" color="#333333">
+                    3년 이상
+                  </Text>
+                </CheckBox>
+              </InputBox>
             </LineBox>
             <SubmitBox>
               <Button
@@ -500,7 +496,6 @@ const InfoContainer = styled.div`
 `;
 
 const TitleBox = styled.div`
-  margin: 20px 0px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -546,7 +541,6 @@ const ButtonBox = styled.div`
 
 const Subject = styled.div`
   width: 70px;
-  padding: 10px 0px;
 `;
 
 const CheckBox = styled.div`
@@ -561,7 +555,6 @@ const InputBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 40px;
 `;
 
 const SubmitBox = styled.div`
