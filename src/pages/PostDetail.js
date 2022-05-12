@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { ReactComponent as Thumb } from "../assets/Vector (1).svg";
+import { ReactComponent as ThumbUp } from "../assets/post-select.svg";
 import styled from "styled-components";
 import { Text, Button } from "../elements/index";
 //페이지 관련
@@ -17,6 +17,7 @@ function PostDetail(props) {
   const history = useHistory();
   const dispatch = useDispatch();
   //공감해요 버튼
+  const [like, setLike] = React.useState(false);
   const [count, setCount] = React.useState(0);
   //포스트 상세 조회 가져오기, 댓글리스트가져오기
   React.useEffect(() => {
@@ -125,20 +126,31 @@ function PostDetail(props) {
             }
           }}
         >
-          <Thumb />
+          <Thumb
+            like={like}
+            // onClick={() => {
+            //   setLike(!like);
+            // }}
+          >
+            <ThumbUp />
+          </Thumb>
           <Text weight="700" color="#333333" cursor="pointer">
-            공감해요 <span style={{ color: "#7A37BE" }}>{count}</span>
+            <span style={{ color: "#7A37BE" }}>{count}</span>
           </Text>
         </IsLike>
       </DetailWrapper>
-      <div style={{ marginTop: "200px" }}>
-        <CommentWrite postId={postId} />
+      <CommentWrapper>
         <CommentList />
-      </div>
+        <CommentWrite postId={postId} />
+      </CommentWrapper>
     </React.Fragment>
   );
 }
-
+const CommentWrapper = styled.div`
+  /* border: 1px solid red; */
+  margin: 200px auto 0px auto;
+  width: 1032px;
+`;
 const BtnContainer = styled.div`
   display: flex;
   width: 1032px;
@@ -215,9 +227,17 @@ const IsLike = styled.div`
   padding: 30px;
   gap: 10px;
   margin: auto;
-  width: 110px;
+  width: 119px;
   height: 24px;
+
   /* border: 1px solid red; */
+`;
+
+const Thumb = styled.button`
+  background-color: ${(props) => (props.commentLike ? "#7A37BE" : "#ddddd")};
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
 `;
 const CommentPhotoWrap = styled.div`
   display: flex;
@@ -249,6 +269,7 @@ const PhotoUpload1 = styled.div`
   /* border: 1px solid red; */
   padding-bottom: 10px;
   display: block;
+  border: 1px solid red;
 `;
 const Img = styled.img`
   width: 100%;

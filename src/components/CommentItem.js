@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Text, Button } from "../elements";
+import { Text, Button, Input } from "../elements";
+import { ReactComponent as Like } from "../assets/comment-select.svg";
+import { ReactComponent as Cancel } from "../assets/Vector (2).svg";
 import styled from "styled-components";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +16,7 @@ const CommentItem = (props) => {
   const comment_id = props.commentId;
   const comments = props.comment;
   const postId = props.boardPostId;
+  const createdAt = props.createdAt;
   //좋아요!(댓글)
   const commentLike = props.likes;
 
@@ -77,50 +80,78 @@ const CommentItem = (props) => {
   }
   if (isEdit) {
     return (
-      <div>
-        <input
-          placeholder="선플은 선택이 아닌 의무입니다! (최소 10자 이상)"
-          onChange={(e) => {
-            setComment(e.target.value);
-          }}
-          onKeyUp={checkMaxLength}
-          style={{ width: "3700px" }}
-          value={comment || ""}
-        />
-        <div>
-          {/* <Text textAlign="right" margin="0px 5px">
-            {textLength}/ 200자
-          </Text> */}
-          <Button _onClick={editComment}>수정완료</Button>
-          <Button
-            _onClick={() => {
-              setIsEdit(!isEdit);
-            }}
-          >
-            취소하기
-          </Button>
-        </div>
-      </div>
+      <React.Fragment>
+        <IsEdit>
+          <CancelContainer>
+            <CancelBtn
+              onClick={() => {
+                setIsEdit(!isEdit);
+              }}
+            >
+              <Cancel />
+            </CancelBtn>
+          </CancelContainer>
+          <TitleBox>
+            <Text batang>댓글 수정하기</Text>
+          </TitleBox>
+          <InputStyle>
+            <Input
+              placeholder="선플은 선택이 아닌 의무입니다! (최소 10자 이상)"
+              _onChange={(e) => {
+                setComment(e.target.value);
+              }}
+              _onKeyUp={checkMaxLength}
+              multiLine
+              maxlength="200"
+              rows={25}
+              value={comment || ""}
+            />
+          </InputStyle>
+          <Btn>
+            <Button
+              _onClick={editComment}
+              bg="#948A9E"
+              text="수정하기"
+              width="160px"
+            ></Button>
+          </Btn>
+        </IsEdit>
+      </React.Fragment>
     );
   }
   return (
     <React.Fragment>
-      <div style={{ display: "flex" }}>
-        <div style={{ width: "600px" }}>
-          <Text color="black">{comments}</Text>
-        </div>
-        <div style={{ margin: "0px 50px" }}>
-          <Button width="30px" _onClick={editMode}>
-            수정
-          </Button>
-          <Button width="30px" _onClick={deleteComment}>
-            삭제
-          </Button>
-          <LikeBtn commentLike={commentLike} onClick={likeComment}>
-            💌
-          </LikeBtn>
-        </div>
-      </div>
+      <CommentWrapper>
+        <CommentContainer>
+          <CommentBox>
+            <Text color="#333333" size="13px" weight="300">
+              {comments}
+            </Text>
+          </CommentBox>
+
+          <CommentBox>
+            <Text color="#999999" size="12px" weight="300">
+              {createdAt}
+            </Text>
+            <BtnBox
+              IsEdit={IsEdit}
+              onClick={editMode}
+              style={{
+                borderLeft: "1px solid #999999",
+                borderRight: "1px solid #999999",
+                marginLeft: "4px",
+              }}
+            >
+              수정
+            </BtnBox>
+            <BtnBox onClick={deleteComment}>삭제</BtnBox>
+          </CommentBox>
+        </CommentContainer>
+
+        <LikeBtn commentLike={commentLike} onClick={likeComment}>
+          <Like />
+        </LikeBtn>
+      </CommentWrapper>
     </React.Fragment>
   );
 };
@@ -130,9 +161,96 @@ CommentItem.defaultProps = {
   comment: "헉,, 충격적이네요..",
 };
 
-const LikeBtn = styled.button`
-  background-color: ${(props) => (props.commentLike ? "red" : "#ddd")};
-  border: none;
+const CommentWrapper = styled.div`
+  display: flex;
 `;
 
+const CommentContainer = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 40px;
+  margin: auto;
+  width: 1031px;
+  height: 128px;
+  border-bottom: 1px solid #cccccc;
+`;
+const CommentBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 6px 0px 0px;
+  gap: 8px;
+  height: 20px;
+  line-height: 20px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  /* background-color: red; */
+`;
+const BtnBox = styled.button`
+  border: none;
+  background-color: transparent;
+  color: #999999;
+`;
+
+const LikeBtn = styled.button`
+  background-color: ${(props) => (props.commentLike ? "#7A37BE" : "#ddddd")};
+  border: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 4px;
+  margin: auto;
+  width: 40px;
+  height: 30px;
+  cursor: pointer;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  border-radius: 4px;
+`;
+
+const IsEdit = styled.div`
+  width: 550px;
+  height: 625px;
+  background: #ffffff;
+  border-radius: 20px;
+  position: absolute;
+  top: 100px;
+  left: 35%;
+`;
+
+const TitleBox = styled.div`
+  justify-content: center;
+  width: 550px;
+  height: 20px;
+  display: flex;
+`;
+
+const CancelBtn = styled.button`
+  border: none;
+  background-color: transparent;
+  width: 24px;
+  height: 24px;
+`;
+
+const InputStyle = styled.div`
+  padding: 40px 35px 20px 15px;
+  gap: 10px;
+`;
+
+const Btn = styled.div`
+  margin: auto;
+`;
+
+const CancelContainer = styled.div`
+  margin-left: 330px;
+  padding-top: 25px;
+  text-align: right;
+  width: 200px;
+  /* border: solid 1px red; */
+`;
 export default CommentItem;
