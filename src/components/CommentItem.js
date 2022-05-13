@@ -29,7 +29,7 @@ const CommentItem = (props) => {
     setIsEdit(false);
   };
   const likeComment = () => {
-    dispatch(actionCreators.likeCommentDB(postId, comment_id, setLike));
+    dispatch(actionCreators.likeCommentDB(postId, comment_id));
     // setLike(!like);
   };
 
