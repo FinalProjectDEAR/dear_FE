@@ -1,8 +1,8 @@
-import React, { Children } from "react";
+import React from "react";
 import styled from "styled-components";
 import { ColorBadge } from "../elements";
 
-function OpenViduAudioComponent(props) {
+function OpenViduVideoComponent(props) {
   const audioRef = React.useRef();
 
   React.useEffect(() => {
@@ -13,24 +13,22 @@ function OpenViduAudioComponent(props) {
   }, []);
 
   return (
-    <OutterCircle
-      streamManager={props.mainStreamManager}
-      autoPlay={true}
-      ref={audioRef}
-    >
-      {Children}
-    </OutterCircle>
+    <OuterCircle autoPlay={true} ref={audioRef} color={props.color}>
+      <ColorBadge size="60" position="absolute" />
+    </OuterCircle>
   );
 }
 
-export default OpenViduAudioComponent;
+export default OpenViduVideoComponent;
 
-const OutterCircle = styled.div`
+const OuterCircle = styled.video`
   --size: 68px;
   width: var(--size);
   height: var(--size);
-  border: 4px solid #948a9e;
-  background-color: #fff;
+  border-radius: var(--size);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${(props) => props.color};
   position: relative;
-  margin: 0px 20px;
 `;

@@ -1,34 +1,30 @@
 import React, { Component } from "react";
-
+import OpenViduAudioComponent from "./OvAudio";
 import styled from "styled-components";
-import { ColorBadge } from "../elements";
 
 function UserAudioComponent(props) {
-  console.log("streamManager:", props);
-  const audioRef = React.useRef();
-
-  React.useEffect(() => {
-    if (props.streamManager && !!audioRef) {
-      props.streamManager.addVideoElement(audioRef.current);
-    }
-    return () => {};
-  }, []);
-
+  console.log("유저 비디오 프롭스", props);
+  // const getNicknameTag = () => {
+  //   // Gets the nickName of the user
+  //   return JSON.parse(props.streamManager.stream.connection.data).clientData;
+  // };
   return (
-    <OuterCircle
-      streamManager={props.streamManager}
-      autoPlay={true}
-      ref={audioRef}
-    >
-      <ColorBadge bg={props.color} size="60" position="absolute" />
-    </OuterCircle>
+    <div>
+      {props.streamManager !== undefined ? (
+        <OuterCircle>
+          <InnerCircle color={props.color}>
+            <OpenViduAudioComponent streamManager={props.streamManager} />
+          </InnerCircle>
+        </OuterCircle>
+      ) : null}
+    </div>
   );
 }
 
 export default UserAudioComponent;
 
-const OuterCircle = styled.video`
-  --size: 70px;
+const OuterCircle = styled.div`
+  --size: 77px;
   width: var(--size);
   height: var(--size);
   border-radius: var(--size);
@@ -38,5 +34,16 @@ const OuterCircle = styled.video`
   border: 4px solid #948a9e;
   background-color: #fff;
   position: relative;
-  margin: 0px 20px;
+`;
+
+const InnerCircle = styled.div`
+  --size: 68px;
+  width: var(--size);
+  height: var(--size);
+  border-radius: var(--size);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${(props) => props.color};
+  position: absolute;
 `;

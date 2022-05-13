@@ -38,8 +38,8 @@ const Modal = (props) => {
         style={{
           color: "white",
           position: "absolute",
-          right: "1.5rem",
-          top: "1.5rem",
+          right: "20px",
+          top: "-140px",
           cursor: "pointer",
         }}
       />
