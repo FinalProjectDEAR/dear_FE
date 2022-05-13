@@ -18,8 +18,7 @@ function PostDetail(props) {
   const dispatch = useDispatch();
   //공감해요 버튼
   const [like, setLike] = React.useState(false);
-  const [count, setCount] = React.useState(0);
-  //포스트 상세 조회 가져오기, 댓글리스트가져오기
+  //포스트 상세 조회,댓글리스트가져오기
   React.useEffect(() => {
     dispatch(actionCreators.getDetailDB(postId));
     dispatch(commentActions.getCommentDB(postId));
@@ -27,8 +26,7 @@ function PostDetail(props) {
   //상세페이지 가져오기
   const post = useSelector((state) => state.post.detailPost);
   console.log(post);
-  // const likes = useSelector((state) => state.post.detailPost.likes);
-  // console.log("조아좌아", likes);
+
   const likesList = post?.likesList; //길이 로직
 
   const loginUser = localStorage.getItem("memberId");

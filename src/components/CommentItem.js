@@ -3,20 +3,29 @@ import { Text, Button, Input } from "../elements";
 import { ReactComponent as Like } from "../assets/comment-select.svg";
 import { ReactComponent as Cancel } from "../assets/Vector (2).svg";
 import styled from "styled-components";
+//시간알려주는패키지
+import TimeCounting from "time-counting";
 
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators } from "../redux/modules/comment";
 
 const CommentItem = (props) => {
   const dispatch = useDispatch();
-  //댓글좋아요
-  const [like, setLike] = React.useState(false);
-
+  console.log(props);
   const commentList = useSelector((state) => state.comment.comments); //[]빈배열
   const comment_id = props.commentId;
   const comments = props.comment;
   const postId = props.boardPostId;
-  const createdAt = props.createdAt;
+  const boardPostId = props.member;
+
+  //시간을 알아보자!
+  const option = {
+    lang: "ko",
+    calculate: {
+      justNow: 60,
+    },
+  };
+  const createdAt = TimeCounting(props.createdAt, option);
   //좋아요!(댓글)
   const commentLike = props.likes;
 
@@ -44,10 +53,6 @@ const CommentItem = (props) => {
   //글자 수 제한
   const checkMaxLength = (e) => {
     let wordLength = e.target.value.length;
-    // if (wordLength <= 10) {
-    //   window.alert("최소 10자 이상 작성 부탁 드립니다.");
-    //   return;
-    // }
     if (wordLength >= 200) {
       window.alert("200자 이상 작성할 수 없습니다.");
       return;
@@ -147,10 +152,11 @@ const CommentItem = (props) => {
             <BtnBox onClick={deleteComment}>삭제</BtnBox>
           </CommentBox>
         </CommentContainer>
-
-        <LikeBtn commentLike={commentLike} onClick={likeComment}>
-          <Like />
-        </LikeBtn>
+        {boardPostId ? (
+          <LikeBtn commentLike={commentLike} onClick={likeComment}>
+            <Like />
+          </LikeBtn>
+        ) : null}
       </CommentWrapper>
     </React.Fragment>
   );

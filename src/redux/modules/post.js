@@ -59,7 +59,7 @@ const getDetailDB = (postId) => {
   return function (dispatch, getState, { history }) {
     try {
       api.get(`anonypost/board/${postId}`, {}).then((res) => {
-        // console.log("포스트 상세보기 get", res.data.data);
+        console.log("포스트 상세보기 get", res.data.data);
         dispatch(getDetail(res.data.data));
       });
     } catch (err) {
@@ -200,6 +200,7 @@ export default handleActions(
         console.log("공감 state", state);
         // draft.postLike.map((e, id) => {
         // if (action.payload.postId == e.boardPostId) {
+
         draft.detailPost.likes = action.payload.likes;
         // }
         // });
