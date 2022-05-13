@@ -12,81 +12,121 @@ import { actionCreators } from "../redux/modules/review";
 function ReqReview() {
   const dispatch = useDispatch();
   const resMemberId = localStorage.getItem("memberId");
+  // const oppositeMemberId = 상대방아이디_리스너아이디
   const request = localStorage.getItem("request");
 
-  const [goodResTag, setGoodResTag] = React.useState([]);
-  const [badResTag, setBadResTag] = React.useState([]);
   const [serviceComment, setServiceComment] = React.useState(null);
   const [follow, unFollow] = React.useState(false);
   const [goodClick, setGoodClick] = React.useState(false);
   const [badClick, setBadClick] = React.useState(false);
 
-  const [goodTag, setGoodTag] = React.useState([
+  const goodTag = [
     "공감을 잘해줘요.",
     "대화가 즐거웠어요.",
     "감수성이 풍부했어요.",
     "시원하게 팩트폭격을 해줘요.",
     "명쾌한 해결책을 알려줘요.",
-  ]);
-  const [badTag, setBadTag] = React.useState([
+  ];
+  const badTag = [
     "욕설, 비속어를 사용했어요.",
     "주제와 관련없는 이야기를 했어요.",
-    "대화를 꺼내도 답이 없었어요.",
+    "이야기를 꺼내도 답이 없었어요.",
+    "대화 태도가 불량해요",
     "불순한 의도로 접근했어요.",
-  ]);
-  const SelectGoodTag = (evt, i) => {
-    if (evt.target.checked) {
-      setGoodResTag([...goodResTag, evt.target.value]);
-    } //취소
-    else {
-      setGoodResTag(goodResTag.filter((e) => e !== evt.target.value));
+  ];
+
+  const [goodResTag, setGoodResTag] = React.useState({
+    "공감을 잘해줘요.": false,
+    "대화가 즐거웠어요.": false,
+    "감수성이 풍부했어요.": false,
+    "시원하게 팩트폭격을 해줘요.": false,
+    "명쾌한 해결책을 알려줘요.": false,
+  });
+  const [badResTag, setBadResTag] = React.useState({
+    "욕설, 비속어를 사용했어요.": false,
+    "주제와 관련없는 이야기를 했어요.": false,
+    "이야기를 꺼내도 답이 없었어요.": false,
+    "대화 태도가 불량해요": false,
+    "불순한 의도로 접근했어요.": false,
+  });
+  //Boolean(value)은 value를 불리언값으로
+  const SelectGoodTag = (e) => {
+    const { value, name } = e.target;
+    if (e.target.checked) {
+      setGoodResTag({ ...goodResTag, [name]: Boolean(value) });
+    } else {
+      setGoodResTag({ ...goodResTag, [name]: Boolean(!value) });
     }
   };
-  const SelectBadTag = (evt, i) => {
-    if (evt.target.checked) {
-      setBadResTag([...badResTag, evt.target.value]);
-    } //취소
-    else {
-      setBadResTag(badResTag.filter((e) => e !== evt.target.value));
+  //Object.values()객체의 value값만 뽑아내기
+  // console.log("굿", Object.values(goodResTag));
+
+  const SelectBadTag = (e) => {
+    const { value, name } = e.target;
+    if (e.target.checked) {
+      setBadResTag({ ...badResTag, [name]: Boolean(value) });
+    } else {
+      setBadResTag({ ...badResTag, [name]: Boolean(!value) });
     }
   };
+  // console.log("배드", Object.values(badResTag));
+
+  //고민러 고정값
+  const requestReview = true;
   //고민러 후기 추가하기
   const finish = () => {
+    let tagLike = "";
     if (goodClick === true) {
-      console.log("굿클릭", resMemberId, goodResTag, serviceComment);
+      console.log(
+        "굿클릭",
+        requestReview,
+        Object.values(goodResTag),
+        serviceComment
+      );
       if (goodResTag === "") {
         window.alert("이유를 선택 해주세요!");
         return;
       }
+      tagLike = true;
       dispatch(
         actionCreators.addReviewReqDB(
-          resMemberId,
-          goodResTag,
-          badResTag,
+          requestReview,
+          tagLike,
+          Object.values(goodResTag),
           serviceComment
         )
       );
-      localStorage.removeItem("request");
+      // localStorage.removeItem("request");
     }
     if (badClick === true) {
-      console.log("배드클릭", resMemberId, badResTag, serviceComment);
+      console.log(
+        "배드클릭",
+        requestReview,
+        Object.values(badResTag),
+        serviceComment
+      );
+      if (badResTag === "") {
+        window.alert("이유를 선택 해주세요!");
+        return;
+      }
+      tagLike = false;
       dispatch(
         actionCreators.addReviewReqDB(
-          resMemberId,
-          goodResTag,
-          badResTag,
+          requestReview,
+          tagLike,
+          Object.values(badResTag),
           serviceComment
         )
       );
       localStorage.removeItem("request");
     }
   };
-
   //유저찜하기 액션
   const userFollow = () => {
     unFollow(!follow);
     dispatch(actionCreators.followDB(resMemberId, follow));
   };
+
   return (
     <React.Fragment>
       <ReviewWrapper>
@@ -112,6 +152,7 @@ function ReqReview() {
               <ThumbUpBtn
                 onClick={() => {
                   setGoodClick(!goodClick);
+                  setBadClick(false);
                 }}
                 goodClick={goodClick}
               >
@@ -120,6 +161,7 @@ function ReqReview() {
               <ThumbDownBtn
                 onClick={() => {
                   setBadClick(!badClick);
+                  setGoodClick(false);
                 }}
                 badClick={badClick}
               >
@@ -140,8 +182,9 @@ function ReqReview() {
                       <input
                         type="checkbox"
                         onChange={SelectGoodTag}
-                        value={e}
+                        value={true}
                         id={e}
+                        name={e}
                       />
                       <label htmlFor={e}>{e}</label>
                     </React.Fragment>
@@ -164,8 +207,9 @@ function ReqReview() {
                       <input
                         type="checkbox"
                         onChange={SelectBadTag}
-                        value={e}
+                        value={true}
                         id={e}
+                        name={e}
                       />
                       <label htmlFor={e}>{e}</label>
                     </React.Fragment>
