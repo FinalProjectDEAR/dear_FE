@@ -28,6 +28,14 @@ import FixedBtn from "../components/FixedBtn";
 import VoteWrite from "../pages/VoteWrite";
 import VoteDetail from "../pages/VoteDetail";
 import VoteList from "../components/VoteList";
+import ReqChatStart from "../pages/ReqChatStart";
+import ResChatStart from "../pages/ResChatStart";
+import HistoryCard from "../components/HistoryCard";
+import AudioRoom from "../pages/AudioRoom";
+import AudioChat from "../components/AudioChat";
+import Loading from "../pages/Loading";
+import ChatClose from "../components/alert/ChatClose";
+import Test from "../components/Test";
 
 function App() {
   return (
@@ -50,6 +58,15 @@ function App() {
           <Route path="/voteWrite" exact component={VoteWrite} />
           <Route path="/voteDetail/:postId" component={VoteDetail} />
           <Route path="/voteList" component={VoteList} />
+          <Route path="/startReq" exact component={ReqChatStart} />
+          <Route path="/startRes" exact component={ResChatStart} />
+          <Route path="/historyCard" exact component={HistoryCard} />
+          <Route path="/historyCard" exact component={HistoryCard} />
+          <Route path="/AudioRoom/:sessionId" component={AudioRoom} />
+          <Route path="/AudioChat" exact component={AudioChat} />
+          <Route path="/loading" exact component={Loading} />
+          <Route path="/ChatClose" exact component={ChatClose} />
+          <Route path="/Test" exact component={Test} />
           <Section />
         </Wrapper>
         <Section />
