@@ -5,10 +5,11 @@ import { actionCreators as chatActions } from "../redux/modules/chat";
 import { OpenVidu } from "openvidu-browser";
 
 import styled from "styled-components";
-import { Text, Button, ColorBadge } from "../elements";
+import { Text, Button, ColorBadge, Modal } from "../elements";
 import UserAudioComponent from "../components/UserAudioComponent";
 import Timer from "../components/Timer";
 import Loading from "../pages/Loading";
+import ChatClose from "./alert/ChatClose";
 
 function AudioChat(props) {
   const nickname = localStorage.getItem("nickname");
@@ -26,6 +27,17 @@ function AudioChat(props) {
   const [isSub, setIsSub] = React.useState(false);
   const [targetTime, setTargetTime] = React.useState("");
   const [isConnect, setIsConnect] = React.useState(false);
+
+  //모달
+  const [modalOpen, setModalOpen] = React.useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   // 오디오채팅 (오픈비듀)
   const onbeforeunload = (event) => {
@@ -70,7 +82,7 @@ function AudioChat(props) {
             audioSource: undefined,
             videoSource: videoDevices[0].deviceId,
             publishAudio: true,
-            publishVideo: true,
+            publishVideo: false,
             resolution: "640x480",
             frameRate: 30,
             insertMode: "APPEND",
@@ -98,7 +110,6 @@ function AudioChat(props) {
     if (mySession) {
       mySession.disconnect();
     }
-    const OV = null;
     setSession(undefined);
     setSubscribers([]);
     setMySessionId("");
@@ -118,12 +129,12 @@ function AudioChat(props) {
             <UserAudioComponent
               streamManager={mainStreamManager}
               // color={chatInfo.reqColor}
-              color="#c9c9"
+              color="#D62020"
             />
             <Timer targetTime={targetTime} />
             <UserAudioComponent
               streamManager={subscribers[0]}
-              color="#c88"
+              color="#FFD05B"
               // color={chatInfo.resColor}
             />
           </TapeBox>
@@ -221,7 +232,9 @@ function AudioChat(props) {
           <Button
             bg="#F6EAED"
             color="#BE3757"
-            _onClick={leaveSession}
+            _onClick={() => {
+              setModalOpen(true);
+            }}
             margin="0px 10px"
           >
             상담 종료하기
@@ -231,6 +244,11 @@ function AudioChat(props) {
       {/* ) : ( */}
       {/* <Loading /> */}
       {/* )} */}
+      {modalOpen && (
+        <Modal closModal={closeModal}>
+          <ChatClose closeModal={closeModal} leaveSession={leaveSession} />
+        </Modal>
+      )}
     </React.Fragment>
   );
 }
@@ -278,7 +296,7 @@ const UserBox = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 0px;
-  margin: 0px 40px;
+  margin: 0px 63px;
 `;
 
 const TagBox = styled.div`

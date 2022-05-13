@@ -18,6 +18,7 @@ const Text = (props) => {
     textShadow,
     lineHeight,
     wordBreak,
+    bg,
   } = props;
 
   const styles = {
@@ -33,6 +34,7 @@ const Text = (props) => {
     textShadow: textShadow,
     lineHeight: lineHeight,
     wordBreak: wordBreak,
+    bg: bg,
   };
   return (
     <P style={_style} onClick={_onClick} {...styles}>
@@ -56,6 +58,7 @@ Text.defaultProps = {
   textShadow: "none",
   lineHeight: "24px",
   wordBreak: false,
+  bg: "",
 };
 
 const P = styled.p`
@@ -74,6 +77,7 @@ const P = styled.p`
   ${(props) => (props.textShadow ? `text-shadow: ${props.textShadow};` : "")};
   font-style: ${(props) => props.fontStyle};
   ${(props) => (props.wordBreak ? `word-break: keep-all;` : "")};
+  background-color: ${(props) => props.bg};
 `;
 
 export default Text;

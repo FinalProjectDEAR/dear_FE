@@ -1,6 +1,8 @@
 import React, { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Text, Input, Button } from "../elements";
+import { history } from "../redux/configureStore";
+
+import { Text, Input, Button, Modal } from "../elements";
 import { OpenVidu } from "openvidu-browser";
 
 import { actionCreators as imageActions } from "../redux/modules/image";
@@ -24,6 +26,18 @@ function ResChatStart() {
   const memberId = localStorage.getItem("memberId");
   const ninckname = localStorage.getItem("ninckname");
   const fileList = useSelector((state) => state.image.fileList);
+
+  //모달
+  const [modalOpen, setModalOpen] = React.useState(true);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    history.push("/");
+  };
 
   const selectFile = (e) => {
     // const imgList = [...imgFile];
@@ -96,216 +110,224 @@ function ResChatStart() {
   };
 
   return (
-    <React.Fragment>
-      <RequestContainer>
-        <TitleBox>
-          <Text batang weight="500" size="20px" textAlign="left">
-            여러분의 고민에 대해 알려주세요!
-          </Text>
-          <Text margin="0px 10px" weight="300" size="14px">
-            <span style={{ color: "red", marginRight: "4px" }}>*</span>필수입력
-          </Text>
-        </TitleBox>
-        <LineBox>
-          <ChatInfoBox>
-            <Text weight="500" size="16px" color="#999999">
-              한 줄 고민
-              <span style={{ color: "red", marginLeft: "4px" }}>*</span>
-            </Text>
-          </ChatInfoBox>
-          <InputBox>
-            <Input
-              padding="16px"
-              value={chatTitle}
-              placeholder="오늘의 고민을 한줄로 나타내주세요.(20자 이내)"
-              _onChange={(e) => {
-                setChatTitle(e.target.value);
-              }}
-            />
-          </InputBox>
-        </LineBox>
-        <LineBox>
-          <ChatInfoBox>
-            <Text weight="500" size="16px" color="#999999">
-              상담 카테고리
-              <span style={{ color: "red", marginLeft: "4px" }}>*</span>
-            </Text>
-          </ChatInfoBox>
-          <InputBox>
-            <CheckBox>
-              <input
-                type="radio"
-                name="category"
-                value="썸"
-                onChange={(e) => {
-                  setCategory(e.target.value);
-                }}
-              />
-              썸
-            </CheckBox>
-            <CheckBox>
-              <input
-                type="radio"
-                name="category"
-                value="고백"
-                onChange={(e) => {
-                  setCategory(e.target.value);
-                }}
-              />
-              고백
-            </CheckBox>
-            <CheckBox>
-              <input
-                type="radio"
-                name="category"
-                value="연애중"
-                onChange={(e) => {
-                  setCategory(e.target.value);
-                }}
-              />
-              연애중
-            </CheckBox>
-            <CheckBox>
-              <input
-                type="radio"
-                name="category"
-                value="이별"
-                onChange={(e) => {
-                  setCategory(e.target.value);
-                }}
-              />
-              이별
-            </CheckBox>
-            <CheckBox>
-              <input
-                type="radio"
-                name="category"
-                value="재회"
-                onChange={(e) => {
-                  setCategory(e.target.value);
-                }}
-              />
-              재회
-            </CheckBox>
-            <CheckBox>
-              <input
-                type="radio"
-                name="category"
-                value="기타"
-                onChange={(e) => {
-                  setCategory(e.target.value);
-                }}
-              />
-              기타
-            </CheckBox>
-          </InputBox>
-        </LineBox>
+    <>
+      {modalOpen && (
+        <Modal closeModal={closeModal}>
+          <React.Fragment>
+            <RequestContainer>
+              <TitleBox>
+                <Text batang weight="500" size="20px" textAlign="left">
+                  여러분의 고민에 대해 알려주세요!
+                </Text>
+                <Text margin="0px 10px" weight="300" size="14px">
+                  <span style={{ color: "red", marginRight: "4px" }}>*</span>
+                  필수입력
+                </Text>
+              </TitleBox>
+              <LineBox>
+                <ChatInfoBox>
+                  <Text weight="500" size="16px" color="#999999">
+                    한 줄 고민
+                    <span style={{ color: "red", marginLeft: "4px" }}>*</span>
+                  </Text>
+                </ChatInfoBox>
+                <InputBox>
+                  <Input
+                    padding="16px"
+                    value={chatTitle}
+                    placeholder="오늘의 고민을 한줄로 나타내주세요.(20자 이내)"
+                    _onChange={(e) => {
+                      setChatTitle(e.target.value);
+                    }}
+                  />
+                </InputBox>
+              </LineBox>
+              <LineBox>
+                <ChatInfoBox>
+                  <Text weight="500" size="16px" color="#999999">
+                    상담 카테고리
+                    <span style={{ color: "red", marginLeft: "4px" }}>*</span>
+                  </Text>
+                </ChatInfoBox>
+                <InputBox>
+                  <CheckBox>
+                    <input
+                      type="radio"
+                      name="category"
+                      value="썸"
+                      onChange={(e) => {
+                        setCategory(e.target.value);
+                      }}
+                    />
+                    썸
+                  </CheckBox>
+                  <CheckBox>
+                    <input
+                      type="radio"
+                      name="category"
+                      value="고백"
+                      onChange={(e) => {
+                        setCategory(e.target.value);
+                      }}
+                    />
+                    고백
+                  </CheckBox>
+                  <CheckBox>
+                    <input
+                      type="radio"
+                      name="category"
+                      value="연애중"
+                      onChange={(e) => {
+                        setCategory(e.target.value);
+                      }}
+                    />
+                    연애중
+                  </CheckBox>
+                  <CheckBox>
+                    <input
+                      type="radio"
+                      name="category"
+                      value="이별"
+                      onChange={(e) => {
+                        setCategory(e.target.value);
+                      }}
+                    />
+                    이별
+                  </CheckBox>
+                  <CheckBox>
+                    <input
+                      type="radio"
+                      name="category"
+                      value="재회"
+                      onChange={(e) => {
+                        setCategory(e.target.value);
+                      }}
+                    />
+                    재회
+                  </CheckBox>
+                  <CheckBox>
+                    <input
+                      type="radio"
+                      name="category"
+                      value="기타"
+                      onChange={(e) => {
+                        setCategory(e.target.value);
+                      }}
+                    />
+                    기타
+                  </CheckBox>
+                </InputBox>
+              </LineBox>
 
-        <LineBox>
-          <Text
-            batang
-            margin="30px 0px 0px 0px "
-            weight="500"
-            size="20px"
-            textAlign="left"
-          >
-            상담은 어떻게 진행할까요?
-          </Text>
-          <Text margin="30px 10px 0px 10px" weight="300" size="14px">
-            <span style={{ color: "red", marginRight: "4px" }}> *</span>필수입력
-          </Text>
-        </LineBox>
-        <LineBox>
-          <ChatInfoBox>
-            <Text weight="500" size="16px" color="#999999">
-              고민을 들어줄 리스너의 성별
-              <span style={{ color: "red", marginLeft: "4px" }}>*</span>
-            </Text>
-          </ChatInfoBox>
-          <InputBox>
-            <CheckBox>
-              <input
-                type="radio"
-                name="gender"
-                value="none"
-                onChange={(e) => {
-                  setGender(e.target.value);
-                }}
-              />
-              상관없음
-            </CheckBox>
-            <CheckBox>
-              <input
-                type="radio"
-                name="gender"
-                value="male"
-                onChange={(e) => {
-                  setGender(e.target.value);
-                }}
-              />
-              남성
-            </CheckBox>
-            <CheckBox>
-              <input
-                type="radio"
-                name="gender"
-                value="female"
-                onChange={(e) => {
-                  setGender(e.target.value);
-                }}
-              />
-              여성
-            </CheckBox>
-          </InputBox>
-        </LineBox>
-        <LineBox>
-          <ChatInfoBox>
-            <Text weight="500" size="16px" color="#999999">
-              고민 상담에 필요한 자료 첨부
-            </Text>
-          </ChatInfoBox>
-          <FileBox>
-            <ImgButton htmlFor="subInfo">파일선택</ImgButton>
-            <FileInput
-              id="subInfo"
-              type="file"
-              multiple="multiple"
-              onChange={(e) => {
-                selectFile(e);
-              }}
-            />
-            {fileName !== null || fileName.length !== 0
-              ? fileName.map((item, idx) => {
-                  return (
-                    <FileTag key={idx}>
-                      <Text color="#666666" weight="500" size="12px">
-                        {item}
-                      </Text>
-                      <Deletebutton
-                        onClick={() => {
-                          deleteFile(idx);
-                        }}
-                      >
-                        x
-                      </Deletebutton>
-                    </FileTag>
-                  );
-                })
-              : null}
-          </FileBox>
-        </LineBox>
-        <LineBox>
-          <Button
-            margin="40px auto"
-            width="210px"
-            bg="#7A37BE"
-            text="고민 신청하기"
-            cursor="pointer"
-            _onClick={submit}
-          />
-        </LineBox>
-      </RequestContainer>
-    </React.Fragment>
+              <LineBox>
+                <Text
+                  batang
+                  margin="30px 0px 0px 0px "
+                  weight="500"
+                  size="20px"
+                  textAlign="left"
+                >
+                  상담은 어떻게 진행할까요?
+                </Text>
+                <Text margin="30px 10px 0px 10px" weight="300" size="14px">
+                  <span style={{ color: "red", marginRight: "4px" }}> *</span>
+                  필수입력
+                </Text>
+              </LineBox>
+              <LineBox>
+                <ChatInfoBox>
+                  <Text weight="500" size="16px" color="#999999">
+                    고민을 들어줄 리스너의 성별
+                    <span style={{ color: "red", marginLeft: "4px" }}>*</span>
+                  </Text>
+                </ChatInfoBox>
+                <InputBox>
+                  <CheckBox>
+                    <input
+                      type="radio"
+                      name="gender"
+                      value="none"
+                      onChange={(e) => {
+                        setGender(e.target.value);
+                      }}
+                    />
+                    상관없음
+                  </CheckBox>
+                  <CheckBox>
+                    <input
+                      type="radio"
+                      name="gender"
+                      value="male"
+                      onChange={(e) => {
+                        setGender(e.target.value);
+                      }}
+                    />
+                    남성
+                  </CheckBox>
+                  <CheckBox>
+                    <input
+                      type="radio"
+                      name="gender"
+                      value="female"
+                      onChange={(e) => {
+                        setGender(e.target.value);
+                      }}
+                    />
+                    여성
+                  </CheckBox>
+                </InputBox>
+              </LineBox>
+              <LineBox>
+                <ChatInfoBox>
+                  <Text weight="500" size="16px" color="#999999">
+                    고민 상담에 필요한 자료 첨부
+                  </Text>
+                </ChatInfoBox>
+                <FileBox>
+                  <ImgButton htmlFor="subInfo">파일선택</ImgButton>
+                  <FileInput
+                    id="subInfo"
+                    type="file"
+                    multiple="multiple"
+                    onChange={(e) => {
+                      selectFile(e);
+                    }}
+                  />
+                  {fileName !== null || fileName.length !== 0
+                    ? fileName.map((item, idx) => {
+                        return (
+                          <FileTag key={idx}>
+                            <Text color="#666666" weight="500" size="12px">
+                              {item}
+                            </Text>
+                            <Deletebutton
+                              onClick={() => {
+                                deleteFile(idx);
+                              }}
+                            >
+                              x
+                            </Deletebutton>
+                          </FileTag>
+                        );
+                      })
+                    : null}
+                </FileBox>
+              </LineBox>
+              <LineBox>
+                <Button
+                  margin="40px auto"
+                  width="210px"
+                  bg="#7A37BE"
+                  text="고민 신청하기"
+                  cursor="pointer"
+                  _onClick={submit}
+                />
+              </LineBox>
+            </RequestContainer>
+          </React.Fragment>
+        </Modal>
+      )}
+    </>
   );
 }
 export default ResChatStart;
@@ -313,7 +335,6 @@ export default ResChatStart;
 const RequestContainer = styled.div`
   width: 840px;
   height: 640px;
-  margin: 80px auto;
   padding: 40px 60px;
   box-sizing: border-box;
   background: #ffffff;

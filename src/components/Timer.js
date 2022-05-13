@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useInterval } from "../shared/hooks";
 import { Text, ColorBadge } from "../elements";
 
@@ -26,6 +26,7 @@ function TimerView({ targetTime }) {
   const remain = useResultOfIntervalCalculator(() =>
     Math.floor((new Date(targetTime) - new Date()) / 1000, 10)
   );
+
   return (
     <div
       style={{
@@ -37,11 +38,11 @@ function TimerView({ targetTime }) {
     >
       {remain ? (
         <Text weight="700" size="20px" margin="5px">
-          {remain}
+          {parseInt(remain / 60)} : {remain % 60}
         </Text>
       ) : (
-        <Text weight="700" size="20px" margin="5px">
-          "매칭 대기 중"
+        <Text weight="700" size="15px" margin="5px">
+          매칭 대기 중
         </Text>
       )}
 
