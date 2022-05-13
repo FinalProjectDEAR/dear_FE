@@ -12,6 +12,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 //pages
+import ScrollToTop from "../components/ScrollToTop";
 import Login from "../pages/Login";
 import KakaoAuthHandle from "../pages/KakaoAuthHandle";
 import Signup from "../pages/Signup";
@@ -41,6 +42,7 @@ function App() {
   return (
     <div className="App">
       <ConnectedRouter history={history}>
+        <ScrollToTop />
         <Header />
         <Wrapper>
           <Route path="/" exact component={Login} />
