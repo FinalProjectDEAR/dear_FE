@@ -53,40 +53,6 @@ function PostDetail(props) {
   // }
   return (
     <React.Fragment>
-      <BtnContainer>
-        <Button
-          text="목록"
-          bg="#948A9E"
-          color="white"
-          width="140px"
-          _onClick={() => {
-            history.push("/postList");
-          }}
-          cursor="pointer"
-        />
-        {post?.memberId === loginUser ? (
-          <div>
-            <Button
-              text="수정하기"
-              bg="#948A9E"
-              color="white"
-              width="140px"
-              cursor="pointer"
-              _onClick={() => {
-                history.push(`/PostEdit/${postId}`);
-              }}
-            />
-            <Button
-              text="삭제하기"
-              bg="#61586A"
-              color="white"
-              width="140px"
-              _onClick={onRemove}
-              cursor="pointer"
-            />
-          </div>
-        ) : null}
-      </BtnContainer>
       <DetailWrapper>
         <CategoryBox>
           <Title>카테고리</Title>
@@ -134,6 +100,40 @@ function PostDetail(props) {
           </Text>
         </IsLike>
       </DetailWrapper>
+      <BtnContainer>
+        <Button
+          text="목록"
+          bg="#948A9E"
+          color="white"
+          width="140px"
+          _onClick={() => {
+            history.push("/postList");
+          }}
+          cursor="pointer"
+        />
+        {post?.memberId === loginUser ? (
+          <div>
+            <Button
+              text="수정하기"
+              bg="#948A9E"
+              color="white"
+              width="140px"
+              cursor="pointer"
+              _onClick={() => {
+                history.push(`/PostEdit/${postId}`);
+              }}
+            />
+            <Button
+              text="삭제하기"
+              bg="#61586A"
+              color="white"
+              width="140px"
+              _onClick={onRemove}
+              cursor="pointer"
+            />
+          </div>
+        ) : null}
+      </BtnContainer>
       <CommentWrapper>
         <CommentList />
         <CommentWrite postId={postId} />
@@ -149,8 +149,9 @@ const CommentWrapper = styled.div`
 const BtnContainer = styled.div`
   display: flex;
   width: 1032px;
-  /* border: 1px solid pink; */
+  border-top: 1px solid #666666;
   margin: 40px auto 15px auto;
+  padding-top: 20px;
   align-items: flex-start;
   justify-content: space-between;
 `;
@@ -213,17 +214,16 @@ const ContentBox = styled.div`
   padding: 30px 40px;
   gap: 10px;
   width: 1032px;
-  height: 360px;
+  /* border: 1px solid red; */
 `;
 const IsLike = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: center;
-  padding: 30px;
   gap: 10px;
   margin: auto;
-  width: 130px;
-  height: 24px;
+  height: 150px;
   /* border: 1px solid red; */
 `;
 
@@ -237,7 +237,6 @@ const CommentPhotoWrap = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  /* margin-top: -133px; */
 `;
 const PhotoDivWrap = styled.div`
   display: flex;
@@ -246,11 +245,13 @@ const PhotoDivWrap = styled.div`
 const PhotoDiv = styled.div`
   display: flex;
   flex-direction: row;
-  margin: -42px 0px 0px 10px;
+  margin: 10px;
+  /* border: 1px solid red; */
 `;
 const PhotoWrap = styled.div`
   display: flex;
   flex-direction: row;
+  /* border: 1px solid red; */
 `;
 const PhotoUpload1 = styled.div`
   display: flex;
@@ -260,10 +261,9 @@ const PhotoUpload1 = styled.div`
   text-align: center;
   width: 80px;
   height: 80px;
-  /* border: 1px solid red; */
-  padding-bottom: 10px;
+  padding-top: 30px;
   display: block;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 `;
 const Img = styled.img`
   width: 100%;

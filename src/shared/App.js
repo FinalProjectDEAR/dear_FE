@@ -36,7 +36,6 @@ import AudioRoom from "../pages/AudioRoom";
 import AudioChat from "../components/AudioChat";
 import Loading from "../pages/Loading";
 import ChatClose from "../components/alert/ChatClose";
-import Test from "../components/Test";
 
 function App() {
   return (
@@ -68,7 +67,6 @@ function App() {
           <Route path="/AudioChat" exact component={AudioChat} />
           <Route path="/loading" exact component={Loading} />
           <Route path="/ChatClose" exact component={ChatClose} />
-          <Route path="/Test" exact component={Test} />
           <Section />
         </Wrapper>
         <Section />

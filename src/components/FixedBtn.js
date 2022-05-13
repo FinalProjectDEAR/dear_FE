@@ -72,7 +72,7 @@ const BtnWrap = styled.div`
   position: absolute;
   width: 52px;
   bottom: 30px;
-  left: 1760px;
+  left: 90%;
   position: fixed;
 `;
 

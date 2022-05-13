@@ -140,21 +140,11 @@ function PostList(props) {
             기타
           </CategoryBtn>
         </CateGoryWrapper>
-        <BtnWrapper>
-          <Text color="#2E2A32" bold size="18px">
+        <TitleWrapper>
+          <Text color="#2E2A32" weight="700" size="18px">
             익명상담소
           </Text>
-          <BtnContainer>
-            <Button text="투표만들기" bg="#948A9E" />
-            <Button
-              text="상담신청하기"
-              bg="#61586A"
-              _onClick={() => {
-                history.push("/postWrite");
-              }}
-            />
-          </BtnContainer>
-        </BtnWrapper>
+        </TitleWrapper>
         <PostTable>
           <TableInfo>
             <InfoItem style={{ marginLeft: "100px" }}>제목</InfoItem>
@@ -166,6 +156,18 @@ function PostList(props) {
               return <Post key={idx} item={item} />;
             })}
         </PostTable>
+        <BtnWrapper>
+          <BtnContainer>
+            <Button text="투표만들기" bg="#948A9E" />
+            <Button
+              text="상담신청하기"
+              bg="#61586A"
+              _onClick={() => {
+                history.push("/postWrite");
+              }}
+            />
+          </BtnContainer>
+        </BtnWrapper>
       </BoardWrapper>
     </React.Fragment>
   );
@@ -203,7 +205,7 @@ const BoardWrapper = styled.div`
   height: 547px;
   /* border: 1px solid green; */
 `;
-const BtnWrapper = styled.div`
+const TitleWrapper = styled.div`
   display: flex;
   width: 1032px;
   /* background: pink; */
@@ -223,17 +225,22 @@ const CateGoryWrapper = styled.div`
   top: 1178px;
   /* background: yellow; */
 `;
+const BtnWrapper = styled.div`
+  padding-top: 10px;
+  padding-left: 727px;
+  /* justify-content: left;
+  align-items: left; */
+  display: flex;
+  /* background: yellow; */
+`;
 const BtnContainer = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  /* align-items: right; */
   /* padding-top: 36px; */
   gap: 10px;
   width: 290px;
-  height: 36px;
-  left: 946px;
-  top: 1224px;
-  /* background: yellow; */
+  height: 40px;
 `;
 const CategoryBtn = styled.div`
   display: flex;

@@ -30,7 +30,6 @@ const CommentContainer = styled.div`
   width: 1032px;
   height: 45px;
   border-width: 0px 1px;
-  border-top: 1px solid #666666;
   border-bottom: 1px solid #666666;
 `;
 
