@@ -32,54 +32,70 @@ const getReviewDB = () => {
   };
 };
 //고민러 후기 작성
-const addReviewReqDB = (resMemberId, goodResTag, badResTag, serviceComment) => {
+const addReviewReqDB = (
+  requestReview,
+  // oppositeMemberId,
+  tagLike,
+  tagSelectList,
+  serviceComment
+) => {
   console.log(
     "고민러 후기 미듈웨어",
-    resMemberId,
-    goodResTag,
-    badResTag,
+    requestReview,
+    // oppositeMemberId,
+    tagLike,
+    tagSelectList,
     serviceComment
   );
   return function (dispatch, getState, { history }) {
     try {
-      api
-        .post("/chat/request/review", {
-          resMemberId: resMemberId,
-          goodResTag: goodResTag,
-          badResTag: badResTag,
-          serviceComment: serviceComment,
-        })
-        .then((res) => {
-          console.log("후기추가하기", res);
-          dispatch(addReview(res));
-        });
+      // api
+      //   .post("/chat/request/review", {
+      //     requestReview: requestReview,
+      //     // oppositeMemberId:oppositeMemberId,
+      //     tagLike: tagLike,
+      //     tagSelectList: tagSelectList,
+      //     serviceComment: serviceComment,
+      //   })
+      //   .then((res) => {
+      //     console.log("후기추가하기", res);
+      //     dispatch(addReview(res));
+      //   });
     } catch (err) {
       console.log("고민러 후기추가하기error", err);
     }
   };
 };
 //리스너 후기 작성
-const addReviewResDB = (resMemberId, goodResTag, badResTag, serviceComment) => {
+const addReviewResDB = (
+  requestReview,
+  // oppositeMemberId,
+  tagLike,
+  tagSelectList,
+  serviceComment
+) => {
   console.log(
     "리스너 후기 미듈웨어",
-    resMemberId,
-    goodResTag,
-    badResTag,
+    requestReview,
+    // oppositeMemberId,
+    tagLike,
+    tagSelectList,
     serviceComment
   );
   return function (dispatch, getState, { history }) {
     try {
-      api
-        .post("/chat/response/review", {
-          resMemberId: resMemberId,
-          goodResTag: goodResTag,
-          badResTag: badResTag,
-          serviceComment: serviceComment,
-        })
-        .then((res) => {
-          console.log("후기추가하기", res);
-          dispatch(addReview(res));
-        });
+      // api
+      //   .post("/chat/response/review", {
+      //     requestReview: requestReview,
+      //     // oppositeMemberId:oppositeMemberId,
+      //     tagLike: tagLike,
+      //     tagSelectList: tagSelectList,
+      //     serviceComment: serviceComment,
+      //   })
+      //   .then((res) => {
+      //     console.log("후기추가하기", res);
+      //     dispatch(addReview(res));
+      //   });
     } catch (err) {
       console.log("리스너 후기추가하기error", err);
     }

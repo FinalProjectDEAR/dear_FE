@@ -12,66 +12,94 @@ import { actionCreators } from "../redux/modules/review";
 function ResReview() {
   const dispatch = useDispatch();
   const resMemberId = localStorage.getItem("memberId");
+  // const oppositeMemberId = 상대방아이디_고민러아이디
   const response = localStorage.getItem("response");
 
-  const [goodResTag, setGoodResTag] = React.useState([]);
-  const [badResTag, setBadResTag] = React.useState([]);
   const [serviceComment, setServiceComment] = React.useState(null);
   const [goodClick, setGoodClick] = React.useState(false);
   const [badClick, setBadClick] = React.useState(false);
 
-  const [goodTag, setGoodTag] = React.useState([
+  const goodTag = [
     "친절하고 매너가 좋아요",
     "대화가 즐거웠어요.",
     "충분히 고민할 만한 주제였어요",
-  ]);
-  const [badTag, setBadTag] = React.useState([
+  ];
+  const badTag = [
     "욕설, 비속어를 사용했어요.",
-    "주제와 관련없는 이야기를 했어요.",
-    "대화를 꺼내도 답이 없었어요.",
+    "이야기를 꺼내도 답이 없었어요.",
     "불순한 의도로 접근했어요.",
-  ]);
-  const SelectGoodTag = (evt, i) => {
-    if (evt.target.checked) {
-      setGoodResTag([...goodResTag, evt.target.value]);
-    } //취소
-    else {
-      setGoodResTag(goodResTag.filter((e) => e !== evt.target.value));
+  ];
+  const [goodResTag, setGoodResTag] = React.useState({
+    "친절하고 매너가 좋아요": false,
+    "대화가 즐거웠어요.": false,
+    "충분히 고민할 만한 주제였어요": false,
+  });
+  const [badResTag, setBadResTag] = React.useState({
+    "욕설, 비속어를 사용했어요.": false,
+    "이야기를 꺼내도 답이 없었어요.": false,
+    "불순한 의도로 접근했어요.": false,
+  });
+
+  const SelectGoodTag = (e) => {
+    const { value, name } = e.target;
+    if (e.target.checked) {
+      setGoodResTag({ ...goodResTag, [name]: Boolean(value) });
+    } else {
+      setGoodResTag({ ...goodResTag, [name]: Boolean(!value) });
     }
   };
-  const SelectBadTag = (evt, i) => {
-    if (evt.target.checked) {
-      setBadResTag([...badResTag, evt.target.value]);
-    } //취소
-    else {
-      setBadResTag(badResTag.filter((e) => e !== evt.target.value));
+  //Object.values()객체의 value값만 뽑아내기
+  // console.log("굿", Object.values(goodResTag));
+  const SelectBadTag = (e) => {
+    const { value, name } = e.target;
+    if (e.target.checked) {
+      setBadResTag({ ...badResTag, [name]: Boolean(value) });
+    } else {
+      setBadResTag({ ...badResTag, [name]: Boolean(!value) });
     }
   };
+  // console.log("배드", Object.values(badResTag));
+  //리스너 고정값
+  const requestReview = false;
   //리스너 후기 추가하기
   const finish = () => {
+    let tagLike = "";
     if (goodClick === true) {
-      console.log("굿클릭", resMemberId, goodResTag, serviceComment);
+      console.log(
+        "굿클릭",
+        requestReview,
+        Object.values(goodResTag),
+        serviceComment
+      );
       if (goodResTag === "") {
         window.alert("이유를 선택 해주세요!");
         return;
       }
+      tagLike = true;
       dispatch(
         actionCreators.addReviewResDB(
-          resMemberId,
-          goodResTag,
-          badResTag,
+          requestReview,
+          tagLike,
+          Object.values(goodResTag),
           serviceComment
         )
       );
       localStorage.removeItem("response");
     }
+
     if (badClick === true) {
-      console.log("배드클릭", resMemberId, badResTag, serviceComment);
+      console.log(
+        "배드클릭",
+        requestReview,
+        Object.values(badResTag),
+        serviceComment
+      );
+      tagLike = false;
       dispatch(
         actionCreators.addReviewResDB(
-          resMemberId,
-          goodResTag,
-          badResTag,
+          requestReview,
+          tagLike,
+          Object.values(badResTag),
           serviceComment
         )
       );
@@ -104,6 +132,7 @@ function ResReview() {
               <ThumbUpBtn
                 onClick={() => {
                   setGoodClick(!goodClick);
+                  setBadClick(false);
                 }}
                 goodClick={goodClick}
               >
@@ -112,6 +141,7 @@ function ResReview() {
               <ThumbDownBtn
                 onClick={() => {
                   setBadClick(!badClick);
+                  setGoodClick(false);
                 }}
                 badClick={badClick}
               >
@@ -132,8 +162,9 @@ function ResReview() {
                       <input
                         type="checkbox"
                         onChange={SelectGoodTag}
-                        value={e}
+                        value={true}
                         id={e}
+                        name={e}
                       />
                       <label htmlFor={e}>{e}</label>
                     </React.Fragment>
@@ -142,6 +173,7 @@ function ResReview() {
               </SelectContainer>
             </ReviewBox>
           ) : null}
+
           {badClick === true ? (
             <ReviewBox>
               <SelectContainer>
@@ -156,8 +188,9 @@ function ResReview() {
                       <input
                         type="checkbox"
                         onChange={SelectBadTag}
-                        value={e}
+                        value={true}
                         id={e}
+                        name={e}
                       />
                       <label htmlFor={e}>{e}</label>
                     </React.Fragment>
