@@ -2,11 +2,13 @@ import React from "react";
 import { Text, Input, Button } from "../elements";
 
 import { history } from "../redux/configureStore";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { memberIdCheck } from "../shared/Check";
 
 import styled from "styled-components";
+import logo from "../assets/main/logoL.png";
+import kakao from "../assets/kakao.png";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -38,7 +40,7 @@ const Login = () => {
       <LoginWrapper>
         <div style={{ padding: "50px 0px" }}>
           <LogoBox>
-            <Logo />
+            <Logo src={logo} />
           </LogoBox>
           <InputBox>
             <Input
@@ -96,7 +98,7 @@ const Login = () => {
             </Button>
           </ButtonBox>
           <KakaoBox>
-            <KakaoButton onClick={kakaoAuth} />
+            <KakaoButton onClick={kakaoAuth} src={kakao} />
           </KakaoBox>
         </div>
       </LoginWrapper>
@@ -117,15 +119,10 @@ const LogoBox = styled.div`
   padding: 0px 0px 30px;
 `;
 
-const Logo = styled.div`
+const Logo = styled.img`
   width: 225px;
-  height: 78px;
-  padding: 0px 0px 30px;
   margin: 0px auto;
   border-radius: 20px;
-  background-image: url(https://encrypted-tbn0.gstatic.com/imgs?q=tbn:ANd9GcRZXhntGH9U4LYi4QSnFt1VAPJ9_ispc6gTog&usqp=CAU);
-  background-repeat: no-repeat;
-  background-position: center;
 `;
 
 const InputBox = styled.div`
@@ -145,16 +142,14 @@ const KakaoBox = styled.div`
   padding: 30px 0px 0px;
 `;
 
-const KakaoButton = styled.div`
+const KakaoButton = styled.img`
   margin: 0px auto;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  background-image: url(https://encrypted-tbn0.gstatic.com/imgs?q=tbn:ANd9GcRo7CeP_r7MwNZwEbU7QkBYMfm3Gr_-4IO13A&usqp=CAU);
   --size: 60px;
   width: var(--size);
   height: var(--size);
   border-radius: var(--size);
-  background-size: cover;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
 `;

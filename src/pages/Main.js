@@ -12,18 +12,38 @@ import Review from "../components/Review";
 import Slide from "../components/Slide";
 import SwiperPro from "../components/Swiper";
 
+//assets
+import tapeD from "../assets/main/tapeD.png";
+import tapeW from "../assets/main/tapeW.png";
+
 function Main() {
   const history = useHistory();
   const data = useSelector((state) => state);
   const [checkBox, setCheckBox] = React.useState(false);
 
+  const startReq = () => {
+    if (checkBox !== true) {
+      window.alert("이용약관에 동의해주세요.");
+      return;
+    }
+    history.push("/startReq");
+  };
+
+  const startRes = () => {
+    if (checkBox !== true) {
+      window.alert("이용약관에 동의해주세요.");
+      return;
+    }
+    history.push("/startRes");
+  };
+
   return (
     <React.Fragment>
       <MainWrap>
-        <Text batang color="#2E2A32">
+        <Text batang color="#2E2A32" weight="500" size="26px">
           오늘은 연애 고민이 있는 친구를 위해
         </Text>
-        <Text batang color="#2E2A32">
+        <Text batang color="#2E2A32" weight="500" size="26px">
           다정한 리스너가 되어주는건 어떨까요?
         </Text>
       </MainWrap>
@@ -36,29 +56,83 @@ function Main() {
             setCheckBox(!checkBox);
           }}
         />
-        <SpanSt>
-          상대방에게 불쾌함을 주는 행위를 하였을 시, 이용에 제한을 받을 수
-          있음에 동의합니다 .
-        </SpanSt>
+        <Text weight="300" size="14px" margin="10px">
+          따듯하고 부드러운 언행을 사용하여 상대방과 진솔한 대화를 나누는 것에
+          동의합니다.
+        </Text>
       </InputWrap>
       <BtnWrap>
-        <Btn
-          checkBox={checkBox}
-          disabled={checkBox === false}
-          onClick={() => {
-            history.push("/startReq");
-          }}
-        >
-          고민 들어줄 친구 찾기
+        <Btn checkBox={checkBox} onClick={startReq}>
+          <Text
+            batang
+            weight="300"
+            size="14px"
+            margin="5px"
+            cursor="pointer"
+            color={checkBox ? "#fff" : "#61586A"}
+          >
+            고민 들어줄 친구 찾기
+          </Text>
+          <LineBox>
+            {!checkBox ? (
+              <img
+                src={tapeD}
+                style={{ width: "20px", height: "16px" }}
+                alt="tape"
+              />
+            ) : (
+              <img
+                src={tapeW}
+                style={{ width: "20px", height: "16px" }}
+                alt="tape"
+              />
+            )}
+            <Text
+              margin="0px 5px"
+              weigh="300"
+              size="14px"
+              color={checkBox ? "#fff" : "#61586A"}
+              cursor="pointer"
+            >
+              -1
+            </Text>
+          </LineBox>
         </Btn>
-        <Btn
-          checkBox={checkBox}
-          disabled={checkBox === false}
-          onClick={() => {
-            history.push("/startRes");
-          }}
-        >
-          친구의 고민 들어주기
+        <Btn checkBox={checkBox} onClick={startRes}>
+          <Text
+            batang
+            weight="300"
+            size="14px"
+            margin="5px"
+            cursor="pointer"
+            color={checkBox ? "#fff" : "#61586A"}
+          >
+            친구의 고민 들어주기
+          </Text>
+          <LineBox>
+            {!checkBox ? (
+              <img
+                src={tapeD}
+                style={{ width: "20px", height: "16px" }}
+                alt="tape"
+              />
+            ) : (
+              <img
+                src={tapeW}
+                style={{ width: "20px", height: "16px" }}
+                alt="tape"
+              />
+            )}
+            <Text
+              margin="0px 5px"
+              weigh="300"
+              size="14px"
+              color={checkBox ? "#fff" : "#61586A"}
+              cursor="pointer"
+            >
+              +1
+            </Text>
+          </LineBox>
         </Btn>
       </BtnWrap>
       <div
@@ -124,32 +198,44 @@ const MainWrap = styled.div`
   box-sizing: border-box;
 `;
 const InputWrap = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 556px;
   height: 24px;
   margin: 10px auto;
 `;
+
+const LineBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const BtnWrap = styled.div`
-  max-width: 790px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto 420px auto;
   width: 100%;
-  height: 311px;
-  margin: auto;
+  max-width: 790px;
   box-sizing: border-box;
   /* border: 1px solid red; */
 `;
 const Btn = styled.button`
-  max-width: 278px;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 22px 0px 22px;
+  margin: 0px 10px;
+  width: 240px;
   height: 102px;
+  border: none;
   cursor: pointer;
-  border: 1px solid #61586a;
-  border-radius: 30px;
-  background-color: ${(props) => (props.checkBox ? "#fff" : "#61586A")};
-  color: ${(props) => (props.checkBox ? "#61586A" : "#fff")};
-  margin: 5px;
-`;
-
-const SpanSt = styled.span`
-  color: #6c757d;
+  background-color: ${(props) => (props.checkBox ? "#61586A" : "#fff")};
+  box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
+  border-radius: 20px;
 `;
 
 const Wrap = styled.div`
