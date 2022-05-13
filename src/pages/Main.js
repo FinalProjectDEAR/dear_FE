@@ -135,7 +135,7 @@ function Main() {
           </LineBox>
         </Btn>
       </BtnWrap>
-      <div
+      {/* <div
         style={{
           maxWidth: "1190px",
           width: "100%",
@@ -185,7 +185,7 @@ function Main() {
         </div>
 
         <BestPost />
-      </Wrap>
+      </Wrap> */}
     </React.Fragment>
   );
 }

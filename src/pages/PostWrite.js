@@ -177,32 +177,32 @@ function PostWrite() {
                     accept=".jpg,.png"
                   />
                 </label>
-              </PhotoUpload>{" "}
-              <PhotoDesc>사진은 최대 3장 업로드 가능합니다.</PhotoDesc>
-              <PhotoDiv>
-                {imgPreview.map((image, id) => {
-                  return (
-                    <PhotoDiv>
-                      <Img
-                        key={id}
-                        style={{
-                          width: "80px",
-                          marginTop: "5px",
-                        }}
-                        src={`${image}` ? `${image}` : null}
-                        alt={`${image}-${id}`}
-                      />
-                      <BiX
-                        type="button"
-                        onClick={() => {
-                          CancelImage(image, id);
-                        }}
-                      />
-                    </PhotoDiv>
-                  );
-                })}
-              </PhotoDiv>
+                <PhotoDesc>사진은 최대 3장 업로드 가능합니다.</PhotoDesc>
+              </PhotoUpload>
             </PhotoContainer>
+            <PhotoDiv>
+              {imgPreview.map((image, id) => {
+                return (
+                  <PhotoWrap>
+                    <Img
+                      key={id}
+                      style={{
+                        width: "80px",
+                        marginTop: "5px",
+                      }}
+                      src={`${image}` ? `${image}` : null}
+                      alt={`${image}-${id}`}
+                    />
+                    <BiX
+                      type="button"
+                      onClick={() => {
+                        CancelImage(image, id);
+                      }}
+                    />
+                  </PhotoWrap>
+                );
+              })}
+            </PhotoDiv>
           </div>
         </ImageWrapper>
         <BtnWrap>
@@ -358,8 +358,6 @@ const ContentWrapper = styled.div`
   order: 1;
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
-
-  /* background: pink; */
 `;
 const TextWrapper = styled.div`
   width: 860px;
@@ -368,7 +366,6 @@ const TextWrapper = styled.div`
 const ImageWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  padding: 10px 0px;
   gap: 20px;
   width: 952px;
   height: 182px;
@@ -376,29 +373,23 @@ const ImageWrapper = styled.div`
   order: 1;
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
-  /* background: green; */
 `;
 const PhotoWrap = styled.div`
   display: flex;
-  position: absolute;
-  width: 1120px;
-  height: 182px;
-  left: 40px;
-  top: 563px;
-  /* background-color: #ffddd2; */
+  height: 8px;
+  padding-top: 10px;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: row;
 `;
 const PhotoDesc = styled.div`
   display: flex;
-  position: static;
+  padding: 4px;
   width: 220px;
   height: 18px;
-  left: 0px;
-  top: 5px;
-  padding-left: 10px;
   font-size: 12px;
   text-align: center;
   color: #666;
-  line-height: 18px;
   outline: none;
 `;
 const PhotoDiv = styled.div`
@@ -406,16 +397,10 @@ const PhotoDiv = styled.div`
   flex-direction: row;
 `;
 const PhotoUpload = styled.div`
-  /* background-color: #f5f4f5; */
-  /* text-align: center; */
-  /* width: 80px;
-  height: 80px; */
-  /* border: 1px solid #dddfe1; */
-  /* margin: 10px; */
-  /* padding-bottom: 10px; */
-  display: block;
+  display: flex;
+  flex-direction: row;
   cursor: pointer;
-  /* border-radius: 13px; */
+  padding: 4px;
   input[type="file"] {
     position: absolute;
     width: 0;
@@ -429,8 +414,7 @@ const PhotoUpload = styled.div`
 `;
 const Img = styled.img`
   width: 100%;
-  margin-top: 10px;
-  margin-left: 10px;
+  margin-right: -10px;
   width: 80px;
   height: 80px;
   &:hover {
@@ -444,6 +428,7 @@ const Img = styled.img`
 `;
 const PhotoContainer = styled.div`
   display: flex;
+  height: 40px;
 `;
 const BtnWrap = styled.div`
   display: flex;

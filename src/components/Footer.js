@@ -1,4 +1,5 @@
 import React from "react";
+import { Text } from "../elements";
 import styled from "styled-components";
 
 const Footer = () => {
@@ -6,17 +7,13 @@ const Footer = () => {
     <React.Fragment>
       <FooterWrapper>
         <FooterBox>
-          The source code is licensed HangHae 6a_team7 Please refer to github
-          for details © 2022 HangHae LUCKY SEVEN
           <GitBtn
             onClick={() => {
               window.open("https://github.com/FinalProjectDEAR");
             }}
           >
-            <img
-              src="https://velog.velcdn.com/images/gagyeong/post/bb4cb10c-a816-4d0c-8c5d-38a175ba9ad6/image.png"
-              alt="깃허브로 바로가기"
-            ></img>
+            The source code is licensed HangHae 6a_team7 Please refer to github
+            for details © 2022 HangHae LUCKY SEVEN
           </GitBtn>
         </FooterBox>
       </FooterWrapper>
@@ -25,17 +22,36 @@ const Footer = () => {
 };
 
 const FooterWrapper = styled.div`
-  background-color: #cdb4db;
+  background-color: #fafafa;
   height: 300px;
   width: 100%;
   margin: auto;
   position: absolute;
 `;
 const FooterBox = styled.div`
-  background-color: #bb9ed8;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  text-align: left;
+  align-items: left;
+  padding: 0px;
+  /* gap: 24px; */
+
+  position: absolute;
+  left: 14.17%;
+  right: 60%;
+  top: 40%;
+  bottom: 60%;
+  /* background-color: #bb9ed8; */
 `;
 const GitBtn = styled.button`
+  display: flex;
   border: none;
+  color: #948a9e;
+  justify-content: left;
+  text-align: left;
+  align-items: left;
+  cursor: pointer;
   background-color: transparent;
 `;
 

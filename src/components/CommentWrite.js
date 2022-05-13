@@ -38,6 +38,7 @@ const CommentWrite = (props) => {
     <React.Fragment>
       <CommentWriteWrapper>
         <TextWrapper>
+          <TextBox>댓글 쓰기</TextBox>
           <Input
             placeholder="선플은 선택이 아닌 의무입니다! (최소 10자 이상)"
             _onChange={(e) => {
@@ -68,7 +69,7 @@ const CommentWriteWrapper = styled.div`
   flex-direction: column;
   padding-top: 20px;
   width: 1032px;
-  height: 231px;
+  height: 250px;
   background: #ffffff;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 10px;
@@ -79,15 +80,25 @@ const CommentWriteWrapper = styled.div`
 const TextWrapper = styled.div`
   width: 952px;
   height: 140px;
-  /* border: 1px solid red; */
   margin: 0px auto;
 `;
+const TextBox = styled.div`
+  display: flex;
+  padding: 10px;
+  margin-left: 10px;
+  weight: 500px;
+  size: 14px;
+  line-height: 18px;
+  align-items: flex-start;
+`;
+
 const BtnWrapper = styled.div`
   display: flex;
   margin: 0px auto;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  margin-top: 30px;
+  justify-content: right;
+  align-items: right;
   padding: 15px 0px 0px;
   gap: 673px;
   width: 952px;
