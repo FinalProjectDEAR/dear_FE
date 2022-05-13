@@ -17,7 +17,7 @@ const initialState = {
   post: [],
   postList: [],
   detail_post: [],
-  createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+  postLike: [],
 };
 
 // 액션 생성 함수
@@ -33,7 +33,10 @@ const editPost = createAction(EDIT_POST, (postId, postList) => ({
   postId,
   postList,
 }));
-const likePost = createAction(LIKE_POST, (memberId) => ({ memberId }));
+const likePost = createAction(LIKE_POST, (postId, likes) => ({
+  postId,
+  likes,
+}));
 
 // 미들웨어
 //postList 서버에서 받아오기
@@ -145,14 +148,16 @@ const deletePostDB = (postId) => {
 };
 
 // 공감 버튼
-const likeDB = (postId, memberId) => {
-  console.log("공감 payload", memberId);
+const likeDB = (postId, likes) => {
+  console.log("공감 payload", postId, likes);
   return function (dispatch, getState, { history }) {
     try {
-      apis.post({}).then((res) => {
-        console.log("공감", res);
-        dispatch(likePost(res));
-      });
+      api
+        .post(`/anonypost/board/${postId}/postLikes?likes=${likes}`, {})
+        .then((res) => {
+          console.log("공감", res.data.data.likes);
+          dispatch(likePost(postId, res.data.data.likes));
+        });
     } catch (err) {
       console.log("공감하기", err);
     }
@@ -183,15 +188,21 @@ export default handleActions(
           (p) => p.postId !== action.payload.postId
         );
       }),
-    [EDIT_POST]: (state, action) =>
-      produce(state, (draft) => {
-        draft.comment = draft.comment.filter(
-          (p) => p.postId === action.payload.postId
-        );
-      }),
+    // [EDIT_POST]: (state, action) =>
+    //   produce(state, (draft) => {
+    //     draft.comment = draft.comment.filter(
+    //       (p) => p.postId === action.payload.postId
+    //     );
+    //   }),
     [LIKE_POST]: (state, action) =>
       produce(state, (draft) => {
-        draft.detail_post = action.payload.commentId;
+        console.log("공감 받아온 값", action.payload);
+        console.log("공감 state", state);
+        // draft.postLike.map((e, id) => {
+        // if (action.payload.postId == e.boardPostId) {
+        draft.detailPost.likes = action.payload.likes;
+        // }
+        // });
       }),
   },
   initialState

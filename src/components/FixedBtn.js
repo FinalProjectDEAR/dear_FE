@@ -2,6 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
+import { useHistory } from "react-router-dom";
+
 //id값으로 스크롤
 import { Link } from "react-scroll";
 //아이콘
@@ -13,6 +15,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 
 function FixedBtn(props) {
+  const history = useHistory();
   const [isRead, setIsRead] = React.useState(false);
   const user_id = useSelector((state) => state.user.user);
 
@@ -33,7 +36,11 @@ function FixedBtn(props) {
           <InfoIcon />
           <span>서비스소개</span>
         </Desc>
-        <Message>
+        <Message
+          onClick={() => {
+            history.push("/postList");
+          }}
+        >
           <QuestionAnswerIcon />
           <span>익명상담소</span>
         </Message>

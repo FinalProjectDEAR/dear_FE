@@ -26,9 +26,10 @@ function PostDetail(props) {
   }, []);
   //상세페이지 가져오기
   const post = useSelector((state) => state.post.detailPost);
-  // console.log(post);
-  const image = post?.imgUrl;
-  const memberId = post?.memberId;
+  console.log(post);
+  // const likes = useSelector((state) => state.post.detailPost.likes);
+  // console.log("조아좌아", likes);
+  const likesList = post?.likesList; //길이 로직
 
   const loginUser = localStorage.getItem("memberId");
   // console.log(memberId, loginUser);
@@ -42,6 +43,10 @@ function PostDetail(props) {
     } else {
       alert("취소합니다.");
     }
+  };
+  const likePost = () => {
+    setLike(!like);
+    dispatch(actionCreators.likeDB(postId, like));
   };
 
   //optionalChaining ?. 과 같음 , useEffect는 리턴 후 실행
@@ -61,7 +66,7 @@ function PostDetail(props) {
           }}
           cursor="pointer"
         />
-        {memberId === loginUser ? (
+        {post?.memberId === loginUser ? (
           <div>
             <Button
               text="수정하기"
@@ -100,8 +105,8 @@ function PostDetail(props) {
               <PhotoUpload1>
                 {/* <Img src={post?.imgUrl} /> */}
                 <PhotoWrap>
-                  {image &&
-                    image.map((image, id) => {
+                  {post?.imgUrl &&
+                    post?.imgUrl.map((image, id) => {
                       return (
                         <Img
                           key={id}
@@ -119,23 +124,15 @@ function PostDetail(props) {
             </PhotoDiv>
           </PhotoDivWrap>
         </CommentPhotoWrap>
-        <IsLike
-          onClick={() => {
-            {
-              setCount(+1);
-            }
-          }}
-        >
-          <Thumb
-            like={like}
-            // onClick={() => {
-            //   setLike(!like);
-            // }}
-          >
+        <IsLike onClick={likePost}>
+          <Thumb likes={post?.likes}>
             <ThumbUp />
           </Thumb>
+          <Text size="14px" weight="500" color="#333333">
+            공감해요
+          </Text>
           <Text weight="700" color="#333333" cursor="pointer">
-            <span style={{ color: "#7A37BE" }}>{count}</span>
+            {/* <span style={{ color: "#7A37BE" }}>{likesList}</span> */}
           </Text>
         </IsLike>
       </DetailWrapper>
@@ -227,14 +224,13 @@ const IsLike = styled.div`
   padding: 30px;
   gap: 10px;
   margin: auto;
-  width: 119px;
+  width: 130px;
   height: 24px;
-
   /* border: 1px solid red; */
 `;
 
 const Thumb = styled.button`
-  background-color: ${(props) => (props.commentLike ? "#7A37BE" : "#ddddd")};
+  background-color: ${(props) => (props.likes ? "#7A37BE" : "#ddddd")};
   border: none;
   border-radius: 4px;
   padding: 4px 8px;
