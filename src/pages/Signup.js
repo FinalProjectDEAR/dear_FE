@@ -1,11 +1,13 @@
 import React from "react";
 import { Input, Text, Button } from "../elements";
 
-import { useDispatch } from "react-redux";
+import { history } from "../redux/configureStore";
+import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { memberIdCheck, pwdCheck } from "../shared/Check";
 
 import styled from "styled-components";
+import logo from "../assets/main/logoL.png";
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -14,6 +16,7 @@ const Signup = () => {
   const [pwd, setPwd] = React.useState("");
   const [pwdConfirm, setPwdConfirm] = React.useState("");
   const [isCheck, setIsCheck] = React.useState(false);
+  const nickErr = useSelector((state) => state.user.msg);
 
   const dupCheck = (memberId) => {
     if (!memberIdCheck(memberId)) {
@@ -52,7 +55,12 @@ const Signup = () => {
       <SignupWrapper>
         <div style={{ padding: "50px 0px" }}>
           <LogoBox>
-            <Logo />
+            <Logo
+              src={logo}
+              onClick={() => {
+                history.push("/");
+              }}
+            />
           </LogoBox>
           <IdBox>
             <Input
@@ -81,6 +89,15 @@ const Signup = () => {
               />
             </ButtonBox>
           </IdBox>
+          <Text
+            weight="300"
+            size="12px"
+            color="#999"
+            textAlign="left"
+            margin="15px"
+          >
+            {nickErr}
+          </Text>
           <PasswordBox>
             <Input
               padding="14px 0px 14px 30px"
@@ -138,22 +155,17 @@ const LogoBox = styled.div`
   padding: 0px 0px 30px;
 `;
 
-const Logo = styled.div`
+const Logo = styled.img`
   width: 225px;
-  height: 78px;
-  padding: 0px 0px 30px;
   margin: 0px auto;
   border-radius: 20px;
-  background-image: url(https://encrypted-tbn0.gstatic.com/imgs?q=tbn:ANd9GcRZXhntGH9U4LYi4QSnFt1VAPJ9_ispc6gTog&usqp=CAU);
-  background-repeat: no-repeat;
-  background-position: center;
+  cursor: pointer;
 `;
 
 const IdBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0px 0px 30px;
 `;
 
 const PasswordBox = styled.div`

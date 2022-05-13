@@ -1,10 +1,11 @@
 import React from "react";
-import { Text, Input, Button, ColorBadge } from "../elements";
 import { useSelector, useDispatch } from "react-redux";
+import { history } from "../redux/configureStore";
 
 import { actionCreators as userActions } from "../redux/modules/user";
 import { nicknameCheck } from "../shared/Check";
 
+import { Text, Input, Button, ColorBadge, Modal } from "../elements";
 import styled from "styled-components";
 
 function MemberInfo() {
@@ -24,6 +25,18 @@ function MemberInfo() {
   const memberId = localStorage.getItem("memberId");
 
   const nickErr = useSelector((state) => state.user.msg);
+
+  //모달
+  const [modalOpen, setModalOpen] = React.useState(true);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    history.push("/");
+  };
 
   const dupCheck = (nickname) => {
     if (!nicknameCheck(nickname)) {
@@ -113,365 +126,391 @@ function MemberInfo() {
   ];
 
   return (
-    <React.Fragment>
-      {isNext === 1 ? (
-        <InfoWrapper>
-          <TitleBox>
-            <Text color="#BB9ED8" weight="500" size="14px">
-              STEP 1
-            </Text>
-            <Text
-              margin="0px 10px"
-              batang
-              weight="500"
-              size="16px"
-              color="#333333"
-            >
-              나를 가장 잘 나타내는 프로필을 만들어주세요.
-            </Text>
-          </TitleBox>
-          <InfoContainer>
-            <Preview>
-              <ColorBadge size="40" bg={isSelected} />
-              <Text margin="0px 15px" batang weight="300" size="16px">
-                {showName}
-              </Text>
-            </Preview>
-
-            <NickBox>
-              <div style={{ display: "flex" }}>
-                <Input
-                  padding="15px"
-                  margin="0px"
-                  placeholder="10자 이내로 입력해주세요."
-                  alignItems="center"
-                  _onChange={(e) => {
-                    setNickname(e.target.value);
-                  }}
-                  value={nickname}
-                />
-                <ButtonBox>
-                  <Button
-                    width="110px"
+    <>
+      {modalOpen && (
+        <Modal closeModal={closeModal}>
+          <React.Fragment>
+            {isNext === 1 ? (
+              <InfoWrapper>
+                <TitleBox>
+                  <Text color="#BB9ED8" weight="500" size="14px">
+                    STEP 1
+                  </Text>
+                  <Text
                     margin="0px 10px"
-                    borderRadius="22px"
-                    bg="#BB9ED8"
-                    text="중복확인"
-                    _onClick={() => {
-                      dupCheck(nickname);
-                    }}
-                  />
-                </ButtonBox>
-              </div>
-              <Text
-                weight="300"
-                size="12px"
-                color="#999"
-                textAlign="left"
-                margin="0px 15px"
-              >
-                {nickErr}
-              </Text>
-            </NickBox>
+                    batang
+                    weight="500"
+                    size="16px"
+                    color="#333333"
+                  >
+                    나를 가장 잘 나타내는 프로필을 만들어주세요.
+                  </Text>
+                </TitleBox>
+                <InfoContainer>
+                  <Preview>
+                    <ColorBadge size="40" bg={isSelected} />
+                    <Text margin="0px 15px" batang weight="300" size="16px">
+                      {showName}
+                    </Text>
+                  </Preview>
 
-            <ColorBox>
-              {colorList.map((color, idx) => {
-                return (
-                  <ColorBadge
-                    border="2px solid #F8F8F8"
-                    size="20"
-                    margin="10px 0px"
-                    bg={color}
-                    key={idx}
-                    cursor="pointer"
-                    _onClick={() => {
-                      setIsSelected(color);
-                    }}
-                  />
-                );
-              })}
-            </ColorBox>
-            <ButtonBox>
-              <Button
-                width="160px"
-                bg="#61586A"
-                margin="20px 0px"
-                shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
-                _onClick={() => {
-                  setIsNext(2);
-                }}
-              >
-                <Text
-                  margin="0px"
-                  color="#fff"
-                  weight="500"
-                  size="14px"
-                  cursor="pointer"
-                >
-                  다음단계
-                </Text>
-              </Button>
-            </ButtonBox>
-          </InfoContainer>
-        </InfoWrapper>
-      ) : null}
-      {isNext === 2 ? (
-        <InfoWrapper>
-          <TitleBox>
-            <Text color="#BB9ED8" weight="500" size="14px">
-              STEP 2
-            </Text>
-            <Text
-              margin="0px 10px"
-              batang
-              weight="500"
-              size="16px"
-              color="#333333"
-            >
-              리스너 매칭과 상담을 위한 정보를 선택해주세요.
-            </Text>
-          </TitleBox>
-          <InfoContainer>
-            <LineBox>
-              <Subject>
-                <Text weight="500" size="14px" color="#999" textAlign="left">
-                  성별
-                </Text>
-              </Subject>
+                  <NickBox>
+                    <div style={{ display: "flex" }}>
+                      <Input
+                        padding="15px"
+                        margin="0px"
+                        placeholder="10자 이내로 입력해주세요."
+                        alignItems="center"
+                        _onChange={(e) => {
+                          setNickname(e.target.value);
+                        }}
+                        value={nickname}
+                      />
+                      <ButtonBox>
+                        <Button
+                          width="110px"
+                          margin="0px 10px"
+                          borderRadius="22px"
+                          bg="#BB9ED8"
+                          text="중복확인"
+                          _onClick={() => {
+                            dupCheck(nickname);
+                          }}
+                        />
+                      </ButtonBox>
+                    </div>
+                    <Text
+                      weight="300"
+                      size="12px"
+                      color="#999"
+                      textAlign="left"
+                      margin="0px 15px"
+                    >
+                      {nickErr}
+                    </Text>
+                  </NickBox>
 
-              <InputBox>
-                <CheckBox>
-                  <input
-                    type="radio"
-                    name="gender"
-                    value="male"
-                    onChange={(e) => {
-                      setGender(e.target.value);
-                    }}
-                  />
-                  <Text weight="300" size="14px" color="#333333">
-                    남성
+                  <ColorBox>
+                    {colorList.map((color, idx) => {
+                      return (
+                        <ColorBadge
+                          border="2px solid #F8F8F8"
+                          size="20"
+                          margin="10px 0px"
+                          bg={color}
+                          key={idx}
+                          cursor="pointer"
+                          _onClick={() => {
+                            setIsSelected(color);
+                          }}
+                        />
+                      );
+                    })}
+                  </ColorBox>
+                  <ButtonBox>
+                    <Button
+                      width="160px"
+                      bg="#61586A"
+                      margin="20px 0px"
+                      shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
+                      _onClick={() => {
+                        setIsNext(2);
+                      }}
+                    >
+                      <Text
+                        margin="0px"
+                        color="#fff"
+                        weight="500"
+                        size="14px"
+                        cursor="pointer"
+                      >
+                        다음단계
+                      </Text>
+                    </Button>
+                  </ButtonBox>
+                </InfoContainer>
+              </InfoWrapper>
+            ) : null}
+            {isNext === 2 ? (
+              <InfoWrapper>
+                <TitleBox>
+                  <Text color="#BB9ED8" weight="500" size="14px">
+                    STEP 2
                   </Text>
-                </CheckBox>
-                <CheckBox>
-                  <input
-                    type="radio"
-                    name="gender"
-                    value="female"
-                    onChange={(e) => {
-                      setGender(e.target.value);
-                    }}
-                  />
-                  <Text weight="300" size="14px" color="#333333">
-                    여성
+                  <Text
+                    margin="0px 10px"
+                    batang
+                    weight="500"
+                    size="16px"
+                    color="#333333"
+                  >
+                    리스너 매칭과 상담을 위한 정보를 선택해주세요.
                   </Text>
-                </CheckBox>
-              </InputBox>
-            </LineBox>
+                </TitleBox>
+                <InfoContainer>
+                  <LineBox>
+                    <Subject>
+                      <Text
+                        weight="500"
+                        size="14px"
+                        color="#999"
+                        textAlign="left"
+                      >
+                        성별
+                      </Text>
+                    </Subject>
 
-            <LineBox>
-              <Subject>
-                <Text weight="500" size="14px" color="#999" textAlign="left">
-                  나이
-                </Text>
-              </Subject>
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <InputBox>
-                  <CheckBox>
-                    <input
-                      type="radio"
-                      name="age"
-                      value="20대"
-                      onChange={(e) => {
-                        setAge(e.target.value);
+                    <InputBox>
+                      <CheckBox>
+                        <input
+                          type="radio"
+                          name="gender"
+                          value="male"
+                          onChange={(e) => {
+                            setGender(e.target.value);
+                          }}
+                        />
+                        <Text weight="300" size="14px" color="#333333">
+                          남성
+                        </Text>
+                      </CheckBox>
+                      <CheckBox>
+                        <input
+                          type="radio"
+                          name="gender"
+                          value="female"
+                          onChange={(e) => {
+                            setGender(e.target.value);
+                          }}
+                        />
+                        <Text weight="300" size="14px" color="#333333">
+                          여성
+                        </Text>
+                      </CheckBox>
+                    </InputBox>
+                  </LineBox>
+
+                  <LineBox>
+                    <Subject>
+                      <Text
+                        weight="500"
+                        size="14px"
+                        color="#999"
+                        textAlign="left"
+                      >
+                        나이
+                      </Text>
+                    </Subject>
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                      <InputBox>
+                        <CheckBox>
+                          <input
+                            type="radio"
+                            name="age"
+                            value="20대"
+                            onChange={(e) => {
+                              setAge(e.target.value);
+                            }}
+                          />
+                          <Text weight="300" size="14px" color="#333333">
+                            20대 초·중반
+                          </Text>
+                        </CheckBox>
+                        <CheckBox>
+                          <input
+                            type="radio"
+                            name="age"
+                            value="20대"
+                            onChange={(e) => {
+                              setAge(e.target.value);
+                            }}
+                          />
+                          <Text weight="300" size="14px" color="#333333">
+                            20대 후반
+                          </Text>
+                        </CheckBox>
+                      </InputBox>
+                      <InputBox>
+                        <CheckBox>
+                          <input
+                            type="radio"
+                            name="age"
+                            value="30대"
+                            onChange={(e) => {
+                              setAge(e.target.value);
+                            }}
+                          />
+                          <Text weight="300" size="14px" color="#333333">
+                            30대 초·중반
+                          </Text>
+                        </CheckBox>
+                        <CheckBox>
+                          <input
+                            type="radio"
+                            name="age"
+                            value="30대"
+                            onChange={(e) => {
+                              setAge(e.target.value);
+                            }}
+                          />
+                          <Text weight="300" size="14px" color="#333333">
+                            30대 후반
+                          </Text>
+                        </CheckBox>
+                      </InputBox>
+                    </div>
+                  </LineBox>
+                  <LineBox>
+                    <Subject>
+                      <Text
+                        weight="500"
+                        size="14px"
+                        color="#999"
+                        textAlign="left"
+                      >
+                        연애유형
+                      </Text>
+                    </Subject>
+                    <InputBox>
+                      <CheckBox>
+                        <input
+                          type="radio"
+                          name="loveType"
+                          value="본인이 연하"
+                          onChange={(e) => {
+                            setLoveType(e.target.value);
+                          }}
+                        />
+                        <Text weight="300" size="14px" color="#333333">
+                          본인이 연하
+                        </Text>
+                      </CheckBox>
+                      <CheckBox>
+                        <input
+                          type="radio"
+                          name="loveType"
+                          value="동갑"
+                          onChange={(e) => {
+                            setLoveType(e.target.value);
+                          }}
+                        />
+                        <Text weight="300" size="14px" color="#333333">
+                          동갑
+                        </Text>
+                      </CheckBox>
+                      <CheckBox>
+                        <input
+                          type="radio"
+                          name="loveType"
+                          value="본인이 연상"
+                          onChange={(e) => {
+                            setLoveType(e.target.value);
+                          }}
+                        />
+                        <Text weight="300" size="14px" color="#333333">
+                          본인이 연상
+                        </Text>
+                      </CheckBox>
+                    </InputBox>
+                  </LineBox>
+                  <LineBox>
+                    <Subject>
+                      <Text
+                        weight="500"
+                        size="14px"
+                        color="#999"
+                        textAlign="left"
+                      >
+                        연애기간
+                      </Text>
+                    </Subject>
+                    <InputBox>
+                      <CheckBox>
+                        <input
+                          type="radio"
+                          name="lovePeriod"
+                          value="6개월 미만"
+                          onChange={(e) => {
+                            setLovePeriod(e.target.value);
+                          }}
+                        />
+                        <Text weight="300" size="14px" color="#333333">
+                          6개월 미만
+                        </Text>
+                      </CheckBox>
+                      <CheckBox>
+                        <input
+                          type="radio"
+                          name="lovePeriod"
+                          value="6개월 ~ 2년 미만"
+                          onChange={(e) => {
+                            setLovePeriod(e.target.value);
+                          }}
+                        />
+                        <Text weight="300" size="14px" color="#333333">
+                          6개월 ~ 2년 미만
+                        </Text>
+                      </CheckBox>
+                      <CheckBox>
+                        <input
+                          type="radio"
+                          name="lovePeriod"
+                          value="3년 이상"
+                          onChange={(e) => {
+                            setLovePeriod(e.target.value);
+                          }}
+                        />
+                        <Text weight="300" size="14px" color="#333333">
+                          3년 이상
+                        </Text>
+                      </CheckBox>
+                    </InputBox>
+                  </LineBox>
+                  <SubmitBox>
+                    <Button
+                      width="160px"
+                      bg=" #BB9ED8"
+                      margin="10px"
+                      shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
+                      _onClick={() => {
+                        setIsNext(1);
                       }}
-                    />
-                    <Text weight="300" size="14px" color="#333333">
-                      20대 초·중반
-                    </Text>
-                  </CheckBox>
-                  <CheckBox>
-                    <input
-                      type="radio"
-                      name="age"
-                      value="20대"
-                      onChange={(e) => {
-                        setAge(e.target.value);
-                      }}
-                    />
-                    <Text weight="300" size="14px" color="#333333">
-                      20대 후반
-                    </Text>
-                  </CheckBox>
-                </InputBox>
-                <InputBox>
-                  <CheckBox>
-                    <input
-                      type="radio"
-                      name="age"
-                      value="30대"
-                      onChange={(e) => {
-                        setAge(e.target.value);
-                      }}
-                    />
-                    <Text weight="300" size="14px" color="#333333">
-                      30대 초·중반
-                    </Text>
-                  </CheckBox>
-                  <CheckBox>
-                    <input
-                      type="radio"
-                      name="age"
-                      value="30대"
-                      onChange={(e) => {
-                        setAge(e.target.value);
-                      }}
-                    />
-                    <Text weight="300" size="14px" color="#333333">
-                      30대 후반
-                    </Text>
-                  </CheckBox>
-                </InputBox>
-              </div>
-            </LineBox>
-            <LineBox>
-              <Subject>
-                <Text weight="500" size="14px" color="#999" textAlign="left">
-                  연애유형
-                </Text>
-              </Subject>
-              <InputBox>
-                <CheckBox>
-                  <input
-                    type="radio"
-                    name="loveType"
-                    value="본인이 연하"
-                    onChange={(e) => {
-                      setLoveType(e.target.value);
-                    }}
-                  />
-                  <Text weight="300" size="14px" color="#333333">
-                    본인이 연하
-                  </Text>
-                </CheckBox>
-                <CheckBox>
-                  <input
-                    type="radio"
-                    name="loveType"
-                    value="동갑"
-                    onChange={(e) => {
-                      setLoveType(e.target.value);
-                    }}
-                  />
-                  <Text weight="300" size="14px" color="#333333">
-                    동갑
-                  </Text>
-                </CheckBox>
-                <CheckBox>
-                  <input
-                    type="radio"
-                    name="loveType"
-                    value="본인이 연상"
-                    onChange={(e) => {
-                      setLoveType(e.target.value);
-                    }}
-                  />
-                  <Text weight="300" size="14px" color="#333333">
-                    본인이 연상
-                  </Text>
-                </CheckBox>
-              </InputBox>
-            </LineBox>
-            <LineBox>
-              <Subject>
-                <Text weight="500" size="14px" color="#999" textAlign="left">
-                  연애기간
-                </Text>
-              </Subject>
-              <InputBox>
-                <CheckBox>
-                  <input
-                    type="radio"
-                    name="lovePeriod"
-                    value="6개월 미만"
-                    onChange={(e) => {
-                      setLovePeriod(e.target.value);
-                    }}
-                  />
-                  <Text weight="300" size="14px" color="#333333">
-                    6개월 미만
-                  </Text>
-                </CheckBox>
-                <CheckBox>
-                  <input
-                    type="radio"
-                    name="lovePeriod"
-                    value="6개월 ~ 2년 미만"
-                    onChange={(e) => {
-                      setLovePeriod(e.target.value);
-                    }}
-                  />
-                  <Text weight="300" size="14px" color="#333333">
-                    6개월 ~ 2년 미만
-                  </Text>
-                </CheckBox>
-                <CheckBox>
-                  <input
-                    type="radio"
-                    name="lovePeriod"
-                    value="3년 이상"
-                    onChange={(e) => {
-                      setLovePeriod(e.target.value);
-                    }}
-                  />
-                  <Text weight="300" size="14px" color="#333333">
-                    3년 이상
-                  </Text>
-                </CheckBox>
-              </InputBox>
-            </LineBox>
-            <SubmitBox>
-              <Button
-                width="160px"
-                bg=" #BB9ED8"
-                margin="10px"
-                shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
-                _onClick={() => {
-                  setIsNext(1);
-                }}
-              >
-                <Text
-                  margin="0px"
-                  color="#fff"
-                  weight="500"
-                  size="14px"
-                  cursor="pointer"
-                >
-                  이전단계
-                </Text>
-              </Button>
-              <Button
-                width="160px"
-                bg="#7A37BE"
-                margin="10px"
-                shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
-                _onClick={submit}
-              >
-                <Text
-                  margin="0px"
-                  color="#fff"
-                  weight="500"
-                  size="14px"
-                  cursor="pointer"
-                >
-                  선택완료
-                </Text>
-              </Button>
-            </SubmitBox>
-          </InfoContainer>
-        </InfoWrapper>
-      ) : null}
-    </React.Fragment>
+                    >
+                      <Text
+                        margin="0px"
+                        color="#fff"
+                        weight="500"
+                        size="14px"
+                        cursor="pointer"
+                      >
+                        이전단계
+                      </Text>
+                    </Button>
+                    <Button
+                      width="160px"
+                      bg="#7A37BE"
+                      margin="10px"
+                      shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
+                      _onClick={submit}
+                    >
+                      <Text
+                        margin="0px"
+                        color="#fff"
+                        weight="500"
+                        size="14px"
+                        cursor="pointer"
+                      >
+                        선택완료
+                      </Text>
+                    </Button>
+                  </SubmitBox>
+                </InfoContainer>
+              </InfoWrapper>
+            ) : null}
+          </React.Fragment>
+        </Modal>
+      )}
+    </>
   );
 }
 
@@ -481,7 +520,6 @@ const InfoWrapper = styled.div`
   width: 550px;
   height: 614px;
   border-radius: 20px;
-  margin: auto;
   padding: 70px;
   box-sizing: border-box;
   background-color: #fff;
