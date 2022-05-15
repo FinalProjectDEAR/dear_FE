@@ -3,7 +3,6 @@ import { Text, Input, Button } from "../elements/index";
 import styled from "styled-components";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
 import { useDispatch } from "react-redux";
 import { actionCreators } from "../redux/modules/review";
@@ -216,7 +215,7 @@ function ResReview() {
         </Container>
         <BtnWrap>
           <Button bg="#7A37BE" cursor="pointer" _onClick={finish}>
-            <Text color="white" margin="-2px">
+            <Text color="white" margin="-2px" cursor="pointer">
               종료하기
             </Text>
           </Button>
@@ -348,6 +347,7 @@ const BtnWrap = styled.div`
   align-items: flex-start;
   margin-top: -40px;
   padding: 10px;
+  cursor: pointer;
 `;
 
 const Star = styled.span`

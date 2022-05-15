@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+
 import { ReactComponent as Logo } from "../assets/Frame.svg";
 
 import { useHistory } from "react-router-dom";
@@ -16,8 +17,23 @@ const Header = (props) => {
             onClick={() => {
               history.push("/main");
             }}
-            style={{ cursor: "pointer" }}
+            style={{
+              cursor: "pointer",
+              width: "100px",
+              height: "66.34px",
+            }}
           />
+          <div>
+            <HeaderBtn>서비스 소개</HeaderBtn>
+            <HeaderBtn
+              onClick={() => {
+                history.push("/postList");
+              }}
+            >
+              디어상담소
+            </HeaderBtn>
+            <HeaderBtn>마이페이지</HeaderBtn>
+          </div>
         </HeaderBox>
       </HeaderContainer>
     </HeaderWrapper>
@@ -38,10 +54,18 @@ const HeaderContainer = styled.div`
 `;
 
 const HeaderBox = styled.div`
+  margin: auto;
   display: flex;
-  padding-top: 30px;
-  padding-bottom: 40px;
-  padding-left: 200px;
-  background: ##bb9ed8;
+  padding: 30px 20px 40px 100px;
+  /* background: #bb9ed8; */
+  justify-content: space-between;
+`;
+
+const HeaderBtn = styled.button`
+  border: none;
+  background-color: transparent;
+  color: #61586a;
+  cursor: pointer;
+  line-height: 60px;
 `;
 export default Header;
