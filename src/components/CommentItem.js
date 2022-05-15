@@ -203,6 +203,7 @@ const BtnBox = styled.button`
 const LikeBtn = styled.button`
   background-color: ${(props) => (props.commentLike ? "#7A37BE" : "#ddddd")};
   border: none;
+  border-radius: 50%;
   display: flex;
   flex-direction: row;
   justify-content: center;

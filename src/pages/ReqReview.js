@@ -240,7 +240,7 @@ function ReqReview() {
             </Text>
           </Button>
           <Button bg="#7A37BE" cursor="pointer" _onClick={finish}>
-            <Text color="white" margin="-2px">
+            <Text color="white" margin="-2px" cursor="pointer">
               종료하기
             </Text>
           </Button>

@@ -11,6 +11,7 @@ import vote from "./modules/vote";
 import comment from "./modules/comment";
 import review from "./modules/review";
 import chat from "./modules/chat";
+import message from "./modules/message";
 
 export const history = createBrowserHistory();
 
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   chat: chat,
   comment: comment,
   review: review,
+  message: message,
   router: connectRouter(history),
 });
 

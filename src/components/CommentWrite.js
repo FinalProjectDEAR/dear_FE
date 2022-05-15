@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { Text, Button, Input } from "../elements";
+import { Button, Input } from "../elements";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { actionCreators } from "../redux/modules/comment";
 
 const CommentWrite = (props) => {

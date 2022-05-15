@@ -230,8 +230,9 @@ const IsLike = styled.div`
 const Thumb = styled.button`
   background-color: ${(props) => (props.likes ? "#7A37BE" : "#ddddd")};
   border: none;
-  border-radius: 4px;
+  border-radius: 50%;
   padding: 4px 8px;
+  cursor: pointer;
 `;
 const CommentPhotoWrap = styled.div`
   display: flex;

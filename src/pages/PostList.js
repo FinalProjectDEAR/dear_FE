@@ -192,7 +192,6 @@ const MoreVote = styled.span`
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
-  /* line-height: 18px; */
   text-decoration-line: underline;
   width: 129px;
   height: 18px;

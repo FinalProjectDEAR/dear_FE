@@ -96,6 +96,7 @@ function PostWrite() {
   const addPost = () => {
     if (title === "" || category === "" || contents === "") {
       window.alert("내용을 모두 작성해주세요!");
+      return;
     }
     dispatch(
       actionCreators.addPostDB({
