@@ -79,7 +79,6 @@ const loginDB = (memberId, pwd) => {
 
       const tokenData = jwtDecode(accessToken);
       localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("refreshToken", refreshToken);
 
       if (tokenData.nick) {
         const nickname = tokenData.nick;
@@ -110,7 +109,6 @@ const kakaoLogin = (code) => {
 
       const tokenData = jwtDecode(accessToken);
       localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("refreshToken", refreshToken);
       console.log(tokenData);
 
       if (tokenData.nick) {

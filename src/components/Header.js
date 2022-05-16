@@ -2,13 +2,18 @@ import React from "react";
 import styled from "styled-components";
 
 import { ReactComponent as Logo } from "../assets/Frame.svg";
-
-import { useHistory } from "react-router-dom";
+import { history } from "../redux/configureStore";
 
 import logo from "../assets/main/logoS.png";
 
+const logout = () => {
+  history.push("/");
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("memberId");
+  localStorage.removeItem("nickname");
+};
+
 const Header = (props) => {
-  const history = useHistory();
   return (
     <HeaderWrapper id="1">
       <HeaderContainer>
@@ -33,6 +38,7 @@ const Header = (props) => {
               디어상담소
             </HeaderBtn>
             <HeaderBtn>마이페이지</HeaderBtn>
+            <HeaderBtn onClick={logout}>로그아웃</HeaderBtn>
           </div>
         </HeaderBox>
       </HeaderContainer>
