@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { ThemeProvider } from "styled-components";
-import theme from "./theme";
+import theme from "../styles/theme";
 
 const Text = (props) => {
   const {
@@ -174,7 +174,7 @@ Text.defaultProps = {
 const Title = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.bold};
-  color: ${({ theme }) => theme.colors.secondary[700]};
+  color: ${({ theme }) => theme.colors.secondary["700"]};
   font-size: 18px;
   line-height: 30px;
   background-color: ${(props) => props.bg};
@@ -190,7 +190,7 @@ const Title = styled.p`
 const HeadLine = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.bold};
-  color: ${({ theme }) => theme.colors.secondary[700]};
+  color: ${({ theme }) => theme.colors.secondary["700"]};
   font-size: 16px;
   line-height: 16px;
   background-color: ${(props) => props.bg};
@@ -206,7 +206,7 @@ const HeadLine = styled.p`
 const Body2 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.medium};
-  color: ${({ theme }) => theme.colors.secondary[700]};
+  color: ${({ theme }) => theme.colors.secondary["700"]};
   font-size: 18px;
   line-height: 20px;
   background-color: ${(props) => props.bg};
@@ -222,7 +222,7 @@ const Body2 = styled.p`
 const Body3 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.medium};
-  color: ${({ theme }) => theme.colors.secondary[700]};
+  color: ${({ theme }) => theme.colors.secondary["700"]};
   font-size: 16px;
   line-height: 24px;
   background-color: ${(props) => props.bg};
@@ -238,7 +238,7 @@ const Body3 = styled.p`
 const Body4 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.medium};
-  color: ${({ theme }) => theme.colors.secondary[700]};
+  color: ${({ theme }) => theme.colors.secondary["700"]};
   font-size: 14px;
   line-height: 18px;
   background-color: ${(props) => props.bg};
@@ -254,7 +254,7 @@ const Body4 = styled.p`
 const Body5 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.lignt};
-  color: ${({ theme }) => theme.colors.secondary[700]};
+  color: ${({ theme }) => theme.colors.secondary["700"]};
   font-size: 16px;
   line-height: 27px;
   background-color: ${(props) => props.bg};
@@ -270,7 +270,7 @@ const Body5 = styled.p`
 const Body = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.medium};
-  color: ${({ theme }) => theme.colors.secondary[700]};
+  color: ${({ theme }) => theme.colors.secondary["700"]};
   font-size: 20px;
   line-height: 20px;
   background-color: ${(props) => props.bg};
@@ -286,7 +286,7 @@ const Body = styled.p`
 const Sub = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.bold};
-  color: ${({ theme }) => theme.colors.secondary[300]};
+  color: ${({ theme }) => theme.colors.secondary["300"]};
   font-size: 12px;
   line-height: 14px;
   background-color: ${(props) => props.bg};
@@ -302,7 +302,7 @@ const Sub = styled.p`
 const Sub2 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.medium};
-  color: ${({ theme }) => theme.colors.secondary[300]};
+  color: ${({ theme }) => theme.colors.secondary["300"]};
   font-size: 14px;
   line-height: 18px;
   text-decoration-line: underline;
@@ -318,7 +318,7 @@ const Sub2 = styled.p`
 const Sub3 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.medium};
-  color: ${({ theme }) => theme.colors.secondary[300]};
+  color: ${({ theme }) => theme.colors.secondary["300"]};
   font-size: 12px;
   line-height: 14px;
   text-decoration-line: underline;
@@ -334,7 +334,7 @@ const Sub3 = styled.p`
 const Sub4 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.medium};
-  color: ${({ theme }) => theme.colors.secondary[300]};
+  color: ${({ theme }) => theme.colors.secondary["300"]};
   font-size: 12px;
   line-height: 14px;
   background-color: ${(props) => props.bg};
@@ -350,7 +350,7 @@ const Sub4 = styled.p`
 const Sub5 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.medium};
-  color: ${({ theme }) => theme.colors.secondary[300]};
+  color: ${({ theme }) => theme.colors.secondary["300"]};
   font-size: 10px;
   line-height: 14px;
   background-color: ${(props) => props.bg};
@@ -366,7 +366,7 @@ const Sub5 = styled.p`
 const Sub6 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.light};
-  color: ${({ theme }) => theme.colors.secondary[300]};
+  color: ${({ theme }) => theme.colors.secondary["300"]};
   font-size: 14px;
   line-height: 18px;
   background-color: ${(props) => props.bg};
@@ -382,7 +382,7 @@ const Sub6 = styled.p`
 const Sub7 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.light};
-  color: ${({ theme }) => theme.colors.secondary[300]};
+  color: ${({ theme }) => theme.colors.secondary["300"]};
   font-size: 12px;
   line-height: 14px;
   background-color: ${(props) => props.bg};

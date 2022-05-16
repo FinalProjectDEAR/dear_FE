@@ -121,7 +121,7 @@ const Primary = styled.div`
   line-height: ${(props) => props.lineHeight};
   font-family: ${(props) => props.fontFamily};
   font-style: ${(props) => props.fontStyle};
-  color: ${(theme) => theme.colors.primary[100]};
+  color: ${(theme) => theme.colors.primary["100"]};
   font-size: ${(props) => props.size};
   box-sizing: border-box;
   ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
@@ -139,7 +139,7 @@ const Sub = styled.div`
   line-height: ${(props) => props.lineHeight};
   font-family: ${(props) => props.fontFamily};
   font-style: ${(props) => props.fontStyle};
-  color: ${(theme) => theme.colors.primary[100]};
+  color: ${(theme) => theme.colors.primary["100"]};
   font-size: ${(props) => props.size};
   box-sizing: border-box;
   ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
@@ -175,7 +175,7 @@ const Small = styled.div`
   line-height: ${(props) => props.lineHeight};
   font-family: ${(props) => props.fontFamily};
   font-style: ${(props) => props.fontStyle};
-  color: ${(theme) => theme.colors.grayScale[30]};
+  color: ${(theme) => theme.colors.grayScale["30"]};
   font-size: ${(props) => props.size};
   box-sizing: border-box;
   ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
@@ -193,7 +193,7 @@ const Regular = styled.div`
   line-height: ${(props) => props.lineHeight};
   font-family: ${(props) => props.fontFamily};
   font-style: ${(props) => props.fontStyle};
-  color: ${(theme) => theme.colors.grayScale[30]};
+  color: ${(theme) => theme.colors.grayScale["30"]};
   font-size: ${(props) => props.size};
   box-sizing: border-box;
   ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
