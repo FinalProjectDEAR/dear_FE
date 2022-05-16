@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { ThemeProvider } from "styled-components";
-import theme from "./theme";
+import theme from "../styles/theme";
 
 const TextB = (props) => {
   const {
@@ -93,7 +93,7 @@ Text.defaultProps = {
 const Title = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.batang};
   font-weight: ${({ theme }) => theme.fonts.weight.medium};
-  color: ${({ theme }) => theme.colors.secondary[700]};
+  color: ${({ theme }) => theme.colors.secondary["700"]};
   font-size: 26px;
   line-height: 42px;
   background-color: ${(props) => props.bg};
@@ -109,7 +109,7 @@ const Title = styled.p`
 const SubTitle = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.batang};
   font-weight: ${({ theme }) => theme.fonts.weight.medium};
-  color: ${({ theme }) => theme.colors.secondary[700]};
+  color: ${({ theme }) => theme.colors.secondary["700"]};
   font-size: 16px;
   line-height: 20px;
   background-color: ${(props) => props.bg};
@@ -125,7 +125,7 @@ const SubTitle = styled.p`
 const Sub = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.batang};
   font-weight: ${({ theme }) => theme.fonts.weight.light};
-  color: ${({ theme }) => theme.colors.secondary[300]};
+  color: ${({ theme }) => theme.colors.secondary["300"]};
   font-size: 14px;
   line-height: 24px;
   background-color: ${(props) => props.bg};
@@ -141,7 +141,7 @@ const Sub = styled.p`
 const Sub2 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.batang};
   font-weight: ${({ theme }) => theme.fonts.weight.light};
-  color: ${({ theme }) => theme.colors.secondary[300]};
+  color: ${({ theme }) => theme.colors.secondary["300"]};
   font-size: 10px;
   line-height: 14px;
   background-color: ${(props) => props.bg};
@@ -157,7 +157,7 @@ const Sub2 = styled.p`
 const Body = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.batang};
   font-weight: ${({ theme }) => theme.fonts.weight.light};
-  color: ${({ theme }) => theme.colors.secondary[700]};
+  color: ${({ theme }) => theme.colors.secondary["700"]};
   font-size: 16px;
   line-height: 30px;
   background-color: ${(props) => props.bg};

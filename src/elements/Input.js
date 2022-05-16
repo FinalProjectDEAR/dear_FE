@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import theme from "./theme";
+import theme from "../styles/theme";
 
 import Text from "./Text";
 
@@ -143,14 +143,14 @@ const ElTextArea = styled.textarea`
 `;
 
 const ElInput = styled.input`
-  color: ${({ theme }) => theme.colors.Grayscale[700]};
-  border: 1px solid ${({ theme }) => theme.colors.Grayscale[50]};
+  color: ${({ theme }) => theme.colors.grayScale["700"]};
+  border: 1px solid ${({ theme }) => theme.colors.grayScale["50"]};
   &:focus {
     box-shadow: 0px 0px 5px rgba(230, 230, 230, 0.75);
     outline: none;
   }
   &::placeholder {
-    color: ${({ theme }) => theme.colors.Grayscale[300]};
+    color: ${({ theme }) => theme.colors.grayScale[300]};
   }
   width: 100%;
   box-sizing: border-box;

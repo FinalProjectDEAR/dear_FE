@@ -207,7 +207,7 @@ const PrimaryHoverButton = styled.button`
   line-height: ${(props) => props.lineHeight};
   font-family: ${(props) => props.fontFamily};
   font-style: ${(props) => props.fontStyle};
-  color: ${(theme) => theme.colors.primary[700]};
+  color: ${(theme) => theme.colors.primary["700"]};
   font-size: ${(props) => props.size};
   ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")}
   box-sizing: border-box;
@@ -224,7 +224,7 @@ const PrimaryDisabledButton = styled.button`
   line-height: ${(props) => props.lineHeight};
   font-family: ${(props) => props.fontFamily};
   font-style: ${(props) => props.fontStyle};
-  color: ${(theme) => theme.colors.grayScale[100]};
+  color: ${(theme) => theme.colors.grayScale["100"]};
   font-size: ${(props) => props.size};
   ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")}
   box-sizing: border-box;
@@ -241,7 +241,7 @@ const SecondaryDefaultButton = styled.button`
   line-height: ${(props) => props.lineHeight};
   font-family: ${(props) => props.fontFamily};
   font-style: ${(props) => props.fontStyle};
-  color: ${(theme) => theme.colors.grayScale[0]};
+  color: ${(theme) => theme.colors.grayScale["0"]};
   font-size: ${(props) => props.size};
   ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")}
   box-sizing: border-box;
@@ -258,7 +258,7 @@ const SecondaryHoverButton = styled.button`
   line-height: ${(props) => props.lineHeight};
   font-family: ${(props) => props.fontFamily};
   font-style: ${(props) => props.fontStyle};
-  color: ${(theme) => theme.colors.primary[200]};
+  color: ${(theme) => theme.colors.primary["200"]};
   font-size: ${(props) => props.size};
   ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")}
   box-sizing: border-box;
@@ -270,12 +270,12 @@ const SecondaryDisabledButton = styled.button`
   padding: ${(props) => props.padding};
   background-color: ${(props) => props.bg};
   ${(props) => (props.img ? `background-image : ${props.img};` : "")}
-  border: 1px solid ${(theme) => theme.colors.grayScale[50]};
+  border: 1px solid ${(theme) => theme.colors.grayScale["50"]};
   border-radius: ${(props) => props.borderRadius};
   line-height: ${(props) => props.lineHeight};
   font-family: ${(props) => props.fontFamily};
   font-style: ${(props) => props.fontStyle};
-  color: ${(theme) => theme.colors.grayScale[50]};
+  color: ${(theme) => theme.colors.grayScale["50"]};
   font-size: ${(props) => props.size};
   ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")}
   box-sizing: border-box;
