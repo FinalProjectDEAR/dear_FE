@@ -5,7 +5,7 @@ import { history } from "../redux/configureStore";
 
 import { Text } from "../elements";
 import styled from "styled-components";
-import "../css/style.css";
+import "../styles/libraryStyle/style.css";
 
 import VoteCard from "./VoteCard";
 
