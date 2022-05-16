@@ -3,4 +3,5 @@ import Text from "./Text";
 import Input from "./Input";
 import ColorBadge from "./ColorBadge";
 import Modal from "./Modal";
-export { Button, Text, Input, ColorBadge, Modal };
+import Tag from "./Tag";
+export { Button, Text, Input, ColorBadge, Modal, Tag };
