@@ -56,7 +56,7 @@ const CommentWrite = (props) => {
           {/* <Text textAlign="right" margin="0px 5px">
             {textLength}/ 200자
           </Text> */}
-          <Button bg="#948A9E" width="200px" _onClick={addComment}>
+          <Button bg="#7A37BE" width="200px" _onClick={addComment}>
             댓글쓰기
           </Button>
         </BtnWrapper>

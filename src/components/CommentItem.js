@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Text, Button, Input } from "../elements";
+import { Text, Button, Input, Modal } from "../elements";
 import { ReactComponent as Like } from "../assets/comment-select.svg";
 import { ReactComponent as Cancel } from "../assets/Vector (2).svg";
 import styled from "styled-components";
 //시간알려주는패키지
 import TimeCounting from "time-counting";
 
+import CommentRemove from "../components/alert/CommentRemove";
+
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators } from "../redux/modules/comment";
+import { padding } from "@mui/system";
 
 const CommentItem = (props) => {
   const dispatch = useDispatch();
@@ -28,10 +31,8 @@ const CommentItem = (props) => {
   const createdAt = TimeCounting(props.createdAt, option);
   //좋아요!(댓글)
   const commentLike = props.likes;
-
   //수정을 알 수 있는 방법
   const memberId = localStorage.getItem("memberId");
-
   const editComment = () => {
     dispatch(actionCreators.editCommentDB(comment_id, comment, postId));
     //isEdit이 바뀌는거랑
@@ -41,7 +42,14 @@ const CommentItem = (props) => {
     dispatch(actionCreators.likeCommentDB(postId, comment_id));
     // setLike(!like);
   };
-
+  //모달
+  const [modalOpen, setModalOpen] = React.useState(false);
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
   const [isEdit, setIsEdit] = useState(false);
   const [comment, setComment] = React.useState(comments);
   const [textLength, setTextLength] = React.useState(0);
@@ -60,14 +68,14 @@ const CommentItem = (props) => {
     setTextLength(wordLength);
   };
 
-  const deleteComment = () => {
-    if (memberId !== props.member) {
-      window.alert("본인이 작성한 댓글이 아닙니다.");
-      return;
-    }
-    if (!window.confirm("댓글을 삭제하시겠습니까??")) return;
-    dispatch(actionCreators.delCommentDB({ comment_id, postId }));
-  };
+  // const deleteComment = () => {
+  //   if (memberId !== props.member) {
+  //     window.alert("본인이 작성한 댓글이 아닙니다.");
+  //     return;
+  //   }
+  //   if (!window.confirm("댓글을 삭제하시겠습니까??")) return;
+  //   dispatch(actionCreators.delCommentDB({ comment_id, postId }));
+  // };
 
   const editMode = () => {
     if (memberId !== props.member) {
@@ -86,41 +94,28 @@ const CommentItem = (props) => {
   if (isEdit) {
     return (
       <React.Fragment>
-        <IsEdit>
-          <CancelContainer>
-            <CancelBtn
-              onClick={() => {
-                setIsEdit(!isEdit);
-              }}
-            >
-              <Cancel />
-            </CancelBtn>
-          </CancelContainer>
-          <TitleBox>
-            <Text batang>댓글 수정하기</Text>
-          </TitleBox>
-          <InputStyle>
-            <Input
-              placeholder="선플은 선택이 아닌 의무입니다! (최소 10자 이상)"
-              _onChange={(e) => {
-                setComment(e.target.value);
-              }}
-              _onKeyUp={checkMaxLength}
-              multiLine
-              maxlength="200"
-              rows={25}
-              value={comment || ""}
-            />
-          </InputStyle>
-          <Btn>
-            <Button
-              _onClick={editComment}
-              bg="#948A9E"
-              text="수정하기"
-              width="160px"
-            ></Button>
-          </Btn>
-        </IsEdit>
+        <div style={{ width: "992px" }}>
+          <Input
+            placeholder="선플은 선택이 아닌 의무입니다! (최소 10자 이상)"
+            _onChange={(e) => {
+              setComment(e.target.value);
+            }}
+            _onKeyUp={checkMaxLength}
+            multiLine
+            maxlength="200"
+            rows={7}
+            value={comment || ""}
+          />
+          <div
+            style={{
+              width: "992px",
+              paddingLeft: "460px",
+              marginBottom: "30px",
+            }}
+          >
+            <Btn onClick={editComment}>수정</Btn>
+          </div>
+        </div>
       </React.Fragment>
     );
   }
@@ -149,12 +144,28 @@ const CommentItem = (props) => {
             >
               수정
             </BtnBox>
-            <BtnBox onClick={deleteComment}>삭제</BtnBox>
+            <BtnBox
+              onClick={() => {
+                setModalOpen(true);
+              }}
+              // onClick={deleteComment}
+            >
+              삭제
+            </BtnBox>
+            {modalOpen && (
+              <Modal closModal={closeModal}>
+                <CommentRemove
+                  closeModal={closeModal}
+                  postId={postId}
+                  comment_id={comment_id}
+                />
+              </Modal>
+            )}
           </CommentBox>
         </CommentContainer>
         {boardPostId ? (
           <LikeBtn commentLike={commentLike} onClick={likeComment}>
-            <Like />
+            <Like style={{ borderRadius: "50%" }} />
           </LikeBtn>
         ) : null}
       </CommentWrapper>
@@ -198,12 +209,12 @@ const BtnBox = styled.button`
   border: none;
   background-color: transparent;
   color: #999999;
+  cursor: pointer;
 `;
 
 const LikeBtn = styled.button`
   background-color: ${(props) => (props.commentLike ? "#7A37BE" : "#ddddd")};
   border: none;
-  border-radius: 50%;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -249,8 +260,14 @@ const InputStyle = styled.div`
   gap: 10px;
 `;
 
-const Btn = styled.div`
-  margin: auto;
+const Btn = styled.button`
+  border: none;
+  background-color: transparent;
+  color: #7a37be;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  cursor: pointer;
 `;
 
 const CancelContainer = styled.div`

@@ -2,10 +2,11 @@ import React from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { ReactComponent as ThumbUp } from "../assets/post-select.svg";
 import styled from "styled-components";
-import { Text, Button } from "../elements/index";
+import { Text, Button, Modal } from "../elements/index";
 //페이지 관련
 import CommentList from "../components/CommentList";
 import CommentWrite from "../components/CommentWrite";
+import PostRemove from "../components/alert/PostRemove";
 // 리덕스 관련
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators } from "../redux/modules/post";
@@ -31,7 +32,14 @@ function PostDetail(props) {
 
   const loginUser = localStorage.getItem("memberId");
   // console.log(memberId, loginUser);
-
+  //모달
+  const [modalOpen, setModalOpen] = React.useState(false);
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
   const deletePost = () => {
     dispatch(actionCreators.deletePostDB(postId));
   };
@@ -128,9 +136,17 @@ function PostDetail(props) {
               bg="#61586A"
               color="white"
               width="140px"
-              _onClick={onRemove}
+              _onClick={() => {
+                setModalOpen(true);
+              }}
+              // _onClick={onRemove}
               cursor="pointer"
             />
+            {modalOpen && (
+              <Modal closModal={closeModal}>
+                <PostRemove closeModal={closeModal} postId={postId} />
+              </Modal>
+            )}
           </div>
         ) : null}
       </BtnContainer>

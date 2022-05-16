@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Text } from "../elements";
+import { TextB } from "../elements";
 import { useHistory } from "react-router-dom";
 //시간알려주는패키지
 import TimeCounting from "time-counting";
@@ -25,14 +25,10 @@ function Post(props) {
         }}
       >
         <Title>
-          <Text batang size="12px" color="#333333" weight="500">
-            {props.item.title}
-          </Text>
+          <TextB body>{props.item.title}</TextB>
         </Title>
         <Date>
-          <Text batang size="12px" color="#333333" weight="500">
-            {createdAt}
-          </Text>
+          <TextB body>{createdAt}</TextB>
         </Date>
       </PostWrapper>
     </React.Fragment>
