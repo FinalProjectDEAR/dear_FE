@@ -8,6 +8,7 @@ const TextB = (props) => {
     subtitle,
     sub,
     sub2,
+    body2,
     _onClick,
     _style,
     children,
@@ -65,6 +66,14 @@ const TextB = (props) => {
       <Sub2 style={_style} onClick={_onClick} {...styles}>
         {children}
       </Sub2>
+    );
+  }
+
+  if (body2) {
+    return (
+      <Body2 style={_style} onClick={_onClick} {...styles}>
+        {children}
+      </Body2>
     );
   }
 
@@ -140,7 +149,7 @@ const Sub = styled.p`
 
 const Sub2 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.batang};
-  font-weight: ${({ theme }) => theme.fonts.weight.light};
+  font-weight: ${({ theme }) => theme.fonts.weight.medium};
   color: ${({ theme }) => theme.colors.secondary["300"]};
   font-size: 10px;
   line-height: 14px;
@@ -160,6 +169,22 @@ const Body = styled.p`
   color: ${({ theme }) => theme.colors.secondary["700"]};
   font-size: 16px;
   line-height: 30px;
+  background-color: ${(props) => props.bg};
+  font-style: ${(props) => props.fontStyle};
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
+  ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")};
+  ${(props) => (props.deco ? `text-decoration: ${props.deco};` : "")};
+  ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
+  ${(props) => (props.textShadow ? `text-shadow: ${props.textShadow};` : "")};
+  ${(props) => (props.wordBreak ? `word-break: keep-all;` : "")};
+`;
+
+const Body2 = styled.p`
+  font-family: ${({ theme }) => theme.fonts.family.batang};
+  font-weight: ${({ theme }) => theme.fonts.weight.light};
+  color: ${({ theme }) => theme.colors.secondary["700"]};
+  font-size: 12px;
+  line-height: 20px;
   background-color: ${(props) => props.bg};
   font-style: ${(props) => props.fontStyle};
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
