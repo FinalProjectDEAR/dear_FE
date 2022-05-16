@@ -54,7 +54,7 @@ const signupDB = (memberId, pwd, pwdCheck) => {
       console.log("서버응답", data);
 
       //   dispatch(setUser(userInfo));
-      history.replace("/login");
+      history.replace("/");
     } catch (err) {
       console.log("회원가입 실패", err);
       window.alert("회원가입이 실패했습니다. 다시 시도해주세요.");
@@ -79,14 +79,13 @@ const loginDB = (memberId, pwd) => {
 
       const tokenData = jwtDecode(accessToken);
       localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("refreshToken", refreshToken);
 
       if (tokenData.nick) {
         const nickname = tokenData.nick;
         localStorage.setItem("memberId", memberId);
         localStorage.setItem("nickname", nickname);
         dispatch(setUser(memberId, nickname));
-        history.replace("/");
+        history.replace("/main");
       } else {
         history.push("/info");
       }
@@ -110,7 +109,6 @@ const kakaoLogin = (code) => {
 
       const tokenData = jwtDecode(accessToken);
       localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("refreshToken", refreshToken);
       console.log(tokenData);
 
       if (tokenData.nick) {
@@ -119,14 +117,14 @@ const kakaoLogin = (code) => {
         localStorage.setItem("memberId", memberId);
         localStorage.setItem("nickname", nickname);
         dispatch(setUser(memberId, nickname));
-        history.replace("/");
+        history.replace("/main");
       } else {
         history.push("/info");
       }
     } catch (err) {
       console.log("소셜로그인 에러", err);
       window.alert("카카오로그인에 실패하였습니다. 다시 시도해주세요.");
-      history.replace("/login");
+      history.replace("/");
     }
   };
 };
@@ -143,7 +141,7 @@ const memberInfoDB = (memberId, memberInfo) => {
       localStorage.setItem("memberId", memberId);
       localStorage.setItem("nickname", nickname);
       dispatch(setUser(memberId, nickname));
-      history.replace("/");
+      history.replace("/main");
     } catch (err) {
       console.log("유저정보 등록 에러", err);
       window.alert("등록에 실패하였습니다. 다시 시도해주세요.");

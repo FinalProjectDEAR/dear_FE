@@ -7,7 +7,7 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
 
-import "../css/swiperCss.css";
+import "../styles/libraryStyle/swiper.css";
 
 // import required modules
 import { FreeMode, Pagination } from "swiper";

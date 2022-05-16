@@ -6,16 +6,23 @@ import { OpenVidu } from "openvidu-browser";
 
 import styled from "styled-components";
 import { Text, Button, ColorBadge, Modal } from "../elements";
+
+//page
 import UserAudioComponent from "../components/UserAudioComponent";
 import Timer from "../components/Timer";
 import Loading from "../pages/Loading";
 import ChatClose from "./alert/ChatClose";
+import ResReview from "../pages/ResReview";
+import ReqReview from "../pages/ReqReview";
 
-function AudioChat(props) {
+function AudioChat() {
+  const dispatch = useDispatch();
+
   const nickname = localStorage.getItem("nickname");
   const token = useSelector((state) => state.chat.roomAuthInfo.token);
   const sessionId = useSelector((state) => state.chat.roomAuthInfo.sessionId);
   const role = useSelector((state) => state.chat.roomAuthInfo.role);
+  console.log("역할", role);
 
   const chatInfo = useSelector((state) => state.chat.chatInfo);
 
@@ -44,7 +51,21 @@ function AudioChat(props) {
     //크롬에서는 표준에 따른 기본동작을 방지하기 위해 아래 두게 설정
     event.preventDefault();
     event.returnValue = "";
-    leaveSession();
+  };
+
+  const sendSignal = () => {
+    session
+      .signal({
+        data: "true", // Any string (optional)
+        to: [], // Array of Connection objects (optional. Broadcast to everyone if empty)
+        type: "chat", // The type of message (optional)
+      })
+      .then(() => {
+        console.log("메시지 전송 성공");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   React.useEffect(() => {
@@ -54,6 +75,7 @@ function AudioChat(props) {
       console.log("커넥트 시도");
 
       var mySession = OV.initSession();
+      setSession(mySession);
 
       mySession.on("streamCreated", (event) => {
         var subscriber = mySession.subscribe(event.stream, undefined);
@@ -67,6 +89,13 @@ function AudioChat(props) {
         setTargetTime(target);
         setIsConnect(true);
         console.log("매칭됐어! 타겟시간: ", targetTime);
+        dispatch(chatActions.getChatInfoDB(sessionId));
+      });
+
+      mySession.on("signal:chat", (event) => {
+        console.log("메시지 수신", event.data); // Message
+        console.log(event.from); // Connection object of the sender
+        console.log(event.type); // The type of message ("my-chat")
       });
 
       mySession
@@ -106,147 +135,211 @@ function AudioChat(props) {
   }, []);
 
   const leaveSession = () => {
+    console.log("종료 시도한다?");
     const mySession = session;
+
     if (mySession) {
       mySession.disconnect();
     }
+
     setSession(undefined);
     setSubscribers([]);
     setMySessionId("");
     setPublisher(undefined);
-    history.replace("/startreq");
+
+    const closeTime = new Date();
+
+    if (subscribers.length !== 0) {
+      dispatch(chatActions.closeChatDB(sessionId, dateFormat(closeTime)));
+    }
+    dispatch(chatActions.disConnectDB(sessionId));
   };
 
   // 타이머
+  function dateFormat(date) {
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    let hour = date.getHours();
+    let minute = date.getMinutes();
+    let second = date.getSeconds();
+
+    month = month >= 10 ? month : "0" + month;
+    day = day >= 10 ? day : "0" + day;
+    hour = hour >= 10 ? hour : "0" + hour;
+    minute = minute >= 10 ? minute : "0" + minute;
+    second = second >= 10 ? second : "0" + second;
+
+    return (
+      date.getFullYear() +
+      "." +
+      month +
+      "." +
+      day +
+      " " +
+      hour +
+      ":" +
+      minute +
+      ":" +
+      second
+    );
+  }
 
   return (
     <React.Fragment>
-      {/* {role === "request" || subscribers.length > 0 ? ( */}
-      <ChatWrapper>
-        <ChatContainer>
-          {/* {role === "request" && publisher !== undefined ? ( */}
-          <TapeBox>
-            <UserAudioComponent
-              streamManager={mainStreamManager}
-              // color={chatInfo.reqColor}
-              color="#D62020"
-            />
-            <Timer targetTime={targetTime} />
-            <UserAudioComponent
-              streamManager={subscribers[0]}
-              color="#FFD05B"
-              // color={chatInfo.resColor}
-            />
-          </TapeBox>
-          {/* ) : null} */}
+      {role === "request" || subscribers.length > 0 ? (
+        <ChatWrapper>
+          <ChatContainer>
+            {role === "request" && publisher !== undefined ? (
+              <TapeBox>
+                <UserAudioComponent
+                  streamManager={mainStreamManager}
+                  color={chatInfo.reqColor}
+                  // color="#D62020"
+                />
+                <Timer targetTime={targetTime} leaveSession={leaveSession} />
+                <UserAudioComponent
+                  streamManager={subscribers[0]}
+                  // color="#FFD05B"
+                  color={chatInfo.resColor}
+                />
+              </TapeBox>
+            ) : null}
+            {role === "response" && publisher !== undefined ? (
+              <TapeBox>
+                <UserAudioComponent
+                  streamManager={subscribers[0]}
+                  color={chatInfo.reqColor}
+                />
+                <Timer targetTime={targetTime} />
+                <UserAudioComponent
+                  streamManager={mainStreamManager}
+                  color={chatInfo.resColor}
+                />
+              </TapeBox>
+            ) : null}
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <UserBox>
+                <Text weight="500" size="16px">
+                  {chatInfo.reqNickname}
+                </Text>
 
-          {/* {role === "response" && publisher !== undefined ? (
-            <TapeBox>
-              <UserAudioComponent
-                streamManager={subscribers[0]}
-                color={chatInfo.reqColor}
-              />
-              <Timer />
-              <UserAudioComponent
-                streamManager={mainStreamManager}
-                color={chatInfo.resColor}
-              />
-            </TapeBox>
-          ) : null} */}
+                <TagBox>
+                  {chatInfo.reqAge && (
+                    <Tag>
+                      <Text margin="0px" weight="300" size="12px">
+                        {chatInfo.reqAge}
+                      </Text>
+                    </Tag>
+                  )}
+                  {chatInfo.reqLoveType && (
+                    <Tag>
+                      <Text margin="0px" weight="300" size="12px">
+                        {chatInfo.reqLoveType}
+                      </Text>
+                    </Tag>
+                  )}
+                  {chatInfo.reqLovePeriod && (
+                    <Tag>
+                      <Text margin="0px" weight="300" size="12px">
+                        {chatInfo.reqLovePeriod}
+                      </Text>
+                    </Tag>
+                  )}
 
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <UserBox>
-              {/* <Text>{chatInfo.reqNickname}</Text> */}
-              <Text weight="500" size="16px">
-                비둘기구구절절구구
-              </Text>
-              <TagBox>
-                {/* {tagList.map((tag,idx)=>{
-                return(
-                  <Tag key={idx}>
-                  <Text margin="0px" weight="300" size="12px">
-                    {tag}
-                  </Text>
-                </Tag>
-                )
-              })} */}
-                <Tag>
-                  <Text margin="0px" weight="300" size="12px">
-                    20대 중반
-                  </Text>
-                </Tag>
-                <Tag>
-                  <Text margin="0px" weight="300" size="12px">
-                    커플
-                  </Text>
-                </Tag>
-                <Tag>
-                  <Text margin="0px" weight="300" size="12px">
-                    본인이 연상
-                  </Text>
-                </Tag>
-                <Tag>
-                  <Text margin="0px" weight="300" size="12px">
-                    6개월 미만
-                  </Text>
-                </Tag>
-              </TagBox>
-            </UserBox>
-            <UserBox>
-              {/* <Text>{chatInfo.resNickname}</Text> */}
-              <Text weight="500" size="16px">
-                내맘이야
-              </Text>
-              <TagBox>
-                {/* {tagList.map((tag,idx)=>{
-                return(
-                  <Tag key={idx}>
-                  <Text margin="0px" weight="300" size="12px">
-                    {tag}
-                  </Text>
-                </Tag>
-                )
-              })} */}
-                <Tag>
-                  <Text margin="0px" weight="300" size="12px">
-                    20대 후반
-                  </Text>
-                </Tag>
-                <Tag>
-                  <Text margin="0px" weight="300" size="12px">
-                    솔로
-                  </Text>
-                </Tag>
-              </TagBox>
-            </UserBox>
-          </div>
-        </ChatContainer>
-        <BottomBox>
-          <VoiceBtnBox></VoiceBtnBox>
-          <Button bg={isConnect ? "#7A37BE" : "#999999"} margin="0px 10px">
-            ON AIR
-          </Button>
-          <Button bg="#EEE7F5" color="#7A37BE" margin="0px 10px">
-            상담 연장하기
-          </Button>
-          <Button
-            bg="#F6EAED"
-            color="#BE3757"
-            _onClick={() => {
-              setModalOpen(true);
-            }}
-            margin="0px 10px"
-          >
-            상담 종료하기
-          </Button>
-        </BottomBox>
-      </ChatWrapper>
-      {/* ) : ( */}
-      {/* <Loading /> */}
-      {/* )} */}
+                  {/* <Tag>
+                    <Text margin="0px" weight="300" size="12px">
+                      20대 중반
+                    </Text>
+                  </Tag>
+                  <Tag>
+                    <Text margin="0px" weight="300" size="12px">
+                      커플
+                    </Text>
+                  </Tag>
+                  <Tag>
+                    <Text margin="0px" weight="300" size="12px">
+                      본인이 연상
+                    </Text>
+                  </Tag>
+                  <Tag>
+                    <Text margin="0px" weight="300" size="12px">
+                      6개월 미만
+                    </Text>
+                  </Tag> */}
+                </TagBox>
+              </UserBox>
+              <UserBox>
+                <Text weight="500" size="16px">
+                  {chatInfo.resNickname}
+                </Text>
+                {/* <Text weight="500" size="16px">
+                  내맘이야
+                </Text> */}
+                <TagBox>
+                  {chatInfo.resAge && (
+                    <Tag>
+                      <Text margin="0px" weight="300" size="12px">
+                        {chatInfo.resAge}
+                      </Text>
+                    </Tag>
+                  )}
+                  {chatInfo.resLoveType && (
+                    <Tag>
+                      <Text margin="0px" weight="300" size="12px">
+                        {chatInfo.resLoveType}
+                      </Text>
+                    </Tag>
+                  )}
+                  {chatInfo.resLovePeriod && (
+                    <Tag>
+                      <Text margin="0px" weight="300" size="12px">
+                        {chatInfo.resLovePeriod}
+                      </Text>
+                    </Tag>
+                  )}
+                  {/* <Tag>
+                    <Text margin="0px" weight="300" size="12px">
+                      20대 후반
+                    </Text>
+                  </Tag>
+                  <Tag>
+                    <Text margin="0px" weight="300" size="12px">
+                      솔로
+                    </Text>
+                  </Tag> */}
+                </TagBox>
+              </UserBox>
+            </div>
+          </ChatContainer>
+          <BottomBox>
+            <VoiceBtnBox></VoiceBtnBox>
+            <Button bg={isConnect ? "#7A37BE" : "#999999"} margin="0px 10px">
+              ON AIR
+            </Button>
+            <Button bg="#EEE7F5" color="#7A37BE" margin="0px 10px">
+              상담 연장하기
+            </Button>
+            <Button
+              bg="#F6EAED"
+              color="#BE3757"
+              _onClick={() => {
+                setModalOpen(true);
+              }}
+              margin="0px 10px"
+            >
+              상담 종료하기
+            </Button>
+          </BottomBox>
+        </ChatWrapper>
+      ) : null}
+      {role === "response" && subscribers.length === 0 ? <Loading /> : null}
       {modalOpen && (
         <Modal closModal={closeModal}>
-          <ChatClose closeModal={closeModal} leaveSession={leaveSession} />
+          <ChatClose
+            closeModal={closeModal}
+            leaveSession={leaveSession}
+            sendSignal={sendSignal}
+          />
         </Modal>
       )}
     </React.Fragment>

@@ -4,11 +4,12 @@ import styled from "styled-components";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 
+import { history } from "../redux/configureStore";
 import { useDispatch } from "react-redux";
 import { actionCreators } from "../redux/modules/review";
 
 //리스너 상담후기작성페이지
-function ResReview() {
+function ResReview({ leaveSession }) {
   const dispatch = useDispatch();
   const resMemberId = localStorage.getItem("memberId");
   // const oppositeMemberId = 상대방아이디_고민러아이디
@@ -104,6 +105,7 @@ function ResReview() {
       );
       localStorage.removeItem("response");
     }
+    leaveSession();
   };
 
   return (

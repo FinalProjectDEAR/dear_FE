@@ -5,11 +5,12 @@ import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
+import { history } from "../redux/configureStore";
 import { useDispatch } from "react-redux";
 import { actionCreators } from "../redux/modules/review";
 
 //고민러 상담후기작성페이지
-function ReqReview() {
+function ReqReview({ leaveSession }) {
   const dispatch = useDispatch();
   const resMemberId = localStorage.getItem("memberId");
   // const oppositeMemberId = 상대방아이디_리스너아이디
@@ -120,6 +121,7 @@ function ReqReview() {
       );
       localStorage.removeItem("request");
     }
+    leaveSession();
   };
   //유저찜하기 액션
   const userFollow = () => {

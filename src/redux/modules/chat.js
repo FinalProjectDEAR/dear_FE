@@ -39,20 +39,6 @@ const initialState = {
 
 //middlewares
 
-const getChatInfoDB = (sessionId) => {
-  return async function (dispatch, getState, { history }) {
-    console.log("채팅정보 통신시작", sessionId);
-    try {
-      const { data } = await apis.getChat(sessionId);
-      const chatInfo = data.data;
-      dispatch(getChatInfo(chatInfo));
-    } catch {
-      alert("채팅방 정보를 불러오지 못했습니다.");
-      history.replace("/");
-    }
-  };
-};
-
 const reqChatDB = (payload) => {
   return async function (dispatch, getState, { history }) {
     console.log("리스너매칭 통신시작", payload);
@@ -99,6 +85,50 @@ const resChatDB = (category) => {
   };
 };
 
+const getChatInfoDB = (sessionId) => {
+  return async function (dispatch, getState, { history }) {
+    console.log("채팅정보 통신시작", sessionId);
+    try {
+      const { data } = await apis.getChat(sessionId);
+      const chatInfo = data.data;
+      dispatch(getChatInfo(chatInfo));
+    } catch {
+      alert("채팅방 정보를 불러오지 못했습니다.");
+      history.replace("/");
+    }
+  };
+};
+
+const closeChatDB = (sessionId, time, role) => {
+  return async function (dispatch, getState, { history }) {
+    console.log("채팅종료 통신시작", sessionId, time, role);
+    try {
+      const { data } = await apis.closeChat(sessionId, time);
+      console.log(data);
+
+      history.replace("/main");
+    } catch {
+      alert("채팅방을 종료하는데 오류가 발생했습니다.");
+      history.replace("/main");
+    }
+  };
+};
+
+const disConnectDB = (sessionId, role) => {
+  return async function (dispatch, getState, { history }) {
+    console.log("방나가기 통신시작");
+    try {
+      const { data } = await apis.disConnect(sessionId);
+      console.log(data);
+
+      history.replace("/main");
+    } catch {
+      alert("채팅방을 종료하는데 오류가 발생했습니다.");
+      history.replace("/main");
+    }
+  };
+};
+
 // reducer
 export default handleActions(
   {
@@ -121,6 +151,9 @@ export default handleActions(
 const actionCreators = {
   reqChatDB,
   resChatDB,
+  getChatInfoDB,
+  closeChatDB,
+  disConnectDB,
 };
 
 export { actionCreators };

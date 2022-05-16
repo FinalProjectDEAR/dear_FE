@@ -18,11 +18,10 @@ function AudioRoom(props) {
   const sessionId = params.sessionId;
 
   const chatInfo = useSelector((state) => state.chat.chatInfo);
-  const imgUrl = useSelector((state) => state.chat.chatInfo.imgUrl);
 
-  // React.useEffect(() => {
-  //   dispatch(chatActions.getChatInfoDB(sessionId));
-  // }, []);
+  React.useEffect(() => {
+    dispatch(chatActions.getChatInfoDB(sessionId));
+  }, []);
 
   return (
     <React.Fragment>
@@ -30,24 +29,28 @@ function AudioRoom(props) {
         <ChatContainer>
           <LeftBox>
             <TitleBox>
-              {/* <Text>{chatInfo.category}</Text> */}
-              {/* <Text>{chatInfo.title}</Text> */}
               <Text batang weight="500" size="16px" color="#BB9ED8">
+                {chatInfo.category}
+              </Text>
+              <Text margin="0px 10px" batang weight="500" size="16px">
+                {chatInfo.reqTitle}
+              </Text>
+              {/* <Text batang weight="500" size="16px" color="#BB9ED8">
                 연애
               </Text>
               <Text margin="0px 10px" batang weight="500" size="16px">
                 여자친구와 연락스타일이 안맞아요.
-              </Text>
+              </Text> */}
             </TitleBox>
             <AudioChat chatInfo={chatInfo} />
           </LeftBox>
           <ImageBox>
-            {/* {imgUrl.map((url, idx) => {
+            {chatInfo.imageUrl?.map((url, idx) => {
               return <Image key={idx} src={url} />;
-            })} */}
+            })}
+            {/* <Image src={example} />
             <Image src={example} />
-            <Image src={example} />
-            <Image src={example} />
+            <Image src={example} /> */}
           </ImageBox>
         </ChatContainer>
       </ChatWrapper>

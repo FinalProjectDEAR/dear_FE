@@ -1,19 +1,20 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useInterval } from "../shared/hooks";
 import { Text, ColorBadge } from "../elements";
+import { actionCreators as chatActions } from "../redux/modules/chat";
 
-export default function Timer(props) {
+export default function Timer({ targetTime, leaveSession }) {
   const data = new Date();
-  const remain = Math.floor((new Date(props.targetTime) - data) / 1000, 10);
+  const remain = Math.floor((new Date(targetTime) - data) / 1000, 10);
   console.log(remain);
 
   const isNotYet = useResultOfIntervalCalculator(
-    () => new Date(props.targetTime) - new Date() > 0,
+    () => new Date(targetTime) - new Date() > 0,
     10
   );
   return (
     <div>
-      <TimerView targetTime={props.targetTime} />
+      <TimerView targetTime={targetTime} leaveSession={leaveSession} />
     </div>
   );
 }
@@ -22,10 +23,17 @@ Timer.defaultProps = {
   targetTime: "",
 };
 
-function TimerView({ targetTime }) {
+function TimerView({ targetTime, leaveSession }) {
   const remain = useResultOfIntervalCalculator(() =>
     Math.floor((new Date(targetTime) - new Date()) / 1000, 10)
   );
+
+  useEffect(() => {
+    if (remain <= 0) {
+      leaveSession();
+    }
+    return;
+  });
 
   return (
     <div
