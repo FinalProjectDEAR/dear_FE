@@ -1,15 +1,17 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
+import theme from "./theme";
 
 const Text = (props) => {
   const {
+    title,
+    subtitle,
+    sub,
+    sub2,
     _onClick,
     _style,
     children,
     margin,
-    weight,
-    batang,
-    font,
     color,
     size,
     cursor,
@@ -23,9 +25,6 @@ const Text = (props) => {
 
   const styles = {
     margin: margin,
-    weight: weight,
-    batang: batang,
-    font: font,
     color: color,
     size: size,
     cursor: cursor,
@@ -36,10 +35,43 @@ const Text = (props) => {
     wordBreak: wordBreak,
     bg: bg,
   };
+
+  if (title) {
+    return (
+      <Title style={_style} onClick={_onClick} {...styles}>
+        {children}
+      </Title>
+    );
+  }
+
+  if (subtitle) {
+    return (
+      <SubTitle style={_style} onClick={_onClick} {...styles}>
+        {children}
+      </SubTitle>
+    );
+  }
+
+  if (sub) {
+    return (
+      <Sub style={_style} onClick={_onClick} {...styles}>
+        {children}
+      </Sub>
+    );
+  }
+
+  if (sub2) {
+    return (
+      <Sub2 style={_style} onClick={_onClick} {...styles}>
+        {children}
+      </Sub2>
+    );
+  }
+
   return (
-    <P style={_style} onClick={_onClick} {...styles}>
+    <Body style={_style} onClick={_onClick} {...styles}>
       {children}
-    </P>
+    </Body>
   );
 };
 
@@ -47,9 +79,6 @@ Text.defaultProps = {
   _onClick: () => {},
   children: null,
   margin: false,
-  lineHeight: "24PX",
-  batang: false,
-  weight: "300",
   color: "#61586A",
   size: "18px",
   cursor: "default",
@@ -61,23 +90,84 @@ Text.defaultProps = {
   bg: "",
 };
 
-const P = styled.p`
+const Title = styled.p`
+  font-family: ${({ theme }) => theme.fonts.family.base};
+  font-weight: ${({ theme }) => theme.fonts.weight.medium};
+  color: ${({ theme }) => theme.colors.secondary[700]};
+  font-size: 26px;
+  line-height: 42px;
+  background-color: ${(props) => props.bg};
+  font-style: ${(props) => props.fontStyle};
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
-  line-height: ${(props) => props.lineHeight};
-  font-family: ${(props) =>
-    props.batang
-      ? "KoPub Batang"
-      : "Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif"};
-  font-weight: ${(props) => props.weight};
-  color: ${(props) => props.color};
-  font-size: ${(props) => props.size};
   ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")};
   ${(props) => (props.deco ? `text-decoration: ${props.deco};` : "")};
   ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
   ${(props) => (props.textShadow ? `text-shadow: ${props.textShadow};` : "")};
-  font-style: ${(props) => props.fontStyle};
   ${(props) => (props.wordBreak ? `word-break: keep-all;` : "")};
+`;
+
+const SubTitle = styled.p`
+  font-family: ${({ theme }) => theme.fonts.family.base};
+  font-weight: ${({ theme }) => theme.fonts.weight.medium};
+  color: ${({ theme }) => theme.colors.secondary[700]};
+  font-size: 16px;
+  line-height: 20px;
   background-color: ${(props) => props.bg};
+  font-style: ${(props) => props.fontStyle};
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
+  ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")};
+  ${(props) => (props.deco ? `text-decoration: ${props.deco};` : "")};
+  ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
+  ${(props) => (props.textShadow ? `text-shadow: ${props.textShadow};` : "")};
+  ${(props) => (props.wordBreak ? `word-break: keep-all;` : "")};
+`;
+
+const Sub = styled.p`
+  font-family: ${({ theme }) => theme.fonts.family.base};
+  font-weight: ${({ theme }) => theme.fonts.weight.light};
+  color: ${({ theme }) => theme.colors.secondary[300]};
+  font-size: 14px;
+  line-height: 24px;
+  background-color: ${(props) => props.bg};
+  font-style: ${(props) => props.fontStyle};
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
+  ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")};
+  ${(props) => (props.deco ? `text-decoration: ${props.deco};` : "")};
+  ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
+  ${(props) => (props.textShadow ? `text-shadow: ${props.textShadow};` : "")};
+  ${(props) => (props.wordBreak ? `word-break: keep-all;` : "")};
+`;
+
+const Sub2 = styled.p`
+  font-family: ${({ theme }) => theme.fonts.family.base};
+  font-weight: ${({ theme }) => theme.fonts.weight.light};
+  color: ${({ theme }) => theme.colors.secondary[300]};
+  font-size: 10px;
+  line-height: 14px;
+  background-color: ${(props) => props.bg};
+  font-style: ${(props) => props.fontStyle};
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
+  ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")};
+  ${(props) => (props.deco ? `text-decoration: ${props.deco};` : "")};
+  ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
+  ${(props) => (props.textShadow ? `text-shadow: ${props.textShadow};` : "")};
+  ${(props) => (props.wordBreak ? `word-break: keep-all;` : "")};
+`;
+
+const Body = styled.p`
+  font-family: ${({ theme }) => theme.fonts.family.base};
+  font-weight: ${({ theme }) => theme.fonts.weight.light};
+  color: ${({ theme }) => theme.colors.secondary[700]};
+  font-size: 16px;
+  line-height: 30px;
+  background-color: ${(props) => props.bg};
+  font-style: ${(props) => props.fontStyle};
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
+  ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")};
+  ${(props) => (props.deco ? `text-decoration: ${props.deco};` : "")};
+  ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
+  ${(props) => (props.textShadow ? `text-shadow: ${props.textShadow};` : "")};
+  ${(props) => (props.wordBreak ? `word-break: keep-all;` : "")};
 `;
 
 export default Text;
