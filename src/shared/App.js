@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 
 import styled, { ThemeProvider } from "styled-components";
-import theme from "./theme";
+import theme from "../styles/theme";
 
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configureStore";
