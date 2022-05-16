@@ -27,7 +27,8 @@ import CommentList from "../components/CommentList";
 import PostEdit from "../pages/PostEdit";
 import FixedBtn from "../components/FixedBtn";
 import VoteWrite from "../pages/VoteWrite";
-import VoteDetail from "../pages/VoteDetail";
+import ImageVote from "../components/ImageVote";
+import LetterVote from "../components/LetterVote";
 import VoteList from "../components/VoteList";
 import ReqChatStart from "../pages/ReqChatStart";
 import ResChatStart from "../pages/ResChatStart";
@@ -38,6 +39,7 @@ import Loading from "../pages/Loading";
 import ChatClose from "../components/alert/ChatClose";
 import SendMsg from "../pages/SendMsg";
 import ReceivedMsg from "../pages/ReceivedMsg";
+import VoteDetail from "../pages/VoteDetail";
 
 function App() {
   return (
@@ -58,8 +60,8 @@ function App() {
           <Route path="/resReview" exact component={ResReview} />
           <Route path="/reqReview" exact component={ReqReview} />
           <Route path="/postEdit/:postId" exact component={PostEdit} />
-          <Route path="/voteWrite" exact component={VoteWrite} />
-          <Route path="/voteDetail/:postId" component={VoteDetail} />
+          <Route path="/VoteDetail/:postId" exact component={VoteDetail} />
+          <Route path="/ImageVote" exact component={ImageVote} />
           <Route path="/voteList" component={VoteList} />
           <Route path="/startReq" exact component={ReqChatStart} />
           <Route path="/startRes" exact component={ResChatStart} />

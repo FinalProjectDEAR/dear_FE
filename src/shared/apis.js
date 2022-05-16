@@ -88,6 +88,9 @@ export const apis = {
   sendInfo: (memberInfo) => api.post("/user/info", memberInfo),
 
   //chat
+  getChat: (sessionId) => api.get(`/chat/info/${sessionId}`),
   reqChat: (formData) => api.post("/chat/request", formData),
   resChat: (category) => api.post("/chat/response", category),
+  closeChat: (sessionId, time) => api.post(`/chat/info/${sessionId}/${time}`),
+  disConnect: (sessionId) => api.delete(`/chat/info/${sessionId}/disconnect`),
 };

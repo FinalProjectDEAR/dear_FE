@@ -29,13 +29,13 @@ const initialState = {
       memberId: "럭키세븐호01",
       vote: [
         {
-          imageUrl: image01,
+          imageUrl: false,
           imageTitle: "신발",
           selectionList: ["스파르타", "항해99"],
           selected: true,
         },
         {
-          imageUrl: image02,
+          imageUrl: false,
           imageTitle: "가방",
           selectionList: ["스파르타", "항해99", "럭키세븐호"],
           selected: false,
@@ -144,7 +144,7 @@ const addVoteDB = (title, contents, imageLeft, imageRight, vote1, vote2) => {
       const { data } = await apis.addVote(formData);
       console.log(data);
       //   dispatch(getVoteDB());
-      //   history.replace("/board");
+      history.replace("/board");
     } catch (err) {
       console.log(err, "업로드에 실패하였습니다.");
       window.alert("업로드에 실패하였습니다.");
