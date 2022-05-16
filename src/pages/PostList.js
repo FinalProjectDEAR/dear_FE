@@ -7,7 +7,7 @@ import { ReactComponent as Some } from "../assets/board-cate3.svg";
 import { ReactComponent as Love } from "../assets/board-cate4.svg";
 import { ReactComponent as Broken } from "../assets/board-cate5.svg";
 import { ReactComponent as Again } from "../assets/board-cate6.svg";
-import { ReactComponent as Nineteen } from "../assets/board-cate7.svg";
+import { ReactComponent as Solo } from "../assets/board-cate3 (1).svg";
 import { ReactComponent as Etc } from "../assets/board-cate8.svg";
 
 import { useHistory } from "react-router-dom";
@@ -75,13 +75,9 @@ function PostList(props) {
               history.push("/전체");
             }}
           >
-            <All
-              style={{
-                backgroundColor: "#fafafa",
-                borderRadius: "10px",
-                boxShadow: "0px 0px 20px rgba(172, 151, 197, 0.25)",
-              }}
-            />
+            <AllBtn>
+              <All />
+            </AllBtn>
             전체
           </CategoryBtn>
           <CategoryBtn
@@ -94,6 +90,22 @@ function PostList(props) {
           </CategoryBtn>
           <CategoryBtn
             onClick={() => {
+              history.push("/솔로");
+            }}
+          >
+            <Solo />
+            솔로
+          </CategoryBtn>
+          <CategoryBtn
+            onClick={() => {
+              history.push("/짝사랑");
+            }}
+          >
+            <Love />
+            짝사랑
+          </CategoryBtn>
+          <CategoryBtn
+            onClick={() => {
               history.push("/썸");
             }}
           >
@@ -101,11 +113,11 @@ function PostList(props) {
           </CategoryBtn>
           <CategoryBtn
             onClick={() => {
-              history.push("/연애중");
+              history.push("/연애");
             }}
           >
-            <Love />
-            연애중
+            <Again />
+            연애
           </CategoryBtn>
           <CategoryBtn
             onClick={() => {
@@ -114,22 +126,6 @@ function PostList(props) {
           >
             <Broken />
             이별
-          </CategoryBtn>
-          <CategoryBtn
-            onClick={() => {
-              history.push("/재회");
-            }}
-          >
-            <Again />
-            재회
-          </CategoryBtn>
-          <CategoryBtn
-            onClick={() => {
-              history.push("/19+");
-            }}
-          >
-            <Nineteen />
-            19+
           </CategoryBtn>
           <CategoryBtn
             onClick={() => {
@@ -214,9 +210,7 @@ const TitleWrapper = styled.div`
 const CateGoryWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  /* align-items: flex-start; */
   margin: auto;
-  /* padding: 0px 0px 0px 40px; */
   gap: 20px;
   max-width: 600px;
   height: 82px;
@@ -227,16 +221,11 @@ const CateGoryWrapper = styled.div`
 const BtnWrapper = styled.div`
   padding-top: 10px;
   padding-left: 727px;
-  /* justify-content: left;
-  align-items: left; */
   display: flex;
-  /* background: yellow; */
 `;
 const BtnContainer = styled.div`
   display: flex;
   flex-direction: row;
-  /* align-items: right; */
-  /* padding-top: 36px; */
   gap: 10px;
   width: 290px;
   height: 40px;
@@ -256,6 +245,19 @@ const CategoryBtn = styled.div`
   cursor: pointer;
   /* border: 1px solid red; */
 `;
+const AllBtn = styled.div`
+  background-color: #fafafa;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
+  width: 76px;
+  height: 76px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 18px;
+  box-sizing: border-box;
+`;
 
 const PostTable = styled.div`
   margin-top: 15px;
@@ -268,7 +270,7 @@ const TableInfo = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #666666;
 `;
 
 const InfoItem = styled.div`
@@ -276,7 +278,7 @@ const InfoItem = styled.div`
   color: #61586A
   font-size: 14px;
   line-height: 18px;
-  font-weight: 300;
+  font-weight: 500;
   vertical-align: middle;
 `;
 
