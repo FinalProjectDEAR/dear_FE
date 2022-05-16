@@ -5,9 +5,18 @@ import theme from "./theme";
 const Text = (props) => {
   const {
     title,
-    subtitle,
+    headLine,
+    body2,
+    body3,
+    body4,
+    body5,
     sub,
     sub2,
+    sub3,
+    sub4,
+    sub5,
+    sub6,
+    sub7,
     _onClick,
     _style,
     children,
@@ -44,11 +53,43 @@ const Text = (props) => {
     );
   }
 
-  if (subtitle) {
+  if (headLine) {
     return (
-      <SubTitle style={_style} onClick={_onClick} {...styles}>
+      <HeadLine style={_style} onClick={_onClick} {...styles}>
         {children}
-      </SubTitle>
+      </HeadLine>
+    );
+  }
+
+  if (body2) {
+    return (
+      <Body2 style={_style} onClick={_onClick} {...styles}>
+        {children}
+      </Body2>
+    );
+  }
+
+  if (body3) {
+    return (
+      <Body3 style={_style} onClick={_onClick} {...styles}>
+        {children}
+      </Body3>
+    );
+  }
+
+  if (body4) {
+    return (
+      <Body4 style={_style} onClick={_onClick} {...styles}>
+        {children}
+      </Body4>
+    );
+  }
+
+  if (body5) {
+    return (
+      <Body5 style={_style} onClick={_onClick} {...styles}>
+        {children}
+      </Body5>
     );
   }
 
@@ -65,6 +106,46 @@ const Text = (props) => {
       <Sub2 style={_style} onClick={_onClick} {...styles}>
         {children}
       </Sub2>
+    );
+  }
+
+  if (sub3) {
+    return (
+      <Sub3 style={_style} onClick={_onClick} {...styles}>
+        {children}
+      </Sub3>
+    );
+  }
+
+  if (sub4) {
+    return (
+      <Sub4 style={_style} onClick={_onClick} {...styles}>
+        {children}
+      </Sub4>
+    );
+  }
+
+  if (sub5) {
+    return (
+      <Sub5 style={_style} onClick={_onClick} {...styles}>
+        {children}
+      </Sub5>
+    );
+  }
+
+  if (sub6) {
+    return (
+      <Sub6 style={_style} onClick={_onClick} {...styles}>
+        {children}
+      </Sub6>
+    );
+  }
+
+  if (sub7) {
+    return (
+      <Sub7 style={_style} onClick={_onClick} {...styles}>
+        {children}
+      </Sub7>
     );
   }
 
@@ -92,10 +173,10 @@ Text.defaultProps = {
 
 const Title = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
-  font-weight: ${({ theme }) => theme.fonts.weight.medium};
+  font-weight: ${({ theme }) => theme.fonts.weight.bold};
   color: ${({ theme }) => theme.colors.secondary[700]};
-  font-size: 26px;
-  line-height: 42px;
+  font-size: 18px;
+  line-height: 30px;
   background-color: ${(props) => props.bg};
   font-style: ${(props) => props.fontStyle};
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
@@ -106,11 +187,91 @@ const Title = styled.p`
   ${(props) => (props.wordBreak ? `word-break: keep-all;` : "")};
 `;
 
-const SubTitle = styled.p`
+const HeadLine = styled.p`
+  font-family: ${({ theme }) => theme.fonts.family.base};
+  font-weight: ${({ theme }) => theme.fonts.weight.bold};
+  color: ${({ theme }) => theme.colors.secondary[700]};
+  font-size: 16px;
+  line-height: 16px;
+  background-color: ${(props) => props.bg};
+  font-style: ${(props) => props.fontStyle};
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
+  ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")};
+  ${(props) => (props.deco ? `text-decoration: ${props.deco};` : "")};
+  ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
+  ${(props) => (props.textShadow ? `text-shadow: ${props.textShadow};` : "")};
+  ${(props) => (props.wordBreak ? `word-break: keep-all;` : "")};
+`;
+
+const Body2 = styled.p`
+  font-family: ${({ theme }) => theme.fonts.family.base};
+  font-weight: ${({ theme }) => theme.fonts.weight.medium};
+  color: ${({ theme }) => theme.colors.secondary[700]};
+  font-size: 18px;
+  line-height: 20px;
+  background-color: ${(props) => props.bg};
+  font-style: ${(props) => props.fontStyle};
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
+  ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")};
+  ${(props) => (props.deco ? `text-decoration: ${props.deco};` : "")};
+  ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
+  ${(props) => (props.textShadow ? `text-shadow: ${props.textShadow};` : "")};
+  ${(props) => (props.wordBreak ? `word-break: keep-all;` : "")};
+`;
+
+const Body3 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.medium};
   color: ${({ theme }) => theme.colors.secondary[700]};
   font-size: 16px;
+  line-height: 24px;
+  background-color: ${(props) => props.bg};
+  font-style: ${(props) => props.fontStyle};
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
+  ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")};
+  ${(props) => (props.deco ? `text-decoration: ${props.deco};` : "")};
+  ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
+  ${(props) => (props.textShadow ? `text-shadow: ${props.textShadow};` : "")};
+  ${(props) => (props.wordBreak ? `word-break: keep-all;` : "")};
+`;
+
+const Body4 = styled.p`
+  font-family: ${({ theme }) => theme.fonts.family.base};
+  font-weight: ${({ theme }) => theme.fonts.weight.medium};
+  color: ${({ theme }) => theme.colors.secondary[700]};
+  font-size: 14px;
+  line-height: 18px;
+  background-color: ${(props) => props.bg};
+  font-style: ${(props) => props.fontStyle};
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
+  ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")};
+  ${(props) => (props.deco ? `text-decoration: ${props.deco};` : "")};
+  ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
+  ${(props) => (props.textShadow ? `text-shadow: ${props.textShadow};` : "")};
+  ${(props) => (props.wordBreak ? `word-break: keep-all;` : "")};
+`;
+
+const Body5 = styled.p`
+  font-family: ${({ theme }) => theme.fonts.family.base};
+  font-weight: ${({ theme }) => theme.fonts.weight.lignt};
+  color: ${({ theme }) => theme.colors.secondary[700]};
+  font-size: 16px;
+  line-height: 27px;
+  background-color: ${(props) => props.bg};
+  font-style: ${(props) => props.fontStyle};
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
+  ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")};
+  ${(props) => (props.deco ? `text-decoration: ${props.deco};` : "")};
+  ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
+  ${(props) => (props.textShadow ? `text-shadow: ${props.textShadow};` : "")};
+  ${(props) => (props.wordBreak ? `word-break: keep-all;` : "")};
+`;
+
+const Body = styled.p`
+  font-family: ${({ theme }) => theme.fonts.family.base};
+  font-weight: ${({ theme }) => theme.fonts.weight.medium};
+  color: ${({ theme }) => theme.colors.secondary[700]};
+  font-size: 20px;
   line-height: 20px;
   background-color: ${(props) => props.bg};
   font-style: ${(props) => props.fontStyle};
@@ -124,10 +285,10 @@ const SubTitle = styled.p`
 
 const Sub = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
-  font-weight: ${({ theme }) => theme.fonts.weight.light};
+  font-weight: ${({ theme }) => theme.fonts.weight.bold};
   color: ${({ theme }) => theme.colors.secondary[300]};
-  font-size: 14px;
-  line-height: 24px;
+  font-size: 12px;
+  line-height: 14px;
   background-color: ${(props) => props.bg};
   font-style: ${(props) => props.fontStyle};
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
@@ -140,7 +301,55 @@ const Sub = styled.p`
 
 const Sub2 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
-  font-weight: ${({ theme }) => theme.fonts.weight.light};
+  font-weight: ${({ theme }) => theme.fonts.weight.medium};
+  color: ${({ theme }) => theme.colors.secondary[300]};
+  font-size: 14px;
+  line-height: 18px;
+  text-decoration-line: underline;
+  background-color: ${(props) => props.bg};
+  font-style: ${(props) => props.fontStyle};
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
+  ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")};
+  ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
+  ${(props) => (props.textShadow ? `text-shadow: ${props.textShadow};` : "")};
+  ${(props) => (props.wordBreak ? `word-break: keep-all;` : "")};
+`;
+
+const Sub3 = styled.p`
+  font-family: ${({ theme }) => theme.fonts.family.base};
+  font-weight: ${({ theme }) => theme.fonts.weight.medium};
+  color: ${({ theme }) => theme.colors.secondary[300]};
+  font-size: 12px;
+  line-height: 14px;
+  text-decoration-line: underline;
+  background-color: ${(props) => props.bg};
+  font-style: ${(props) => props.fontStyle};
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
+  ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")};
+  ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
+  ${(props) => (props.textShadow ? `text-shadow: ${props.textShadow};` : "")};
+  ${(props) => (props.wordBreak ? `word-break: keep-all;` : "")};
+`;
+
+const Sub4 = styled.p`
+  font-family: ${({ theme }) => theme.fonts.family.base};
+  font-weight: ${({ theme }) => theme.fonts.weight.medium};
+  color: ${({ theme }) => theme.colors.secondary[300]};
+  font-size: 12px;
+  line-height: 14px;
+  background-color: ${(props) => props.bg};
+  font-style: ${(props) => props.fontStyle};
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
+  ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")};
+  ${(props) => (props.deco ? `text-decoration: ${props.deco};` : "")};
+  ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
+  ${(props) => (props.textShadow ? `text-shadow: ${props.textShadow};` : "")};
+  ${(props) => (props.wordBreak ? `word-break: keep-all;` : "")};
+`;
+
+const Sub5 = styled.p`
+  font-family: ${({ theme }) => theme.fonts.family.base};
+  font-weight: ${({ theme }) => theme.fonts.weight.medium};
   color: ${({ theme }) => theme.colors.secondary[300]};
   font-size: 10px;
   line-height: 14px;
@@ -154,12 +363,28 @@ const Sub2 = styled.p`
   ${(props) => (props.wordBreak ? `word-break: keep-all;` : "")};
 `;
 
-const Body = styled.p`
+const Sub6 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.light};
-  color: ${({ theme }) => theme.colors.secondary[700]};
-  font-size: 16px;
-  line-height: 30px;
+  color: ${({ theme }) => theme.colors.secondary[300]};
+  font-size: 14px;
+  line-height: 18px;
+  background-color: ${(props) => props.bg};
+  font-style: ${(props) => props.fontStyle};
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
+  ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")};
+  ${(props) => (props.deco ? `text-decoration: ${props.deco};` : "")};
+  ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
+  ${(props) => (props.textShadow ? `text-shadow: ${props.textShadow};` : "")};
+  ${(props) => (props.wordBreak ? `word-break: keep-all;` : "")};
+`;
+
+const Sub7 = styled.p`
+  font-family: ${({ theme }) => theme.fonts.family.base};
+  font-weight: ${({ theme }) => theme.fonts.weight.light};
+  color: ${({ theme }) => theme.colors.secondary[300]};
+  font-size: 12px;
+  line-height: 14px;
   background-color: ${(props) => props.bg};
   font-style: ${(props) => props.fontStyle};
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
