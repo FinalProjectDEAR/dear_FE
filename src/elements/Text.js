@@ -10,6 +10,7 @@ const Text = (props) => {
     body3,
     body4,
     body5,
+    body6,
     sub,
     sub2,
     sub3,
@@ -17,6 +18,7 @@ const Text = (props) => {
     sub5,
     sub6,
     sub7,
+    sub8,
     _onClick,
     _style,
     children,
@@ -93,6 +95,14 @@ const Text = (props) => {
     );
   }
 
+  if (body6) {
+    return (
+      <Body6 style={_style} onClick={_onClick} {...styles}>
+        {children}
+      </Body6>
+    );
+  }
+
   if (sub) {
     return (
       <Sub style={_style} onClick={_onClick} {...styles}>
@@ -149,6 +159,14 @@ const Text = (props) => {
     );
   }
 
+  if (sub8) {
+    return (
+      <Sub8 style={_style} onClick={_onClick} {...styles}>
+        {children}
+      </Sub8>
+    );
+  }
+
   return (
     <Body style={_style} onClick={_onClick} {...styles}>
       {children}
@@ -193,6 +211,22 @@ const HeadLine = styled.p`
   color: ${({ theme }) => theme.colors.secondary["700"]};
   font-size: 16px;
   line-height: 16px;
+  background-color: ${(props) => props.bg};
+  font-style: ${(props) => props.fontStyle};
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
+  ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")};
+  ${(props) => (props.deco ? `text-decoration: ${props.deco};` : "")};
+  ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
+  ${(props) => (props.textShadow ? `text-shadow: ${props.textShadow};` : "")};
+  ${(props) => (props.wordBreak ? `word-break: keep-all;` : "")};
+`;
+
+const Body = styled.p`
+  font-family: ${({ theme }) => theme.fonts.family.base};
+  font-weight: ${({ theme }) => theme.fonts.weight.medium};
+  color: ${({ theme }) => theme.colors.secondary["700"]};
+  font-size: 14px;
+  line-height: 18 px;
   background-color: ${(props) => props.bg};
   font-style: ${(props) => props.fontStyle};
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
@@ -253,7 +287,7 @@ const Body4 = styled.p`
 
 const Body5 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
-  font-weight: ${({ theme }) => theme.fonts.weight.lignt};
+  font-weight: ${({ theme }) => theme.fonts.weight.light};
   color: ${({ theme }) => theme.colors.secondary["700"]};
   font-size: 16px;
   line-height: 27px;
@@ -267,12 +301,12 @@ const Body5 = styled.p`
   ${(props) => (props.wordBreak ? `word-break: keep-all;` : "")};
 `;
 
-const Body = styled.p`
+const Body6 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
-  font-weight: ${({ theme }) => theme.fonts.weight.medium};
+  font-weight: ${({ theme }) => theme.fonts.weight.light};
   color: ${({ theme }) => theme.colors.secondary["700"]};
-  font-size: 20px;
-  line-height: 20px;
+  font-size: 14px;
+  line-height: 22px;
   background-color: ${(props) => props.bg};
   font-style: ${(props) => props.fontStyle};
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
@@ -384,6 +418,22 @@ const Sub7 = styled.p`
   font-weight: ${({ theme }) => theme.fonts.weight.light};
   color: ${({ theme }) => theme.colors.secondary["300"]};
   font-size: 12px;
+  line-height: 14px;
+  background-color: ${(props) => props.bg};
+  font-style: ${(props) => props.fontStyle};
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
+  ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")};
+  ${(props) => (props.deco ? `text-decoration: ${props.deco};` : "")};
+  ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
+  ${(props) => (props.textShadow ? `text-shadow: ${props.textShadow};` : "")};
+  ${(props) => (props.wordBreak ? `word-break: keep-all;` : "")};
+`;
+
+const Sub8 = styled.p`
+  font-family: ${({ theme }) => theme.fonts.family.base};
+  font-weight: ${({ theme }) => theme.fonts.weight.light};
+  color: ${({ theme }) => theme.colors.secondary["300"]};
+  font-size: 10px;
   line-height: 14px;
   background-color: ${(props) => props.bg};
   font-style: ${(props) => props.fontStyle};

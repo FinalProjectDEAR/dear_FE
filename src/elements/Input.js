@@ -139,6 +139,9 @@ const ElTextArea = styled.textarea`
   &:focus {
     outline: none;
   }
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.grayScale[300]};
+  }
   ${(props) => (props.maxlength ? `maxlength: ${props.maxLength}` : "")};
 `;
 
