@@ -46,41 +46,43 @@ import VoteDetail from "../pages/VoteDetail";
 function App() {
   return (
     <div className="App">
-      <ConnectedRouter history={history}>
-        <ScrollToTop />
-        <Header />
-        <Wrapper>
-          <Route path="/" exact component={Login} />
-          <Route path="/user/kakao/callback" component={KakaoAuthHandle} />
-          <Route path="/signup" exact component={Signup} />
-          <Route path="/info" exact component={MemberInfo} />
-          <Route path="/commentList" exact component={CommentList} />
-          <Route path="/main" exact component={Main} />
-          <Route path="/postList" exact component={PostList} />
-          <Route path="/postWrite" exact component={PostWrite} />
-          <Route path="/postDetail/:postId" exact component={PostDetail} />
-          <Route path="/resReview" exact component={ResReview} />
-          <Route path="/reqReview" exact component={ReqReview} />
-          <Route path="/postEdit/:postId" exact component={PostEdit} />
-          <Route path="/VoteDetail/:postId" exact component={VoteDetail} />
-          <Route path="/ImageVote" exact component={ImageVote} />
-          <Route path="/voteList" component={VoteList} />
-          <Route path="/startReq" exact component={ReqChatStart} />
-          <Route path="/startRes" exact component={ResChatStart} />
-          <Route path="/historyCard" exact component={HistoryCard} />
-          <Route path="/historyCard" exact component={HistoryCard} />
-          <Route path="/AudioRoom/:sessionId" component={AudioRoom} />
-          <Route path="/AudioChat" exact component={AudioChat} />
-          <Route path="/loading" exact component={Loading} />
-          <Route path="/ChatClose" exact component={ChatClose} />
-          <Route path="/sendMsg" exact component={SendMsg} />
-          <Route path="/receivedMsg" exact component={ReceivedMsg} />
+      <ThemeProvider theme={theme}>
+        <ConnectedRouter history={history}>
+          <ScrollToTop />
+          <Header />
+          <Wrapper>
+            <Route path="/" exact component={Login} />
+            <Route path="/user/kakao/callback" component={KakaoAuthHandle} />
+            <Route path="/signup" exact component={Signup} />
+            <Route path="/info" exact component={MemberInfo} />
+            <Route path="/commentList" exact component={CommentList} />
+            <Route path="/main" exact component={Main} />
+            <Route path="/postList" exact component={PostList} />
+            <Route path="/postWrite" exact component={PostWrite} />
+            <Route path="/postDetail/:postId" exact component={PostDetail} />
+            <Route path="/resReview" exact component={ResReview} />
+            <Route path="/reqReview" exact component={ReqReview} />
+            <Route path="/postEdit/:postId" exact component={PostEdit} />
+            <Route path="/VoteDetail/:postId" exact component={VoteDetail} />
+            <Route path="/ImageVote" exact component={ImageVote} />
+            <Route path="/voteList" component={VoteList} />
+            <Route path="/startReq" exact component={ReqChatStart} />
+            <Route path="/startRes" exact component={ResChatStart} />
+            <Route path="/historyCard" exact component={HistoryCard} />
+            <Route path="/historyCard" exact component={HistoryCard} />
+            <Route path="/AudioRoom/:sessionId" component={AudioRoom} />
+            <Route path="/AudioChat" exact component={AudioChat} />
+            <Route path="/loading" exact component={Loading} />
+            <Route path="/ChatClose" exact component={ChatClose} />
+            <Route path="/sendMsg" exact component={SendMsg} />
+            <Route path="/receivedMsg" exact component={ReceivedMsg} />
+            <Section />
+          </Wrapper>
           <Section />
-        </Wrapper>
-        <Section />
-        <Footer />
-        <FixedBtn />
-      </ConnectedRouter>
+          <Footer />
+          <FixedBtn />
+        </ConnectedRouter>
+      </ThemeProvider>
     </div>
   );
 }
