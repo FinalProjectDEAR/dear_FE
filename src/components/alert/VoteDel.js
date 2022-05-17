@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { history } from "../../redux/configureStore";
 
 import styled from "styled-components";
-import { Text, Button } from "../../elements";
+import { Text, TextB, Button } from "../../elements";
 
 import { actionCreators as voteActions } from "../../redux/modules/vote";
 
@@ -17,27 +17,28 @@ function VoteDel(props) {
     <React.Fragment>
       <CloseContainer>
         <LineBox>
-          <Text subTitle>상담을 종료할까요?</Text>
+          <TextB subTitle>투표를 삭제할까요?</TextB>
         </LineBox>
         <BottomBox>
-          <Button primary _onClick={props.closeModal}>
-            <Text body4 color="#7A37BE" cursor="pointer">
+          <Button
+            secondaryDefault
+            size="narrow"
+            margin="0px 8px"
+            _onClick={props.closeModal}
+          >
+            <Text body4 margin="0px" color="#7A37BE" cursor="pointer">
               돌아가기
             </Text>
           </Button>
           <Button
-            primary
+            primaryDefault
+            size="narrow"
+            margin="0px 8px"
             _onClick={() => {
               delVote();
             }}
           >
-            <Text
-              margin="0px"
-              color="#fff"
-              weight="500"
-              size="14px"
-              cursor="pointer"
-            >
+            <Text margin="0px" color="#fff" body4 cursor="pointer">
               삭제하기
             </Text>
           </Button>
@@ -69,6 +70,6 @@ const BottomBox = styled.div`
   margin: 20px auto;
   padding: 0px 80px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 `;

@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/configureStore";
 
 import styled from "styled-components";
-import theme from "../styles/theme";
-import { Text, Button, Input, ColorBadge } from "../elements";
+import { Text, TextB } from "../elements";
 import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
 import image01 from "../assets/image01.png";
 import image02 from "../assets/image02.png";
@@ -23,17 +22,17 @@ function VoteCard(props) {
           history.push(`/voteDetail/${props.postId}`);
         }}
       >
-        <Font>
+        <TextB subTitle>
           <Question>Q. </Question>
           {props.title}
-        </Font>
+        </TextB>
         <VoteContainer>
           <LineBox>
             <VoteLine>
-              <VoteTitle color={props.leftSelected ? "#7A37BE" : "#61586A"}>
+              <Text sub4>
                 {/* {props.vote[0].imageTitle} */}
                 친구가애인새우우우우
-              </VoteTitle>
+              </Text>
             </VoteLine>
             <ProgressBar>
               <Highlight
@@ -47,10 +46,10 @@ function VoteCard(props) {
           </LineBox>
           <LineBox>
             <VoteLine>
-              <VoteTitle color={props.rightSelected ? "#7A37BE" : "#61586A"}>
+              <Text sub4>
                 {/* {props.vote[1].imageTitle} */}
                 강원도
-              </VoteTitle>
+              </Text>
             </VoteLine>
             <ProgressBar>
               <Highlight

@@ -272,13 +272,11 @@ function VoteWrite() {
               </ImgInputBox>
 
               <div>
-                <Button
-                  bg="#7A37BE"
-                  margin="10px auto"
-                  width="212px"
-                  text="투표등록"
-                  _onClick={uploadVote}
-                />
+                <Button size="regular" margin="10px auto" _onClick={uploadVote}>
+                  <Text body4 color="#fff" margin="0">
+                    투표등록
+                  </Text>
+                </Button>
               </div>
             </VoteWrapper>
           </React.Fragment>

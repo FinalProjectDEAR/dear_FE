@@ -58,7 +58,7 @@ const Login = () => {
             <Input
               padding="14px 0px 14px 30px"
               borderRadius="100px"
-              margin="10px 0px"
+              margin="15px 0px"
               shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
               placeholder="비밀번호"
               type="password"
@@ -72,35 +72,31 @@ const Login = () => {
               }}
             />
           </InputBox>
-          <ButtonBox>
-            <Button
-              bg=" #61586A"
-              cursor="pointer"
-              shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
-              text="로그인"
-              _onClick={() => {
-                login();
-              }}
-            />
-            <Button
-              bg="transparent"
-              border="1px solid #61586A;"
-              margin="10px 0px"
-              cursor="pointer"
-              shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
-              _onClick={() => {
-                history.push("/signup");
-              }}
-            >
-              <Text margin="0px" color="#61586A" weight="500" size="16px">
-                회원가입
-              </Text>
-            </Button>
-          </ButtonBox>
-          <KakaoBox>
-            <KakaoButton onClick={kakaoAuth} src={kakao} />
-          </KakaoBox>
         </div>
+        <ButtonBox>
+          <Button
+            primaryDefault
+            size="wide"
+            _onClick={() => {
+              login();
+            }}
+          >
+            <Text body4 textAlign="center" margin="0px" color="#fff">
+              로그인
+            </Text>
+          </Button>
+          <LineBox>
+            <Text sub4 margin="0px" color="#61586A">
+              계정이 없으신가요?
+            </Text>
+            <Text sub5 margin="0px 10px" color="#7A37BE" deco="underLine">
+              회원가입
+            </Text>
+          </LineBox>
+        </ButtonBox>
+        <KakaoBox>
+          <KakaoButton onClick={kakaoAuth} src={kakao} />
+        </KakaoBox>
       </LoginWrapper>
     </React.Fragment>
   );
@@ -109,37 +105,52 @@ const Login = () => {
 export default Login;
 
 const LoginWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 360px;
   margin: auto;
 `;
 
 const LogoBox = styled.div`
-  justify-content: center;
-  align-items: center;
-  padding: 0px 0px 30px;
+  padding: 0px 0px 40px;
 `;
 
 const Logo = styled.img`
-  width: 225px;
+  width: 140px;
+  height: 94px;
   margin: 0px auto;
-  border-radius: 20px;
 `;
 
 const InputBox = styled.div`
   justify-content: center;
   align-items: center;
-  padding: 0px 0px 30px;
+  width: 300px;
+  height: 95px;
+  box-sizing: border-box;
 `;
 
 const ButtonBox = styled.div`
+  width: 300px;
+  height: 69px;
+  margin-bottom: 30px;
   justify-content: center;
   align-items: center;
+`;
+
+const LineBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 19px;
+  margin: 10px auto;
 `;
 
 const KakaoBox = styled.div`
   justify-content: center;
   align-items: center;
-  padding: 30px 0px 0px;
 `;
 
 const KakaoButton = styled.img`

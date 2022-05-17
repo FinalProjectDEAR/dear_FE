@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { ThemeProvider } from "styled-components";
+import styled, { css } from "styled-components";
 import theme from "../styles/theme";
 
 const Button = (props) => {
@@ -55,6 +55,7 @@ const Button = (props) => {
     //추가
     shadow: shadow,
   };
+
   if (primaryDefault) {
     return (
       <PrimaryDefaultButton {...styles} style={_style} onClick={_onClick}>
@@ -156,15 +157,44 @@ Button.defaultProps = {
     "Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;",
   fontStyle: "normal",
   color: "#ffffff",
-  size: "16px",
+  size: "",
   _onClick: () => {},
   cursor: "pointer",
   disabled: false,
   shadow: false,
 };
 
+const sizes = {
+  small_1: {
+    width: "110px",
+    height: "36px",
+  },
+  small_2: {
+    width: "110px",
+    height: "40px",
+  },
+  narrow: {
+    width: "140px",
+    height: "36px",
+  },
+  regular: { width: "160px", height: "36px" },
+  wide: {
+    width: "300px",
+    height: "40px",
+  },
+};
+
+const sizeStyles = css`
+  ${(props) =>
+    props.size
+      ? css`
+          width: ${sizes[props.size].width};
+          height: ${sizes[props.size].height};
+        `
+      : ""};
+`;
+
 const PrimaryDefaultButton = styled.button`
-  width: ${(props) => props.width};
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
   padding: ${(props) => props.padding};
   background-color: ${({ theme }) => theme.colors.primary.default};
@@ -175,13 +205,12 @@ const PrimaryDefaultButton = styled.button`
   font-family: ${(props) => props.fontFamily};
   font-style: ${(props) => props.fontStyle};
   color: ${({ theme }) => theme.colors.grayScale["0"]};
-  font-size: ${(props) => props.size};
   ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")}
   box-sizing: border-box;
   box-shadow: ${(props) => props.shadow};
+  ${sizeStyles}
 `;
 const PrimaryHoverButton = styled.button`
-  width: ${(props) => props.width};
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
   padding: ${(props) => props.padding};
   background-color: ${({ theme }) => theme.colors.primary["700"]};
@@ -192,13 +221,12 @@ const PrimaryHoverButton = styled.button`
   font-family: ${(props) => props.fontFamily};
   font-style: ${(props) => props.fontStyle};
   color: ${({ theme }) => theme.colors.grayScale["0"]};
-  font-size: ${(props) => props.size};
   ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")}
   box-sizing: border-box;
   box-shadow: ${(props) => props.shadow};
+  ${sizeStyles}
 `;
 const PrimaryDisabledButton = styled.button`
-  width: ${(props) => props.width};
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
   padding: ${(props) => props.padding};
   background-color: ${({ theme }) => theme.colors.grayScale["100"]};
@@ -209,13 +237,12 @@ const PrimaryDisabledButton = styled.button`
   font-family: ${(props) => props.fontFamily};
   font-style: ${(props) => props.fontStyle};
   color: ${({ theme }) => theme.colors.grayScale["0"]};
-  font-size: ${(props) => props.size};
   ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")}
   box-sizing: border-box;
   box-shadow: ${(props) => props.shadow};
+  ${sizeStyles}
 `;
 const SecondaryDefaultButton = styled.button`
-  width: ${(props) => props.width};
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
   padding: ${(props) => props.padding};
   background-color: ${({ theme }) => theme.colors.grayScale["0"]};
@@ -226,10 +253,10 @@ const SecondaryDefaultButton = styled.button`
   font-family: ${(props) => props.fontFamily};
   font-style: ${(props) => props.fontStyle};
   color: ${({ theme }) => theme.colors.primary.default};
-  font-size: ${(props) => props.size};
   ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")}
   box-sizing: border-box;
   box-shadow: ${(props) => props.shadow};
+  ${sizeStyles}
 `;
 const SecondaryHoverButton = styled.button`
   width: ${(props) => props.width};
@@ -243,13 +270,12 @@ const SecondaryHoverButton = styled.button`
   font-family: ${(props) => props.fontFamily};
   font-style: ${(props) => props.fontStyle};
   color: ${({ theme }) => theme.colors.primary.default};
-  font-size: ${(props) => props.size};
   ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")}
   box-sizing: border-box;
   box-shadow: ${(props) => props.shadow};
+  ${sizeStyles}
 `;
 const SecondaryDisabledButton = styled.button`
-  width: ${(props) => props.width};
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
   padding: ${(props) => props.padding};
   background-color: ${({ theme }) => theme.colors.grayScale["50"]};
@@ -260,10 +286,10 @@ const SecondaryDisabledButton = styled.button`
   font-family: ${(props) => props.fontFamily};
   font-style: ${(props) => props.fontStyle};
   color: ${({ theme }) => theme.colors.grayScale["0"]};
-  font-size: ${(props) => props.size};
   ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")}
   box-sizing: border-box;
   box-shadow: ${(props) => props.shadow};
+  ${sizeStyles}
 `;
 const SmallButton = styled.button`
   width: 110px;

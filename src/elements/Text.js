@@ -177,8 +177,8 @@ const Text = (props) => {
 Text.defaultProps = {
   _onClick: () => {},
   children: null,
-  margin: false,
-  color: "#61586A",
+  margin: "0px",
+  color: false,
   size: "18px",
   cursor: "default",
   deco: "none",
@@ -193,6 +193,7 @@ const Title = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.bold};
   color: ${({ theme }) => theme.colors.secondary["700"]};
+  ${(props) => (props.color ? `color: ${props.color}` : "")};
   font-size: 18px;
   line-height: 30px;
   background-color: ${(props) => props.bg};
@@ -209,6 +210,7 @@ const HeadLine = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.bold};
   color: ${({ theme }) => theme.colors.secondary["700"]};
+  ${(props) => (props.color ? `color: ${props.color}` : "")};
   font-size: 16px;
   line-height: 16px;
   background-color: ${(props) => props.bg};
@@ -225,6 +227,7 @@ const Body = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.medium};
   color: ${({ theme }) => theme.colors.secondary["700"]};
+  ${(props) => (props.color ? `color: ${props.color}` : "")};
   font-size: 14px;
   line-height: 18 px;
   background-color: ${(props) => props.bg};
@@ -241,6 +244,7 @@ const Body2 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.medium};
   color: ${({ theme }) => theme.colors.secondary["700"]};
+  ${(props) => (props.color ? `color: ${props.color}` : "")};
   font-size: 18px;
   line-height: 20px;
   background-color: ${(props) => props.bg};
@@ -257,6 +261,7 @@ const Body3 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.medium};
   color: ${({ theme }) => theme.colors.secondary["700"]};
+  ${(props) => (props.color ? `color: ${props.color}` : "")};
   font-size: 16px;
   line-height: 24px;
   background-color: ${(props) => props.bg};
@@ -273,6 +278,7 @@ const Body4 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.medium};
   color: ${({ theme }) => theme.colors.secondary["700"]};
+  ${(props) => (props.color ? `color: ${props.color}` : "")};
   font-size: 14px;
   line-height: 18px;
   background-color: ${(props) => props.bg};
@@ -289,6 +295,7 @@ const Body5 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.light};
   color: ${({ theme }) => theme.colors.secondary["700"]};
+  ${(props) => (props.color ? `color: ${props.color}` : "")};
   font-size: 16px;
   line-height: 27px;
   background-color: ${(props) => props.bg};
@@ -305,6 +312,7 @@ const Body6 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.light};
   color: ${({ theme }) => theme.colors.secondary["700"]};
+  ${(props) => (props.color ? `color: ${props.color}` : "")};
   font-size: 14px;
   line-height: 22px;
   background-color: ${(props) => props.bg};
@@ -321,6 +329,7 @@ const Sub = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.bold};
   color: ${({ theme }) => theme.colors.secondary["300"]};
+  ${(props) => (props.color ? `color: ${props.color}` : "")};
   font-size: 12px;
   line-height: 14px;
   background-color: ${(props) => props.bg};
@@ -337,6 +346,7 @@ const Sub2 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.medium};
   color: ${({ theme }) => theme.colors.secondary["300"]};
+  ${(props) => (props.color ? `color: ${props.color}` : "")};
   font-size: 14px;
   line-height: 18px;
   text-decoration-line: underline;
@@ -353,6 +363,7 @@ const Sub3 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.medium};
   color: ${({ theme }) => theme.colors.secondary["300"]};
+  ${(props) => (props.color ? `color: ${props.color}` : "")};
   font-size: 12px;
   line-height: 14px;
   text-decoration-line: underline;
@@ -369,6 +380,7 @@ const Sub4 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.medium};
   color: ${({ theme }) => theme.colors.secondary["300"]};
+  ${(props) => (props.color ? `color: ${props.color}` : "")};
   font-size: 12px;
   line-height: 14px;
   background-color: ${(props) => props.bg};
@@ -385,6 +397,7 @@ const Sub5 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.medium};
   color: ${({ theme }) => theme.colors.secondary["300"]};
+  ${(props) => (props.color ? `color: ${props.color}` : "")};
   font-size: 10px;
   line-height: 14px;
   background-color: ${(props) => props.bg};
@@ -401,6 +414,7 @@ const Sub6 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.light};
   color: ${({ theme }) => theme.colors.secondary["300"]};
+  ${(props) => (props.color ? `color: ${props.color}` : "")};
   font-size: 14px;
   line-height: 18px;
   background-color: ${(props) => props.bg};
@@ -417,6 +431,7 @@ const Sub7 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.light};
   color: ${({ theme }) => theme.colors.secondary["300"]};
+  ${(props) => (props.color ? `color: ${props.color}` : "")};
   font-size: 12px;
   line-height: 14px;
   background-color: ${(props) => props.bg};
@@ -433,6 +448,7 @@ const Sub8 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.base};
   font-weight: ${({ theme }) => theme.fonts.weight.light};
   color: ${({ theme }) => theme.colors.secondary["300"]};
+  ${(props) => (props.color ? `color: ${props.color}` : "")};
   font-size: 10px;
   line-height: 14px;
   background-color: ${(props) => props.bg};
