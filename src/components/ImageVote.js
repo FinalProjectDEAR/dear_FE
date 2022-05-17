@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, Text, Button } from "../elements";
+import { Text, Button } from "../elements";
 import { useSelector, useDispatch } from "react-redux";
 
 import { history } from "../redux/configureStore";
@@ -12,7 +12,7 @@ import uploadImg from "../assets/upload.png";
 import styled from "styled-components";
 import VoteResult from "./VoteResult";
 
-function ImageVote() {
+function ImageVote({ voteInfo }) {
   const dispatch = useDispatch();
 
   const params = useParams();
@@ -20,22 +20,35 @@ function ImageVote() {
   console.log(postId);
 
   React.useEffect(() => {
-    dispatch(voteActions.detailVoteDB(postId));
-    showSelection();
+    // dispatch(voteActions.detailVoteDB(postId));
   }, []);
+
+  React.useEffect(() => {
+    showSelection();
+  }, [voteInfo.vote[0].selected]);
 
   const [vote, setVote] = React.useState("");
   const [leftSelected, setLeftSelected] = React.useState(false);
   const [rightSelected, setRightSelected] = React.useState(false);
   const [showResult, setShowResult] = React.useState(false);
 
-  const voteInfo = useSelector((state) => state.vote.voteInfo);
+  // const voteInfo = useSelector((state) => state.vote.voteInfo);
   console.log(voteInfo.vote[0].selected);
+  console.log(leftSelected);
+  console.log(rightSelected);
 
   const showSelection = () => {
-    if (voteInfo.vote[0].selected === true) {
+    if (
+      voteInfo.vote[0].selected === false &&
+      voteInfo.vote[1].selected === false
+    ) {
+      console.log("나띵");
+      return;
+    } else if (voteInfo.vote[0].selected === true) {
+      console.log("왼쪽");
       setLeftSelected(true);
-    } else {
+    } else if (voteInfo.vote[1].selected === true) {
+      console.log("오른쪽");
       setRightSelected(true);
     }
   };
@@ -57,10 +70,6 @@ function ImageVote() {
     setShowResult(true);
   };
 
-  const delVote = () => {
-    dispatch(voteActions.delVoteDB(postId));
-  };
-
   return (
     <React.Fragment>
       {!showResult ? (
@@ -68,7 +77,7 @@ function ImageVote() {
           <CheckBox>
             <Vote
               bg={leftSelected ? "#EEE7F5" : "transparent"}
-              border={leftSelected ? "1px solid #7A37BE" : "1px solid #61586A"}
+              border={leftSelected ? "1px solid #7A37BE" : "1px solid #E6E6E6"}
               onClick={selectLeft}
             >
               <Font color={leftSelected ? "#7A37BE" : "#61586A"}>
@@ -86,7 +95,7 @@ function ImageVote() {
             <Vote
               bg={rightSelected ? "#EEE7F5" : "transparent"}
               border={
-                rightSelected ? "1px solid #7A37BE" : "1px solid #61586A;"
+                rightSelected ? "1px solid #7A37BE" : "1px solid #E6E6E6;"
               }
               onClick={selectRight}
             >
@@ -105,7 +114,7 @@ function ImageVote() {
           </CheckBox>
           <BottomBox>
             <Button size="regular" cursor="pointer" _onClick={submitVote}>
-              <Text body4 margin="0px" color="#fff">
+              <Text body4 margin="0px" color="#fff" cursor="pointer">
                 투표하기
               </Text>
             </Button>

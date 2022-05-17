@@ -11,7 +11,7 @@ import { useParams } from "react-router-dom";
 import VoteResult from "./VoteResult";
 import styled from "styled-components";
 
-function LetterVote() {
+function LetterVote({ voteInfo }) {
   const dispatch = useDispatch();
 
   const params = useParams();
@@ -19,7 +19,7 @@ function LetterVote() {
   console.log(postId);
 
   React.useEffect(() => {
-    dispatch(voteActions.detailVoteDB(postId));
+    // dispatch(voteActions.detailVoteDB(postId));
     showSelection();
   }, []);
 
@@ -28,13 +28,23 @@ function LetterVote() {
   const [rightSelected, setRightSelected] = React.useState(false);
   const [showResult, setShowResult] = React.useState(false);
 
-  const voteInfo = useSelector((state) => state.vote.voteInfo);
+  // const voteInfo = useSelector((state) => state.vote.voteInfo);
   console.log(voteInfo.vote[0].selected);
+  console.log(leftSelected);
+  console.log(rightSelected);
 
   const showSelection = () => {
-    if (voteInfo.vote[0].selected === true) {
+    console.log("쇼셀렉션");
+    if (
+      voteInfo.vote[0].selected === false &&
+      voteInfo.vote[1].selected === false
+    ) {
+      return;
+    } else if (voteInfo.vote[0].selected === true) {
+      console.log("왼쪽");
       setLeftSelected(true);
-    } else {
+    } else if (voteInfo.vote[1].selected === true) {
+      console.log("오른쪽");
       setRightSelected(true);
     }
   };
@@ -56,63 +66,67 @@ function LetterVote() {
     setShowResult(true);
   };
 
-  const delVote = () => {
-    dispatch(voteActions.delVoteDB(postId));
-  };
-
   return (
     <React.Fragment>
-      <VoteWrapper>
-        <CheckBox>
-          <Vote
-            bg={leftSelected ? "#EEE7F5" : "transparent"}
-            border={leftSelected ? "1px solid #7A37BE" : "1px solid #61586A;"}
-            _onClick={selectLeft}
-          >
-            <Text
-              margin="0px"
-              body3
-              color={leftSelected ? "#7A37BE" : "#61586A"}
-              cursor="pointer"
+      {!showResult ? (
+        <VoteWrapper>
+          <CheckBox>
+            <Vote
+              bg={leftSelected ? "#EEE7F5" : "transparent"}
+              border={leftSelected ? "1px solid #7A37BE" : "1px solid #E6E6E6;"}
+              onClick={selectLeft}
             >
-              {voteInfo.vote[0].imageTitle}
+              <Text
+                body3
+                color={leftSelected ? "#7A37BE" : "#61586A"}
+                cursor="pointer"
+              >
+                {voteInfo.vote[0].imageTitle}
+              </Text>
+            </Vote>
+            <Text body2 margin="17px 24px">
+              VS
             </Text>
-          </Vote>
-          <Text body2 margin="17px 24px">
-            VS
-          </Text>
-          <Vote
-            bg={rightSelected ? "#EEE7F5" : "transparent"}
-            border={rightSelected ? "1px solid #7A37BE" : "1px solid #61586A;"}
-            margin="10px 0px"
-            cursor="pointer"
-            shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
-            _onClick={selectRight}
-          >
-            <Text
-              margin="0px"
-              body3
-              color={rightSelected ? "#7A37BE" : "#61586A"}
+            <Vote
+              bg={rightSelected ? "#EEE7F5" : "transparent"}
+              border={
+                rightSelected ? "1px solid #7A37BE" : "1px solid #E6E6E6;"
+              }
+              margin="10px 0px"
               cursor="pointer"
+              shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
+              onClick={selectRight}
             >
-              {voteInfo.vote[1].imageTitle}
-            </Text>
-          </Vote>
-        </CheckBox>
-        <BottomBox>
-          <Button
-            primaryDefault
-            size="regular"
-            cursor="pointer"
-            _onClick={submitVote}
-          >
-            <Text body4 color="#fff" margin="0px">
-              투표하기
-            </Text>
-          </Button>
-        </BottomBox>
-      </VoteWrapper>
-      {showResult ? <VoteResult voteInfo={voteInfo} /> : null}
+              <Text
+                margin="0px"
+                body3
+                color={rightSelected ? "#7A37BE" : "#61586A"}
+                cursor="pointer"
+              >
+                {voteInfo.vote[1].imageTitle}
+              </Text>
+            </Vote>
+          </CheckBox>
+          <BottomBox>
+            <Button
+              primaryDefault
+              size="regular"
+              cursor="pointer"
+              _onClick={submitVote}
+            >
+              <Text body4 color="#fff" margin="0px" cursor="pointer">
+                투표하기
+              </Text>
+            </Button>
+          </BottomBox>
+        </VoteWrapper>
+      ) : (
+        <VoteResult
+          voteInfo={voteInfo}
+          leftSelected={leftSelected}
+          rightSelected={rightSelected}
+        />
+      )}
     </React.Fragment>
   );
 }
