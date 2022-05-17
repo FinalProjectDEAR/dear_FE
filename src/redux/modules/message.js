@@ -20,16 +20,17 @@ const getMessage = createAction(GET_MESSAGE, (message) => ({
 const getDetailMessage = createAction(GET_DETAIL_MSG, (message) => ({
   message,
 }));
-const addMessage = createAction(ADD_MESSAGE, (comments) => ({
-  comments,
+const addMessage = createAction(ADD_MESSAGE, (message, resUser) => ({
+  message,
+  resUser,
 }));
 
 //미듈웨어
-const getMessageDB = () => {
+const getMessageDB = (page) => {
   return function (dispatch, getState, { history }) {
     try {
-      api.get("message", {}).then((res) => {
-        console.log("쪽지 전체가져오기", res.data);
+      api.get(`/user/Info/message/${page}`, {}).then((res) => {
+        // console.log("쪽지 전체가져오기", res.data);
         dispatch(getMessage(res.data));
       });
     } catch (err) {
@@ -40,9 +41,10 @@ const getMessageDB = () => {
 };
 
 const getDetailMsgDB = (messageId) => {
+  console.log(messageId);
   return function (dispatch, getState, { history }) {
     try {
-      api.get(`message/${messageId}/details`, {}).then((res) => {
+      api.get(`/message/detail/${messageId}`, {}).then((res) => {
         console.log("쪽지 상세 가져오기", res.data);
         dispatch(getDetailMessage(res.data));
       });
@@ -53,15 +55,15 @@ const getDetailMsgDB = (messageId) => {
   };
 };
 
-const addMessageDB = (comment, postId) => {
+const addMessageDB = (message, resUser) => {
   return function (dispatch, getState, { history }) {
-    // console.log("댓글추가하기!", comment.comment, postId);
+    // console.log("쪽지보내기!", message, resUser);
     try {
       api
-        .post(`anonypost/board/${postId}/comment`, comment.comment)
+        .post(`/message/request`, { message: message, resUser: resUser })
         .then((res) => {
-          // console.log("댓글 추가", res.data.data);
-          dispatch(addMessage(res.data.data));
+          // console.log("쪽지 추가", res);
+          history.push("/myPage");
         });
     } catch (err) {
       console.log(err);
@@ -72,20 +74,20 @@ const addMessageDB = (comment, postId) => {
 
 export default handleActions(
   {
-    [ADD_MESSAGE]: (state, action) =>
-      produce(state, (draft) => {
-        // console.log("리듀서 쪽지추가", action.payload.message.data);
-        draft.message.unshift(action.payload.message);
-      }),
+    // [ADD_MESSAGE]: (state, action) =>
+    //   produce(state, (draft) => {
+    //     // console.log("리듀서 쪽지추가", action.payload.message.data);
+    //     draft.message.unshift(action.payload.message);
+    //   }),
     [GET_MESSAGE]: (state, action) =>
       produce(state, (draft) => {
-        // console.log("리듀서 쪽지받기", action.payload.messages);
-        draft.message = action.payload.messages.data;
+        // console.log("리듀서 쪽지받기", action.payload.message.data);
+        draft.message = action.payload.message.data;
       }),
     [GET_DETAIL_MSG]: (state, action) =>
       produce(state, (draft) => {
         // console.log("리듀서 상세 쪽지 받기", action.payload.message.data);
-        draft.message = action.payload.message.data;
+        draft.messages = action.payload.message.data;
       }),
   },
   initialState

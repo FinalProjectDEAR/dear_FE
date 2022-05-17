@@ -44,7 +44,11 @@ function FixedBtn(props) {
           <QuestionAnswerIcon />
           <span>익명상담소</span>
         </Message>
-        <Follow>
+        <Follow
+          onClick={() => {
+            history.push("/myPage");
+          }}
+        >
           <PersonIcon />
           <span>마이페이지</span>
         </Follow>

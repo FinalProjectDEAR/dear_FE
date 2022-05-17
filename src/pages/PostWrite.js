@@ -208,31 +208,14 @@ function PostWrite() {
         </ImageWrapper>
         <BtnWrap>
           <Button
-            _onClick={() => {
-              history.push("/postList");
-            }}
-            width="120px"
-            height="42px"
-            bg="#948A9E"
-            border="1px solid #948A9E;"
-            cursor="pointer"
-          >
-            <Text margin="1px 0 0 0" color="white">
-              목록
-            </Text>
-          </Button>
-
-          <Button
+            primaryDefault
             _onClick={addPost}
             width="120px"
             height="42px"
             bg="#61586A"
             cursor="pointer"
-          >
-            <Text margin="1px 0 0 0" color="white">
-              상담신청
-            </Text>
-          </Button>
+            text="상담신청"
+          />
         </BtnWrap>
       </WriteWrapper>
     </React.Fragment>
@@ -443,7 +426,7 @@ const BtnWrap = styled.div`
   flex: none;
   order: 1;
   flex-grow: 0;
-  justify-content: space-between;
+  padding-left: 830px;
   /* background: pink; */
 `;
 export default PostWrite;
