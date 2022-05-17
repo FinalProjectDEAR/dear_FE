@@ -87,7 +87,7 @@ const TextB = (props) => {
 Text.defaultProps = {
   _onClick: () => {},
   children: null,
-  margin: false,
+  margin: "0px",
   color: "#61586A",
   size: "18px",
   cursor: "default",
@@ -103,6 +103,7 @@ const Title = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.batang};
   font-weight: ${({ theme }) => theme.fonts.weight.medium};
   color: ${({ theme }) => theme.colors.secondary["700"]};
+  ${(props) => (props.color ? `color: ${props.color}` : "")};
   font-size: 26px;
   line-height: 42px;
   background-color: ${(props) => props.bg};
@@ -119,6 +120,7 @@ const SubTitle = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.batang};
   font-weight: ${({ theme }) => theme.fonts.weight.medium};
   color: ${({ theme }) => theme.colors.secondary["700"]};
+  ${(props) => (props.color ? `color: ${props.color}` : "")};
   font-size: 16px;
   line-height: 20px;
   background-color: ${(props) => props.bg};
@@ -135,6 +137,7 @@ const Sub = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.batang};
   font-weight: ${({ theme }) => theme.fonts.weight.light};
   color: ${({ theme }) => theme.colors.secondary["300"]};
+  ${(props) => (props.color ? `color: ${props.color}` : "")};
   font-size: 14px;
   line-height: 24px;
   background-color: ${(props) => props.bg};
@@ -151,6 +154,7 @@ const Sub2 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.batang};
   font-weight: ${({ theme }) => theme.fonts.weight.medium};
   color: ${({ theme }) => theme.colors.secondary["300"]};
+  ${(props) => (props.color ? `color: ${props.color}` : "")};
   font-size: 10px;
   line-height: 14px;
   background-color: ${(props) => props.bg};
@@ -167,6 +171,7 @@ const Body = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.batang};
   font-weight: ${({ theme }) => theme.fonts.weight.light};
   color: ${({ theme }) => theme.colors.secondary["700"]};
+  ${(props) => (props.color ? `color: ${props.color}` : "")};
   font-size: 16px;
   line-height: 30px;
   background-color: ${(props) => props.bg};
@@ -183,6 +188,7 @@ const Body2 = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.batang};
   font-weight: ${({ theme }) => theme.fonts.weight.light};
   color: ${({ theme }) => theme.colors.secondary["700"]};
+  ${(props) => (props.color ? `color: ${props.color}` : "")};
   font-size: 12px;
   line-height: 20px;
   background-color: ${(props) => props.bg};

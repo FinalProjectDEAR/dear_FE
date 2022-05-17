@@ -38,10 +38,6 @@ function VoteDetail(props) {
 
   const loginUser = localStorage.getItem("memberId");
 
-  const delVote = () => {
-    dispatch(voteActions.delVoteDB(postId));
-  };
-
   return (
     <React.Fragment>
       <BtnContainer></BtnContainer>
@@ -66,15 +62,20 @@ function VoteDetail(props) {
             <Text sub7>{voteInfo.createdAt}</Text>
           </TimeBox>
         </CategoryBox>
-        {voteInfo?.memberId === loginUser ? (
-          <LineBox>
-            <DelText
-              onClick={() => {
-                setModalOpen(true);
-              }}
-            ></DelText>
-          </LineBox>
-        ) : null}
+        {/* {voteInfo?.memberId === loginUser ? ( */}
+        <LineBox>
+          <Text
+            sub7
+            margin="18.5px 45px"
+            cursor="pointer"
+            _onClick={() => {
+              setModalOpen(true);
+            }}
+          >
+            삭제
+          </Text>
+        </LineBox>
+        {/* ) : null} */}
 
         {modalOpen && (
           <Modal closeModal={closeModal}>
@@ -153,7 +154,7 @@ const DelText = styled.p`
   font-weight: 300;
   font-size: 12px;
   line-height: 14px;
-  margin: 12.5px 49.5px;
+
   color: #666666;
 `;
 
@@ -173,7 +174,7 @@ const TimeBox = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 0px;
+  margin-right: 45px;
   gap: 2px;
 
   width: 120px;

@@ -104,15 +104,10 @@ function ImageVote() {
             </Vote>
           </CheckBox>
           <BottomBox>
-            <Button
-              width="160px"
-              bg="#7A37BE"
-              cursor="pointer"
-              _onClick={submitVote}
-            >
-              <Font margin="0px" weight="500" size="16px" color="#fff">
+            <Button size="regular" cursor="pointer" _onClick={submitVote}>
+              <Text body4 margin="0px" color="#fff">
                 투표하기
-              </Font>
+              </Text>
             </Button>
           </BottomBox>
         </VoteWrapper>

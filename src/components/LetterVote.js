@@ -1,5 +1,5 @@
 import React from "react";
-import { div, Input, Text, Button } from "../elements";
+import { Text, Button } from "../elements";
 import { useSelector, useDispatch } from "react-redux";
 
 import { history } from "../redux/configureStore";
@@ -64,28 +64,24 @@ function LetterVote() {
     <React.Fragment>
       <VoteWrapper>
         <CheckBox>
-          <Button
+          <Vote
             bg={leftSelected ? "#EEE7F5" : "transparent"}
             border={leftSelected ? "1px solid #7A37BE" : "1px solid #61586A;"}
-            margin="10px 0px"
-            cursor="pointer"
-            shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
             _onClick={selectLeft}
           >
             <Text
               margin="0px"
+              body3
               color={leftSelected ? "#7A37BE" : "#61586A"}
-              weight="500"
-              size="16px"
               cursor="pointer"
             >
               {voteInfo.vote[0].imageTitle}
             </Text>
-          </Button>
-          <Text weight="500" size="18px" margin="17px 24px">
+          </Vote>
+          <Text body2 margin="17px 24px">
             VS
           </Text>
-          <Button
+          <Vote
             bg={rightSelected ? "#EEE7F5" : "transparent"}
             border={rightSelected ? "1px solid #7A37BE" : "1px solid #61586A;"}
             margin="10px 0px"
@@ -95,23 +91,22 @@ function LetterVote() {
           >
             <Text
               margin="0px"
+              body3
               color={rightSelected ? "#7A37BE" : "#61586A"}
-              weight="500"
-              size="16px"
               cursor="pointer"
             >
               {voteInfo.vote[1].imageTitle}
             </Text>
-          </Button>
+          </Vote>
         </CheckBox>
         <BottomBox>
           <Button
-            width="160px"
-            bg="#7A37BE"
+            primaryDefault
+            size="regular"
             cursor="pointer"
             _onClick={submitVote}
           >
-            <Text margin="0px" weight="500" size="16px" color="#fff">
+            <Text body4 color="#fff" margin="0px">
               투표하기
             </Text>
           </Button>
@@ -147,6 +142,22 @@ const CheckBox = styled.div`
   margin: 30px;
   width: 792px;
   height: 54px;
+`;
+
+const Vote = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 0px;
+  margin: 10px 0px;
+  width: 360px;
+  height: 54px;
+  box-sizing: border-box;
+  background-color: ${(props) => props.bg};
+  border: ${(props) => props.border};
+  border-radius: 30px;
+  cursor: pointer;
 `;
 
 const BottomBox = styled.div`
