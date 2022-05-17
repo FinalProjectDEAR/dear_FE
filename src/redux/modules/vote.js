@@ -26,7 +26,7 @@ const putVote = createAction(PUT_VOTE, (postId) => postId);
 const initialState = {
   voteList: [
     {
-      memberId: "럭키세븐호01",
+      memberId: "luckyseven",
       vote: [
         {
           imageUrl: false,
@@ -46,18 +46,18 @@ const initialState = {
       contents: "생일선물 뭐고를지 모르겠어요 투표 부탁드려요!",
     },
     {
-      memberId: "럭키세븐호02",
+      memberId: "luckyseven",
       vote: [
         {
           imageUrl: image01,
           imageTitle: "신발",
-          selectionList: ["스파르타", "항해99"],
+          selectionList: ["스파르타", "항해99", "럭키세븐호"],
           selected: true,
         },
         {
           imageUrl: image02,
           imageTitle: "가방",
-          selectionList: ["스파르타", "항해99", "럭키세븐호"],
+          selectionList: ["스파르타"],
           selected: false,
         },
       ],
@@ -75,13 +75,13 @@ const initialState = {
       {
         imageUrl: image01,
         imageTitle: "신발",
-        selectionList: ["스파르타", "항해99"],
+        selectionList: ["스파르타", "항해99", "럭키세븐호"],
         selected: true,
       },
       {
         imageUrl: image02,
         imageTitle: "가방",
-        selectionList: ["스파르타", "항해99", "럭키세븐호"],
+        selectionList: ["스파르타", "항해99"],
         selected: false,
       },
     ],

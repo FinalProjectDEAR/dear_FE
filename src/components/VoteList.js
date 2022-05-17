@@ -25,7 +25,7 @@ const VoteList = (props) => {
   const settings = {
     dots: true,
     infinite: true,
-    slidesToShow: 2,
+    slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
     rows: 2,
@@ -68,7 +68,7 @@ const VoteList = (props) => {
             history.push("");
           }}
         >
-          진행중인 투표 더보기 >
+          진행중인 투표 더보기 {">"}
         </Text>
       </RankingContainer>
     </RankingWrapper>
@@ -78,7 +78,7 @@ const VoteList = (props) => {
 export default VoteList;
 
 const RankingWrapper = styled.div`
-  width: 70vw;
+  width: 1032px;
   margin: auto;
 `;
 

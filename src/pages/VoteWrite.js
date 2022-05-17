@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Input, Text, Button, Modal } from "../elements";
+import { Input, Text, TextB, Button, Modal } from "../elements";
 import { useSelector, useDispatch } from "react-redux";
 import { history } from "../redux/configureStore";
 
@@ -8,6 +8,7 @@ import { actionCreators as voteActions } from "../redux/modules/vote";
 
 // import assets
 import uploadImg from "../assets/upload.png";
+import attach from "../assets/vote/attach.png";
 import styled from "styled-components";
 
 function VoteWrite() {
@@ -121,10 +122,8 @@ function VoteWrite() {
           <React.Fragment>
             <VoteWrapper>
               <LineBox>
-                <Text margin="0px" batang weight="500" size="16px">
-                  간단한 고민을 투표로 물어보세요!{" "}
-                </Text>
-                <Text margin="0px 10px" weight="300" size="14px">
+                <TextB subTitle>간단한 고민을 투표로 물어보세요! </TextB>
+                <Text sub6 margin="0px 10px">
                   <span style={{ color: "red", marginRight: "4px" }}>*</span>
                   필수입력
                 </Text>
@@ -132,13 +131,8 @@ function VoteWrite() {
 
               <LineBox>
                 <Title>
-                  <Text
-                    textAlign="left"
-                    weight="400"
-                    size="16px"
-                    color="#999999"
-                  >
-                    투표 질문
+                  <Text body4 textAlign="left">
+                    투표 주제
                     <span style={{ color: "red", marginRight: "4px" }}>*</span>
                   </Text>
                 </Title>
@@ -156,12 +150,7 @@ function VoteWrite() {
               </LineBox>
               <LineBox>
                 <Title>
-                  <Text
-                    textAlign="left"
-                    weight="400"
-                    size="16px"
-                    color="#999999"
-                  >
+                  <Text body4 textAlign="left">
                     투표 내용
                     <span style={{ color: "red", marginRight: "4px" }}>*</span>
                   </Text>
@@ -169,7 +158,7 @@ function VoteWrite() {
                 <div style={{ width: "546px" }}>
                   <Input
                     margin="0px"
-                    padding="16px"
+                    padding="14px"
                     multiLine
                     _onKeyUp={checkLength}
                     maxlength="200"
@@ -182,17 +171,12 @@ function VoteWrite() {
                   />
                 </div>
               </LineBox>
-              <Text textAlign="right" margin="0px" weight="300" size="14px">
+              <Text sub7 textAlign="right" margin="0px">
                 {textLength}/ 200자
               </Text>
               <LineBox>
                 <Title>
-                  <Text
-                    textAlign="left"
-                    weight="400"
-                    size="16px"
-                    color="#999999"
-                  >
+                  <Text body4 textAlign="left">
                     투표 형식
                     <span style={{ color: "red", marginRight: "4px" }}>*</span>
                   </Text>
@@ -225,12 +209,7 @@ function VoteWrite() {
 
               <LineBox>
                 <Title>
-                  <Text
-                    textAlign="left"
-                    weight="400"
-                    size="16px"
-                    color="#999999"
-                  >
+                  <Text body4 textAlign="left">
                     투표 항목
                     <span style={{ color: "red", marginRight: "4px" }}>*</span>
                   </Text>
@@ -246,7 +225,7 @@ function VoteWrite() {
                     }}
                   />
 
-                  <Text weight="500" size="18px" margin="0px 24px">
+                  <Text body4 margin="0px 24px">
                     VS
                   </Text>
                   <Input
@@ -261,36 +240,38 @@ function VoteWrite() {
                 </InputBox>
               </LineBox>
 
-              {imgVote && (
-                <ImgInputBox>
-                  <ImageBox>
-                    <ImgButton htmlFor="rightImage">이미지 등록</ImgButton>
-                    <Image src={rightPreview ? rightPreview : uploadImg} />
-                    <FileInput
-                      id="rightImage"
-                      type="file"
-                      ref={imageRight}
-                      onChange={() => {
-                        selectFile("right");
-                      }}
-                    />
-                  </ImageBox>
-                  <ImageBox>
-                    <ImgButton htmlFor="rightImage">이미지 등록</ImgButton>
-                    <Image src={rightPreview ? rightPreview : uploadImg} />
-                    <FileInput
-                      id="rightImage"
-                      type="file"
-                      ref={imageRight}
-                      onChange={() => {
-                        selectFile("right");
-                      }}
-                    />
-                  </ImageBox>
-                </ImgInputBox>
-              )}
+              <ImgInputBox>
+                {imgVote && (
+                  <>
+                    <ImageBox>
+                      <ImgButton htmlFor="leftImage"></ImgButton>
+                      <Image src={leftPreview ? leftPreview : uploadImg} />
+                      <FileInput
+                        id="leftImage"
+                        type="file"
+                        ref={imageLeft}
+                        onChange={() => {
+                          selectFile("left");
+                        }}
+                      />
+                    </ImageBox>
+                    <ImageBox>
+                      <ImgButton htmlFor="rightImage"></ImgButton>
+                      <Image src={rightPreview ? rightPreview : uploadImg} />
+                      <FileInput
+                        id="rightImage"
+                        type="file"
+                        ref={imageRight}
+                        onChange={() => {
+                          selectFile("right");
+                        }}
+                      />
+                    </ImageBox>
+                  </>
+                )}
+              </ImgInputBox>
 
-              <LineBox>
+              <div>
                 <Button
                   bg="#7A37BE"
                   margin="10px auto"
@@ -298,7 +279,7 @@ function VoteWrite() {
                   text="투표등록"
                   _onClick={uploadVote}
                 />
-              </LineBox>
+              </div>
             </VoteWrapper>
           </React.Fragment>
         </Modal>
@@ -348,6 +329,7 @@ const ImgInputBox = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 490px;
+  height: 250px;
 `;
 
 const CheckBox = styled.div`
@@ -361,31 +343,25 @@ const CheckBox = styled.div`
 
 const ImageBox = styled.div`
   width: 210px;
-  height: 166px;
+  height: 130px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: flex-start;
 `;
 
 const ImgButton = styled.label`
   border: none;
-  background-color: #999;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 400;
-  color: #fff;
-  width: 30%;
+  width: 58px;
+  height: 20px;
   margin-bottom: 10px;
-  padding: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-size: cover;
+  background-image: url(${attach});
   cursor: pointer;
 `;
 
 const Image = styled.label`
-  width: 140px;
-  height: 110px;
+  width: 100px;
+  height: 90px;
   background: #f2f2f2;
   border-radius: 10px;
   box-sizing: border-box;

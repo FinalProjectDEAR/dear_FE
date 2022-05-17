@@ -41,8 +41,9 @@ export default handleActions(
           draft.preview[1] = action.payload.preview;
           draft.imageRight = action.payload.file;
           draft.uploading = false;
+        } else {
+          draft.fileList = [...state.fileList, ...action.payload.file];
         }
-        draft.fileList = [...state.fileList, ...action.payload.file];
       }),
     // [UPLOADING]: (state, action) =>
     //   produce(state, (draft) => {
