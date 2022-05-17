@@ -51,9 +51,9 @@ function VoteDel(props) {
 export default VoteDel;
 
 const CloseContainer = styled.div`
-  width: 550px;
-  height: 260px;
-  padding: 60px 0px;
+  width: 400px;
+  height: 200px;
+  padding: 35px 0px;
   box-sizing: border-box;
   background: #ffffff;
   border-radius: 20px;
@@ -66,9 +66,9 @@ const LineBox = styled.div`
 `;
 
 const BottomBox = styled.div`
-  height: 40px;
-  margin: 20px auto;
-  padding: 0px 80px;
+  height: 36px;
+  margin: 15px auto;
+  padding: 0px 50px;
   display: flex;
   justify-content: center;
   align-items: center;
