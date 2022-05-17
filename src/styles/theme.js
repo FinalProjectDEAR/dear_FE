@@ -52,8 +52,8 @@ const size = {
 
 // 미디어 쿼리의 중복 코드를 줄이기위해 정의된 변수입니다
 const device = {
-  mobile: `@media only screen and (max-width: ${size.mobile})`,
-  desktopL: `@media only screen and (max-width: ${size.desktop})`,
+  mobile: `only screen and (max-width: ${size.mobile})`,
+  desktopL: `only screen and (max-width: ${size.desktop})`,
 };
 
 // 자주 사용하는 스타일 속성을 theme으로 만들어보자.

@@ -1,11 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import styled from "styled-components";
 
 import { useHistory } from "react-router-dom";
 
 //id값으로 스크롤
 import { Link } from "react-scroll";
+
+import styled from "styled-components";
+import { Text } from "../elements";
+
 //아이콘
 import { Badge } from "@material-ui/core";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
@@ -29,28 +32,36 @@ function FixedBtn(props) {
       <BtnWrap>
         <Link to="1" smooth={true}>
           <Up>
-            <ArrowUpwardIcon />
+            <ArrowUpwardIcon fontSize="medium" />
           </Up>
         </Link>
         <Desc>
+          <FontBox>
+            <Font>서비스소개</Font>
+          </FontBox>
           <InfoIcon />
-          <span>서비스소개</span>
         </Desc>
-        <Message
+        <Board
           onClick={() => {
             history.push("/postList");
           }}
         >
+          <FontBox>
+            <Font>익명상담소</Font>
+          </FontBox>
+
           <QuestionAnswerIcon />
-          <span>익명상담소</span>
-        </Message>
+        </Board>
         <Follow
           onClick={() => {
             history.push("/myPage");
           }}
         >
+          <FontBox>
+            <Font>마이페이지</Font>
+          </FontBox>
+
           <PersonIcon />
-          <span>마이페이지</span>
         </Follow>
         <Badge
           color="secondary"
@@ -59,8 +70,10 @@ function FixedBtn(props) {
           invisible={isRead}
         >
           <Noti onClick={notiCheck}>
+            <FontBox>
+              <Font>알림</Font>
+            </FontBox>
             <NotificationsIcon />
-            <span>알림</span>
           </Noti>
         </Badge>
       </BtnWrap>
@@ -80,15 +93,32 @@ const BtnWrap = styled.div`
   position: fixed;
 `;
 
+const FontBox = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100px;
+  height: 24px;
+`;
+
+const Font = styled.p`
+  align-items: center;
+  font-family: ${({ theme }) => theme.fonts.family.base};
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  margin: auto 13px;
+  color: #fafafa;
+`;
+
 const Desc = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 0px;
   position: static;
-  width: 60px;
-  height: 60px;
+  width: 54px;
+  height: 54px;
   left: 0px;
   top: 0px;
   flex: none;
@@ -101,32 +131,34 @@ const Desc = styled.div`
   color: #61586a;
   cursor: pointer;
   overflow: hidden;
-  transition: 0.4s;
-  span {
+
+  ${FontBox} {
     display: none;
   }
   &: hover {
+    ${FontBox} {
+      display: block;
+      transition: 0.5s;
+    }
     background-color: #61586a;
+    justify-content: center;
     color: white;
     width: 160px;
-    border-radius: 30px;
-
-    span {
-      display: block;
-    }
+    border-radius: 26px;
+    box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
+    transition: 0.3s;
   }
 `;
 
-const Message = styled.div`
+const Board = styled.div`
   position: fixed;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 0px;
   position: static;
-  width: 60px;
-  height: 60px;
+  width: 54px;
+  height: 54px;
   left: 0px;
   top: 92px;
   flex: none;
@@ -139,30 +171,32 @@ const Message = styled.div`
   color: #61586a;
   cursor: pointer;
   transition: 0.4s;
-  span {
+  ${FontBox} {
     display: none;
   }
   &: hover {
+    ${FontBox} {
+      display: block;
+      transition: 0.5s;
+    }
     background-color: #61586a;
     color: white;
     width: 160px;
-    border-radius: 30px;
-    span {
-      display: block;
-    }
+    border-radius: 26px;
+    box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
+    transition: 0.3s;
   }
 `;
 
 const Follow = styled.div`
   position: fixed;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 0px;
   position: static;
-  width: 60px;
-  height: 60px;
+  width: 54px;
+  height: 54px;
   left: 0px;
   top: 184px;
   flex: none;
@@ -175,30 +209,32 @@ const Follow = styled.div`
   color: #61586a;
   cursor: pointer;
   transition: 0.4s;
-  span {
+  ${FontBox} {
     display: none;
   }
   &: hover {
+    ${FontBox} {
+      display: block;
+      transition: 0.5s;
+    }
     background-color: #61586a;
     color: white;
     width: 160px;
-    border-radius: 30px;
-    span {
-      display: block;
-    }
+    border-radius: 26px;
+    box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
+    transition: 0.3s;
   }
 `;
 
 const Noti = styled.div`
   position: fixed;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 0px;
   position: static;
-  width: 60px;
-  height: 60px;
+  width: 54px;
+  height: 54px;
   left: 0px;
   top: 276px;
   flex: none;
@@ -211,17 +247,20 @@ const Noti = styled.div`
   color: #61586a;
   cursor: pointer;
   transition: 0.4s;
-  span {
+  ${FontBox} {
     display: none;
   }
   &: hover {
+    ${FontBox} {
+      display: block;
+      transition: 0.5s;
+    }
     background-color: #61586a;
     color: white;
     width: 160px;
-    border-radius: 30px;
-    span {
-      display: block;
-    }
+    border-radius: 26px;
+    box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
+    transition: 0.3s;
   }
 `;
 const Up = styled.div`
@@ -232,8 +271,8 @@ const Up = styled.div`
   align-items: center;
   padding: 0px;
   position: static;
-  width: 60px;
-  height: 60px;
+  width: 54px;
+  height: 54px;
   left: 0px;
   top: 368px;
   flex: none;
