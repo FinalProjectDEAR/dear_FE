@@ -7,6 +7,7 @@ import { apis, api } from "../../shared/apis";
 // 액션
 const GET_POST = "GET_POST";
 const GET_DETAIL = "GET_DETAIL";
+const GET_CATEDETAIL = "ET_CATEDETAIL";
 const ADD_POST = "ADD_POST";
 const EDIT_POST = "EDIT_POST";
 const DELETE_POST = "DELETE_POST";
@@ -23,6 +24,9 @@ const initialState = {
 // 액션 생성 함수
 const getPost = createAction(GET_POST, (post) => ({ post }));
 const getDetail = createAction(GET_DETAIL, (detailPost) => ({ detailPost }));
+const getCateDetail = createAction(GET_CATEDETAIL, (detailPostCategory) => ({
+  detailPostCategory,
+}));
 const addPost = createAction(ADD_POST, (postList) => ({
   postList,
 }));
@@ -62,6 +66,24 @@ const getDetailDB = (postId) => {
         console.log("포스트 상세보기 get", res.data.data);
         dispatch(getDetail(res.data.data));
       });
+    } catch (err) {
+      console.log("포스트 상세보기", err);
+      window.alert("게시글 정보를 가져올 수 없습니다.");
+    }
+  };
+};
+
+// 게시판 카테고리별 상세페이지 서버에서 받아오기
+const getCateDetailDB = (postId, page, category) => {
+  console.log(postId, page, category);
+  return function (dispatch, getState, { history }) {
+    try {
+      api
+        .get(`anonypost/board/${postId}?page=${page}&category=${category}`, {})
+        .then((res) => {
+          console.log("포스트 카테고리 상세보기 get", res.data.data);
+          dispatch(getDetail(res.data.data));
+        });
     } catch (err) {
       console.log("포스트 상세보기", err);
       window.alert("게시글 정보를 가져올 수 없습니다.");
@@ -222,6 +244,8 @@ const actionCreators = {
   editPostDB,
   deletePostDB,
   likeDB,
+  getCateDetailDB,
+  getCateDetail,
 };
 
 export { actionCreators };

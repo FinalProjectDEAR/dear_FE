@@ -167,7 +167,58 @@ const PrimaryDefaultButton = styled.button`
   width: ${(props) => props.width};
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
   padding: ${(props) => props.padding};
-  background-color: ${(props) => props.bg};
+  background-color: ${({ theme }) => theme.colors.primary.default};
+  ${(props) => (props.img ? `background-image : ${props.img};` : "")}
+  border: 1px solid ${({ theme }) => theme.colors.primary.default};
+  border-radius: ${(props) => props.borderRadius};
+  line-height: ${(props) => props.lineHeight};
+  font-family: ${(props) => props.fontFamily};
+  font-style: ${(props) => props.fontStyle};
+  color: ${({ theme }) => theme.colors.grayScale["0"]};
+  font-size: ${(props) => props.size};
+  ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")}
+  box-sizing: border-box;
+  box-shadow: ${(props) => props.shadow};
+`;
+const PrimaryHoverButton = styled.button`
+  width: ${(props) => props.width};
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
+  padding: ${(props) => props.padding};
+  background-color: ${({ theme }) => theme.colors.primary["700"]};
+  ${(props) => (props.img ? `background-image : ${props.img};` : "")}
+  border: 1px solid ${({ theme }) => theme.colors.primary["700"]};
+  border-radius: ${(props) => props.borderRadius};
+  line-height: ${(props) => props.lineHeight};
+  font-family: ${(props) => props.fontFamily};
+  font-style: ${(props) => props.fontStyle};
+  color: ${({ theme }) => theme.colors.grayScale["0"]};
+  font-size: ${(props) => props.size};
+  ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")}
+  box-sizing: border-box;
+  box-shadow: ${(props) => props.shadow};
+`;
+const PrimaryDisabledButton = styled.button`
+  width: ${(props) => props.width};
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
+  padding: ${(props) => props.padding};
+  background-color: ${({ theme }) => theme.colors.grayScale["100"]};
+  ${(props) => (props.img ? `background-image : ${props.img};` : "")}
+  border: 1px solid  ${({ theme }) => theme.colors.grayScale["100"]};
+  border-radius: ${(props) => props.borderRadius};
+  line-height: ${(props) => props.lineHeight};
+  font-family: ${(props) => props.fontFamily};
+  font-style: ${(props) => props.fontStyle};
+  color: ${({ theme }) => theme.colors.grayScale["0"]};
+  font-size: ${(props) => props.size};
+  ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")}
+  box-sizing: border-box;
+  box-shadow: ${(props) => props.shadow};
+`;
+const SecondaryDefaultButton = styled.button`
+  width: ${(props) => props.width};
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
+  padding: ${(props) => props.padding};
+  background-color: ${({ theme }) => theme.colors.grayScale["0"]};
   ${(props) => (props.img ? `background-image : ${props.img};` : "")}
   border: 1px solid ${({ theme }) => theme.colors.primary.default};
   border-radius: ${(props) => props.borderRadius};
@@ -180,69 +231,18 @@ const PrimaryDefaultButton = styled.button`
   box-sizing: border-box;
   box-shadow: ${(props) => props.shadow};
 `;
-const PrimaryHoverButton = styled.button`
-  width: ${(props) => props.width};
-  ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
-  padding: ${(props) => props.padding};
-  background-color: ${(props) => props.bg};
-  ${(props) => (props.img ? `background-image : ${props.img};` : "")}
-  border: 1px solid ${({ theme }) => theme.colors.primary["700"]};
-  border-radius: ${(props) => props.borderRadius};
-  line-height: ${(props) => props.lineHeight};
-  font-family: ${(props) => props.fontFamily};
-  font-style: ${(props) => props.fontStyle};
-  color: ${({ theme }) => theme.colors.primary["700"]};
-  font-size: ${(props) => props.size};
-  ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")}
-  box-sizing: border-box;
-  box-shadow: ${(props) => props.shadow};
-`;
-const PrimaryDisabledButton = styled.button`
-  width: ${(props) => props.width};
-  ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
-  padding: ${(props) => props.padding};
-  background-color: ${(props) => props.bg};
-  ${(props) => (props.img ? `background-image : ${props.img};` : "")}
-  border: 1px solid  ${({ theme }) => theme.colors.grayScale["100"]};
-  border-radius: ${(props) => props.borderRadius};
-  line-height: ${(props) => props.lineHeight};
-  font-family: ${(props) => props.fontFamily};
-  font-style: ${(props) => props.fontStyle};
-  color: ${({ theme }) => theme.colors.grayScale["100"]};
-  font-size: ${(props) => props.size};
-  ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")}
-  box-sizing: border-box;
-  box-shadow: ${(props) => props.shadow};
-`;
-const SecondaryDefaultButton = styled.button`
-  width: ${(props) => props.width};
-  ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
-  padding: ${(props) => props.padding};
-  background-color: ${(props) => props.bg};
-  ${(props) => (props.img ? `background-image : ${props.img};` : "")}
-  border: 1px solid ${({ theme }) => theme.colors.primary.default}
-  border-radius: ${(props) => props.borderRadius};
-  line-height: ${(props) => props.lineHeight};
-  font-family: ${(props) => props.fontFamily};
-  font-style: ${(props) => props.fontStyle};
-  color: ${({ theme }) => theme.colors.primary.default}
-  font-size: ${(props) => props.size};
-  ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")}
-  box-sizing: border-box;
-  box-shadow: ${(props) => props.shadow};
-`;
 const SecondaryHoverButton = styled.button`
   width: ${(props) => props.width};
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
   padding: ${(props) => props.padding};
-  background-color: ${(props) => props.bg};
+  background-color: ${({ theme }) => theme.colors.primary["200"]};
   ${(props) => (props.img ? `background-image : ${props.img};` : "")}
-  border: 1px solid ${({ theme }) => theme.colors.primary["200"]}
+  border: 1px solid ${({ theme }) => theme.colors.primary.default};
   border-radius: ${(props) => props.borderRadius};
   line-height: ${(props) => props.lineHeight};
   font-family: ${(props) => props.fontFamily};
   font-style: ${(props) => props.fontStyle};
-  color: ${({ theme }) => theme.colors.primary["200"]}
+  color: ${({ theme }) => theme.colors.primary.default};
   font-size: ${(props) => props.size};
   ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")}
   box-sizing: border-box;
@@ -252,14 +252,14 @@ const SecondaryDisabledButton = styled.button`
   width: ${(props) => props.width};
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
   padding: ${(props) => props.padding};
-  background-color: ${(props) => props.bg};
+  background-color: ${({ theme }) => theme.colors.grayScale["50"]};
   ${(props) => (props.img ? `background-image : ${props.img};` : "")}
-  border: 1px solid ${({ theme }) => theme.colors.grayScale["50"]}
+  border: 1px solid ${({ theme }) => theme.colors.grayScale["50"]};
   border-radius: ${(props) => props.borderRadius};
   line-height: ${(props) => props.lineHeight};
   font-family: ${(props) => props.fontFamily};
   font-style: ${(props) => props.fontStyle};
-  color: ${({ theme }) => theme.colors.grayScale["50"]}
+  color: ${({ theme }) => theme.colors.grayScale["0"]};
   font-size: ${(props) => props.size};
   ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")}
   box-sizing: border-box;
@@ -270,89 +270,94 @@ const SmallButton = styled.button`
   height: 36px;
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
   padding: ${(props) => props.padding};
-  background-color: ${(props) => props.bg};
+  background-color: ${({ theme }) => theme.colors.primary.default};
   ${(props) => (props.img ? `background-image : ${props.img};` : "")}
-  border: 1px solid ${({ theme }) => theme.colors.primary.default}
+  border: 1px solid ${({ theme }) => theme.colors.primary.default};
   border-radius: ${(props) => props.borderRadius};
   line-height: ${(props) => props.lineHeight};
   font-family: ${(props) => props.fontFamily};
   font-style: ${(props) => props.fontStyle};
-  color: ${({ theme }) => theme.colors.primary.default}
+  color: ${({ theme }) => theme.colors.grayScale["0"]};
   font-size: ${(props) => props.size};
   ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")}
   box-sizing: border-box;
   box-shadow: ${(props) => props.shadow};
+  padding: 0px;
 `;
 const Small2Button = styled.button`
   width: 110px;
   height: 40px;
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
   padding: ${(props) => props.padding};
-  background-color: ${(props) => props.bg};
+  background-color: ${({ theme }) => theme.colors.primary.default};
   ${(props) => (props.img ? `background-image : ${props.img};` : "")}
-  border: 1px solid ${({ theme }) => theme.colors.primary.default}
+  border: 1px solid ${({ theme }) => theme.colors.primary.default};
   border-radius: ${(props) => props.borderRadius};
   line-height: ${(props) => props.lineHeight};
   font-family: ${(props) => props.fontFamily};
   font-style: ${(props) => props.fontStyle};
-  color: ${({ theme }) => theme.colors.primary.default}
+  color: ${({ theme }) => theme.colors.grayScale["0"]};
   font-size: ${(props) => props.size};
   ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")}
   box-sizing: border-box;
   box-shadow: ${(props) => props.shadow};
+  padding: 0px;
 `;
 const NarrowButton = styled.button`
   width: 140px;
   height: 36px;
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
   padding: ${(props) => props.padding};
-  background-color: ${(props) => props.bg};
+  background-color: ${({ theme }) => theme.colors.primary.default};
   ${(props) => (props.img ? `background-image : ${props.img};` : "")}
-  border: 1px solid ${({ theme }) => theme.colors.primary.default}
+  border: 1px solid ${({ theme }) => theme.colors.primary.default};
   border-radius: ${(props) => props.borderRadius};
   line-height: ${(props) => props.lineHeight};
   font-family: ${(props) => props.fontFamily};
   font-style: ${(props) => props.fontStyle};
-  color: ${({ theme }) => theme.colors.primary.default}
+  color: ${({ theme }) => theme.colors.grayScale["0"]};
   font-size: ${(props) => props.size};
   ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")}
   box-sizing: border-box;
   box-shadow: ${(props) => props.shadow};
+  padding: 0px;
 `;
 const RegularButton = styled.button`
   width: 160px;
   height: 36px;
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
   padding: ${(props) => props.padding};
-  background-color: ${(props) => props.bg};
+  background-color: ${({ theme }) => theme.colors.primary.default};
   ${(props) => (props.img ? `background-image : ${props.img};` : "")}
-  border: 1px solid ${({ theme }) => theme.colors.primary.default}
+  border: 1px solid ${({ theme }) => theme.colors.primary.default};
   border-radius: ${(props) => props.borderRadius};
   line-height: ${(props) => props.lineHeight};
   font-family: ${(props) => props.fontFamily};
   font-style: ${(props) => props.fontStyle};
-  color: ${({ theme }) => theme.colors.primary.default}
+  color: ${({ theme }) => theme.colors.grayScale["0"]};
   font-size: ${(props) => props.size};
   ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")}
   box-sizing: border-box;
   box-shadow: ${(props) => props.shadow};
+  padding: 0px;
 `;
 const WideButton = styled.button`
   width: 300px;
   height: 40px;
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
   padding: ${(props) => props.padding};
-  background-color: ${(props) => props.bg};
+  background-color: ${({ theme }) => theme.colors.primary.default};
   ${(props) => (props.img ? `background-image : ${props.img};` : "")}
-  border: 1px solid ${({ theme }) => theme.colors.primary.default}
+  border: 1px solid ${({ theme }) => theme.colors.primary.default};
   border-radius: ${(props) => props.borderRadius};
   line-height: ${(props) => props.lineHeight};
   font-family: ${(props) => props.fontFamily};
   font-style: ${(props) => props.fontStyle};
-  color: ${({ theme }) => theme.colors.primary.default}
+  color: ${({ theme }) => theme.colors.grayScale["0"]};
   font-size: ${(props) => props.size};
   ${(props) => (props.cursor ? `cursor: ${props.cursor};` : "")}
   box-sizing: border-box;
   box-shadow: ${(props) => props.shadow};
+  padding: 0px;
 `;
 export default Button;
