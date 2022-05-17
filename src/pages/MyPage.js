@@ -1,11 +1,22 @@
 import React from "react";
 import { Text } from "../elements";
 import styled from "styled-components";
-
-import Message from "./Message";
+//페이지관련
+import MessageList from "./MessageList";
 import CounselHistory from "./CounselHistory";
+//리덕스관련
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators } from "../redux/modules/message";
 
 const MyPage = () => {
+  const dispatch = useDispatch();
+  const page = 1;
+  //메세지조회
+  React.useEffect(() => {
+    dispatch(actionCreators.getMessageDB(page));
+  }, []);
+  const msgList = useSelector((state) => state.message.message);
+
   return (
     <React.Fragment>
       <MyPageWrapper></MyPageWrapper>
@@ -13,9 +24,11 @@ const MyPage = () => {
         <Text>내가 받은 쪽지</Text>
         <Text>쪽지는 최대 30일까지 보관돼요.</Text>
         <MsgContainer>
-          <Message />
-          <Message />
-          <Message />
+          {msgList &&
+            msgList.map((item, idx) => {
+              // PostDetail 페이지에 item값을 props로 넘겨준다.
+              return <MessageList key={idx} item={item} />;
+            })}
         </MsgContainer>
       </MsgWrapper>
       <CounselWrapper>

@@ -75,7 +75,11 @@ function App() {
             <Route path="/loading" exact component={Loading} />
             <Route path="/ChatClose" exact component={ChatClose} />
             <Route path="/sendMsg" exact component={SendMsg} />
-            <Route path="/receivedMsg" exact component={ReceivedMsg} />
+            <Route
+              path="/receivedMsg/:messageId"
+              exact
+              component={ReceivedMsg}
+            />
             <Route path="/myPage" exact component={MyPage} />
             <Section />
           </Wrapper>

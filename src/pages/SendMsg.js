@@ -7,11 +7,12 @@ import { useDispatch } from "react-redux";
 import { actionCreators } from "../redux/modules/message";
 
 function SendMsg() {
+  const dispatch = useDispatch();
   //모달
   const [modalOpen, setModalOpen] = React.useState(true);
   const closeModal = () => {
     setModalOpen(false);
-    history.push("/");
+    history.push("/myPage");
   };
   const [textLength, setTextLength] = React.useState(0);
   const [msg, setMsg] = React.useState();
@@ -24,12 +25,13 @@ function SendMsg() {
     }
     setTextLength(wordLength);
   };
+  const resUser = "마포대교";
   const send = () => {
     if (msg === "") {
       window.alert("쪽지를 작성해주세요!");
       return;
     }
-    actionCreators.addMessageDB({ msg });
+    dispatch(actionCreators.addMessageDB(msg, resUser));
   };
   return (
     <>
@@ -39,8 +41,7 @@ function SendMsg() {
             <MsgWrapper>
               <TitleWrapper>
                 <TextB sub>
-                  <NickNameSpan>닉네임은최대10자</NickNameSpan> 님에게 쪽지
-                  보내기
+                  <NickNameSpan>{resUser}</NickNameSpan> 님에게 쪽지 보내기
                 </TextB>
               </TitleWrapper>
               <MsgBox>
@@ -56,7 +57,6 @@ function SendMsg() {
                   rows={20}
                   margin="0px"
                 />
-
                 <Text
                   sub4
                   textAlign="right"
@@ -68,14 +68,8 @@ function SendMsg() {
                   {textLength}/ 500자
                 </Text>
               </MsgBox>
-              <Button
-                bg="#7a37be"
-                width="160px"
-                height="36px"
-                border="#7a37be"
-                text="쪽지보내기"
-                _onClick={send}
-              />
+
+              <Button regular text="쪽지보내기" _onClick={send} />
             </MsgWrapper>
           </React.Fragment>
         </Modal>

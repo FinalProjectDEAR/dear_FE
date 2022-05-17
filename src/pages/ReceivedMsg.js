@@ -5,18 +5,26 @@ import styled from "styled-components";
 //시간알려주는패키지
 import TimeCounting from "time-counting";
 //리덕스관련
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { actionCreators } from "../redux/modules/message";
+import { useParams } from "react-router-dom";
 
 const ReceivedMsg = () => {
+  const params = useParams();
+  const dispatch = useDispatch();
   //모달
   const [modalOpen, setModalOpen] = React.useState(true);
   const closeModal = () => {
     setModalOpen(false);
-    history.push("/");
+    history.push("/myPage");
   };
+  //메세지조회
+  React.useEffect(() => {
+    dispatch(actionCreators.getDetailMsgDB(params.messageId));
+  }, []);
   //메세지 가져오가
-  const message = useSelector((state) => state.message);
+  const msgList = useSelector((state) => state.message.messages);
+  // console.log(msgList);
   //시간을 알아보자!
   const option = {
     lang: "ko",
@@ -24,7 +32,7 @@ const ReceivedMsg = () => {
       justNow: 60,
     },
   };
-  // const createdAt = TimeCounting(createAt, option);
+  const createdAt = TimeCounting(msgList?.createdAt, option);
   return (
     <>
       {modalOpen && (
@@ -39,7 +47,7 @@ const ReceivedMsg = () => {
                   lineheight="20px"
                   color="#666666"
                 >
-                  <NickNameSpan>닉네임은최대10자</NickNameSpan> 님이 보낸 쪽지
+                  <NickNameSpan>{msgList?.reqUser}</NickNameSpan> 님이 보낸 쪽지
                 </TextB>
               </TitleWrapper>
               <MsgContainer>
@@ -52,7 +60,7 @@ const ReceivedMsg = () => {
                     lineheight="24px"
                     textAlign="left"
                   >
-                    쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용쪽지내용
+                    {msgList?.message}
                   </Text>
                 </MsgBox>
               </MsgContainer>
@@ -60,11 +68,11 @@ const ReceivedMsg = () => {
                 <UserBox>
                   <UserText>
                     <ColorBadge width="24px" height="24px" bg="#40D39C" />
-                    꿀꿀대지
+                    {msgList?.resUser}
                   </UserText>
                   <UserSpan>(1달 전 상담)</UserSpan>
                 </UserBox>
-                <UserTime>28분전</UserTime>
+                <UserTime>{createdAt}</UserTime>
               </UserContainer>
               <Button
                 regular
