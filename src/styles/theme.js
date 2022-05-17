@@ -4,7 +4,7 @@ import styled from "styled-components";
 const colors = {
   primary: {
     700: "#6422A7",
-    default: "#EEE7F5",
+    default: "#7A37BE",
     300: "#BB9ED8",
     200: "#E1D6ED",
     100: "#EEE7F5",
@@ -32,20 +32,6 @@ const colors = {
   },
 };
 
-const margins = {
-  sm: ".5rem",
-  base: "1rem",
-  lg: "2rem",
-  xl: "3rem",
-};
-
-const paddings = {
-  sm: ".5rem",
-  base: "1rem",
-  lg: "2rem",
-  xl: "3rem",
-};
-
 const fonts = {
   family: {
     base: `Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif`,
@@ -70,40 +56,6 @@ const device = {
   desktopL: `@media only screen and (max-width: ${size.desktop})`,
 };
 
-//테마에 따라 다른 값을 갖는 색상 값입니다
-const lightThemeColors = {
-  ...colors,
-  primary: "#333",
-  secondary: "#fff",
-  tertiary: "#808080",
-};
-
-const darkThemeColors = {
-  ...colors,
-  primary: "#fff",
-  secondary: "#333",
-  tertiary: "#d4d0c4",
-};
-
-// 테마와 관련없이 공통으로 사용되는 변수들입니다
-const defalutTheme = {
-  margins,
-  paddings,
-
-  device,
-};
-
-// 각 테마는 공통 변수와 함께, 각기 다른 색상 값들을 갖습니다.
-export const darkTheme = {
-  ...defalutTheme,
-  colors: darkThemeColors,
-};
-
-export const lightTheme = {
-  ...defalutTheme,
-  colors: lightThemeColors,
-};
-
 // 자주 사용하는 스타일 속성을 theme으로 만들어보자.
 const common = {
   flexCenter: `
@@ -124,18 +76,7 @@ const theme = {
   fonts,
   colors,
   common,
+  device,
 };
 
 export default theme;
-
-// element에 반영 예시..
-
-// const Title = styled.h1`
-// font-size: ${({ theme }) => theme.fontSizes.title};
-// color: ${({ theme }) => theme.colors.grey};
-// `;
-
-// const Subtitle = styled.h2`
-// font-size: ${({ theme }) => theme.fontSizes.subtitle};
-// color: ${({ theme }) => theme.colors.green};
-// `;

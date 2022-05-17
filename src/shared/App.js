@@ -42,6 +42,7 @@ import ChatClose from "../components/alert/ChatClose";
 import SendMsg from "../pages/SendMsg";
 import ReceivedMsg from "../pages/ReceivedMsg";
 import VoteDetail from "../pages/VoteDetail";
+import MyPage from "../pages/MyPage";
 
 function App() {
   return (
@@ -76,6 +77,7 @@ function App() {
             <Route path="/ChatClose" exact component={ChatClose} />
             <Route path="/sendMsg" exact component={SendMsg} />
             <Route path="/receivedMsg" exact component={ReceivedMsg} />
+            <Route path="/myPage" exact component={MyPage} />
             <Section />
           </Wrapper>
           <Section />

@@ -1,6 +1,6 @@
 import React from "react";
 import { history } from "../redux/configureStore";
-import { Text, Button, ColorBadge, TextB, Modal } from "../elements";
+import { Text, Button, ColorBadge, TextB, Modal, Tag } from "../elements";
 import styled from "styled-components";
 //시간알려주는패키지
 import TimeCounting from "time-counting";
@@ -66,13 +66,8 @@ const ReceivedMsg = () => {
                 </UserBox>
                 <UserTime>28분전</UserTime>
               </UserContainer>
-
               <Button
-                bg="#7a37be"
-                width="160px"
-                height="36px"
-                color="white"
-                // border="#7a37be"
+                regular
                 text="답장하기"
                 _onClick={() => {
                   history.push("/sendMsg");
