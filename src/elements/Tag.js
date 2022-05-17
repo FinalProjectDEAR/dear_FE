@@ -6,7 +6,8 @@ const Tag = (props) => {
   const {
     primary,
     sub,
-    counsel,
+    counselRes,
+    counselReq,
     small,
     regular,
     _style,
@@ -60,11 +61,18 @@ const Tag = (props) => {
       </Sub>
     );
   }
-  if (counsel) {
+  if (counselRes) {
     return (
-      <Counsel {...styles} style={_style}>
+      <CounselRes {...styles} style={_style}>
         {text ? text : children}
-      </Counsel>
+      </CounselRes>
+    );
+  }
+  if (counselReq) {
+    return (
+      <CounselReq {...styles} style={_style}>
+        {text ? text : children}
+      </CounselReq>
     );
   }
   if (small) {
@@ -94,7 +102,7 @@ Tag.defaultProps = {
   text: false,
   width: "100%",
   margin: false,
-  padding: "10px 0px",
+  padding: "0px 10px",
   bg: false,
   img: false,
   border: "none",
@@ -112,16 +120,16 @@ Tag.defaultProps = {
 const Primary = styled.div`
   width: 120px;
   height: 24px;
-  ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
   padding: ${(props) => props.padding};
-  background-color: ${(props) => props.bg};
-  ${(props) => (props.img ? `background-image : ${props.img};` : "")}
-  border: 1px solid ${(theme) => theme.primary.default};
+  background-color: ${({ theme }) => theme.colors.primary["100"]};
+  ${(props) => (props.img ? `background-image : ${props.img};` : "")};
+  border: 1px solid ${({ theme }) => theme.colors.primary.default};
   border-radius: ${(props) => props.borderRadius};
   line-height: ${(props) => props.lineHeight};
   font-family: ${(props) => props.fontFamily};
   font-style: ${(props) => props.fontStyle};
-  color: ${(theme) => theme.colors.primary["100"]};
+  color: ${({ theme }) => theme.colors.primary.default};
   font-size: ${(props) => props.size};
   box-sizing: border-box;
   ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
@@ -130,34 +138,52 @@ const Primary = styled.div`
 const Sub = styled.div`
   width: 120px;
   height: 24px;
-  ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
   padding: ${(props) => props.padding};
-  background-color: ${(props) => props.bg};
-  ${(props) => (props.img ? `background-image : ${props.img};` : "")}
-  border: 1px solid theme.colors.primary["100"]
+  background-color: ${({ theme }) => theme.colors.primary["100"]};
+  ${(props) => (props.img ? `background-image : ${props.img};` : "")};
+  border: 1px solid theme.colors.primary[ "100" ];
   border-radius: ${(props) => props.borderRadius};
   line-height: ${(props) => props.lineHeight};
   font-family: ${(props) => props.fontFamily};
   font-style: ${(props) => props.fontStyle};
-  color:  ${({ theme }) => theme.colors.primary["100"]}
+  color: ${({ theme }) => theme.colors.primary.default};
   font-size: ${(props) => props.size};
   box-sizing: border-box;
   ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
 `;
 
-const Counsel = styled.div`
+const CounselRes = styled.div`
   width: 70px;
   height: 24px;
-  ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
   padding: ${(props) => props.padding};
-  background-color: ${(props) => props.bg};
-  ${(props) => (props.img ? `background-image : ${props.img};` : "")}
-  border: 1px solid ${({ theme }) => theme.colors.primary}
+  background-color: ${({ theme }) => theme.colors.primary["100"]};
+  ${(props) => (props.img ? `background-image : ${props.img};` : "")};
+  border: 1px solid ${({ theme }) => theme.colors.primary["100"]};
   border-radius: ${(props) => props.borderRadius};
   line-height: ${(props) => props.lineHeight};
   font-family: ${(props) => props.fontFamily};
   font-style: ${(props) => props.fontStyle};
-  color: ${({ theme }) => theme.colors.primary}
+  color: ${({ theme }) => theme.colors.primary.default};
+  font-size: ${(props) => props.size};
+  box-sizing: border-box;
+  ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
+`;
+
+const CounselReq = styled.div`
+  width: 70px;
+  height: 24px;
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
+  padding: ${(props) => props.padding};
+  background-color: ${({ theme }) => theme.colors.primary.default};
+  ${(props) => (props.img ? `background-image : ${props.img};` : "")}
+  border: 1px solid ${({ theme }) => theme.colors.primary.default};
+  border-radius: ${(props) => props.borderRadius};
+  line-height: ${(props) => props.lineHeight};
+  font-family: ${(props) => props.fontFamily};
+  font-style: ${(props) => props.fontStyle};
+  color: ${({ theme }) => theme.colors.grayScale["0"]};
   font-size: ${(props) => props.size};
   box-sizing: border-box;
   ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
@@ -166,16 +192,16 @@ const Counsel = styled.div`
 const Small = styled.div`
   width: 40px;
   height: 26px;
-  ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
   padding: ${(props) => props.padding};
-  background-color: ${(props) => props.bg};
-  ${(props) => (props.img ? `background-image : ${props.img};` : "")}
-  border: 1px solid ${({ theme }) => theme.colors.grayScale["30"]}
+  background-color: ${({ theme }) => theme.colors.grayScale["30"]};
+  ${(props) => (props.img ? `background-image : ${props.img};` : "")};
+  border: 1px solid ${({ theme }) => theme.colors.grayScale["30"]};
   border-radius: ${(props) => props.borderRadius};
   line-height: ${(props) => props.lineHeight};
   font-family: ${(props) => props.fontFamily};
   font-style: ${(props) => props.fontStyle};
-  color: ${({ theme }) => theme.colors.grayScale["30"]}
+  color: ${({ theme }) => theme.colors.grayScale["700"]};
   font-size: ${(props) => props.size};
   box-sizing: border-box;
   ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
@@ -186,14 +212,14 @@ const Regular = styled.div`
   height: 26px;
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
   padding: ${(props) => props.padding};
-  background-color: ${(props) => props.bg};
+  background-color: ${({ theme }) => theme.colors.grayScale["30"]};
   ${(props) => (props.img ? `background-image : ${props.img};` : "")}
-  border: 1px solid ${({ theme }) => theme.colors.grayScale["30"]}
+  border: 1px solid ${({ theme }) => theme.colors.grayScale["30"]};
   border-radius: ${(props) => props.borderRadius};
   line-height: ${(props) => props.lineHeight};
   font-family: ${(props) => props.fontFamily};
   font-style: ${(props) => props.fontStyle};
-  color: ${({ theme }) => theme.colors.grayScale["30"]}
+  color: ${({ theme }) => theme.colors.grayScale["700"]};
   font-size: ${(props) => props.size};
   box-sizing: border-box;
   ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};

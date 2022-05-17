@@ -4,7 +4,7 @@ import styled from "styled-components";
 const colors = {
   primary: {
     700: "#6422A7",
-    default: "#EEE7F5",
+    default: "#7A37BE",
     300: "#BB9ED8",
     200: "#E1D6ED",
     100: "#EEE7F5",
