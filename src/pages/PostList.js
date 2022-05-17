@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Text } from "../elements";
+import { Button, Text, TextB } from "../elements";
 import styled from "styled-components";
 import { ReactComponent as All } from "../assets/board-cate1.svg";
 import { ReactComponent as Vote } from "../assets/board-cate2.svg";
@@ -25,41 +25,26 @@ function PostList(props) {
   React.useEffect(() => {
     dispatch(actionCreators.getPostDB());
   }, []);
-  const _postList = useSelector((state) => state.post.post);
+  const postList = useSelector((state) => state.post.post);
 
   return (
     <React.Fragment>
       <InfoWrapper id="1">
-        <Text color="#2E2A32" weight="700" textAlign="left">
-          디어상담소
-        </Text>
-        <Text
-          batang
-          color="#61586A"
-          size="16px"
-          lineheight="30px"
-          textAlign="left"
-        >
-          간단한 연애 질문부터 채팅으로 말하지 못한 긴 고민까지,
-        </Text>
-        <Text
-          batang
-          color="#61586A"
-          size="16px"
-          lineheight="30px"
-          textAlign="left"
-        >
-          언제든 고민을 남기면 리스너들이 답장을 남깁니다.
-        </Text>
-        <Text
-          batang
-          color="#61586A"
-          size="16px"
-          lineheight="30px"
-          textAlign="left"
-        >
-          못다한 이야기를 디어상담소에 남겨보세요!
-        </Text>
+        <InfoContainer>
+          <Text title textAlign="left">
+            디어상담소
+          </Text>
+          <TextB color="#61586A" size="16px" lineheight="30px" textAlign="left">
+            간단한 연애 질문부터 채팅으로 말하지 못한 긴 고민까지,
+          </TextB>
+          <TextB color="#61586A" size="16px" lineheight="30px" textAlign="left">
+            언제든 고민을 남기면 리스너들이 답장을 남깁니다.
+          </TextB>
+          <TextB color="#61586A" size="16px" lineheight="30px" textAlign="left">
+            못다한 이야기를 디어상담소에 남겨보세요!
+          </TextB>
+        </InfoContainer>
+        <InfoBox></InfoBox>
       </InfoWrapper>
       <VoteWrapper>
         <Text color="#2E2A32" weight="700">
@@ -146,8 +131,8 @@ function PostList(props) {
             <InfoItem style={{ marginLeft: "100px" }}>제목</InfoItem>
             <InfoItem style={{ marginRight: "110px" }}>작성일</InfoItem>
           </TableInfo>
-          {_postList &&
-            _postList.map((item, idx) => {
+          {postList &&
+            postList.map((item, idx) => {
               // PostDetail 페이지에 item값을 props로 넘겨준다.
               return <Post key={idx} item={item} />;
             })}
@@ -170,9 +155,21 @@ function PostList(props) {
 }
 
 const InfoWrapper = styled.div`
-  margin: 185px 851px 155px 204px;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  width: 1032px;
+  height: 150px;
+  border: 1px solid red;
+`;
+const InfoContainer = styled.div`
   width: 385px;
   height: 150px;
+  border: 1px solid red;
+`;
+const InfoBox = styled.div`
+  width: 592px;
+  height: 200px;
   border: 1px solid red;
 `;
 const VoteWrapper = styled.div`
