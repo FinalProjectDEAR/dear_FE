@@ -1,7 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
+import { history } from "../redux/configureStore";
 
+import styled from "styled-components";
+import theme from "../styles/theme";
 import { Text, Button, Input, ColorBadge } from "../elements";
 import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
 import image01 from "../assets/image01.png";
@@ -11,31 +13,61 @@ function VoteCard(props) {
   const totalCount =
     props.vote[0].selectionList.length + props.vote[1].selectionList.length;
 
+  const leftScore = props.vote[0].selectionList.length;
+  const rightScore = props.vote[1].selectionList.length;
+
   return (
     <React.Fragment>
-      <CardWrapper>
-        <LineBox>
-          <Text wordBreak weigh="500" size="16px" color="#999999">
-            {props.title}
-          </Text>
-        </LineBox>
-        <LineBox>
-          <VoteTitle> {props.vote[0].imageTitle}</VoteTitle>
-          <ProgressBar>
-            <Highlight
-              width={
-                // (props.vote[0].selectionList.length / totalCount) * 100 + "%"
-                (60 / 165) * 100 + "%"
-              }
-            />
-          </ProgressBar>
-          <VoteTitle> {props.vote[1].imageTitle}</VoteTitle>
-        </LineBox>
+      <CardWrapper
+        onClick={() => {
+          history.push(`/voteDetail/${props.postId}`);
+        }}
+      >
+        <Font>
+          <Question>Q. </Question>
+          {props.title}
+        </Font>
+        <VoteContainer>
+          <LineBox>
+            <VoteLine>
+              <VoteTitle color={props.leftSelected ? "#7A37BE" : "#61586A"}>
+                {/* {props.vote[0].imageTitle} */}
+                친구가애인새우우우우
+              </VoteTitle>
+            </VoteLine>
+            <ProgressBar>
+              <Highlight
+                width={
+                  // (props.vote[0].selectionList.length / totalCount) * 100 + "%"
+                  (60 / 165) * 100 + "%"
+                }
+                color={leftScore >= rightScore ? "#7A37BE" : "#BB9ED8"}
+              />
+            </ProgressBar>
+          </LineBox>
+          <LineBox>
+            <VoteLine>
+              <VoteTitle color={props.rightSelected ? "#7A37BE" : "#61586A"}>
+                {/* {props.vote[1].imageTitle} */}
+                강원도
+              </VoteTitle>
+            </VoteLine>
+            <ProgressBar>
+              <Highlight
+                width={
+                  // (props.vote[0].selectionList.length / totalCount) * 100 + "%"
+                  (105 / 165) * 100 + "%"
+                }
+                color={rightScore >= leftScore ? "#7A37BE" : "#BB9ED8"}
+              />
+            </ProgressBar>
+          </LineBox>
+        </VoteContainer>
         <LineBox>
           <PeopleRoundedIcon style={{ width: "16.5px", color: "#999999" }} />
-          <Text color="#61586A" weight="300" size="12px" margin="0px 5px">
+          <Text sub5 margin="0px 5px">
             {/* {totalCount}명 참여중 */}
-            165명 참여중
+            165
           </Text>
         </LineBox>
       </CardWrapper>
@@ -50,29 +82,28 @@ VoteCard.defaultProps = {
   vote: [
     {
       imageUrl: image01,
-      imageTitle: "양떼목장",
+      imageTitle: "친구가애인새우우우",
       selectionList: ["스파르타", "항해99"],
       selected: true,
     },
     {
       imageUrl: image02,
-      imageTitle: "바닷가",
+      imageTitle: "애인이친구새우",
       selectionList: ["스파르타", "항해99", "럭키세븐호"],
       selected: false,
     },
   ],
   createdAt: "22-05-01 10:00:00",
-  title: "다음주 데이트 어디로 갈지 고민이에요. 골라주세요!",
+  title: "누가 누구의 새우를 까줄때..!",
   contents: "생일선물 뭐고를지 모르겠어요 투표 부탁드려요!",
 };
 
 const CardWrapper = styled.div`
-  width: 588px;
-  height: 180px;
+  width: 328px;
+  height: 158px;
   margin: 12px;
-  padding: 10px 30px;
+  padding: 30px 40px;
   box-sizing: border-box;
-  display: block;
 
   background: #fafafa;
   border-radius: 10px;
@@ -81,11 +112,30 @@ const CardWrapper = styled.div`
 `;
 
 const LineBox = styled.div`
-  margin: 5px 0px;
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
+  padding: 4px 0px;
+`;
+
+const Question = styled.span`
+  font-family: ${({ theme }) => theme.fonts.family.batang};
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 0px;
+  color: #7a37be;
+`;
+
+const Font = styled.p`
+  font-family: ${({ theme }) => theme.fonts.family.batang};
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  margin: 0px;
+  margin-bottom: 10px;
+  word-break: keep-all;
+  color: #333333;
 `;
 
 const BottomBox = styled.div`
@@ -96,34 +146,41 @@ const BottomBox = styled.div`
   align-items: center;
 `;
 
-const VoteTitle = styled.div`
-  width: 120px;
-  height: 47px;
+const VoteContainer = styled.div`
   display: flex;
-  box-sizing: border-box;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 14px;
-  background: #7a37be;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 300;
-  border-radius: 25px;
+  flex-direction: column;
+  width: 248px;
+  padding: 10px 0px 4px;
+`;
+
+const VoteLine = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const VoteTitle = styled.div`
+  font-family: ${({ theme }) => theme.fonts.family.base};
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 14px;
+  margin-right: 10px;
+  text-align: left;
+  color: #333333;
 `;
 
 const ProgressBar = styled.div`
   display: flex;
   align-items: center;
-  background-color: #bb9ed8;
-  width: 80%;
-  height: 10px;
-  margin: 25px auto;
+  background-color: #fafafa;
+  width: 100%;
+  height: 14px;
 `;
 
 const Highlight = styled.div`
-  background-color: #eee7f5;
+  background-color: ${(props) => props.color};
   transition: 1s;
   width: ${(props) => props.width};
-  height: 10px;
+  height: 14px;
 `;

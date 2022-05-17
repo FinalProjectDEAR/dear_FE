@@ -30,7 +30,6 @@ import PostEdit from "../pages/PostEdit";
 import FixedBtn from "../components/FixedBtn";
 import VoteWrite from "../pages/VoteWrite";
 import ImageVote from "../components/ImageVote";
-import LetterVote from "../components/LetterVote";
 import VoteList from "../components/VoteList";
 import ReqChatStart from "../pages/ReqChatStart";
 import ResChatStart from "../pages/ResChatStart";
@@ -65,8 +64,8 @@ function App() {
             <Route path="/reqReview" exact component={ReqReview} />
             <Route path="/postEdit/:postId" exact component={PostEdit} />
             <Route path="/VoteDetail/:postId" exact component={VoteDetail} />
-            <Route path="/ImageVote" exact component={ImageVote} />
-            <Route path="/voteList" component={VoteList} />
+            <Route path="/voteList" exact component={VoteList} />
+            <Route path="/voteWrite" exact component={VoteWrite} />
             <Route path="/startReq" exact component={ReqChatStart} />
             <Route path="/startRes" exact component={ResChatStart} />
             <Route path="/historyCard" exact component={HistoryCard} />

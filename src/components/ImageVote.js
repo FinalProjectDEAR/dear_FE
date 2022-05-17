@@ -1,5 +1,5 @@
 import React from "react";
-import { div, Input, Text, Button } from "../elements";
+import { Input, Text, Button } from "../elements";
 import { useSelector, useDispatch } from "react-redux";
 
 import { history } from "../redux/configureStore";
@@ -66,59 +66,42 @@ function ImageVote() {
       {!showResult ? (
         <VoteWrapper>
           <CheckBox>
-            <Button
+            <Vote
               bg={leftSelected ? "#EEE7F5" : "transparent"}
-              border={leftSelected ? "1px solid #7A37BE" : "1px solid #61586A;"}
-              padding="30px"
-              margin="10px 0px"
-              cursor="pointer"
-              shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
-              _onClick={selectLeft}
+              border={leftSelected ? "1px solid #7A37BE" : "1px solid #61586A"}
+              onClick={selectLeft}
             >
-              <Text
-                color={leftSelected ? "#7A37BE" : "#61586A"}
-                margin="0px"
-                weight="500"
-                size="16px"
-                cursor="pointer"
-              >
+              <Font color={leftSelected ? "#7A37BE" : "#61586A"}>
                 {voteInfo.vote[0].imageTitle}
-              </Text>
+              </Font>
               <img
                 style={{ width: "300px", height: "300px", marginTop: "15px" }}
                 src={voteInfo.vote[0].imageUrl}
                 alt="선택지 1"
               />
-            </Button>
-            <Text weight="500" size="18px" margin="17px 24px">
+            </Vote>
+            <Text body2 margin="17px 24px">
               VS
             </Text>
-            <Button
+            <Vote
               bg={rightSelected ? "#EEE7F5" : "transparent"}
               border={
                 rightSelected ? "1px solid #7A37BE" : "1px solid #61586A;"
               }
-              padding="30px"
-              margin="10px 0px"
-              cursor="pointer"
-              shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
-              _onClick={selectRight}
+              onClick={selectRight}
             >
-              <Text
+              <Font
                 color={rightSelected ? "#7A37BE" : "#61586A"}
-                margin="0px"
-                weight="500"
-                size="16px"
                 cursor="pointer"
               >
                 {voteInfo.vote[1].imageTitle}
-              </Text>
+              </Font>
               <img
                 style={{ width: "300px", height: "300px", marginTop: "15px" }}
                 src={voteInfo.vote[1].imageUrl}
                 alt="선택지 2"
               />
-            </Button>
+            </Vote>
           </CheckBox>
           <BottomBox>
             <Button
@@ -127,14 +110,18 @@ function ImageVote() {
               cursor="pointer"
               _onClick={submitVote}
             >
-              <Text margin="0px" weight="500" size="16px" color="#fff">
+              <Font margin="0px" weight="500" size="16px" color="#fff">
                 투표하기
-              </Text>
+              </Font>
             </Button>
           </BottomBox>
         </VoteWrapper>
       ) : (
-        <VoteResult voteInfo={voteInfo} />
+        <VoteResult
+          voteInfo={voteInfo}
+          leftSelected={leftSelected}
+          rightSelected={rightSelected}
+        />
       )}
     </React.Fragment>
   );
@@ -195,6 +182,32 @@ const CheckBox = styled.div`
   margin: 30px;
   width: 792px;
   height: 400px;
+`;
+
+const Vote = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  gap: 15px;
+  margin: 10px 0px;
+  cursor: pointer;
+  box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
+  background-color: ${(props) => props.bg};
+  border: ${(props) => props.border};
+  border-radius: 20px;
+  box-sizing: border-box;
+  width: 360px;
+  height: 399px;
+`;
+
+const Font = styled.p`
+  color: ${(props) => props.color};
+  margin: 0px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  cursor: pointer;
 `;
 
 const BottomBox = styled.div`

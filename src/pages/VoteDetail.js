@@ -1,11 +1,15 @@
 import React from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { ReactComponent as ThumbUp } from "../assets/post-select.svg";
+
 import styled from "styled-components";
-import { Text, Button } from "../elements/index";
+import { Text, TextB, Modal } from "../elements/index";
+import vote from "../assets/vote/vote.png";
+
 //페이지 관련
 import ImageVote from "../components/ImageVote";
 import LetterVote from "../components/LetterVote";
+import VoteDel from "../components/alert/VoteDel";
 
 // 리덕스 관련
 import { useDispatch, useSelector } from "react-redux";
@@ -18,75 +22,75 @@ function VoteDetail(props) {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  //공감해요 버튼
-  const [like, setLike] = React.useState(false);
+  //모달
+  const [modalOpen, setModalOpen] = React.useState(false);
 
-  //포스트 상세 조회,댓글리스트가져오기
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   React.useEffect(() => {
     dispatch(voteActions.detailVoteDB(postId));
   }, []);
 
-  //상세페이지 가져오기
   const voteInfo = useSelector((state) => state.vote.voteInfo);
   console.log(voteInfo);
 
   const loginUser = localStorage.getItem("memberId");
-  // console.log(memberId, loginUser);
 
   const delVote = () => {
     dispatch(voteActions.delVoteDB(postId));
   };
-  const onRemove = () => {
-    if (window.confirm("정말 삭제합니까?")) {
-      delVote();
-    } else {
-      alert("취소합니다.");
-    }
-  };
 
   return (
     <React.Fragment>
-      <BtnContainer>
-        <Button
-          text="목록"
-          bg="#948A9E"
-          color="white"
-          width="140px"
-          _onClick={() => {
-            history.push("/postList");
-          }}
-          cursor="pointer"
-        />
-        {voteInfo?.memberId === loginUser ? (
-          <div>
-            <Button
-              text="삭제하기"
-              bg="#61586A"
-              color="white"
-              width="140px"
-              _onClick={onRemove}
-              cursor="pointer"
-            />
-          </div>
-        ) : null}
-      </BtnContainer>
+      <BtnContainer></BtnContainer>
       <DetailWrapper>
         <CategoryBox>
           <Title>주제</Title>
-          <TitleContent>{voteInfo?.title}</TitleContent>
+          <TitleContent>
+            <TextB subTitle>
+              {voteInfo?.title}
+              <img
+                src={vote}
+                alt={vote}
+                style={{
+                  width: "18px",
+                  margin: "auto 10px",
+                  alignItems: "center",
+                }}
+              />
+            </TextB>
+          </TitleContent>
+          <TimeBox>
+            <Text sub7>{voteInfo.createdAt}</Text>
+          </TimeBox>
         </CategoryBox>
+        {voteInfo?.memberId === loginUser ? (
+          <LineBox>
+            <DelText
+              onClick={() => {
+                setModalOpen(true);
+              }}
+            ></DelText>
+          </LineBox>
+        ) : null}
 
-        <ContentBox>{voteInfo?.contents}</ContentBox>
+        {modalOpen && (
+          <Modal closeModal={closeModal}>
+            <VoteDel closeModal={closeModal} postId={postId} />
+          </Modal>
+        )}
+
+        <ContentBox>
+          <Text body3>{voteInfo?.contents}</Text>
+        </ContentBox>
         {voteInfo.vote[0].imageUrl ? <ImageVote /> : <LetterVote />}
       </DetailWrapper>
     </React.Fragment>
   );
 }
-const CommentWrapper = styled.div`
-  /* border: 1px solid red; */
-  margin: 200px auto 0px auto;
-  width: 1032px;
-`;
+
 const BtnContainer = styled.div`
   display: flex;
   width: 1032px;
@@ -104,24 +108,13 @@ const DetailWrapper = styled.div`
 const CategoryBox = styled.div`
   box-sizing: border-box;
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
   padding: 0px;
   width: 1032px;
   height: 45px;
   border-top: 1px solid #666666;
   border-bottom: 1px solid #cccccc;
 `;
-const TitleBox = styled.div`
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 0px;
-  width: 1032px;
-  height: 45px;
-  border-bottom: 1px solid #666666;
-`;
+
 const Title = styled.div`
   display: flex;
   flex-direction: row;
@@ -134,19 +127,36 @@ const Title = styled.div`
   order: 0;
   flex-grow: 0;
 `;
+
 const TitleContent = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: center;
+  box-sizing: border-box;
   padding: 0px 0px 0px 40px;
   gap: 10px;
   width: 782px;
   height: 45px;
-  flex: none;
-  order: 1;
-  flex-grow: 0;
-  font-family: "KoPub Batang";
 `;
+
+const LineBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 0px;
+  width: 1032px;
+  height: 45px;
+`;
+
+const DelText = styled.p`
+  font-family: "Pretendard";
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 14px;
+  margin: 12.5px 49.5px;
+  color: #666666;
+`;
+
 const ContentBox = styled.div`
   display: flex;
   flex-direction: row;
@@ -156,6 +166,18 @@ const ContentBox = styled.div`
   gap: 10px;
   width: 1032px;
   height: 108px;
+`;
+
+const TimeBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 2px;
+
+  width: 120px;
+  height: 45px;
 `;
 const IsLike = styled.div`
   display: flex;
