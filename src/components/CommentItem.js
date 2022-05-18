@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { Text, Button, Input, Modal } from "../elements";
+import { Text, Input, Modal } from "../elements";
 import { ReactComponent as Like } from "../assets/comment-select.svg";
-import { ReactComponent as Cancel } from "../assets/Vector (2).svg";
 import styled from "styled-components";
 //시간알려주는패키지
 import TimeCounting from "time-counting";
-
+//페이지
 import CommentRemove from "../components/alert/CommentRemove";
-
+//리덕스
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators } from "../redux/modules/comment";
-import { padding } from "@mui/system";
 
 const CommentItem = (props) => {
   const dispatch = useDispatch();
-  console.log(props);
+  React.useEffect(() => {
+    dispatch(actionCreators.pages(props.totalPages));
+  }, []);
+  // const Page = useSelector((state) => state.comment.pages);
+  // console.log(Page);
   const commentList = useSelector((state) => state.comment.comments); //[]빈배열
   const comment_id = props.commentId;
   const comments = props.comment;
@@ -33,11 +35,13 @@ const CommentItem = (props) => {
   const commentLike = props.likes;
   //수정을 알 수 있는 방법
   const memberId = localStorage.getItem("memberId");
+  //수정하기
   const editComment = () => {
     dispatch(actionCreators.editCommentDB(comment_id, comment, postId));
-    //isEdit이 바뀌는거랑
+    //isEdit이 바뀌는거
     setIsEdit(false);
   };
+  //댓글 채택
   const likeComment = () => {
     dispatch(actionCreators.likeCommentDB(postId, comment_id));
     // setLike(!like);
@@ -67,16 +71,6 @@ const CommentItem = (props) => {
     }
     setTextLength(wordLength);
   };
-
-  // const deleteComment = () => {
-  //   if (memberId !== props.member) {
-  //     window.alert("본인이 작성한 댓글이 아닙니다.");
-  //     return;
-  //   }
-  //   if (!window.confirm("댓글을 삭제하시겠습니까??")) return;
-  //   dispatch(actionCreators.delCommentDB({ comment_id, postId }));
-  // };
-
   const editMode = () => {
     if (memberId !== props.member) {
       window.alert("본인이 작성한 댓글이 아닙니다.");
@@ -128,7 +122,6 @@ const CommentItem = (props) => {
               {comments}
             </Text>
           </CommentBox>
-
           <CommentBox>
             <Text color="#999999" size="12px" weight="300">
               {createdAt}
@@ -148,7 +141,6 @@ const CommentItem = (props) => {
               onClick={() => {
                 setModalOpen(true);
               }}
-              // onClick={deleteComment}
             >
               삭제
             </BtnBox>
@@ -165,7 +157,7 @@ const CommentItem = (props) => {
         </CommentContainer>
         {boardPostId ? (
           <LikeBtn commentLike={commentLike} onClick={likeComment}>
-            <Like style={{ borderRadius: "50%" }} />
+            <Like />
           </LikeBtn>
         ) : null}
       </CommentWrapper>
@@ -228,7 +220,7 @@ const LikeBtn = styled.button`
   flex: none;
   order: 1;
   flex-grow: 0;
-  border-radius: 4px;
+  border-radius: 50%;
 `;
 
 const IsEdit = styled.div`

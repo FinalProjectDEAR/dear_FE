@@ -17,7 +17,7 @@ const LIKE_POST = "HELP_POST";
 const initialState = {
   post: [],
   postList: [],
-  detail_post: [],
+  detailPost: [],
   postLike: [],
 };
 
@@ -44,10 +44,10 @@ const likePost = createAction(LIKE_POST, (postId, likes) => ({
 
 // 미들웨어
 //postList 서버에서 받아오기
-const getPostDB = () => {
+const getPostDB = (page) => {
   return function (dispatch, getState, { history }) {
     try {
-      apis.get().then((res) => {
+      api.get(`anonypost?page=${page}`, {}).then((res) => {
         // console.log("익명게시판리스트", res.data.data);
         dispatch(getPost(res.data.data));
       });
@@ -63,7 +63,7 @@ const getDetailDB = (postId) => {
   return function (dispatch, getState, { history }) {
     try {
       api.get(`anonypost/board/${postId}`, {}).then((res) => {
-        console.log("포스트 상세보기 get", res.data.data);
+        // console.log("포스트 상세보기 get", res.data.data);
         dispatch(getDetail(res.data.data));
       });
     } catch (err) {
@@ -74,15 +74,15 @@ const getDetailDB = (postId) => {
 };
 
 // 게시판 카테고리별 상세페이지 서버에서 받아오기
-const getCateDetailDB = (postId, page, category) => {
-  console.log(postId, page, category);
+const getCateDetailDB = (page, category) => {
+  console.log(page, category);
   return function (dispatch, getState, { history }) {
     try {
       api
-        .get(`anonypost/board/${postId}?page=${page}&category=${category}`, {})
+        .get(`/anonypost?page=${page}&category=${category}`, {})
         .then((res) => {
-          console.log("포스트 카테고리 상세보기 get", res.data.data);
-          dispatch(getDetail(res.data.data));
+          // console.log("포스트 카테고리 상세보기 get", res.data.data);
+          dispatch(getPost(res.data.data));
         });
     } catch (err) {
       console.log("포스트 상세보기", err);
@@ -123,7 +123,7 @@ const addPostDB = (payload) => {
 
 //수정하기 테스트 남음
 const editPostDB = (payload) => {
-  console.log("포스트 수정하기 payload", payload);
+  // console.log("포스트 수정하기 payload", payload);
   return async function (dispatch, getState, { history }) {
     try {
       const formData = new FormData();
@@ -171,13 +171,13 @@ const deletePostDB = (postId) => {
 
 // 공감 버튼
 const likeDB = (postId, likes) => {
-  console.log("공감 payload", postId, likes);
+  // console.log("공감 payload", postId, likes);
   return function (dispatch, getState, { history }) {
     try {
       api
         .post(`/anonypost/board/${postId}/postLikes?likes=${likes}`, {})
         .then((res) => {
-          console.log("공감", res.data.data.likes);
+          // console.log("공감", res.data);
           dispatch(likePost(postId, res.data.data.likes));
         });
     } catch (err) {
@@ -220,12 +220,7 @@ export default handleActions(
       produce(state, (draft) => {
         console.log("공감 받아온 값", action.payload);
         console.log("공감 state", state);
-        // draft.postLike.map((e, id) => {
-        // if (action.payload.postId == e.boardPostId) {
-
         draft.detailPost.likes = action.payload.likes;
-        // }
-        // });
       }),
   },
   initialState

@@ -9,6 +9,7 @@ const CommentWrite = (props) => {
   const dispatch = useDispatch();
   const [comment, setComment] = React.useState();
   const [textLength, setTextLength] = React.useState(0);
+
   //글자 수 제한
   const checkMaxLength = (e) => {
     let wordLength = e.target.value.length;
@@ -53,10 +54,7 @@ const CommentWrite = (props) => {
         </TextWrapper>
 
         <BtnWrapper>
-          {/* <Text textAlign="right" margin="0px 5px">
-            {textLength}/ 200자
-          </Text> */}
-          <Button bg="#7A37BE" width="200px" _onClick={addComment}>
+          <Button primaryDefault size="narrow" _onClick={addComment}>
             댓글쓰기
           </Button>
         </BtnWrapper>

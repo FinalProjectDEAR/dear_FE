@@ -8,11 +8,13 @@ const LOAD = "comment/LOAD";
 const DELETE = "comment/DELETE";
 const EDIT = "comment/EDIT";
 const LIKE = "comment/LIKE";
+const TOTAL = "comment/TOTAL";
 
 //초기값
 const initialState = {
   comment: [],
   comments: [],
+  pages: [],
   // is_edit: false,
   // likes: false,
 };
@@ -33,15 +35,16 @@ const likeComment = createAction(LIKE, (commentId, likes) => ({
   commentId,
   likes,
 }));
+const pages = createAction(TOTAL, (totalPages) => ({ totalPages }));
 
 //미듈웨어
 //서버에서 댓글 가져오기
-const getCommentDB = (postId) => {
+const getCommentDB = (postId, page) => {
   // console.log(postId);
   return function (dispatch, getState, { history }) {
     try {
-      api.get(`anonypost/${postId}/comment`, {}).then((res) => {
-        // console.log("댓글가져오기", res.data);
+      api.get(`anonypost/${postId}/comment/${page}`, {}).then((res) => {
+        console.log("댓글가져오기", res.data);
         dispatch(getComment(res.data));
       });
     } catch (err) {
@@ -59,7 +62,7 @@ const addCommentDB = (comment, postId) => {
       api
         .post(`anonypost/board/${postId}/comment`, comment.comment)
         .then((res) => {
-          // console.log("댓글 추가", res.data.data);
+          console.log("댓글 추가", res.data.data);
           dispatch(addComment(res.data.data));
         });
     } catch (err) {
@@ -160,6 +163,11 @@ export default handleActions(
           }
         });
       }),
+    [TOTAL]: (state, action) =>
+      produce(state, (draft) => {
+        // console.log("페이지 받아온 값", action.payload);
+        draft.pages = action.payload.totalPages;
+      }),
   },
   initialState
 );
@@ -173,6 +181,7 @@ const actionCreators = {
   editCommentDB,
   delCommentDB,
   likeCommentDB,
+  pages,
 };
 
 export { actionCreators };

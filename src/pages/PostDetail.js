@@ -1,12 +1,16 @@
 import React from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { ReactComponent as ThumbUp } from "../assets/post-select.svg";
+import { ReactComponent as ThumbUp } from "../assets/postList/posthumb.svg";
+import { ReactComponent as CommentNum } from "../assets/postList/post.svg";
 import styled from "styled-components";
 import { Text, Button, Modal } from "../elements/index";
+//시간알려주는패키지
+import TimeCounting from "time-counting";
 //페이지 관련
 import CommentList from "../components/CommentList";
 import CommentWrite from "../components/CommentWrite";
 import PostRemove from "../components/alert/PostRemove";
+import Pagination from "../elements/Pagination";
 // 리덕스 관련
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators } from "../redux/modules/post";
@@ -19,17 +23,32 @@ function PostDetail(props) {
   const dispatch = useDispatch();
   //공감해요 버튼
   const [like, setLike] = React.useState(false);
-  //포스트 상세 조회,댓글리스트가져오기
+  //페이지
+  const [page, setPage] = React.useState(1);
+  const totalPage = useSelector((state) => state.comment.pages);
+  console.log(totalPage);
+  //포스트 상세 조회
   React.useEffect(() => {
     dispatch(actionCreators.getDetailDB(postId));
-    dispatch(commentActions.getCommentDB(postId));
   }, []);
+  //페이지별 댓글리스트가져오기
+  React.useEffect(() => {
+    dispatch(commentActions.getCommentDB(postId, page));
+  }, [page]);
   //상세페이지 가져오기
   const post = useSelector((state) => state.post.detailPost);
-  console.log(post);
-
+  const commentList = useSelector((state) => state.comment.comments);
+  console.log(commentList);
+  //시간을 알아보자!
+  const option = {
+    lang: "ko",
+    calculate: {
+      justNow: 60,
+    },
+  };
+  const createdAt = TimeCounting(post?.createAt, option);
   const likesList = post?.likesList; //길이 로직
-
+  // console.log(likesList?.length);
   const loginUser = localStorage.getItem("memberId");
   // console.log(memberId, loginUser);
   //모달
@@ -63,19 +82,60 @@ function PostDetail(props) {
     <React.Fragment>
       <DetailWrapper>
         <CategoryBox>
-          <Title>카테고리</Title>
-          <TitleContent>{post?.category}</TitleContent>
+          <Title>
+            <Text body4>카테고리</Text>
+          </Title>
+          <CateContent>
+            <Text body4>{post?.category}</Text>
+          </CateContent>
+          <TitleContent>
+            <Text sub7>{createdAt}</Text>
+          </TitleContent>
         </CategoryBox>
         <TitleBox>
-          <Title>제목</Title>
+          <Title>
+            <Text body4>제목</Text>
+          </Title>
           <TitleContent>{post?.title}</TitleContent>
+          <TitleContent>
+            <ThumbUp />
+            <Text sub7> {likesList?.length}</Text>
+            <CommentNum />
+            <Text sub7> {commentList?.length}</Text>
+          </TitleContent>
         </TitleBox>
-        <ContentBox>{post?.contents}</ContentBox>
+        <BtnContainer>
+          {post?.memberId === loginUser ? (
+            <>
+              <BtnL
+                onClick={() => {
+                  history.push(`/PostEdit/${postId}`);
+                }}
+              >
+                수정
+              </BtnL>
+              <BtnR
+                onClick={() => {
+                  setModalOpen(true);
+                }}
+              >
+                삭제
+              </BtnR>
+              {modalOpen && (
+                <Modal closModal={closeModal}>
+                  <PostRemove closeModal={closeModal} postId={postId} />
+                </Modal>
+              )}
+            </>
+          ) : null}
+        </BtnContainer>
+        <ContentBox>
+          <Text body6> {post?.contents}</Text>
+        </ContentBox>
         <CommentPhotoWrap>
           <PhotoDivWrap>
             <PhotoDiv>
               <PhotoUpload1>
-                {/* <Img src={post?.imgUrl} /> */}
                 <PhotoWrap>
                   {post?.imgUrl &&
                     post?.imgUrl.map((image, id) => {
@@ -104,54 +164,14 @@ function PostDetail(props) {
             공감해요
           </Text>
           <Text weight="700" color="#333333" cursor="pointer">
-            {/* <span style={{ color: "#7A37BE" }}>{likesList}</span> */}
+            {likesList?.length}
           </Text>
         </IsLike>
       </DetailWrapper>
-      <BtnContainer>
-        <Button
-          text="목록"
-          bg="#948A9E"
-          color="white"
-          width="140px"
-          _onClick={() => {
-            history.push("/postList");
-          }}
-          cursor="pointer"
-        />
-        {post?.memberId === loginUser ? (
-          <div>
-            <Button
-              text="수정하기"
-              bg="#948A9E"
-              color="white"
-              width="140px"
-              cursor="pointer"
-              _onClick={() => {
-                history.push(`/PostEdit/${postId}`);
-              }}
-            />
-            <Button
-              text="삭제하기"
-              bg="#61586A"
-              color="white"
-              width="140px"
-              _onClick={() => {
-                setModalOpen(true);
-              }}
-              // _onClick={onRemove}
-              cursor="pointer"
-            />
-            {modalOpen && (
-              <Modal closModal={closeModal}>
-                <PostRemove closeModal={closeModal} postId={postId} />
-              </Modal>
-            )}
-          </div>
-        ) : null}
-      </BtnContainer>
+      {/* 댓글 */}
       <CommentWrapper>
         <CommentList />
+        <Pagination setPage={setPage} totalPage={totalPage} />
         <CommentWrite postId={postId} />
       </CommentWrapper>
     </React.Fragment>
@@ -165,11 +185,8 @@ const CommentWrapper = styled.div`
 const BtnContainer = styled.div`
   display: flex;
   width: 1032px;
-  border-top: 1px solid #666666;
-  margin: 40px auto 15px auto;
   padding-top: 20px;
-  align-items: flex-start;
-  justify-content: space-between;
+  justify-content: right;
 `;
 const DetailWrapper = styled.div`
   margin: auto;
@@ -209,12 +226,15 @@ const Title = styled.div`
   flex: none;
   order: 0;
   flex-grow: 0;
+  ${({ theme }) => theme.device.mobile} {
+    display: none;
+  }
 `;
-const TitleContent = styled.div`
+const CateContent = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0px 0px 0px 40px;
+  /* padding: 0px 0px 0px 40px; */
   gap: 10px;
   width: 782px;
   height: 45px;
@@ -222,7 +242,38 @@ const TitleContent = styled.div`
   order: 1;
   flex-grow: 0;
   font-family: "KoPub Batang";
+  ${({ theme }) => theme.device.mobile} {
+  }
 `;
+const TitleContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* padding: 0px 0px 0px 40px; */
+  gap: 10px;
+  width: 782px;
+  height: 45px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  font-family: "KoPub Batang";
+  ${({ theme }) => theme.device.mobile} {
+    width: 326px;
+    margin: auto;
+  }
+`;
+const BtnL = styled.button`
+  border: none;
+  background-color: transparent;
+  border-right: 0.5px solid #999999;
+  color: #666666;
+`;
+const BtnR = styled.button`
+  border: none;
+  background-color: transparent;
+  color: #666666;
+`;
+
 const ContentBox = styled.div`
   display: flex;
   flex-direction: row;
