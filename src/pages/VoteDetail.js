@@ -110,19 +110,17 @@ function VoteDetail(props) {
   );
 }
 
-const BtnContainer = styled.div`
-  display: flex;
-  width: 1032px;
-  /* border: 1px solid pink; */
-  margin: 40px auto 15px auto;
-  align-items: flex-start;
-  justify-content: space-between;
-`;
 const DetailWrapper = styled.div`
   margin: auto;
   width: 1032px;
   height: 450px;
   /* border: 1px solid red; */
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 360px;
+    height: 990px;
+    padding: 20px;
+    border-radius: 0px;
+  }
 `;
 const CategoryBox = styled.div`
   box-sizing: border-box;
@@ -197,6 +195,15 @@ const TimeBox = styled.div`
 
   width: 120px;
   height: 45px;
+`;
+
+const BtnContainer = styled.div`
+  display: flex;
+  width: 1032px;
+  /* border: 1px solid pink; */
+  margin: 40px auto 15px auto;
+  align-items: flex-start;
+  justify-content: space-between;
 `;
 
 export default VoteDetail;

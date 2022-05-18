@@ -195,10 +195,10 @@ const sizeStyles = css`
 `;
 
 const PrimaryDefaultButton = styled.button`
-  ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
   padding: ${(props) => props.padding};
   background-color: ${({ theme }) => theme.colors.primary.default};
-  ${(props) => (props.img ? `background-image : ${props.img};` : "")}
+  ${(props) => (props.img ? `background-image : ${props.img};` : "")};
   border: 1px solid ${({ theme }) => theme.colors.primary.default};
   border-radius: ${(props) => props.borderRadius};
   line-height: ${(props) => props.lineHeight};
@@ -209,6 +209,7 @@ const PrimaryDefaultButton = styled.button`
   box-sizing: border-box;
   box-shadow: ${(props) => props.shadow};
   ${sizeStyles}
+  cursor: pointer;
 `;
 const PrimaryHoverButton = styled.button`
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
@@ -225,6 +226,7 @@ const PrimaryHoverButton = styled.button`
   box-sizing: border-box;
   box-shadow: ${(props) => props.shadow};
   ${sizeStyles}
+  cursor: pointer;
 `;
 const PrimaryDisabledButton = styled.button`
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
@@ -241,6 +243,7 @@ const PrimaryDisabledButton = styled.button`
   box-sizing: border-box;
   box-shadow: ${(props) => props.shadow};
   ${sizeStyles}
+  cursor: pointer;
 `;
 const SecondaryDefaultButton = styled.button`
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
@@ -257,6 +260,7 @@ const SecondaryDefaultButton = styled.button`
   box-sizing: border-box;
   box-shadow: ${(props) => props.shadow};
   ${sizeStyles}
+  cursor: pointer;
 `;
 const SecondaryHoverButton = styled.button`
   width: ${(props) => props.width};
@@ -274,6 +278,7 @@ const SecondaryHoverButton = styled.button`
   box-sizing: border-box;
   box-shadow: ${(props) => props.shadow};
   ${sizeStyles}
+  cursor: pointer;
 `;
 const SecondaryDisabledButton = styled.button`
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
@@ -290,6 +295,7 @@ const SecondaryDisabledButton = styled.button`
   box-sizing: border-box;
   box-shadow: ${(props) => props.shadow};
   ${sizeStyles}
+  cursor: pointer;
 `;
 const SmallButton = styled.button`
   width: 110px;
@@ -309,6 +315,7 @@ const SmallButton = styled.button`
   box-sizing: border-box;
   box-shadow: ${(props) => props.shadow};
   padding: 0px;
+  cursor: pointer;
 `;
 const Small2Button = styled.button`
   width: 110px;
@@ -328,6 +335,7 @@ const Small2Button = styled.button`
   box-sizing: border-box;
   box-shadow: ${(props) => props.shadow};
   padding: 0px;
+  cursor: pointer;
 `;
 const NarrowButton = styled.button`
   width: 140px;
@@ -347,6 +355,7 @@ const NarrowButton = styled.button`
   box-sizing: border-box;
   box-shadow: ${(props) => props.shadow};
   padding: 0px;
+  cursor: pointer;
 `;
 const RegularButton = styled.button`
   width: 160px;
@@ -366,6 +375,7 @@ const RegularButton = styled.button`
   box-sizing: border-box;
   box-shadow: ${(props) => props.shadow};
   padding: 0px;
+  cursor: pointer;
 `;
 const WideButton = styled.button`
   width: 300px;
@@ -385,5 +395,6 @@ const WideButton = styled.button`
   box-sizing: border-box;
   box-shadow: ${(props) => props.shadow};
   padding: 0px;
+  cursor: pointer;
 `;
 export default Button;

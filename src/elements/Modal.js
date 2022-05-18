@@ -68,6 +68,10 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    padding: 0px;
+  }
 `;
 
 const Background = styled.div`
@@ -80,6 +84,7 @@ const Background = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(5px);
   animation: modal-bg-show 1s;
+
   @keyframes modal-bg-show {
     from {
       opacity: 0;
@@ -95,15 +100,8 @@ const ModalBlock = styled.div`
   display: block;
   top: 6.5rem;
   border-radius: 10px;
-  padding: 1.5rem;
-  /* background-color: white; */
   width: 600px;
-  /* @media (max-width: 1120px) {
-    width: 50rem;
-  }
-  @media (max-width: 50rem) {
-    width: 80%;
-  } */
+  box-sizing: border-box;
   min-height: 35rem;
   animation: modal-show 1s;
   @keyframes modal-show {
@@ -116,8 +114,9 @@ const ModalBlock = styled.div`
       margin-top: 0;
     }
   }
-  ${({ theme }) => theme.device.mobile} {
-   top: 0rem;
+  @media ${({ theme }) => theme.device.mobile} {
+    top: 0rem;
+  }
 `;
 
 const Contents = styled.div`

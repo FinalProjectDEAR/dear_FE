@@ -43,9 +43,11 @@ function LetterVote({ voteInfo }) {
     } else if (voteInfo.vote[0].selected === true) {
       console.log("왼쪽");
       setLeftSelected(true);
+      setVote(1);
     } else if (voteInfo.vote[1].selected === true) {
       console.log("오른쪽");
       setRightSelected(true);
+      setVote(2);
     }
   };
 
@@ -108,12 +110,7 @@ function LetterVote({ voteInfo }) {
             </Vote>
           </CheckBox>
           <BottomBox>
-            <Button
-              primaryDefault
-              size="regular"
-              cursor="pointer"
-              _onClick={submitVote}
-            >
+            <Button primaryDefault size="regular" _onClick={submitVote}>
               <Text body4 color="#fff" margin="0px" cursor="pointer">
                 투표하기
               </Text>
