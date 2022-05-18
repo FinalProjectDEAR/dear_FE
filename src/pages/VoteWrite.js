@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { useMediaQuery } from "react-responsive";
 import { Input, Text, TextB, Button, Modal } from "../elements";
 import { useSelector, useDispatch } from "react-redux";
 import { history } from "../redux/configureStore";
@@ -9,9 +10,16 @@ import { actionCreators as voteActions } from "../redux/modules/vote";
 // import assets
 import uploadImg from "../assets/upload.png";
 import attach from "../assets/vote/attach.png";
+import arrowBack from "../assets/arrow_back.png";
 import styled from "styled-components";
 
 function VoteWrite() {
+  //모바일 사이즈
+  const Mobile = ({ children }) => {
+    const isMobile = useMediaQuery({ maxWidth: 767 });
+    return isMobile ? children : null;
+  };
+
   const [title, setTitle] = React.useState("");
   const [contents, setContents] = React.useState("");
   const [imgVote, setImageVote] = React.useState(false);
@@ -124,6 +132,14 @@ function VoteWrite() {
         <Modal closeModal={closeModal}>
           <React.Fragment>
             <VoteWrapper>
+              <LineBox>
+                <ArrowBack
+                  src={arrowBack}
+                  onClick={() => {
+                    history.goBack();
+                  }}
+                />
+              </LineBox>
               <SubjectBox>
                 <TextB subTitle>간단한 고민을 투표로 물어보세요! </TextB>
                 <span style={{ color: "red", margin: "0px 4px" }}>*</span>
@@ -221,7 +237,7 @@ function VoteWrite() {
                   <Input
                     margin="0px"
                     padding="14px"
-                    placeholder="5자 이내 입력"
+                    placeholder="10자 이내 입력"
                     value={voteLeft}
                     _onChange={(e) => {
                       setVoteLeft(e.target.value);
@@ -234,7 +250,7 @@ function VoteWrite() {
                   <Input
                     margin="0px"
                     padding="14px"
-                    placeholder="5자 이내 입력"
+                    placeholder="10자 이내 입력"
                     value={voteRight}
                     _onChange={(e) => {
                       setVoteRight(e.target.value);
@@ -273,20 +289,20 @@ function VoteWrite() {
                   </>
                 )}
               </ImgInputBox>
-              <div>
-                <Button
-                  size="regular"
-                  margin="10px auto"
-                  cursor="pointer"
-                  _onClick={uploadVote}
-                >
+              <BottomBox>
+                <Button size="regular" cursor="pointer" _onClick={uploadVote}>
                   <Text body4 color="#fff" cursor="pointer" textAlign="center">
                     투표등록
                   </Text>
                 </Button>
-              </div>
+              </BottomBox>
             </VoteWrapper>
           </React.Fragment>
+          <MobileButton onClick={uploadVote}>
+            <Text body4 color="#fff" cursor="pointer" textAlign="center">
+              투표등록
+            </Text>
+          </MobileButton>
         </Modal>
       )}
     </>
@@ -307,8 +323,9 @@ const VoteWrapper = styled.div`
 
   @media ${({ theme }) => theme.device.mobile} {
     width: 360px;
-    height: 820px;
+    height: 834px;
     padding: 20px;
+    border-radius: 0px;
   }
 `;
 
@@ -321,6 +338,12 @@ const Font = styled.p`
   color: #999999;
 `;
 
+const ArrowBack = styled.img`
+  display: none;
+  width: 24px;
+  cursor: pointer;
+`;
+
 const SubjectBox = styled.div`
   display: flex;
   justify-content: flex-start;
@@ -331,7 +354,7 @@ const SubjectBox = styled.div`
     ${Font} {
       display: none;
     }
-    height: 50px;
+    height: 70px;
   }
 `;
 
@@ -342,6 +365,9 @@ const LineBox = styled.div`
   margin: 5px 0px;
   @media ${({ theme }) => theme.device.mobile} {
     flex-direction: column;
+    ${ArrowBack} {
+      display: flex;
+    }
   }
 `;
 
@@ -373,7 +399,6 @@ const InputBox = styled.div`
   align-items: center;
   width: 546px;
   @media ${({ theme }) => theme.device.mobile} {
-    align-items: flex-start;
     width: 320px;
     height: 50px;
   }
@@ -440,6 +465,35 @@ const Image = styled.label`
   @media ${({ theme }) => theme.device.mobile} {
     width: 130px;
     height: 130px;
+  }
+`;
+
+const BottomBox = styled.div`
+  width: 100%;
+  height: 36px;
+  margin: 10px auto;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    display: none;
+  }
+`;
+
+const MobileButton = styled.div`
+  display: none;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  width: 360px;
+  height: 48px;
+
+  background: #7a37be;
+  border-radius: 0px;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    display: flex;
+    position: fixed;
+    bottom: 0;
   }
 `;
 

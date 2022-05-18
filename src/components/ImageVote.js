@@ -47,9 +47,11 @@ function ImageVote({ voteInfo }) {
     } else if (voteInfo.vote[0].selected === true) {
       console.log("왼쪽");
       setLeftSelected(true);
+      setVote(1);
     } else if (voteInfo.vote[1].selected === true) {
       console.log("오른쪽");
       setRightSelected(true);
+      setVote(2);
     }
   };
 
@@ -113,7 +115,7 @@ function ImageVote({ voteInfo }) {
             </Vote>
           </CheckBox>
           <BottomBox>
-            <Button size="regular" cursor="pointer" _onClick={submitVote}>
+            <Button size="regular" _onClick={submitVote}>
               <Text body4 margin="0px" color="#fff" cursor="pointer">
                 투표하기
               </Text>

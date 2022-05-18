@@ -12,8 +12,16 @@ import uploadImg from "../assets/upload.png";
 import styled from "styled-components";
 
 function VoteResult(props) {
+  console.log(props);
+  const totalCount =
+    props.voteInfo.vote[0].selectionList.length +
+    props.voteInfo.vote[1].selectionList.length;
+
   const leftScore = props.voteInfo.vote[0].selectionList.length;
   const rightScore = props.voteInfo.vote[1].selectionList.length;
+
+  const leftPercentage = parseInt((leftScore / totalCount) * 100);
+  const rightPercentage = parseInt((rightScore / totalCount) * 100);
 
   return (
     <React.Fragment>
@@ -40,15 +48,12 @@ function VoteResult(props) {
 
           <ProgressBar>
             <Highlight
-              width={
-                // (props.voteInfo.vote[0].selectionList.length / totalCount) * 100 + "%"
-                (105 / 165) * 100 + "%"
-              }
+              width={leftPercentage + "%"}
               color={leftScore >= rightScore ? "#7A37BE" : "#BB9ED8"}
             />
           </ProgressBar>
           <Percent color={leftScore >= rightScore ? "#7A37BE" : "#BB9ED8"}>
-            {parseInt((105 / 165) * 100) + "%"}
+            {leftPercentage + "%"}
           </Percent>
         </LineBox>
         <LineBox>
@@ -72,15 +77,12 @@ function VoteResult(props) {
 
           <ProgressBar>
             <Highlight
-              width={
-                // (props.voteInfo.vote[1].selectionList.length / totalCount) * 100 + "%"
-                (60 / 165) * 100 + "%"
-              }
+              width={rightPercentage + "%"}
               color={rightScore >= leftScore ? "#7A37BE" : "#BB9ED8"}
             />
           </ProgressBar>
           <Percent color={rightScore >= leftScore ? "#7A37BE" : "#BB9ED8"}>
-            {parseInt((60 / 165) * 100) + "%"}
+            {rightPercentage + "%"}
           </Percent>
         </LineBox>
       </ResultWrapper>
@@ -138,6 +140,7 @@ const Font = styled.p`
 const Percent = styled.p`
   color: ${(props) => props.color};
   margin: 0px;
+  width: 44px;
   font-weight: 700;
   font-size: 16px;
   line-height: 16px;

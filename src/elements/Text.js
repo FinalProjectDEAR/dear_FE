@@ -178,7 +178,7 @@ Text.defaultProps = {
   _onClick: () => {},
   children: null,
   margin: "0px",
-  color: false,
+  color: "#61586A", // 수정 boolean 값이 안된다고 오류뜸
   size: "18px",
   cursor: "default",
   deco: "none",

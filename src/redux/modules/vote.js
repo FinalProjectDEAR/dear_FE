@@ -166,11 +166,11 @@ const addVoteDB = (
   };
 };
 
-const putVoteDB = (postId, vote) => {
+const putVoteDB = (postId, leftSelected) => {
   return async function (dispatch, getState, { history }) {
-    console.log(postId, vote);
+    console.log(postId, leftSelected);
     try {
-      const { data } = await apis.putVote(postId, vote);
+      const { data } = await apis.putVote(postId, leftSelected);
       console.log(data);
     } catch (err) {
       console.log(err);
