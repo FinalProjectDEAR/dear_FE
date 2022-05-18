@@ -4,12 +4,11 @@ import { history } from "../redux/configureStore";
 import { useParams } from "react-router-dom";
 
 import { actionCreators as chatActions } from "../redux/modules/chat";
-import { OpenVidu } from "openvidu-browser";
 
 import AudioChat from "../components/AudioChat";
 
 import styled from "styled-components";
-import { Text } from "../elements";
+import { Text, TextB, Modal } from "../elements";
 import example from "../assets/imageex.png";
 
 function AudioRoom(props) {
@@ -18,10 +17,23 @@ function AudioRoom(props) {
   const sessionId = params.sessionId;
 
   const chatInfo = useSelector((state) => state.chat.chatInfo);
-
+  console.log(chatInfo);
   React.useEffect(() => {
     dispatch(chatActions.getChatInfoDB(sessionId));
   }, []);
+
+  const [modalOpen, setModalOpen] = React.useState(false);
+  const [imgUrl, setImgUrl] = React.useState("");
+
+  //모달
+  const openModal = (url) => {
+    setModalOpen(true);
+    setImgUrl(url);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   return (
     <React.Fragment>
@@ -29,29 +41,33 @@ function AudioRoom(props) {
         <ChatContainer>
           <LeftBox>
             <TitleBox>
-              <Text batang weight="500" size="16px" color="#BB9ED8">
+              <TextB subTitle color="#BB9ED8">
                 {chatInfo.category}
-              </Text>
-              <Text margin="0px 10px" batang weight="500" size="16px">
+              </TextB>
+              <TextB subTitle margin="0px 10px">
                 {chatInfo.reqTitle}
-              </Text>
-              {/* <Text batang weight="500" size="16px" color="#BB9ED8">
-                연애
-              </Text>
-              <Text margin="0px 10px" batang weight="500" size="16px">
-                여자친구와 연락스타일이 안맞아요.
-              </Text> */}
+              </TextB>
             </TitleBox>
             <AudioChat chatInfo={chatInfo} />
           </LeftBox>
           <ImageBox>
             {chatInfo.imageUrl?.map((url, idx) => {
-              return <Image key={idx} src={url} />;
+              return (
+                <Image
+                  key={idx}
+                  src={url}
+                  onClick={() => {
+                    openModal(url);
+                  }}
+                />
+              );
             })}
-            {/* <Image src={example} />
-            <Image src={example} />
-            <Image src={example} /> */}
           </ImageBox>
+          {modalOpen ? (
+            <Modal closeModal={closeModal}>
+              <img src={imgUrl} alt="img" style={{ maxHeight: "650px" }} />
+            </Modal>
+          ) : null}
         </ChatContainer>
       </ChatWrapper>
     </React.Fragment>
@@ -123,7 +139,7 @@ const ImageBox = styled.div`
 
 const Image = styled.div`
   width: 330px;
-  height: 500px;
+  height: 300px;
   margin: 10px auto;
   border-radius: 3px;
   background-image: url("${(props) => props.src}");

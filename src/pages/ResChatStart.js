@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Text, Button, Modal } from "../elements";
+import { Text, TextB, Button, Modal } from "../elements";
 import { history } from "../redux/configureStore";
 
 import { actionCreators as chatActions } from "../redux/modules/chat";
@@ -46,17 +46,20 @@ function ResChatStart() {
           <React.Fragment>
             <ResContainer>
               <LineBox>
-                <Text batang weight="500" size="20px" textAlign="left">
-                  상담은 어떻게 진행할까요?
-                </Text>
-                <Text margin="0px 10px" weight="300" size="14px">
-                  <span style={{ color: "red", marginRight: "4px" }}> *</span>
+                <TitleBox>
+                  <TextB subTitle textAlign="left">
+                    상담은 어떻게 진행할까요?
+                  </TextB>
+                </TitleBox>
+                <span style={{ color: "red", marginLeft: "4px" }}> *</span>
+                <Text sub7 margin="0px 4px">
+                  {" "}
                   필수입력
                 </Text>
               </LineBox>
               <LineBox>
                 <ChatInfoBox>
-                  <Text weight="500" size="16px" color="#999999">
+                  <Text body4>
                     상담 카테고리
                     <span style={{ color: "red", marginLeft: "4px" }}>*</span>
                   </Text>
@@ -130,59 +133,19 @@ function ResChatStart() {
                   </CheckBox>
                 </CategoryBox>
               </LineBox>
-              <LineBox>
-                <ChatInfoBox>
-                  <Text weight="500" size="16px" color="#999999">
-                    고민러의 성별
-                    <span style={{ color: "red", marginLeft: "4px" }}>*</span>
-                  </Text>
-                </ChatInfoBox>
-                <GenderBox>
-                  <CheckBox>
-                    <input
-                      type="radio"
-                      name="gender"
-                      value="none"
-                      onChange={(e) => {
-                        setGender(e.target.value);
-                      }}
-                    />
-                    상관없음
-                  </CheckBox>
-                  <CheckBox>
-                    <input
-                      type="radio"
-                      name="gender"
-                      value="male"
-                      onChange={(e) => {
-                        setGender(e.target.value);
-                      }}
-                    />
-                    남성
-                  </CheckBox>
-                  <CheckBox>
-                    <input
-                      type="radio"
-                      name="gender"
-                      value="female"
-                      onChange={(e) => {
-                        setGender(e.target.value);
-                      }}
-                    />
-                    여성
-                  </CheckBox>
-                </GenderBox>
-              </LineBox>
-              <LineBox>
+
+              <BottomBox>
                 <Button
-                  width="210px"
-                  margin="25px auto"
-                  bg="#7A37BE"
-                  text="고민 들어주기"
+                  primaryDefault
+                  size="regular"
                   cursor="pointer"
                   _onClick={submit}
-                />
-              </LineBox>
+                >
+                  <Text body4 color="#fff" cursor="pointer">
+                    상담 시작하기
+                  </Text>
+                </Button>
+              </BottomBox>
             </ResContainer>
           </React.Fragment>
         </Modal>
@@ -194,8 +157,8 @@ export default ResChatStart;
 
 const ResContainer = styled.div`
   width: 840px;
-  height: 324px;
-  padding: 30px 40px;
+  height: 290px;
+  padding: 60px 40px;
   box-sizing: border-box;
   background: #ffffff;
   border-radius: 20px;
@@ -205,6 +168,13 @@ const LineBox = styled.div`
   display: flex;
   align-items: center;
   margin: 0px auto;
+`;
+
+const TitleBox = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 40px;
 `;
 
 const ChatInfoBox = styled.div`
@@ -223,7 +193,7 @@ const CheckBox = styled.div`
 `;
 
 const CategoryBox = styled.div`
-  width: 65%;
+  width: 428px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -236,4 +206,14 @@ const GenderBox = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 18px 0px;
+`;
+
+const BottomBox = styled.div`
+  width: 100%;
+  height: 36px;
+  margin: 40px auto;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    display: none;
+  }
 `;

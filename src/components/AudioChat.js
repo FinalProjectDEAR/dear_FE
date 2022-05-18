@@ -7,6 +7,9 @@ import { OpenVidu } from "openvidu-browser";
 import styled from "styled-components";
 import { Text, Button, ColorBadge, Modal } from "../elements";
 
+import highPitch from "../assets/chat/highPitch.png";
+import lowPitch from "../assets/chat/lowPitch.png";
+
 //page
 import UserAudioComponent from "../components/UserAudioComponent";
 import Timer from "../components/Timer";
@@ -136,11 +139,12 @@ function AudioChat() {
 
   const leaveSession = () => {
     console.log("종료 시도한다?");
-    const mySession = session;
+    // const mySession = session;
 
-    if (mySession) {
-      mySession.disconnect();
-    }
+    // if (mySession) {
+    //   mySession.disconnect();
+    // }
+    session.disconnect();
 
     setSession(undefined);
     setSubscribers([]);
@@ -151,8 +155,9 @@ function AudioChat() {
 
     if (subscribers.length !== 0) {
       dispatch(chatActions.closeChatDB(sessionId, dateFormat(closeTime)));
+    } else {
+      dispatch(chatActions.disConnectDB(sessionId));
     }
-    dispatch(chatActions.disConnectDB(sessionId));
   };
 
   // 타이머
@@ -219,53 +224,40 @@ function AudioChat() {
             ) : null}
             <div style={{ display: "flex", justifyContent: "center" }}>
               <UserBox>
-                <Text weight="500" size="16px">
-                  {chatInfo.reqNickname}
-                </Text>
-
+                <Text body3>{chatInfo.reqNickname}</Text>
                 <TagBox>
-                  {chatInfo.reqAge && (
-                    <Tag>
-                      <Text margin="0px" weight="300" size="12px">
-                        {chatInfo.reqAge}
-                      </Text>
-                    </Tag>
-                  )}
-                  {chatInfo.reqLoveType && (
-                    <Tag>
-                      <Text margin="0px" weight="300" size="12px">
-                        {chatInfo.reqLoveType}
-                      </Text>
-                    </Tag>
-                  )}
-                  {chatInfo.reqLovePeriod && (
-                    <Tag>
-                      <Text margin="0px" weight="300" size="12px">
-                        {chatInfo.reqLovePeriod}
-                      </Text>
-                    </Tag>
-                  )}
-
-                  {/* <Tag>
-                    <Text margin="0px" weight="300" size="12px">
-                      20대 중반
-                    </Text>
-                  </Tag>
-                  <Tag>
-                    <Text margin="0px" weight="300" size="12px">
-                      커플
-                    </Text>
-                  </Tag>
-                  <Tag>
-                    <Text margin="0px" weight="300" size="12px">
-                      본인이 연상
-                    </Text>
-                  </Tag>
-                  <Tag>
-                    <Text margin="0px" weight="300" size="12px">
-                      6개월 미만
-                    </Text>
-                  </Tag> */}
+                  <TagLine>
+                    {chatInfo.reqAge && (
+                      <Tag>
+                        <Text sub7 margin="6px 8px">
+                          {chatInfo.reqAge}
+                        </Text>
+                      </Tag>
+                    )}
+                    {chatInfo.isLove && (
+                      <Tag>
+                        <Text sub7 margin="6px 8px">
+                          {chatInfo.reqLoveType}
+                        </Text>
+                      </Tag>
+                    )}
+                  </TagLine>
+                  <TagLine>
+                    {chatInfo.reqLoveType && (
+                      <Tag>
+                        <Text sub7 margin="6px 8px">
+                          {chatInfo.reqLoveType}
+                        </Text>
+                      </Tag>
+                    )}
+                    {chatInfo.reqLovePeriod && (
+                      <Tag>
+                        <Text sub7 margin="6px 8px">
+                          {chatInfo.reqLovePeriod}
+                        </Text>
+                      </Tag>
+                    )}
+                  </TagLine>
                 </TagBox>
               </UserBox>
               <UserBox>
@@ -276,52 +268,61 @@ function AudioChat() {
                   내맘이야
                 </Text> */}
                 <TagBox>
-                  {chatInfo.resAge && (
-                    <Tag>
-                      <Text margin="0px" weight="300" size="12px">
-                        {chatInfo.resAge}
-                      </Text>
-                    </Tag>
-                  )}
-                  {chatInfo.resLoveType && (
-                    <Tag>
-                      <Text margin="0px" weight="300" size="12px">
-                        {chatInfo.resLoveType}
-                      </Text>
-                    </Tag>
-                  )}
-                  {chatInfo.resLovePeriod && (
-                    <Tag>
-                      <Text margin="0px" weight="300" size="12px">
-                        {chatInfo.resLovePeriod}
-                      </Text>
-                    </Tag>
-                  )}
-                  {/* <Tag>
-                    <Text margin="0px" weight="300" size="12px">
-                      20대 후반
-                    </Text>
-                  </Tag>
-                  <Tag>
-                    <Text margin="0px" weight="300" size="12px">
-                      솔로
-                    </Text>
-                  </Tag> */}
+                  <TagLine>
+                    {chatInfo.reqAge && (
+                      <Tag>
+                        <Text sub7 margin="6px 8px">
+                          {chatInfo.reqAge}
+                        </Text>
+                      </Tag>
+                    )}
+                    {chatInfo.isLove && (
+                      <Tag>
+                        <Text sub7 margin="6px 8px">
+                          {chatInfo.reqLoveType}
+                        </Text>
+                      </Tag>
+                    )}
+                  </TagLine>
+                  <TagLine>
+                    {chatInfo.reqLoveType && (
+                      <Tag>
+                        <Text sub7 margin="6px 8px">
+                          {chatInfo.reqLoveType}
+                        </Text>
+                      </Tag>
+                    )}
+                    {chatInfo.reqLovePeriod && (
+                      <Tag>
+                        <Text sub7 margin="6px 8px">
+                          {chatInfo.reqLovePeriod}
+                        </Text>
+                      </Tag>
+                    )}
+                  </TagLine>
                 </TagBox>
               </UserBox>
             </div>
           </ChatContainer>
           <BottomBox>
-            <VoiceBtnBox></VoiceBtnBox>
-            <Button bg={isConnect ? "#7A37BE" : "#999999"} margin="0px 10px">
+            <VoiceBtnBox>
+              <VoiceBtn>
+                <img src={lowPitch} alt="voice1" style={{ width: "20px" }} />
+              </VoiceBtn>
+              <VoiceBtn>
+                <img src={highPitch} alt="voice2" style={{ width: "20px" }} />
+              </VoiceBtn>
+            </VoiceBtnBox>
+            {/* <Button
+              primaryDefault
+              bg={isConnect ? "#7A37BE" : "#999999"}
+              margin="0px 10px"
+            >
               ON AIR
-            </Button>
-            <Button bg="#EEE7F5" color="#7A37BE" margin="0px 10px">
-              상담 연장하기
-            </Button>
+            </Button> */}
             <Button
-              bg="#F6EAED"
-              color="#BE3757"
+              primaryDefault
+              size="regular"
               _onClick={() => {
                 setModalOpen(true);
               }}
@@ -334,7 +335,7 @@ function AudioChat() {
       ) : null}
       {role === "response" && subscribers.length === 0 ? <Loading /> : null}
       {modalOpen && (
-        <Modal closModal={closeModal}>
+        <Modal>
           <ChatClose
             closeModal={closeModal}
             leaveSession={leaveSession}
@@ -389,23 +390,33 @@ const UserBox = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 0px;
-  margin: 0px 63px;
+  margin: 14px 63px;
 `;
 
 const TagBox = styled.div`
   width: 151px;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(25%, auto));
-  grid-row: 2;
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const TagLine = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 151px;
+  height: 26px;
+  margin-bottom: 2px;
 `;
 
 const Tag = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 3px;
+  height: 26px;
   background: #e6e6e6;
   border-radius: 4px;
+  margin: 0px 2px;
 `;
 
 const BottomBox = styled.div`
@@ -413,11 +424,30 @@ const BottomBox = styled.div`
   margin: 17px auto;
   padding: 0px 113px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 `;
 
 const VoiceBtnBox = styled.div`
+  display: flex;
   width: 100px;
   height: 44px;
+  margin-right: 10px;
+  padding: 10px;
+`;
+
+const VoiceBtn = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 10px;
+  margin: 0px 10px;
+  box-sizing: border-box;
+  width: 40px;
+  height: 40px;
+
+  background: #fafafa;
+  border-radius: 40px;
+  box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
 `;

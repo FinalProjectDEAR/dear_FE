@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useInterval } from "../shared/hooks";
+
+import styled from "styled-components";
 import { Text, ColorBadge } from "../elements";
 import { actionCreators as chatActions } from "../redux/modules/chat";
 
@@ -36,20 +38,13 @@ function TimerView({ targetTime, leaveSession }) {
   });
 
   return (
-    <div
-      style={{
-        width: "110px",
-        height: "44px",
-        backgroundColor: "#f8f8f8",
-        borderRadius: "4px",
-      }}
-    >
+    <TimerBox>
       {remain ? (
-        <Text weight="700" size="20px" margin="5px">
+        <Text body margin="5px">
           {parseInt(remain / 60)} : {remain % 60}
         </Text>
       ) : (
-        <Text weight="700" size="15px" margin="5px">
+        <Text body margin="5px">
           매칭 대기 중
         </Text>
       )}
@@ -61,7 +56,7 @@ function TimerView({ targetTime, leaveSession }) {
         <ColorBadge size="6" bg="#948A9E" margin="0px 2px" />
         <ColorBadge size="6" bg="#948A9E" margin="0px 2px" />
       </div>
-    </div>
+    </TimerBox>
   );
 }
 
@@ -74,3 +69,12 @@ const useResultOfIntervalCalculator = (calculator, delay) => {
 
   return result;
 };
+
+const TimerBox = styled.div`
+  width: 110px;
+  height: 44px;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+  padding: 4px;
+  box-sizing: border-box;
+`;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, Input, Button } from "../elements/index";
+import { Text, TextB, Input, Button } from "../elements/index";
 import styled from "styled-components";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
@@ -133,120 +133,130 @@ function ReqReview({ leaveSession }) {
     <React.Fragment>
       <ReviewWrapper>
         <ReviewContainer>
-          <Text batang weight="600" size="16px">
-            상담후기를 작성해주세요.
-            <Star>*</Star>
-            <Pilsu>필수입력</Pilsu>
+          <TitleBox>
+            <TextB subTitle textAlign="left">
+              상담후기를 작성해주세요.
+            </TextB>
+            <span style={{ color: "red", margin: "4px" }}>*</span>
+            <Text sub7>필수입력</Text>
+          </TitleBox>
+          <Text sub5 color="#BB9ED8" margin="0px 0px 10px 0px">
+            후기를 작성하여 원활한 서비스문화 만들기에 동참해주세요!
           </Text>
-          <SubTitle>
-            <Text color="#BB9ED8" size="14px">
-              후기를 작성하여 원활한 서비스문화 만들기에 동참해주세요!
-            </Text>
-          </SubTitle>
         </ReviewContainer>
-        <Container>
-          <MiddleContainer>
-            <Text paddingLeft="60px" size="14px">
-              "리스너"님과 상담은 어떠셨나요?
+        <LikeContainer>
+          <Text body4>
+            "고민러"님과 상담은 어떠셨나요?
+            <Star>*</Star>
+          </Text>
+          <ThumbContainer>
+            <ThumbUpBtn
+              bg={goodClick ? "#7A37BE" : "#E6E6E6"}
+              color={goodClick ? "#FFF" : "#ccc"}
+              onClick={() => {
+                setGoodClick(!goodClick);
+                setBadClick(false);
+              }}
+            >
+              <ThumbUpAltIcon fontSize="small" />
+            </ThumbUpBtn>
+
+            <ThumbDownBtn
+              bg={badClick ? "#D53253" : "#E6E6E6"}
+              color={badClick ? "#FFF" : "#ccc"}
+              onClick={() => {
+                setBadClick(!badClick);
+                setGoodClick(false);
+              }}
+            >
+              <ThumbDownAltIcon fontSize="small" />
+            </ThumbDownBtn>
+          </ThumbContainer>
+        </LikeContainer>
+        {goodClick ? (
+          <ReviewBox>
+            <Text body4 margin="10px 0px">
+              상담하며 좋았던 점을 선택해 주세요.
               <Star>*</Star>
             </Text>
-            <ThumbContainer>
-              <ThumbUpBtn
-                onClick={() => {
-                  setGoodClick(!goodClick);
-                  setBadClick(false);
-                }}
-                goodClick={goodClick}
-              >
-                <ThumbUpAltIcon />
-              </ThumbUpBtn>
-              <ThumbDownBtn
-                onClick={() => {
-                  setBadClick(!badClick);
-                  setGoodClick(false);
-                }}
-                badClick={badClick}
-              >
-                <ThumbDownAltIcon />
-              </ThumbDownBtn>
-            </ThumbContainer>
-          </MiddleContainer>
-          {goodClick === true ? (
-            <ReviewBox>
-              <SelectContainer>
-                <Text size="14px">
-                  상담하며 좋았던 점을 선택해 주세요.
-                  <Star>*</Star>
-                </Text>
-                {goodTag.map((e, i) => (
-                  <ChkDiv>
-                    <React.Fragment key={i}>
-                      <input
-                        type="checkbox"
-                        onChange={SelectGoodTag}
-                        value={true}
-                        id={e}
-                        name={e}
-                      />
-                      <label htmlFor={e}>{e}</label>
-                    </React.Fragment>
-                  </ChkDiv>
-                ))}
-              </SelectContainer>
-            </ReviewBox>
-          ) : null}
-          {badClick === true ? (
-            <ReviewBox>
-              <SelectContainer>
-                <Text size="14px">
-                  '별로예요'에 답한 이유는 무엇인가요?
-                  <Star>*</Star>
-                </Text>
-                <BadManner>*비매너 후기는 상대방이 볼 수 없어요</BadManner>
-                {badTag.map((e, i) => (
-                  <ChkDiv>
-                    <React.Fragment key={i}>
-                      <input
-                        type="checkbox"
-                        onChange={SelectBadTag}
-                        value={true}
-                        id={e}
-                        name={e}
-                      />
-                      <label htmlFor={e}>{e}</label>
-                    </React.Fragment>
-                  </ChkDiv>
-                ))}
-              </SelectContainer>
-            </ReviewBox>
-          ) : null}
-          <SvcContainer>
-            <Text margin="-0.5px" size="14px">
-              서비스에 대한 간단한 한줄평을 남겨주세요!
-            </Text>
-            <SvcInput>
-              <Input
-                placeholder="20자 이내로 입력해주세요."
-                _onChange={(e) => {
-                  setServiceComment(e.target.value);
-                }}
-                value={serviceComment}
-              />
-            </SvcInput>
-          </SvcContainer>
-        </Container>
-        <BtnWrap>
-          <Button bg="#EEE7F5" cursor="pointer" _onClick={userFollow}>
-            <Text color="#7A37BE" margin="-2px">
+            {goodTag.map((e, i) => (
+              <ChkDiv>
+                <React.Fragment key={i}>
+                  <input
+                    type="checkbox"
+                    onChange={SelectGoodTag}
+                    value={true}
+                    id={i}
+                    name={e}
+                  />
+                  <label htmlFor={e}>{e}</label>
+                </React.Fragment>
+              </ChkDiv>
+            ))}
+          </ReviewBox>
+        ) : null}
+
+        {badClick ? (
+          <ReviewBox>
+            <TitleBox>
+              <Text body4 margin="13px 0px">
+                '별로예요'에 답한 이유는 무엇인가요?
+                <Star>*</Star>
+              </Text>
+              <BadManner>비매너 후기는 상대방이 볼 수 없어요</BadManner>
+            </TitleBox>
+
+            {badTag.map((e, i) => (
+              <ChkDiv>
+                <React.Fragment key={i}>
+                  <input
+                    type="checkbox"
+                    onChange={SelectBadTag}
+                    value={true}
+                    id={i}
+                    name={e}
+                  />
+                  <label htmlFor={e}>{e}</label>
+                </React.Fragment>
+              </ChkDiv>
+            ))}
+          </ReviewBox>
+        ) : null}
+        <SvcContainer>
+          <Text body4>서비스에 대한 간단한 한줄평을 남겨주세요!</Text>
+          <SvcInput>
+            <Input
+              padding="10px 15px"
+              placeholder="20자 이내로 입력해주세요."
+              _onChange={(e) => {
+                setServiceComment(e.target.value);
+              }}
+              value={serviceComment}
+            />
+          </SvcInput>
+        </SvcContainer>
+        <BottomBox>
+          <Button
+            secondaryDefault
+            size="regular"
+            _onClick={userFollow}
+            margin="0px 8px"
+          >
+            <Text color="#7A37BE" cursor="pointer">
               {follow ? "리스너 찜 취소하기" : "리스너 찜하기"}
             </Text>
           </Button>
-          <Button bg="#7A37BE" cursor="pointer" _onClick={finish}>
+          <Button
+            primaryDefault
+            size="regular"
+            _onClick={finish}
+            margin="0px 8px"
+          >
             <Text color="white" margin="-2px" cursor="pointer">
               종료하기
             </Text>
           </Button>
-        </BtnWrap>
+        </BottomBox>
       </ReviewWrapper>
     </React.Fragment>
   );
@@ -254,86 +264,92 @@ function ReqReview({ leaveSession }) {
 
 const ReviewWrapper = styled.div`
   max-width: 550px;
-  height: 630px;
-  margin: 110px auto;
+  height: 575px;
+  padding: 40px 40px;
+  box-sizing: border-box;
   background-color: #ffffff;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 20px;
 `;
 
 const ReviewContainer = styled.div`
-  margin-top: 40px;
-  margin-left: 40px;
-  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   box-sizing: border-box;
 `;
-const SubTitle = styled.div`
-  margin-top: -30px;
-`;
-const Container = styled.div`
-  width: 550px;
-  height: 432px;
-  padding-top: 130px;
+
+const TitleBox = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 40px;
 `;
 
-const MiddleContainer = styled.div`
+const LikeContainer = styled.div`
+  height: 44px;
+  margin: 10px 0px;
   display: flex;
-  padding-left: 60px;
-  flex-direction: row;
-  align-items: flex-start;
-  padding-bottom: 20px;
-  box-sizing: border-box;
+  justify-content: flex-start;
+  align-items: center;
   /* background-color: red; */
 `;
 
 const ThumbContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 90px;
   height: 30px;
-  margin-top: 15px;
-  padding-left: 20px;
 `;
 
-const ThumbUpBtn = styled.button`
-  border: none;
-  margin-right: 10px;
+const ThumbUpBtn = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  box-sizing: border-box;
+  border: 1px solid #e6e6e6;
   cursor: pointer;
+  margin: 0px 4px;
   border-radius: 4px;
-  background-color: ${(props) => (props.goodClick ? "#7A37BE" : "#E6E6E6")};
-  color: ${(props) => (props.goodClick ? "#FFFFFF" : "#333333")};
+  background-color: ${(props) => props.bg};
+  color: ${(props) => props.color};
+
+  display: flex;
+  align-items: center;
 `;
 
-const ThumbDownBtn = styled.button`
-  border: none;
+const ThumbDownBtn = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #e6e6e6;
   cursor: pointer;
+  width: 30px;
+  height: 30px;
+  box-sizing: border-box;
+  margin: 0px 2px;
   border-radius: 4px;
-  background-color: ${(props) => (props.badClick ? "#D53253" : "#E6E6E6")};
-  color: ${(props) => (props.badClick ? "#FFFFFF" : "#333333")};
+  background-color: ${(props) => props.bg};
+  color: ${(props) => props.color};
 `;
 
 const ReviewBox = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
-  margin-top: -60px;
   position: static;
   width: 490px;
-  height: 300px;
-  left: 0px;
-  top: 60px;
-`;
-
-const SelectContainer = styled.div`
-  padding-left: 60px;
+  height: 230px;
 `;
 
 const ChkDiv = styled.div`
+  margin: 7px 0px;
   display: flex;
   justify-content: left;
-  padding-bottom: 14.5px;
   color: #61586a;
   font-size: 13px;
   input[type="checkbox"] {
@@ -352,44 +368,33 @@ const ChkDiv = styled.div`
 `;
 
 const SvcContainer = styled.div`
-  padding-left: 60px;
-  margin-top: -5px;
-  align-items: flex-start;
   display: flex;
+  align-items: flex-start;
   flex-direction: column;
   justify-content: center;
 `;
 
 const SvcInput = styled.div`
-  width: 410px;
-  margin-left: -10px;
+  width: 400px;
 `;
 
-const BtnWrap = styled.div`
-  width: 335px;
-  height: 40px;
-  margin: auto;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  margin-top: -40px;
-  padding: 10px;
+const BottomBox = styled.div`
+  position: absolute;
+  bottom: 50px;
+  left: 8px;
+  width: 100%;
+  height: 36px;
+  margin-top: 30px;
 `;
 
 const Star = styled.span`
+  margin-left: 4px;
   color: #d53253;
-`;
-
-const Pilsu = styled.span`
-  color: #999999;
-  font-size: 14px;
 `;
 
 const BadManner = styled.p`
+  margin-left: 4px;
   color: #d53253;
   font-size: 11px;
-  margin-top: -15px;
-  margin-right: 30px;
-  padding-bottom: 10px;
 `;
 export default ReqReview;

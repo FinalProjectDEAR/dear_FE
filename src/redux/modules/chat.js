@@ -92,6 +92,7 @@ const getChatInfoDB = (sessionId) => {
       const { data } = await apis.getChat(sessionId);
       const chatInfo = data.data;
       dispatch(getChatInfo(chatInfo));
+      console.log("받아온 채팅정보", chatInfo);
     } catch {
       alert("채팅방 정보를 불러오지 못했습니다.");
       history.replace("/");
