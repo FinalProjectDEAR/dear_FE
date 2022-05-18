@@ -78,6 +78,10 @@ const BtnWrap = styled.div`
   bottom: 30px;
   left: 90%;
   position: fixed;
+  ${({ theme }) => theme.device.mobile} {
+    display: none;
+    /* background: orange; */
+  }
 `;
 
 const Desc = styled.div`

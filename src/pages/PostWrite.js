@@ -113,8 +113,8 @@ function PostWrite() {
     <React.Fragment>
       <WriteWrapper>
         <TitleContainer>
-          <TitleBox>상담신청하기</TitleBox>
-          <SubTitleBox>해당 글은 익명으로만 작성됩니다.</SubTitleBox>
+          <Text title>상담신청하기</Text>
+          <Text sub7>해당 글은 익명으로만 작성됩니다.</Text>
         </TitleContainer>
         <CategoryWrapper>
           <Title>카테고리</Title>
@@ -131,13 +131,15 @@ function PostWrite() {
         </CategoryWrapper>
         <TitleWrapper>
           <Title>제목</Title>
-          <Input
-            placeholder="제목을 입력해주세요."
-            _onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-            value={title}
-          />
+          <InputMobile>
+            <Input
+              placeholder="제목을 입력해주세요."
+              _onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+              value={title}
+            />
+          </InputMobile>
         </TitleWrapper>
         <ContentWrapper>
           <Title>내용</Title>
@@ -161,14 +163,6 @@ function PostWrite() {
             <PhotoContainer>
               <PhotoUpload>
                 <label>
-                  {/* <img
-                    src="https://res.kurly.com/pc/ico/1806/img_add_thumb_x2.png"
-                    style={{
-                      width: "20px",
-                      marginTop: "33px",
-                    }}
-                    alt="이미지플러스"
-                  /> */}
                   <ImageUPload />
                   <input
                     type="file"
@@ -208,14 +202,15 @@ function PostWrite() {
         </ImageWrapper>
         <BtnWrap>
           <Button
+            size="narrow"
             primaryDefault
             _onClick={addPost}
-            width="120px"
-            height="42px"
-            bg="#61586A"
             cursor="pointer"
-            text="상담신청"
-          />
+          >
+            <Text body4 color="#fff">
+              상담신청
+            </Text>
+          </Button>
         </BtnWrap>
       </WriteWrapper>
     </React.Fragment>
@@ -235,14 +230,17 @@ const WriteWrapper = styled.div`
   background: #ffffff;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 10px;
+  ${({ theme }) => theme.device.mobile} {
+    width: 326px;
+    margin: auto;
+  }
 `;
-
 const TitleContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: flex-end;
-  padding: 0px 0px 10px 40px;
+  padding: 0px 0px 10px 16px;
   gap: 660px;
   width: 952px;
   height: 60px;
@@ -250,33 +248,15 @@ const TitleContainer = styled.div`
   order: 0;
   flex-grow: 0;
   /* background: orange; */
-`;
-const TitleBox = styled.div`
-  width: 98px;
-  height: 30px;
-  font-family: "Pretendard";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 30px;
-  color: #2e2a32;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-`;
-
-const SubTitleBox = styled.div`
-  width: 158px;
-  height: 14px;
-  font-family: "Pretendard";
-  font-style: normal;
-  font-weight: 300;
-  font-size: 12px;
-  line-height: 14px;
-  color: #999999;
-  flex: none;
-  order: 1;
-  flex-grow: 0;
+  ${({ theme }) => theme.device.mobile} {
+    width: 129px;
+    height: 83px;
+    margin: auto;
+    background: orange;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 `;
 const TitleWrapper = styled.div`
   display: flex;
@@ -289,7 +269,12 @@ const TitleWrapper = styled.div`
   order: 1;
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
-  /* background: pink; */
+  ${({ theme }) => theme.device.mobile} {
+    width: 304px;
+    /* background-color: orange; */
+    border: none;
+    padding: 0px;
+  }
 `;
 const CategoryWrapper = styled.div`
   display: flex;
@@ -303,6 +288,11 @@ const CategoryWrapper = styled.div`
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
   border-top: 1px solid #948a9e;
+  ${({ theme }) => theme.device.mobile} {
+    /* background-color: orange; */
+    width: 350px;
+    border: none;
+  }
 `;
 const Title = styled.div`
   display: flex;
@@ -317,7 +307,17 @@ const Title = styled.div`
   flex-grow: 0;
   border-right: 1px solid #cccccc;
   color: #666666;
+  ${({ theme }) => theme.device.mobile} {
+    display: none;
+  }
 `;
+const InputMobile = styled.div`
+  ${({ theme }) => theme.device.mobile} {
+    /* background-color: orange; */
+    width: 350px;
+  }
+`;
+
 const Select = styled.select`
   width: 181px;
   height: 42px;
@@ -342,10 +342,18 @@ const ContentWrapper = styled.div`
   order: 1;
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
+  ${({ theme }) => theme.device.mobile} {
+    width: 304px;
+    border: none;
+  }
 `;
 const TextWrapper = styled.div`
   width: 860px;
   height: 295px;
+  ${({ theme }) => theme.device.mobile} {
+    /* background-color: orange; */
+    width: 350px;
+  }
 `;
 const ImageWrapper = styled.div`
   display: flex;
@@ -357,6 +365,11 @@ const ImageWrapper = styled.div`
   order: 1;
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
+  ${({ theme }) => theme.device.mobile} {
+    /* background-color: orange; */
+    width: 350px;
+    border: none;
+  }
 `;
 const PhotoWrap = styled.div`
   display: flex;
@@ -419,7 +432,6 @@ const BtnWrap = styled.div`
   flex-direction: row;
   align-items: center;
   margin: auto;
-  /* padding: 20px 0px 0px; */
   gap: 20px;
   width: 952px;
   height: 60px;
@@ -428,5 +440,13 @@ const BtnWrap = styled.div`
   flex-grow: 0;
   padding-left: 830px;
   /* background: pink; */
+  ${({ theme }) => theme.device.mobile} {
+    width: 350px;
+    height: 56px;
+    margin: auto;
+    /* background: orange; */
+    padding: 0px;
+    justify-content: right;
+  }
 `;
 export default PostWrite;

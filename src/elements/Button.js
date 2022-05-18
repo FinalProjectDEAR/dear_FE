@@ -146,7 +146,7 @@ Button.defaultProps = {
   text: false,
   width: "100%",
   margin: false,
-  padding: "10px 0px",
+  padding: false,
   bg: false,
   img: false,
   border: "none",
@@ -245,7 +245,7 @@ const PrimaryDisabledButton = styled.button`
 const SecondaryDefaultButton = styled.button`
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
   padding: ${(props) => props.padding};
-  background-color: ${({ theme }) => theme.colors.grayScale["0"]};
+  background-color: transparent;
   ${(props) => (props.img ? `background-image : ${props.img};` : "")}
   border: 1px solid ${({ theme }) => theme.colors.primary.default};
   border-radius: ${(props) => props.borderRadius};

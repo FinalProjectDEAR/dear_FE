@@ -1,32 +1,33 @@
 import React from "react";
 import { Button, Text, TextB } from "../elements";
 import styled from "styled-components";
-import { ReactComponent as All } from "../assets/board-cate1.svg";
-import { ReactComponent as Vote } from "../assets/board-cate2.svg";
-import { ReactComponent as Some } from "../assets/board-cate3.svg";
-import { ReactComponent as Love } from "../assets/board-cate4.svg";
-import { ReactComponent as Broken } from "../assets/board-cate5.svg";
-import { ReactComponent as Again } from "../assets/board-cate6.svg";
-import { ReactComponent as Solo } from "../assets/board-cate3 (1).svg";
-import { ReactComponent as Etc } from "../assets/board-cate8.svg";
+import { ReactComponent as All } from "../assets/postList/board-cate1.svg";
+import { ReactComponent as Vote } from "../assets/postList/board-cate2.svg";
+import { ReactComponent as Some } from "../assets/postList/board-cate3.svg";
+import { ReactComponent as Love } from "../assets/postList/board-cate4.svg";
+import { ReactComponent as Broken } from "../assets/postList/board-cate5.svg";
+import { ReactComponent as Again } from "../assets/postList/board-cate6.svg";
+import { ReactComponent as Solo } from "../assets/postList/board-cate3 (1).svg";
+import { ReactComponent as Etc } from "../assets/postList/board-cate8.svg";
 
 import { useHistory } from "react-router-dom";
 import { actionCreators } from "../redux/modules/post";
 import { useDispatch, useSelector } from "react-redux";
 
 import Post from "../pages/Post";
+import Pagination from "../elements/Pagination";
 
 function PostList(props) {
-  const mytoken = localStorage.getItem("accessToken");
   const dispatch = useDispatch();
   const history = useHistory();
-
-  //게시글 전체 조회
+  //페이지
+  const [page, setPage] = React.useState(1);
+  //페이지별 게시글 전체 조회
   React.useEffect(() => {
-    dispatch(actionCreators.getPostDB());
-  }, []);
-  const postList = useSelector((state) => state.post.post);
-
+    dispatch(actionCreators.getPostDB(page));
+  }, [page]);
+  const postList = useSelector((state) => state.post.post.content);
+  const pageList = useSelector((state) => state.post.post);
   return (
     <React.Fragment>
       <InfoWrapper id="1">
@@ -36,11 +37,9 @@ function PostList(props) {
           </Text>
           <TextB color="#61586A" size="16px" lineheight="30px" textAlign="left">
             간단한 연애 질문부터 채팅으로 말하지 못한 긴 고민까지,
-          </TextB>
-          <TextB color="#61586A" size="16px" lineheight="30px" textAlign="left">
+            <br />
             언제든 고민을 남기면 리스너들이 답장을 남깁니다.
-          </TextB>
-          <TextB color="#61586A" size="16px" lineheight="30px" textAlign="left">
+            <br />
             못다한 이야기를 디어상담소에 남겨보세요!
           </TextB>
         </InfoContainer>
@@ -52,12 +51,11 @@ function PostList(props) {
         </Text>
         <MoreVote>진행중인 투표 더보기 ></MoreVote>
       </VoteWrapper>
-
       <BoardWrapper>
         <CateGoryWrapper>
           <CategoryBtn
             onClick={() => {
-              history.push("/전체");
+              dispatch(actionCreators.getPostDB(page));
             }}
           >
             <AllBtn>
@@ -67,7 +65,7 @@ function PostList(props) {
           </CategoryBtn>
           <CategoryBtn
             onClick={() => {
-              history.push("/투표");
+              dispatch(actionCreators.getCateDetailDB(page, "투표"));
             }}
           >
             <Vote />
@@ -75,7 +73,7 @@ function PostList(props) {
           </CategoryBtn>
           <CategoryBtn
             onClick={() => {
-              history.push("/솔로");
+              dispatch(actionCreators.getCateDetailDB(page, "솔로"));
             }}
           >
             <Solo />
@@ -83,7 +81,7 @@ function PostList(props) {
           </CategoryBtn>
           <CategoryBtn
             onClick={() => {
-              history.push("/짝사랑");
+              dispatch(actionCreators.getCateDetailDB(page, "짝사랑"));
             }}
           >
             <Love />
@@ -91,14 +89,14 @@ function PostList(props) {
           </CategoryBtn>
           <CategoryBtn
             onClick={() => {
-              history.push("/썸");
+              dispatch(actionCreators.getCateDetailDB(page, "썸"));
             }}
           >
             <Some />썸
           </CategoryBtn>
           <CategoryBtn
             onClick={() => {
-              history.push("/연애");
+              dispatch(actionCreators.getCateDetailDB(page, "연애"));
             }}
           >
             <Again />
@@ -106,7 +104,7 @@ function PostList(props) {
           </CategoryBtn>
           <CategoryBtn
             onClick={() => {
-              history.push("/이별");
+              dispatch(actionCreators.getCateDetailDB(page, "이별"));
             }}
           >
             <Broken />
@@ -114,7 +112,7 @@ function PostList(props) {
           </CategoryBtn>
           <CategoryBtn
             onClick={() => {
-              history.push("/기타");
+              dispatch(actionCreators.getCateDetailDB(page, "기타"));
             }}
           >
             <Etc />
@@ -122,33 +120,40 @@ function PostList(props) {
           </CategoryBtn>
         </CateGoryWrapper>
         <TitleWrapper>
-          <Text color="#2E2A32" weight="700" size="18px">
-            익명상담소
-          </Text>
+          <Text title>익명상담소</Text>
         </TitleWrapper>
         <PostTable>
           <TableInfo>
             <InfoItem style={{ marginLeft: "100px" }}>제목</InfoItem>
             <InfoItem style={{ marginRight: "110px" }}>작성일</InfoItem>
           </TableInfo>
-          {postList &&
-            postList.map((item, idx) => {
-              // PostDetail 페이지에 item값을 props로 넘겨준다.
-              return <Post key={idx} item={item} />;
-            })}
+          {postList?.slice(0, 11).map((item, idx) => {
+            // slice를 이용하여 보여주고 싶은 게시물을 제어
+            return <Post key={idx} item={item} />;
+          })}
         </PostTable>
         <BtnWrapper>
           <BtnContainer>
-            <Button text="투표만들기" bg="#948A9E" />
+            <Button size="narrow" secondaryDefault cursor="pointer">
+              <Text body4 color="#7A37BE">
+                투표만들기
+              </Text>
+            </Button>
             <Button
-              text="상담신청하기"
-              bg="#61586A"
+              size="narrow"
+              primaryDefault
               _onClick={() => {
                 history.push("/postWrite");
               }}
-            />
+              cursor="pointer"
+            >
+              <Text body4 color="#fff">
+                상담신청하기
+              </Text>
+            </Button>
           </BtnContainer>
         </BtnWrapper>
+        <Pagination totalPage={pageList?.totalPages} setPage={setPage} />
       </BoardWrapper>
     </React.Fragment>
   );

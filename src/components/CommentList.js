@@ -1,22 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 
-import CommentItem from "./CommentItem";
 import { useSelector } from "react-redux";
+
+import CommentItem from "./CommentItem";
 
 const CommentList = (props) => {
   const commentList = useSelector((state) => state.comment.comments);
   // console.log(commentList);
-
   return (
     <React.Fragment>
       <CommentContainer>
-        <CommentBox>댓글 (댓글 수)</CommentBox>
+        <CommentBox>댓글 ({commentList?.length})</CommentBox>
       </CommentContainer>
-      {commentList &&
-        commentList.map((comment, idx) => {
-          return <CommentItem key={idx} {...comment} />;
-        })}
+      {commentList?.slice(0, 3).map((comment, idx) => {
+        return <CommentItem key={idx} {...comment} />;
+      })}
     </React.Fragment>
   );
 };

@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { TextB } from "../elements";
+import { TextB, Text } from "../elements";
 import { useHistory } from "react-router-dom";
 //시간알려주는패키지
 import TimeCounting from "time-counting";
 
 function Post(props) {
-  const postId = props.item.boardPostId;
+  const postId = props.item.postId;
   const history = useHistory();
   //시간을 알아보자!
   const option = {
@@ -15,7 +15,7 @@ function Post(props) {
       justNow: 60,
     },
   };
-  const createdAt = TimeCounting(props.item.createAt, option);
+  const createdAt = TimeCounting(props.item.created_at, option);
 
   return (
     <React.Fragment>
@@ -25,10 +25,12 @@ function Post(props) {
         }}
       >
         <Title>
-          <TextB body>{props.item.title}</TextB>
+          <TextB body weight="500">
+            {props.item.title}
+          </TextB>
         </Title>
         <Date>
-          <TextB body>{createdAt}</TextB>
+          <Text sub7>{createdAt}</Text>
         </Date>
       </PostWrapper>
     </React.Fragment>
