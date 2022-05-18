@@ -22,14 +22,14 @@ function VoteCard(props) {
           history.push(`/voteDetail/${props.postId}`);
         }}
       >
-        <TextB subTitle>
+        <TextB subTitle margin="0px">
           <Question>Q. </Question>
           {props.title}
         </TextB>
         <VoteContainer>
           <LineBox>
             <VoteLine>
-              <Text sub4>
+              <Text sub4 margin="0px 4px">
                 {/* {props.vote[0].imageTitle} */}
                 친구가애인새우우우우
               </Text>
@@ -46,7 +46,7 @@ function VoteCard(props) {
           </LineBox>
           <LineBox>
             <VoteLine>
-              <Text sub4>
+              <Text sub4 margin="0px 4px">
                 {/* {props.vote[1].imageTitle} */}
                 강원도
               </Text>

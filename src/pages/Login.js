@@ -89,7 +89,16 @@ const Login = () => {
             <Text sub4 margin="0px" color="#61586A">
               계정이 없으신가요?
             </Text>
-            <Text sub5 margin="0px 10px" color="#7A37BE" deco="underLine">
+            <Text
+              sub5
+              margin="0px 10px"
+              color="#7A37BE"
+              deco="underLine"
+              cursor="pointer"
+              _onClick={() => {
+                history.push("/signup");
+              }}
+            >
               회원가입
             </Text>
           </LineBox>

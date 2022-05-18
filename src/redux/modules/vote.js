@@ -52,7 +52,7 @@ const initialState = {
           imageUrl: image01,
           imageTitle: "신발",
           selectionList: ["스파르타", "항해99", "럭키세븐호"],
-          selected: true,
+          selected: false,
         },
         {
           imageUrl: image02,
@@ -76,7 +76,7 @@ const initialState = {
         imageUrl: image01,
         imageTitle: "신발",
         selectionList: ["스파르타", "항해99", "럭키세븐호"],
-        selected: true,
+        selected: false,
       },
       {
         imageUrl: image02,
@@ -127,19 +127,33 @@ const detailVoteDB = (postId) => {
   };
 };
 
-const addVoteDB = (title, contents, imageLeft, imageRight, vote1, vote2) => {
+const addVoteDB = (
+  imgVote,
+  title,
+  contents,
+  vote1,
+  vote2,
+  imageLeft,
+  imageRight
+) => {
   return async function (dispatch, getState, { history }) {
     console.log("투표작성 통신시작");
     try {
-      console.log(title, contents, imageLeft, imageRight, vote1, vote2);
-
+      console.log(title, contents, vote1, vote2, imageLeft, imageRight);
       const formData = new FormData();
-      formData.append("imgLeftFile", imageLeft);
-      formData.append("imgRightFile", imageRight);
-      formData.append("imgLeftTitle", vote1);
-      formData.append("imgRightTitle", vote2);
-      formData.append("title", title);
-      formData.append("contents", contents);
+      if (imgVote === true) {
+        formData.append("imgLeftFile", imageLeft);
+        formData.append("imgRightFile", imageRight);
+        formData.append("imgLeftTitle", vote1);
+        formData.append("imgRightTitle", vote2);
+        formData.append("title", title);
+        formData.append("contents", contents);
+      } else {
+        formData.append("imgLeftTitle", vote1);
+        formData.append("imgRightTitle", vote2);
+        formData.append("title", title);
+        formData.append("contents", contents);
+      }
 
       const { data } = await apis.addVote(formData);
       console.log(data);
@@ -158,7 +172,6 @@ const putVoteDB = (postId, vote) => {
     try {
       const { data } = await apis.putVote(postId, vote);
       console.log(data);
-      history.push("/board");
     } catch (err) {
       console.log(err);
       window.alert("투표실패! 다시 시도해주세요.");
@@ -176,7 +189,7 @@ const delVoteDB = (postId) => {
       console.log(voteList);
 
       dispatch(delVote(postId));
-      window.location.reload();
+      history.push("/board");
     } catch (err) {
       console.log(err);
       window.alert("삭제실패! 다시 시도해주세요.");

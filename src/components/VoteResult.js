@@ -156,4 +156,5 @@ const Highlight = styled.div`
   transition: 1s;
   width: ${(props) => props.width};
   height: 38px;
+  margin: 10px;
 `;

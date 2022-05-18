@@ -38,6 +38,22 @@ function VoteDetail(props) {
 
   const loginUser = localStorage.getItem("memberId");
 
+  // function dateFormat(date) {
+  //   let month = date.getMonth() + 1;
+  //   let day = date.getDate();
+  //   let hour = date.getHours();
+  //   let minute = date.getMinutes();
+
+  //   month = month >= 10 ? month : "0" + month;
+  //   day = day >= 10 ? day : "0" + day;
+  //   hour = hour >= 10 ? hour : "0" + hour;
+  //   minute = minute >= 10 ? minute : "0" + minute;
+
+  //   return (
+  //     date.getFullYear() + "-" + month + "-" + day + " " + hour + ":" + minute
+  //   );
+  // }
+
   return (
     <React.Fragment>
       <BtnContainer></BtnContainer>
@@ -45,21 +61,19 @@ function VoteDetail(props) {
         <CategoryBox>
           <Title>주제</Title>
           <TitleContent>
-            <TextB subTitle>
-              {voteInfo?.title}
-              <img
-                src={vote}
-                alt={vote}
-                style={{
-                  width: "18px",
-                  margin: "auto 10px",
-                  alignItems: "center",
-                }}
-              />
-            </TextB>
+            <TextB subTitle>{voteInfo?.title}</TextB>
+            <img
+              src={vote}
+              alt={vote}
+              style={{
+                width: "18px",
+              }}
+            />
           </TitleContent>
           <TimeBox>
-            <Text sub7>{voteInfo.createdAt}</Text>
+            <Text sub7 margin="0px">
+              {voteInfo.createdAt}
+            </Text>
           </TimeBox>
         </CategoryBox>
         {/* {voteInfo?.memberId === loginUser ? ( */}
@@ -86,7 +100,11 @@ function VoteDetail(props) {
         <ContentBox>
           <Text body3>{voteInfo?.contents}</Text>
         </ContentBox>
-        {voteInfo.vote[0].imageUrl ? <ImageVote /> : <LetterVote />}
+        {voteInfo.vote[0].imageUrl ? (
+          <ImageVote voteInfo={voteInfo} />
+        ) : (
+          <LetterVote voteInfo={voteInfo} />
+        )}
       </DetailWrapper>
     </React.Fragment>
   );
@@ -132,8 +150,8 @@ const Title = styled.div`
 const TitleContent = styled.div`
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   box-sizing: border-box;
-  padding: 0px 0px 0px 40px;
   gap: 10px;
   width: 782px;
   height: 45px;
@@ -174,74 +192,11 @@ const TimeBox = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-right: 45px;
+  margin-right: 36px;
   gap: 2px;
 
   width: 120px;
   height: 45px;
-`;
-const IsLike = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 30px;
-  gap: 10px;
-  margin: auto;
-  width: 130px;
-  height: 24px;
-  /* border: 1px solid red; */
-`;
-
-const Thumb = styled.button`
-  background-color: ${(props) => (props.likes ? "#7A37BE" : "#ddddd")};
-  border: none;
-  border-radius: 4px;
-  padding: 4px 8px;
-`;
-const CommentPhotoWrap = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  /* margin-top: -133px; */
-`;
-const PhotoDivWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-const PhotoDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin: -42px 0px 0px 10px;
-`;
-const PhotoWrap = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-const PhotoUpload1 = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  width: 80px;
-  height: 80px;
-  /* border: 1px solid red; */
-  padding-bottom: 10px;
-  display: block;
-  border: 1px solid red;
-`;
-const Img = styled.img`
-  width: 100%;
-  margin-top: 10px;
-  margin-left: 15px;
-  &:hover {
-    transition: 0.4s;
-    transform: scale(4.9);
-    -webkit-transform: scale(4.9);
-    -moz-transform: scale(4.9);
-    -ms-transform: scale(4.9);
-    -o-transform: scale(4.9);
-  }
 `;
 
 export default VoteDetail;

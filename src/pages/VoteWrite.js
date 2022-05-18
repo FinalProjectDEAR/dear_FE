@@ -93,12 +93,13 @@ function VoteWrite() {
       }
       dispatch(
         voteActions.addVoteDB(
+          imgVote,
           title,
           contents,
-          _imageLeft,
-          _imageRight,
           voteLeft,
-          voteRight
+          voteRight,
+          _imageLeft,
+          _imageRight
         )
       );
     } else {
@@ -111,7 +112,9 @@ function VoteWrite() {
         window.alert("컨텐츠를 모두 작성해주세요!");
         return;
       }
-      dispatch(voteActions.addVoteDB(title, contents, voteLeft, voteRight));
+      dispatch(
+        voteActions.addVoteDB(imgVote, title, contents, voteLeft, voteRight)
+      );
     }
   };
 
@@ -121,25 +124,25 @@ function VoteWrite() {
         <Modal closeModal={closeModal}>
           <React.Fragment>
             <VoteWrapper>
-              <LineBox>
+              <SubjectBox>
                 <TextB subTitle>간단한 고민을 투표로 물어보세요! </TextB>
-                <Text sub6 margin="0px 10px">
-                  <span style={{ color: "red", marginRight: "4px" }}>*</span>
+                <span style={{ color: "red", margin: "0px 4px" }}>*</span>
+                <Font sub6 margin="0px 10px">
                   필수입력
-                </Text>
-              </LineBox>
+                </Font>
+              </SubjectBox>
 
               <LineBox>
                 <Title>
                   <Text body4 textAlign="left">
                     투표 주제
-                    <span style={{ color: "red", marginRight: "4px" }}>*</span>
+                    <span style={{ color: "red", marginLeft: "4px" }}>*</span>
                   </Text>
                 </Title>
                 <InputBox>
                   <Input
                     margin="0px"
-                    padding="16px"
+                    padding="14px"
                     placeholder="질문할 내용을 20자 이내로 입력해주세요."
                     value={title}
                     _onChange={(e) => {
@@ -152,10 +155,10 @@ function VoteWrite() {
                 <Title>
                   <Text body4 textAlign="left">
                     투표 내용
-                    <span style={{ color: "red", marginRight: "4px" }}>*</span>
+                    <span style={{ color: "red", marginLeft: "4px" }}>*</span>
                   </Text>
                 </Title>
-                <div style={{ width: "546px" }}>
+                <TextAreaBox>
                   <Input
                     margin="0px"
                     padding="14px"
@@ -169,7 +172,7 @@ function VoteWrite() {
                       setContents(e.target.value);
                     }}
                   />
-                </div>
+                </TextAreaBox>
               </LineBox>
               <Text sub7 textAlign="right" margin="0px">
                 {textLength}/ 200자
@@ -178,7 +181,7 @@ function VoteWrite() {
                 <Title>
                   <Text body4 textAlign="left">
                     투표 형식
-                    <span style={{ color: "red", marginRight: "4px" }}>*</span>
+                    <span style={{ color: "red", marginLeft: "4px" }}>*</span>
                   </Text>
                 </Title>
                 <InputBox>
@@ -217,8 +220,8 @@ function VoteWrite() {
                 <InputBox>
                   <Input
                     margin="0px"
-                    padding="16px"
-                    placeholder="5자 이내로 입력해주세요."
+                    padding="14px"
+                    placeholder="5자 이내 입력"
                     value={voteLeft}
                     _onChange={(e) => {
                       setVoteLeft(e.target.value);
@@ -230,8 +233,8 @@ function VoteWrite() {
                   </Text>
                   <Input
                     margin="0px"
-                    padding="16px"
-                    placeholder="5자 이내로 입력해주세요."
+                    padding="14px"
+                    placeholder="5자 이내 입력"
                     value={voteRight}
                     _onChange={(e) => {
                       setVoteRight(e.target.value);
@@ -270,10 +273,14 @@ function VoteWrite() {
                   </>
                 )}
               </ImgInputBox>
-
               <div>
-                <Button size="regular" margin="10px auto" _onClick={uploadVote}>
-                  <Text body4 color="#fff" margin="0">
+                <Button
+                  size="regular"
+                  margin="10px auto"
+                  cursor="pointer"
+                  _onClick={uploadVote}
+                >
+                  <Text body4 color="#fff" cursor="pointer" textAlign="center">
                     투표등록
                   </Text>
                 </Button>
@@ -297,14 +304,45 @@ const VoteWrapper = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 360px;
+    height: 820px;
+    padding: 20px;
+  }
 `;
 
-const LineBox = styled.div`
+const Font = styled.p`
+  font-family: ${({ theme }) => theme.fonts.family.base};
+  font-style: normal;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 14px;
+  color: #999999;
+`;
+
+const SubjectBox = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
   box-sizing: border-box;
   margin: 5px 0px;
+  @media ${({ theme }) => theme.device.mobile} {
+    ${Font} {
+      display: none;
+    }
+    height: 50px;
+  }
+`;
+
+const LineBox = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  margin: 5px 0px;
+  @media ${({ theme }) => theme.device.mobile} {
+    flex-direction: column;
+  }
 `;
 
 const Title = styled.div`
@@ -313,21 +351,45 @@ const Title = styled.div`
   align-items: center;
   width: 140px;
   height: 60px;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 140px;
+    height: 28px;
+  }
+`;
+
+const TextAreaBox = styled.div`
+  width: 546px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 320px;
+  }
 `;
 
 const InputBox = styled.div`
   display: flex;
   align-items: center;
   width: 546px;
+  @media ${({ theme }) => theme.device.mobile} {
+    align-items: flex-start;
+    width: 320px;
+    height: 50px;
+  }
 `;
 
 const ImgInputBox = styled.div`
   margin-left: 125px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
   width: 490px;
   height: 250px;
+  @media ${({ theme }) => theme.device.mobile} {
+    margin-left: 0px;
+    width: 320px;
+    height: 160px;
+  }
 `;
 
 const CheckBox = styled.div`
@@ -337,6 +399,9 @@ const CheckBox = styled.div`
   width: auto;
   height: 24px;
   margin-right: 40px;
+  @media ${({ theme }) => theme.device.mobile} {
+    height: 14px;
+  }
 `;
 
 const ImageBox = styled.div`
@@ -345,6 +410,10 @@ const ImageBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 130px;
+    height: 130px;
+  }
 `;
 
 const ImgButton = styled.label`
@@ -355,6 +424,9 @@ const ImgButton = styled.label`
   background-size: cover;
   background-image: url(${attach});
   cursor: pointer;
+  @media ${({ theme }) => theme.device.mobile} {
+    height: 25px;
+  }
 `;
 
 const Image = styled.label`
@@ -365,6 +437,10 @@ const Image = styled.label`
   box-sizing: border-box;
   background-image: url("${(props) => props.src}");
   background-size: cover;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 130px;
+    height: 130px;
+  }
 `;
 
 const FileInput = styled.input`
