@@ -16,7 +16,7 @@ const initialState = {
   chatInfo: {
     reqTitle: "한줄 고민",
     imageUrl: ["url", "url", "url"],
-
+    reqMemberId: "",
     reqNickname: "비둘기구구",
     reqTag: [],
     reqColor: "#fff",
@@ -25,6 +25,7 @@ const initialState = {
     reqLoveType: "연상",
     reqLovePeriod: "6개월 이하",
 
+    resMemberId: "",
     resNickname: "비둘기구구",
     resColor: "#fff",
     resTag: [],
@@ -100,9 +101,9 @@ const getChatInfoDB = (sessionId) => {
   };
 };
 
-const closeChatDB = (sessionId, time, role) => {
+const closeChatDB = (sessionId, time) => {
   return async function (dispatch, getState, { history }) {
-    console.log("채팅종료 통신시작", sessionId, time, role);
+    console.log("채팅종료 통신시작", sessionId, time);
     try {
       const { data } = await apis.closeChat(sessionId, time);
       console.log(data);

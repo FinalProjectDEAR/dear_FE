@@ -35,7 +35,7 @@ function ResChatStart() {
 
   const closeModal = () => {
     setModalOpen(false);
-    history.push("/");
+    history.push("/main");
   };
 
   const selectFile = (e) => {

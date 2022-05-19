@@ -116,6 +116,10 @@ const ModalBlock = styled.div`
       margin-top: 0;
     }
   }
+  @media ${({ theme }) => theme.device.mobile} {
+    top: 0rem;
+    padding: 0rem;
+  }
 `;
 
 const Contents = styled.div`

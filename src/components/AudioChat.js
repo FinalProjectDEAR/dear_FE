@@ -15,8 +15,8 @@ import UserAudioComponent from "../components/UserAudioComponent";
 import Timer from "../components/Timer";
 import Loading from "../pages/Loading";
 import ChatClose from "./alert/ChatClose";
-import ResReview from "../pages/ResReview";
-import ReqReview from "../pages/ReqReview";
+import OtherClose from "./alert/OtherClose";
+import NoMatch from "./alert/NoMatch";
 
 function AudioChat() {
   const dispatch = useDispatch();
@@ -25,7 +25,6 @@ function AudioChat() {
   const token = useSelector((state) => state.chat.roomAuthInfo.token);
   const sessionId = useSelector((state) => state.chat.roomAuthInfo.sessionId);
   const role = useSelector((state) => state.chat.roomAuthInfo.role);
-  console.log("역할", role);
 
   const chatInfo = useSelector((state) => state.chat.chatInfo);
 
@@ -34,12 +33,15 @@ function AudioChat() {
   const [mainStreamManager, setMainStreamManager] = React.useState(undefined);
   const [publisher, setPublisher] = React.useState(undefined);
   const [subscribers, setSubscribers] = React.useState([]);
-  const [isSub, setIsSub] = React.useState(false);
+  const [otherClose, setOtherClose] = React.useState(false);
   const [targetTime, setTargetTime] = React.useState("");
   const [isConnect, setIsConnect] = React.useState(false);
+  const [message, setMessage] = React.useState(false);
+  const [connectObj, setConnectObj] = React.useState("");
 
   //모달
   const [modalOpen, setModalOpen] = React.useState(false);
+  const [noListener, setNoListener] = React.useState(false);
 
   const openModal = () => {
     setModalOpen(true);
@@ -54,17 +56,34 @@ function AudioChat() {
     //크롬에서는 표준에 따른 기본동작을 방지하기 위해 아래 두게 설정
     event.preventDefault();
     event.returnValue = "";
+    dispatch(chatActions.disConnectDB());
   };
 
-  const sendSignal = () => {
+  const sendCloseSignal = () => {
+    console.log("종료 시그널 보내", connectObj);
     session
       .signal({
         data: "true", // Any string (optional)
-        to: [], // Array of Connection objects (optional. Broadcast to everyone if empty)
-        type: "chat", // The type of message (optional)
+        to: [connectObj], // Array of Connection objects (optional. Broadcast to everyone if empty)
+        type: "close", // The type of message (optional)
       })
       .then(() => {
-        console.log("메시지 전송 성공");
+        console.log("채팅종료한대");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const sendContinueSignal = () => {
+    session
+      .signal({
+        data: "true", // Any string (optional)
+        to: [connectObj], // Array of Connection objects (optional. Broadcast to everyone if empty)
+        type: "continue", // The type of message (optional)
+      })
+      .then(() => {
+        console.log("연장하구싶대");
       })
       .catch((error) => {
         console.error(error);
@@ -75,7 +94,6 @@ function AudioChat() {
     window.addEventListener("beforeunload", onbeforeunload);
     const connectSession = () => {
       const OV = new OpenVidu();
-      console.log("커넥트 시도");
 
       var mySession = OV.initSession();
       setSession(mySession);
@@ -84,28 +102,39 @@ function AudioChat() {
         var subscriber = mySession.subscribe(event.stream, undefined);
         var subscriberList = subscribers;
         subscriberList.push(subscriber);
-        console.log("구독자 리스트", subscriberList);
         setSubscribers([...subscribers, ...subscriberList]);
 
         let date = new Date();
         let target = date.setMinutes(date.getMinutes() + 10);
         setTargetTime(target);
         setIsConnect(true);
-        console.log("매칭됐어! 타겟시간: ", targetTime);
         dispatch(chatActions.getChatInfoDB(sessionId));
       });
 
-      mySession.on("signal:chat", (event) => {
-        console.log("메시지 수신", event.data); // Message
-        console.log(event.from); // Connection object of the sender
-        console.log(event.type); // The type of message ("my-chat")
+      mySession.on("signal:close", (event) => {
+        console.log("수신메시지 타입", typeof event.data);
+        setOtherClose(true);
+        console.log("클로즈 수신", event.data); // Message string
+      });
+
+      mySession.on("signal:continue", (event) => {
+        if (event.data === true) {
+          setMessage(!message);
+          let newTime = targetTime.setMinutes(targetTime.getMinutes() + 10);
+          setTargetTime(newTime);
+        }
+        console.log("연장 수신", event.data); // Message
+      });
+
+      mySession.on("connectionCreated", (event) => {
+        setConnectObj(event.connection);
+        console.log("커넥션 created", event.connection);
       });
 
       mySession
         .connect(token, { clientData: nickname })
         .then(async () => {
           var devices = await OV.getDevices();
-          console.log(devices);
           var videoDevices = devices.filter(
             (device) => device.kind === "videoinput"
           );
@@ -131,31 +160,61 @@ function AudioChat() {
     };
 
     connectSession();
+    // subscribeMsg();
 
     return () => {
       window.removeEventListener("beforeunload", onbeforeunload);
     };
   }, []);
 
-  const leaveSession = () => {
-    console.log("종료 시도한다?");
-    // const mySession = session;
+  // const subscribeMsg = () => {
 
-    // if (mySession) {
-    //   mySession.disconnect();
-    // }
+  // };
+
+  //매칭안될때
+  const noMatch = () => {
+    leaveSession();
+    informClose();
+  };
+
+  const timeOut = () => {
+    setNoListener(true);
+  };
+
+  React.useEffect(() => {
+    if (!isConnect) {
+      console.log("30초센다?");
+      setTimeout(timeOut, 30000);
+    }
+  }, []);
+
+  // 종료 메시지 보내기
+  const chatClose = () => {
+    sendCloseSignal();
+    setTimeout(leaveSession, 2000);
+  };
+
+  //세션 종료
+  const leaveSession = () => {
+    console.log("오픈비두 세션종료");
+
     session.disconnect();
 
     setSession(undefined);
     setSubscribers([]);
     setMySessionId("");
     setPublisher(undefined);
+  };
 
+  //서버에 종료 알리기
+  const informClose = () => {
+    console.log("채팅방종료 서버통신");
     const closeTime = new Date();
-
-    if (subscribers.length !== 0) {
+    if (isConnect) {
+      console.log("채팅시 종료");
       dispatch(chatActions.closeChatDB(sessionId, dateFormat(closeTime)));
     } else {
+      console.log("혼자 종료");
       dispatch(chatActions.disConnectDB(sessionId));
     }
   };
@@ -227,80 +286,77 @@ function AudioChat() {
                 <Text body3>{chatInfo.reqNickname}</Text>
                 <TagBox>
                   <TagLine>
-                    {chatInfo.reqAge && (
+                    {chatInfo.reqAge ? (
                       <Tag>
                         <Text sub7 margin="6px 8px">
                           {chatInfo.reqAge}
                         </Text>
                       </Tag>
-                    )}
-                    {chatInfo.isLove && (
+                    ) : null}
+                    {chatInfo.isLove ? (
                       <Tag>
                         <Text sub7 margin="6px 8px">
                           {chatInfo.reqLoveType}
                         </Text>
                       </Tag>
-                    )}
+                    ) : null}
                   </TagLine>
                   <TagLine>
-                    {chatInfo.reqLoveType && (
+                    {chatInfo.reqLoveType ? (
                       <Tag>
                         <Text sub7 margin="6px 8px">
                           {chatInfo.reqLoveType}
                         </Text>
                       </Tag>
-                    )}
-                    {chatInfo.reqLovePeriod && (
+                    ) : null}
+                    {chatInfo.reqLovePeriod ? (
                       <Tag>
                         <Text sub7 margin="6px 8px">
                           {chatInfo.reqLovePeriod}
                         </Text>
                       </Tag>
-                    )}
+                    ) : null}
                   </TagLine>
                 </TagBox>
               </UserBox>
               <UserBox>
-                <Text weight="500" size="16px">
-                  {chatInfo.resNickname}
-                </Text>
-                {/* <Text weight="500" size="16px">
-                  내맘이야
-                </Text> */}
-                <TagBox>
-                  <TagLine>
-                    {chatInfo.reqAge && (
-                      <Tag>
-                        <Text sub7 margin="6px 8px">
-                          {chatInfo.reqAge}
-                        </Text>
-                      </Tag>
-                    )}
-                    {chatInfo.isLove && (
-                      <Tag>
-                        <Text sub7 margin="6px 8px">
-                          {chatInfo.reqLoveType}
-                        </Text>
-                      </Tag>
-                    )}
-                  </TagLine>
-                  <TagLine>
-                    {chatInfo.reqLoveType && (
-                      <Tag>
-                        <Text sub7 margin="6px 8px">
-                          {chatInfo.reqLoveType}
-                        </Text>
-                      </Tag>
-                    )}
-                    {chatInfo.reqLovePeriod && (
-                      <Tag>
-                        <Text sub7 margin="6px 8px">
-                          {chatInfo.reqLovePeriod}
-                        </Text>
-                      </Tag>
-                    )}
-                  </TagLine>
-                </TagBox>
+                <Text body3>{chatInfo.resNickname}</Text>
+                {chatInfo.resNickname ? (
+                  <TagBox>
+                    <TagLine>
+                      {chatInfo.reqAge ? (
+                        <Tag>
+                          <Text sub7 margin="6px 8px">
+                            {chatInfo.resAge}
+                          </Text>
+                        </Tag>
+                      ) : null}
+                      {chatInfo.isLove ? (
+                        <Tag>
+                          <Text sub7 margin="6px 8px">
+                            {chatInfo.resLoveType}
+                          </Text>
+                        </Tag>
+                      ) : null}
+                    </TagLine>
+                    <TagLine>
+                      {chatInfo.reqLoveType ? (
+                        <Tag>
+                          <Text sub7 margin="6px 8px">
+                            {chatInfo.resLoveType}
+                          </Text>
+                        </Tag>
+                      ) : null}
+                      {chatInfo.reqLovePeriod ? (
+                        <Tag>
+                          <Text sub7 margin="6px 8px">
+                            {chatInfo.resLovePeriod}
+                          </Text>
+                        </Tag>
+                      ) : null}
+                    </TagLine>
+                  </TagBox>
+                ) : null}
               </UserBox>
             </div>
           </ChatContainer>
@@ -333,16 +389,32 @@ function AudioChat() {
           </BottomBox>
         </ChatWrapper>
       ) : null}
-      {role === "response" && subscribers.length === 0 ? <Loading /> : null}
+      {role === "response" && isConnect === false ? (
+        <Loading informClose={informClose} leaveSession={leaveSession} />
+      ) : null}
       {modalOpen && (
         <Modal>
           <ChatClose
             closeModal={closeModal}
             leaveSession={leaveSession}
-            sendSignal={sendSignal}
+            chatClose={chatClose}
+            informClose={informClose}
+            isConnect={isConnect}
           />
         </Modal>
       )}
+
+      {otherClose ? (
+        <Modal>
+          <OtherClose informClose={informClose} />
+        </Modal>
+      ) : null}
+
+      {noListener && isConnect === false && role === "request" ? (
+        <Modal closeModal={closeModal}>
+          <NoMatch noMatch={noMatch} />
+        </Modal>
+      ) : null}
     </React.Fragment>
   );
 }
@@ -384,17 +456,17 @@ const TapeBox = styled.div`
 `;
 
 const UserBox = styled.div`
-  width: 151px;
+  width: 175px;
   height: 94px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 0px;
-  margin: 14px 63px;
+  margin: 14px 48px;
 `;
 
 const TagBox = styled.div`
-  width: 151px;
+  width: 175px;
   margin-top: 14px;
   display: flex;
   flex-direction: column;
@@ -404,7 +476,7 @@ const TagLine = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 151px;
+  width: 175px;
   height: 26px;
   margin-bottom: 2px;
 `;

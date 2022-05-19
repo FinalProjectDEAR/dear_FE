@@ -23,7 +23,7 @@ function ResChatStart() {
 
   const closeModal = () => {
     setModalOpen(false);
-    history.push("/");
+    history.push("/main");
   };
 
   //정보 송부

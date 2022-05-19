@@ -10,72 +10,48 @@ import { Text, TextB, Button } from "../../elements";
 import ResReview from "../../pages/ResReview";
 import ReqReview from "../../pages/ReqReview";
 
-function ChatClose(props) {
-  const { closeModal, leaveSession, chatClose, informClose, isConnect } = props;
+function OtherClose(props) {
+  const { informClose } = props;
+  const [Review, setReview] = React.useState(false);
   const [view, setView] = React.useState(true);
-  const [review, setReView] = React.useState(false);
 
   const role = useSelector((state) => state.chat.roomAuthInfo.role);
   console.log("종료시 역할", role);
   const chatInfo = useSelector((state) => state.chat.chatInfo);
-
-  const finish = () => {
-    if (isConnect) {
-      setView(false);
-      setReView(true);
-      chatClose();
-    } else {
-      setView(false);
-      leaveSession();
-      informClose();
-      history.push("/main");
-    }
-  };
 
   return (
     <React.Fragment>
       {view ? (
         <CloseContainer>
           <LineBox>
-            <TextB subTitle> 상담을 종료할까요?</TextB>
+            <TextB subTitle> 상대방이 상담을 종료하였습니다.</TextB>
           </LineBox>
           <BottomBox>
-            <Button
-              secondaryDefault
-              size="narrow"
-              margin="0px 8px"
-              _onClick={closeModal}
-            >
-              <Text body4 margin="0px" color="#7A37BE" cursor="pointer">
-                돌아가기
-              </Text>
-            </Button>
             <Button
               primaryDefault
               size="narrow"
               margin="0px 8px"
               _onClick={() => {
-                finish();
+                setView(false);
+                setReview(true);
               }}
             >
               <Text margin="0px" color="#fff" body4 cursor="pointer">
-                종료하기
+                확인
               </Text>
             </Button>
           </BottomBox>
         </CloseContainer>
       ) : null}
 
-      {review && role === "request" ? (
+      {Review && role === "request" ? (
         <ReqReview
-          resMemberId={chatInfo.resMemberId}
           resNickname={chatInfo.resNickname}
           informClose={informClose}
         />
       ) : null}
-      {review && role === "response" ? (
+      {Review && role === "response" ? (
         <ResReview
-          reqMemberId={chatInfo.reqMemberId}
           reqNickname={chatInfo.reqNickname}
           informClose={informClose}
         />
@@ -84,7 +60,7 @@ function ChatClose(props) {
   );
 }
 
-export default ChatClose;
+export default OtherClose;
 
 const CloseContainer = styled.div`
   width: 400px;

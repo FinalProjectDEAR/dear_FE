@@ -1,8 +1,31 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import { Text, Button } from "../elements";
+import { Text, Button, Modal } from "../elements";
 
-function Loading() {
+import NoMatch from "../components/alert/NoMatch";
+
+function Loading({ informClose, leaveSession }) {
+  const [modalOpen, setModalOpen] = React.useState(false);
+
+  function openModal() {
+    setModalOpen(true);
+  }
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  const noMatch = () => {
+    leaveSession();
+    informClose();
+  };
+
+  React.useEffect(() => {
+    console.log("30초센다?");
+    setTimeout(openModal, 30000);
+    console.log(modalOpen);
+  }, []);
+
   return (
     <React.Fragment>
       <LoaderWrapper>
@@ -14,6 +37,11 @@ function Loading() {
           </InnerSpinner>
         </Loader>
       </LoaderWrapper>
+      {modalOpen ? (
+        <Modal closeModal={closeModal}>
+          <NoMatch noMatch={noMatch} />
+        </Modal>
+      ) : null}
     </React.Fragment>
   );
 }
@@ -26,7 +54,7 @@ const LoaderWrapper = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 9999;
+  z-index: 100;
   background: #777e90;
 `;
 

@@ -5,15 +5,14 @@ import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 
 import { history } from "../redux/configureStore";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { actionCreators } from "../redux/modules/review";
 
-//리스너 상담후기작성페이지
-function ResReview({ leaveSession }) {
+//리스너가 작성하는 상담후기 페이지
+function ResReview(props) {
   const dispatch = useDispatch();
-  const resMemberId = localStorage.getItem("memberId");
-  // const oppositeMemberId = 상대방아이디_고민러아이디
-  const response = localStorage.getItem("response");
+  const reqMemberId = useSelector((state) => state.chat.chatInfo.reqMemberId);
+  console.log("고민러 아이디", reqMemberId);
 
   const [serviceComment, setServiceComment] = React.useState(null);
   const [goodClick, setGoodClick] = React.useState(false);
@@ -79,6 +78,7 @@ function ResReview({ leaveSession }) {
       dispatch(
         actionCreators.addReviewResDB(
           requestReview,
+          props.reqMemberId,
           tagLike,
           Object.values(goodResTag),
           serviceComment
@@ -98,6 +98,7 @@ function ResReview({ leaveSession }) {
       dispatch(
         actionCreators.addReviewResDB(
           requestReview,
+          props.reqMemberId,
           tagLike,
           Object.values(badResTag),
           serviceComment
@@ -105,7 +106,7 @@ function ResReview({ leaveSession }) {
       );
       localStorage.removeItem("response");
     }
-    leaveSession();
+    props.informClose();
   };
 
   return (
@@ -125,7 +126,7 @@ function ResReview({ leaveSession }) {
         </ReviewContainer>
         <LikeContainer>
           <Text body4>
-            "고민러"님과 대화는 어떠셨나요?
+            {props.reqNickname}님과 대화는 어떠셨나요?
             <Star>*</Star>
           </Text>
           <ThumbContainer>
@@ -205,6 +206,7 @@ function ResReview({ leaveSession }) {
           <Text body4>서비스에 대한 간단한 한줄평을 남겨주세요!</Text>
           <SvcInput>
             <Input
+              margin="10px 0px"
               padding="10px 15px"
               placeholder="20자 이내로 입력해주세요."
               _onChange={(e) => {
@@ -339,7 +341,7 @@ const SvcContainer = styled.div`
 `;
 
 const SvcInput = styled.div`
-  width: 400px;
+  width: 470px;
 `;
 
 const BottomBox = styled.div`

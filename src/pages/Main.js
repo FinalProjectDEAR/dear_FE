@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Text } from "../elements";
+import { Text, TextB } from "../elements";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 //페이지
@@ -13,6 +13,7 @@ import Slide from "../components/Slide";
 import SwiperPro from "../components/Swiper";
 
 //assets
+import logo from "../assets/main/logoL.png";
 import tapeD from "../assets/main/tapeD.png";
 import tapeW from "../assets/main/tapeW.png";
 
@@ -40,12 +41,15 @@ function Main() {
   return (
     <React.Fragment>
       <MainWrap>
-        <Text batang color="#2E2A32" weight="500" size="26px">
+        <LogoBox>
+          <Logo src={logo} />
+        </LogoBox>
+        <TextB title color="#2E2A32" margin="0px">
           오늘은 연애 고민이 있는 친구를 위해
-        </Text>
-        <Text batang color="#2E2A32" weight="500" size="26px">
+        </TextB>
+        <TextB title color="#2E2A32" margin="0px">
           다정한 리스너가 되어주는건 어떨까요?
-        </Text>
+        </TextB>
       </MainWrap>
       <InputWrap>
         <input
@@ -56,41 +60,38 @@ function Main() {
             setCheckBox(!checkBox);
           }}
         />
-        <Text weight="300" size="14px" margin="10px">
+        <Text sub6 margin="10px">
           따듯하고 부드러운 언행을 사용하여 상대방과 진솔한 대화를 나누는 것에
           동의합니다.
         </Text>
       </InputWrap>
       <BtnWrap>
         <Btn checkBox={checkBox} onClick={startReq}>
-          <Text
-            batang
-            weight="300"
-            size="14px"
+          <TextB
+            subTitle
             margin="5px"
             cursor="pointer"
-            color={checkBox ? "#fff" : "#61586A"}
+            color={checkBox ? "#fff" : "#2E2A32"}
           >
             고민 들어줄 친구 찾기
-          </Text>
+          </TextB>
           <LineBox>
             {!checkBox ? (
               <img
                 src={tapeD}
-                style={{ width: "20px", height: "16px" }}
+                style={{ width: "24px", height: "24px" }}
                 alt="tape"
               />
             ) : (
               <img
                 src={tapeW}
-                style={{ width: "20px", height: "16px" }}
+                style={{ width: "24px", height: "24px" }}
                 alt="tape"
               />
             )}
             <Text
+              sub6
               margin="0px 5px"
-              weigh="300"
-              size="14px"
               color={checkBox ? "#fff" : "#61586A"}
               cursor="pointer"
             >
@@ -99,34 +100,31 @@ function Main() {
           </LineBox>
         </Btn>
         <Btn checkBox={checkBox} onClick={startRes}>
-          <Text
-            batang
-            weight="300"
-            size="14px"
+          <TextB
+            subTitle
             margin="5px"
             cursor="pointer"
             color={checkBox ? "#fff" : "#61586A"}
           >
             친구의 고민 들어주기
-          </Text>
+          </TextB>
           <LineBox>
             {!checkBox ? (
               <img
                 src={tapeD}
-                style={{ width: "20px", height: "16px" }}
+                style={{ width: "24px", height: "24px" }}
                 alt="tape"
               />
             ) : (
               <img
                 src={tapeW}
-                style={{ width: "20px", height: "16px" }}
+                style={{ width: "24px", height: "24px" }}
                 alt="tape"
               />
             )}
             <Text
+              sub6
               margin="0px 5px"
-              weigh="300"
-              size="14px"
               color={checkBox ? "#fff" : "#61586A"}
               cursor="pointer"
             >
@@ -192,11 +190,23 @@ function Main() {
 const MainWrap = styled.div`
   max-width: 426px;
   width: 100%;
-  height: 84px;
-  margin: 80px auto 50px;
+  height: 230px;
+  padding-top: 240px;
+  padding-bottom: 0px;
+  margin: 0px auto;
   /* background-color: pink; */
-  box-sizing: border-box;
 `;
+
+const LogoBox = styled.div`
+  padding: 0px 0px 40px;
+`;
+
+const Logo = styled.img`
+  width: 140px;
+  height: 94px;
+  margin: 0px auto;
+`;
+
 const InputWrap = styled.div`
   display: flex;
   align-items: center;

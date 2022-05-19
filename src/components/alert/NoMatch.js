@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Text, TextB, Button } from "../../elements";
 import { history } from "../../redux/configureStore";
 
-function NoMatch() {
+function NoMatch(props) {
   return (
     <React.Fragment>
       <CloseContainer>
@@ -16,7 +16,7 @@ function NoMatch() {
             primaryDefault
             size="regular"
             _onClick={() => {
-              history.push("/main");
+              props.noMatch();
             }}
           >
             <Text body4 color="#fff" cursor="pointer">

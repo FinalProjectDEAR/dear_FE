@@ -165,11 +165,7 @@ Button.defaultProps = {
 };
 
 const sizes = {
-  small_1: {
-    width: "110px",
-    height: "36px",
-  },
-  small_2: {
+  small: {
     width: "110px",
     height: "40px",
   },
