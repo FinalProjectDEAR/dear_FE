@@ -40,17 +40,19 @@ const CommentWrite = (props) => {
       <CommentWriteWrapper>
         <TextWrapper>
           <TextBox>댓글 쓰기</TextBox>
-          <Input
-            placeholder="선플은 선택이 아닌 의무입니다! (최소 10자 이상)"
-            _onChange={(e) => {
-              setComment(e.target.value);
-            }}
-            _onKeyUp={checkMaxLength}
-            value={comment}
-            multiLine
-            maxlength="200"
-            rows={7}
-          />
+          <div styled={{ width: "100%" }}>
+            <Input
+              placeholder="선플은 선택이 아닌 의무입니다! (최소 10자 이상)"
+              _onChange={(e) => {
+                setComment(e.target.value);
+              }}
+              _onKeyUp={checkMaxLength}
+              value={comment}
+              multiLine
+              maxlength="200"
+              rows={7}
+            />
+          </div>
         </TextWrapper>
 
         <BtnWrapper>
@@ -65,8 +67,7 @@ const CommentWrite = (props) => {
 const CommentWriteWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 20px;
-  width: 1032px;
+  max-width: 1032px;
   height: 250px;
   background: #ffffff;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
@@ -74,17 +75,25 @@ const CommentWriteWrapper = styled.div`
   flex: none;
   order: 0;
   flex-grow: 0;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 328px;
+    border: 1px solid pink;
+  }
 `;
 const TextWrapper = styled.div`
   width: 952px;
   height: 140px;
-  margin: 0px auto;
+  margin: auto;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 328px;
+    border: 1px solid red;
+  }
 `;
 const TextBox = styled.div`
   display: flex;
   padding: 10px;
   margin-left: 10px;
-  weight: 500px;
+  weight: 100%;
   size: 14px;
   line-height: 18px;
   align-items: flex-start;
@@ -92,18 +101,21 @@ const TextBox = styled.div`
 
 const BtnWrapper = styled.div`
   display: flex;
+  box-sizing: border-box;
   margin: 0px auto;
   flex-direction: row;
-  margin-top: 30px;
+  margin: 30px 10px 10px;
   justify-content: right;
   align-items: right;
-  padding: 15px 0px 0px;
-  gap: 673px;
-  width: 952px;
+  max-width: 992px;
+  width: 100%;
   height: 51px;
   flex: none;
   order: 1;
   flex-grow: 0;
-  /* border: 1px solid red; */
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 328px;
+    border: 1px solid red;
+  }
 `;
 export default CommentWrite;

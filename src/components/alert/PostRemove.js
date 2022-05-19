@@ -25,38 +25,23 @@ function ChatClose(props) {
         </LineBox>
         <BottomBox>
           <Button
-            width="160px"
-            bg="#EEE7F5"
-            margin="8px"
-            shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
+            secondaryDefault
             cursor="pointer"
+            size="narrow"
             _onClick={closeModal}
           >
-            <Text
-              margin="0px"
-              color="#7A37BE"
-              weight="500"
-              size="14px"
-              cursor="pointer"
-            >
+            <Text body4 color="#7A37BE" cursor="pointer">
               돌아가기
             </Text>
           </Button>
           <Button
-            width="160px"
-            bg="#7A37BE"
-            margin="8px"
+            primaryDefault
             shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
             cursor="pointer"
+            size="narrow"
             _onClick={onRemove}
           >
-            <Text
-              margin="0px"
-              color="#fff"
-              weight="500"
-              size="14px"
-              cursor="pointer"
-            >
+            <Text body4 color="#fff" cursor="pointer">
               삭제하기
             </Text>
           </Button>
@@ -84,6 +69,7 @@ const LineBox = styled.div`
 `;
 
 const BottomBox = styled.div`
+  width: 296px;
   height: 40px;
   margin: 20px auto;
   padding: 0px 80px;

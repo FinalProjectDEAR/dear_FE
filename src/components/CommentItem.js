@@ -72,6 +72,10 @@ const CommentItem = (props) => {
     setTextLength(wordLength);
   };
   const editMode = () => {
+    if (commentLike === true) {
+      window.alert("이미 채택 된 댓글은 수정이 불가합니다!");
+      return;
+    }
     if (memberId !== props.member) {
       window.alert("본인이 작성한 댓글이 아닙니다.");
       return;
@@ -80,9 +84,25 @@ const CommentItem = (props) => {
   };
   if (memberId !== props.member) {
     return (
-      <div style={{ border: "1px solid #ddd" }}>
-        <Text color="black">{comments}</Text>
-      </div>
+      <CommentWrapper>
+        <CommentContainer>
+          <CommentBox>
+            <Text color="#333333" size="13px" weight="300">
+              {comments}
+            </Text>
+          </CommentBox>
+          <CommentBox>
+            <Text color="#999999" size="12px" weight="300">
+              {createdAt}
+            </Text>
+          </CommentBox>
+        </CommentContainer>
+        {boardPostId ? (
+          <LikeBtn commentLike={commentLike} onClick={likeComment}>
+            <Like />
+          </LikeBtn>
+        ) : null}
+      </CommentWrapper>
     );
   }
   if (isEdit) {
@@ -104,10 +124,9 @@ const CommentItem = (props) => {
             style={{
               width: "992px",
               paddingLeft: "460px",
-              marginBottom: "30px",
             }}
           >
-            <Btn onClick={editComment}>수정</Btn>
+            <Btn onClick={editComment}>수정하기</Btn>
           </div>
         </div>
       </React.Fragment>
@@ -172,6 +191,14 @@ CommentItem.defaultProps = {
 
 const CommentWrapper = styled.div`
   display: flex;
+  height: 200px;
+  border-bottom: 1px solid #CCCCCC;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 328px;
+ margin: auto;
+    border: 1px solid red;
+    /* text-align: left; */
+    display: flex;  
 `;
 
 const CommentContainer = styled.div`
@@ -180,10 +207,16 @@ const CommentContainer = styled.div`
   flex-direction: column;
   padding: 20px 40px;
   margin: auto;
-  width: 1031px;
-  height: 128px;
-  border-bottom: 1px solid #cccccc;
+  width: 100%;
+  height: 100%;
+  /* border-bottom: 1px solid #cccccc; */
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 328px;
+    border: 1px solid red;
+    margin: auto;
+    display: flex;
 `;
+
 const CommentBox = styled.div`
   display: flex;
   flex-direction: row;
@@ -195,7 +228,8 @@ const CommentBox = styled.div`
   flex: none;
   order: 1;
   flex-grow: 0;
-  /* background-color: red; */
+  /* 
+  background-color: red; */
 `;
 const BtnBox = styled.button`
   border: none;
@@ -215,7 +249,7 @@ const LikeBtn = styled.button`
   gap: 4px;
   margin: auto;
   width: 40px;
-  height: 30px;
+  height: 40px;
   cursor: pointer;
   flex: none;
   order: 1;
@@ -255,7 +289,8 @@ const InputStyle = styled.div`
 const Btn = styled.button`
   border: none;
   background-color: transparent;
-  color: #7a37be;
+  color: #948a9e;
+  text-decoration-line: underline;
   font-weight: 500;
   font-size: 14px;
   line-height: 18px;

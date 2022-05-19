@@ -42,6 +42,7 @@ import SendMsg from "../pages/SendMsg";
 import ReceivedMsg from "../pages/ReceivedMsg";
 import VoteDetail from "../pages/VoteDetail";
 import MyPage from "../pages/MyPage";
+import Notification from "../components/Notification";
 
 function App() {
   return (
@@ -81,6 +82,7 @@ function App() {
               component={ReceivedMsg}
             />
             <Route path="/myPage" exact component={MyPage} />
+            <Route path="/notification" exact component={Notification} />
             <Section />
           </Wrapper>
           <Section />

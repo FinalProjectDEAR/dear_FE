@@ -178,14 +178,15 @@ function PostEdit() {
         </CategoryWrapper>
         <TitleWrapper>
           <Title>제목</Title>
-
-          <Input
-            placeholder="제목을 입력해주세요."
-            _onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-            value={title || ""}
-          />
+          <InputMobile>
+            <Input
+              placeholder="제목을 입력해주세요."
+              _onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+              value={title || ""}
+            />
+          </InputMobile>
         </TitleWrapper>
         <ContentWrapper>
           <Title>내용</Title>
@@ -209,14 +210,6 @@ function PostEdit() {
             <PhotoContainer>
               <PhotoUpload>
                 <label>
-                  {/* <img
-                      src="https://res.kurly.com/pc/ico/1806/img_add_thumb_x2.png"
-                      style={{
-                        width: "20px",
-                        marginTop: "33px",
-                      }}
-                      alt="이미지플러스"
-                    /> */}
                   <ImageUPload />
                   <input
                     type="file"
@@ -226,33 +219,34 @@ function PostEdit() {
                     accept=".jpg,.png"
                   />
                 </label>
-              </PhotoUpload>{" "}
-              <PhotoDesc>사진은 최대 3장 업로드 가능합니다.</PhotoDesc>
-              <PhotoDiv>
-                {imgPreview &&
-                  imgPreview.map((image, id) => {
-                    return (
-                      <PhotoDiv>
-                        <Img
-                          key={id}
-                          style={{
-                            width: "80px",
-                            marginTop: "5px",
-                          }}
-                          src={image}
-                          alt={`${image}-${id}`}
-                        />
-                        <BiX
-                          type="button"
-                          onClick={() => {
-                            CancelImage(image, id);
-                          }}
-                        />
-                      </PhotoDiv>
-                    );
-                  })}
-              </PhotoDiv>
+                <PhotoDesc>사진은 최대 3장 업로드 가능합니다.</PhotoDesc>
+              </PhotoUpload>
             </PhotoContainer>
+            <PhotoDiv>
+              {imgPreview &&
+                imgPreview.map((image, id) => {
+                  return (
+                    <PhotoWrap>
+                      <Img
+                        key={id}
+                        style={{
+                          width: "80px",
+                          marginTop: "5px",
+                        }}
+                        src={image}
+                        alt={`${image}-${id}`}
+                      />
+                      <BiX
+                        type="button"
+                        onClick={() => {
+                          CancelImage(image, id);
+                        }}
+                        style={{ cursor: "pointer" }}
+                      />
+                    </PhotoWrap>
+                  );
+                })}
+            </PhotoDiv>
           </div>
         </ImageWrapper>
         <BtnWrap>
@@ -260,24 +254,22 @@ function PostEdit() {
             _onClick={() => {
               history.goBack();
             }}
-            width="120px"
-            height="42px"
-            bg="#FFFFFF;"
-            border="1px solid #948A9E;"
+            secondaryDefault
             cursor="pointer"
+            size="narrow"
           >
-            <Text margin="1px 0 0 0" color="#333333;">
+            <Text body4 color="#7A37BE">
               뒤로 가기
             </Text>
           </Button>
           <Button
             _onClick={editPost}
-            width="120px"
-            height="42px"
-            bg="#61586A"
+            primaryDefault
+            shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
             cursor="pointer"
+            size="narrow"
           >
-            <Text size="16.5px" margin="1px 0 0 0" color="white">
+            <Text body4 color="#fff" cursor="pointer">
               수정하기
             </Text>
           </Button>
@@ -300,6 +292,11 @@ const WriteWrapper = styled.div`
   background: #ffffff;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 10px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 328px;
+    margin: auto;
+    box-sizing: border-box;
+  }
 `;
 
 const TitleContainer = styled.div`
@@ -315,6 +312,18 @@ const TitleContainer = styled.div`
   order: 0;
   flex-grow: 0;
   /* background: orange; */
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 155px;
+    height: 83px;
+    margin: auto;
+    /* background: orange; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    align-items: center;
+    gap: 0px;
+  }
 `;
 const TitleBox = styled.div`
   width: 98px;
@@ -330,19 +339,18 @@ const TitleBox = styled.div`
   flex-grow: 0;
 `;
 
-const SubTitleBox = styled.div`
-  width: 158px;
-  height: 14px;
-  font-family: "Pretendard";
-  font-style: normal;
-  font-weight: 300;
-  font-size: 12px;
-  line-height: 14px;
-  color: #999999;
-  flex: none;
-  order: 1;
-  flex-grow: 0;
+const SubTitle = styled.div`
+  @media ${({ theme }) => theme.device.mobile} {
+    display: none;
+  }
 `;
+
+const Sub5Title = styled.div`
+  @media ${({ theme }) => theme.device.web} {
+    display: none;
+  }
+`;
+
 const TitleWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -355,6 +363,13 @@ const TitleWrapper = styled.div`
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
   /* background: pink; */
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 250px;
+    /* background-color: orange; */
+    border: none;
+    padding: 0px;
+    box-sizing: border-box;
+  }
 `;
 const CategoryWrapper = styled.div`
   display: flex;
@@ -368,6 +383,12 @@ const CategoryWrapper = styled.div`
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
   border-top: 1px solid #948a9e;
+  @media ${({ theme }) => theme.device.mobile} {
+    /* background-color: orange; */
+    width: 250px;
+    border: none;
+    box-sizing: border-box;
+  }
 `;
 const Title = styled.div`
   display: flex;
@@ -382,18 +403,31 @@ const Title = styled.div`
   flex-grow: 0;
   border-right: 1px solid #cccccc;
   color: #666666;
+  @media ${({ theme }) => theme.device.mobile} {
+    display: none;
+  }
+`;
+
+const InputMobile = styled.div`
+  width: 860px;
+  @media ${({ theme }) => theme.device.mobile} {
+    /* background-color: orange; */
+    width: 250px;
+    box-sizing: border-box;
+  }
 `;
 const Select = styled.select`
-  width: 181px;
-  height: 42px;
-  background: #f5f4f5;
-  border-radius: 20px;
+  width: 302px;
+  height: 40px;
+  background: #ffffff;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 12px 20px;
   margin-left: 10px;
+  margin-top: 6px;
+  padding: 10px 0px 10px 15px;
+  border: 1px solid #e6e6e6;
   cursor: pointer;
 `;
 const ContentWrapper = styled.div`
@@ -407,12 +441,22 @@ const ContentWrapper = styled.div`
   order: 1;
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
-
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 250px;
+    border: none;
+    /* background-color: orange; */
+    box-sizing: border-box;
+  }
   /* background: pink; */
 `;
 const TextWrapper = styled.div`
   width: 860px;
   height: 295px;
+  @media ${({ theme }) => theme.device.mobile} {
+    /* background-color: orange; */
+    width: 350px;
+    box-sizing: border-box;
+  }
 `;
 const ImageWrapper = styled.div`
   display: flex;
@@ -425,29 +469,30 @@ const ImageWrapper = styled.div`
   order: 1;
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
+  @media ${({ theme }) => theme.device.mobile} {
+    /* background-color: orange; */
+    width: 250px;
+    border: none;
+    box-sizing: border-box;
+  }
   /* background: green; */
 `;
 const PhotoWrap = styled.div`
   display: flex;
-  position: absolute;
-  width: 1120px;
-  height: 182px;
-  left: 40px;
-  top: 563px;
-  /* background-color: #ffddd2; */
+  height: 8px;
+  padding-top: 10px;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: row;
 `;
 const PhotoDesc = styled.div`
   display: flex;
-  position: static;
+  padding: 4px;
   width: 220px;
   height: 18px;
-  left: 0px;
-  top: 5px;
-  padding-left: 10px;
   font-size: 12px;
   text-align: center;
   color: #666;
-  line-height: 18px;
   outline: none;
 `;
 const PhotoDiv = styled.div`
@@ -455,16 +500,10 @@ const PhotoDiv = styled.div`
   flex-direction: row;
 `;
 const PhotoUpload = styled.div`
-  /* background-color: #f5f4f5; */
-  /* text-align: center; */
-  /* width: 80px;
-  height: 80px; */
-  /* border: 1px solid #dddfe1; */
-  /* margin: 10px; */
-  /* padding-bottom: 10px; */
-  display: block;
+  display: flex;
+  flex-direction: row;
   cursor: pointer;
-  /* border-radius: 13px; */
+  padding: 4px;
   input[type="file"] {
     position: absolute;
     width: 0;
@@ -478,8 +517,7 @@ const PhotoUpload = styled.div`
 `;
 const Img = styled.img`
   width: 100%;
-  margin-top: 10px;
-  margin-left: 10px;
+  margin-right: -10px;
   width: 80px;
   height: 80px;
   &:hover {
@@ -493,6 +531,7 @@ const Img = styled.img`
 `;
 const PhotoContainer = styled.div`
   display: flex;
+  height: 40px;
 `;
 const BtnWrap = styled.div`
   display: flex;

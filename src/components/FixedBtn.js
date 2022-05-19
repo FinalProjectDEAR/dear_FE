@@ -21,7 +21,6 @@ function FixedBtn(props) {
   const history = useHistory();
   const [isRead, setIsRead] = React.useState(false);
   const user_id = useSelector((state) => state.user.user);
-
   const notiCheck = () => {
     setIsRead(true);
     props._onClick();

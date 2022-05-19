@@ -2,6 +2,7 @@ import React from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { ReactComponent as ThumbUp } from "../assets/postList/posthumb.svg";
 import { ReactComponent as CommentNum } from "../assets/postList/post.svg";
+import { ReactComponent as LikeUp } from "../assets/postList/postUp.svg";
 import styled from "styled-components";
 import { Text, Button, Modal } from "../elements/index";
 //시간알려주는패키지
@@ -97,12 +98,12 @@ function PostDetail(props) {
             <Text body4>제목</Text>
           </Title>
           <TitleContent>{post?.title}</TitleContent>
-          <TitleContent>
+          <ThumbComment>
             <ThumbUp />
             <Text sub7> {likesList?.length}</Text>
             <CommentNum />
             <Text sub7> {commentList?.length}</Text>
-          </TitleContent>
+          </ThumbComment>
         </TitleBox>
         <BtnContainer>
           {post?.memberId === loginUser ? (
@@ -158,7 +159,7 @@ function PostDetail(props) {
         </CommentPhotoWrap>
         <IsLike onClick={likePost}>
           <Thumb likes={post?.likes}>
-            <ThumbUp />
+            <LikeUp />
           </Thumb>
           <Text size="14px" weight="500" color="#333333">
             공감해요
@@ -171,16 +172,22 @@ function PostDetail(props) {
       {/* 댓글 */}
       <CommentWrapper>
         <CommentList />
-        <Pagination setPage={setPage} totalPage={totalPage} />
+        <div>
+          <Pagination setPage={setPage} totalPage={totalPage} />
+        </div>
+
         <CommentWrite postId={postId} />
       </CommentWrapper>
     </React.Fragment>
   );
 }
 const CommentWrapper = styled.div`
-  /* border: 1px solid red; */
-  margin: 200px auto 0px auto;
-  width: 1032px;
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid blue; */
+  margin: 0px auto 0px auto;
+  max-width: 1032px;
+  height: 703px;
 `;
 const BtnContainer = styled.div`
   display: flex;
@@ -213,7 +220,7 @@ const TitleBox = styled.div`
   padding: 0px;
   width: 1032px;
   height: 45px;
-  border-bottom: 1px solid #666666;
+  border-bottom: 1px solid #cccccc;
 `;
 const Title = styled.div`
   display: flex;
@@ -249,9 +256,8 @@ const TitleContent = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* padding: 0px 0px 0px 40px; */
   gap: 10px;
-  width: 782px;
+  width: 760px;
   height: 45px;
   flex: none;
   order: 1;
@@ -262,16 +268,31 @@ const TitleContent = styled.div`
     margin: auto;
   }
 `;
+const ThumbComment = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  /* width: 760px; */
+  height: 45px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  font-family: "KoPub Batang";
+`;
+
 const BtnL = styled.button`
   border: none;
   background-color: transparent;
   border-right: 0.5px solid #999999;
   color: #666666;
+  cursor: pointer;
 `;
 const BtnR = styled.button`
   border: none;
   background-color: transparent;
   color: #666666;
+  cursor: pointer;
 `;
 
 const ContentBox = styled.div`
@@ -291,7 +312,6 @@ const IsLike = styled.div`
   gap: 10px;
   margin: auto;
   height: 150px;
-  /* border: 1px solid red; */
 `;
 
 const Thumb = styled.button`
@@ -300,6 +320,8 @@ const Thumb = styled.button`
   border-radius: 50%;
   padding: 4px 8px;
   cursor: pointer;
+  width: 30px;
+  height: 30px;
 `;
 const CommentPhotoWrap = styled.div`
   display: flex;
