@@ -85,11 +85,7 @@ function ImageVote({ voteInfo }) {
               <Font color={leftSelected ? "#7A37BE" : "#61586A"}>
                 {voteInfo.vote[0].imageTitle}
               </Font>
-              <img
-                style={{ width: "300px", height: "300px", marginTop: "15px" }}
-                src={voteInfo.vote[0].imageUrl}
-                alt="선택지 1"
-              />
+              <VoteImg src={voteInfo.vote[0].imageUrl} alt="선택지 1" />
             </Vote>
             <Text body2 margin="17px 24px">
               VS
@@ -107,11 +103,7 @@ function ImageVote({ voteInfo }) {
               >
                 {voteInfo.vote[1].imageTitle}
               </Font>
-              <img
-                style={{ width: "300px", height: "300px", marginTop: "15px" }}
-                src={voteInfo.vote[1].imageUrl}
-                alt="선택지 2"
-              />
+              <VoteImg src={voteInfo.vote[1].imageUrl} alt="선택지 2" />
             </Vote>
           </CheckBox>
           <BottomBox>
@@ -127,6 +119,7 @@ function ImageVote({ voteInfo }) {
           voteInfo={voteInfo}
           leftSelected={leftSelected}
           rightSelected={rightSelected}
+          vote={vote}
         />
       )}
     </React.Fragment>
@@ -179,6 +172,11 @@ const VoteWrapper = styled.div`
   background: #ffffff;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 10px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 328px;
+    height: 818px;
+    padding: 0px 44px;
+  }
 `;
 
 const CheckBox = styled.div`
@@ -188,6 +186,11 @@ const CheckBox = styled.div`
   margin: 30px;
   width: 792px;
   height: 400px;
+  @media ${({ theme }) => theme.device.mobile} {
+    flex-direction: column;
+    width: 248px;
+    height: 652px;
+  }
 `;
 
 const Vote = styled.div`
@@ -205,6 +208,20 @@ const Vote = styled.div`
   box-sizing: border-box;
   width: 360px;
   height: 399px;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    img {
+      width: 200px;
+    }
+    width: 249px;
+    height: 300px;
+  }
+`;
+
+const VoteImg = styled.img`
+  width: 300px;
+  height: 300px;
+  margin-top: 15px;
 `;
 
 const Font = styled.p`
@@ -219,4 +236,9 @@ const Font = styled.p`
 const BottomBox = styled.div`
   width: 792px;
   height: 66px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 240px;
+    height: 40px;
+    margin-top: 30px;
+  }
 `;

@@ -38,30 +38,35 @@ function VoteDetail(props) {
 
   const loginUser = localStorage.getItem("memberId");
 
-  // function dateFormat(date) {
-  //   let month = date.getMonth() + 1;
-  //   let day = date.getDate();
-  //   let hour = date.getHours();
-  //   let minute = date.getMinutes();
+  const date = voteInfo.createdAt.replace("T", " ").substring(0, 16);
+  // let month = date.getMonth() + 1;
+  // let day = date.getDate();
+  // let hour = date.getHours();
+  // let minute = date.getMinutes();
 
-  //   month = month >= 10 ? month : "0" + month;
-  //   day = day >= 10 ? day : "0" + day;
-  //   hour = hour >= 10 ? hour : "0" + hour;
-  //   minute = minute >= 10 ? minute : "0" + minute;
+  // month = month >= 10 ? month : "0" + month;
+  // day = day >= 10 ? day : "0" + day;
+  // hour = hour >= 10 ? hour : "0" + hour;
+  // minute = minute >= 10 ? minute : "0" + minute;
 
-  //   return (
-  //     date.getFullYear() + "-" + month + "-" + day + " " + hour + ":" + minute
-  //   );
-  // }
+  // return (
+  //   date.getFullYear() + "-" + month + "-" + day + " " + hour + ":" + minute
+  // );
 
   return (
     <React.Fragment>
       <BtnContainer></BtnContainer>
       <DetailWrapper>
         <CategoryBox>
-          <Title>주제</Title>
+          <Title>
+            <Text body4 color="#7A37BE">
+              투표
+            </Text>
+          </Title>
           <TitleContent>
-            <TextB subTitle>{voteInfo?.title}</TextB>
+            <TextB subTitle margin="0px">
+              {voteInfo?.title}
+            </TextB>
             <img
               src={vote}
               alt={vote}
@@ -72,15 +77,19 @@ function VoteDetail(props) {
           </TitleContent>
           <TimeBox>
             <Text sub7 margin="0px">
-              {voteInfo.createdAt}
+              {date}
             </Text>
           </TimeBox>
         </CategoryBox>
         {/* {voteInfo?.memberId === loginUser ? ( */}
         <LineBox>
+          <MTimeBox>
+            <Text sub7 margin="0px">
+              {date}
+            </Text>
+          </MTimeBox>
           <Text
             sub7
-            margin="18.5px 45px"
             cursor="pointer"
             _onClick={() => {
               setModalOpen(true);
@@ -116,12 +125,24 @@ const DetailWrapper = styled.div`
   height: 450px;
   /* border: 1px solid red; */
   @media ${({ theme }) => theme.device.mobile} {
-    width: 360px;
-    height: 990px;
-    padding: 20px;
+    width: 328px;
+    height: 100%;
+    /* height: 990px; */
     border-radius: 0px;
   }
 `;
+
+const TimeBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-right: 36px;
+  gap: 2px;
+  width: 120px;
+  height: 45px;
+`;
+
 const CategoryBox = styled.div`
   box-sizing: border-box;
   display: flex;
@@ -130,6 +151,32 @@ const CategoryBox = styled.div`
   height: 45px;
   border-top: 1px solid #666666;
   border-bottom: 1px solid #cccccc;
+  @media ${({ theme }) => theme.device.mobile} {
+    ${TimeBox} {
+      display: none;
+    }
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 328px;
+    height: 80px;
+    margin-top: 80px;
+    border-top: none;
+    border-bottom: 1px solid #666666;
+    border-radius: 0px;
+  }
+`;
+
+const MTimeBox = styled.div`
+  display: none;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  width: 120px;
+  height: 14px;
+  @media ${({ theme }) => theme.device.mobile} {
+    display: block;
+  }
 `;
 
 const Title = styled.div`
@@ -143,6 +190,10 @@ const Title = styled.div`
   flex: none;
   order: 0;
   flex-grow: 0;
+  @media ${({ theme }) => theme.device.mobile} {
+    padding: 0px;
+    height: 40px;
+  }
 `;
 
 const TitleContent = styled.div`
@@ -153,16 +204,30 @@ const TitleContent = styled.div`
   gap: 10px;
   width: 782px;
   height: 45px;
+  img {
+    width: 5px;
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    height: 36px;
+  }
 `;
 
 const LineBox = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  align-items: flex-start;
-  padding: 0px;
+  align-items: center;
+  box-sizing: border-box;
+  padding-right: 40px;
   width: 1032px;
   height: 45px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 328px;
+    justify-content: space-between;
+    height: 24px;
+    margin-top: 12px;
+    padding-right: 0px;
+  }
 `;
 
 const DelText = styled.p`
@@ -182,19 +247,10 @@ const ContentBox = styled.div`
   padding: 30px 40px;
   gap: 10px;
   width: 1032px;
-  height: 108px;
-`;
-
-const TimeBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-right: 36px;
-  gap: 2px;
-
-  width: 120px;
-  height: 45px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 328px;
+    padding: 12px 20px;
+  }
 `;
 
 const BtnContainer = styled.div`
