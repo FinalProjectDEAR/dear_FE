@@ -210,8 +210,6 @@ function ResChatStart() {
                   <TextB subTitle textAlign="left">
                     상담은 어떻게 진행할까요?
                   </TextB>
-                  <span style={{ color: "red", margin: "4px" }}>*</span>
-                  <Text sub7>필수입력</Text>
                 </TitleBox>
                 <LineBox>
                   <ChatInfoBox>
@@ -298,13 +296,8 @@ function ResChatStart() {
               </SecondBox>
 
               <BottomBox>
-                <Button
-                  margin="40px auto"
-                  size="regular"
-                  cursor="pointer"
-                  _onClick={submit}
-                >
-                  <Text body4 color="#fff">
+                <Button margin="40px auto" size="regular" _onClick={submit}>
+                  <Text body4 color="#fff" cursor="pointer">
                     리스너 매칭하기
                   </Text>
                 </Button>
@@ -320,7 +313,7 @@ export default ResChatStart;
 
 const RequestContainer = styled.div`
   width: 840px;
-  height: 680px;
+  height: 575px;
   padding: 40px 40px;
   box-sizing: border-box;
   background: #ffffff;
@@ -328,7 +321,7 @@ const RequestContainer = styled.div`
 `;
 
 const SecondBox = styled.div`
-  margin-top: 40px;
+  margin-top: 20px;
 `;
 
 const TitleBox = styled.div`
@@ -406,7 +399,7 @@ const ImageBox = styled.div`
   box-sizing: border-box;
   margin-left: 240px;
   width: 530px;
-  height: 176px;
+  height: 110px;
 
   border: 1px solid #e6e6e6;
 `;
@@ -425,8 +418,8 @@ const FileTag = styled.div`
 `;
 
 const Picture = styled.div`
-  width: 140px;
-  height: 140px;
+  width: 80px;
+  height: 80px;
   border: 1px solid rgba(0, 0, 0, 0.07);
   margin: 10px;
   border-radius: 4px;
