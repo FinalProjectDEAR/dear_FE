@@ -9,6 +9,7 @@ import { ReactComponent as Broken } from "../assets/postList/board-cate5.svg";
 import { ReactComponent as Again } from "../assets/postList/board-cate6.svg";
 import { ReactComponent as Solo } from "../assets/postList/board-cate3 (1).svg";
 import { ReactComponent as Etc } from "../assets/postList/board-cate8.svg";
+import { ReactComponent as Alll } from "../assets/postList/Frame 481 (1).svg";
 
 import { useHistory } from "react-router-dom";
 import { actionCreators } from "../redux/modules/post";
@@ -61,7 +62,7 @@ function PostList(props) {
             <AllBtn>
               <All />
             </AllBtn>
-            전체
+            <p style={{ marginTop: "83px", position: "absolute" }}>전체</p>
           </CategoryBtn>
           <CategoryBtn
             onClick={() => {
@@ -124,8 +125,8 @@ function PostList(props) {
         </TitleWrapper>
         <PostTable>
           <TableInfo>
-            <InfoItem style={{ marginLeft: "100px" }}>제목</InfoItem>
-            <InfoItem style={{ marginRight: "110px" }}>작성일</InfoItem>
+            <InfoItem style={{ marginLeft: "40px" }}>제목</InfoItem>
+            <InfoItem style={{ marginRight: "40px" }}>작성일</InfoItem>
           </TableInfo>
           {postList?.slice(0, 11).map((item, idx) => {
             // slice를 이용하여 보여주고 싶은 게시물을 제어
@@ -213,12 +214,10 @@ const CateGoryWrapper = styled.div`
   display: flex;
   flex-direction: row;
   margin: auto;
-  gap: 20px;
-  max-width: 600px;
-  height: 82px;
-  left: 204px;
-  top: 1178px;
+  max-width: 818px;
+  /* height: 200px; */
   /* background: yellow; */
+  justify-content: space-around;
 `;
 const BtnWrapper = styled.div`
   padding-top: 10px;
@@ -238,7 +237,7 @@ const CategoryBtn = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0px;
-  gap: 10px;
+  gap: 30px;
   width: 54px;
   height: 82px;
   flex: none;
@@ -253,10 +252,12 @@ const AllBtn = styled.div`
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   width: 76px;
   height: 76px;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border: 1px solid red;  */
+  margin-bottom: 50px;
   padding: 18px;
   box-sizing: border-box;
 `;

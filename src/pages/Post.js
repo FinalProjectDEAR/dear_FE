@@ -49,10 +49,10 @@ const PostWrapper = styled.div`
   border-bottom: 1px solid #cccccc;
 `;
 const Title = styled.div`
-  padding-left: 60px;
+  padding-left: 40px;
 `;
 const Date = styled.div`
-  padding-right: 100px;
+  padding-right: 40px;
 `;
 
 export default Post;

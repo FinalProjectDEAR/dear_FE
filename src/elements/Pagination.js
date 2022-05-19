@@ -23,7 +23,12 @@ const PaginationDiv = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  height: 84px;
+  height: 200px;
+  /* background-color: green; */
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 328px;
+    border: 1px solid #948a9e;
+  }
   /* border: 1px solid red; */
 `;
 

@@ -114,12 +114,19 @@ function PostWrite() {
       <WriteWrapper>
         <TitleContainer>
           <Text title>상담신청하기</Text>
-          <Text sub7>해당 글은 익명으로만 작성됩니다.</Text>
+          <SubTitle>
+            <Text sub7> 해당 글은 익명으로만 작성됩니다.</Text>
+          </SubTitle>
+          <Sub5Title>
+            <Text sub5 color="#BB9ED8">
+              해당 글은 익명으로만 작성됩니다.
+            </Text>
+          </Sub5Title>
         </TitleContainer>
         <CategoryWrapper>
           <Title>카테고리</Title>
           <Select name="category" form="myForm" onChange={SelectCategory}>
-            <option value="카테고리">카테고리 선택</option>
+            <OptionSelect value="카테고리">카테고리 선택</OptionSelect>
             <option value="썸">썸</option>
             <option value="고백">고백</option>
             <option value="연애중">연애중</option>
@@ -193,6 +200,7 @@ function PostWrite() {
                       onClick={() => {
                         CancelImage(image, id);
                       }}
+                      style={{ cursor: "pointer" }}
                     />
                   </PhotoWrap>
                 );
@@ -230,9 +238,10 @@ const WriteWrapper = styled.div`
   background: #ffffff;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 10px;
-  ${({ theme }) => theme.device.mobile} {
-    width: 326px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 328px;
     margin: auto;
+    box-sizing: border-box;
   }
 `;
 const TitleContainer = styled.div`
@@ -248,16 +257,31 @@ const TitleContainer = styled.div`
   order: 0;
   flex-grow: 0;
   /* background: orange; */
-  ${({ theme }) => theme.device.mobile} {
-    width: 129px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 155px;
     height: 83px;
     margin: auto;
-    background: orange;
+    /* background: orange; */
     display: flex;
     flex-direction: column;
     justify-content: center;
+    box-sizing: border-box;
+    align-items: center;
+    gap: 0px;
   }
 `;
+const SubTitle = styled.div`
+  @media ${({ theme }) => theme.device.mobile} {
+    display: none;
+  }
+`;
+
+const Sub5Title = styled.div`
+  @media ${({ theme }) => theme.device.web} {
+    display: none;
+  }
+`;
+
 const TitleWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -269,11 +293,12 @@ const TitleWrapper = styled.div`
   order: 1;
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
-  ${({ theme }) => theme.device.mobile} {
-    width: 304px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 250px;
     /* background-color: orange; */
     border: none;
     padding: 0px;
+    box-sizing: border-box;
   }
 `;
 const CategoryWrapper = styled.div`
@@ -288,10 +313,11 @@ const CategoryWrapper = styled.div`
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
   border-top: 1px solid #948a9e;
-  ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     /* background-color: orange; */
-    width: 350px;
+    width: 250px;
     border: none;
+    box-sizing: border-box;
   }
 `;
 const Title = styled.div`
@@ -307,30 +333,38 @@ const Title = styled.div`
   flex-grow: 0;
   border-right: 1px solid #cccccc;
   color: #666666;
-  ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: none;
   }
 `;
 const InputMobile = styled.div`
-  ${({ theme }) => theme.device.mobile} {
+  width: 860px;
+  @media ${({ theme }) => theme.device.mobile} {
     /* background-color: orange; */
-    width: 350px;
+    width: 250px;
+    box-sizing: border-box;
   }
 `;
 
 const Select = styled.select`
-  width: 181px;
-  height: 42px;
-  background: #f5f4f5;
-  border-radius: 20px;
+  width: 302px;
+  height: 40px;
+  background: #ffffff;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 12px 20px;
   margin-left: 10px;
+  margin-top: 6px;
+  padding: 10px 0px 10px 15px;
+  border: 1px solid #e6e6e6;
   cursor: pointer;
 `;
+
+const OptionSelect = styled.option`
+  background-color: red;
+`;
+
 const ContentWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -342,22 +376,26 @@ const ContentWrapper = styled.div`
   order: 1;
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
-  ${({ theme }) => theme.device.mobile} {
-    width: 304px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 250px;
     border: none;
+    /* background-color: orange; */
+    box-sizing: border-box;
   }
 `;
 const TextWrapper = styled.div`
   width: 860px;
   height: 295px;
-  ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     /* background-color: orange; */
     width: 350px;
+    box-sizing: border-box;
   }
 `;
 const ImageWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  padding: 10px 0px;
   gap: 20px;
   width: 952px;
   height: 182px;
@@ -365,10 +403,11 @@ const ImageWrapper = styled.div`
   order: 1;
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
-  ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     /* background-color: orange; */
-    width: 350px;
+    width: 250px;
     border: none;
+    box-sizing: border-box;
   }
 `;
 const PhotoWrap = styled.div`
@@ -440,13 +479,14 @@ const BtnWrap = styled.div`
   flex-grow: 0;
   padding-left: 830px;
   /* background: pink; */
-  ${({ theme }) => theme.device.mobile} {
-    width: 350px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 250px;
     height: 56px;
     margin: auto;
     /* background: orange; */
     padding: 0px;
-    justify-content: right;
+    justify-content: center;
+    box-sizing: border-box;
   }
 `;
 export default PostWrite;
