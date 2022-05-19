@@ -9,12 +9,10 @@ import { history } from "../redux/configureStore";
 import { useDispatch } from "react-redux";
 import { actionCreators } from "../redux/modules/review";
 
-//고민러 상담후기작성페이지
-function ReqReview({ leaveSession }) {
+//고민러가 작성하는 상담후기 페이지
+function ReqReview(props) {
+  console.log("리스너 아이디", props.resMemberId);
   const dispatch = useDispatch();
-  const resMemberId = localStorage.getItem("memberId");
-  // const oppositeMemberId = 상대방아이디_리스너아이디
-  const request = localStorage.getItem("request");
 
   const [serviceComment, setServiceComment] = React.useState(null);
   const [follow, unFollow] = React.useState(false);
@@ -74,6 +72,7 @@ function ReqReview({ leaveSession }) {
 
   //고민러 고정값
   const requestReview = true;
+
   //고민러 후기 추가하기
   const finish = () => {
     let tagLike = "";
@@ -92,6 +91,7 @@ function ReqReview({ leaveSession }) {
       dispatch(
         actionCreators.addReviewReqDB(
           requestReview,
+          props.reqMemberId,
           tagLike,
           Object.values(goodResTag),
           serviceComment
@@ -114,6 +114,7 @@ function ReqReview({ leaveSession }) {
       dispatch(
         actionCreators.addReviewReqDB(
           requestReview,
+          props.reqMemberId,
           tagLike,
           Object.values(badResTag),
           serviceComment
@@ -121,12 +122,12 @@ function ReqReview({ leaveSession }) {
       );
       localStorage.removeItem("request");
     }
-    leaveSession();
+    props.informClose();
   };
   //유저찜하기 액션
   const userFollow = () => {
     unFollow(!follow);
-    dispatch(actionCreators.followDB(resMemberId, follow));
+    dispatch(actionCreators.followDB(props.reqMemberId, follow));
   };
 
   return (
@@ -146,7 +147,7 @@ function ReqReview({ leaveSession }) {
         </ReviewContainer>
         <LikeContainer>
           <Text body4>
-            "고민러"님과 상담은 어떠셨나요?
+            {props.resNickname}님과 상담은 어떠셨나요?
             <Star>*</Star>
           </Text>
           <ThumbContainer>
@@ -180,8 +181,8 @@ function ReqReview({ leaveSession }) {
               <Star>*</Star>
             </Text>
             {goodTag.map((e, i) => (
-              <ChkDiv>
-                <React.Fragment key={i}>
+              <ChkDiv key={i}>
+                <React.Fragment>
                   <input
                     type="checkbox"
                     onChange={SelectGoodTag}
@@ -207,8 +208,8 @@ function ReqReview({ leaveSession }) {
             </TitleBox>
 
             {badTag.map((e, i) => (
-              <ChkDiv>
-                <React.Fragment key={i}>
+              <ChkDiv key={i}>
+                <React.Fragment>
                   <input
                     type="checkbox"
                     onChange={SelectBadTag}
@@ -375,7 +376,8 @@ const SvcContainer = styled.div`
 `;
 
 const SvcInput = styled.div`
-  width: 400px;
+  box-sizing: border-box;
+  width: 470px;
 `;
 
 const BottomBox = styled.div`
