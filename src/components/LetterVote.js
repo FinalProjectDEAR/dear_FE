@@ -16,12 +16,11 @@ function LetterVote({ voteInfo }) {
 
   const params = useParams();
   const postId = params.postId;
-  console.log(postId);
 
   React.useEffect(() => {
     // dispatch(voteActions.detailVoteDB(postId));
     showSelection();
-  }, []);
+  }, [voteInfo.vote[0].selected]);
 
   const [vote, setVote] = React.useState("");
   const [leftSelected, setLeftSelected] = React.useState(false);
@@ -31,7 +30,6 @@ function LetterVote({ voteInfo }) {
   // const voteInfo = useSelector((state) => state.vote.voteInfo);
   console.log(voteInfo.vote[0].selected);
   console.log(leftSelected);
-  console.log(rightSelected);
 
   const showSelection = () => {
     console.log("쇼셀렉션");
@@ -143,16 +141,26 @@ const VoteWrapper = styled.div`
   background: #ffffff;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 10px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 328px;
+    height: 374px;
+    padding: 0px 44px;
+  }
 `;
 
 const CheckBox = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
   margin: 30px;
   width: 792px;
   height: 54px;
+  @media ${({ theme }) => theme.device.mobile} {
+    flex-direction: column;
+    width: 328px;
+    height: 160px;
+  }
 `;
 
 const Vote = styled.div`
@@ -169,6 +177,11 @@ const Vote = styled.div`
   border: ${(props) => props.border};
   border-radius: 30px;
   cursor: pointer;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 249px;
+    height: 54px;
+    margin: 0px;
+  }
 `;
 
 const BottomBox = styled.div`
