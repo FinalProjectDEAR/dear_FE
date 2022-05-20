@@ -58,6 +58,7 @@ const addReviewReqDB = (
           serviceComment: serviceComment,
         })
         .then((res) => {
+          history.replace("/main");
           console.log("후기추가하기", res);
           dispatch(addReview(res));
         });
@@ -93,6 +94,7 @@ const addReviewResDB = (
           serviceComment: serviceComment,
         })
         .then((res) => {
+          history.replace("/main");
           console.log("후기추가하기", res);
           dispatch(addReview(res));
         });

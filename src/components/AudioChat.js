@@ -42,7 +42,7 @@ function AudioChat() {
   const [isConnect, setIsConnect] = React.useState(false);
   const [message, setMessage] = React.useState(false);
   const [connectObj, setConnectObj] = React.useState("");
-  const [wantMore, setWantMore] = React.useState(false);
+  const [wantMore, setWantMore] = React.useState([]);
   const [thirtySec, setThirtySec] = React.useState(false);
   const [isTimeOver, setIsTimeOver] = React.useState(false);
 
@@ -90,6 +90,16 @@ function AudioChat() {
   };
 
   const sendContinueSignal = () => {
+    const wantMoreList = wantMore;
+    wantMoreList.push("true");
+    setWantMore(wantMoreList);
+
+    if (wantMore.length === 2) {
+      let date = new Date();
+      let extend = date.setMinutes(date.getMinutes() + 2);
+      setTargetTime(extend);
+    }
+
     session
       .signal({
         data: "true", // Any string (optional)
@@ -97,8 +107,7 @@ function AudioChat() {
         type: "continue", // The type of message (optional)
       })
       .then(() => {
-        setWantMore(true);
-        console.log("연장하구싶대");
+        console.log("연장하구싶대", wantMore);
       })
       .catch((error) => {
         console.error(error);
@@ -133,12 +142,15 @@ function AudioChat() {
       });
 
       mySession.on("signal:continue", (event) => {
-        if (wantMore === true && event.data === "true") {
-          let newTime = targetTime.setMinutes(targetTime.getMinutes() + 10);
-          console.log(newTime);
-          setTargetTime(newTime);
+        console.log("연장 수신");
+        const wantMoreList = wantMore;
+        wantMoreList.push(event.data);
+        setWantMore(wantMoreList);
+        if (wantMore.length === 2) {
+          let date = new Date();
+          let extend = date.setMinutes(date.getMinutes() + 2);
+          setTargetTime(extend);
         }
-        console.log("연장 수신", event.data); // Message
       });
 
       //메세지 송신을 위한 connect Obj 생성
@@ -230,7 +242,7 @@ function AudioChat() {
     }
   };
 
-  // 타이머
+  // 채팅종료시간
   function dateFormat(date) {
     let month = date.getMonth() + 1;
     let day = date.getDate();
