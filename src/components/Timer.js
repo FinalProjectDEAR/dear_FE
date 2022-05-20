@@ -1,40 +1,36 @@
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useInterval } from "../shared/hooks";
 
 import styled from "styled-components";
 import { Text, ColorBadge } from "../elements";
-import { actionCreators as chatActions } from "../redux/modules/chat";
 
-export default function Timer({ targetTime, leaveSession }) {
-  const data = new Date();
-  const remain = Math.floor((new Date(targetTime) - data) / 1000, 10);
-  console.log(remain);
+export default function Timer(props) {
+  const { targetTime, timeOverSet, askContinue } = props;
 
-  const isNotYet = useResultOfIntervalCalculator(
-    () => new Date(targetTime) - new Date() > 0,
-    10
-  );
-  return (
-    <div>
-      <TimerView targetTime={targetTime} leaveSession={leaveSession} />
-    </div>
-  );
-}
+  const useResultOfIntervalCalculator = (calculator, delay) => {
+    const [result, setResult] = useState(calculator());
+    useInterval(() => {
+      const newResult = calculator();
+      if (newResult !== result) setResult(newResult);
+    }, delay);
 
-Timer.defaultProps = {
-  targetTime: "",
-};
+    return result;
+  };
 
-function TimerView({ targetTime, leaveSession }) {
   const remain = useResultOfIntervalCalculator(() =>
     Math.floor((new Date(targetTime) - new Date()) / 1000, 10)
   );
 
-  useEffect(() => {
-    if (remain <= 0) {
-      leaveSession();
+  const thirtySec = useResultOfIntervalCalculator(() => remain === 51, 10);
+  const isTimeOver = useResultOfIntervalCalculator(() => remain === 1, 10);
+
+  React.useEffect(() => {
+    if (thirtySec) {
+      askContinue();
     }
-    return;
+    if (isTimeOver) {
+      timeOverSet();
+    }
   });
 
   return (
@@ -60,14 +56,8 @@ function TimerView({ targetTime, leaveSession }) {
   );
 }
 
-const useResultOfIntervalCalculator = (calculator, delay) => {
-  const [result, setResult] = useState(calculator());
-  useInterval(() => {
-    const newResult = calculator();
-    if (newResult !== result) setResult(newResult);
-  }, delay);
-
-  return result;
+Timer.defaultProps = {
+  targetTime: "",
 };
 
 const TimerBox = styled.div`

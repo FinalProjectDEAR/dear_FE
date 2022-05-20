@@ -16,7 +16,6 @@ function ChatClose(props) {
   const [review, setReView] = React.useState(false);
 
   const role = useSelector((state) => state.chat.roomAuthInfo.role);
-  console.log("종료시 역할", role);
   const chatInfo = useSelector((state) => state.chat.chatInfo);
 
   const finish = () => {

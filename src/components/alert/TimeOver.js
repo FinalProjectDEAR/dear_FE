@@ -10,9 +10,9 @@ import { Text, TextB, Button } from "../../elements";
 import ResReview from "../../pages/ResReview";
 import ReqReview from "../../pages/ReqReview";
 
-function OtherClose(props) {
+function TimeOver(props) {
   const { informClose, leaveSession } = props;
-  const [review, setReview] = React.useState(false);
+  const [review, setReview] = React.useState("");
   const [view, setView] = React.useState(true);
 
   const role = useSelector((state) => state.chat.roomAuthInfo.role);
@@ -23,7 +23,7 @@ function OtherClose(props) {
       {view ? (
         <CloseContainer>
           <LineBox>
-            <TextB subTitle> 상대방이 상담을 종료하였습니다.</TextB>
+            <TextB subTitle> 채팅시간이 종료되었습니다. </TextB>
           </LineBox>
           <BottomBox>
             <Button
@@ -31,6 +31,7 @@ function OtherClose(props) {
               size="narrow"
               margin="0px 8px"
               _onClick={() => {
+                console.log("버튼눌렀어");
                 setView(false);
                 setReview(true);
                 leaveSession();
@@ -46,6 +47,7 @@ function OtherClose(props) {
 
       {review && role === "request" ? (
         <ReqReview
+          leaveSession={leaveSession}
           resMemberId={chatInfo.resMemberId}
           resNickname={chatInfo.resNickname}
           informClose={informClose}
@@ -62,7 +64,7 @@ function OtherClose(props) {
   );
 }
 
-export default OtherClose;
+export default TimeOver;
 
 const CloseContainer = styled.div`
   width: 400px;
