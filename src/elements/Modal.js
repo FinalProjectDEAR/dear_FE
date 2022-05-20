@@ -93,7 +93,7 @@ const Background = styled.div`
 const ModalBlock = styled.div`
   position: fixed;
   display: block;
-  top: 6.5rem;
+  top: 1rem;
   border-radius: 10px;
   padding: 1.5rem;
   /* background-color: white; */
