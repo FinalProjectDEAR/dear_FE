@@ -11,7 +11,7 @@ import ResReview from "../../pages/ResReview";
 import ReqReview from "../../pages/ReqReview";
 
 function OtherClose(props) {
-  const { informClose } = props;
+  const { informClose, leaveSession } = props;
   const [Review, setReview] = React.useState(false);
   const [view, setView] = React.useState(true);
 
@@ -34,6 +34,7 @@ function OtherClose(props) {
               _onClick={() => {
                 setView(false);
                 setReview(true);
+                leaveSession();
               }}
             >
               <Text margin="0px" color="#fff" body4 cursor="pointer">
