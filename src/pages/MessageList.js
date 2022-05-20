@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Text } from "../elements";
+import { Text, TextB } from "../elements";
 //시간알려주는패키지
 import TimeCounting from "time-counting";
 
@@ -22,18 +22,22 @@ const MessageList = (props) => {
   const createdTime = TimeCounting(createdAt, option);
   return (
     <MessageWrapper>
-      <MessageContainer>{message}</MessageContainer>
+      <MessageContainer>
+        <TextB sub color="#2E2A32" textAlign="left">
+          {message}
+        </TextB>
+      </MessageContainer>
       <MessageBox>
-        <Text>
-          {reqMemberNickname}, {createdTime}
+        <Text sub4 color="#666">
+          {reqMemberNickname} / {createdTime}
         </Text>
-        <button
+        <Btn
           onClick={() => {
             history.push(`/receivedMsg/${messageId}`);
           }}
         >
           쪽지보기
-        </button>
+        </Btn>
       </MessageBox>
     </MessageWrapper>
   );
@@ -42,21 +46,25 @@ const MessageList = (props) => {
 const MessageWrapper = styled.div`
   width: 328px;
   height: 324px;
-  border: 1px solid red;
   margin: auto;
+  background-color: #fafafa;
+  box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
 `;
 const MessageContainer = styled.div`
-  justify-content: left;
-  text-align: left;
-  align-items: left;
+  height: 250px;
   box-sizing: border-box;
-  padding: 40px 34px;
-  border: 1px solid red;
+  padding: 20px 34px;
 `;
 const MessageBox = styled.div`
-  border: 1px solid red;
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin: 20px 34px;
+`;
+const Btn = styled.button`
+  background-color: transparent;
+  border: none;
+  text-decoration: underline;
+  color: #948a9e;
+  cursor: pointer;
 `;
 export default MessageList;
