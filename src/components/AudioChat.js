@@ -406,7 +406,7 @@ function AudioChat() {
 
       {otherClose ? (
         <Modal>
-          <OtherClose informClose={informClose} />
+          <OtherClose informClose={informClose} leaveSession={leaveSession} />
         </Modal>
       ) : null}
 
