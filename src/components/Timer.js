@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { Text, ColorBadge } from "../elements";
 
 export default function Timer(props) {
-  const { targetTime, timeOverSet, askContinue } = props;
+  const { targetTime, timeOverSet, askContinue, wantMore } = props;
 
   const useResultOfIntervalCalculator = (calculator, delay) => {
     const [result, setResult] = useState(calculator());
@@ -21,11 +21,11 @@ export default function Timer(props) {
     Math.floor((new Date(targetTime) - new Date()) / 1000, 10)
   );
 
-  const thirtySec = useResultOfIntervalCalculator(() => remain === 51, 10);
+  const isContinue = useResultOfIntervalCalculator(() => remain === 51, 10); //테스트 10초마다 연장의사 묻기
   const isTimeOver = useResultOfIntervalCalculator(() => remain === 1, 10);
 
   React.useEffect(() => {
-    if (thirtySec) {
+    if (wantMore.agree.length / 2 < 5 && isContinue) {
       askContinue();
     }
     if (isTimeOver) {

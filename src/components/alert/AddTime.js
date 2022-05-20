@@ -5,7 +5,9 @@ import styled from "styled-components";
 import { Text, TextB, Button } from "../../elements";
 
 function AddTime(props) {
-  const { addTimeClose, sendContinueSignal, leftOver } = props;
+  const { addTimeClose, sendContinueSignal, wantMore } = props;
+
+  const leftOver = 5 - parseInt(wantMore.agree.length / 2);
 
   return (
     <React.Fragment>
@@ -16,7 +18,7 @@ function AddTime(props) {
           </TextB>
           <Text sub4 color="#999999">
             나와 상대방 모두 연장하기를 클릭 상담이 자동으로 연장됩니다. (남은
-            연장 횟수 (5/5)
+            연장 횟수 ({leftOver}/5)
           </Text>
         </LineBox>
 

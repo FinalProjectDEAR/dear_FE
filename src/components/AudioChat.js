@@ -40,29 +40,21 @@ function AudioChat() {
   const [otherClose, setOtherClose] = React.useState(false);
   const [targetTime, setTargetTime] = React.useState("");
   const [isConnect, setIsConnect] = React.useState(false);
-  const [message, setMessage] = React.useState(false);
   const [connectObj, setConnectObj] = React.useState("");
-  const [wantMore, setWantMore] = React.useState([]);
-  const [thirtySec, setThirtySec] = React.useState(false);
+  const [wantMore, setWantMore] = React.useState({ agree: [] });
+  const [isContinue, setIsContinue] = React.useState(false);
   const [isTimeOver, setIsTimeOver] = React.useState(false);
-
-  console.log("30초 넘었어?", thirtySec);
-  console.log(isTimeOver);
 
   //모달
   const [modalOpen, setModalOpen] = React.useState(false);
   const [noListener, setNoListener] = React.useState(false);
-
-  const openModal = () => {
-    setModalOpen(true);
-  };
 
   const closeModal = () => {
     setModalOpen(false);
   };
 
   const addTimeClose = () => {
-    setThirtySec(false);
+    setIsContinue(false);
   };
 
   //브라우저 새로고침, 종료시
@@ -90,13 +82,14 @@ function AudioChat() {
   };
 
   const sendContinueSignal = () => {
-    const wantMoreList = wantMore;
+    console.log("연장송부", wantMore);
+    const wantMoreList = wantMore.agree;
     wantMoreList.push("true");
-    setWantMore(wantMoreList);
+    setWantMore({ ...wantMore, agree: wantMoreList });
 
-    if (wantMore.length === 2) {
+    if (wantMore.agree.length % 2 === 0) {
       let date = new Date();
-      let extend = date.setMinutes(date.getMinutes() + 2);
+      let extend = date.setMinutes(date.getMinutes() + 1); //연장 테스트 1분
       setTargetTime(extend);
     }
 
@@ -138,17 +131,17 @@ function AudioChat() {
 
       mySession.on("signal:close", (event) => {
         setOtherClose(true);
-        console.log("클로즈 수신", event.data); // Message string
+        console.log("종료 수신", event.data);
       });
 
       mySession.on("signal:continue", (event) => {
-        console.log("연장 수신");
-        const wantMoreList = wantMore;
-        wantMoreList.push(event.data);
-        setWantMore(wantMoreList);
-        if (wantMore.length === 2) {
+        console.log("연장 수신", wantMore);
+        const wantMoreList = wantMore.agree;
+        wantMoreList.push("true");
+        setWantMore({ ...wantMore, agree: wantMoreList });
+        if (wantMore.agree.length % 2 === 0) {
           let date = new Date();
-          let extend = date.setMinutes(date.getMinutes() + 2);
+          let extend = date.setMinutes(date.getMinutes() + 1); //연장 테스트 1분
           setTargetTime(extend);
         }
       });
@@ -197,7 +190,7 @@ function AudioChat() {
   //매칭 안될 때
   React.useEffect(() => {
     if (!isConnect) {
-      console.log("30초센다?");
+      console.log("30초 카운트");
       setTimeout(waitTimeOut, 30000);
     }
   }, []);
@@ -273,7 +266,7 @@ function AudioChat() {
 
   //연장의사묻기
   const askContinue = () => {
-    setThirtySec(true);
+    setIsContinue(true);
   };
 
   //타임오버
@@ -297,6 +290,7 @@ function AudioChat() {
                   targetTime={targetTime}
                   timeOverSet={timeOverSet}
                   askContinue={askContinue}
+                  wantMore={wantMore}
                 />
                 <UserAudioComponent
                   streamManager={subscribers[0]}
@@ -315,6 +309,7 @@ function AudioChat() {
                   targetTime={targetTime}
                   timeOverSet={timeOverSet}
                   askContinue={askContinue}
+                  wantMore={wantMore}
                 />
                 <UserAudioComponent
                   streamManager={mainStreamManager}
@@ -457,23 +452,23 @@ function AudioChat() {
         </Modal>
       ) : null}
 
-      {thirtySec === true ? (
+      {isContinue === true ? (
         <Modal closeModal={closeModal}>
           <AddTime
             sendContinueSignal={sendContinueSignal}
             addTimeClose={addTimeClose}
             leaveSession={leaveSession}
             informClose={informClose}
+            wantMore={wantMore}
           />
         </Modal>
       ) : null}
       {isTimeOver === true ? (
         <Modal>
           <TimeOver
-            sendContinueSignal={sendContinueSignal}
-            timeOverSet={timeOverSet}
             leaveSession={leaveSession}
             informClose={informClose}
+            chatClose={chatClose}
           />
         </Modal>
       ) : null}
