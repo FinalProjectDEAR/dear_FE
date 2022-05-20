@@ -16,18 +16,22 @@ import Timer from "../components/Timer";
 import Loading from "../pages/Loading";
 import ChatClose from "./alert/ChatClose";
 import OtherClose from "./alert/OtherClose";
+import AddTime from "./alert/AddTime";
+import TimeOver from "./alert/TimeOver";
 import NoMatch from "./alert/NoMatch";
 
 function AudioChat() {
   const dispatch = useDispatch();
 
   const nickname = localStorage.getItem("nickname");
+  //세션 입장정보
   const token = useSelector((state) => state.chat.roomAuthInfo.token);
   const sessionId = useSelector((state) => state.chat.roomAuthInfo.sessionId);
   const role = useSelector((state) => state.chat.roomAuthInfo.role);
-
+  //채팅방 정보
   const chatInfo = useSelector((state) => state.chat.chatInfo);
 
+  //채팅
   const [mySessionId, setMySessionId] = React.useState("");
   const [session, setSession] = React.useState(undefined);
   const [mainStreamManager, setMainStreamManager] = React.useState(undefined);
@@ -38,6 +42,12 @@ function AudioChat() {
   const [isConnect, setIsConnect] = React.useState(false);
   const [message, setMessage] = React.useState(false);
   const [connectObj, setConnectObj] = React.useState("");
+  const [wantMore, setWantMore] = React.useState(false);
+  const [thirtySec, setThirtySec] = React.useState(false);
+  const [isTimeOver, setIsTimeOver] = React.useState(false);
+
+  console.log("30초 넘었어?", thirtySec);
+  console.log(isTimeOver);
 
   //모달
   const [modalOpen, setModalOpen] = React.useState(false);
@@ -51,14 +61,18 @@ function AudioChat() {
     setModalOpen(false);
   };
 
-  // 오디오채팅 (오픈비듀)
-  const onbeforeunload = (event) => {
-    //크롬에서는 표준에 따른 기본동작을 방지하기 위해 아래 두게 설정
-    event.preventDefault();
-    event.returnValue = "";
-    dispatch(chatActions.disConnectDB());
+  const addTimeClose = () => {
+    setThirtySec(false);
   };
 
+  //브라우저 새로고침, 종료시
+  const onbeforeunload = (event) => {
+    event.preventDefault();
+    event.returnValue = "";
+    informClose();
+  };
+
+  // 채팅중 실시간 시그널
   const sendCloseSignal = () => {
     console.log("종료 시그널 보내", connectObj);
     session
@@ -83,6 +97,7 @@ function AudioChat() {
         type: "continue", // The type of message (optional)
       })
       .then(() => {
+        setWantMore(true);
         console.log("연장하구싶대");
       })
       .catch((error) => {
@@ -90,6 +105,7 @@ function AudioChat() {
       });
   };
 
+  //세션 연결 및 커넥트
   React.useEffect(() => {
     window.addEventListener("beforeunload", onbeforeunload);
     const connectSession = () => {
@@ -105,27 +121,27 @@ function AudioChat() {
         setSubscribers([...subscribers, ...subscriberList]);
 
         let date = new Date();
-        let target = date.setMinutes(date.getMinutes() + 10);
+        let target = date.setMinutes(date.getMinutes() + 1); // 테스트는 1분으로 시작!
         setTargetTime(target);
         setIsConnect(true);
         dispatch(chatActions.getChatInfoDB(sessionId));
       });
 
       mySession.on("signal:close", (event) => {
-        console.log("수신메시지 타입", typeof event.data);
         setOtherClose(true);
         console.log("클로즈 수신", event.data); // Message string
       });
 
       mySession.on("signal:continue", (event) => {
-        if (event.data === true) {
-          setMessage(!message);
+        if (wantMore === true && event.data === "true") {
           let newTime = targetTime.setMinutes(targetTime.getMinutes() + 10);
+          console.log(newTime);
           setTargetTime(newTime);
         }
         console.log("연장 수신", event.data); // Message
       });
 
+      //메세지 송신을 위한 connect Obj 생성
       mySession.on("connectionCreated", (event) => {
         setConnectObj(event.connection);
         console.log("커넥션 created", event.connection);
@@ -160,41 +176,36 @@ function AudioChat() {
     };
 
     connectSession();
-    // subscribeMsg();
 
     return () => {
       window.removeEventListener("beforeunload", onbeforeunload);
     };
   }, []);
 
-  // const subscribeMsg = () => {
+  //매칭 안될 때
+  React.useEffect(() => {
+    if (!isConnect) {
+      console.log("30초센다?");
+      setTimeout(waitTimeOut, 30000);
+    }
+  }, []);
 
-  // };
-
-  //매칭안될때
   const noMatch = () => {
     leaveSession();
     informClose();
   };
 
-  const timeOut = () => {
+  const waitTimeOut = () => {
     setNoListener(true);
   };
 
-  React.useEffect(() => {
-    if (!isConnect) {
-      console.log("30초센다?");
-      setTimeout(timeOut, 30000);
-    }
-  }, []);
-
-  // 종료 메시지 보내기
+  // 채팅 종료
   const chatClose = () => {
     sendCloseSignal();
     setTimeout(leaveSession, 2000);
   };
 
-  //세션 종료
+  //세션,커넥션 종료
   const leaveSession = () => {
     console.log("오픈비두 세션종료");
 
@@ -248,6 +259,16 @@ function AudioChat() {
     );
   }
 
+  //연장의사묻기
+  const askContinue = () => {
+    setThirtySec(true);
+  };
+
+  //타임오버
+  const timeOverSet = () => {
+    setIsTimeOver(true);
+  };
+
   return (
     <React.Fragment>
       {role === "request" || subscribers.length > 0 ? (
@@ -260,7 +281,11 @@ function AudioChat() {
                   color={chatInfo.reqColor}
                   // color="#D62020"
                 />
-                <Timer targetTime={targetTime} leaveSession={leaveSession} />
+                <Timer
+                  targetTime={targetTime}
+                  timeOverSet={timeOverSet}
+                  askContinue={askContinue}
+                />
                 <UserAudioComponent
                   streamManager={subscribers[0]}
                   // color="#FFD05B"
@@ -274,7 +299,11 @@ function AudioChat() {
                   streamManager={subscribers[0]}
                   color={chatInfo.reqColor}
                 />
-                <Timer targetTime={targetTime} />
+                <Timer
+                  targetTime={targetTime}
+                  timeOverSet={timeOverSet}
+                  askContinue={askContinue}
+                />
                 <UserAudioComponent
                   streamManager={mainStreamManager}
                   color={chatInfo.resColor}
@@ -413,6 +442,27 @@ function AudioChat() {
       {noListener && isConnect === false && role === "request" ? (
         <Modal closeModal={closeModal}>
           <NoMatch noMatch={noMatch} />
+        </Modal>
+      ) : null}
+
+      {thirtySec === true ? (
+        <Modal closeModal={closeModal}>
+          <AddTime
+            sendContinueSignal={sendContinueSignal}
+            addTimeClose={addTimeClose}
+            leaveSession={leaveSession}
+            informClose={informClose}
+          />
+        </Modal>
+      ) : null}
+      {isTimeOver === true ? (
+        <Modal>
+          <TimeOver
+            sendContinueSignal={sendContinueSignal}
+            timeOverSet={timeOverSet}
+            leaveSession={leaveSession}
+            informClose={informClose}
+          />
         </Modal>
       ) : null}
     </React.Fragment>

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { Text, TextB, Button } from "../../elements";
 
 function AddTime(props) {
-  const { closeModal, addTime } = props;
+  const { addTimeClose, sendContinueSignal, leftOver } = props;
 
   return (
     <React.Fragment>
@@ -16,7 +16,7 @@ function AddTime(props) {
           </TextB>
           <Text sub4 color="#999999">
             나와 상대방 모두 연장하기를 클릭 상담이 자동으로 연장됩니다. (남은
-            연장 횟수 5/5)
+            연장 횟수 (5/5)
           </Text>
         </LineBox>
 
@@ -25,7 +25,7 @@ function AddTime(props) {
             secondaryDefault
             size="narrow"
             margin="0px 8px"
-            _onClick={closeModal}
+            _onClick={addTimeClose}
           >
             <Text body4 color="#7A37BE" cursor="pointer">
               돌아가기
@@ -35,7 +35,10 @@ function AddTime(props) {
             primaryDefault
             size="narrow"
             margin="0px 8px"
-            _onClick={addTime}
+            _onClick={() => {
+              sendContinueSignal();
+              addTimeClose();
+            }}
           >
             <Text body4 color="#fff" cursor="pointer">
               연장하기

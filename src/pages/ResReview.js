@@ -160,8 +160,8 @@ function ResReview(props) {
               <Star>*</Star>
             </Text>
             {goodTag.map((e, i) => (
-              <ChkDiv>
-                <React.Fragment key={i}>
+              <ChkDiv key={i}>
+                <React.Fragment >
                   <input
                     type="checkbox"
                     onChange={SelectGoodTag}
@@ -187,8 +187,8 @@ function ResReview(props) {
             </TitleBox>
 
             {badTag.map((e, i) => (
-              <ChkDiv>
-                <React.Fragment key={i}>
+              <ChkDiv key={i}>
+                <React.Fragment>
                   <input
                     type="checkbox"
                     onChange={SelectBadTag}
