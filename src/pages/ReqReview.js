@@ -122,7 +122,7 @@ function ReqReview(props) {
       );
       localStorage.removeItem("request");
     }
-    props.informClose();
+    // props.informClose();
   };
   //유저찜하기 액션
   const userFollow = () => {

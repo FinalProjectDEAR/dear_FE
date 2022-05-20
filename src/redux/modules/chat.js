@@ -107,8 +107,6 @@ const closeChatDB = (sessionId, time) => {
     try {
       const { data } = await apis.closeChat(sessionId, time);
       console.log(data);
-
-      history.replace("/main");
     } catch {
       alert("채팅방을 종료하는데 오류가 발생했습니다.");
       history.replace("/main");

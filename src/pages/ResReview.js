@@ -106,7 +106,7 @@ function ResReview(props) {
       );
       localStorage.removeItem("response");
     }
-    props.informClose();
+    // props.informClose();
   };
 
   return (
@@ -161,7 +161,7 @@ function ResReview(props) {
             </Text>
             {goodTag.map((e, i) => (
               <ChkDiv key={i}>
-                <React.Fragment >
+                <React.Fragment>
                   <input
                     type="checkbox"
                     onChange={SelectGoodTag}
