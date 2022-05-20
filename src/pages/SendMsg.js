@@ -4,7 +4,7 @@ import { Text, Input, Button, TextB, Modal } from "../elements";
 import styled from "styled-components";
 //리덕스관련
 import { useDispatch } from "react-redux";
-import { actionCreators } from "../redux/modules/message";
+import { MsgActionCreators } from "../redux/modules/message";
 
 function SendMsg() {
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ function SendMsg() {
       window.alert("쪽지를 작성해주세요!");
       return;
     }
-    dispatch(actionCreators.addMessageDB(msg, resUser));
+    dispatch(MsgActionCreators.addMessageDB(msg, resUser));
   };
   return (
     <>

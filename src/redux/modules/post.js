@@ -7,7 +7,7 @@ import { apis, api } from "../../shared/apis";
 // 액션
 const GET_POST = "GET_POST";
 const GET_DETAIL = "GET_DETAIL";
-const GET_CATEDETAIL = "ET_CATEDETAIL";
+const GET_CATEDETAIL = "GET_CATEDETAIL";
 const ADD_POST = "ADD_POST";
 const EDIT_POST = "EDIT_POST";
 const DELETE_POST = "DELETE_POST";
