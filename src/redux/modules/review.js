@@ -103,13 +103,13 @@ const addReviewResDB = (
     }
   };
 };
-//유저팔로우하기 (쿼리문 준비해두기)
+//유저팔로우하기
 const followDB = (memberId, follow) => {
   console.log("팔로우", memberId, follow);
   return function (dispatch, getState, { history }) {
     try {
       api.post(`user/${memberId}/follow?follow=${follow}`, {}).then((res) => {
-        console.log("팔로우하기", res.data.data.follow);
+        console.log("팔로우하기", res.data);
         // dispatch(follow(memberId, res.data.data));
       });
     } catch (err) {

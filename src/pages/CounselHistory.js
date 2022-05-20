@@ -1,18 +1,29 @@
 import React from "react";
 import styled from "styled-components";
 import { Text, TextB, Tag, ColorBadge } from "../elements";
+//시간알려주는패키지
+import TimeCounting from "time-counting";
 
-const CounselHistory = () => {
+const CounselHistory = (props) => {
+  // console.log(props.item);
+  //시간을 알아보자!
+  const option = {
+    lang: "ko",
+    calculate: {
+      justNow: 60,
+    },
+  };
+  const createdAt = TimeCounting(props.item.createdAt, option);
   return (
     // <HistoryWrapper>
     //   <HistoryList>
     <CounselHistoryWrapper>
       <div className="tag">
-        <Tag counselRes2>참여한 상담</Tag>
+        <Tag counselRes2>{props?.item.myRole}</Tag>
       </div>
       <div className="content">
         <TextB sub color="#2E2A32">
-          고민은최대20자입력고민은최대20자입력
+          {props?.item.reqComment}
         </TextB>
       </div>
 
@@ -20,17 +31,25 @@ const CounselHistory = () => {
         <ColorBadge
           border="2px solid #F8F8F8"
           size="14"
-          bg="#43BDE3"
+          bg={props?.item.color}
           cursor="pointer"
         />
         <Text sub4 color="#66666">
-          내연애는못하는사람 (2일 전)
+          {props?.item.nickname} ({createdAt})
         </Text>
       </div>
     </CounselHistoryWrapper>
     //   </HistoryList>
     // </HistoryWrapper>
   );
+};
+
+CounselHistory.defaultProps = {
+  role: "request",
+  color: "ddd",
+  chatTitle: "고백을 어떻게 할까요?",
+  nickName: "내연애는못하는사람",
+  createdAt: "2",
 };
 
 const HistoryWrapper = styled.div`

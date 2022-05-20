@@ -18,6 +18,7 @@ const initialState = {
   post: [],
   postList: [],
   detailPost: [],
+  detail_post: [],
   postLike: [],
 };
 
@@ -206,6 +207,7 @@ export default handleActions(
       }),
     [DELETE_POST]: (state, action) =>
       produce(state, (draft) => {
+        console.log(state.detail_post, action.payload);
         draft.detail_post = draft.detail_post.filter(
           (p) => p.postId !== action.payload.postId
         );

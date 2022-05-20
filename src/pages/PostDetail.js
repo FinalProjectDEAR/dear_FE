@@ -27,7 +27,7 @@ function PostDetail(props) {
   //페이지
   const [page, setPage] = React.useState(1);
   const totalPage = useSelector((state) => state.comment.pages);
-  console.log(totalPage);
+  // console.log(totalPage);
   //포스트 상세 조회
   React.useEffect(() => {
     dispatch(actionCreators.getDetailDB(postId));
@@ -39,7 +39,7 @@ function PostDetail(props) {
   //상세페이지 가져오기
   const post = useSelector((state) => state.post.detailPost);
   const commentList = useSelector((state) => state.comment.comments);
-  console.log(commentList);
+  // console.log(commentList);
   //시간을 알아보자!
   const option = {
     lang: "ko",

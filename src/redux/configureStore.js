@@ -12,6 +12,7 @@ import comment from "./modules/comment";
 import review from "./modules/review";
 import chat from "./modules/chat";
 import message from "./modules/message";
+import mypage from "./modules/mypage";
 
 export const history = createBrowserHistory();
 
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   comment: comment,
   review: review,
   message: message,
+  mypage: mypage,
   router: connectRouter(history),
 });
 

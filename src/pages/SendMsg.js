@@ -3,7 +3,7 @@ import { history } from "../redux/configureStore";
 import { Text, Input, Button, TextB, Modal } from "../elements";
 import styled from "styled-components";
 //리덕스관련
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { MsgActionCreators } from "../redux/modules/message";
 
 function SendMsg() {
@@ -25,13 +25,16 @@ function SendMsg() {
     }
     setTextLength(wordLength);
   };
-  const resUser = "마포대교";
+  //팔로우가져오기
+  const followNickName = useSelector((state) => state.mypage.follower);
+  console.log(followNickName);
+
   const send = () => {
     if (msg === "") {
       window.alert("쪽지를 작성해주세요!");
       return;
     }
-    dispatch(MsgActionCreators.addMessageDB(msg, resUser));
+    dispatch(MsgActionCreators.addMessageDB(msg, followNickName));
   };
   return (
     <>
@@ -41,7 +44,8 @@ function SendMsg() {
             <MsgWrapper>
               <TitleWrapper>
                 <TextB sub>
-                  <NickNameSpan>{resUser}</NickNameSpan> 님에게 쪽지 보내기
+                  <NickNameSpan>{followNickName}</NickNameSpan> 님에게 쪽지
+                  보내기
                 </TextB>
               </TitleWrapper>
               <MsgBox>

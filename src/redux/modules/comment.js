@@ -44,7 +44,7 @@ const getCommentDB = (postId, page) => {
   return function (dispatch, getState, { history }) {
     try {
       api.get(`anonypost/${postId}/comment/${page}`, {}).then((res) => {
-        console.log("댓글가져오기", res.data);
+        // console.log("댓글가져오기", res.data);
         dispatch(getComment(res.data));
       });
     } catch (err) {
@@ -62,7 +62,7 @@ const addCommentDB = (comment, postId) => {
       api
         .post(`anonypost/board/${postId}/comment`, comment.comment)
         .then((res) => {
-          console.log("댓글 추가", res.data.data);
+          // console.log("댓글 추가", res.data.data);
           dispatch(addComment(res.data.data));
         });
     } catch (err) {
@@ -113,7 +113,7 @@ const likeCommentDB = (postId, commentId) => {
       api
         .post(`anonypost/board/${postId}/commentLikes/${commentId}`, {})
         .then((res) => {
-          console.log("댓글좋아요 Res", res);
+          // console.log("댓글좋아요 Res", res);
           dispatch(likeComment(commentId, res.data.data.likes));
         });
     } catch (err) {
@@ -155,8 +155,8 @@ export default handleActions(
       }),
     [LIKE]: (state, action) =>
       produce(state, (draft) => {
-        console.log("댓글 좋아요 받아온 값", action.payload);
-        console.log("댓글 좋아요 state", state);
+        // console.log("댓글 좋아요 받아온 값", action.payload);
+        // console.log("댓글 좋아요 state", state);
         draft.comments.map((e, id) => {
           if (action.payload.commentId === e.commentId) {
             e.likes = action.payload.likes;
