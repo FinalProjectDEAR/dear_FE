@@ -6,11 +6,11 @@ import { history } from "../redux/configureStore";
 import { actionCreators as chatActions } from "../redux/modules/chat";
 
 import styled from "styled-components";
+import arrowBack from "../assets/arrow_back.png";
 
 function ResChatStart() {
   const dispatch = useDispatch();
   const [category, setCategory] = React.useState(false);
-  const [gender, setGender] = React.useState("");
 
   const memberId = localStorage.getItem("memberId");
 
@@ -34,7 +34,6 @@ function ResChatStart() {
     }
     const chatInfo = {
       category: category,
-      gender: gender,
     };
     dispatch(chatActions.resChatDB(category));
   };
@@ -45,18 +44,23 @@ function ResChatStart() {
         <Modal closeModal={closeModal}>
           <React.Fragment>
             <ResContainer>
-              <LineBox>
-                <TitleBox>
-                  <TextB subTitle textAlign="left">
-                    상담은 어떻게 진행할까요?
-                  </TextB>
-                </TitleBox>
+              <ArrowLine>
+                <ArrowBack
+                  src={arrowBack}
+                  onClick={() => {
+                    history.goBack();
+                  }}
+                />
+              </ArrowLine>
+              <TitleBox>
+                <TextB subTitle textAlign="left">
+                  상담은 어떻게 진행할까요?
+                </TextB>
                 <span style={{ color: "red", marginLeft: "4px" }}> *</span>
                 <Text sub7 margin="0px 4px">
-                  {" "}
                   필수입력
                 </Text>
-              </LineBox>
+              </TitleBox>
               <LineBox>
                 <ChatInfoBox>
                   <Text body4>
@@ -74,7 +78,9 @@ function ResChatStart() {
                         setCategory(e.target.value);
                       }}
                     />
-                    썸
+                    <Text sub6 textAlign="center" color="#333">
+                      솔로
+                    </Text>
                   </CheckBox>
                   <CheckBox>
                     <input
@@ -85,7 +91,9 @@ function ResChatStart() {
                         setCategory(e.target.value);
                       }}
                     />
-                    고백
+                    <Text sub6 textAlign="center" color="#333">
+                      짝사랑
+                    </Text>
                   </CheckBox>
                   <CheckBox>
                     <input
@@ -96,7 +104,9 @@ function ResChatStart() {
                         setCategory(e.target.value);
                       }}
                     />
-                    연애중
+                    <Text sub6 textAlign="center" color="#333">
+                      썸
+                    </Text>
                   </CheckBox>
                   <CheckBox>
                     <input
@@ -107,7 +117,9 @@ function ResChatStart() {
                         setCategory(e.target.value);
                       }}
                     />
-                    이별
+                    <Text sub6 textAlign="center" color="#333">
+                      연애
+                    </Text>
                   </CheckBox>
                   <CheckBox>
                     <input
@@ -118,7 +130,9 @@ function ResChatStart() {
                         setCategory(e.target.value);
                       }}
                     />
-                    재회
+                    <Text sub6 textAlign="center" color="#333">
+                      이별
+                    </Text>
                   </CheckBox>
                   <CheckBox>
                     <input
@@ -129,7 +143,9 @@ function ResChatStart() {
                         setCategory(e.target.value);
                       }}
                     />
-                    기타
+                    <Text sub6 textAlign="center" color="#333">
+                      기타
+                    </Text>
                   </CheckBox>
                 </CategoryBox>
               </LineBox>
@@ -148,6 +164,11 @@ function ResChatStart() {
               </BottomBox>
             </ResContainer>
           </React.Fragment>
+          <MobileButton onClick={submit}>
+            <Text body4 color="#fff" cursor="pointer" textAlign="center">
+              상담 시작하기
+            </Text>
+          </MobileButton>
         </Modal>
       )}
     </>
@@ -162,12 +183,43 @@ const ResContainer = styled.div`
   box-sizing: border-box;
   background: #ffffff;
   border-radius: 20px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 360px;
+    min-height: 700px;
+    padding: 44px 20px;
+    border-radius: 0px;
+  }
+`;
+
+const ArrowBack = styled.img`
+  display: none;
+  width: 24px;
+  cursor: pointer;
+`;
+
+const ArrowLine = styled.div`
+  display: none;
+  width: 320px;
+  height: 24px;
+  margin-bottom: 24px;
+  @media ${({ theme }) => theme.device.mobile} {
+    display: flex;
+    ${ArrowBack} {
+      display: flex;
+      justify-content: flex-start;
+    }
+  }
 `;
 
 const LineBox = styled.div`
   display: flex;
   align-items: center;
   margin: 0px auto;
+  @media ${({ theme }) => theme.device.mobile} {
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 320px;
+  }
 `;
 
 const TitleBox = styled.div`
@@ -175,6 +227,9 @@ const TitleBox = styled.div`
   justify-content: flex-start;
   align-items: center;
   height: 40px;
+  @media ${({ theme }) => theme.device.mobile} {
+    margin-bottom: 15px;
+  }
 `;
 
 const ChatInfoBox = styled.div`
@@ -183,6 +238,10 @@ const ChatInfoBox = styled.div`
   align-items: center;
   width: 30%;
   box-sizing: border-box;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 320px;
+    height: 26px;
+  }
 `;
 
 const CheckBox = styled.div`
@@ -190,6 +249,11 @@ const CheckBox = styled.div`
   align-items: center;
   width: auto;
   height: 24px;
+  @media ${({ theme }) => theme.device.mobile} {
+    justify-content: flex-start;
+    margin: 5px 0px;
+    margin-right: 33px;
+  }
 `;
 
 const CategoryBox = styled.div`
@@ -198,14 +262,14 @@ const CategoryBox = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 18px 0px;
-`;
-
-const GenderBox = styled.div`
-  width: 40%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 0px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 320px;
+    height: 40px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 0px;
+    margin-bottom: 20px;
+  }
 `;
 
 const BottomBox = styled.div`
@@ -215,5 +279,24 @@ const BottomBox = styled.div`
 
   @media ${({ theme }) => theme.device.mobile} {
     display: none;
+  }
+`;
+
+const MobileButton = styled.div`
+  display: none;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  width: 360px;
+  height: 48px;
+
+  background: #7a37be;
+  border-radius: 0px;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    display: flex;
+    position: fixed;
+    bottom: 0;
   }
 `;

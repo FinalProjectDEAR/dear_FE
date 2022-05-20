@@ -4,6 +4,7 @@ import styled from "styled-components";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import arrowBack from "../assets/arrow_back.png";
 
 import { history } from "../redux/configureStore";
 import { useDispatch } from "react-redux";
@@ -134,6 +135,14 @@ function ReqReview(props) {
     <React.Fragment>
       <ReviewWrapper>
         <ReviewContainer>
+          <ArrowLine>
+            <ArrowBack
+              src={arrowBack}
+              onClick={() => {
+                history.goBack();
+              }}
+            />
+          </ArrowLine>
           <TitleBox>
             <TextB subTitle textAlign="left">
               상담후기를 작성해주세요.
@@ -199,13 +208,15 @@ function ReqReview(props) {
 
         {badClick ? (
           <ReviewBox>
-            <TitleBox>
-              <Text body4 margin="13px 0px">
+            <BadTagLine>
+              <Text body4>
                 '별로예요'에 답한 이유는 무엇인가요?
                 <Star>*</Star>
               </Text>
-              <BadManner>비매너 후기는 상대방이 볼 수 없어요</BadManner>
-            </TitleBox>
+              <Text sub7 color="#d53253" margin="0px 4px">
+                비매너 후기는 상대방이 볼 수 없어요
+              </Text>
+            </BadTagLine>
 
             {badTag.map((e, i) => (
               <ChkDiv key={i}>
@@ -227,6 +238,7 @@ function ReqReview(props) {
           <Text body4>서비스에 대한 간단한 한줄평을 남겨주세요!</Text>
           <SvcInput>
             <Input
+              margin="10px 0px"
               padding="10px 15px"
               placeholder="20자 이내로 입력해주세요."
               _onChange={(e) => {
@@ -271,6 +283,33 @@ const ReviewWrapper = styled.div`
   background-color: #ffffff;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 20px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 360px;
+    min-height: 640px;
+    padding: 44px 20px;
+    border-radius: 0px;
+    overflow: scroll;
+  }
+`;
+
+const ArrowBack = styled.img`
+  display: none;
+  width: 24px;
+  cursor: pointer;
+`;
+
+const ArrowLine = styled.div`
+  display: none;
+  width: 320px;
+  height: 24px;
+  margin-bottom: 24px;
+  @media ${({ theme }) => theme.device.mobile} {
+    display: flex;
+    ${ArrowBack} {
+      display: flex;
+      justify-content: flex-start;
+    }
+  }
 `;
 
 const ReviewContainer = styled.div`
@@ -287,13 +326,30 @@ const TitleBox = styled.div`
   height: 40px;
 `;
 
+const BadTagLine = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 40px;
+  @media ${({ theme }) => theme.device.mobile} {
+    margin-top: 20px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+`;
+
 const LikeContainer = styled.div`
   height: 44px;
   margin: 10px 0px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  /* background-color: red; */
+  @media ${({ theme }) => theme.device.mobile} {
+    margin: 20px 0px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 const ThumbContainer = styled.div`
@@ -302,6 +358,11 @@ const ThumbContainer = styled.div`
   justify-content: center;
   width: 90px;
   height: 30px;
+  @media ${({ theme }) => theme.device.mobile} {
+    justify-content: flex-start;
+    margin-top: 5px;
+    margin-right: 5px;
+  }
 `;
 
 const ThumbUpBtn = styled.div`
@@ -345,6 +406,13 @@ const ReviewBox = styled.div`
   position: static;
   width: 490px;
   height: 230px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 320px;
+    height: 240px;
+    margin: 20px 0px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 const ChkDiv = styled.div`
@@ -378,6 +446,9 @@ const SvcContainer = styled.div`
 const SvcInput = styled.div`
   box-sizing: border-box;
   width: 470px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 320px;
+  }
 `;
 
 const BottomBox = styled.div`
@@ -398,5 +469,10 @@ const BadManner = styled.p`
   margin-left: 4px;
   color: #d53253;
   font-size: 11px;
+  @media ${({ theme }) => theme.device.mobile} {
+    margin: 0px;
+    margin-left: 0px;
+    text-align: left;
+  }
 `;
 export default ReqReview;

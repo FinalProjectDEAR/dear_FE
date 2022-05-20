@@ -9,6 +9,7 @@ import { actionCreators as chatActions } from "../redux/modules/chat";
 
 import styled from "styled-components";
 import attach from "../assets/vote/attach.png";
+import arrowBack from "../assets/arrow_back.png";
 
 function ResChatStart() {
   const dispatch = useDispatch();
@@ -104,6 +105,14 @@ function ResChatStart() {
         <Modal closeModal={closeModal}>
           <React.Fragment>
             <RequestContainer>
+              <ArrowLine>
+                <ArrowBack
+                  src={arrowBack}
+                  onClick={() => {
+                    history.goBack();
+                  }}
+                />
+              </ArrowLine>
               <TitleBox>
                 <TextB subTitle textAlign="left">
                   여러분의 고민에 대해 알려주세요!
@@ -120,9 +129,10 @@ function ResChatStart() {
                 </ChatInfoBox>
                 <InputBox>
                   <Input
-                    padding="10px 15px"
+                    margin="0px"
+                    padding="15px 15px"
                     value={chatTitle}
-                    placeholder="오늘의 고민을 한줄로 나타내주세요.(20자 이내)"
+                    placeholder="오늘의 고민을 20자 이내로 입력해주세요."
                     _onChange={(e) => {
                       setChatTitle(e.target.value);
                     }}
@@ -141,34 +151,53 @@ function ResChatStart() {
                     <input
                       type="radio"
                       name="category"
+                      value="솔로"
+                      onChange={(e) => {
+                        setCategory(e.target.value);
+                      }}
+                    />
+                    <Text sub6 textAlign="center" color="#333">
+                      솔로
+                    </Text>
+                  </CheckBox>
+                  <CheckBox>
+                    <input
+                      type="radio"
+                      name="category"
+                      value="짝사랑"
+                      onChange={(e) => {
+                        setCategory(e.target.value);
+                      }}
+                    />
+                    <Text sub6 textAlign="center" color="#333">
+                      짝사랑
+                    </Text>
+                  </CheckBox>
+                  <CheckBox>
+                    <input
+                      type="radio"
+                      name="category"
                       value="썸"
                       onChange={(e) => {
                         setCategory(e.target.value);
                       }}
                     />
-                    썸
+                    <Text sub6 textAlign="center" color="#333">
+                      썸
+                    </Text>
                   </CheckBox>
                   <CheckBox>
                     <input
                       type="radio"
                       name="category"
-                      value="고백"
+                      value="연애"
                       onChange={(e) => {
                         setCategory(e.target.value);
                       }}
                     />
-                    고백
-                  </CheckBox>
-                  <CheckBox>
-                    <input
-                      type="radio"
-                      name="category"
-                      value="연애중"
-                      onChange={(e) => {
-                        setCategory(e.target.value);
-                      }}
-                    />
-                    연애중
+                    <Text sub6 textAlign="center" color="#333">
+                      연애
+                    </Text>
                   </CheckBox>
                   <CheckBox>
                     <input
@@ -179,18 +208,9 @@ function ResChatStart() {
                         setCategory(e.target.value);
                       }}
                     />
-                    이별
-                  </CheckBox>
-                  <CheckBox>
-                    <input
-                      type="radio"
-                      name="category"
-                      value="재회"
-                      onChange={(e) => {
-                        setCategory(e.target.value);
-                      }}
-                    />
-                    재회
+                    <Text sub6 textAlign="center" color="#333">
+                      이별
+                    </Text>
                   </CheckBox>
                   <CheckBox>
                     <input
@@ -201,7 +221,9 @@ function ResChatStart() {
                         setCategory(e.target.value);
                       }}
                     />
-                    기타
+                    <Text sub6 textAlign="center" color="#333">
+                      기타
+                    </Text>
                   </CheckBox>
                 </InputBox>
               </LineBox>
@@ -228,7 +250,9 @@ function ResChatStart() {
                           setGender(e.target.value);
                         }}
                       />
-                      상관없음
+                      <Text sub6 textAlign="center" color="#333">
+                        상관없음
+                      </Text>
                     </CheckBox>
                     <CheckBox>
                       <input
@@ -239,7 +263,9 @@ function ResChatStart() {
                           setGender(e.target.value);
                         }}
                       />
-                      남성
+                      <Text sub6 textAlign="center" color="#333">
+                        남성
+                      </Text>
                     </CheckBox>
                     <CheckBox>
                       <input
@@ -250,7 +276,9 @@ function ResChatStart() {
                           setGender(e.target.value);
                         }}
                       />
-                      여성
+                      <Text sub6 textAlign="center" color="#333">
+                        여성
+                      </Text>
                     </CheckBox>
                   </InputBox>
                 </LineBox>
@@ -304,6 +332,11 @@ function ResChatStart() {
               </BottomBox>
             </RequestContainer>
           </React.Fragment>
+          <MobileButton onClick={submit}>
+            <Text body4 color="#fff" cursor="pointer" textAlign="center">
+              리스너 매칭하기
+            </Text>
+          </MobileButton>
         </Modal>
       )}
     </>
@@ -318,10 +351,40 @@ const RequestContainer = styled.div`
   box-sizing: border-box;
   background: #ffffff;
   border-radius: 20px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 360px;
+    min-height: 700px;
+    padding: 44px 20px;
+    border-radius: 0px;
+    overflow: scroll;
+  }
+`;
+
+const ArrowBack = styled.img`
+  display: none;
+  width: 24px;
+  cursor: pointer;
+`;
+
+const ArrowLine = styled.div`
+  display: none;
+  width: 320px;
+  height: 24px;
+  margin-bottom: 24px;
+  @media ${({ theme }) => theme.device.mobile} {
+    display: flex;
+    ${ArrowBack} {
+      display: flex;
+      justify-content: flex-start;
+    }
+  }
 `;
 
 const SecondBox = styled.div`
   margin-top: 20px;
+  @media ${({ theme }) => theme.device.mobile} {
+    margin-top: 40px;
+  }
 `;
 
 const TitleBox = styled.div`
@@ -329,13 +392,19 @@ const TitleBox = styled.div`
   justify-content: flex-start;
   align-items: center;
   height: 40px;
+  @media ${({ theme }) => theme.device.mobile} {
+    margin-bottom: 15px;
+  }
 `;
 
 const LineBox = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  height: 54px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 320px;
+    flex-direction: column;
+  }
 `;
 
 const ChatInfoBox = styled.div`
@@ -344,6 +413,10 @@ const ChatInfoBox = styled.div`
   width: 240px;
   height: 54px;
   box-sizing: border-box;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 320px;
+    height: 26px;
+  }
 `;
 
 const InputBox = styled.div`
@@ -352,6 +425,12 @@ const InputBox = styled.div`
   align-items: center;
   justify-content: flex-start;
   height: 54px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 320px;
+    height: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
 `;
 
 const CheckBox = styled.div`
@@ -360,6 +439,11 @@ const CheckBox = styled.div`
   width: auto;
   height: 24px;
   margin: 10px;
+  @media ${({ theme }) => theme.device.mobile} {
+    justify-content: flex-start;
+    margin: 5px 0px;
+    margin-right: 20px;
+  }
 `;
 
 const FileInput = styled.input`
@@ -373,11 +457,19 @@ const FileBox = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 320px;
+    height: 40px;
+  }
 `;
 
 const ImgButtonLine = styled.div`
   display: flex;
   align-items: center;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 320px;
+    height: 30px;
+  }
 `;
 
 const ImgButton = styled.label`
@@ -389,7 +481,8 @@ const ImgButton = styled.label`
   background-image: url(${attach});
   cursor: pointer;
   @media ${({ theme }) => theme.device.mobile} {
-    height: 25px;
+    width: 63px;
+    height: 22px;
   }
 `;
 
@@ -397,24 +490,18 @@ const ImageBox = styled.div`
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  margin-left: 240px;
-  width: 530px;
+  margin-left: 235px;
+  width: 523px;
   height: 110px;
 
   border: 1px solid #e6e6e6;
-`;
-
-const FileTag = styled.div`
-  width: auto;
-  height: 30px;
-  padding: 4px 8px;
-  margin: 0px 5px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  background: #f8f8f8;
-  border-radius: 4px;
+  @media ${({ theme }) => theme.device.mobile} {
+    margin-left: 0px;
+    width: 320px;
+    flex-direction: column;
+    height: auto;
+    border: none;
+  }
 `;
 
 const Picture = styled.div`
@@ -426,6 +513,10 @@ const Picture = styled.div`
   background-image: url("${(props) => props.src}");
   background-size: cover;
   position: relative;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 304px;
+    height: 180px;
+  }
 `;
 const ImgDelbtn = styled.div`
   color: #333;
@@ -459,5 +550,24 @@ const BottomBox = styled.div`
 
   @media ${({ theme }) => theme.device.mobile} {
     display: none;
+  }
+`;
+
+const MobileButton = styled.div`
+  display: none;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  width: 360px;
+  height: 48px;
+
+  background: #7a37be;
+  border-radius: 0px;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    display: flex;
+    position: fixed;
+    bottom: 0;
   }
 `;

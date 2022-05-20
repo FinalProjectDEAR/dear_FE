@@ -3,6 +3,7 @@ import { Text, TextB, Input, Button } from "../elements/index";
 import styled from "styled-components";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
+import arrowBack from "../assets/arrow_back.png";
 
 import { history } from "../redux/configureStore";
 import { useSelector, useDispatch } from "react-redux";
@@ -113,6 +114,14 @@ function ResReview(props) {
     <React.Fragment>
       <ReviewWrapper>
         <ReviewContainer>
+          <ArrowLine>
+            <ArrowBack
+              src={arrowBack}
+              onClick={() => {
+                history.replace("/main");
+              }}
+            />
+          </ArrowLine>
           <TitleBox>
             <TextB subTitle textAlign="left">
               상담후기를 작성해주세요.
@@ -178,13 +187,15 @@ function ResReview(props) {
 
         {badClick ? (
           <ReviewBox>
-            <TitleBox>
+            <BadTagLine>
               <Text size="14px">
                 '별로예요'에 답한 이유는 무엇인가요?
                 <Star>*</Star>
               </Text>
-              <BadManner>비매너 후기는 상대방이 볼 수 없어요</BadManner>
-            </TitleBox>
+              <Text sub7 color="#d53253" margin="0px 4px">
+                비매너 후기는 상대방이 볼 수 없어요.
+              </Text>
+            </BadTagLine>
 
             {badTag.map((e, i) => (
               <ChkDiv key={i}>
@@ -236,6 +247,33 @@ const ReviewWrapper = styled.div`
   background-color: #ffffff;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 20px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 360px;
+    min-height: 640px;
+    padding: 44px 20px;
+    border-radius: 0px;
+    overflow: scroll;
+  }
+`;
+
+const ArrowBack = styled.img`
+  display: none;
+  width: 24px;
+  cursor: pointer;
+`;
+
+const ArrowLine = styled.div`
+  display: none;
+  width: 320px;
+  height: 24px;
+  margin-bottom: 24px;
+  @media ${({ theme }) => theme.device.mobile} {
+    display: flex;
+    ${ArrowBack} {
+      display: flex;
+      justify-content: flex-start;
+    }
+  }
 `;
 
 const ReviewContainer = styled.div`
@@ -252,13 +290,31 @@ const TitleBox = styled.div`
   height: 40px;
 `;
 
+const BadTagLine = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 40px;
+  @media ${({ theme }) => theme.device.mobile} {
+    margin-bottom: 5px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+`;
+
 const LikeContainer = styled.div`
   height: 44px;
   margin: 10px 0px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  /* background-color: red; */
+  @media ${({ theme }) => theme.device.mobile} {
+    margin: 20px 0px;
+    margin-bottom: 30px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 const ThumbContainer = styled.div`
@@ -267,6 +323,11 @@ const ThumbContainer = styled.div`
   justify-content: center;
   width: 90px;
   height: 30px;
+  @media ${({ theme }) => theme.device.mobile} {
+    justify-content: flex-start;
+    margin-top: 5px;
+    margin-right: 5px;
+  }
 `;
 
 const ThumbUpBtn = styled.div`
@@ -342,6 +403,9 @@ const SvcContainer = styled.div`
 
 const SvcInput = styled.div`
   width: 470px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 320px;
+  }
 `;
 
 const BottomBox = styled.div`

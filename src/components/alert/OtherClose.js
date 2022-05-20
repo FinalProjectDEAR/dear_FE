@@ -71,12 +71,21 @@ const CloseContainer = styled.div`
   box-sizing: border-box;
   background: #ffffff;
   border-radius: 20px;
+  @media ${({ theme }) => theme.device.mobile} {
+    padding-top: 15px;
+    width: 320px;
+    height: 146px;
+    border-radius: 10px;
+  }
 `;
 
 const LineBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media ${({ theme }) => theme.device.mobile} {
+    margin: auto;
+  }
 `;
 
 const BottomBox = styled.div`
