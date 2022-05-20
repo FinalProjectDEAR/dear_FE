@@ -11,6 +11,7 @@ import styled from "styled-components";
 import MessageList from "./MessageList";
 import CounselHistory from "./CounselHistory";
 import Follow from "./Follow";
+import Post from "../pages/Post";
 import Pagination from "../elements/Pagination";
 //리덕스관련
 import { useDispatch, useSelector } from "react-redux";
@@ -20,21 +21,38 @@ import { history } from "../redux/configureStore";
 
 const MyPage = () => {
   const dispatch = useDispatch();
-  //메시지임시페이지
-  const pages = 1;
-  const totalPage = 1;
   //페이지
   const [page, setPage] = React.useState(1);
   //페이지별 게시글 전체 조회
   React.useEffect(() => {
     dispatch(actionCreators.getPostListDB(page));
   }, [page]);
+  const postList = useSelector((state) => state.mypage.postList.content);
+  const postTotalPage = useSelector(
+    (state) => state.mypage.postList.totalPages
+  );
+  //팔로우 전체 조회
+  React.useEffect(() => {
+    dispatch(actionCreators.getFollowDB(page));
+  }, [page]);
+  const follower = useSelector((state) => state.mypage.followList);
+  //상담 히스토리 조회
+  React.useEffect(() => {
+    dispatch(actionCreators.getChatDB());
+  }, [page]);
+  const chatList = useSelector((state) => state.mypage.chatList);
   //메세지조회
   React.useEffect(() => {
-    dispatch(MsgActionCreators.getMessageDB(pages));
-  }, []);
+    dispatch(MsgActionCreators.getMessageDB(page));
+  }, [page]);
   const msgList = useSelector((state) => state.message.message);
-  const color = useSelector((state) => state.mypage);
+  //멤버인포조회
+  React.useEffect(() => {
+    dispatch(actionCreators.getInfoDB());
+  }, []);
+  const userInfo = useSelector((state) => state.mypage.user.user);
+  console.log(userInfo?.resTags);
+
   return (
     <React.Fragment>
       <MyPageWrapper>
@@ -44,14 +62,14 @@ const MyPage = () => {
               <ColorBadge
                 border="2px solid #F8F8F8"
                 size="60"
-                bg="#43BDE3"
+                bg={userInfo?.color}
                 cursor="pointer"
               />
             </ColorBox>
             <NicknameBox>
               <div className="nick">
                 <Text body2 color="#2E2A32">
-                  닉네임은최대열자예요
+                  {userInfo?.nickname}
                 </Text>
                 <Setting
                   style={{ cursor: "pointer" }}
@@ -61,10 +79,10 @@ const MyPage = () => {
                 />
               </div>
               <Text sub6 color="#999999" size="14px">
-                memberId
+                {userInfo?.memberId}
               </Text>
               <Text sub7 color="#7A37BE" size="12px">
-                나를 찜한 친구 16명
+                나를 찜한 친구 {userInfo?.follower}명
               </Text>
             </NicknameBox>
           </MemberWrapper>
@@ -78,16 +96,16 @@ const MyPage = () => {
               </div>
               <div className="loveTag">
                 <Tag small2>
-                  <Text sub7>20대 중반</Text>
+                  <Text sub7>{userInfo?.age}</Text>
                 </Tag>
                 <Tag small2>
-                  <Text sub7>커플</Text>
+                  <Text sub7>{userInfo?.dating}</Text>
                 </Tag>
                 <Tag small2>
-                  <Text sub7>본인이 연하</Text>
+                  <Text sub7>{userInfo?.loveType}</Text>
                 </Tag>
                 <Tag small2>
-                  <Text sub7>2년 이상</Text>
+                  <Text sub7>{userInfo?.lovePeriod}</Text>
                 </Tag>
               </div>
             </div>
@@ -100,12 +118,12 @@ const MyPage = () => {
               </div>
               <div className="types">
                 <div className="listenerTag">
-                  <Tag counselReq2>공감을 잘해줘요</Tag>
-                  <Tag counselRes2>명쾌한 해결사</Tag>
+                  {/* <Tag counselReq2>{userInfo?.resTags.resTag1}</Tag>
+                  <Tag sub2>{userInfo?.resTags.resTag2}</Tag> */}
                 </div>
                 <div className="ondo">
                   <Tag sub2>
-                    마음의 온도 38.2 <Ondo />
+                    마음의 온도 {userInfo?.score} <Ondo />
                   </Tag>
                 </div>
               </div>
@@ -118,7 +136,7 @@ const MyPage = () => {
             </div>
             <div className="tapeCnt">
               <Sound />
-              <Text body2>7</Text>
+              <Text body2>{userInfo?.reward}</Text>
             </div>
           </TapeWrapper>
         </MypageContainer>
@@ -156,12 +174,10 @@ const MyPage = () => {
           </Text>
         </Title>
         <CounselGrid>
-          {/* {counselList?.map((item, idx) => {
-            return <CounselHistory  key={idx} item={item} />;
-          })} */}
+          {chatList?.map((item, idx) => {
+            return <CounselHistory key={idx} item={item} />;
+          })}
         </CounselGrid>
-        {/* 아래는 맵 돌리면 없앨 놈 */}
-        <CounselHistory />
       </CounselWrapper>
       <FollowWrapper>
         <TitleContainer>
@@ -177,11 +193,9 @@ const MyPage = () => {
           </div>
         </TitleContainer>
         <FollowContainer>
-          <Follow />
-          <Follow />
-          <Follow />
-          <Follow />
-          <Follow />
+          {follower?.map((item, idx) => {
+            return <Follow key={idx} item={item} />;
+          })}
         </FollowContainer>
       </FollowWrapper>
       <PostWrapper>
@@ -195,12 +209,12 @@ const MyPage = () => {
             <InfoItem style={{ marginLeft: "40px" }}>제목</InfoItem>
             <InfoItem style={{ marginRight: "40px" }}>작성일</InfoItem>
           </TableInfo>
-          {/* {postList?.slice(0, 11).map((item, idx) => {
+          {postList?.slice(0, 8).map((item, idx) => {
             // slice를 이용하여 보여주고 싶은 게시물을 제어
             return <Post key={idx} item={item} />;
-          })} */}
+          })}
         </PostTable>
-        <Pagination totalPage={totalPage} setPage={setPage} />
+        <Pagination totalPage={postTotalPage} setPage={setPage} />
       </PostWrapper>
     </React.Fragment>
   );

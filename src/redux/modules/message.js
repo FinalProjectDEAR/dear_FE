@@ -60,7 +60,10 @@ const addMessageDB = (message, resUser) => {
     // console.log("쪽지보내기!", message, resUser);
     try {
       api
-        .post(`/message/request`, { message: message, resUser: resUser })
+        .post(`/message/request`, {
+          message: message,
+          resUserNickName: resUser,
+        })
         .then((res) => {
           // console.log("쪽지 추가", res);
           history.push("/myPage");

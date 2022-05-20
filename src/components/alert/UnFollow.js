@@ -4,18 +4,24 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Text, Button, TextB } from "../../elements";
 
-import { actionCreators } from "../../redux/modules/post";
+import { actionCreators } from "../../redux/modules/review";
 
-function ChatClose(props) {
+function UnFollow(props) {
   const dispatch = useDispatch();
-  const { closeModal, postId } = props;
+  const { closeModal, Follower } = props;
+  const [follow, unFollow] = React.useState(false);
+  const userFollow = () => {
+    unFollow(!follow);
+    dispatch(actionCreators.followDB(Follower, follow));
+    closeModal();
+  };
 
   return (
     <React.Fragment>
       <CloseContainer>
         <LineBox>
           <Text headline color="#2E2A32" size="16px">
-            닉네임은최대열자예요
+            {Follower}
           </Text>
           <TextB size="16px" color="#2E2A32">
             님 찜을 해제할까요?
@@ -40,9 +46,10 @@ function ChatClose(props) {
             shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
             cursor="pointer"
             size="narrow"
+            _onClick={userFollow}
           >
             <Text body4 color="#fff" cursor="pointer">
-              연장하기
+              해제하기
             </Text>
           </Button>
         </BottomBox>
@@ -51,7 +58,7 @@ function ChatClose(props) {
   );
 }
 
-export default ChatClose;
+export default UnFollow;
 
 const CloseContainer = styled.div`
   width: 550px;

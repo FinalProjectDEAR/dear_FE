@@ -20,7 +20,7 @@ const CommentList = (props) => {
           </CommentBox>
         </CommentContainer>
         <Comment>
-          {commentList?.slice(0, 3).map((comment, idx) => {
+          {commentList?.slice(0, 2).map((comment, idx) => {
             return <CommentItem key={idx} {...comment} />;
           })}
         </Comment>
