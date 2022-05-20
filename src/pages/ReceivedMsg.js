@@ -6,7 +6,7 @@ import styled from "styled-components";
 import TimeCounting from "time-counting";
 //리덕스관련
 import { useDispatch, useSelector } from "react-redux";
-import { actionCreators } from "../redux/modules/message";
+import { MsgActionCreators } from "../redux/modules/message";
 import { useParams } from "react-router-dom";
 
 const ReceivedMsg = () => {
@@ -20,7 +20,7 @@ const ReceivedMsg = () => {
   };
   //메세지조회
   React.useEffect(() => {
-    dispatch(actionCreators.getDetailMsgDB(params.messageId));
+    dispatch(MsgActionCreators.getDetailMsgDB(params.messageId));
   }, []);
   //메세지 가져오가
   const msgList = useSelector((state) => state.message.messages);

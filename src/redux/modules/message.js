@@ -93,7 +93,7 @@ export default handleActions(
   initialState
 );
 
-const actionCreators = {
+const MsgActionCreators = {
   addMessageDB,
   addMessage,
   getMessage,
@@ -102,4 +102,4 @@ const actionCreators = {
   getDetailMsgDB,
 };
 
-export { actionCreators };
+export { MsgActionCreators };
