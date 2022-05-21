@@ -18,7 +18,7 @@ function MainRanking() {
   //     dispatch(mainActions.getRankingDB());
   //   });
 
-  const rankingList = useSelector((state) => state.main.rankingList);
+  //   const rankingList = useSelector((state) => state.main.rankingList);
 
   return (
     <React.Fragment>
