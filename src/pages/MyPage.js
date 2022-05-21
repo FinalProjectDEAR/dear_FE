@@ -2,7 +2,6 @@ import React from "react";
 import { Text, ColorBadge, Tag } from "../elements";
 import { ReactComponent as Setting } from "../assets/설정btn.svg";
 import { ReactComponent as Help } from "../assets/help_outline.svg";
-import { ReactComponent as Ondo } from "../assets/온도.svg";
 import { ReactComponent as Sound } from "../assets/surround_sound.svg";
 import { ReactComponent as Left } from "../assets/paging_left.svg";
 import { ReactComponent as Right } from "../assets/paging_right.svg";
@@ -129,23 +128,24 @@ const MyPage = () => {
                 <Help />
               </div>
               <div className="types">
-                <div className="listenerTag">
-                  <Tag counselReq2>{userInfo?.resTag1}</Tag>
-                  <Tag sub2>{userInfo?.resTag2}</Tag>
-                </div>
+                {/* <div className="listenerTag"> */}
+                {userInfo?.resTag1 ? (
+                  <div className="listenerTag">
+                    <Tag counselReq2>{userInfo?.resTag1}</Tag>
+                  </div>
+                ) : null}
+                {userInfo?.resTag2 ? (
+                  <div className="listenerTag">
+                    <Tag sub2>{userInfo?.resTag2}</Tag>{" "}
+                  </div>
+                ) : null}
+
+                {/* </div> */}
                 <Tag sub2>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      margin: "6px 23px",
-                    }}
-                  >
+                  <TemperatureBox>
                     <Text sub7>
                       마음의 온도
-                      <span style={{ fontWeight: "700" }}>
-                        {userInfo?.score}°C
-                      </span>
+                      <Temperature>{userInfo?.score}°C</Temperature>
                     </Text>
                     <TemperatureBar>
                       <ProgressBar>
@@ -155,11 +155,10 @@ const MyPage = () => {
                           border="none"
                           position="absolute"
                         />
-                        <Highlight width={userInfo?.score + "°C"} />
-                        {/* <Highlight width="60%" /> */}
+                        <Highlight width={userInfo?.score + "%"} />
                       </ProgressBar>
                     </TemperatureBar>
-                  </div>
+                  </TemperatureBox>
                 </Tag>
               </div>
             </div>
@@ -171,7 +170,7 @@ const MyPage = () => {
             </div>
             <div className="tapeCnt">
               <Sound />
-              <Text body2>{userInfo?.reward}</Text>
+              <Text body2>{userInfo?.reward ? userInfo?.reward : 0}</Text>
             </div>
           </TapeWrapper>
         </MypageContainer>
@@ -371,8 +370,8 @@ const TypeWrapper = styled.div`
   }
   .listenerTag {
     gap: 10px;
-    width: 400px;
-    height: 26px;
+    /* width: 400px;
+    height: 26px; */
     display: flex;
     flex-direction: row;
   }
@@ -391,13 +390,21 @@ const TapeWrapper = styled.div`
     justify-content: center;
   }
 `;
+const TemperatureBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin: 6px 29px;
+`;
 const TemperatureBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
   margin: 0px 5px;
 `;
-
+const Temperature = styled.span`
+  font-weight: 700;
+  margin-left: 3px;
+`;
 const ProgressBar = styled.div`
   display: flex;
   align-items: center;

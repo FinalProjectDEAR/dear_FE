@@ -12,6 +12,7 @@ const ADD_POST = "ADD_POST";
 const EDIT_POST = "EDIT_POST";
 const DELETE_POST = "DELETE_POST";
 const LIKE_POST = "HELP_POST";
+const RESET_POST = "RESET_POST";
 
 // 초기값
 const initialState = {
@@ -220,9 +221,18 @@ export default handleActions(
     //   }),
     [LIKE_POST]: (state, action) =>
       produce(state, (draft) => {
-        console.log("공감 받아온 값", action.payload);
-        console.log("공감 state", state);
+        // console.log("공감 받아온 값", action.payload);
+        // console.log("공감 state", state);
         draft.detailPost.likes = action.payload.likes;
+      }),
+    //클린업작업
+    [RESET_POST]: (state, { payload }) =>
+      produce(state, (draft) => {
+        draft.post = [];
+        draft.postList = [];
+        draft.detailPost = [];
+        draft.detail_post = [];
+        draft.postLike = [];
       }),
   },
   initialState
