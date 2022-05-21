@@ -73,7 +73,7 @@ function ResChatStart() {
                     <input
                       type="radio"
                       name="category"
-                      value="썸"
+                      value="솔로"
                       onChange={(e) => {
                         setCategory(e.target.value);
                       }}
@@ -86,7 +86,7 @@ function ResChatStart() {
                     <input
                       type="radio"
                       name="category"
-                      value="고백"
+                      value="짝사랑"
                       onChange={(e) => {
                         setCategory(e.target.value);
                       }}
@@ -99,7 +99,7 @@ function ResChatStart() {
                     <input
                       type="radio"
                       name="category"
-                      value="연애중"
+                      value="썸"
                       onChange={(e) => {
                         setCategory(e.target.value);
                       }}
@@ -112,7 +112,7 @@ function ResChatStart() {
                     <input
                       type="radio"
                       name="category"
-                      value="이별"
+                      value="연애"
                       onChange={(e) => {
                         setCategory(e.target.value);
                       }}
@@ -125,7 +125,7 @@ function ResChatStart() {
                     <input
                       type="radio"
                       name="category"
-                      value="재회"
+                      value="이별"
                       onChange={(e) => {
                         setCategory(e.target.value);
                       }}

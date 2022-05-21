@@ -95,7 +95,7 @@ function ResChatStart() {
       window.alert("필수정보를 모두 입력해주세요!");
       return;
     }
-
+    console.log("파일리스트", fileList);
     dispatch(chatActions.reqChatDB({ chatTitle, category, gender, fileList }));
   };
 
