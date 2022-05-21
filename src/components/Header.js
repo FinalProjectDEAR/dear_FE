@@ -48,7 +48,7 @@ const Header = (props) => {
 const HeaderWrapper = styled.div`
   /* background-color: #cdb4db; */
   width: 100%;
-  height: 160px;
+  height: 95px;
   /* margin: auto; */
 `;
 
@@ -60,10 +60,10 @@ const HeaderContainer = styled.div`
 `;
 
 const HeaderBox = styled.div`
+  width: 1032px;
   margin: auto;
   display: flex;
   padding: 30px 20px 40px 100px;
-  /* background: #bb9ed8; */
   justify-content: space-between;
 `;
 
