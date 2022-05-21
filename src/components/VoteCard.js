@@ -98,9 +98,9 @@ VoteCard.defaultProps = {
 };
 
 const CardWrapper = styled.div`
-  width: 328px;
+  width: 300px;
   height: 158px;
-  margin: 12px;
+  margin: 15px;
   padding: 30px 40px;
   box-sizing: border-box;
 

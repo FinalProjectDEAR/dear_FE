@@ -45,6 +45,7 @@ import MyPage from "../pages/MyPage";
 import Notification from "../components/Notification";
 import EditMyPage from "../pages/EditMyPage";
 import MainRanking from "../pages/MainRanking";
+import MainHotPost from "../pages/MainHotPost";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
         <ConnectedRouter history={history}>
           <Route path="/main" exact component={Main} />
           <Route path="/mainRanking" exact component={MainRanking} />
+          <Route path="/mainHotPost" exact component={MainHotPost} />
           <ScrollToTop />
           <Header />
           <Wrapper>
