@@ -6,11 +6,13 @@ import { api } from "../../shared/apis";
 const GET_MESSAGE = "message/GET_MESSAGE";
 const GET_DETAIL_MSG = "message/GET_DETAIL_MSG";
 const ADD_MESSAGE = "message/ADD_MESSAGE";
+const MSG_PAGE = "MSG_PAGE";
 
 //초기값
 const initialState = {
   message: [],
   messages: [],
+  msgPage: [],
 };
 
 //액션 생성 함수
@@ -24,12 +26,13 @@ const addMessage = createAction(ADD_MESSAGE, (message, resUser) => ({
   message,
   resUser,
 }));
+const msgPage = createAction(MSG_PAGE, (page) => ({ page }));
 
 //미듈웨어
 const getMessageDB = (page) => {
   return function (dispatch, getState, { history }) {
     try {
-      api.get(`/user/Info/message/${page}`, {}).then((res) => {
+      api.get(`/user/info/message/${page}`, {}).then((res) => {
         // console.log("쪽지 전체가져오기", res.data);
         dispatch(getMessage(res.data));
       });
@@ -84,13 +87,18 @@ export default handleActions(
     //   }),
     [GET_MESSAGE]: (state, action) =>
       produce(state, (draft) => {
-        // console.log("리듀서 쪽지받기", action.payload.message.data);
+        console.log("리듀서 쪽지받기", action.payload.message.data);
         draft.message = action.payload.message.data;
       }),
     [GET_DETAIL_MSG]: (state, action) =>
       produce(state, (draft) => {
         // console.log("리듀서 상세 쪽지 받기", action.payload.message.data);
         draft.messages = action.payload.message.data;
+      }),
+    [MSG_PAGE]: (state, action) =>
+      produce(state, (draft) => {
+        // console.log("메시지 토탈페이지:", action.payload);
+        draft.page = action.payload.page;
       }),
   },
   initialState
@@ -103,6 +111,7 @@ const MsgActionCreators = {
   getMessageDB,
   getDetailMessage,
   getDetailMsgDB,
+  msgPage,
 };
 
 export { MsgActionCreators };

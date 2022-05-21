@@ -5,14 +5,16 @@ import styled from "styled-components";
 import { Text, Button, TextB } from "../../elements";
 
 import { actionCreators } from "../../redux/modules/review";
+import { actionCreators as Follow } from "../../redux/modules/mypage";
 
 function UnFollow(props) {
   const dispatch = useDispatch();
-  const { closeModal, Follower } = props;
+  const { closeModal, Follower, nickname } = props;
   const [follow, unFollow] = React.useState(false);
   const userFollow = () => {
     unFollow(!follow);
     dispatch(actionCreators.followDB(Follower, follow));
+    // dispatch(Follow.getFollowDB)
     closeModal();
   };
 
@@ -21,7 +23,7 @@ function UnFollow(props) {
       <CloseContainer>
         <LineBox>
           <Text headline color="#2E2A32" size="16px">
-            {Follower}
+            {nickname}
           </Text>
           <TextB size="16px" color="#2E2A32">
             님 찜을 해제할까요?

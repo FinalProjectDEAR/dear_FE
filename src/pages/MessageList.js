@@ -3,15 +3,20 @@ import styled from "styled-components";
 import { Text, TextB } from "../elements";
 //시간알려주는패키지
 import TimeCounting from "time-counting";
-
+//리덕스관련
+import { useDispatch } from "react-redux";
 import { history } from "../redux/configureStore";
+import { MsgActionCreators } from "../redux/modules/message";
 
 const MessageList = (props) => {
-  // console.log(props.item);
+  const dispatch = useDispatch();
   const messageId = props?.item.messageId;
   const createdAt = props?.item.createdAt;
   const reqMemberNickname = props?.item.reqMemberNickname;
   const message = props?.item.message;
+  React.useEffect(() => {
+    dispatch(MsgActionCreators.msgPage(props.item.totalPages));
+  }, []);
   //시간을 알아보자!
   const option = {
     lang: "ko",

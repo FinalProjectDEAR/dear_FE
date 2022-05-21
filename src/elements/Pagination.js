@@ -2,14 +2,18 @@ import React from "react";
 import styled from "styled-components";
 
 const Pagination = ({ totalPage, setPage }) => {
-  console.log(totalPage, setPage);
+  // console.log(totalPage, setPage);
 
   return (
     <PaginationDiv>
       <PageBtnContainer>
         <PrevPage />
         {[...Array(totalPage)].map((p, idx) => (
-          <PageBtn data-index={idx + 1} onClick={() => setPage(idx + 1)}>
+          <PageBtn
+            key={idx}
+            data-index={idx + 1}
+            onClick={() => setPage(idx + 1)}
+          >
             {idx + 1}
           </PageBtn>
         ))}

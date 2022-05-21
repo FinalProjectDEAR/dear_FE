@@ -23,6 +23,10 @@ const MyPage = () => {
   const dispatch = useDispatch();
   //페이지
   const [page, setPage] = React.useState(1);
+  //페이지별 팔로우 조회
+  const followPage = useSelector((state) => state.mypage.page);
+  //페이지별 메시지 조회
+  const msgPage = useSelector((state) => state.message.page);
   //페이지별 게시글 전체 조회
   React.useEffect(() => {
     dispatch(actionCreators.getPostListDB(page));
@@ -51,7 +55,7 @@ const MyPage = () => {
     dispatch(actionCreators.getInfoDB());
   }, []);
   const userInfo = useSelector((state) => state.mypage.user.user);
-  console.log(userInfo?.resTags);
+  console.log("멤버인포레스태그", userInfo?.resTag1);
 
   return (
     <React.Fragment>
@@ -96,16 +100,24 @@ const MyPage = () => {
               </div>
               <div className="loveTag">
                 <Tag small2>
-                  <Text sub7>{userInfo?.age}</Text>
+                  <Text sub7 margin="3px 8px">
+                    {userInfo?.age}
+                  </Text>
                 </Tag>
                 <Tag small2>
-                  <Text sub7>{userInfo?.dating}</Text>
+                  <Text sub7 margin="3px 8px">
+                    {userInfo?.dating}
+                  </Text>
                 </Tag>
                 <Tag small2>
-                  <Text sub7>{userInfo?.loveType}</Text>
+                  <Text sub7 margin="3px 8px">
+                    {userInfo?.loveType}
+                  </Text>
                 </Tag>
                 <Tag small2>
-                  <Text sub7>{userInfo?.lovePeriod}</Text>
+                  <Text sub7 margin="3px 8px">
+                    {userInfo?.lovePeriod}
+                  </Text>
                 </Tag>
               </div>
             </div>
@@ -118,14 +130,16 @@ const MyPage = () => {
               </div>
               <div className="types">
                 <div className="listenerTag">
-                  {/* <Tag counselReq2>{userInfo?.resTags.resTag1}</Tag>
-                  <Tag sub2>{userInfo?.resTags.resTag2}</Tag> */}
+                  <Tag counselReq2>{userInfo?.resTag1}</Tag>
+                  <Tag sub2>{userInfo?.resTag2}</Tag>
                 </div>
-                <div className="ondo">
-                  <Tag sub2>
-                    마음의 온도 {userInfo?.score} <Ondo />
-                  </Tag>
-                </div>
+                <Tag sub2>
+                  <Text sub7 margin="5px">
+                    마음의 온도
+                    <span style={{ fontWeight: "700" }}>{userInfo?.score}</span>
+                    <Ondo />
+                  </Text>
+                </Tag>
               </div>
             </div>
           </TypeWrapper>
@@ -152,14 +166,29 @@ const MyPage = () => {
             </Text>
           </div>
           <div className="page">
-            <Left style={{ cursor: "pointer" }} />
-            <Right style={{ cursor: "pointer" }} />
+            <Left
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                if (page > 1) {
+                  setPage(page - 1);
+                }
+              }}
+            />
+            <Right
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                if (page === msgPage) {
+                  window.alert("마지막 쪽지 페이지입니다.");
+                  return;
+                }
+                setPage(page + 1);
+              }}
+            />
           </div>
         </TitleContainer>
         <MsgContainer>
           {msgList &&
             msgList.map((item, idx) => {
-              // PostDetail 페이지에 item값을 props로 넘겨준다.
               return <MessageList key={idx} item={item} />;
             })}
         </MsgContainer>
@@ -188,8 +217,24 @@ const MyPage = () => {
             <Help />
           </div>
           <div className="page">
-            <Left style={{ cursor: "pointer" }} />
-            <Right style={{ cursor: "pointer" }} />
+            <Left
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                if (page > 1) {
+                  setPage(page - 1);
+                }
+              }}
+            />
+            <Right
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                if (page === followPage) {
+                  window.alert("마지막 찜 페이지입니다.");
+                  return;
+                }
+                setPage(page + 1);
+              }}
+            />
           </div>
         </TitleContainer>
         <FollowContainer>
@@ -310,8 +355,6 @@ const TypeWrapper = styled.div`
     display: flex;
     flex-direction: row;
   }
-  /* .ondo {
-  } */
 `;
 const TapeWrapper = styled.div`
   display: flex;
