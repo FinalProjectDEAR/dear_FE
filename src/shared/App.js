@@ -44,12 +44,15 @@ import VoteDetail from "../pages/VoteDetail";
 import MyPage from "../pages/MyPage";
 import Notification from "../components/Notification";
 import EditMyPage from "../pages/EditMyPage";
+import MainRanking from "../pages/MainRanking";
 
 function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
         <ConnectedRouter history={history}>
+          <Route path="/main" exact component={Main} />
+          <Route path="/mainRanking" exact component={MainRanking} />
           <ScrollToTop />
           <Header />
           <Wrapper>
@@ -58,7 +61,6 @@ function App() {
             <Route path="/signup" exact component={Signup} />
             <Route path="/info" exact component={MemberInfo} />
             <Route path="/commentList" exact component={CommentList} />
-            <Route path="/main" exact component={Main} />
             <Route path="/postList" exact component={PostList} />
             <Route path="/postWrite" exact component={PostWrite} />
             <Route path="/postDetail/:postId" exact component={PostDetail} />
