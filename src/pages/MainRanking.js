@@ -92,7 +92,6 @@ const Background = styled.div`
 `;
 
 const RankingWrapper = styled.div`
-  border: 3px solid green;
   box-sizing: border-box;
   width: 1020px;
   height: 600px;

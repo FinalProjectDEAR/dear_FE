@@ -18,10 +18,10 @@ const initialState = {
 };
 
 //액션 생성 함수
-const setRanking = createAction(GET_RANKING, (rankingList) => rankingList);
-const setHotVote = createAction(GET_HOT_VOTE, (voteList) => voteList);
-const setHotBoard = createAction(GET_HOT_BOARD, (BoardList) => BoardList);
-const setServiceCmt = createAction(GET_SERVICE_CMT, (reviewList) => reviewList);
+const getRanking = createAction(GET_RANKING, (rankingList) => rankingList);
+const getHotVote = createAction(GET_HOT_VOTE, (voteList) => voteList);
+const getHotBoard = createAction(GET_HOT_BOARD, (BoardList) => BoardList);
+const getReview = createAction(GET_SERVICE_CMT, (reviewList) => reviewList);
 // const getFollow = createAction(FOLLOW_LIST, (follower) => ({ follower }));
 // const getFollower = createAction(FOLLOWER, (follower) => ({ follower }));
 // const getChat = createAction(CHAT_LIST, (chat) => ({ chat }));
@@ -34,7 +34,7 @@ const getRankingDB = () => {
     try {
       const { data } = await apis.getRank();
       console.log("랭킹", data);
-      dispatch(setRanking(data.data));
+      dispatch(getRanking(data.data));
     } catch (err) {
       console.log("랭킹데이터 가져오기 실패", err);
     }
@@ -46,7 +46,7 @@ const getHotVoteDB = () => {
     try {
       const { data } = await apis.getHotVote();
       console.log("인기투표", data);
-      dispatch(setHotVote(data.data));
+      dispatch(getHotVote(data.data));
     } catch (err) {
       console.log("인기 투표글 가져오기 실패", err);
     }
@@ -58,19 +58,19 @@ const getHotBoardDB = () => {
     try {
       const { data } = await apis.getHotBoard();
       console.log("인기게시글", data);
-      dispatch(setHotBoard(data.data));
+      dispatch(getHotBoard(data.data));
     } catch (err) {
       console.log("인기 게시글 가져오기 실패", err);
     }
   };
 };
 
-const getServiceCmtDB = () => {
+const getReviewDB = () => {
   return async function (dispatch, getState, { history }) {
     try {
       const { data } = await apis.getServiceCmt();
       console.log("서비스후기", data);
-      dispatch(setServiceCmt(data.data));
+      dispatch(getReview(data.data));
     } catch (err) {
       console.log("서비스 후기 가져오기 실패", err);
     }
@@ -104,7 +104,7 @@ const actionCreators = {
   getRankingDB,
   getHotBoardDB,
   getHotVoteDB,
-  getServiceCmtDB,
+  getReviewDB,
 };
 
 export { actionCreators };
