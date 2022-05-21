@@ -74,13 +74,14 @@ const Background = styled.div`
   height: 100vh;
   display: flex;
   align-items: center;
+  scroll-snap-align: start;
 `;
 
 const ReviewWrapper = styled.div`
   box-sizing: border-box;
   width: 1440px;
   height: 600px;
-  margin: 0px auto;
+  margin: auto;
   overflow: hidden;
 `;
 

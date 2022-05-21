@@ -86,9 +86,10 @@ export default MainRanking;
 
 const Background = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   align-items: center;
+  scroll-snap-align: start;
 `;
 
 const RankingWrapper = styled.div`

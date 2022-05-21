@@ -76,6 +76,7 @@ const Background = styled.div`
   height: 100vh;
   display: flex;
   align-items: center;
+  scroll-snap-align: start;
 `;
 
 const HotPostWrapper = styled.div`
