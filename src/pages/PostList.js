@@ -26,6 +26,9 @@ function PostList(props) {
   //페이지별 게시글 전체 조회
   React.useEffect(() => {
     dispatch(actionCreators.getPostDB(page));
+    return () => {
+      dispatch(actionCreators.resetPost());
+    };
   }, [page]);
   const postList = useSelector((state) => state.post.post.content);
   const pageList = useSelector((state) => state.post.post);

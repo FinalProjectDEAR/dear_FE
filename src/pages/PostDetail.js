@@ -27,13 +27,13 @@ function PostDetail(props) {
   //페이지
   const [page, setPage] = React.useState(1);
   const totalPage = useSelector((state) => state.comment.pages);
-  //클린업작업
-  // React.useEffect(() => {
-  //   dispatch(actionCreators.RESET_POST());
-  // }, [dispatch]);
   //포스트 상세 조회
   React.useEffect(() => {
     dispatch(actionCreators.getDetailDB(postId));
+    //클린업작업
+    return () => {
+      dispatch(actionCreators.resetPost());
+    };
   }, []);
   //페이지별 댓글리스트가져오기
   React.useEffect(() => {
