@@ -46,18 +46,20 @@ import Notification from "../components/Notification";
 import EditMyPage from "../pages/EditMyPage";
 import MainRanking from "../pages/MainRanking";
 import MainHotPost from "../pages/MainHotPost";
+import MainReview from "../pages/MainReview";
 
 function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
         <ConnectedRouter history={history}>
-          <Route path="/main" exact component={Main} />
-          <Route path="/mainRanking" exact component={MainRanking} />
-          <Route path="/mainHotPost" exact component={MainHotPost} />
           <ScrollToTop />
-          <Header />
+          {/* <Header /> */}
           <Wrapper>
+            <Route path="/main" exact component={Main} />
+            <Route path="/mainRanking" exact component={MainRanking} />
+            <Route path="/mainHotPost" exact component={MainHotPost} />
+            <Route path="/mainReview" exact component={MainReview} />
             <Route path="/" exact component={Login} />
             <Route path="/user/kakao/callback" component={KakaoAuthHandle} />
             <Route path="/signup" exact component={Signup} />
@@ -89,10 +91,9 @@ function App() {
             <Route path="/myPage" exact component={MyPage} />
             <Route path="/notification" exact component={Notification} />
             <Route path="/editMyPage" exact component={EditMyPage} />
-            <Section />
+            {/* <Section /> */}
           </Wrapper>
-          <Section />
-          <Footer />
+          {/* <Footer /> */}
           <FixedBtn />
         </ConnectedRouter>
       </ThemeProvider>
