@@ -1,6 +1,6 @@
 import React from "react";
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
+import { actionCreators } from "../redux/modules/noti";
 import { useHistory } from "react-router-dom";
 
 //id값으로 스크롤
@@ -18,14 +18,22 @@ import InfoIcon from "@mui/icons-material/Info";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 
 function FixedBtn(props) {
+  const dispatch = useDispatch();
   const history = useHistory();
   const [isRead, setIsRead] = React.useState(false);
   const user_id = useSelector((state) => state.user.user);
+  //알람 버튼 눌렀을 때 가져오기
   const notiCheck = () => {
+    history.push("/notification");
+    dispatch(actionCreators.getNotiDB());
     setIsRead(true);
     props._onClick();
   };
-
+  //알람 갯수 가져오기
+  React.useEffect(() => {
+    dispatch(actionCreators.getNotiCntDB());
+  }, []);
+  const alarmNum = useSelector((state) => state.noti.notiCnt);
   return (
     <React.Fragment>
       <BtnWrap>
@@ -64,7 +72,7 @@ function FixedBtn(props) {
         </Follow>
         <Badge
           color="secondary"
-          badgeContent={0}
+          value={alarmNum}
           overlap="circular"
           invisible={isRead}
         >

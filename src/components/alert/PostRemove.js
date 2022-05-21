@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { history } from "../../redux/configureStore";
 
 import styled from "styled-components";
 import { Text, Button, TextB } from "../../elements";
@@ -14,6 +15,7 @@ function ChatClose(props) {
   };
   const onRemove = () => {
     deletePost();
+    history.goBack();
   };
   return (
     <React.Fragment>

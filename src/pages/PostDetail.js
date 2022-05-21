@@ -27,7 +27,10 @@ function PostDetail(props) {
   //페이지
   const [page, setPage] = React.useState(1);
   const totalPage = useSelector((state) => state.comment.pages);
-  // console.log(totalPage);
+  //클린업작업
+  // React.useEffect(() => {
+  //   dispatch(actionCreators.RESET_POST());
+  // }, [dispatch]);
   //포스트 상세 조회
   React.useEffect(() => {
     dispatch(actionCreators.getDetailDB(postId));
@@ -39,7 +42,6 @@ function PostDetail(props) {
   //상세페이지 가져오기
   const post = useSelector((state) => state.post.detailPost);
   const commentList = useSelector((state) => state.comment.comments);
-  // console.log(commentList);
   //시간을 알아보자!
   const option = {
     lang: "ko",
@@ -48,10 +50,8 @@ function PostDetail(props) {
     },
   };
   const createdAt = TimeCounting(post?.createAt, option);
-  const likesList = post?.likesList; //길이 로직
-  // console.log(likesList?.length);
+  const likesList = post?.likesList; //공감 수 로직
   const loginUser = localStorage.getItem("memberId");
-  // console.log(memberId, loginUser);
   //모달
   const [modalOpen, setModalOpen] = React.useState(false);
   const openModal = () => {

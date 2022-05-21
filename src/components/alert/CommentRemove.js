@@ -1,10 +1,11 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 
 import styled from "styled-components";
 import { Text, Button, TextB } from "../../elements";
 
 import { actionCreators } from "../../redux/modules/comment";
+import { history } from "../../redux/configureStore";
+import { useDispatch } from "react-redux";
 
 function ChatClose(props) {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ function ChatClose(props) {
   };
   const onRemove = () => {
     deletePost();
+    history.goBack();
   };
   return (
     <React.Fragment>

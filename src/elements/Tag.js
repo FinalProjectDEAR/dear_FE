@@ -186,7 +186,7 @@ const Sub = styled.div`
 `;
 
 const Sub2 = styled.div`
-  width: 200px;
+  width: 230px;
   height: 24px;
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
   padding: ${(props) => props.padding};
