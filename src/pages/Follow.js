@@ -13,8 +13,11 @@ import TimeCounting from "time-counting";
 import UnFollow from "../components/alert/UnFollow";
 
 const Follow = (props) => {
-  console.log(props);
+  // console.log(props.item.totalPages);
   const dispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch(actionCreators.followPage(props.item.totalPages));
+  }, []);
   //모달
   const [modalOpen, setModalOpen] = React.useState(false);
   const openModal = () => {
@@ -36,6 +39,7 @@ const Follow = (props) => {
     history.push("/sendMsg");
   };
   const Follower = props?.item.followMemberId;
+  const nickname = props?.item.nickname;
   return (
     <FollowWrapper>
       <FollowContainer>
@@ -62,7 +66,11 @@ const Follow = (props) => {
           />
           {modalOpen && (
             <Modal closModal={closeModal}>
-              <UnFollow closeModal={closeModal} Follower={Follower} />
+              <UnFollow
+                closeModal={closeModal}
+                Follower={Follower}
+                nickname={nickname}
+              />
             </Modal>
           )}
           <Msg style={{ cursor: "pointer" }} onClick={sendFollower} />

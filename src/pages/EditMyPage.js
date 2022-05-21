@@ -13,6 +13,7 @@ const EditMyPage = () => {
   const [age, setAge] = React.useState("");
   const [loveType, setLoveType] = React.useState("");
   const [lovePeriod, setLovePeriod] = React.useState("");
+  const [dating, setDating] = React.useState("");
   const colorList = [
     "#7A37BE",
     "#FFE5A1",
@@ -52,22 +53,23 @@ const EditMyPage = () => {
     dispatch(actionCreators.getInfoDB());
   }, []);
   const userInfo = useSelector((state) => state.mypage.user.user);
-  console.log(userInfo);
+  // console.log(userInfo);
   //defaultValue가 아닌 진짜 Value로 불러오기 위한 작업
   useEffect(() => {
     // console.log("유즈이펙트 시작한다~~");
     setNickname(userInfo?.nickname);
-    setGender(userInfo?.gender);
     setAge(userInfo?.age);
     setLoveType(userInfo?.loveType);
     setLovePeriod(userInfo?.lovePeriod);
     setIsSelected(userInfo?.color);
+    setDating(userInfo?.dating);
   }, [userInfo]);
   const addInfo = () => {
     dispatch(
       actionCreators.addInfoDB(
         age,
         isSelected,
+        dating,
         gender,
         lovePeriod,
         loveType,
@@ -138,10 +140,11 @@ const EditMyPage = () => {
                   <div className="radio">
                     <input
                       type="radio"
-                      value={gender || ""}
+                      value="남성"
                       name="성별"
                       onChange={(e) => {
                         setGender(e.target.value);
+                        console.log(gender);
                       }}
                     />
                     <label>
@@ -149,7 +152,7 @@ const EditMyPage = () => {
                     </label>
                     <input
                       type="radio"
-                      value={gender || ""}
+                      value="여성"
                       name="성별"
                       onChange={(e) => {
                         setGender(e.target.value);
@@ -258,11 +261,11 @@ const EditMyPage = () => {
                       </Text>
                     </div>
                     <div className="radio">
-                      <input type="radio" value="솔로" name="연애" />
+                      <input type="radio" value={dating || ""} name="연애" />
                       <label>
                         <Text sub6>솔로</Text>
                       </label>
-                      <input type="radio" value="커플" name="연애" />
+                      <input type="radio" value={dating || ""} name="연애" />
                       <label>
                         <Text sub6>커플</Text>
                       </label>
