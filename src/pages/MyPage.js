@@ -134,11 +134,32 @@ const MyPage = () => {
                   <Tag sub2>{userInfo?.resTag2}</Tag>
                 </div>
                 <Tag sub2>
-                  <Text sub7 margin="5px">
-                    마음의 온도
-                    <span style={{ fontWeight: "700" }}>{userInfo?.score}</span>
-                    <Ondo />
-                  </Text>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      margin: "6px 23px",
+                    }}
+                  >
+                    <Text sub7>
+                      마음의 온도
+                      <span style={{ fontWeight: "700" }}>
+                        {userInfo?.score}°C
+                      </span>
+                    </Text>
+                    <TemperatureBar>
+                      <ProgressBar>
+                        <ColorBadge
+                          size="10"
+                          bg="#7A37BE"
+                          border="none"
+                          position="absolute"
+                        />
+                        <Highlight width={userInfo?.score + "°C"} />
+                        {/* <Highlight width="60%" /> */}
+                      </ProgressBar>
+                    </TemperatureBar>
+                  </div>
                 </Tag>
               </div>
             </div>
@@ -370,6 +391,38 @@ const TapeWrapper = styled.div`
     justify-content: center;
   }
 `;
+const TemperatureBar = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0px 5px;
+`;
+
+const ProgressBar = styled.div`
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: #fff;
+  width: 69px;
+  height: 6px;
+  border: 1px solid #bb9ed8;
+  border-radius: 10px;
+  @media ${({ theme }) => theme.device.mobile} {
+    height: 24px;
+  }
+`;
+
+const Highlight = styled.div`
+  background-color: #7a37be;
+  transition: 1s;
+  width: ${(props) => props.width};
+  height: 6px;
+  border-radius: 10px;
+  @media ${({ theme }) => theme.device.mobile} {
+    height: 24px;
+  }
+`;
+
 const MsgWrapper = styled.div`
   width: 1032px;
   height: 402px;
