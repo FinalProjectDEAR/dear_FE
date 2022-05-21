@@ -29,6 +29,9 @@ const MyPage = () => {
   //페이지별 게시글 전체 조회
   React.useEffect(() => {
     dispatch(actionCreators.getPostListDB(page));
+    return () => {
+      dispatch(actionCreators.resetPage());
+    };
   }, [page]);
   const postList = useSelector((state) => state.mypage.postList.content);
   const postTotalPage = useSelector(
@@ -37,21 +40,33 @@ const MyPage = () => {
   //팔로우 전체 조회
   React.useEffect(() => {
     dispatch(actionCreators.getFollowDB(page));
+    return () => {
+      dispatch(actionCreators.resetPage());
+    };
   }, [page]);
   const follower = useSelector((state) => state.mypage.followList);
   //상담 히스토리 조회
   React.useEffect(() => {
     dispatch(actionCreators.getChatDB());
+    return () => {
+      dispatch(actionCreators.resetPage());
+    };
   }, [page]);
   const chatList = useSelector((state) => state.mypage.chatList);
   //메세지조회
   React.useEffect(() => {
     dispatch(MsgActionCreators.getMessageDB(page));
+    return () => {
+      dispatch(actionCreators.resetPage());
+    };
   }, [page]);
   const msgList = useSelector((state) => state.message.message);
   //멤버인포조회
   React.useEffect(() => {
     dispatch(actionCreators.getInfoDB());
+    return () => {
+      dispatch(actionCreators.resetPage());
+    };
   }, []);
   const userInfo = useSelector((state) => state.mypage.user.user);
   console.log("멤버인포레스태그", userInfo?.resTag1);

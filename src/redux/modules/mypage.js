@@ -10,6 +10,7 @@ const CHAT_LIST = "CHAT_LIST";
 const GET_INFO = "GET_INFO";
 const ADD_INFO = "ADD_INFO";
 const FOLLOW_PAGE = "FOLLOW_PAGE";
+const RESET_PAGE = "RESET_POST";
 
 //초기값
 const initialState = {
@@ -32,6 +33,7 @@ const getChat = createAction(CHAT_LIST, (chat) => ({ chat }));
 const getInfo = createAction(GET_INFO, (user) => ({ user }));
 const addInfo = createAction(GET_INFO, (user) => ({ user }));
 const followPage = createAction(FOLLOW_PAGE, (page) => ({ page }));
+const resetPage = createAction(RESET_PAGE, () => ({}));
 
 //내가 작성한 글 가져오기
 const getPostListDB = (page) => {
@@ -152,6 +154,16 @@ export default handleActions(
         console.log("마이페이지 팔로우 토탈페이지:", action.payload);
         draft.page = action.payload.page;
       }),
+    [RESET_PAGE]: (state, action) =>
+      produce(state, (draft) => {
+        draft.postList = [];
+        draft.followList = [];
+        draft.follower = [];
+        draft.chatList = [];
+        draft.user = [];
+        draft.userInfo = [];
+        draft.followPage = [];
+      }),
   },
   initialState
 );
@@ -169,6 +181,7 @@ const actionCreators = {
   addInfo,
   addInfoDB,
   followPage,
+  resetPage,
 };
 
 export { actionCreators };

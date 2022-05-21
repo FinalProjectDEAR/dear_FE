@@ -43,6 +43,7 @@ const likePost = createAction(LIKE_POST, (postId, likes) => ({
   postId,
   likes,
 }));
+const resetPost = createAction(RESET_POST, () => ({}));
 
 // 미들웨어
 //postList 서버에서 받아오기
@@ -253,6 +254,7 @@ const actionCreators = {
   likeDB,
   getCateDetailDB,
   getCateDetail,
+  resetPost,
 };
 
 export { actionCreators };

@@ -7,6 +7,7 @@ const GET_MESSAGE = "message/GET_MESSAGE";
 const GET_DETAIL_MSG = "message/GET_DETAIL_MSG";
 const ADD_MESSAGE = "message/ADD_MESSAGE";
 const MSG_PAGE = "MSG_PAGE";
+const RESET_MSG = "RESET_MSGT";
 
 //초기값
 const initialState = {
@@ -27,6 +28,7 @@ const addMessage = createAction(ADD_MESSAGE, (message, resUser) => ({
   resUser,
 }));
 const msgPage = createAction(MSG_PAGE, (page) => ({ page }));
+const resetMsg = createAction(RESET_MSG, () => ({}));
 
 //미듈웨어
 const getMessageDB = (page) => {
@@ -100,6 +102,13 @@ export default handleActions(
         // console.log("메시지 토탈페이지:", action.payload);
         draft.page = action.payload.page;
       }),
+    //클린업작업
+    [RESET_MSG]: (state, { payload }) =>
+      produce(state, (draft) => {
+        draft.message = [];
+        draft.messages = [];
+        draft.msgPage = [];
+      }),
   },
   initialState
 );
@@ -112,6 +121,7 @@ const MsgActionCreators = {
   getDetailMessage,
   getDetailMsgDB,
   msgPage,
+  resetMsg,
 };
 
 export { MsgActionCreators };
