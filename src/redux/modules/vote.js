@@ -101,17 +101,18 @@ const getVoteDB = (type) => {
   };
 };
 
-const getVoteRankingDB = () => {
-  return async function (dispatch, getState) {
-    try {
-      const { data } = await apis.voteRanking();
-      const rankingList = data.data.vote;
-      dispatch(setRanking(rankingList));
-    } catch {
-      alert("투표 랭킹을 불러오지 못했습니다.");
-    }
-  };
-};
+//main api로 대체
+// const getVoteRankingDB = () => {
+//   return async function (dispatch, getState) {
+//     try {
+//       const { data } = await apis.voteRanking();
+//       const rankingList = data.data.vote;
+//       dispatch(setRanking(rankingList));
+//     } catch {
+//       alert("투표 랭킹을 불러오지 못했습니다.");
+//     }
+//   };
+// };
 
 const detailVoteDB = (postId) => {
   console.log("상세정보DB 통신 진입");
@@ -221,7 +222,6 @@ export default handleActions(
 
 const actionCreators = {
   getVoteDB,
-  getVoteRankingDB,
   addVoteDB,
   detailVoteDB,
   delVoteDB,

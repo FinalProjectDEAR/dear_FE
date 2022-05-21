@@ -81,7 +81,6 @@ export const apis = {
   delVote: (postId) => api.delete(`/anonypost/vote/${postId}`),
   putVote: (postId, vote) =>
     api.post(`/anonypost/vote/${postId}/voteSelect?selectionNum=${vote}`),
-  voteRanking: () => api.get("/anonypost/voteRanking"),
 
   // user
   nickCheck: (nickname) => api.post("/user/nicknameCheck", { nickname }),
@@ -93,4 +92,10 @@ export const apis = {
   resChat: (category) => api.post("/chat/response", category),
   closeChat: (sessionId, time) => api.post(`/chat/info/${sessionId}/${time}`),
   disConnect: (sessionId) => api.delete(`/chat/info/${sessionId}/disconnect`),
+
+  //main
+  getRanking: () => api.get(`/main/ranking/member`),
+  getHotBoard: () => api.get(`/main/ranking/board`),
+  getHotVote: () => api.get(`/main/ranking/voteBoard`),
+  getServiceCmt: () => api.get(`/main/serviceComment`),
 };

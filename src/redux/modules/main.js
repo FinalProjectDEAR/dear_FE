@@ -14,10 +14,14 @@ const initialState = {
   tape: "",
   hotVoteList: [],
   hotBoardList: [],
+  reviewList: [],
 };
 
 //액션 생성 함수
-const getRanking = createAction(GET_RANKING, (rankingList) => rankingList);
+const setRanking = createAction(GET_RANKING, (rankingList) => rankingList);
+const setHotVote = createAction(GET_HOT_VOTE, (voteList) => voteList);
+const setHotBoard = createAction(GET_HOT_BOARD, (BoardList) => BoardList);
+const setServiceCmt = createAction(GET_SERVICE_CMT, (reviewList) => reviewList);
 // const getFollow = createAction(FOLLOW_LIST, (follower) => ({ follower }));
 // const getFollower = createAction(FOLLOWER, (follower) => ({ follower }));
 // const getChat = createAction(CHAT_LIST, (chat) => ({ chat }));
@@ -29,11 +33,46 @@ const getRankingDB = () => {
   return async function (dispatch, getState, { history }) {
     try {
       const { data } = await apis.getRank();
-      console.log(data);
-      dispatch(getRanking(data.data));
+      console.log("랭킹", data);
+      dispatch(setRanking(data.data));
     } catch (err) {
-      console.log(err);
-      window.alert("투표실패! 다시 시도해주세요.");
+      console.log("랭킹데이터 가져오기 실패", err);
+    }
+  };
+};
+
+const getHotVoteDB = () => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      const { data } = await apis.getHotVote();
+      console.log("인기투표", data);
+      dispatch(setHotVote(data.data));
+    } catch (err) {
+      console.log("인기 투표글 가져오기 실패", err);
+    }
+  };
+};
+
+const getHotBoardDB = () => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      const { data } = await apis.getHotBoard();
+      console.log("인기게시글", data);
+      dispatch(setHotBoard(data.data));
+    } catch (err) {
+      console.log("인기 게시글 가져오기 실패", err);
+    }
+  };
+};
+
+const getServiceCmtDB = () => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      const { data } = await apis.getServiceCmt();
+      console.log("서비스후기", data);
+      dispatch(setServiceCmt(data.data));
+    } catch (err) {
+      console.log("서비스 후기 가져오기 실패", err);
     }
   };
 };
@@ -45,12 +84,27 @@ export default handleActions(
         // console.log("마이페이지 익명게시판리스트 리듀서:", action.payload);
         draft.rankingList = action.payload;
       }),
+    [GET_HOT_VOTE]: (state, action) =>
+      produce(state, (draft) => {
+        draft.hotVoteList = action.payload;
+      }),
+    [GET_HOT_BOARD]: (state, action) =>
+      produce(state, (draft) => {
+        draft.hotBoardList = action.payload;
+      }),
+    [GET_SERVICE_CMT]: (state, action) =>
+      produce(state, (draft) => {
+        draft.reviewList = action.payload;
+      }),
   },
   initialState
 );
 
 const actionCreators = {
   getRankingDB,
+  getHotBoardDB,
+  getHotVoteDB,
+  getServiceCmtDB,
 };
 
 export { actionCreators };
