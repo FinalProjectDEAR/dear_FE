@@ -30,6 +30,9 @@ const FooterWrapper = styled.div`
   height: 200px;
   padding-top: 60px;
   background-color: #fafafa;
+  @media ${({ theme }) => theme.device.mobile} {
+    display: none;
+  }
 `;
 
 const FooterBox = styled.div`
