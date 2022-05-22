@@ -431,6 +431,10 @@ const Sub6 = styled.p`
   ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
   ${(props) => (props.textShadow ? `text-shadow: ${props.textShadow};` : "")};
   ${(props) => (props.wordBreak ? `word-break: keep-all;` : "")};
+  @media ${({ theme }) => theme.device.mobile} {
+    font-size: 12px;
+    line-height: 16px;
+  }
 `;
 
 const Sub7 = styled.p`

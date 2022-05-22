@@ -73,7 +73,7 @@ function MainChat() {
           <BtnWrap>
             <Btn checkBox={checkBox} onClick={startReq}>
               <TextB
-                subTitle
+                subtitle
                 margin="5px"
                 cursor="pointer"
                 color={checkBox ? "#fff" : "#2E2A32"}
@@ -106,7 +106,7 @@ function MainChat() {
             </Btn>
             <Btn checkBox={checkBox} onClick={startRes}>
               <TextB
-                subTitle
+                subtitle
                 margin="5px"
                 cursor="pointer"
                 color={checkBox ? "#fff" : "#61586A"}
@@ -138,6 +138,11 @@ function MainChat() {
               </LineBox>
             </Btn>
           </BtnWrap>
+          {/* <Text>현재 나의 보유 테이프: {tapeCount}</Text> */}
+          <TapeCntLine>
+            <Text sub7>현재 나의 보유 테이프: 4</Text>
+          </TapeCntLine>
+
           <ScrollBox>
             <Text body color="#948A9E">
               SCROLL
@@ -165,6 +170,10 @@ const BackGround = styled.div`
 
 const MainWrap = styled.div`
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 const IntroWrap = styled.div`
@@ -172,7 +181,10 @@ const IntroWrap = styled.div`
   width: 100%;
   height: 230px;
   margin: auto;
-  /* background-color: pink; */
+  @media ${({ theme }) => theme.device.mobile} {
+    margin-top: 60px;
+    height: 180px;
+  }
 `;
 
 const LogoBox = styled.div`
@@ -183,6 +195,10 @@ const Logo = styled.img`
   width: 140px;
   height: 94px;
   margin: 0px auto;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 100px;
+    height: 67px;
+  }
 `;
 
 const InputWrap = styled.div`
@@ -192,6 +208,10 @@ const InputWrap = styled.div`
   width: 556px;
   height: 24px;
   margin: 10px auto;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 262px;
+    height: 32px;
+  }
 `;
 
 const LineBox = styled.div`
@@ -204,12 +224,17 @@ const BtnWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px auto;
+  margin: 10px auto;
   width: 100%;
   max-width: 790px;
   box-sizing: border-box;
-  /* border: 1px solid red; */
+  @media ${({ theme }) => theme.device.mobile} {
+    flex-direction: column;
+    width: 272px;
+    height: 110px;
+  }
 `;
+
 const Btn = styled.button`
   display: flex;
   flex-direction: column;
@@ -224,6 +249,23 @@ const Btn = styled.button`
   background-color: ${(props) => (props.checkBox ? "#61586A" : "#fff")};
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 20px;
+  @media ${({ theme }) => theme.device.mobile} {
+    flex-direction: row;
+    border-radius: 16px;
+    height: 50px;
+    padding: 13px 20px;
+    margin: 5px 0px;
+  }
+`;
+
+const TapeCntLine = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 500px;
+  @media ${({ theme }) => theme.device.mobile} {
+    justify-content: center;
+    width: 240px;
+  }
 `;
 
 const ScrollBox = styled.div`
