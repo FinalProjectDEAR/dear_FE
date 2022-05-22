@@ -59,6 +59,29 @@ function PostList(props) {
               <Pho />
             </InfoBox>
           </InfoWrapper>
+
+          <MBtnWrapper>
+            <MBtnContainer>
+              <Button
+                size="regular"
+                primaryDefault
+                _onClick={() => {
+                  history.push("/postWrite");
+                }}
+                cursor="pointer"
+              >
+                <Text body4 color="#fff">
+                  상담신청하기
+                </Text>
+              </Button>
+              <Button size="small" secondaryDefault cursor="pointer">
+                <Text body4 color="#7A37BE">
+                  투표만들기
+                </Text>
+              </Button>
+            </MBtnContainer>
+          </MBtnWrapper>
+
           <VoteWrapper>
             <Text color="#2E2A32" weight="700">
               지금 뜨거운 투표
@@ -67,71 +90,77 @@ function PostList(props) {
           </VoteWrapper>
           <BoardWrapper>
             <CateGoryWrapper>
-              <CategoryBtn
-                onClick={() => {
-                  dispatch(actionCreators.getPostDB(page));
-                }}
-              >
-                <AllBtn>
-                  <All />
-                </AllBtn>
-                <p style={{ marginTop: "83px", position: "absolute" }}>전체</p>
-              </CategoryBtn>
-              <CategoryBtn
-                onClick={() => {
-                  dispatch(actionCreators.getCateDetailDB(page, "투표"));
-                }}
-              >
-                <Vote />
-                투표
-              </CategoryBtn>
-              <CategoryBtn
-                onClick={() => {
-                  dispatch(actionCreators.getCateDetailDB(page, "솔로"));
-                }}
-              >
-                <Solo />
-                솔로
-              </CategoryBtn>
-              <CategoryBtn
-                onClick={() => {
-                  dispatch(actionCreators.getCateDetailDB(page, "짝사랑"));
-                }}
-              >
-                <Love />
-                짝사랑
-              </CategoryBtn>
-              <CategoryBtn
-                onClick={() => {
-                  dispatch(actionCreators.getCateDetailDB(page, "썸"));
-                }}
-              >
-                <Some />썸
-              </CategoryBtn>
-              <CategoryBtn
-                onClick={() => {
-                  dispatch(actionCreators.getCateDetailDB(page, "연애"));
-                }}
-              >
-                <Again />
-                연애
-              </CategoryBtn>
-              <CategoryBtn
-                onClick={() => {
-                  dispatch(actionCreators.getCateDetailDB(page, "이별"));
-                }}
-              >
-                <Broken />
-                이별
-              </CategoryBtn>
-              <CategoryBtn
-                onClick={() => {
-                  dispatch(actionCreators.getCateDetailDB(page, "기타"));
-                }}
-              >
-                <Etc />
-                기타
-              </CategoryBtn>
+              <div className="mobile">
+                <CategoryBtn
+                  onClick={() => {
+                    dispatch(actionCreators.getPostDB(page));
+                  }}
+                >
+                  <AllBtn>
+                    <All />
+                  </AllBtn>
+                  <p style={{ marginTop: "83px", position: "absolute" }}>
+                    전체
+                  </p>
+                </CategoryBtn>
+                <CategoryBtn
+                  onClick={() => {
+                    dispatch(actionCreators.getCateDetailDB(page, "투표"));
+                  }}
+                >
+                  <Vote />
+                  투표
+                </CategoryBtn>
+                <CategoryBtn
+                  onClick={() => {
+                    dispatch(actionCreators.getCateDetailDB(page, "솔로"));
+                  }}
+                >
+                  <Solo />
+                  솔로
+                </CategoryBtn>
+                <CategoryBtn
+                  onClick={() => {
+                    dispatch(actionCreators.getCateDetailDB(page, "짝사랑"));
+                  }}
+                >
+                  <Love />
+                  짝사랑
+                </CategoryBtn>
+              </div>
+              <div className="mobile">
+                <CategoryBtn
+                  onClick={() => {
+                    dispatch(actionCreators.getCateDetailDB(page, "썸"));
+                  }}
+                >
+                  <Some />썸
+                </CategoryBtn>
+                <CategoryBtn
+                  onClick={() => {
+                    dispatch(actionCreators.getCateDetailDB(page, "연애"));
+                  }}
+                >
+                  <Again />
+                  연애
+                </CategoryBtn>
+                <CategoryBtn
+                  onClick={() => {
+                    dispatch(actionCreators.getCateDetailDB(page, "이별"));
+                  }}
+                >
+                  <Broken />
+                  이별
+                </CategoryBtn>
+                <CategoryBtn
+                  onClick={() => {
+                    dispatch(actionCreators.getCateDetailDB(page, "기타"));
+                  }}
+                >
+                  <Etc />
+                  기타
+                </CategoryBtn>
+              </div>
             </CateGoryWrapper>
             <TitleWrapper>
               <Text title>익명상담소</Text>
@@ -178,6 +207,9 @@ function PostList(props) {
 }
 const Background = styled.div`
   height: 2000px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    height: 2500px;
+  }
 `;
 const PageBtn = styled.div`
   padding-top: 33px;
@@ -189,21 +221,31 @@ const InfoWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin: auto;
-  width: 1032px;
+  max-width: 1032px;
+  width: 100%
   height: 150px;
-  border: 1px solid red;
+  /* border: 1px solid red; */
+  
+ 
 `;
 const InfoContainer = styled.div`
-  width: 385px;
+  max-width: 400px;
+  width: 100%;
   height: 150px;
-  border: 1px solid red;
+  /* border: 1px solid red; */
+  @media ${({ theme }) => theme.device.isMobile} {
+    box-sizing: border-box;
+    margin: auto;
+  }
 `;
 const InfoBox = styled.div`
   width: 592px;
   height: 150px;
   box-sizing: border-box;
-
-  border: 1px solid red;
+  /* border: 1px solid red; */
+  @media ${({ theme }) => theme.device.isMobile} {
+    display: none;
+  }
 `;
 const VoteWrapper = styled.div`
   width: 1032px;
@@ -245,19 +287,35 @@ const CateGoryWrapper = styled.div`
   /* height: 200px; */
   /* background: yellow; */
   justify-content: space-around;
+  /* border: 1px solid black; */
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 300px;
+    height: 180px;
+    /* background: yellow; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .mobile {
+      /* border: 1px solid red; */
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      height: 90px;
+    }
+  }
+  @media ${({ theme }) => theme.device.web} {
+    .mobile {
+      display: flex;
+      width: 409px;
+      flex-direction: row;
+      /* border: 1px solid blue; */
+      justify-content: space-around;
+      align-items: center;
+    }
+  }
 `;
-const BtnWrapper = styled.div`
-  padding-top: 10px;
-  padding-left: 727px;
-  display: flex;
-`;
-const BtnContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  width: 290px;
-  height: 40px;
-`;
+
 const CategoryBtn = styled.div`
   display: flex;
   flex-direction: column;
@@ -271,7 +329,9 @@ const CategoryBtn = styled.div`
   order: 0;
   flex-grow: 0;
   cursor: pointer;
-  /* border: 1px solid red; */
+  @media ${({ theme }) => theme.device.isMobile} {
+    /* border: 1px solid black; */
+  }
 `;
 const AllBtn = styled.div`
   background-color: #fafafa;
@@ -301,6 +361,9 @@ const TableInfo = styled.div`
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #666666;
+  @media ${({ theme }) => theme.device.isMobile} {
+    display: none;
+  }
 `;
 
 const InfoItem = styled.div`
@@ -311,5 +374,50 @@ const InfoItem = styled.div`
   font-weight: 500;
   vertical-align: middle;
 `;
+const BtnWrapper = styled.div`
+  /* border: 1px solid red; */
+  justify-content: right;
+  padding-top: 14px;
+  display: flex;
+  @media ${({ theme }) => theme.device.isMobile} {
+    display: none;
+  }
+`;
+const BtnContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 290px;
+  height: 40px;
+  /* background-color: orange; */
+  @media ${({ theme }) => theme.device.isMobile} {
+    display: none;
+  }
+`;
 
+const MBtnWrapper = styled.div`
+  @media ${({ theme }) => theme.device.web} {
+    display: none;
+  }
+  @media ${({ theme }) => theme.device.isMobile} {
+    /* border: 1px solid red; */
+    width: 290px;
+    height: 40px;
+    display: flex;
+    padding-top: 15px;
+  }
+`;
+const MBtnContainer = styled.div`
+  @media ${({ theme }) => theme.device.web} {
+    display: none;
+  }
+  @media ${({ theme }) => theme.device.isMobile} {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 290px;
+    height: 40px;
+    /* background-color: orange; */
+  }
+`;
 export default PostList;

@@ -95,6 +95,12 @@ function PostDetail(props) {
               <Text sub7>{createdAt}</Text>
             </TitleContent>
           </CategoryBox>
+
+          <MobileCategory>
+            <Text body4 color="#7A37BE">
+              {post?.category}
+            </Text>
+          </MobileCategory>
           <TitleBox>
             <Title>
               <Text body4>제목</Text>
@@ -108,8 +114,11 @@ function PostDetail(props) {
             </ThumbComment>
           </TitleBox>
           <BtnContainer>
+            <div className="time">
+              <Text sub7>{createdAt}</Text>
+            </div>
             {post?.memberId === loginUser ? (
-              <>
+              <div className="smallBtn">
                 <BtnL
                   onClick={() => {
                     history.push(`/PostEdit/${postId}`);
@@ -129,11 +138,13 @@ function PostDetail(props) {
                     <PostRemove closeModal={closeModal} postId={postId} />
                   </Modal>
                 )}
-              </>
+              </div>
             ) : null}
           </BtnContainer>
           <ContentBox>
-            <Text body6> {post?.contents}</Text>
+            <Text body6 textAlign="left">
+              {post?.contents}
+            </Text>
           </ContentBox>
           <CommentPhotoWrap>
             <PhotoDivWrap>
@@ -174,11 +185,12 @@ function PostDetail(props) {
         {/* 댓글 */}
         <CommentWrapper>
           <CommentList />
-          <div>
+          <PageWrapper>
             <Pagination setPage={setPage} totalPage={totalPage} />
-          </div>
-
-          <CommentWrite postId={postId} />
+          </PageWrapper>
+          <WriteWrapper>
+            <CommentWrite postId={postId} />
+          </WriteWrapper>
         </CommentWrapper>
       </Layout>
     </React.Fragment>
@@ -187,22 +199,55 @@ function PostDetail(props) {
 const CommentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  /* border: 1px solid blue; */
   margin: 0px auto 0px auto;
   max-width: 1032px;
+  width: 100%;
   height: 703px;
+`;
+const PageWrapper = styled.div`
+  @media ${({ theme }) => theme.device.isMobile} {
+    padding: 10px 0px 10px;
+  }
+  padding-top: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 90px 0px 30px;
+  /* border: 1px solid red; */
+`;
+const WriteWrapper = styled.div`
+  padding: 10px 0px 10px;
 `;
 const BtnContainer = styled.div`
   display: flex;
   width: 1032px;
   padding-top: 20px;
   justify-content: right;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 326px;
+    border-top: 1px solid #666666;
+    justify-content: space-between;
+  }
+  @media ${({ theme }) => theme.device.web} {
+    .time {
+      display: none;
+    }
+    .smallBtn {
+      /* border: 1px solid red; */
+      /* justify-content: right; */
+    }
+  }
 `;
 const DetailWrapper = styled.div`
   margin: auto;
-  width: 1032px;
+  max-width: 1032px;
+  width: 100%;
   height: 450px;
   /* border: 1px solid red; */
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 326px;
+    margin: auto;
+  }
 `;
 const CategoryBox = styled.div`
   box-sizing: border-box;
@@ -210,10 +255,18 @@ const CategoryBox = styled.div`
   flex-direction: row;
   align-items: flex-start;
   padding: 0px;
-  width: 1032px;
+  max-width: 1032px;
+  width: 100%;
   height: 45px;
   border-top: 1px solid #666666;
   border-bottom: 1px solid #cccccc;
+  /* background: yellow; */
+  @media ${({ theme }) => theme.device.isMobile} {
+    /* width: 326px;
+    margin: auto;
+    border: none; */
+    display: none;
+  }
 `;
 const TitleBox = styled.div`
   box-sizing: border-box;
@@ -221,9 +274,28 @@ const TitleBox = styled.div`
   flex-direction: row;
   align-items: flex-start;
   padding: 0px;
-  width: 1032px;
+  max-width: 1032px;
+  width: 100%;
   height: 45px;
   border-bottom: 1px solid #cccccc;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 326px;
+    margin: auto;
+    /* border: 1px solid red; */
+  }
+`;
+
+const MobileCategory = styled.div`
+  @media ${({ theme }) => theme.device.isMobile} {
+    /* border: 1px solid red; */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  @media ${({ theme }) => theme.device.web} {
+    display: none;
+  }
 `;
 const Title = styled.div`
   display: flex;
@@ -231,12 +303,13 @@ const Title = styled.div`
   align-items: center;
   padding: 0px 40px;
   gap: 10px;
-  width: 130px;
+  max-width: 130px;
+  width: 100%;
   height: 45px;
   flex: none;
   order: 0;
   flex-grow: 0;
-  ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: none;
   }
 `;
@@ -244,29 +317,28 @@ const CateContent = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* padding: 0px 0px 0px 40px; */
   gap: 10px;
-  width: 782px;
+  max-width: 782px;
+  width: 100%;
   height: 45px;
   flex: none;
   order: 1;
   flex-grow: 0;
   font-family: "KoPub Batang";
-  ${({ theme }) => theme.device.mobile} {
-  }
 `;
 const TitleContent = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 10px;
-  width: 760px;
+  max-width: 760px;
+  width: 100%;
   height: 45px;
   flex: none;
   order: 1;
   flex-grow: 0;
   font-family: "KoPub Batang";
-  ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     width: 326px;
     margin: auto;
   }
@@ -276,12 +348,14 @@ const ThumbComment = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 5px;
-  /* width: 760px; */
   height: 45px;
   flex: none;
   order: 1;
   flex-grow: 0;
   font-family: "KoPub Batang";
+  @media ${({ theme }) => theme.device.isMobile} {
+    display: none;
+  }
 `;
 
 const BtnL = styled.button`
@@ -304,8 +378,13 @@ const ContentBox = styled.div`
   align-items: flex-start;
   padding: 30px 40px;
   gap: 10px;
-  width: 1032px;
+  max-width: 1032px;
+  width: 100%;
   /* border: 1px solid red; */
+  box-sizing: border-box;
+  @media ${({ theme }) => theme.device.isMobile} {
+    padding: 30px 0px;
+  }
 `;
 const IsLike = styled.div`
   display: flex;
@@ -315,6 +394,7 @@ const IsLike = styled.div`
   gap: 10px;
   margin: auto;
   height: 150px;
+  /* border: 1px solid yellow; */
 `;
 
 const Thumb = styled.button`
@@ -333,22 +413,25 @@ const CommentPhotoWrap = styled.div`
 `;
 const PhotoDivWrap = styled.div`
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
 `;
 const PhotoDiv = styled.div`
   display: flex;
-  flex-direction: row;
+  /* flex-direction: row; */
   margin: 10px;
   /* border: 1px solid red; */
 `;
 const PhotoWrap = styled.div`
   display: flex;
-  flex-direction: row;
+  /* flex-direction: row; */
   /* border: 1px solid red; */
+  ${({ theme }) => theme.device.isMobile} {
+    flex-direction: column;
+  }
 `;
 const PhotoUpload1 = styled.div`
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   justify-content: center;
   align-items: center;
   text-align: center;

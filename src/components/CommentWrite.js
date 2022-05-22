@@ -38,23 +38,20 @@ const CommentWrite = (props) => {
   return (
     <React.Fragment>
       <CommentWriteWrapper>
+        <TextBox>댓글 쓰기</TextBox>
         <TextWrapper>
-          <TextBox>댓글 쓰기</TextBox>
-          <div styled={{ width: "100%" }}>
-            <Input
-              placeholder="선플은 선택이 아닌 의무입니다! (최소 10자 이상)"
-              _onChange={(e) => {
-                setComment(e.target.value);
-              }}
-              _onKeyUp={checkMaxLength}
-              value={comment}
-              multiLine
-              maxlength="200"
-              rows={7}
-            />
-          </div>
+          <Input
+            placeholder="선플은 선택이 아닌 의무입니다! (최소 10자 이상)"
+            _onChange={(e) => {
+              setComment(e.target.value);
+            }}
+            _onKeyUp={checkMaxLength}
+            value={comment}
+            multiLine
+            maxlength="200"
+            rows={7}
+          />
         </TextWrapper>
-
         <BtnWrapper>
           <Button primaryDefault size="narrow" _onClick={addComment}>
             댓글쓰기
@@ -68,6 +65,7 @@ const CommentWriteWrapper = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 1032px;
+  width: 100%;
   height: 250px;
   background: #ffffff;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
@@ -75,18 +73,19 @@ const CommentWriteWrapper = styled.div`
   flex: none;
   order: 0;
   flex-grow: 0;
-  @media ${({ theme }) => theme.device.mobile} {
+  /* @media ${({ theme }) => theme.device.isMobile} {
     width: 328px;
     border: 1px solid pink;
-  }
+    margin: auto;
+  } */
 `;
 const TextWrapper = styled.div`
   width: 952px;
   height: 140px;
   margin: auto;
-  @media ${({ theme }) => theme.device.mobile} {
-    width: 328px;
-    border: 1px solid red;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 90%;
+    /* border: 1px solid red; */
   }
 `;
 const TextBox = styled.div`
@@ -97,6 +96,10 @@ const TextBox = styled.div`
   size: 14px;
   line-height: 18px;
   align-items: flex-start;
+  padding-top: 15px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    display: none;
+  }
 `;
 
 const BtnWrapper = styled.div`
@@ -104,7 +107,7 @@ const BtnWrapper = styled.div`
   box-sizing: border-box;
   margin: 0px auto;
   flex-direction: row;
-  margin: 30px 10px 10px;
+  margin: 10px;
   justify-content: right;
   align-items: right;
   max-width: 992px;
@@ -113,9 +116,10 @@ const BtnWrapper = styled.div`
   flex: none;
   order: 1;
   flex-grow: 0;
-  @media ${({ theme }) => theme.device.mobile} {
-    width: 328px;
-    border: 1px solid red;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 100%;
+    /* border: 1px solid red; */
+    margin: auto;
   }
 `;
 export default CommentWrite;
