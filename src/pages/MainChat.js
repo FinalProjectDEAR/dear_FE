@@ -226,18 +226,6 @@ const Btn = styled.button`
   border-radius: 20px;
 `;
 
-const Wrap = styled.div`
-  margin: 20px auto 20px auto;
-  background-color: #ddd;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: flex-start;
-  gap: 20px;
-  max-width: 1190px;
-  width: 100%;
-`;
-
 const ScrollBox = styled.div`
   display: flex;
   flex-direction: column;

@@ -48,7 +48,7 @@ function MainRanking() {
               </ImageBox>
             </InfoBox>
             <LineBox>
-              <Text sub2 deco="underLine" color="#948A9E">
+              <Text sub2 deco="underLine" color="#948A9E" cursor="pointer">
                 서비스 소개 더보기 {">"}
               </Text>
             </LineBox>

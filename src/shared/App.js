@@ -11,8 +11,6 @@ import { Switch } from "react-router-dom";
 import { Route } from "react-router-dom";
 
 //컴포넌트
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 import ScrollToTop from "../components/ScrollToTop";
 import FixedBtn from "../components/FixedBtn";
 import Loading from "../pages/Loading";
@@ -57,48 +55,43 @@ function App() {
       <ThemeProvider theme={theme}>
         <ConnectedRouter history={history}>
           <ScrollToTop />
-          {/* <Header /> */}
-          <Wrapper>
-            <Suspense fallback={<Loading />}>
-              <Route path="/main" exact component={Main} />
-              <Route path="/mainRanking" exact component={MainRanking} />
-              <Route path="/mainHotPost" exact component={MainHotPost} />
-              <Route path="/mainReview" exact component={MainReview} />
-              <Route path="/" exact component={Login} />
-              <Route path="/user/kakao/callback" component={KakaoAuthHandle} />
-              <Route path="/signup" exact component={Signup} />
-              <Route path="/info" exact component={MemberInfo} />
-              <Route path="/commentList" exact component={CommentList} />
-              <Route path="/postList" exact component={PostList} />
-              <Route path="/postWrite" exact component={PostWrite} />
-              <Route path="/postDetail/:postId" exact component={PostDetail} />
-              <Route path="/resReview" exact component={ResReview} />
-              <Route path="/reqReview" exact component={ReqReview} />
-              <Route path="/postEdit/:postId" exact component={PostEdit} />
-              <Route path="/VoteDetail/:postId" exact component={VoteDetail} />
-              <Route path="/voteList" exact component={VoteList} />
-              <Route path="/voteWrite" exact component={VoteWrite} />
-              <Route path="/startReq" exact component={ReqChatStart} />
-              <Route path="/startRes" exact component={ResChatStart} />
-              <Route path="/historyCard" exact component={HistoryCard} />
-              <Route path="/historyCard" exact component={HistoryCard} />
-              <Route path="/AudioRoom/:sessionId" component={AudioRoom} />
-              <Route path="/AudioChat" exact component={AudioChat} />
-              <Route path="/loading" exact component={Loading} />
-              <Route path="/ChatClose" exact component={ChatClose} />
-              <Route path="/sendMsg" exact component={SendMsg} />
-              <Route
-                path="/receivedMsg/:messageId"
-                exact
-                component={ReceivedMsg}
-              />
-              <Route path="/myPage" exact component={MyPage} />
-              <Route path="/notification" exact component={Notification} />
-              <Route path="/editMyPage" exact component={EditMyPage} />
-            </Suspense>
-            {/* <Section /> */}
-          </Wrapper>
-          {/* <Footer /> */}
+          <Suspense fallback={<Loading />}>
+            <Route path="/main" exact component={Main} />
+            <Route path="/mainRanking" exact component={MainRanking} />
+            <Route path="/mainHotPost" exact component={MainHotPost} />
+            <Route path="/mainReview" exact component={MainReview} />
+            <Route path="/" exact component={Login} />
+            <Route path="/user/kakao/callback" component={KakaoAuthHandle} />
+            <Route path="/signup" exact component={Signup} />
+            <Route path="/info" exact component={MemberInfo} />
+            <Route path="/commentList" exact component={CommentList} />
+            <Route path="/postList" exact component={PostList} />
+            <Route path="/postWrite" exact component={PostWrite} />
+            <Route path="/postDetail/:postId" exact component={PostDetail} />
+            <Route path="/resReview" exact component={ResReview} />
+            <Route path="/reqReview" exact component={ReqReview} />
+            <Route path="/postEdit/:postId" exact component={PostEdit} />
+            <Route path="/VoteDetail/:postId" exact component={VoteDetail} />
+            <Route path="/voteList" exact component={VoteList} />
+            <Route path="/voteWrite" exact component={VoteWrite} />
+            <Route path="/startReq" exact component={ReqChatStart} />
+            <Route path="/startRes" exact component={ResChatStart} />
+            <Route path="/historyCard" exact component={HistoryCard} />
+            <Route path="/historyCard" exact component={HistoryCard} />
+            <Route path="/AudioRoom/:sessionId" component={AudioRoom} />
+            <Route path="/AudioChat" exact component={AudioChat} />
+            <Route path="/loading" exact component={Loading} />
+            <Route path="/ChatClose" exact component={ChatClose} />
+            <Route path="/sendMsg" exact component={SendMsg} />
+            <Route
+              path="/receivedMsg/:messageId"
+              exact
+              component={ReceivedMsg}
+            />
+            <Route path="/myPage" exact component={MyPage} />
+            <Route path="/notification" exact component={Notification} />
+            <Route path="/editMyPage" exact component={EditMyPage} />
+          </Suspense>
           <FixedBtn />
         </ConnectedRouter>
       </ThemeProvider>
@@ -106,12 +99,4 @@ function App() {
   );
 }
 
-const Wrapper = styled.div`
-  min-height: 100vh;
-  position: relative;
-  width: 100%;
-`;
-const Section = styled.div`
-  padding-bottom: 300px;
-`;
 export default App;

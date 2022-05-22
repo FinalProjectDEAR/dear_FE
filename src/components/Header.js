@@ -46,10 +46,13 @@ const Header = (props) => {
   );
 };
 const HeaderWrapper = styled.div`
-  /* background-color: #cdb4db; */
+  position: fixed;
+  left: 0;
+  top: 0;
   width: 100%;
-  height: 95px;
-  /* margin: auto; */
+  height: 120px;
+  padding: 24px;
+  box-sizing: border-box;
 `;
 
 const HeaderContainer = styled.div`
@@ -61,9 +64,9 @@ const HeaderContainer = styled.div`
 
 const HeaderBox = styled.div`
   width: 1032px;
+  height: 100%;
   margin: auto;
   display: flex;
-  padding: 30px 20px 40px 100px;
   justify-content: space-between;
 `;
 

@@ -8,8 +8,7 @@ import MainChat from "./MainChat";
 import MainRanking from "./MainRanking";
 import MainHotPost from "./MainHotPost";
 import MainReview from "./MainReview";
-
-import ArrowDropDownRoundedIcon from "@mui/icons-material/ArrowDropDownRounded";
+import Footer from "../components/Footer";
 
 function Main() {
   const [currentPage, setCurrentPage] = React.useState(null);
