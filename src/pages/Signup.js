@@ -7,7 +7,7 @@ import { actionCreators as userActions } from "../redux/modules/user";
 import { memberIdCheck, pwdCheck } from "../shared/Check";
 
 import styled from "styled-components";
-import logo from "../assets/main/logoL.png";
+import logo from "../assets/main/logoS.png";
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -77,27 +77,31 @@ const Signup = () => {
             />
             <ButtonBox>
               <Button
-                width="110px"
+                secondaryDefault
+                size="small"
                 margin="0px 10px"
-                borderRadius="22px"
                 bg="#948A9E"
                 cursor="pointer"
-                text="중복확인"
                 _onClick={() => {
                   dupCheck(memberId);
                 }}
-              />
+              >
+                <Text body4 color="#7A37BE">
+                  중복확인
+                </Text>
+              </Button>
             </ButtonBox>
           </IdBox>
-          <Text
-            weight="300"
-            size="12px"
-            color="#999"
-            textAlign="left"
-            margin="15px"
-          >
-            {nickErr}
-          </Text>
+          {nickErr ? (
+            <Text sub7 textAlign="left" margin="15px">
+              {nickErr}
+            </Text>
+          ) : (
+            <Text sub7 textAlign="left" margin="15px">
+              영문(소문자), 숫자로 4~10자 이내로 입력해 주세요.
+            </Text>
+          )}
+
           <PasswordBox>
             <Input
               padding="14px 0px 14px 30px"
@@ -105,7 +109,7 @@ const Signup = () => {
               borderRadius="100px"
               shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
               type="password"
-              placeholder="비밀번호를 입력해주세요."
+              placeholder="비밀번호는 6자이상 입력해주세요."
               _onChange={(e) => {
                 setPwd(e.target.value);
               }}
@@ -117,7 +121,7 @@ const Signup = () => {
               margin="10px 0px"
               shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
               type="password"
-              placeholder="비밀번호를 다시 입력해주세요."
+              placeholder="비밀번호를 한 번 더 입력해주세요."
               _onChange={(e) => {
                 setPwdConfirm(e.target.value);
               }}
@@ -128,13 +132,30 @@ const Signup = () => {
           </PasswordBox>
           <ButtonBox>
             <Button
-              bg=" #61586A"
-              shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
+              primaryDefault
+              size="wide"
               _onClick={() => {
                 signup();
               }}
               text="회원가입"
             ></Button>
+            <LineBox>
+              <Text sub4 margin="0px" color="#61586A">
+                이미 계정이 있으신가요?
+              </Text>
+              <Text
+                sub5
+                margin="0px 10px"
+                color="#7A37BE"
+                deco="underLine"
+                cursor="pointer"
+                _onClick={() => {
+                  history.push("/");
+                }}
+              >
+                로그인
+              </Text>
+            </LineBox>
           </ButtonBox>
         </div>
       </SignupWrapper>
@@ -145,21 +166,23 @@ const Signup = () => {
 export default Signup;
 
 const SignupWrapper = styled.div`
-  width: 360px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 100vh;
   margin: auto;
 `;
 
 const LogoBox = styled.div`
-  justify-content: center;
-  align-items: center;
-  padding: 0px 0px 30px;
+  padding: 0px 0px 40px;
 `;
 
 const Logo = styled.img`
-  width: 225px;
+  width: 140px;
+  height: 94px;
   margin: 0px auto;
-  border-radius: 20px;
-  cursor: pointer;
 `;
 
 const IdBox = styled.div`
@@ -178,4 +201,13 @@ const ButtonBox = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+`;
+
+const LineBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 19px;
+  margin: 10px auto;
 `;

@@ -89,7 +89,6 @@ const Background = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
-  scroll-snap-align: start;
 `;
 
 const RankingWrapper = styled.div`
