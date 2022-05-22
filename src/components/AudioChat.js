@@ -48,6 +48,8 @@ function AudioChat() {
   //모달
   const [modalOpen, setModalOpen] = React.useState(false);
   const [noListener, setNoListener] = React.useState(false);
+  const [showReqInfo, setShowReqInfo] = React.useState(false);
+  const [showResInfo, setShowResInfo] = React.useState(false);
 
   const closeModal = () => {
     setModalOpen(false);
@@ -191,7 +193,7 @@ function AudioChat() {
   React.useEffect(() => {
     if (!isConnect) {
       console.log("30초 카운트");
-      setTimeout(waitTimeOut, 30000);
+      setTimeout(waitTimeOut, 1000000); //30000
     }
   }, []);
 
@@ -329,10 +331,10 @@ function AudioChat() {
                         </Text>
                       </Tag>
                     ) : null}
-                    {chatInfo.isLove ? (
+                    {chatInfo.reqDating ? (
                       <Tag>
                         <Text sub7 margin="6px 8px">
-                          {chatInfo.reqLoveType}
+                          {chatInfo.reqDating}
                         </Text>
                       </Tag>
                     ) : null}
@@ -355,6 +357,61 @@ function AudioChat() {
                   </TagLine>
                 </TagBox>
               </UserBox>
+              <MobileUserBox>
+                <Ellipsis>
+                  {/* <Text body3>{chatInfo.reqNickname}</Text> */}
+                  <Text body3>비둘기구구절절구구</Text>
+                </Ellipsis>
+                <InfoBtn
+                  onClick={() => {
+                    setShowReqInfo(true);
+                  }}
+                >
+                  <Text sub color="#333">
+                    정보보기
+                  </Text>
+                </InfoBtn>
+                {showReqInfo ? (
+                  <TagInfo
+                    onClick={() => {
+                      setShowReqInfo(false);
+                    }}
+                  >
+                    <TagLine>
+                      {chatInfo.reqAge ? (
+                        <Tag>
+                          <Text sub7 margin="6px 8px">
+                            {chatInfo.reqAge}
+                          </Text>
+                        </Tag>
+                      ) : null}
+                      {chatInfo.reqDating ? (
+                        <Tag>
+                          <Text sub7 margin="6px 8px">
+                            {chatInfo.reqDating}
+                          </Text>
+                        </Tag>
+                      ) : null}
+                    </TagLine>
+                    <TagLine>
+                      {chatInfo.reqLoveType ? (
+                        <Tag>
+                          <Text sub7 margin="6px 8px">
+                            {chatInfo.reqLoveType}
+                          </Text>
+                        </Tag>
+                      ) : null}
+                      {chatInfo.reqLovePeriod ? (
+                        <Tag>
+                          <Text sub7 margin="6px 8px">
+                            {chatInfo.reqLovePeriod}
+                          </Text>
+                        </Tag>
+                      ) : null}
+                    </TagLine>
+                  </TagInfo>
+                ) : null}
+              </MobileUserBox>
               <UserBox>
                 <Text body3>{chatInfo.resNickname}</Text>
                 {chatInfo.resNickname ? (
@@ -367,10 +424,10 @@ function AudioChat() {
                           </Text>
                         </Tag>
                       ) : null}
-                      {chatInfo.isLove ? (
+                      {chatInfo.resDating ? (
                         <Tag>
                           <Text sub7 margin="6px 8px">
-                            {chatInfo.resLoveType}
+                            {chatInfo.resDating}
                           </Text>
                         </Tag>
                       ) : null}
@@ -394,6 +451,64 @@ function AudioChat() {
                   </TagBox>
                 ) : null}
               </UserBox>
+              <MobileUserBox>
+                {isConnect ? (
+                  <>
+                    <Ellipsis>
+                      <Text body3>{chatInfo.resNickname}</Text>
+                    </Ellipsis>
+                    <InfoBtn
+                      onClick={() => {
+                        setShowResInfo(true);
+                      }}
+                    >
+                      <Text sub color="#333">
+                        정보보기
+                      </Text>
+                    </InfoBtn>
+                    {showResInfo ? (
+                      <TagInfo
+                        onClick={() => {
+                          setShowResInfo(false);
+                        }}
+                      >
+                        <TagLine>
+                          {chatInfo.resAge ? (
+                            <Tag>
+                              <Text sub7 margin="6px 8px">
+                                {chatInfo.resAge}
+                              </Text>
+                            </Tag>
+                          ) : null}
+                          {chatInfo.resDating ? (
+                            <Tag>
+                              <Text sub7 margin="6px 8px">
+                                {chatInfo.resDating}
+                              </Text>
+                            </Tag>
+                          ) : null}
+                        </TagLine>
+                        <TagLine>
+                          {chatInfo.resLoveType ? (
+                            <Tag>
+                              <Text sub7 margin="6px 8px">
+                                {chatInfo.resLoveType}
+                              </Text>
+                            </Tag>
+                          ) : null}
+                          {chatInfo.resLovePeriod ? (
+                            <Tag>
+                              <Text sub7 margin="6px 8px">
+                                {chatInfo.resLovePeriod}
+                              </Text>
+                            </Tag>
+                          ) : null}
+                        </TagLine>
+                      </TagInfo>
+                    ) : null}
+                  </>
+                ) : null}
+              </MobileUserBox>
             </div>
           </ChatContainer>
           <BottomBox>
@@ -486,6 +601,11 @@ const ChatWrapper = styled.div`
   background: #ffffff;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 20px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 330px;
+    height: 203px;
+    padding-top: 23px;
+  }
 `;
 
 const ChatContainer = styled.div`
@@ -496,6 +616,11 @@ const ChatContainer = styled.div`
   box-sizing: border-box;
   background: #f8f8f8;
   border-radius: 10px;
+  @media ${({ theme }) => theme.device.mobile} {
+    padding: 11px;
+    width: 306px;
+    height: 134px;
+  }
 `;
 
 const TapeBox = styled.div`
@@ -510,6 +635,11 @@ const TapeBox = styled.div`
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 200px;
   background: #ffffff;
+  @media ${({ theme }) => theme.device.mobile} {
+    padding: 7px;
+    width: 194px;
+    height: 58px;
+  }
 `;
 
 const UserBox = styled.div`
@@ -520,6 +650,57 @@ const UserBox = styled.div`
   align-items: center;
   padding: 0px;
   margin: 14px 48px;
+  @media ${({ theme }) => theme.device.mobile} {
+    display: none;
+  }
+`;
+
+const MobileUserBox = styled.div`
+  width: 72px;
+  height: 60px;
+  margin: 7px 30px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    display: flex;
+  }
+`;
+
+const InfoBtn = styled.div`
+  width: 62px;
+  height: 22px;
+  margin: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  background: #e6e6e6;
+  border-radius: 4px;
+`;
+
+const TagInfo = styled.div`
+  width: 160px;
+  padding: 15px;
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  top: 260px;
+  background-color: #fff;
+  border-radius: 10px;
+`;
+
+const Ellipsis = styled.div`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 `;
 
 const TagBox = styled.div`
@@ -555,14 +736,23 @@ const BottomBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media ${({ theme }) => theme.device.mobile} {
+    padding: 0px;
+    margin: 5px;
+  }
 `;
 
 const VoiceBtnBox = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100px;
   height: 44px;
   margin-right: 10px;
   padding: 10px;
+  @media ${({ theme }) => theme.device.mobile} {
+    heigh: 36px;
+  }
 `;
 
 const VoiceBtn = styled.div`
@@ -579,4 +769,9 @@ const VoiceBtn = styled.div`
   background: #fafafa;
   border-radius: 40px;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 32px;
+    height: 32px;
+    padding: 5px 10px;
+  }
 `;

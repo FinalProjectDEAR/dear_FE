@@ -15,36 +15,41 @@ const logout = () => {
 
 const Header = (props) => {
   return (
-    <HeaderWrapper id="1">
-      <HeaderContainer>
-        <HeaderBox>
-          <Logo
-            onClick={() => {
-              history.push("/main");
-            }}
-            style={{
-              cursor: "pointer",
-              width: "100px",
-              height: "66.34px",
-            }}
-          />
-          <div>
-            <HeaderBtn>서비스 소개</HeaderBtn>
-            <HeaderBtn
+    <React.Fragment>
+      <HeaderWrapper id="1">
+        <HeaderContainer>
+          <HeaderBox>
+            <Logo
               onClick={() => {
-                history.push("/postList");
+                history.push("/main");
               }}
-            >
-              디어상담소
-            </HeaderBtn>
-            <HeaderBtn>마이페이지</HeaderBtn>
-            <HeaderBtn onClick={logout}>로그아웃</HeaderBtn>
-          </div>
-        </HeaderBox>
-      </HeaderContainer>
-    </HeaderWrapper>
+              style={{
+                cursor: "pointer",
+                width: "100px",
+                height: "66.34px",
+              }}
+            />
+            <div>
+              <HeaderBtn>서비스 소개</HeaderBtn>
+              <HeaderBtn
+                onClick={() => {
+                  history.push("/postList");
+                }}
+              >
+                디어상담소
+              </HeaderBtn>
+              <HeaderBtn>마이페이지</HeaderBtn>
+              <HeaderBtn onClick={logout}>로그아웃</HeaderBtn>
+            </div>
+          </HeaderBox>
+        </HeaderContainer>
+      </HeaderWrapper>
+    </React.Fragment>
   );
 };
+
+export default Header;
+
 const HeaderWrapper = styled.div`
   position: fixed;
   left: 0;
@@ -53,6 +58,9 @@ const HeaderWrapper = styled.div`
   height: 120px;
   padding: 24px;
   box-sizing: border-box;
+  @media ${({ theme }) => theme.device.mobile} {
+    display: none;
+  }
 `;
 
 const HeaderContainer = styled.div`
@@ -77,4 +85,3 @@ const HeaderBtn = styled.button`
   cursor: pointer;
   line-height: 60px;
 `;
-export default Header;
