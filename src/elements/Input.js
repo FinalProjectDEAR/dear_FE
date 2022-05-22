@@ -154,7 +154,7 @@ const ElInput = styled.input`
   }
   &::placeholder {
     color: ${({ theme }) => theme.colors.grayScale[300]};
-    font-size: 85%;
+    font-size: 80%;
   }
   width: 100%;
   box-sizing: border-box;
