@@ -159,7 +159,9 @@ function PostEdit() {
       <Layout>
         <WriteWrapper>
           <TitleContainer>
-            <TitleBox>수정하기</TitleBox>
+            <Text title textAlign="left">
+              수정하기
+            </Text>
           </TitleContainer>
           <CategoryWrapper>
             <Title>카테고리</Title>
@@ -183,6 +185,8 @@ function PostEdit() {
             <Title>제목</Title>
             <InputMobile>
               <Input
+                multiLine
+                rows={2}
                 placeholder="제목을 입력해주세요."
                 _onChange={(e) => {
                   setTitle(e.target.value);
@@ -253,18 +257,20 @@ function PostEdit() {
             </div>
           </ImageWrapper>
           <BtnWrap>
-            <Button
-              _onClick={() => {
-                history.goBack();
-              }}
-              secondaryDefault
-              cursor="pointer"
-              size="narrow"
-            >
-              <Text body4 color="#7A37BE">
-                뒤로 가기
-              </Text>
-            </Button>
+            <div className="goback">
+              <Button
+                _onClick={() => {
+                  history.goBack();
+                }}
+                secondaryDefault
+                cursor="pointer"
+                size="narrow"
+              >
+                <Text body4 color="#7A37BE">
+                  뒤로 가기
+                </Text>
+              </Button>
+            </div>
             <Button
               _onClick={editPost}
               primaryDefault
@@ -306,41 +312,14 @@ const WriteWrapper = styled.div`
 const TitleContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: flex-end;
-  padding: 0px 0px 10px 40px;
-  gap: 660px;
-  width: 952px;
-  height: 60px;
+  max-width: 952px;
+  width: 100%;
+  /* height: 60px; */
   flex: none;
   order: 0;
   flex-grow: 0;
-  /* background: orange; */
-  @media ${({ theme }) => theme.device.mobile} {
-    width: 155px;
-    height: 83px;
-    margin: auto;
-    /* background: orange; */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    box-sizing: border-box;
-    align-items: center;
-    gap: 0px;
-  }
-`;
-const TitleBox = styled.div`
-  width: 98px;
-  height: 30px;
-  font-family: "Pretendard";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 30px;
-  color: #2e2a32;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
+  /* border: 1px solid red; */
+  padding: 20px 10px 0px;
 `;
 
 const SubTitle = styled.div`
@@ -544,12 +523,20 @@ const BtnWrap = styled.div`
   margin: auto;
   /* padding: 20px 0px 0px; */
   gap: 20px;
-  width: 952px;
+  max-width: 952px;
+  width: 100%;
   height: 60px;
   flex: none;
   order: 1;
   flex-grow: 0;
   justify-content: space-between;
   /* background: pink; */
+  @media ${({ theme }) => theme.device.mobile} {
+    .goback {
+      display: none;
+    }
+    justify-content: center;
+    /* width: 952px; */
+  }
 `;
 export default PostEdit;

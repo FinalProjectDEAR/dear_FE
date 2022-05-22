@@ -57,7 +57,7 @@ const device = {
   mobile: `only screen and (max-width: ${size.mobile})`,
   desktopL: `only screen and (max-width: ${size.desktop})`,
   web: `only screen and (min-width: ${size.web})`,
-  isMobile: `only screen and (min-width: ${size.isMobile})`,
+  isMobile: `only screen and (max-width: ${size.isMobile})`,
 };
 
 // 자주 사용하는 스타일 속성을 theme으로 만들어보자.

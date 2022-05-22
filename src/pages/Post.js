@@ -25,12 +25,14 @@ function Post(props) {
         }}
       >
         <Title>
-          <TextB body weight="500">
+          <TextB body weight="500" textAlign="left">
             {props.item.title}
           </TextB>
         </Title>
         <Date>
-          <Text sub7>{createdAt}</Text>
+          <Text sub7 textAlign="left">
+            {createdAt}
+          </Text>
         </Date>
       </PostWrapper>
     </React.Fragment>
@@ -41,18 +43,38 @@ const PostWrapper = styled.div`
   display: flex;
   width: 100%;
   height: 45px;
-  display: flex;
   vertical-align: middle;
   justify-content: space-between;
   align-items: center;
   font-size: 12px;
   border-bottom: 1px solid #cccccc;
+  @media ${({ theme }) => theme.device.isMobile} {
+    border-bottom: 1px solid #948a9e;
+    display: flex;
+    flex-direction: column;
+    height: 74px;
+    justify-content: left;
+    /* background: yellow; */
+  }
 `;
 const Title = styled.div`
   padding-left: 40px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    height: 36px;
+    /* border: 1px solid red; */
+    width: 90%;
+    box-sizing: border-box;
+  }
 `;
 const Date = styled.div`
   padding-right: 40px;
+  /* border: 1px solid blue; */
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 90%;
+    padding: 10px 0px 0px 35px;
+    /* border: 1px solid blue; */
+    box-sizing: border-box;
+  }
 `;
 
 export default Post;

@@ -108,7 +108,7 @@ const CommentItem = (props) => {
   if (isEdit) {
     return (
       <React.Fragment>
-        <div style={{ width: "992px" }}>
+        <TextWrapper>
           <Input
             placeholder="선플은 선택이 아닌 의무입니다! (최소 10자 이상)"
             _onChange={(e) => {
@@ -120,15 +120,10 @@ const CommentItem = (props) => {
             rows={7}
             value={comment || ""}
           />
-          <div
-            style={{
-              width: "992px",
-              paddingLeft: "460px",
-            }}
-          >
+          <EditBtn>
             <Btn onClick={editComment}>수정하기</Btn>
-          </div>
-        </div>
+          </EditBtn>
+        </TextWrapper>
       </React.Fragment>
     );
   }
@@ -191,12 +186,14 @@ CommentItem.defaultProps = {
 
 const CommentWrapper = styled.div`
   display: flex;
+  max-width: 1032px;
+  width: 100%;
   height: 200px;
   border-bottom: 1px solid #CCCCCC;
-  @media ${({ theme }) => theme.device.mobile} {
-    width: 328px;
- margin: auto;
-    border: 1px solid red;
+  @media ${({ theme }) => theme.device.isMobile} {
+    /* width: 328px; */
+    margin: auto;
+    /* border: 1px solid violet; */
     /* text-align: left; */
     display: flex;  
 `;
@@ -207,16 +204,34 @@ const CommentContainer = styled.div`
   flex-direction: column;
   padding: 20px 40px;
   margin: auto;
+  max-width: 1032px;
   width: 100%;
   height: 100%;
   /* border-bottom: 1px solid #cccccc; */
-  @media ${({ theme }) => theme.device.mobile} {
-    width: 328px;
-    border: 1px solid red;
+  @media ${({ theme }) => theme.device.isMobile} {
+    /* width: 328px; */
+    /* border: 1px solid orange; */
     margin: auto;
     display: flex;
 `;
-
+const TextWrapper = styled.div`
+  width: 952px;
+  height: 140px;
+  margin: auto;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 90%;
+    /* border: 1px solid red; */
+  }
+`;
+const EditBtn = styled.div`
+  max-width: 992px;
+  width: 100%;
+  justify-content: right;
+  display: flex;
+  /* border: 1px solid red; */
+  @media ${({ theme }) => theme.device.isMobile} {
+  }
+`;
 const CommentBox = styled.div`
   display: flex;
   flex-direction: row;
