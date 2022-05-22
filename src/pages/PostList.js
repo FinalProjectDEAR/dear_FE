@@ -9,12 +9,13 @@ import { ReactComponent as Broken } from "../assets/postList/board-cate5.svg";
 import { ReactComponent as Again } from "../assets/postList/board-cate6.svg";
 import { ReactComponent as Solo } from "../assets/postList/board-cate3 (1).svg";
 import { ReactComponent as Etc } from "../assets/postList/board-cate8.svg";
-import { ReactComponent as Alll } from "../assets/postList/Frame 481 (1).svg";
-
+import { ReactComponent as Pho } from "../assets/postList/Frame 520.svg";
+//리덕스관련
 import { useHistory } from "react-router-dom";
 import { actionCreators } from "../redux/modules/post";
 import { useDispatch, useSelector } from "react-redux";
-
+//페이지관련
+import Layout from "../components/Layout";
 import Post from "../pages/Post";
 import Pagination from "../elements/Pagination";
 
@@ -34,134 +35,148 @@ function PostList(props) {
   const pageList = useSelector((state) => state.post.post);
   return (
     <React.Fragment>
-      <InfoWrapper id="1">
-        <InfoContainer>
-          <Text title textAlign="left">
-            디어상담소
-          </Text>
-          <TextB color="#61586A" size="16px" lineheight="30px" textAlign="left">
-            간단한 연애 질문부터 채팅으로 말하지 못한 긴 고민까지,
-            <br />
-            언제든 고민을 남기면 리스너들이 답장을 남깁니다.
-            <br />
-            못다한 이야기를 디어상담소에 남겨보세요!
-          </TextB>
-        </InfoContainer>
-        <InfoBox></InfoBox>
-      </InfoWrapper>
-      <VoteWrapper>
-        <Text color="#2E2A32" weight="700">
-          지금 뜨거운 투표
-        </Text>
-        <MoreVote>진행중인 투표 더보기 ></MoreVote>
-      </VoteWrapper>
-      <BoardWrapper>
-        <CateGoryWrapper>
-          <CategoryBtn
-            onClick={() => {
-              dispatch(actionCreators.getPostDB(page));
-            }}
-          >
-            <AllBtn>
-              <All />
-            </AllBtn>
-            <p style={{ marginTop: "83px", position: "absolute" }}>전체</p>
-          </CategoryBtn>
-          <CategoryBtn
-            onClick={() => {
-              dispatch(actionCreators.getCateDetailDB(page, "투표"));
-            }}
-          >
-            <Vote />
-            투표
-          </CategoryBtn>
-          <CategoryBtn
-            onClick={() => {
-              dispatch(actionCreators.getCateDetailDB(page, "솔로"));
-            }}
-          >
-            <Solo />
-            솔로
-          </CategoryBtn>
-          <CategoryBtn
-            onClick={() => {
-              dispatch(actionCreators.getCateDetailDB(page, "짝사랑"));
-            }}
-          >
-            <Love />
-            짝사랑
-          </CategoryBtn>
-          <CategoryBtn
-            onClick={() => {
-              dispatch(actionCreators.getCateDetailDB(page, "썸"));
-            }}
-          >
-            <Some />썸
-          </CategoryBtn>
-          <CategoryBtn
-            onClick={() => {
-              dispatch(actionCreators.getCateDetailDB(page, "연애"));
-            }}
-          >
-            <Again />
-            연애
-          </CategoryBtn>
-          <CategoryBtn
-            onClick={() => {
-              dispatch(actionCreators.getCateDetailDB(page, "이별"));
-            }}
-          >
-            <Broken />
-            이별
-          </CategoryBtn>
-          <CategoryBtn
-            onClick={() => {
-              dispatch(actionCreators.getCateDetailDB(page, "기타"));
-            }}
-          >
-            <Etc />
-            기타
-          </CategoryBtn>
-        </CateGoryWrapper>
-        <TitleWrapper>
-          <Text title>익명상담소</Text>
-        </TitleWrapper>
-        <PostTable>
-          <TableInfo>
-            <InfoItem style={{ marginLeft: "40px" }}>제목</InfoItem>
-            <InfoItem style={{ marginRight: "40px" }}>작성일</InfoItem>
-          </TableInfo>
-          {postList?.slice(0, 11).map((item, idx) => {
-            // slice를 이용하여 보여주고 싶은 게시물을 제어
-            return <Post key={idx} item={item} />;
-          })}
-        </PostTable>
-        <BtnWrapper>
-          <BtnContainer>
-            <Button size="narrow" secondaryDefault cursor="pointer">
-              <Text body4 color="#7A37BE">
-                투표만들기
+      <Layout>
+        <Background>
+          <InfoWrapper id="1">
+            <InfoContainer>
+              <Text title textAlign="left">
+                디어상담소
               </Text>
-            </Button>
-            <Button
-              size="narrow"
-              primaryDefault
-              _onClick={() => {
-                history.push("/postWrite");
-              }}
-              cursor="pointer"
-            >
-              <Text body4 color="#fff">
-                상담신청하기
-              </Text>
-            </Button>
-          </BtnContainer>
-        </BtnWrapper>
-        <Pagination totalPage={pageList?.totalPages} setPage={setPage} />
-      </BoardWrapper>
+              <TextB
+                color="#61586A"
+                size="16px"
+                lineheight="30px"
+                textAlign="left"
+              >
+                간단한 연애 질문부터 채팅으로 말하지 못한 긴 고민까지,
+                <br />
+                언제든 고민을 남기면 리스너들이 답장을 남깁니다.
+                <br />
+                못다한 이야기를 디어상담소에 남겨보세요!
+              </TextB>
+            </InfoContainer>
+            <InfoBox>
+              <Pho />
+            </InfoBox>
+          </InfoWrapper>
+          <VoteWrapper>
+            <Text color="#2E2A32" weight="700">
+              지금 뜨거운 투표
+            </Text>
+            <MoreVote>진행중인 투표 더보기 ></MoreVote>
+          </VoteWrapper>
+          <BoardWrapper>
+            <CateGoryWrapper>
+              <CategoryBtn
+                onClick={() => {
+                  dispatch(actionCreators.getPostDB(page));
+                }}
+              >
+                <AllBtn>
+                  <All />
+                </AllBtn>
+                <p style={{ marginTop: "83px", position: "absolute" }}>전체</p>
+              </CategoryBtn>
+              <CategoryBtn
+                onClick={() => {
+                  dispatch(actionCreators.getCateDetailDB(page, "투표"));
+                }}
+              >
+                <Vote />
+                투표
+              </CategoryBtn>
+              <CategoryBtn
+                onClick={() => {
+                  dispatch(actionCreators.getCateDetailDB(page, "솔로"));
+                }}
+              >
+                <Solo />
+                솔로
+              </CategoryBtn>
+              <CategoryBtn
+                onClick={() => {
+                  dispatch(actionCreators.getCateDetailDB(page, "짝사랑"));
+                }}
+              >
+                <Love />
+                짝사랑
+              </CategoryBtn>
+              <CategoryBtn
+                onClick={() => {
+                  dispatch(actionCreators.getCateDetailDB(page, "썸"));
+                }}
+              >
+                <Some />썸
+              </CategoryBtn>
+              <CategoryBtn
+                onClick={() => {
+                  dispatch(actionCreators.getCateDetailDB(page, "연애"));
+                }}
+              >
+                <Again />
+                연애
+              </CategoryBtn>
+              <CategoryBtn
+                onClick={() => {
+                  dispatch(actionCreators.getCateDetailDB(page, "이별"));
+                }}
+              >
+                <Broken />
+                이별
+              </CategoryBtn>
+              <CategoryBtn
+                onClick={() => {
+                  dispatch(actionCreators.getCateDetailDB(page, "기타"));
+                }}
+              >
+                <Etc />
+                기타
+              </CategoryBtn>
+            </CateGoryWrapper>
+            <TitleWrapper>
+              <Text title>익명상담소</Text>
+            </TitleWrapper>
+            <PostTable>
+              <TableInfo>
+                <InfoItem style={{ marginLeft: "40px" }}>제목</InfoItem>
+                <InfoItem style={{ marginRight: "40px" }}>작성일</InfoItem>
+              </TableInfo>
+              {postList?.slice(0, 11).map((item, idx) => {
+                // slice를 이용하여 보여주고 싶은 게시물을 제어
+                return <Post key={idx} item={item} />;
+              })}
+            </PostTable>
+            <BtnWrapper>
+              <BtnContainer>
+                <Button size="narrow" secondaryDefault cursor="pointer">
+                  <Text body4 color="#7A37BE">
+                    투표만들기
+                  </Text>
+                </Button>
+                <Button
+                  size="narrow"
+                  primaryDefault
+                  _onClick={() => {
+                    history.push("/postWrite");
+                  }}
+                  cursor="pointer"
+                >
+                  <Text body4 color="#fff">
+                    상담신청하기
+                  </Text>
+                </Button>
+              </BtnContainer>
+            </BtnWrapper>
+            <Pagination totalPage={pageList?.totalPages} setPage={setPage} />
+          </BoardWrapper>
+        </Background>
+      </Layout>
     </React.Fragment>
   );
 }
+const Background = styled.div`
+  height: 2000px;
+`;
 
 const InfoWrapper = styled.div`
   display: flex;
@@ -178,7 +193,9 @@ const InfoContainer = styled.div`
 `;
 const InfoBox = styled.div`
   width: 592px;
-  height: 200px;
+  height: 150px;
+  box-sizing: border-box;
+
   border: 1px solid red;
 `;
 const VoteWrapper = styled.div`

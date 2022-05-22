@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { actionCreators } from "../redux/modules/post";
 import { imgActions } from "../redux/modules/imagePost";
+//페이지관련
+import Layout from "../components/Layout";
 
 function PostWrite() {
   const history = useHistory();
@@ -111,116 +113,120 @@ function PostWrite() {
   //optionalChaining: ?. (useEffect는 리턴 후 실행)
   return (
     <React.Fragment>
-      <WriteWrapper>
-        <TitleContainer>
-          <Text title>상담신청하기</Text>
-          <SubTitle>
-            <Text sub7> 해당 글은 익명으로만 작성됩니다.</Text>
-          </SubTitle>
-          <Sub5Title>
-            <Text sub5 color="#BB9ED8">
-              해당 글은 익명으로만 작성됩니다.
-            </Text>
-          </Sub5Title>
-        </TitleContainer>
-        <CategoryWrapper>
-          <Title>카테고리</Title>
-          <Select name="category" form="myForm" onChange={SelectCategory}>
-            <OptionSelect value="카테고리">카테고리 선택</OptionSelect>
-            <option value="썸">썸</option>
-            <option value="고백">고백</option>
-            <option value="연애중">연애중</option>
-            <option value="19금">19금</option>
-            <option value="재회">재회</option>
-            <option value="이별">이별</option>
-            <option value="기타">기타</option>
-          </Select>
-        </CategoryWrapper>
-        <TitleWrapper>
-          <Title>제목</Title>
-          <InputMobile>
-            <Input
-              placeholder="제목을 입력해주세요."
-              _onChange={(e) => {
-                setTitle(e.target.value);
-              }}
-              value={title}
-            />
-          </InputMobile>
-        </TitleWrapper>
-        <ContentWrapper>
-          <Title>내용</Title>
-          <TextWrapper>
-            <Input
-              placeholder="내용을 입력해주세요. (최소 20자 이상)"
-              _onChange={(e) => {
-                setContent(e.target.value);
-              }}
-              _onKeyUp={checkMaxLength}
-              value={contents}
-              multiLine
-              maxlength="1000"
-              rows={16}
-            />
-          </TextWrapper>
-        </ContentWrapper>
-        <ImageWrapper>
-          <Title>첨부파일</Title>
-          <div>
-            <PhotoContainer>
-              <PhotoUpload>
-                <label>
-                  <ImageUPload />
-                  <input
-                    type="file"
-                    onChange={selectFile}
-                    ref={fileInput}
-                    multiple="multiple"
-                    accept=".jpg,.png"
-                  />
-                </label>
-                <PhotoDesc>사진은 최대 3장 업로드 가능합니다.</PhotoDesc>
-              </PhotoUpload>
-            </PhotoContainer>
-            <PhotoDiv>
-              {imgPreview.map((image, id) => {
-                return (
-                  <PhotoWrap>
-                    <Img
-                      key={id}
-                      style={{
-                        width: "80px",
-                        marginTop: "5px",
-                      }}
-                      src={`${image}` ? `${image}` : null}
-                      alt={`${image}-${id}`}
+      <Layout>
+        <WriteWrapper>
+          <TitleContainer>
+            <Text title>상담신청하기</Text>
+            <SubTitle>
+              <Text sub7> 해당 글은 익명으로만 작성됩니다.</Text>
+            </SubTitle>
+            <Sub5Title>
+              <Text sub5 color="#BB9ED8">
+                해당 글은 익명으로만 작성됩니다.
+              </Text>
+            </Sub5Title>
+          </TitleContainer>
+          <CategoryWrapper>
+            <Title>카테고리</Title>
+            <Select name="category" form="myForm" onChange={SelectCategory}>
+              <OptionSelect value="카테고리">카테고리 선택</OptionSelect>
+              <option value="투표">투표</option>
+              <option value="솔로">솔로</option>
+              <option value="짝사랑">짝사랑</option>
+              <option value="썸">썸</option>
+              <option value="연애">연애</option>
+              <option value="이별">이별</option>
+              <option value="기타">기타</option>
+            </Select>
+          </CategoryWrapper>
+          <TitleWrapper>
+            <Title>제목</Title>
+            <InputMobile>
+              <Input
+                multiLine
+                rows={1}
+                placeholder="제목을 입력해주세요."
+                _onChange={(e) => {
+                  setTitle(e.target.value);
+                }}
+                value={title}
+              />
+            </InputMobile>
+          </TitleWrapper>
+          <ContentWrapper>
+            <Title>내용</Title>
+            <TextWrapper>
+              <Input
+                placeholder="내용을 입력해주세요. (최소 20자 이상)"
+                _onChange={(e) => {
+                  setContent(e.target.value);
+                }}
+                _onKeyUp={checkMaxLength}
+                value={contents}
+                multiLine
+                maxlength="1000"
+                rows={16}
+              />
+            </TextWrapper>
+          </ContentWrapper>
+          <ImageWrapper>
+            <Title>첨부파일</Title>
+            <div>
+              <PhotoContainer>
+                <PhotoUpload>
+                  <label>
+                    <ImageUPload />
+                    <input
+                      type="file"
+                      onChange={selectFile}
+                      ref={fileInput}
+                      multiple="multiple"
+                      accept=".jpg,.png"
                     />
-                    <BiX
-                      type="button"
-                      onClick={() => {
-                        CancelImage(image, id);
-                      }}
-                      style={{ cursor: "pointer" }}
-                    />
-                  </PhotoWrap>
-                );
-              })}
-            </PhotoDiv>
-          </div>
-        </ImageWrapper>
-        <BtnWrap>
-          <Button
-            size="narrow"
-            primaryDefault
-            _onClick={addPost}
-            cursor="pointer"
-          >
-            <Text body4 color="#fff">
-              상담신청
-            </Text>
-          </Button>
-        </BtnWrap>
-      </WriteWrapper>
+                  </label>
+                  <PhotoDesc>사진은 최대 3장 업로드 가능합니다.</PhotoDesc>
+                </PhotoUpload>
+              </PhotoContainer>
+              <PhotoDiv>
+                {imgPreview.map((image, id) => {
+                  return (
+                    <PhotoWrap>
+                      <Img
+                        key={id}
+                        style={{
+                          width: "80px",
+                          marginTop: "5px",
+                        }}
+                        src={`${image}` ? `${image}` : null}
+                        alt={`${image}-${id}`}
+                      />
+                      <BiX
+                        type="button"
+                        onClick={() => {
+                          CancelImage(image, id);
+                        }}
+                        style={{ cursor: "pointer" }}
+                      />
+                    </PhotoWrap>
+                  );
+                })}
+              </PhotoDiv>
+            </div>
+          </ImageWrapper>
+          <BtnWrap>
+            <Button
+              size="narrow"
+              primaryDefault
+              _onClick={addPost}
+              cursor="pointer"
+            >
+              <Text body4 color="#fff">
+                상담신청
+              </Text>
+            </Button>
+          </BtnWrap>
+        </WriteWrapper>
+      </Layout>
     </React.Fragment>
   );
 }
@@ -339,6 +345,7 @@ const Title = styled.div`
 `;
 const InputMobile = styled.div`
   width: 860px;
+  height: 40px;
   @media ${({ theme }) => theme.device.mobile} {
     /* background-color: orange; */
     width: 250px;

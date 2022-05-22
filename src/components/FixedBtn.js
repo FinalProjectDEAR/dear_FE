@@ -7,8 +7,7 @@ import { useHistory } from "react-router-dom";
 import { Link } from "react-scroll";
 
 import styled from "styled-components";
-import { Text } from "../elements";
-
+import Notification from "./Notification";
 //아이콘
 import { Badge } from "@material-ui/core";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
@@ -21,11 +20,13 @@ function FixedBtn(props) {
   const dispatch = useDispatch();
   const history = useHistory();
   const [isRead, setIsRead] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
   const user_id = useSelector((state) => state.user.user);
   //알람 버튼 눌렀을 때 가져오기
   const notiCheck = () => {
-    history.push("/notification");
+    // history.push("/notification");
     dispatch(actionCreators.getNotiDB());
+    setOpen(!open);
     setIsRead(true);
     props._onClick();
   };
@@ -72,7 +73,7 @@ function FixedBtn(props) {
         </Follow>
         <Badge
           color="secondary"
-          value={alarmNum}
+          badgeContent={alarmNum}
           overlap="circular"
           invisible={isRead}
         >
@@ -81,6 +82,7 @@ function FixedBtn(props) {
               <Font>알림</Font>
             </FontBox>
             <NotificationsIcon />
+            {open ? <Notification /> : null}
           </Noti>
         </Badge>
       </BtnWrap>

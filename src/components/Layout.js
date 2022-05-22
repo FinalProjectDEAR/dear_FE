@@ -17,5 +17,5 @@ function Layout(props) {
 export default Layout;
 
 const Content = styled.div`
-  min-height: calc(100vh - 320px);
+  min-height: calc(100% - 320px);
 `;

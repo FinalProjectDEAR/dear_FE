@@ -7,7 +7,8 @@ import styled from "styled-components";
 import { Text, Button, Modal } from "../elements/index";
 //시간알려주는패키지
 import TimeCounting from "time-counting";
-//페이지 관련
+//페이지관련
+import Layout from "../components/Layout";
 import CommentList from "../components/CommentList";
 import CommentWrite from "../components/CommentWrite";
 import PostRemove from "../components/alert/PostRemove";
@@ -81,103 +82,105 @@ function PostDetail(props) {
   // }
   return (
     <React.Fragment>
-      <DetailWrapper>
-        <CategoryBox>
-          <Title>
-            <Text body4>카테고리</Text>
-          </Title>
-          <CateContent>
-            <Text body4>{post?.category}</Text>
-          </CateContent>
-          <TitleContent>
-            <Text sub7>{createdAt}</Text>
-          </TitleContent>
-        </CategoryBox>
-        <TitleBox>
-          <Title>
-            <Text body4>제목</Text>
-          </Title>
-          <TitleContent>{post?.title}</TitleContent>
-          <ThumbComment>
-            <ThumbUp />
-            <Text sub7> {likesList?.length}</Text>
-            <CommentNum />
-            <Text sub7> {commentList?.length}</Text>
-          </ThumbComment>
-        </TitleBox>
-        <BtnContainer>
-          {post?.memberId === loginUser ? (
-            <>
-              <BtnL
-                onClick={() => {
-                  history.push(`/PostEdit/${postId}`);
-                }}
-              >
-                수정
-              </BtnL>
-              <BtnR
-                onClick={() => {
-                  setModalOpen(true);
-                }}
-              >
-                삭제
-              </BtnR>
-              {modalOpen && (
-                <Modal closModal={closeModal}>
-                  <PostRemove closeModal={closeModal} postId={postId} />
-                </Modal>
-              )}
-            </>
-          ) : null}
-        </BtnContainer>
-        <ContentBox>
-          <Text body6> {post?.contents}</Text>
-        </ContentBox>
-        <CommentPhotoWrap>
-          <PhotoDivWrap>
-            <PhotoDiv>
-              <PhotoUpload1>
-                <PhotoWrap>
-                  {post?.imgUrl &&
-                    post?.imgUrl.map((image, id) => {
-                      return (
-                        <Img
-                          key={id}
-                          style={{
-                            width: "80px",
-                            marginTop: "5px",
-                          }}
-                          src={`${image}` ? `${image}` : null}
-                          alt={`${image}-${id}`}
-                        />
-                      );
-                    })}
-                </PhotoWrap>
-              </PhotoUpload1>
-            </PhotoDiv>
-          </PhotoDivWrap>
-        </CommentPhotoWrap>
-        <IsLike onClick={likePost}>
-          <Thumb likes={post?.likes}>
-            <LikeUp />
-          </Thumb>
-          <Text size="14px" weight="500" color="#333333">
-            공감해요
-          </Text>
-          <Text weight="700" color="#333333" cursor="pointer">
-            {likesList?.length}
-          </Text>
-        </IsLike>
-      </DetailWrapper>
-      {/* 댓글 */}
-      <CommentWrapper>
-        <CommentList />
-        <div>
-          <Pagination setPage={setPage} totalPage={totalPage} />
-        </div>
+      <Layout>
+        <DetailWrapper>
+          <CategoryBox>
+            <Title>
+              <Text body4>카테고리</Text>
+            </Title>
+            <CateContent>
+              <Text body4>{post?.category}</Text>
+            </CateContent>
+            <TitleContent>
+              <Text sub7>{createdAt}</Text>
+            </TitleContent>
+          </CategoryBox>
+          <TitleBox>
+            <Title>
+              <Text body4>제목</Text>
+            </Title>
+            <TitleContent>{post?.title}</TitleContent>
+            <ThumbComment>
+              <ThumbUp />
+              <Text sub7> {likesList?.length}</Text>
+              <CommentNum />
+              <Text sub7> {commentList?.length}</Text>
+            </ThumbComment>
+          </TitleBox>
+          <BtnContainer>
+            {post?.memberId === loginUser ? (
+              <>
+                <BtnL
+                  onClick={() => {
+                    history.push(`/PostEdit/${postId}`);
+                  }}
+                >
+                  수정
+                </BtnL>
+                <BtnR
+                  onClick={() => {
+                    setModalOpen(true);
+                  }}
+                >
+                  삭제
+                </BtnR>
+                {modalOpen && (
+                  <Modal closModal={closeModal}>
+                    <PostRemove closeModal={closeModal} postId={postId} />
+                  </Modal>
+                )}
+              </>
+            ) : null}
+          </BtnContainer>
+          <ContentBox>
+            <Text body6> {post?.contents}</Text>
+          </ContentBox>
+          <CommentPhotoWrap>
+            <PhotoDivWrap>
+              <PhotoDiv>
+                <PhotoUpload1>
+                  <PhotoWrap>
+                    {post?.imgUrl &&
+                      post?.imgUrl.map((image, id) => {
+                        return (
+                          <Img
+                            key={id}
+                            style={{
+                              width: "80px",
+                              marginTop: "5px",
+                            }}
+                            src={`${image}` ? `${image}` : null}
+                            alt={`${image}-${id}`}
+                          />
+                        );
+                      })}
+                  </PhotoWrap>
+                </PhotoUpload1>
+              </PhotoDiv>
+            </PhotoDivWrap>
+          </CommentPhotoWrap>
+          <IsLike onClick={likePost}>
+            <Thumb likes={post?.likes}>
+              <LikeUp />
+            </Thumb>
+            <Text size="14px" weight="500" color="#333333">
+              공감해요
+            </Text>
+            <Text weight="700" color="#333333" cursor="pointer">
+              {likesList?.length}
+            </Text>
+          </IsLike>
+        </DetailWrapper>
+        {/* 댓글 */}
+        <CommentWrapper>
+          <CommentList />
+          <div>
+            <Pagination setPage={setPage} totalPage={totalPage} />
+          </div>
 
-        <CommentWrite postId={postId} />
-      </CommentWrapper>
+          <CommentWrite postId={postId} />
+        </CommentWrapper>
+      </Layout>
     </React.Fragment>
   );
 }
