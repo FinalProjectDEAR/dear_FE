@@ -33,7 +33,7 @@ const initialState = {
   userInfo: null,
   followList: null,
   historyList: null,
-  msg: "",
+  msg: false,
 };
 
 // middleware actions
