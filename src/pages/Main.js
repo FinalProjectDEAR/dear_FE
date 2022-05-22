@@ -15,7 +15,7 @@ function Main() {
   const [currentPage, setCurrentPage] = React.useState(null);
 
   const pageChange = (number) => {
-    setCurrentPage({ currentPage: number });
+    setCurrentPage(number);
   };
 
   const beforePageChange = (number) => {
