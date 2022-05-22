@@ -7,14 +7,17 @@ const Footer = () => {
     <React.Fragment>
       <FooterWrapper>
         <FooterBox>
-          <GitBtn
-            onClick={() => {
-              window.open("https://github.com/FinalProjectDEAR");
-            }}
-          >
-            The source code is licensed HangHae 6a_team7 Please refer to github
-            for details © 2022 HangHae LUCKY SEVEN
-          </GitBtn>
+          <Text sub7 color="#666666" margin="0px 24px">
+            의견 및 오류 제보
+          </Text>
+          |
+          <Text sub7 color="#666666" margin="0px 24px">
+            자주 묻는 질문
+          </Text>
+          |
+          <Text sub7 color="#666666" margin="0px 24px">
+            개인정보처리방침
+          </Text>
         </FooterBox>
       </FooterWrapper>
     </React.Fragment>
@@ -22,37 +25,20 @@ const Footer = () => {
 };
 
 const FooterWrapper = styled.div`
-  background-color: #fafafa;
-  height: 300px;
+  box-sizing: border-box;
   width: 100%;
-  margin: auto;
-  position: absolute;
+  height: 200px;
+  padding-top: 60px;
+  background-color: #fafafa;
 `;
-const FooterBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
-  text-align: left;
-  align-items: left;
-  padding: 0px;
-  /* gap: 24px; */
 
-  position: absolute;
-  left: 14.17%;
-  right: 60%;
-  top: 40%;
-  bottom: 60%;
-  /* background-color: #bb9ed8; */
-`;
-const GitBtn = styled.button`
+const FooterBox = styled.div`
+  width: 1032px;
+  margin: 0px auto;
   display: flex;
-  border: none;
-  color: #948a9e;
-  justify-content: left;
-  text-align: left;
-  align-items: left;
-  cursor: pointer;
-  background-color: transparent;
+  align-items: center;
+  justify-content: flex-start;
+  color: #666;
 `;
 
 export default Footer;

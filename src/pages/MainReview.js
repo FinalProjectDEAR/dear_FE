@@ -62,6 +62,7 @@ function MainReview() {
             <ReviewCard />
           </Slider>
         </ReviewWrapper>
+        <Footer />
       </Background>
     </React.Fragment>
   );
@@ -71,13 +72,16 @@ export default MainReview;
 
 const Background = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
-  align-items: center;
-  scroll-snap-align: start;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const ReviewWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   box-sizing: border-box;
   width: 1440px;
   height: 600px;
