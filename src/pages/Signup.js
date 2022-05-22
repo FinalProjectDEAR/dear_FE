@@ -98,7 +98,7 @@ const Signup = () => {
             </Text>
           ) : (
             <Text sub7 textAlign="left" margin="15px">
-              영문(소문자), 숫자로 4~10자 이내로 입력해 주세요.
+              영문(소문자), 숫자로 3~10자 이내로 입력해 주세요.
             </Text>
           )}
 
