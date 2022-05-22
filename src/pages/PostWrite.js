@@ -244,7 +244,7 @@ const WriteWrapper = styled.div`
   background: #ffffff;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 10px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     width: 328px;
     margin: auto;
     box-sizing: border-box;
@@ -263,7 +263,7 @@ const TitleContainer = styled.div`
   order: 0;
   flex-grow: 0;
   /* background: orange; */
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     width: 155px;
     height: 83px;
     margin: auto;
@@ -277,7 +277,7 @@ const TitleContainer = styled.div`
   }
 `;
 const SubTitle = styled.div`
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: none;
   }
 `;
@@ -299,7 +299,7 @@ const TitleWrapper = styled.div`
   order: 1;
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     width: 250px;
     /* background-color: orange; */
     border: none;
@@ -319,7 +319,7 @@ const CategoryWrapper = styled.div`
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
   border-top: 1px solid #948a9e;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     /* background-color: orange; */
     width: 250px;
     border: none;
@@ -339,14 +339,14 @@ const Title = styled.div`
   flex-grow: 0;
   border-right: 1px solid #cccccc;
   color: #666666;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: none;
   }
 `;
 const InputMobile = styled.div`
   width: 860px;
   height: 40px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     /* background-color: orange; */
     width: 250px;
     box-sizing: border-box;
@@ -383,7 +383,7 @@ const ContentWrapper = styled.div`
   order: 1;
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     width: 250px;
     border: none;
     /* background-color: orange; */
@@ -393,7 +393,7 @@ const ContentWrapper = styled.div`
 const TextWrapper = styled.div`
   width: 860px;
   height: 295px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     /* background-color: orange; */
     width: 350px;
     box-sizing: border-box;
@@ -410,7 +410,7 @@ const ImageWrapper = styled.div`
   order: 1;
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     /* background-color: orange; */
     width: 250px;
     border: none;
@@ -486,7 +486,7 @@ const BtnWrap = styled.div`
   flex-grow: 0;
   padding-left: 830px;
   /* background: pink; */
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     width: 250px;
     height: 56px;
     margin: auto;

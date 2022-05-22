@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 //페이지관련
 import Layout from "../components/Layout";
 import Post from "../pages/Post";
-import Pagination from "../elements/Pagination";
+import Paginations from "../elements/Pagination";
 
 function PostList(props) {
   const dispatch = useDispatch();
@@ -167,7 +167,9 @@ function PostList(props) {
                 </Button>
               </BtnContainer>
             </BtnWrapper>
-            <Pagination totalPage={pageList?.totalPages} setPage={setPage} />
+            <PageBtn>
+              <Paginations totalPage={pageList?.totalPages} setPage={setPage} />
+            </PageBtn>
           </BoardWrapper>
         </Background>
       </Layout>
@@ -177,7 +179,12 @@ function PostList(props) {
 const Background = styled.div`
   height: 2000px;
 `;
-
+const PageBtn = styled.div`
+  padding-top: 33px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 const InfoWrapper = styled.div`
   display: flex;
   justify-content: space-between;
