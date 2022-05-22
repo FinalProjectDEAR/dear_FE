@@ -102,7 +102,9 @@ const BtnWrap = styled.div`
   position: fixed;
   ${({ theme }) => theme.device.mobile} {
     display: none;
-    /* background: orange; */
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    display: none;
   }
 `;
 

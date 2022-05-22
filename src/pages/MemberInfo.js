@@ -6,6 +6,7 @@ import { actionCreators as userActions } from "../redux/modules/user";
 import { nicknameCheck } from "../shared/Check";
 
 import { Text, TextB, Input, Button, ColorBadge, Modal } from "../elements";
+import arrowBack from "../assets/arrow_back.png";
 import styled from "styled-components";
 
 function MemberInfo() {
@@ -169,27 +170,25 @@ function MemberInfo() {
                       <Input
                         padding="11px 15px"
                         margin="0px"
-                        placeholder="10자 이내로 입력해주세요. (3자 이상)"
+                        placeholder="닉네임 3자-10자 이내 입력"
                         alignItems="center"
                         _onChange={(e) => {
                           setNickname(e.target.value);
                         }}
                         value={nickname}
                       />
-                      <ButtonBox>
-                        <Button
-                          secondaryDefault
-                          size="small"
-                          margin="0px 10px"
-                          _onClick={() => {
-                            dupCheck(nickname);
-                          }}
-                        >
-                          <Text body4 color="#7A37BE">
-                            중복확인
-                          </Text>
-                        </Button>
-                      </ButtonBox>
+                      <Button
+                        secondaryDefault
+                        size="small"
+                        margin="0px 10px"
+                        _onClick={() => {
+                          dupCheck(nickname);
+                        }}
+                      >
+                        <Text body4 color="#7A37BE">
+                          중복확인
+                        </Text>
+                      </Button>
                     </div>
                     {nickErr ? (
                       <Text sub7 textAlign="left" margin="15px">
@@ -238,10 +237,23 @@ function MemberInfo() {
                     </Button>
                   </ButtonBox>
                 </InfoContainer>
+                <MobileButton onClick={next}>
+                  <Text body4 color="#fff" cursor="pointer" textAlign="center">
+                    다음 단계
+                  </Text>
+                </MobileButton>
               </InfoWrapper>
             ) : null}
             {isNext === 2 ? (
               <InfoWrapper>
+                <ArrowLine>
+                  <ArrowBack
+                    src={arrowBack}
+                    onClick={() => {
+                      setIsNext(1);
+                    }}
+                  />
+                </ArrowLine>
                 <TitleBox>
                   <Text body4 color="#BB9ED8">
                     STEP 2
@@ -584,6 +596,15 @@ function MemberInfo() {
                       </Text>
                     </Button>
                   </SubmitBox>
+                  <MobileButton
+                    onClick={() => {
+                      submit(dating);
+                    }}
+                  >
+                    <Text body4 color="#fff" textAlign="center">
+                      디어 시작하기
+                    </Text>
+                  </MobileButton>
                 </InfoContainer>
               </InfoWrapper>
             ) : null}
@@ -603,20 +624,50 @@ const InfoWrapper = styled.div`
   padding: 70px;
   box-sizing: border-box;
   background-color: #fff;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 360px;
+    height: 834px;
+    padding: 40px 0px;
+    border-radius: 0px;
+  }
 `;
 
 const InfoContainer = styled.div`
-  width: 364px;
+  width: 360px;
   margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media ${({ theme }) => theme.device.mobile} {
+    height: 676px;
+  }
+`;
+
+const ArrowLine = styled.div`
+  display: none;
+  width: 360px;
+  @media ${({ theme }) => theme.device.mobile} {
+    display: flex;
+    justify-content: flex-start;
+    margin: -10px 20px;
+  }
+`;
+
+const ArrowBack = styled.img`
+  width: 24px;
+  cursor: pointer;
 `;
 
 const TitleBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media ${({ theme }) => theme.device.mobile} {
+    flex-direction: column;
+    width: 200px;
+    margin: auto;
+    word-break: keep-all;
+  }
 `;
 
 const LineBox = styled.div`
@@ -625,6 +676,11 @@ const LineBox = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  @media ${({ theme }) => theme.device.mobile} {
+    margin-top: 15px;
+    width: 360px;
+    padding-left: 50px;
+  }
 `;
 
 const SecondLine = styled.div`
@@ -634,6 +690,10 @@ const SecondLine = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 360px;
+    padding-left: 150px;
+  }
 `;
 
 const Preview = styled.div`
@@ -666,10 +726,18 @@ const ButtonBox = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  @media ${({ theme }) => theme.device.mobile} {
+    display: none;
+  }
 `;
 
 const Subject = styled.div`
   width: 70px;
+  @media ${({ theme }) => theme.device.mobile} {
+    display: flex;
+    justify-content: flex-start;
+    width: 50px;
+  }
 `;
 
 const CheckBox = styled.div`
@@ -695,4 +763,26 @@ const SubmitBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media ${({ theme }) => theme.device.mobile} {
+    display: none;
+  }
+`;
+
+const MobileButton = styled.div`
+  display: none;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  width: 360px;
+  height: 48px;
+
+  background: #7a37be;
+  border-radius: 0px;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+  }
 `;
