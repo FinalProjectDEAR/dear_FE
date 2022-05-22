@@ -40,9 +40,7 @@ export default function Timer(props) {
           {parseInt(remain / 60)} : {remain % 60}
         </Text>
       ) : (
-        <Text body margin="5px">
-          매칭 대기 중
-        </Text>
+        <Text body>대기 중</Text>
       )}
 
       <div style={{ display: "flex", justifyContent: "center" }}>
@@ -67,4 +65,12 @@ const TimerBox = styled.div`
   border-radius: 4px;
   padding: 4px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 60px;
+    height: 24px;
+  }
 `;

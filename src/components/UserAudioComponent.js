@@ -29,6 +29,10 @@ const OuterCircle = styled.div`
   border: 4px solid #948a9e;
   background-color: #fff;
   position: relative;
+  @media ${({ theme }) => theme.device.mobile} {
+    --size: 47px;
+    border: 2px solid #948a9e;
+  }
 `;
 
 const InnerCircle = styled.div`
@@ -41,4 +45,9 @@ const InnerCircle = styled.div`
   align-items: center;
   background-color: ${(props) => props.color};
   position: absolute;
+  top: 3px;
+  left: 3px;
+  @media ${({ theme }) => theme.device.mobile} {
+    --size: 41px;
+  }
 `;

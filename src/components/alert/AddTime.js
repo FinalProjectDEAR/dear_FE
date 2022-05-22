@@ -76,7 +76,7 @@ const LineBox = styled.div`
   align-items: center;
   @media ${({ theme }) => theme.device.mobile} {
     margin: auto;
-    width: 250px;
+    width: 200px;
     word-break: keep-all;
   }
 `;
