@@ -9,7 +9,7 @@ const GET_NOTI_CNT = "GET_NOTI_CNT";
 //초기값
 const initialState = {
   noti: [],
-  notiCnt: {},
+  notiCnt: [],
 };
 
 //액션 생성 함수
