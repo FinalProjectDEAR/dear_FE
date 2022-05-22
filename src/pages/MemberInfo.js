@@ -50,6 +50,10 @@ function MemberInfo() {
   };
 
   const next = () => {
+    if (isCheck === false) {
+      window.alert("닉네임 중복확인을 해주세요!");
+    }
+
     if (nickname === "" || isSelected === "#fff") {
       window.alert("닉네임, 퍼스널 컬러를 모두 입력해주세요!");
       return;
@@ -57,12 +61,11 @@ function MemberInfo() {
     setIsNext(2);
   };
 
-  const submit = () => {
-    if (gender === "" || age === "" || loveType === "" || lovePeriod === "") {
-      window.alert("정보를 모두 입력해주세요.");
+  const submitSolo = () => {
+    if (gender === "" || age === "") {
+      window.alert("솔로 정보를 모두 입력해주세요.");
       return;
     }
-
     const memberInfo = {
       nickname: nickname,
       color: isSelected,
@@ -75,20 +78,30 @@ function MemberInfo() {
     dispatch(userActions.memberInfoDB(memberId, memberInfo));
   };
 
-  const sendInfo = () => {
-    if (isCheck === false) {
-      window.alert("닉네임 중복확인을 해주세요!");
+  const submitCouple = () => {
+    if (gender === "" || age === "" || loveType === "" || lovePeriod === "") {
+      window.alert("커플 정보를 모두 입력해주세요.");
+      return;
     }
+    const memberInfo = {
+      nickname: nickname,
+      color: isSelected,
+      gender: gender,
+      age: age,
+      dating: dating,
+      loveType: loveType,
+      lovePeriod: lovePeriod,
+    };
+    dispatch(userActions.memberInfoDB(memberId, memberInfo));
+  };
 
-    if (
-      nickname === "" ||
-      gender === "" ||
-      age === "" ||
-      dating === "" ||
-      loveType === "" ||
-      lovePeriod === ""
-    ) {
-      window.alert("필수정보를 모두 입력해주세요!");
+  const submit = (dating) => {
+    if (dating === "솔로") {
+      submitSolo();
+    } else if (dating === "커플") {
+      submitCouple();
+    } else {
+      window.alert("정보를 모두 입력해주세요.");
       return;
     }
   };
@@ -156,7 +169,7 @@ function MemberInfo() {
                       <Input
                         padding="11px 15px"
                         margin="0px"
-                        placeholder="10자 이내로 입력해주세요."
+                        placeholder="10자 이내로 입력해주세요. (3자 이상)"
                         alignItems="center"
                         _onChange={(e) => {
                           setNickname(e.target.value);
@@ -182,7 +195,11 @@ function MemberInfo() {
                       <Text sub7 textAlign="left" margin="15px">
                         {nickErr}
                       </Text>
-                    ) : null}
+                    ) : (
+                      <Text sub7 textAlign="left" margin="15px">
+                        영문, 한글, 숫자조합 3~10자 이내로 입력해 주세요.
+                      </Text>
+                    )}
                   </NickBox>
 
                   <ColorBox>
@@ -207,9 +224,7 @@ function MemberInfo() {
                       primaryDefault
                       size="regular"
                       margin="20px 0px"
-                      _onClick={() => {
-                        setIsNext(2);
-                      }}
+                      _onClick={next}
                     >
                       <Text
                         margin="0px"
@@ -560,7 +575,9 @@ function MemberInfo() {
                       primaryDefault
                       size="regular"
                       margin="10px"
-                      _onClick={submit}
+                      _onClick={() => {
+                        submit(dating);
+                      }}
                     >
                       <Text body4 color="#fff" cursor="pointer">
                         디어 시작하기
