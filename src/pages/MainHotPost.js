@@ -50,6 +50,8 @@ function MainHotPost() {
             })} */}
             <PostCard />
             <PostCard />
+            <PostCard />
+            <PostCard />
           </BoardBox>
           <Text
             sub2
@@ -102,7 +104,7 @@ const VoteBox = styled.div`
   margin-top: 30px;
   @media ${({ theme }) => theme.device.mobile} {
     flex-direction: column;
-    height: 500px;
+    height: 300px;
     overflow: hidden;
   }
 `;
@@ -116,6 +118,7 @@ const BoardBox = styled.div`
   @media ${({ theme }) => theme.device.mobile} {
     margin-top: 5px;
     flex-direction: column;
-    height: 534px;
+    height: 650px;
+    overflow: hidden;
   }
 `;
