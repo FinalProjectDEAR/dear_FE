@@ -121,7 +121,12 @@ const Notification = () => {
               alarmList.map((item, idx) => {
                 return item.notiType === "MESSAGE" && !item.read ? (
                   <>
-                    <NotiBox key={idx}>
+                    <NotiBox
+                      key={idx}
+                      onClick={() => {
+                        history.push("/myPage");
+                      }}
+                    >
                       <div className="title">
                         <Text headline color="#2E2A32" textAlign="left">
                           쪽지가 도착했어요.

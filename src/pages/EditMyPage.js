@@ -375,7 +375,7 @@ const EditMyPage = () => {
                             <label>
                               <Text sub6>해당없음</Text>
                             </label>
-                          </div>{" "}
+                          </div>
                         </RadioWrap>
                       </div>
                     </div>
@@ -395,7 +395,7 @@ const EditMyPage = () => {
                               value="6개월 미만"
                               name="연애기간"
                               checked={
-                                loveType === "6개월 미만" ? "6개월 미만" : ""
+                                lovePeriod === "6개월 미만" ? "6개월 미만" : ""
                               }
                               onChange={(e) => {
                                 setLovePeriod(e.target.value);
@@ -409,7 +409,7 @@ const EditMyPage = () => {
                               value="6개월~2년"
                               name="연애기간"
                               checked={
-                                loveType === "6개월~2년" ? "6개월~2년" : ""
+                                lovePeriod === "6개월~2년" ? "6개월~2년" : ""
                               }
                               onChange={(e) => {
                                 setLovePeriod(e.target.value);
@@ -425,7 +425,7 @@ const EditMyPage = () => {
                               value="2년 이상"
                               name="연애기간"
                               checked={
-                                loveType === "2년 이상" ? "2년 이상" : ""
+                                lovePeriod === "2년 이상" ? "2년 이상" : ""
                               }
                               onChange={(e) => {
                                 setLovePeriod(e.target.value);
@@ -439,7 +439,7 @@ const EditMyPage = () => {
                               value="5년 이상"
                               name="연애기간"
                               checked={
-                                loveType === "5년 이상" ? "5년 이상" : ""
+                                lovePeriod === "5년 이상" ? "5년 이상" : ""
                               }
                               onChange={(e) => {
                                 setLovePeriod(e.target.value);
@@ -453,7 +453,7 @@ const EditMyPage = () => {
                               value="해당없음"
                               name="연애기간"
                               checked={
-                                loveType === "해당없음" ? "해당없음" : ""
+                                lovePeriod === "해당없음" ? "해당없음" : ""
                               }
                               onChange={(e) => {
                                 setLovePeriod(e.target.value);
