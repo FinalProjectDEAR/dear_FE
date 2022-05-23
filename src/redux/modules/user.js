@@ -91,7 +91,7 @@ const loginDB = (memberId, pwd) => {
       }
     } catch (err) {
       console.log("로그인 실패", err);
-      window.alert("잘못된 정보입니다. 다시 시도해주세요.");
+      window.alert("일치하는 회원정보가 없습니다. 회원가입을 해주세요.");
     }
   };
 };

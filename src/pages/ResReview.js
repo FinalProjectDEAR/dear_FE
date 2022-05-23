@@ -241,7 +241,7 @@ function ResReview(props) {
 
 const ReviewWrapper = styled.div`
   max-width: 550px;
-  height: 630px;
+  height: 575px;
   padding: 60px 40px;
   box-sizing: border-box;
   background-color: #ffffff;

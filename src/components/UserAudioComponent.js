@@ -36,7 +36,7 @@ const OuterCircle = styled.div`
 `;
 
 const InnerCircle = styled.div`
-  --size: 68px;
+  --size: 69px;
   width: var(--size);
   height: var(--size);
   border-radius: var(--size);
@@ -45,9 +45,10 @@ const InnerCircle = styled.div`
   align-items: center;
   background-color: ${(props) => props.color};
   position: absolute;
-  top: 3px;
-  left: 3px;
+  left: 4px;
   @media ${({ theme }) => theme.device.mobile} {
     --size: 41px;
+    top: 3px;
+    left: 3px;
   }
 `;
