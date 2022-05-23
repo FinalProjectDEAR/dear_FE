@@ -187,6 +187,15 @@ const NotiWrapper = styled.div`
   background: #ffffff;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 20px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 260px;
+    height: 452px;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    align-items: center;
+    right: 0px;
+  }
 `;
 const NotiTitle = styled.div`
   width: 340px;

@@ -60,27 +60,37 @@ const MessageWrapper = styled.div`
     margin: auto;
     display: flex;
     flex-direction: column;
-    border: 1px solid red;
+    /* border: 1px solid red; */
   }
 `;
 const MessageContainer = styled.div`
   height: 250px;
   box-sizing: border-box;
-  padding: 20px 34px;
+  margin: 10px 34px;
+  display: inline-block;
+  width: 260px;
+  /* white-space: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; */
   @media ${({ theme }) => theme.device.isMobile} {
     width: 250px;
     height: 24px;
     /* margin: auto; */
     display: flex;
     flex-direction: column;
-    border: 1px solid red;
+    /* border: 1px solid red; */
+    /* display: inline-block; */
+    /* white-space: nowrap; */
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
   }
 `;
 const MessageBox = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 20px 34px;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 `;
 const Btn = styled.button`
   background-color: transparent;

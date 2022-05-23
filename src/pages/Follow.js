@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Text, ColorBadge, Modal } from "../elements";
 import { ReactComponent as UnFollower } from "../assets/찜해제.svg";
 import { ReactComponent as Msg } from "../assets/Group 493.svg";
+import { useMediaQuery } from "react-responsive";
 //리덕스관련
 import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/configureStore";
@@ -13,6 +14,9 @@ import TimeCounting from "time-counting";
 import UnFollow from "../components/alert/UnFollow";
 
 const Follow = (props) => {
+  const Mobile = useMediaQuery({
+    query: "(max-width:767px)",
+  });
   // console.log(props.item.totalPages);
   const dispatch = useDispatch();
   React.useEffect(() => {
@@ -40,23 +44,42 @@ const Follow = (props) => {
   };
   const Follower = props?.item.followMemberId;
   const nickname = props?.item.nickname;
+
   return (
     <FollowWrapper>
       <FollowContainer>
         <ColorBox>
-          <ColorBadge
+          {Mobile ? (
+            <ColorBadge
+              border="2px solid #F8F8F8"
+              size="30"
+              bg={props?.item.color}
+              cursor="pointer"
+            />
+          ) : (
+            <ColorBadge
+              border="2px solid #F8F8F8"
+              size="40"
+              bg={props?.item.color}
+              cursor="pointer"
+            />
+          )}
+          {/* <ColorBadge
             border="2px solid #F8F8F8"
             size="40"
             bg={props?.item.color}
             cursor="pointer"
-          />
+          /> */}
         </ColorBox>
         <Text body4 color="#333333">
           {props?.item.nickname}
         </Text>
-        <Text sub color="#999999">
-          {createdAt}
-        </Text>
+        {Mobile ? null : (
+          <Text sub color="#999999">
+            {createdAt}
+          </Text>
+        )}
+
         <BtnBox>
           <UnFollower
             style={{ cursor: "pointer" }}
@@ -83,6 +106,13 @@ const FollowWrapper = styled.div`
   width: 186px;
   height: 186px;
   background-color: #fafafa;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 320px;
+    height: 58px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
 `;
 const FollowContainer = styled.div`
   margin-top: 20px;
@@ -90,12 +120,29 @@ const FollowContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media ${({ theme }) => theme.device.isMobile} {
+    display: flex;
+    width: 320px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* background-color: blue; */
+  }
 `;
 const ColorBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 5px auto;
+  @media ${({ theme }) => theme.device.isMobile} {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    /* background-color: blue; */
+    width: 30px;
+    height: 30px;
+    padding-bottom: 5px;
+  }
 `;
 const BtnBox = styled.div`
   width: 70px;
@@ -104,5 +151,13 @@ const BtnBox = styled.div`
   flex-direction: row;
   justify-content: space-between;
   margin: 14px auto;
+  @media ${({ theme }) => theme.device.isMobile} {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* background-color: blue;
+    width: 30px;
+    height: 30px; */
+  }
 `;
 export default Follow;
