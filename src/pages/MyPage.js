@@ -6,6 +6,7 @@ import { ReactComponent as Sound } from "../assets/surround_sound.svg";
 import { ReactComponent as Left } from "../assets/paging_left.svg";
 import { ReactComponent as Right } from "../assets/paging_right.svg";
 import styled from "styled-components";
+import { useMediaQuery } from "react-responsive";
 import ReactTooltip from "react-tooltip";
 //페이지관련
 import Layout from "../components/Layout";
@@ -21,6 +22,9 @@ import { actionCreators } from "../redux/modules/mypage";
 import { history } from "../redux/configureStore";
 
 const MyPage = () => {
+  const Mobile = useMediaQuery({
+    query: "(max-width:767px)",
+  });
   const dispatch = useDispatch();
   //게시글 페이지
   const [page, setPage] = React.useState(1);
@@ -98,16 +102,20 @@ const MyPage = () => {
                     나를 찜한 친구 {userInfo?.follower}명
                   </Text>
                 </NicknameBox>
-                <MTapeWrapper>
-                  <div className="tape">
-                    <Text sub6>보유 테이프</Text>
-                    <Help />
-                  </div>
-                  <div className="tapeCnt">
-                    <Sound />
-                    <Text body2>{userInfo?.reward ? userInfo?.reward : 0}</Text>
-                  </div>
-                </MTapeWrapper>
+                {Mobile ? (
+                  <MTapeWrapper>
+                    <div className="tape">
+                      <Text sub6>보유 테이프</Text>
+                      <Help />
+                    </div>
+                    <div className="tapeCnt">
+                      <Sound />
+                      <Text body2>
+                        {userInfo?.reward ? userInfo?.reward : 0}
+                      </Text>
+                    </div>
+                  </MTapeWrapper>
+                ) : null}
               </MemberWrapper>
               <TypeWrapper>
                 <div id="love">
@@ -333,7 +341,7 @@ const PageBtn = styled.div`
 const Background = styled.div`
   height: 2200px;
   @media ${({ theme }) => theme.device.isMobile} {
-    height: 2800px;
+    height: 3000px;
   }
 `;
 const MyPageWrapper = styled.div`
@@ -351,7 +359,6 @@ const MyPageWrapper = styled.div`
     margin: auto;
     display: flex;
     flex-direction: column;
-    /* border: 1px solid red; */
   }
 `;
 const MypageContainer = styled.div`
@@ -367,12 +374,13 @@ const MypageContainer = styled.div`
   }
 `;
 const MemberWrapper = styled.div`
-  width: 270px;
+  width: 180px;
   height: 200px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  /* border: 1px solid red; */
   @media ${({ theme }) => theme.device.isMobile} {
     width: 280px;
     height: 120px;
@@ -489,7 +497,7 @@ const TypeWrapper = styled.div`
       flex-direction: row;
       width: 104px;
       /* background: blue; */
-      margin: 0px;
+      margin-left: 10px;
     }
     .loveTag {
       margin-left: 0px;
@@ -504,12 +512,14 @@ const TypeWrapper = styled.div`
       /* background: pink; */
       display: flex;
       flex-direction: column;
-      padding-top: 20px;
+      padding-top: 50px;
+      box-sizing: border-box;
     }
     .listenerBox {
       display: flex;
       flex-direction: row;
       width: 116px;
+      margin-left: 10px;
     }
     .types {
       display: flex;
@@ -518,8 +528,7 @@ const TypeWrapper = styled.div`
     }
     .listenerTag {
       gap: 10px;
-      /* width: 400px;
-    height: 26px; */
+      /* height: 26px; */
       display: flex;
       flex-direction: row;
     }
@@ -543,25 +552,20 @@ const TapeWrapper = styled.div`
   }
 `;
 const MTapeWrapper = styled.div`
-  @media ${({ theme }) => theme.device.isMobile} {
-    width: 280px;
-    height: 24px;
+  width: 280px;
+  height: 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+  /* background: red; */
+  .tape {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 20px auto;
-    /* background: red; */
-    .tape {
-      display: flex;
-    }
-    .tapeCnt {
-      display: flex;
-      justify-content: center;
-    }
   }
-  @media ${({ theme }) => theme.device.web} {
-    display: none;
+  .tapeCnt {
+    display: flex;
+    justify-content: center;
   }
 `;
 const TemperatureBox = styled.div`
@@ -612,8 +616,11 @@ const MsgWrapper = styled.div`
   box-sizing: border-box;
   @media ${({ theme }) => theme.device.isMobile} {
     width: 320px;
-    height: 96px;
-    background-color: yellow;
+    height: 390px;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
   }
 `;
 const MsgContainer = styled.div`
@@ -622,8 +629,12 @@ const MsgContainer = styled.div`
   margin: 20px auto;
   @media ${({ theme }) => theme.device.isMobile} {
     width: 320px;
-    height: 96px;
-    background-color: pink;
+    height: 300px;
+    gap: 10px;
+    /* background-color: orange; */
+    display: flex;
+    flex-direction: column;
+    margin: auto;
   }
 `;
 const TitleContainer = styled.div`
@@ -648,9 +659,9 @@ const TitleContainer = styled.div`
     width: 320px;
     height: 390px;
     /* margin: auto; */
-    border: 1px solid red;
+    /* border: 1px solid red; */
     .page {
-      border: 1px solid red;
+      /* border: 1px solid red; */
       width: 80px;
       height: 40px;
       display: flex;
@@ -669,9 +680,9 @@ const CounselWrapper = styled.div`
   height: 342px;
   margin-top: 100px;
   @media ${({ theme }) => theme.device.isMobile} {
-    width: 328px;
-    height: 536px;
-    border: 1px solid red;
+    width: 320px;
+    height: 675px;
+    /* background-color: violet; */
   }
 `;
 const CounselGrid = styled.div`
@@ -685,8 +696,12 @@ const CounselGrid = styled.div`
   grid-template-columns: repeat(3, 328px);
   flex-direction: column;
   @media ${({ theme }) => theme.device.isMobile} {
+    width: 320px;
+    height: 96px;
+    /* background-color: red; */
     display: flex;
     flex-direction: column;
+    margin-top: 100px;
   }
 `;
 const FollowWrapper = styled.div`
@@ -695,11 +710,16 @@ const FollowWrapper = styled.div`
   height: 236px;
   margin-top: 100px;
   @media ${({ theme }) => theme.device.isMobile} {
+    /* width: 328px;
+    height: 440px;
+    background-color: violet; */
     width: 320px;
-    height: 96px;
-
-    /* margin: auto; */
-    border: 1px solid red;
+    height: 92px;
+    /* background-color: orange; */
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 100px;
   }
 `;
 const FollowContainer = styled.div`
@@ -712,10 +732,10 @@ const FollowContainer = styled.div`
   height: 186px;
   @media ${({ theme }) => theme.device.isMobile} {
     width: 320px;
-    height: 96px;
-
-    /* margin: auto; */
-    border: 1px solid red;
+    height: 502px;
+    /* background-color: orange; */
+    display: flex;
+    flex-direction: column;
   }
 `;
 const PostWrapper = styled.div`
@@ -726,7 +746,9 @@ const PostWrapper = styled.div`
   @media ${({ theme }) => theme.device.isMobile} {
     width: 328px;
     height: 536px;
-    border: 1px solid red;
+    /* border: 1px solid red; */
+    margin-top: 460px;
+    box-sizing: border-box;
   }
 `;
 const PostTable = styled.div`

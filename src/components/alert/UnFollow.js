@@ -3,11 +3,15 @@ import { useDispatch } from "react-redux";
 
 import styled from "styled-components";
 import { Text, Button, TextB } from "../../elements";
+import { useMediaQuery } from "react-responsive";
 
 import { actionCreators } from "../../redux/modules/review";
 import { actionCreators as Follow } from "../../redux/modules/mypage";
 
 function UnFollow(props) {
+  const Mobile = useMediaQuery({
+    query: "(max-width:767px)",
+  });
   const dispatch = useDispatch();
   const { closeModal, Follower, nickname } = props;
   const [follow, unFollow] = React.useState(false);
@@ -33,16 +37,19 @@ function UnFollow(props) {
           해제된 찜은 마이페이지에서 복구할 수 없어요
         </Text>
         <BottomBox>
-          <Button
-            secondaryDefault
-            cursor="pointer"
-            size="narrow"
-            _onClick={closeModal}
-          >
-            <Text body4 color="#7A37BE" cursor="pointer">
-              돌아가기
-            </Text>
-          </Button>
+          {Mobile ? null : (
+            <Button
+              secondaryDefault
+              cursor="pointer"
+              size="narrow"
+              _onClick={closeModal}
+            >
+              <Text body4 color="#7A37BE" cursor="pointer">
+                돌아가기
+              </Text>
+            </Button>
+          )}
+
           <Button
             primaryDefault
             shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
@@ -69,6 +76,12 @@ const CloseContainer = styled.div`
   box-sizing: border-box;
   background: #ffffff;
   border-radius: 20px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    padding-top: 15px;
+    width: 320px;
+    height: 146px;
+    border-radius: 10px;
+  }
 `;
 
 const LineBox = styled.div`
@@ -76,6 +89,9 @@ const LineBox = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  @media ${({ theme }) => theme.device.isMobile} {
+    margin: auto;
+  }
 `;
 
 const BottomBox = styled.div`
@@ -86,4 +102,11 @@ const BottomBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media ${({ theme }) => theme.device.isMobile} {
+    /* border: 1px solid red; */
+    justify-content: center;
+    .goBack {
+      display: none;
+    }
+  }
 `;
