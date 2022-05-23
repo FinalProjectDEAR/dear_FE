@@ -37,10 +37,10 @@ const Footer = () => {
               margin="2px 6px"
               color="#666666"
               _onClick={() => {
-                history.push("/");
+                logout();
               }}
             >
-              로그인
+              로그아웃
             </Text>
           </FooterBtn>
         ) : (
@@ -50,10 +50,10 @@ const Footer = () => {
               margin="2px 6px"
               color="#666666"
               _onClick={() => {
-                logout();
+                history.push("/");
               }}
             >
-              로그아웃
+              로그인
             </Text>
           </FooterBtn>
         )}

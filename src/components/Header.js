@@ -6,6 +6,8 @@ import { history } from "../redux/configureStore";
 
 import logo from "../assets/main/logoS.png";
 
+const isLogin = localStorage.getItem("isLogin");
+
 const logout = () => {
   history.push("/");
   localStorage.removeItem("accessToken");
@@ -39,7 +41,11 @@ const Header = (props) => {
                 디어상담소
               </HeaderBtn>
               <HeaderBtn>마이페이지</HeaderBtn>
-              <HeaderBtn onClick={logout}>로그아웃</HeaderBtn>
+              {isLogin ? (
+                <HeaderBtn onClick={logout}>로그아웃</HeaderBtn>
+              ) : (
+                <HeaderBtn onClick={history.push("/")}>로그인</HeaderBtn>
+              )}
             </div>
           </HeaderBox>
         </HeaderContainer>
