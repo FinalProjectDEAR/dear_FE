@@ -28,6 +28,7 @@ import Main from "../pages/Main";
 import MainRanking from "../pages/MainRanking";
 import MainHotPost from "../pages/MainHotPost";
 import MainReview from "../pages/MainReview";
+import MobileRanking from "../components/MobileRanking";
 
 //레이지 로딩 페이지
 const Login = lazy(() => import("../pages/Login"));
@@ -91,6 +92,7 @@ function App() {
             <Route path="/myPage" exact component={MyPage} />
             <Route path="/notification" exact component={Notification} />
             <Route path="/editMyPage" exact component={EditMyPage} />
+            <Route path="/MobileRanking" exact component={MobileRanking} />
           </Suspense>
           <FixedBtn />
         </ConnectedRouter>

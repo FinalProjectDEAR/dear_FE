@@ -12,7 +12,6 @@ import { actionCreators } from "../redux/modules/review";
 
 //고민러가 작성하는 상담후기 페이지
 function ReqReview(props) {
-  console.log("리스너 아이디", props.resMemberId);
   const dispatch = useDispatch();
 
   const [serviceComment, setServiceComment] = React.useState(null);
@@ -92,7 +91,7 @@ function ReqReview(props) {
       dispatch(
         actionCreators.addReviewReqDB(
           requestReview,
-          props.reqMemberId,
+          props.resMemberId,
           tagLike,
           Object.values(goodResTag),
           serviceComment

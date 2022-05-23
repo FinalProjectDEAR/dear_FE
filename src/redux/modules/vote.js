@@ -146,7 +146,7 @@ const addVoteDB = (
       const { data } = await apis.addVote(formData);
       console.log(data);
       //   dispatch(getVoteDB());
-      history.replace("/board");
+      history.replace("/postList");
     } catch (err) {
       console.log(err, "업로드에 실패하였습니다.");
       window.alert("업로드에 실패하였습니다.");

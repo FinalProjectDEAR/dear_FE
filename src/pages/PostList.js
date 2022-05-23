@@ -185,8 +185,15 @@ function PostList(props) {
             </PostTable>
             <BtnWrapper>
               <BtnContainer>
-                <Button size="narrow" secondaryDefault cursor="pointer">
-                  <Text body4 color="#7A37BE">
+                <Button
+                  size="narrow"
+                  secondaryDefault
+                  cursor="pointer"
+                  _onClick={() => {
+                    history.push("/voteWrite");
+                  }}
+                >
+                  <Text body4 color="#7A37BE" cursor="pointer">
                     투표만들기
                   </Text>
                 </Button>

@@ -193,7 +193,7 @@ function AudioChat() {
   React.useEffect(() => {
     if (!isConnect) {
       console.log("30초 카운트");
-      setTimeout(waitTimeOut, 1000000); //30000
+      setTimeout(waitTimeOut, 30000);
     }
   }, []);
 
@@ -331,10 +331,10 @@ function AudioChat() {
                         </Text>
                       </Tag>
                     ) : null}
-                    {chatInfo.reqDating ? (
+                    {chatInfo.reqUserDating ? (
                       <Tag>
                         <Text sub7 margin="6px 8px">
-                          {chatInfo.reqDating}
+                          {chatInfo.reqUserDating}
                         </Text>
                       </Tag>
                     ) : null}
@@ -359,8 +359,8 @@ function AudioChat() {
               </UserBox>
               <MobileUserBox>
                 <Ellipsis>
-                  {/* <Text body3>{chatInfo.reqNickname}</Text> */}
-                  <Text body3>비둘기구구절절구구</Text>
+                  <Text body3>{chatInfo.reqNickname}</Text>
+                  {/* <Text body3>비둘기구구절절구구</Text> */}
                 </Ellipsis>
                 <InfoBtn
                   onClick={() => {
@@ -385,10 +385,10 @@ function AudioChat() {
                           </Text>
                         </Tag>
                       ) : null}
-                      {chatInfo.reqDating ? (
+                      {chatInfo.reqUserDating ? (
                         <Tag>
                           <Text sub7 margin="6px 8px">
-                            {chatInfo.reqDating}
+                            {chatInfo.reqUserDating}
                           </Text>
                         </Tag>
                       ) : null}
@@ -424,10 +424,10 @@ function AudioChat() {
                           </Text>
                         </Tag>
                       ) : null}
-                      {chatInfo.resDating ? (
+                      {chatInfo.resUserDating ? (
                         <Tag>
                           <Text sub7 margin="6px 8px">
-                            {chatInfo.resDating}
+                            {chatInfo.resUserDating}
                           </Text>
                         </Tag>
                       ) : null}
@@ -480,10 +480,10 @@ function AudioChat() {
                               </Text>
                             </Tag>
                           ) : null}
-                          {chatInfo.resDating ? (
+                          {chatInfo.resUserDating ? (
                             <Tag>
                               <Text sub7 margin="6px 8px">
-                                {chatInfo.resDating}
+                                {chatInfo.resUserDating}
                               </Text>
                             </Tag>
                           ) : null}
