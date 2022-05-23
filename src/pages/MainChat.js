@@ -45,7 +45,7 @@ function MainChat() {
     <React.Fragment>
       <Header />
       <Background>
-        <MainWrap>
+        <MainWrap id="1">
           <IntroWrap>
             <LogoBox>
               <Logo src={logo} />
