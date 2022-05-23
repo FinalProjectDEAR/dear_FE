@@ -50,13 +50,13 @@ body {
 
 .dotStyle {
   position: absolute;
-  bottom: -35px;
+  bottom: -15px;
   display: block;
   width: 100%;
-  padding: 0;
+  padding: 0px 120px;
   margin: 0;
   list-style: none;
-  text-align: center;
+  text-align: left;
 }
 
 .dotStyle li {

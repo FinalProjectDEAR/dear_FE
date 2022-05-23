@@ -10,11 +10,15 @@ import { ReactComponent as Again } from "../assets/postList/board-cate6.svg";
 import { ReactComponent as Solo } from "../assets/postList/board-cate3 (1).svg";
 import { ReactComponent as Etc } from "../assets/postList/board-cate8.svg";
 import { ReactComponent as Pho } from "../assets/postList/Frame 520.svg";
+
 //리덕스관련
 import { useHistory } from "react-router-dom";
 import { actionCreators } from "../redux/modules/post";
 import { useDispatch, useSelector } from "react-redux";
+
 //페이지관련
+import VoteList from "../components/VoteList";
+import MobileVoteList from "../components/MobileVoteList";
 import Layout from "../components/Layout";
 import Post from "../pages/Post";
 import Paginations from "../elements/Pagination";
@@ -74,8 +78,14 @@ function PostList(props) {
                   상담신청하기
                 </Text>
               </Button>
-              <Button size="small" secondaryDefault cursor="pointer">
-                <Text body4 color="#7A37BE">
+              <Button
+                size="small"
+                secondaryDefault
+                _onClick={() => {
+                  history.push("/voteWrite");
+                }}
+              >
+                <Text body4 color="#7A37BE" cursor="pointer">
                   투표만들기
                 </Text>
               </Button>
@@ -83,12 +93,10 @@ function PostList(props) {
           </MBtnWrapper>
 
           <VoteWrapper>
-            <Text color="#2E2A32" weight="700">
-              지금 뜨거운 투표
-            </Text>
-            <MoreVote>진행중인 투표 더보기 ></MoreVote>
+            <VoteList />
+            <MobileVoteList />
           </VoteWrapper>
-          <BoardWrapper>
+          <BoardWrapper id="2">
             <CateGoryWrapper>
               <div className="mobile">
                 <CategoryBtn
@@ -224,8 +232,6 @@ const InfoWrapper = styled.div`
   max-width: 1032px;
   width: 100%
   height: 150px;
-  /* border: 1px solid red; */
-  
  
 `;
 const InfoContainer = styled.div`
@@ -251,7 +257,6 @@ const VoteWrapper = styled.div`
   width: 1032px;
   height: 408px;
   margin: 155px auto 200px;
-  border: 1px solid red;
   cursor: pointer;
   text-align: left;
 `;
@@ -263,7 +268,6 @@ const MoreVote = styled.span`
   text-decoration-line: underline;
   width: 129px;
   height: 18px;
-  border: 1px solid red;
   line-height: 720px;
 `;
 const BoardWrapper = styled.div`
@@ -368,7 +372,7 @@ const TableInfo = styled.div`
 
 const InfoItem = styled.div`
   padding: 25px 0px 23px 0;
-  color: #61586A
+  color: #61586a;
   font-size: 14px;
   line-height: 18px;
   font-weight: 500;
