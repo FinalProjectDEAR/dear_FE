@@ -10,6 +10,7 @@ import vote from "../assets/vote/vote.png";
 import ImageVote from "../components/ImageVote";
 import LetterVote from "../components/LetterVote";
 import VoteDel from "../components/alert/VoteDel";
+import Layout from "../components/Layout";
 
 // 리덕스 관련
 import { useDispatch, useSelector } from "react-redux";
@@ -55,79 +56,93 @@ function VoteDetail(props) {
 
   return (
     <React.Fragment>
-      <BtnContainer></BtnContainer>
-      <DetailWrapper>
-        <CategoryBox>
-          <Title>
-            <Text body4 color="#7A37BE">
-              투표
-            </Text>
-          </Title>
-          <TitleContent>
-            <TextB subTitle margin="0px">
-              {voteInfo?.title}
-            </TextB>
-            <img
-              src={vote}
-              alt={vote}
-              style={{
-                width: "18px",
-              }}
-            />
-          </TitleContent>
-          <TimeBox>
-            <Text sub7 margin="0px">
-              {date}
-            </Text>
-          </TimeBox>
-        </CategoryBox>
-        {/* {voteInfo?.memberId === loginUser ? ( */}
-        <LineBox>
-          <MobileTimeBox>
-            <Text sub7 margin="0px" textAlign="left">
-              {date}
-            </Text>
-          </MobileTimeBox>
-          <Text
-            sub7
-            cursor="pointer"
-            _onClick={() => {
-              setModalOpen(true);
-            }}
-          >
-            삭제
-          </Text>
-        </LineBox>
-        {/* ) : null} */}
+      <Layout>
+        <Background>
+          <DetailWrapper>
+            <CategoryBox>
+              <Title>
+                <Text body4 color="#7A37BE">
+                  투표
+                </Text>
+              </Title>
+              <TitleContent>
+                <TextB subTitle margin="0px">
+                  {voteInfo?.title}
+                </TextB>
+                <img
+                  src={vote}
+                  alt={vote}
+                  style={{
+                    width: "18px",
+                  }}
+                />
+              </TitleContent>
+              <TimeBox>
+                <Text sub7 margin="0px">
+                  {date}
+                </Text>
+              </TimeBox>
+            </CategoryBox>
+            {/* {voteInfo?.memberId === loginUser ? ( */}
+            <LineBox>
+              <MobileTimeBox>
+                <Text sub7 margin="0px" textAlign="left">
+                  {date}
+                </Text>
+              </MobileTimeBox>
+              <Text
+                sub7
+                cursor="pointer"
+                _onClick={() => {
+                  setModalOpen(true);
+                }}
+              >
+                삭제
+              </Text>
+            </LineBox>
+            {/* ) : null} */}
 
-        {modalOpen && (
-          <Modal closeModal={closeModal}>
-            <VoteDel closeModal={closeModal} postId={postId} />
-          </Modal>
-        )}
+            {modalOpen && (
+              <Modal closeModal={closeModal}>
+                <VoteDel closeModal={closeModal} postId={postId} />
+              </Modal>
+            )}
 
-        <ContentBox>
-          <Text body3>{voteInfo?.contents}</Text>
-        </ContentBox>
-        {voteInfo.vote[0].imageUrl ? (
-          <ImageVote voteInfo={voteInfo} />
-        ) : (
-          <LetterVote voteInfo={voteInfo} />
-        )}
-      </DetailWrapper>
+            <ContentBox>
+              <Text body3>{voteInfo?.contents}</Text>
+            </ContentBox>
+            {voteInfo.vote[0].imageUrl ? (
+              <ImageVote voteInfo={voteInfo} />
+            ) : (
+              <LetterVote voteInfo={voteInfo} />
+            )}
+          </DetailWrapper>
+        </Background>
+      </Layout>
     </React.Fragment>
   );
 }
 
+const Background = styled.div`
+  width: 100%;
+  height: 100%;
+  @media ${({ theme }) => theme.device.mobile} {
+    padding-top: 80px;
+    height: auto;
+  }
+`;
+
 const DetailWrapper = styled.div`
   margin: auto;
   width: 1032px;
-  height: 450px;
-  /* border: 1px solid red; */
+  min-height: 490px;
+  margin-top: 80px;
+  margin-bottom: 40px;
   @media ${({ theme }) => theme.device.mobile} {
+    min-height: 0px;
+    margin-top: 0px;
+    box-sizing: border-box;
     width: 328px;
-    height: 100%;
-    /* height: 990px; */
     border-radius: 0px;
   }
 `;
@@ -159,7 +174,6 @@ const CategoryBox = styled.div`
     justify-content: flex-start;
     width: 328px;
     height: 80px;
-    margin-top: 80px;
     border-top: none;
     border-bottom: 1px solid #666666;
     border-radius: 0px;

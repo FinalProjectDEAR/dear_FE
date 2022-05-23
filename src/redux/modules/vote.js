@@ -146,7 +146,7 @@ const addVoteDB = (
       const { data } = await apis.addVote(formData);
       console.log(data);
       //   dispatch(getVoteDB());
-      history.replace("/board");
+      history.replace("/postList");
     } catch (err) {
       console.log(err, "업로드에 실패하였습니다.");
       window.alert("업로드에 실패하였습니다.");
@@ -177,7 +177,7 @@ const delVoteDB = (postId) => {
       console.log(voteList);
 
       dispatch(delVote(postId));
-      history.push("/board");
+      history.push("/postList");
     } catch (err) {
       console.log(err);
       window.alert("삭제실패! 다시 시도해주세요.");

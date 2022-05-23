@@ -40,7 +40,7 @@ function VoteWrite() {
 
   const closeModal = () => {
     setModalOpen(false);
-    history.push("/board");
+    history.push("/postList");
   };
 
   const _imageLeft = useSelector((state) => state.image.imageLeft);

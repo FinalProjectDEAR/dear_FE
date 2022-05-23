@@ -6,7 +6,7 @@ import Header from "./Header";
 
 function Layout(props) {
   return (
-    <div id="1" style={{ paddingTop: "120px" }}>
+    <div id="1">
       <Header />
       <Content>{props.children}</Content>
       <Footer />

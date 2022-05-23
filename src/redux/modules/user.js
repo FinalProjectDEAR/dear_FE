@@ -80,6 +80,7 @@ const loginDB = (memberId, pwd) => {
       const tokenData = jwtDecode(accessToken);
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("memberId", memberId);
+      localStorage.setItem("isLogin", true);
 
       if (tokenData.nick) {
         const nickname = tokenData.nick;
@@ -110,6 +111,8 @@ const kakaoLogin = (code) => {
       const tokenData = jwtDecode(accessToken);
       localStorage.setItem("accessToken", accessToken);
       console.log(tokenData);
+
+      localStorage.setItem("isLogin", true);
 
       if (tokenData.nick) {
         const memberId = tokenData.sub;
