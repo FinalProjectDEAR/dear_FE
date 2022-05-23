@@ -19,7 +19,11 @@ const CounselHistory = (props) => {
     //   <HistoryList>
     <CounselHistoryWrapper>
       <div className="tag">
-        <Tag counselRes2>{props?.item.myRole}</Tag>
+        <Tag counselRes2>
+          <Text sub7 margin="3px 8px">
+            {props?.item.myRole}
+          </Text>
+        </Tag>
       </div>
       <div className="content">
         <TextB sub color="#2E2A32">

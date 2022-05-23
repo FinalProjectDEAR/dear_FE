@@ -6,6 +6,7 @@ import { ReactComponent as Sound } from "../assets/surround_sound.svg";
 import { ReactComponent as Left } from "../assets/paging_left.svg";
 import { ReactComponent as Right } from "../assets/paging_right.svg";
 import styled from "styled-components";
+import ReactTooltip from "react-tooltip";
 //페이지관련
 import Layout from "../components/Layout";
 import MessageList from "./MessageList";
@@ -55,9 +56,9 @@ const MyPage = () => {
   //페이지별 게시글 전체 조회
   React.useEffect(() => {
     dispatch(actionCreators.getPostListDB(page));
-    // return () => {
-    //   dispatch(actionCreators.resetPage());
-    // };
+    return () => {
+      dispatch(actionCreators.resetPage());
+    };
   }, [page]);
   const postList = useSelector((state) => state.mypage.postList.content);
   const postTotalPage = useSelector(
@@ -97,6 +98,16 @@ const MyPage = () => {
                     나를 찜한 친구 {userInfo?.follower}명
                   </Text>
                 </NicknameBox>
+                <MTapeWrapper>
+                  <div className="tape">
+                    <Text sub6>보유 테이프</Text>
+                    <Help />
+                  </div>
+                  <div className="tapeCnt">
+                    <Sound />
+                    <Text body2>{userInfo?.reward ? userInfo?.reward : 0}</Text>
+                  </div>
+                </MTapeWrapper>
               </MemberWrapper>
               <TypeWrapper>
                 <div id="love">
@@ -105,6 +116,21 @@ const MyPage = () => {
                       나의 연애 유형
                     </Text>
                     <Help />
+                    {/* <div className="section">
+                      <p className="subTitle">
+                        <div className="exampleJsx">
+                          <div className="side">
+                            <a data-for="enrich" data-tip>
+                              <Help />
+                            </a>
+                          </div>
+                          <ReactTooltip
+                            id="enrich"
+                            getContent={(dataTip) => "어쩌고저쩌고설명"}
+                          />
+                        </div>
+                      </p>
+                    </div> */}
                   </div>
                   <div className="loveTag">
                     <Tag small2>
@@ -188,7 +214,7 @@ const MyPage = () => {
             <TitleContainer>
               <div className="title">
                 <Text title color="#2E2A32" textAlign="left">
-                  내가 받은 쪽지
+                  받은 쪽지
                 </Text>
                 <Text body4 color="#948A9E" textAlign="left">
                   쪽지는 최대 30일까지 보관돼요
@@ -306,6 +332,9 @@ const PageBtn = styled.div`
 
 const Background = styled.div`
   height: 2200px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    height: 2800px;
+  }
 `;
 const MyPageWrapper = styled.div`
   background-color: #ffffff;
@@ -316,12 +345,26 @@ const MyPageWrapper = styled.div`
   width: 1032px;
   height: 200px;
   margin: auto;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 280px;
+    height: 483px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid red; */
+  }
 `;
 const MypageContainer = styled.div`
   margin: auto;
   display: flex;
   flex-direction: row;
   gap: 40px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid red; */
+  }
 `;
 const MemberWrapper = styled.div`
   width: 270px;
@@ -330,11 +373,28 @@ const MemberWrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 280px;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    /* border: 1px solid red; */
+  }
 `;
 const ColorBox = styled.div`
   width: 60px;
   height: 60px;
   margin-right: 20px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0px auto;
+    /* border: 1px solid red; */
+  }
 `;
 const NicknameBox = styled.div`
   display: flex;
@@ -346,6 +406,16 @@ const NicknameBox = styled.div`
   height: 64px;
   .nick {
     display: flex;
+  }
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 280px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    /* border: 1px solid red; */
   }
 `;
 const TypeWrapper = styled.div`
@@ -397,6 +467,63 @@ const TypeWrapper = styled.div`
     display: flex;
     flex-direction: row;
   }
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 280px;
+    height: 159px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    /* border: 1px solid blue; */
+    #love {
+      width: 280px;
+      /* height: 26px; */
+      /* margin-bottom: 18px; */
+      display: flex;
+      flex-direction: column;
+      /* background: yellow; */
+    }
+    .loveBox {
+      display: flex;
+      flex-direction: row;
+      width: 104px;
+      /* background: blue; */
+      margin: 0px;
+    }
+    .loveTag {
+      margin-left: 0px;
+      width: 280px;
+      /* gap: 10px; */
+      display: flex;
+      flex-direction: row;
+      /* background: pink; */
+    }
+    #listener {
+      width: 280px;
+      /* background: pink; */
+      display: flex;
+      flex-direction: column;
+      padding-top: 20px;
+    }
+    .listenerBox {
+      display: flex;
+      flex-direction: row;
+      width: 116px;
+    }
+    .types {
+      display: flex;
+      flex-direction: column;
+      margin-left: 20px;
+    }
+    .listenerTag {
+      gap: 10px;
+      /* width: 400px;
+    height: 26px; */
+      display: flex;
+      flex-direction: row;
+    }
+  }
 `;
 const TapeWrapper = styled.div`
   display: flex;
@@ -411,11 +538,36 @@ const TapeWrapper = styled.div`
     display: flex;
     justify-content: center;
   }
+  @media ${({ theme }) => theme.device.isMobile} {
+    display: none;
+  }
+`;
+const MTapeWrapper = styled.div`
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 280px;
+    height: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    /* background: red; */
+    .tape {
+      display: flex;
+    }
+    .tapeCnt {
+      display: flex;
+      justify-content: center;
+    }
+  }
+  @media ${({ theme }) => theme.device.web} {
+    display: none;
+  }
 `;
 const TemperatureBox = styled.div`
   display: flex;
   flex-direction: row;
-  margin: 6px 29px;
+  margin: 5px 26px;
 `;
 const TemperatureBar = styled.div`
   display: flex;
@@ -436,8 +588,8 @@ const ProgressBar = styled.div`
   height: 6px;
   border: 1px solid #bb9ed8;
   border-radius: 10px;
-  @media ${({ theme }) => theme.device.mobile} {
-    height: 24px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    height: 10px;
   }
 `;
 
@@ -458,11 +610,21 @@ const MsgWrapper = styled.div`
   margin: auto;
   margin-top: 60px;
   box-sizing: border-box;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 320px;
+    height: 96px;
+    background-color: yellow;
+  }
 `;
 const MsgContainer = styled.div`
   display: flex;
   flex-direction: row;
   margin: 20px auto;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 320px;
+    height: 96px;
+    background-color: pink;
+  }
 `;
 const TitleContainer = styled.div`
   display: flex;
@@ -482,6 +644,21 @@ const TitleContainer = styled.div`
   .follow {
     display: flex;
   }
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 320px;
+    height: 390px;
+    /* margin: auto; */
+    border: 1px solid red;
+    .page {
+      border: 1px solid red;
+      width: 80px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+  }
 `;
 const Title = styled.div`
   width: 250px;
@@ -491,6 +668,11 @@ const CounselWrapper = styled.div`
   width: 1032px;
   height: 342px;
   margin-top: 100px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 328px;
+    height: 536px;
+    border: 1px solid red;
+  }
 `;
 const CounselGrid = styled.div`
   width: 1032px;
@@ -502,12 +684,23 @@ const CounselGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 328px);
   flex-direction: column;
+  @media ${({ theme }) => theme.device.isMobile} {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 const FollowWrapper = styled.div`
   margin: auto;
   width: 1034px;
   height: 236px;
   margin-top: 100px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 320px;
+    height: 96px;
+
+    /* margin: auto; */
+    border: 1px solid red;
+  }
 `;
 const FollowContainer = styled.div`
   margin-top: 18px;
@@ -517,12 +710,24 @@ const FollowContainer = styled.div`
   gap: 26px;
   width: 1034px;
   height: 186px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 320px;
+    height: 96px;
+
+    /* margin: auto; */
+    border: 1px solid red;
+  }
 `;
 const PostWrapper = styled.div`
   margin: auto;
   width: 1032px;
   height: 369px;
   margin-top: 100px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 328px;
+    height: 536px;
+    border: 1px solid red;
+  }
 `;
 const PostTable = styled.div`
   margin-top: 15px;
@@ -536,6 +741,9 @@ const TableInfo = styled.div`
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #666666;
+  @media ${({ theme }) => theme.device.isMobile} {
+    display: none;
+  }
 `;
 
 const InfoItem = styled.div`

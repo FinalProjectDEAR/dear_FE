@@ -50,7 +50,7 @@ const getPostListDB = (page) => {
 };
 //팔로우한 사람 가져오기
 const getFollowDB = (page) => {
-  console.log(page);
+  // console.log(page);
   return function (dispatch, getState, { history }) {
     try {
       api.get(`/user/info/follow/${page}`, {}).then((res) => {
@@ -151,7 +151,7 @@ export default handleActions(
       }),
     [FOLLOW_PAGE]: (state, action) =>
       produce(state, (draft) => {
-        console.log("마이페이지 팔로우 토탈페이지:", action.payload);
+        // console.log("마이페이지 팔로우 토탈페이지:", action.payload);
         draft.page = action.payload.page;
       }),
     [RESET_PAGE]: (state, action) =>
