@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
 //max 5개
-function UserRanking(props) {
+function RankingCard(props) {
   return (
     <React.Fragment>
       <UserRankingWrapper>
@@ -40,7 +40,7 @@ function UserRanking(props) {
   );
 }
 
-export default UserRanking;
+export default RankingCard;
 
 const UserRankingWrapper = styled.div`
   display: flex;
@@ -55,6 +55,10 @@ const UserRankingWrapper = styled.div`
   margin-right: 25px;
   background: #fafafa;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
+
+  @media ${({ theme }) => theme.device.mobile} {
+    margin-left: 20px;
+  }
 `;
 
 const BadgeBox = styled.div`
@@ -87,9 +91,6 @@ const ProgressBar = styled.div`
   height: 6px;
   border: 1px solid #bb9ed8;
   border-radius: 10px;
-  @media ${({ theme }) => theme.device.mobile} {
-    height: 24px;
-  }
 `;
 
 const Highlight = styled.div`
@@ -98,7 +99,4 @@ const Highlight = styled.div`
   width: ${(props) => props.width};
   height: 6px;
   border-radius: 10px;
-  @media ${({ theme }) => theme.device.mobile} {
-    height: 24px;
-  }
 `;

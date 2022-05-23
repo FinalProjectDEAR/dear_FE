@@ -51,13 +51,11 @@ const Header = (props) => {
 export default Header;
 
 const HeaderWrapper = styled.div`
-  position: fixed;
-  left: 0;
-  top: 0;
   width: 100%;
   height: 120px;
   padding: 24px;
   box-sizing: border-box;
+  background: rgba(196, 196, 196, 0);
   @media ${({ theme }) => theme.device.mobile} {
     display: none;
   }

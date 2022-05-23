@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { history } from "../redux/configureStore";
 
-import { actionCreators as mainActions } from "../redux/modules/vote";
+import { actionCreators as mainActions } from "../redux/modules/main";
 
 import { Text, TextB } from "../elements";
 import styled from "styled-components";
@@ -16,18 +16,18 @@ import serviceInfo from "../assets/main/service_info_img.png";
 
 function MainHotPost() {
   const dispatch = useDispatch();
-  //   React.useEffect(() => {
-  //     dispatch(mainActions.getHotVoteDB());
-  //   });
+  // React.useEffect(() => {
+  //   dispatch(mainActions.getHotVoteDB());
+  // }, []);
 
-  //   React.useEffect(() => {
-  //     dispatch(mainActions.getHotBoardDB());
-  //   });
+  // React.useEffect(() => {
+  //   dispatch(mainActions.getHotBoardDB());
+  // }, []);
 
-  //   const hotVoteList = useSelector((state) => state.main.voteList);
-  // const TopVote = hotVoteList.slice(0,2)
-  //   const hotBoardList = useSelector((state) => state.main.boardList);
-  // const TopBoard = hotBoardList.slice(0,2)
+  // const hotVoteList = useSelector((state) => state.main.hotVoteList);
+  // const TopVote = hotVoteList.slice(0, 2);
+  // const hotBoardList = useSelector((state) => state.main.hotBoardList);
+  // const TopBoard = hotBoardList.slice(0, 3);
 
   return (
     <React.Fragment>
@@ -45,8 +45,9 @@ function MainHotPost() {
             <VoteCard />
           </VoteBox>
           <BoardBox>
-            <PostCard />
-            <PostCard />
+            {/* {TopBoard.map((post, idx) => {
+              return <PostCard key={idx} postInfo={post} />;
+            })} */}
             <PostCard />
             <PostCard />
           </BoardBox>
@@ -58,7 +59,7 @@ function MainHotPost() {
             deco="underLine"
             cursor="pointer"
             _onClick={() => {
-              history.push("/board");
+              history.push("/postList");
             }}
           >
             디어상담소 바로가기 {">"}
@@ -86,6 +87,11 @@ const HotPostWrapper = styled.div`
   width: 960px;
   height: 500px;
   margin: 0px auto;
+  @media ${({ theme }) => theme.device.mobile} {
+    padding: 0px 25px;
+    width: 360px;
+    height: 650px;
+  }
 `;
 
 const VoteBox = styled.div`
@@ -94,6 +100,11 @@ const VoteBox = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 30px;
+  @media ${({ theme }) => theme.device.mobile} {
+    flex-direction: column;
+    height: 500px;
+    overflow: hidden;
+  }
 `;
 
 const BoardBox = styled.div`
@@ -102,4 +113,9 @@ const BoardBox = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 20px;
+  @media ${({ theme }) => theme.device.mobile} {
+    margin-top: 5px;
+    flex-direction: column;
+    height: 534px;
+  }
 `;

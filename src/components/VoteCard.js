@@ -110,6 +110,9 @@ const CardWrapper = styled.div`
   border-radius: 10px;
   cursor: pointer;
   filter: drop-shadow(0px 0px 20px rgba(172, 151, 197, 0.25));
+  @media ${({ theme }) => theme.device.mobile} {
+    margin: 5px;
+  }
 `;
 
 const LineBox = styled.div`

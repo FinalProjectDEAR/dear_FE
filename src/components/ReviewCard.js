@@ -7,8 +7,23 @@ import { Text, TextB } from "../elements";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import ChatBubbleRoundedIcon from "@mui/icons-material/ChatBubbleRounded";
 
-function ReviewCard(props) {
+function ReviewCard({ reviewInfo }) {
   const nickname = "낭만고양이";
+
+  function dateFormat(date) {
+    let year = date.substring(0, 3);
+    let month = date.substring(5, 6);
+    let day = date.substring(8, 9);
+
+    // month = month >= 10 ? month : "0" + month;
+    // day = day >= 10 ? day : "0" + day;
+    // hour = hour >= 10 ? hour : "0" + hour;
+    // minute = minute >= 10 ? minute : "0" + minute;
+    // second = second >= 10 ? second : "0" + second;
+
+    return year + "년" + " " + month + "월" + " " + day + "일";
+  }
+
   const hideName = (n) => {
     let result = n.substring(0, 1) + "*".repeat(n.length - 1);
     return result;
@@ -18,8 +33,9 @@ function ReviewCard(props) {
     <React.Fragment>
       <CardWrapper>
         <Text sub6 color="#948A9E" textAlign="left">
-          {/* [{date} 상담] {hideName(props.nickname)}님 */}
-          [2022년 5월 20일 상담] {hideName(nickname)}님
+          {/* [{dateFormat(reviewInfo.createdAt)} 상담]
+          {hideName(reviewInfo.nickname)}님 */}
+          [2022년 5월 23일 상담] 낭*****님
         </Text>
         <Ellipsis>
           {/* <Text title>{props.content}</Text> */}

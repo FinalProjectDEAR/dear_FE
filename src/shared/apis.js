@@ -94,7 +94,7 @@ export const apis = {
   disConnect: (sessionId) => api.delete(`/chat/info/${sessionId}/disconnect`),
 
   //main
-  getRanking: () => api.get(`/main/ranking/member`),
+  getRank: () => api.get(`/main/ranking/member`),
   getHotBoard: () => api.get(`/main/ranking/board`),
   getHotVote: () => api.get(`/main/ranking/voteBoard`),
   getServiceCmt: () => api.get(`/main/serviceComment`),

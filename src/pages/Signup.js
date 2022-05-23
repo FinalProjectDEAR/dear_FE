@@ -87,7 +87,7 @@ const Signup = () => {
                   dupCheck(memberId);
                 }}
               >
-                <Text body4 color="#7A37BE">
+                <Text body4 color="#7A37BE" cursor="pointer">
                   중복확인
                 </Text>
               </Button>
@@ -141,7 +141,7 @@ const Signup = () => {
               text="회원가입"
             ></Button>
             <LineBox>
-              <Text sub4 margin="0px" color="#61586A">
+              <Text sub4 margin="0px" color="#61586A" cursor="pointer">
                 이미 계정이 있으신가요?
               </Text>
               <Text
@@ -206,7 +206,7 @@ const SignupWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   width: 300px;
   margin: auto;
   @media ${({ theme }) => theme.device.mobile} {
@@ -217,6 +217,7 @@ const SignupWrapper = styled.div`
 
 const LogoBox = styled.div`
   padding: 0px 0px 40px;
+  margin: 0px auto;
 `;
 
 const Logo = styled.img`

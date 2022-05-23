@@ -189,6 +189,10 @@ const Body = styled.p`
   ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
   ${(props) => (props.textShadow ? `text-shadow: ${props.textShadow};` : "")};
   ${(props) => (props.wordBreak ? `word-break: keep-all;` : "")};
+  @media ${({ theme }) => theme.device.mobile} {
+    font-size: 14px;
+    line-height: 24px;
+  }
 `;
 
 const Body2 = styled.p`
