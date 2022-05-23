@@ -115,32 +115,6 @@ const Login = () => {
         </KakaoBox>
       </LoginWrapper>
       <Footer />
-      <MobileFooter>
-        <FooterBtn>
-          <Text
-            sub
-            color="#666666"
-            _onClick={() => {
-              history.push("/");
-            }}
-          >
-            로그인
-          </Text>
-        </FooterBtn>
-        <FooterBox>
-          <Text sub color="#666666" margin="0px 6px">
-            의견 및 오류 제보
-          </Text>
-          |
-          <Text sub color="#666666" margin="0px 6px">
-            자주 묻는 질문
-          </Text>
-          |
-          <Text sub color="#666666" margin="0px 6px">
-            개인정보처리방침
-          </Text>
-        </FooterBox>
-      </MobileFooter>
     </Background>
   );
 };

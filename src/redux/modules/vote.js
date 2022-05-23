@@ -177,7 +177,7 @@ const delVoteDB = (postId) => {
       console.log(voteList);
 
       dispatch(delVote(postId));
-      history.push("/board");
+      history.push("/postList");
     } catch (err) {
       console.log(err);
       window.alert("삭제실패! 다시 시도해주세요.");

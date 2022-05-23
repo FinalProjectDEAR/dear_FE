@@ -275,9 +275,9 @@ const Body3 = styled.p`
   ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
   ${(props) => (props.textShadow ? `text-shadow: ${props.textShadow};` : "")};
   ${(props) => (props.wordBreak ? `word-break: keep-all;` : "")};
-  @media ${({ theme }) => theme.device.mobile} {
+  /* @media ${({ theme }) => theme.device.mobile} {
     font-size: 14px;
-  }
+  } */
 `;
 
 const Body4 = styled.p`
