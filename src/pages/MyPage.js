@@ -232,8 +232,8 @@ const MyPage = () => {
                 <Left
                   style={{ cursor: "pointer" }}
                   onClick={() => {
-                    if (page > 1) {
-                      setPage(page - 1);
+                    if (mPage > 1) {
+                      setMpage(mPage - 1);
                     }
                   }}
                 />
@@ -283,8 +283,8 @@ const MyPage = () => {
                 <Left
                   style={{ cursor: "pointer" }}
                   onClick={() => {
-                    if (page > 1) {
-                      setPage(page - 1);
+                    if (fPage > 1) {
+                      setFpage(fPage - 1);
                     }
                   }}
                 />
