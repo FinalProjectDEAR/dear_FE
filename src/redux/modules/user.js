@@ -79,10 +79,10 @@ const loginDB = (memberId, pwd) => {
 
       const tokenData = jwtDecode(accessToken);
       localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("memberId", memberId);
 
       if (tokenData.nick) {
         const nickname = tokenData.nick;
-        localStorage.setItem("memberId", memberId);
         localStorage.setItem("nickname", nickname);
         dispatch(setUser(memberId, nickname));
         history.replace("/main");
@@ -91,7 +91,7 @@ const loginDB = (memberId, pwd) => {
       }
     } catch (err) {
       console.log("로그인 실패", err);
-      window.alert("로그인이 실패했습니다. 다시 시도해주세요.");
+      window.alert("잘못된 정보입니다. 다시 시도해주세요.");
     }
   };
 };

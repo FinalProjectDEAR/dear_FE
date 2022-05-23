@@ -210,7 +210,9 @@ function VoteWrite() {
                         setImageVote(false);
                       }}
                     />
-                    선택지
+                    <Text sub6 margin="0px" color="#333333">
+                      선택지
+                    </Text>
                   </CheckBox>
                   <CheckBox>
                     <input
@@ -221,7 +223,9 @@ function VoteWrite() {
                         setImageVote(true);
                       }}
                     />
-                    선택지 + 이미지
+                    <Text sub6 margin="0px" color="#333333">
+                      선택지 + 이미지
+                    </Text>
                   </CheckBox>
                 </InputBox>
               </LineBox>

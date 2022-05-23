@@ -98,4 +98,5 @@ export const apis = {
   getHotBoard: () => api.get(`/main/ranking/board`),
   getHotVote: () => api.get(`/main/ranking/voteBoard`),
   getServiceCmt: () => api.get(`/main/serviceComment`),
+  getTape: () => api.get(`/user/info/reward`),
 };

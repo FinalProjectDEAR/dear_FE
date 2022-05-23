@@ -83,11 +83,11 @@ function VoteDetail(props) {
         </CategoryBox>
         {/* {voteInfo?.memberId === loginUser ? ( */}
         <LineBox>
-          <MTimeBox>
-            <Text sub7 margin="0px">
+          <MobileTimeBox>
+            <Text sub7 margin="0px" textAlign="left">
               {date}
             </Text>
-          </MTimeBox>
+          </MobileTimeBox>
           <Text
             sub7
             cursor="pointer"
@@ -166,7 +166,7 @@ const CategoryBox = styled.div`
   }
 `;
 
-const MTimeBox = styled.div`
+const MobileTimeBox = styled.div`
   display: none;
   flex-direction: row;
   justify-content: center;
@@ -225,7 +225,7 @@ const LineBox = styled.div`
     width: 328px;
     justify-content: space-between;
     height: 24px;
-    margin-top: 12px;
+    margin-top: 10px;
     padding-right: 0px;
   }
 `;

@@ -7,11 +7,12 @@ const GET_RANKING = "GET_RANKING";
 const GET_TAPE = "GET_TAPE";
 const GET_HOT_VOTE = "GET_HOT_VOTE";
 const GET_HOT_BOARD = "GET_HOT_BOARD";
+const GET_REVIEW = "GET_REVIEW";
 
 //초기값
 const initialState = {
   rankingList: [],
-  tape: "",
+  tapeCount: "",
   hotVoteList: [],
   hotBoardList: [],
   reviewList: [],
@@ -21,19 +22,31 @@ const initialState = {
 const getRanking = createAction(GET_RANKING, (rankingList) => rankingList);
 const getHotVote = createAction(GET_HOT_VOTE, (voteList) => voteList);
 const getHotBoard = createAction(GET_HOT_BOARD, (BoardList) => BoardList);
-const getReview = createAction(GET_SERVICE_CMT, (reviewList) => reviewList);
+const getReview = createAction(GET_REVIEW, (reviewList) => reviewList);
+const getTape = createAction(GET_TAPE, (tapeCnt) => tapeCnt);
 // const getFollow = createAction(FOLLOW_LIST, (follower) => ({ follower }));
 // const getFollower = createAction(FOLLOWER, (follower) => ({ follower }));
 // const getChat = createAction(CHAT_LIST, (chat) => ({ chat }));
 // const getInfo = createAction(GET_INFO, (user) => ({ user }));
 // const addInfo = createAction(GET_INFO, (user) => ({ user }));
 
-//내가 작성한 글 가져오기
+const getTapeDB = () => {
+  return async function (dispatch, getState, { history }) {
+    try {
+      const { data } = await apis.getTape();
+      console.log("테이프갯수", data.data.reward);
+      dispatch(getTape(data.data.reward));
+    } catch (err) {
+      console.log("테이프 가져오기 실패", err);
+    }
+  };
+};
+
 const getRankingDB = () => {
   return async function (dispatch, getState, { history }) {
     try {
       const { data } = await apis.getRank();
-      console.log("랭킹", data);
+      console.log("랭킹", data.data);
       dispatch(getRanking(data.data));
     } catch (err) {
       console.log("랭킹데이터 가져오기 실패", err);
@@ -43,6 +56,7 @@ const getRankingDB = () => {
 
 const getHotVoteDB = () => {
   return async function (dispatch, getState, { history }) {
+    console.log("인기투표리스트 서버요청");
     try {
       const { data } = await apis.getHotVote();
       console.log("인기투표", data);
@@ -86,15 +100,20 @@ export default handleActions(
       }),
     [GET_HOT_VOTE]: (state, action) =>
       produce(state, (draft) => {
+        console.log(action.payload);
         draft.hotVoteList = action.payload;
       }),
     [GET_HOT_BOARD]: (state, action) =>
       produce(state, (draft) => {
         draft.hotBoardList = action.payload;
       }),
-    [GET_SERVICE_CMT]: (state, action) =>
+    [GET_REVIEW]: (state, action) =>
       produce(state, (draft) => {
         draft.reviewList = action.payload;
+      }),
+    [GET_TAPE]: (state, action) =>
+      produce(state, (draft) => {
+        draft.tapeCount = action.payload;
       }),
   },
   initialState
@@ -105,6 +124,7 @@ const actionCreators = {
   getHotBoardDB,
   getHotVoteDB,
   getReviewDB,
+  getTapeDB,
 };
 
 export { actionCreators };

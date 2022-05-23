@@ -22,16 +22,19 @@ function VoteCard(props) {
           history.push(`/voteDetail/${props.postId}`);
         }}
       >
-        <TextB subTitle margin="0px">
-          <Question>Q. </Question>
-          {props.title}
-        </TextB>
+        <Ellipsis>
+          <TextB subTitle margin="0px">
+            <Question>Q. </Question>
+            누가 누구의 새우를 까줄 때 어떻게 했어야 했나요?
+          </TextB>
+        </Ellipsis>
+
         <VoteContainer>
           <LineBox>
             <VoteLine>
               <Text sub4 margin="0px 4px">
                 {/* {props.vote[0].imageTitle} */}
-                친구가애인새우우우우
+                까준다
               </Text>
             </VoteLine>
             <ProgressBar>
@@ -48,7 +51,7 @@ function VoteCard(props) {
             <VoteLine>
               <Text sub4 margin="0px 4px">
                 {/* {props.vote[1].imageTitle} */}
-                강원도
+                안까준다
               </Text>
             </VoteLine>
             <ProgressBar>
@@ -65,8 +68,7 @@ function VoteCard(props) {
         <LineBox>
           <PeopleRoundedIcon style={{ width: "16.5px", color: "#999999" }} />
           <Text sub5 margin="0px 5px">
-            {/* {totalCount}명 참여중 */}
-            165
+            {totalCount} {/* 165 */}
           </Text>
         </LineBox>
       </CardWrapper>
@@ -126,6 +128,16 @@ const Question = styled.span`
   color: #7a37be;
 `;
 
+const Ellipsis = styled.div`
+  width: 230px;
+  height: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+`;
+
 const Font = styled.p`
   font-family: ${({ theme }) => theme.fonts.family.batang};
   font-weight: 500;
@@ -153,7 +165,7 @@ const VoteContainer = styled.div`
 `;
 
 const VoteLine = styled.div`
-  width: 100%;
+  width: 250px;
   display: flex;
   justify-content: flex-end;
 `;

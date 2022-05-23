@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { actionCreators as voteActions } from "../redux/modules/vote";
+import { actionCreators as mainActions } from "../redux/modules/main";
+import { actionCreators } from "../redux/modules/post";
 import { history } from "../redux/configureStore";
 
 import { Text } from "../elements";
@@ -14,16 +15,18 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+//스크롤
+import { Link } from "react-scroll";
+
 const VoteList = (props) => {
   const dispatch = useDispatch();
 
   // React.useEffect(() => {
-  //   const type = "VOTE";
-  //   dispatch(voteActions.getVoteRankingDB());
+  //   dispatch(mainActions.getHotVoteDB());
   // }, []);
 
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -34,17 +37,22 @@ const VoteList = (props) => {
     pauseOnHover: true,
   };
 
-  const voteList = useSelector((state) => state.vote.voteList);
+  // const voteList = useSelector((state) => state.main.hotVoteList);
+
+  const gotoVote = () => {
+    dispatch(actionCreators.getCateDetailDB(1, "투표"));
+  };
+
   return (
     <RankingWrapper>
-      <Text textAlign="left" weight="700" size="18px" color="#2E2A32">
-        지금 뜨거운 투표
-      </Text>
       <RankingContainer>
+        <Text title textAlign="left" color="#2E2A32" margin="0px 15px">
+          디어상담소 인기게시물
+        </Text>
         <Slider {...settings} dotsClass="dotStyle">
           {/* {voteList.map((v, idx) => {
-          return <VoteCard {...v} key={idx} />;
-        })} */}
+            return <VoteCard {...v} key={idx} />;
+          })} */}
           <VoteCard />
           <VoteCard />
           <VoteCard />
@@ -56,20 +64,23 @@ const VoteList = (props) => {
           <VoteCard />
           <VoteCard />
         </Slider>
-        <Text
-          margin="20px"
-          textAlign="left"
-          weight="500"
-          size="16px"
-          color="#948A9E"
-          deco="underLine"
-          cursor="pointer"
-          _onClick={() => {
-            history.push("");
-          }}
-        >
-          진행중인 투표 더보기 {">"}
-        </Text>
+        <Link to="2" smooth={true}>
+          <Text
+            sub2
+            margin="10px"
+            textAlign="left"
+            weight="500"
+            size="16px"
+            color="#948A9E"
+            deco="underLine"
+            cursor="pointer"
+            _onClick={() => {
+              gotoVote();
+            }}
+          >
+            진행중인 투표 더보기 {">"}
+          </Text>
+        </Link>
       </RankingContainer>
     </RankingWrapper>
   );
@@ -84,4 +95,7 @@ const RankingWrapper = styled.div`
 
 const RankingContainer = styled.div`
   margin: 15px 0px;
+  @media ${({ theme }) => theme.device.mobile} {
+    display: none;
+  }
 `;
