@@ -123,18 +123,12 @@ function FixedBtn(props) {
             >
               <SpeedDialAction icon={<InfoIcon />} tooltipTitle="서비스 소개" />
               <SpeedDialAction
-                icon={<NotificationsIcon />}
-                tooltipTitle="알림"
-                onClick={notiCheck}
-              />
-              {open ? <Notification /> : null}
-              <SpeedDialAction
                 icon={<QuestionAnswerIcon />}
                 tooltipTitle="디어상담소"
                 onClick={() => {
                   history.push("/postList");
                 }}
-              />
+              />{" "}
               <SpeedDialAction
                 icon={<PersonIcon />}
                 tooltipTitle="마이페이지"
@@ -142,6 +136,12 @@ function FixedBtn(props) {
                   history.push("/myPage");
                 }}
               />
+              <SpeedDialAction
+                icon={<NotificationsIcon />}
+                tooltipTitle="알림"
+                onClick={notiCheck}
+              />
+              {open ? <Notification /> : null}
             </SpeedDial>
           </Box>
         </MuiBtn>

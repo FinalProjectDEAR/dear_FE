@@ -43,6 +43,7 @@ function PostDetail(props) {
   //상세페이지 가져오기
   const post = useSelector((state) => state.post.detailPost);
   const commentList = useSelector((state) => state.comment.comments);
+  // console.log(post);
   //시간을 알아보자!
   const option = {
     lang: "ko",
@@ -71,7 +72,13 @@ function PostDetail(props) {
       alert("취소합니다.");
     }
   };
+  //본인인지 확인 하기
+  const member = localStorage.getItem("memberId");
   const likePost = () => {
+    if (post?.memberId === member) {
+      window.alert("본인 글의 공감은 불가합니다.");
+      return;
+    }
     setLike(!like);
     dispatch(actionCreators.likeDB(postId, like));
   };

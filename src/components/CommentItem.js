@@ -43,6 +43,10 @@ const CommentItem = (props) => {
   };
   //댓글 채택
   const likeComment = () => {
+    if (boardPostId === memberId) {
+      window.alert("본인 댓글은 채택이 불가합니다.");
+      return;
+    }
     dispatch(actionCreators.likeCommentDB(postId, comment_id));
     // setLike(!like);
   };
@@ -120,8 +124,11 @@ const CommentItem = (props) => {
             rows={7}
             value={comment || ""}
           />
-          <EditBtn>
-            <Btn onClick={editComment}>수정하기</Btn>
+          <EditBtn onClick={editComment}>
+            <Text sub2 color="#948A9E">
+              수정하기
+            </Text>
+            {/* <Btn onClick={editComment}>수정하기</Btn> */}
           </EditBtn>
         </TextWrapper>
       </React.Fragment>
@@ -228,9 +235,10 @@ const EditBtn = styled.div`
   width: 100%;
   justify-content: right;
   display: flex;
+  cursor: pointer;
   /* border: 1px solid red; */
-  @media ${({ theme }) => theme.device.isMobile} {
-  }
+  /* @media ${({ theme }) => theme.device.isMobile} {
+  } */
 `;
 const CommentBox = styled.div`
   display: flex;
