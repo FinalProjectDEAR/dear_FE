@@ -1,18 +1,14 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { history } from "../redux/configureStore";
 
-import { actionCreators as mainActions } from "../redux/modules/vote";
+import { actionCreators as mainActions } from "../redux/modules/main";
 
-import { Text, TextB } from "../elements";
+import { Text } from "../elements";
 import styled from "styled-components";
 
 //페이지
 import ReviewCard from "../components/ReviewCard";
 import Footer from "../components/Footer";
-
-//assets
-import serviceInfo from "../assets/main/service_info_img.png";
 
 //Carousel library
 import Slider from "react-slick";
@@ -24,7 +20,7 @@ function MainReview() {
 
   // React.useEffect(() => {
   //   dispatch(mainActions.getReviewDB());
-  // });
+  // }, []);
 
   // const reviewList = useSelector((state) => state.main.reviewList);
 
@@ -44,7 +40,7 @@ function MainReview() {
       <Background>
         <ReviewWrapper>
           <LineBox>
-            <Text title color="">
+            <Text title color="#2E2A32">
               상담후기
             </Text>
           </LineBox>
@@ -94,4 +90,8 @@ const LineBox = styled.div`
   align-items: center;
   justify-content: flex start;
   margin-left: 204px;
+  @media ${({ theme }) => theme.device.mobile} {
+    margin-left: 25px;
+    width: 360px;
+  }
 `;

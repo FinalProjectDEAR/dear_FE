@@ -1,19 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { Text, TextB } from "../elements";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
-//페이지
-import UserRanking from "../components/UserRanking";
-import BestPost from "../components/BestPost";
-import Review from "../components/Review";
-
-//슬라이드관련
-import Slide from "../components/Slide";
-import SwiperPro from "../components/Swiper";
+import { actionCreators as mainActions } from "../redux/modules/main";
 
 //assets
+import Header from "../components/Header";
 import logo from "../assets/main/logoL.png";
 import tapeD from "../assets/main/tapeD.png";
 import tapeW from "../assets/main/tapeW.png";
@@ -21,9 +15,15 @@ import tapeW from "../assets/main/tapeW.png";
 import ArrowDropDownRoundedIcon from "@mui/icons-material/ArrowDropDownRounded";
 
 function MainChat() {
+  const dispatch = useDispatch();
   const history = useHistory();
-  const data = useSelector((state) => state);
   const [checkBox, setCheckBox] = React.useState(false);
+
+  React.useEffect(() => {
+    dispatch(mainActions.getTapeDB());
+  }, []);
+
+  const tapeCount = useSelector((state) => state.main.tapeCount);
 
   const startReq = () => {
     if (checkBox !== true) {
@@ -43,7 +43,8 @@ function MainChat() {
 
   return (
     <React.Fragment>
-      <BackGround>
+      <Header />
+      <Background>
         <MainWrap>
           <IntroWrap>
             <LogoBox>
@@ -138,9 +139,9 @@ function MainChat() {
               </LineBox>
             </Btn>
           </BtnWrap>
-          {/* <Text>현재 나의 보유 테이프: {tapeCount}</Text> */}
           <TapeCntLine>
-            <Text sub7>현재 나의 보유 테이프: 4</Text>
+            <Text sub7>현재 보유 테이프: {tapeCount}</Text>
+            {/* <Text sub7>현재 나의 보유 테이프: 4</Text> */}
           </TapeCntLine>
 
           <ScrollBox>
@@ -152,16 +153,16 @@ function MainChat() {
             />
           </ScrollBox>
         </MainWrap>
-      </BackGround>
+      </Background>
     </React.Fragment>
   );
 }
 
 export default MainChat;
 
-const BackGround = styled.div`
+const Background = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100vh - 180px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -170,10 +171,14 @@ const BackGround = styled.div`
 
 const MainWrap = styled.div`
   width: 100%;
+  margin-top: 70px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  @media ${({ theme }) => theme.device.mobile} {
+    margin-top: 0px;
+  }
 `;
 
 const IntroWrap = styled.div`

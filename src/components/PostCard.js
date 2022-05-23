@@ -58,6 +58,12 @@ const CardWrapper = styled.div`
 
   background: #fafafa;
   border-radius: 10px;
+  @media ${({ theme }) => theme.device.mobile} {
+    margin: 5px 0px;
+    width: 300px;
+    height: 170px;
+    padding: 26px;
+  }
 `;
 
 const Ellipsis = styled.div`

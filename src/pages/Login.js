@@ -82,7 +82,13 @@ const Login = () => {
               login();
             }}
           >
-            <Text body4 textAlign="center" margin="0px" color="#fff">
+            <Text
+              body4
+              textAlign="center"
+              margin="0px"
+              color="#fff"
+              cursor="pointer"
+            >
               로그인
             </Text>
           </Button>

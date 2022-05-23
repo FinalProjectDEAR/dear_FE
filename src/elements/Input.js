@@ -141,6 +141,7 @@ const ElTextArea = styled.textarea`
   }
   &::placeholder {
     color: ${({ theme }) => theme.colors.grayScale[300]};
+    font-size: 11px;
   }
   ${(props) => (props.maxlength ? `maxlength: ${props.maxLength}` : "")};
 `;

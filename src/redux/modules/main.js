@@ -44,6 +44,7 @@ const getTapeDB = () => {
 
 const getRankingDB = () => {
   return async function (dispatch, getState, { history }) {
+    console.log("겟랭킹 통신");
     try {
       const { data } = await apis.getRank();
       console.log("랭킹", data.data);
@@ -56,7 +57,7 @@ const getRankingDB = () => {
 
 const getHotVoteDB = () => {
   return async function (dispatch, getState, { history }) {
-    console.log("인기투표리스트 서버요청");
+    console.log("인기투표 통신");
     try {
       const { data } = await apis.getHotVote();
       console.log("인기투표", data);
@@ -69,6 +70,7 @@ const getHotVoteDB = () => {
 
 const getHotBoardDB = () => {
   return async function (dispatch, getState, { history }) {
+    console.log("인기게시글 통신");
     try {
       const { data } = await apis.getHotBoard();
       console.log("인기게시글", data);
@@ -81,6 +83,7 @@ const getHotBoardDB = () => {
 
 const getReviewDB = () => {
   return async function (dispatch, getState, { history }) {
+    console.log("겟리뷰 통신");
     try {
       const { data } = await apis.getServiceCmt();
       console.log("서비스후기", data);
