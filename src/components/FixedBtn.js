@@ -15,6 +15,14 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import PersonIcon from "@mui/icons-material/Person";
 import InfoIcon from "@mui/icons-material/Info";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
+import { ReactComponent as Hamburger } from "../assets/Vector (5).svg";
+import { ReactComponent as Cancel } from "../assets/Vector (6).svg";
+//모바일버전 아이콘
+import * as Reacts from "react";
+import Box from "@mui/material/Box";
+import SpeedDial from "@mui/material/SpeedDial";
+import SpeedDialAction from "@mui/material/SpeedDialAction";
+import SpeedDialIcon from "@mui/material/SpeedDialIcon";
 
 function FixedBtn(props) {
   const dispatch = useDispatch();
@@ -35,6 +43,15 @@ function FixedBtn(props) {
     dispatch(actionCreators.getNotiCntDB());
   }, []);
   const alarmNum = useSelector((state) => state.noti.notiCnt);
+
+  //모바일 버전 버튼
+  const actions = [
+    { icon: <NotificationsIcon />, name: "알림" },
+    { icon: <InfoIcon />, name: "서비스 소개" },
+    { icon: <QuestionAnswerIcon />, name: "디어상담소" },
+    { icon: <PersonIcon />, name: "마이페이지" },
+  ];
+
   return (
     <React.Fragment>
       <BtnWrap>
@@ -55,7 +72,7 @@ function FixedBtn(props) {
           }}
         >
           <FontBox>
-            <Font>익명상담소</Font>
+            <Font>디어상담소</Font>
           </FontBox>
 
           <QuestionAnswerIcon />
@@ -86,6 +103,54 @@ function FixedBtn(props) {
           </Noti>
         </Badge>
       </BtnWrap>
+      <Mver>
+        <MuiBtn>
+          <Box
+            sx={{
+              height: 320,
+              transform: "translateZ(0px)",
+              flexGrow: 1,
+            }}
+            primary="Project Overview"
+            primaryTypographyProps={{
+              color: "red",
+            }}
+          >
+            <SpeedDial
+              ariaLabel="SpeedDial openIcon example"
+              // sx={{ color: "red" }}
+              icon={<Hamburger openIcon={<Cancel />} />}
+            >
+              <SpeedDialAction icon={<InfoIcon />} tooltipTitle="서비스 소개" />
+              <SpeedDialAction
+                icon={<NotificationsIcon />}
+                tooltipTitle="알림"
+                onClick={notiCheck}
+              />
+              {open ? <Notification /> : null}
+              <SpeedDialAction
+                icon={<QuestionAnswerIcon />}
+                tooltipTitle="디어상담소"
+                onClick={() => {
+                  history.push("/postList");
+                }}
+              />
+              <SpeedDialAction
+                icon={<PersonIcon />}
+                tooltipTitle="마이페이지"
+                onClick={() => {
+                  history.push("/myPage");
+                }}
+              />
+            </SpeedDial>
+          </Box>
+        </MuiBtn>
+        <Link to="1" smooth={true}>
+          <MUp>
+            <ArrowUpwardIcon fontSize="medium" />
+          </MUp>
+        </Link>
+      </Mver>
     </React.Fragment>
   );
 }
@@ -100,14 +165,10 @@ const BtnWrap = styled.div`
   bottom: 30px;
   left: 90%;
   position: fixed;
-  ${({ theme }) => theme.device.mobile} {
-    display: none;
-  }
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: none;
   }
 `;
-
 const FontBox = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -300,7 +361,46 @@ const Up = styled.div`
   border: none;
   cursor: pointer;
 `;
+const MUp = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  width: 54px;
+  height: 54px;
+  flex: none;
+  flex-grow: 0;
+  border-radius: 50%;
+  background-color: #61586a;
+  color: white;
+  border: none;
+  cursor: pointer;
+`;
+const MuiBtn = styled.div`
+  .MuiSpeedDial-fab {
+    background: #61586a;
 
+    :hover {
+      background: #61586a;
+    }
+  }
+`;
+//모바일 버전 임시 위치 설정
+const Mver = styled.div`
+  @media ${({ theme }) => theme.device.web} {
+    display: none;
+  }
+  @media ${({ theme }) => theme.device.isMobile} {
+    position: absolute;
+    width: 52px;
+    bottom: 60px;
+    left: 83%;
+    position: fixed;
+    /* border: 1px solid red; */
+    box-sizing: border-box;
+  }
+`;
 export default FixedBtn;
 
 FixedBtn.defaultProps = {

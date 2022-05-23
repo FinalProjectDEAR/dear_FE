@@ -67,6 +67,18 @@ const EditMyPage = () => {
     setDating(userInfo?.dating);
   }, [userInfo]);
   const addInfo = () => {
+    if (
+      gender === "" ||
+      age === "" ||
+      loveType === "" ||
+      lovePeriod === "" ||
+      dating === "" ||
+      isSelected === "" ||
+      nickname === ""
+    ) {
+      window.alert("정보를 모두 입력해주세요.");
+      return;
+    }
     dispatch(
       actionCreators.addInfoDB(
         age,
@@ -82,384 +94,416 @@ const EditMyPage = () => {
   return (
     <React.Fragment>
       <Layout>
-        <EditWrapper>
-          <Text title textAlign="left">
-            내프로필 수정
-          </Text>
-          <EditContainer>
-            <NickName>
-              <ColorBadge
-                border="2px solid #F8F8F8"
-                size="60"
-                bg={isSelected}
-                cursor="pointer"
-              />
-              <div className="nick">
-                <Input
-                  _onChange={(e) => {
-                    setNickname(e.target.value);
-                  }}
-                  value={nickname || ""}
+        {" "}
+        <Background>
+          <EditWrapper>
+            <Text title textAlign="left">
+              내프로필 수정
+            </Text>
+            <EditContainer>
+              <NickName>
+                <ColorBadge
+                  border="2px solid #F8F8F8"
+                  size="60"
+                  bg={isSelected}
+                  cursor="pointer"
                 />
-              </div>
-            </NickName>
-            <Color>
-              {colorList.map((color, idx) => {
-                return (
-                  <ColorBadge
-                    border="2px solid #F8F8F8"
-                    size="20"
-                    margin="10px 0px"
-                    bg={color || "#CCCCCC"}
-                    key={idx}
-                    cursor="pointer"
-                    _onClick={() => {
-                      setIsSelected(color);
+                <div className="nick">
+                  <Input
+                    _onChange={(e) => {
+                      setNickname(e.target.value);
                     }}
+                    value={nickname || ""}
                   />
-                );
-              })}
-            </Color>
-          </EditContainer>
-        </EditWrapper>
-
-        <InfoWrapper>
-          <InfoContainer>
-            <Text title textAlign="left">
-              기본 정보
-            </Text>
-            <InfoBox>
-              <BoxInfo>
-                <div className="title">
-                  <Text body4 color="#7A37BE" textAlign="left">
-                    수정된 정보는 매칭되는 상대에게만 공개됩니다.
-                  </Text>
                 </div>
-                <div id="info">
-                  <div className="gender">
-                    <Text body4 color="#666666">
-                      성별
-                    </Text>
-                    <div className="radio">
-                      <input
-                        type="radio"
-                        value="남성"
-                        name="성별"
-                        onChange={(e) => {
-                          setGender(e.target.value);
-                          console.log(gender);
-                        }}
-                      />
-                      <label>
-                        <Text sub6>남성</Text>
-                      </label>
-                      <input
-                        type="radio"
-                        value="여성"
-                        name="성별"
-                        onChange={(e) => {
-                          setGender(e.target.value);
-                        }}
-                      />
-                      <label>
-                        <Text sub6>여성</Text>
-                      </label>
-                    </div>
-                  </div>
-                  <div id="info">
-                    <div className="age">
-                      <Text body4 color="#666666">
-                        나이
-                      </Text>
-                      <div className="ageRadio">
-                        <div className="radio">
-                          <input
-                            type="radio"
-                            value="20대 초반"
-                            name="나이"
-                            checked={age === "20대 초반" ? "20대 초반" : ""}
-                            onChange={(e) => {
-                              setAge(e.target.value);
-                            }}
-                          />
-                          <label>
-                            <Text sub6>20대 초반</Text>
-                          </label>
-                          <input
-                            type="radio"
-                            value="20대 중반"
-                            name="나이"
-                            checked={age === "20대 중반" ? "20대 중반" : ""}
-                            onChange={(e) => {
-                              setAge(e.target.value);
-                            }}
-                          />
-                          <label>
-                            <Text sub6>20대 중반</Text>
-                          </label>
-                          <input
-                            type="radio"
-                            value="20대 후반"
-                            name="나이"
-                            checked={age === "20대 후반" ? "20대 후반" : ""}
-                            onChange={(e) => {
-                              setAge(e.target.value);
-                            }}
-                          />
-                          <label>
-                            <Text sub6>20대 후반</Text>
-                          </label>
-                        </div>
-                        <div className="radio">
-                          <input
-                            type="radio"
-                            value="30대 초반"
-                            name="나이"
-                            checked={age === "30대 초반" ? "30대 초반" : ""}
-                            onChange={(e) => {
-                              setAge(e.target.value);
-                            }}
-                          />
-                          <label>
-                            <Text sub6>30대 초반</Text>
-                          </label>
-                          <input
-                            type="radio"
-                            value="30대 중반"
-                            name="나이"
-                            checked={age === "30대 중반" ? "30대 중반" : ""}
-                            onChange={(e) => {
-                              setAge(e.target.value);
-                            }}
-                          />
-                          <label>
-                            <Text sub6>30대 중반</Text>
-                          </label>
-                          <input
-                            type="radio"
-                            value="30대 후반"
-                            name="나이"
-                            checked={age === "30대 후반" ? "30대 후반" : ""}
-                            onChange={(e) => {
-                              setAge(e.target.value);
-                            }}
-                          />
-                          <label>
-                            <Text sub6>30대 후반</Text>
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </BoxInfo>
-            </InfoBox>
-          </InfoContainer>
-          <TypeBox>
-            <Text title textAlign="left">
-              연애 유형
-            </Text>
-            <InfoContainer>
+              </NickName>
+              <Color>
+                {colorList.map((color, idx) => {
+                  return (
+                    <ColorBadge
+                      border="2px solid #F8F8F8"
+                      size="20"
+                      margin="10px 0px"
+                      bg={color || "#CCCCCC"}
+                      key={idx}
+                      cursor="pointer"
+                      _onClick={() => {
+                        setIsSelected(color);
+                      }}
+                    />
+                  );
+                })}
+              </Color>
+            </EditContainer>
+          </EditWrapper>
+          <InfoWrapper>
+            <InfoContainerM>
+              <Text title textAlign="left">
+                기본 정보
+              </Text>
               <InfoBox>
                 <BoxInfo>
+                  <div className="title">
+                    <Text body4 color="#7A37BE" textAlign="left">
+                      수정된 정보는 매칭되는 상대에게만 공개됩니다.
+                    </Text>
+                  </div>
                   <div id="info">
-                    <div className="age">
-                      <div className="typeTitle">
-                        <Text body4 color="#666666" textAlign="left">
-                          유형
-                        </Text>
-                      </div>
+                    <div className="gender">
+                      <Text body4 color="#666666">
+                        성별
+                      </Text>
                       <div className="radio">
                         <input
                           type="radio"
-                          value="솔로"
-                          name="연애"
-                          checked={dating === "솔로" ? "솔로" : ""}
+                          value="남성"
+                          name="성별"
                           onChange={(e) => {
-                            setDating(e.target.value);
+                            setGender(e.target.value);
+                            console.log(gender);
                           }}
                         />
                         <label>
-                          <Text sub6>솔로</Text>
+                          <Text sub6>남성</Text>
                         </label>
                         <input
                           type="radio"
-                          value="커플"
-                          name="연애"
-                          checked={dating === "커플" ? "커플" : ""}
+                          value="여성"
+                          name="성별"
                           onChange={(e) => {
-                            setDating(e.target.value);
+                            setGender(e.target.value);
                           }}
                         />
                         <label>
-                          <Text sub6>커플</Text>
+                          <Text sub6>여성</Text>
                         </label>
                       </div>
                     </div>
-                  </div>
-
-                  <div id="info">
-                    <div className="age">
-                      <div className="typeTitle">
-                        <Text body4 color="#666666" textAlign="left">
-                          나이차
-                        </Text>
-                      </div>
-
-                      <div className="radio">
-                        <input
-                          type="radio"
-                          value="연상"
-                          name="나이차"
-                          checked={loveType === "연상" ? "연상" : ""}
-                          onChange={(e) => {
-                            setLoveType(e.target.value);
-                          }}
-                        />
-                        <label>
-                          <Text sub6>연상</Text>
-                        </label>
-                        <input
-                          type="radio"
-                          value="동갑"
-                          name="나이차"
-                          checked={loveType === "동갑" ? "동갑" : ""}
-                          onChange={(e) => {
-                            setLoveType(e.target.value);
-                          }}
-                        />
-                        <label>
-                          <Text sub6>동갑</Text>
-                        </label>
-                        <input
-                          type="radio"
-                          value="연하"
-                          name="나이차"
-                          checked={loveType === "연하" ? "연하" : ""}
-                          onChange={(e) => {
-                            setLoveType(e.target.value);
-                          }}
-                        />
-                        <label>
-                          <Text sub6>연하</Text>
-                        </label>
-                        <input
-                          type="radio"
-                          value="해당없음"
-                          name="나이차"
-                          checked={loveType === "해당없음" ? "해당없음" : ""}
-                          onChange={(e) => {
-                            setLoveType(e.target.value);
-                          }}
-                        />
-                        <label>
-                          <Text sub6>해당없음</Text>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div id="info">
-                    <div className="age">
-                      <div className="typeTitle">
-                        <Text body4 color="#666666" textAlign="left">
-                          연애기간
-                        </Text>
-                      </div>
-
-                      <div className="ageRadio">
-                        <div className="radio">
-                          <input
-                            type="radio"
-                            value="6개월 미만"
-                            name="연애기간"
-                            checked={
-                              loveType === "6개월 미만" ? "6개월 미만" : ""
-                            }
-                            onChange={(e) => {
-                              setLovePeriod(e.target.value);
-                            }}
-                          />
-                          <label>
-                            <Text sub6>6개월 미만</Text>
-                          </label>
-                          <input
-                            type="radio"
-                            value="6개월~2년"
-                            name="연애기간"
-                            checked={
-                              loveType === "6개월~2년" ? "6개월~2년" : ""
-                            }
-                            onChange={(e) => {
-                              setLovePeriod(e.target.value);
-                            }}
-                          />
-                          <label>
-                            <Text sub6>6개월~2년</Text>
-                          </label>
+                    <div id="info">
+                      <div className="age">
+                        <div className="typeTitleM">
+                          <Text body4 color="#666666">
+                            나이
+                          </Text>
                         </div>
-                        <div className="radioTerm">
-                          <input
-                            type="radio"
-                            value="2년 이상"
-                            name="연애기간"
-                            checked={loveType === "2년 이상" ? "2년 이상" : ""}
-                            onChange={(e) => {
-                              setLovePeriod(e.target.value);
-                            }}
-                          />
-                          <label>
-                            <Text sub6>2년 이상</Text>
-                          </label>
-                          <input
-                            type="radio"
-                            value="5년 이상"
-                            name="연애기간"
-                            checked={loveType === "5년 이상" ? "5년 이상" : ""}
-                            onChange={(e) => {
-                              setLovePeriod(e.target.value);
-                            }}
-                          />
-                          <label>
-                            <Text sub6>5년 이상</Text>
-                          </label>
-                          <input
-                            type="radio"
-                            value="해당없음"
-                            name="연애기간"
-                            checked={loveType === "해당없음" ? "해당없음" : ""}
-                            onChange={(e) => {
-                              setLovePeriod(e.target.value);
-                            }}
-                          />
-                          <label>
-                            <Text sub6>해당없음</Text>
-                          </label>
+                        <div className="ageRadio">
+                          <div className="radio">
+                            <input
+                              type="radio"
+                              value="20대 초반"
+                              name="나이"
+                              checked={age === "20대 초반" ? "20대 초반" : ""}
+                              onChange={(e) => {
+                                setAge(e.target.value);
+                              }}
+                            />
+                            <label>
+                              <Text sub6>20대 초반</Text>
+                            </label>
+                            <input
+                              type="radio"
+                              value="20대 중반"
+                              name="나이"
+                              checked={age === "20대 중반" ? "20대 중반" : ""}
+                              onChange={(e) => {
+                                setAge(e.target.value);
+                              }}
+                            />
+                            <label>
+                              <Text sub6>20대 중반</Text>
+                            </label>
+                            <input
+                              type="radio"
+                              value="20대 후반"
+                              name="나이"
+                              checked={age === "20대 후반" ? "20대 후반" : ""}
+                              onChange={(e) => {
+                                setAge(e.target.value);
+                              }}
+                            />
+                            <label>
+                              <Text sub6>20대 후반</Text>
+                            </label>
+                          </div>
+                          <div className="radio">
+                            <input
+                              type="radio"
+                              value="30대 초반"
+                              name="나이"
+                              checked={age === "30대 초반" ? "30대 초반" : ""}
+                              onChange={(e) => {
+                                setAge(e.target.value);
+                              }}
+                            />
+                            <label>
+                              <Text sub6>30대 초반</Text>
+                            </label>
+
+                            <input
+                              type="radio"
+                              value="30대 중반"
+                              name="나이"
+                              checked={age === "30대 중반" ? "30대 중반" : ""}
+                              onChange={(e) => {
+                                setAge(e.target.value);
+                              }}
+                            />
+                            <label>
+                              <Text sub6>30대 중반</Text>
+                            </label>
+                            <input
+                              type="radio"
+                              value="30대 후반"
+                              name="나이"
+                              checked={age === "30대 후반" ? "30대 후반" : ""}
+                              onChange={(e) => {
+                                setAge(e.target.value);
+                              }}
+                            />
+                            <label>
+                              <Text sub6>30대 후반</Text>
+                            </label>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </BoxInfo>
               </InfoBox>
-            </InfoContainer>
-          </TypeBox>
-        </InfoWrapper>
-        <BtnBox>
-          <Button primary size="regular" cursor="pointer" _onClick={addInfo}>
-            <Text body4 color="#ffffff" cursor="pointer">
-              정보 수정하기
-            </Text>
-          </Button>
-        </BtnBox>
+            </InfoContainerM>
+            <TypeBox>
+              <Text title textAlign="left">
+                연애 유형
+              </Text>
+              <InfoContainer>
+                <InfoBox>
+                  <BoxInfo>
+                    <div id="info">
+                      <div className="age">
+                        <div className="typeTitle">
+                          <Text body4 color="#666666" textAlign="left">
+                            유형
+                          </Text>
+                        </div>
+                        <div className="radio">
+                          <input
+                            type="radio"
+                            value="솔로"
+                            name="연애"
+                            checked={dating === "솔로" ? "솔로" : ""}
+                            onChange={(e) => {
+                              setDating(e.target.value);
+                            }}
+                          />
+                          <label>
+                            <Text sub6>솔로</Text>
+                          </label>
+                          <input
+                            type="radio"
+                            value="커플"
+                            name="연애"
+                            checked={dating === "커플" ? "커플" : ""}
+                            onChange={(e) => {
+                              setDating(e.target.value);
+                            }}
+                          />
+                          <label>
+                            <Text sub6>커플</Text>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div id="ageInfo">
+                      <div className="age">
+                        <div className="typeTitle">
+                          <Text body4 color="#666666" textAlign="left">
+                            나이차
+                          </Text>
+                        </div>
+                        <RadioWrap>
+                          <div className="radioMobile">
+                            <input
+                              type="radio"
+                              value="연상"
+                              name="나이차"
+                              checked={loveType === "연상" ? "연상" : ""}
+                              onChange={(e) => {
+                                setLoveType(e.target.value);
+                              }}
+                            />
+                            <label>
+                              <Text sub6>연상</Text>
+                            </label>
+                            <input
+                              type="radio"
+                              value="동갑"
+                              name="나이차"
+                              checked={loveType === "동갑" ? "동갑" : ""}
+                              onChange={(e) => {
+                                setLoveType(e.target.value);
+                              }}
+                            />
+                            <label>
+                              <Text sub6>동갑</Text>
+                            </label>
+                          </div>
+                          <div className="radioMobile">
+                            <input
+                              type="radio"
+                              value="연하"
+                              name="나이차"
+                              checked={loveType === "연하" ? "연하" : ""}
+                              onChange={(e) => {
+                                setLoveType(e.target.value);
+                              }}
+                            />
+                            <label>
+                              <Text sub6>연하</Text>
+                            </label>
+                            <input
+                              type="radio"
+                              value="해당없음"
+                              name="나이차"
+                              checked={
+                                loveType === "해당없음" ? "해당없음" : ""
+                              }
+                              onChange={(e) => {
+                                setLoveType(e.target.value);
+                              }}
+                            />
+                            <label>
+                              <Text sub6>해당없음</Text>
+                            </label>
+                          </div>{" "}
+                        </RadioWrap>
+                      </div>
+                    </div>
+
+                    <div id="info">
+                      <div className="age">
+                        <div className="typeTitleM">
+                          <Text body4 color="#666666" textAlign="left">
+                            연애기간
+                          </Text>
+                        </div>
+
+                        <div className="ageRadio">
+                          <div className="radio">
+                            <input
+                              type="radio"
+                              value="6개월 미만"
+                              name="연애기간"
+                              checked={
+                                loveType === "6개월 미만" ? "6개월 미만" : ""
+                              }
+                              onChange={(e) => {
+                                setLovePeriod(e.target.value);
+                              }}
+                            />
+                            <label>
+                              <Text sub6>6개월 미만</Text>
+                            </label>
+                            <input
+                              type="radio"
+                              value="6개월~2년"
+                              name="연애기간"
+                              checked={
+                                loveType === "6개월~2년" ? "6개월~2년" : ""
+                              }
+                              onChange={(e) => {
+                                setLovePeriod(e.target.value);
+                              }}
+                            />
+                            <label>
+                              <Text sub6>6개월~2년</Text>
+                            </label>
+                          </div>
+                          <div className="radioTerm">
+                            <input
+                              type="radio"
+                              value="2년 이상"
+                              name="연애기간"
+                              checked={
+                                loveType === "2년 이상" ? "2년 이상" : ""
+                              }
+                              onChange={(e) => {
+                                setLovePeriod(e.target.value);
+                              }}
+                            />
+                            <label>
+                              <Text sub6>2년 이상</Text>
+                            </label>
+                            <input
+                              type="radio"
+                              value="5년 이상"
+                              name="연애기간"
+                              checked={
+                                loveType === "5년 이상" ? "5년 이상" : ""
+                              }
+                              onChange={(e) => {
+                                setLovePeriod(e.target.value);
+                              }}
+                            />
+                            <label>
+                              <Text sub6>5년 이상</Text>
+                            </label>
+                            <input
+                              type="radio"
+                              value="해당없음"
+                              name="연애기간"
+                              checked={
+                                loveType === "해당없음" ? "해당없음" : ""
+                              }
+                              onChange={(e) => {
+                                setLovePeriod(e.target.value);
+                              }}
+                            />
+                            <label>
+                              <Text sub6>해당없음</Text>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </BoxInfo>
+                </InfoBox>
+              </InfoContainer>
+            </TypeBox>
+          </InfoWrapper>
+          <BtnBox>
+            <Button primary size="regular" cursor="pointer" _onClick={addInfo}>
+              <Text body4 color="#ffffff" cursor="pointer">
+                정보 수정하기
+              </Text>
+            </Button>
+          </BtnBox>
+          <MBtnBox>
+            <button onClick={addInfo} className="mobile">
+              <Text body4 color="#ffffff" cursor="pointer">
+                정보 수정하기
+              </Text>
+            </button>
+          </MBtnBox>
+        </Background>
       </Layout>
     </React.Fragment>
   );
 };
-
+const Background = styled.div`
+  height: 900px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    height: 1300px;
+  }
+`;
 const EditWrapper = styled.div`
   margin: auto;
   max-width: 1032px;
   height: 245px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 320px;
+    height: 465px;
+  }
 `;
 const EditContainer = styled.div`
   width: 100%;
@@ -472,6 +516,13 @@ const EditContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 68px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 320px;
+    height: 415px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+  }
 `;
 const NickName = styled.div`
   width: 244px;
@@ -481,6 +532,18 @@ const NickName = styled.div`
   align-items: center;
   .nick {
     width: 164px;
+  }
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 320px;
+    height: 415px;
+    margin: 60px auto 20px;
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid red; */
+    .nick {
+      width: 164px;
+      margin-right: 25px;
+    }
   }
 `;
 const Color = styled.div`
@@ -493,6 +556,15 @@ const Color = styled.div`
   display: grid;
   grid-template-columns: repeat(16, 20px);
   flex-direction: column;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 320px;
+    /* height: 415px; */
+    margin-top: -80px;
+    display: grid;
+    grid-template-columns: repeat(8, 25px);
+    flex-direction: column;
+    /* border: 1px solid red; */
+  }
 `;
 const InfoWrapper = styled.div`
   display: flex;
@@ -500,10 +572,38 @@ const InfoWrapper = styled.div`
   margin: 75px auto 30px;
   max-width: 1032px;
   gap: 24px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 320px;
+    height: 370px;
+    display: flex;
+    flex-direction: column;
+    /* gap: 24px; */
+    margin: auto;
+  }
 `;
 const InfoContainer = styled.div`
   width: 100%;
   height: 284px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 320px;
+    height: 370px;
+    display: flex;
+    flex-direction: column;
+    /* gap: 24px; */
+    margin: auto;
+  }
+`;
+const InfoContainerM = styled.div`
+  width: 100%;
+  height: 284px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 320px;
+    height: 284px;
+    display: flex;
+    flex-direction: column;
+    /* gap: 24px; */
+    margin: auto;
+  }
 `;
 const InfoBox = styled.div`
   margin-top: 15px;
@@ -537,6 +637,13 @@ const InfoBox = styled.div`
     flex-direction: row;
     gap: 10px;
   }
+  .radioMobile {
+    margin-left: 35px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-left: 35px;
+  }
   .radioTerm {
     margin-left: 35px;
     display: flex;
@@ -556,7 +663,96 @@ const InfoBox = styled.div`
   .typeTitle {
     width: 50px;
   }
+  .typeTitleM {
+    width: 50px;
+  }
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 320px;
+    height: 370px;
+    display: flex;
+    flex-direction: column;
+    /* gap: 24px; */
+    margin: auto;
+    .title {
+      margin: auto;
+      width: 294px;
+      height: 100px;
+      /* border: 1px solid blue; */
+      box-sizing: border-box;
+    }
+    #info {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      height: 112px;
+    }
+    #ageInfo {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      height: 112px;
+      padding-bottom: 59px;
+      box-sizing: border-box;
+    }
+    .gender {
+      display: flex;
+      align-items: center;
+      margin: auto;
+      width: 294px;
+      height: 200px;
+      /* border: 1px solid red; */
+      box-sizing: border-box;
+    }
+    .radio {
+      /* margin-left: 35px; */
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      width: 220px;
+      /* border: 1px solid red; */
+    }
+    .radioMobile {
+      display: flex;
+      flex-direction: row;
+      /* border: 1px solid red; */
+      /* gap: 10px; */
+    }
+    .radioTerm {
+      margin-left: 35px;
+      display: flex;
+      flex-direction: row;
+      gap: 2px;
+      width: 220px;
+      /* border: 1px solid red; */
+    }
+    .age {
+      width: 294px;
+      /* border: 1px solid orange; */
+      height: 100px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      padding-top: 24px;
+    }
+    .ageRadio {
+      display: flex;
+      height: 122px;
+      flex-direction: column;
+    }
+    .typeTitleM {
+      width: 35px;
+      /* border: 1px solid red; */
+      padding-bottom: 80px;
+    }
+  }
 `;
+const RadioWrap = styled.div`
+  @media ${({ theme }) => theme.device.web} {
+    display: flex;
+    flex-direction: row;
+  }
+`;
+
 const BoxInfo = styled.div`
   width: 387px;
   display: flex;
@@ -574,5 +770,29 @@ const BtnBox = styled.div`
   display: flex;
   justify-content: right;
   margin: auto;
+  @media ${({ theme }) => theme.device.isMobile} {
+    display: none;
+  }
+`;
+
+const MBtnBox = styled.div`
+  @media ${({ theme }) => theme.device.web} {
+    display: none;
+  }
+  @media ${({ theme }) => theme.device.isMobile} {
+    min-width: 387px;
+    width: 100vw;
+    margin: auto;
+    height: 48px;
+    position: fixed;
+    bottom: 0;
+    .mobile {
+      background: #7a37be;
+      border: none;
+      border-radius: 0px;
+      width: 360px;
+      height: 48px;
+    }
+  }
 `;
 export default EditMyPage;

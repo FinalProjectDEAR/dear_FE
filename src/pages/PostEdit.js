@@ -172,7 +172,6 @@ function PostEdit() {
               value={category || ""}
             >
               <option value="null">카테고리 선택</option>
-              <option value="투표">투표</option>
               <option value="솔로">솔로</option>
               <option value="짝사랑">짝사랑</option>
               <option value="썸">썸</option>

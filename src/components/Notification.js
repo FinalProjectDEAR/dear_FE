@@ -77,11 +77,11 @@ const Notification = () => {
                         <ColorBadge
                           border="2px solid #F8F8F8"
                           size="14"
-                          bg="#ddd"
+                          bg={item.oppositeMemberColor}
                           cursor="pointer"
                         />
                         <Text body4 color="#948A9E" textAlign="left">
-                          갱얼쥐갱얼쥐갱얼쥐갱
+                          {item.notiPostId}
                         </Text>
                       </div>
                     </NotiBox>
@@ -134,11 +134,11 @@ const Notification = () => {
                         <ColorBadge
                           border="2px solid #F8F8F8"
                           size="14"
-                          bg="#ddd"
+                          bg={item.oppositeMemberColor}
                           cursor="pointer"
                         />
                         <Text body4 color="#948A9E" textAlign="left">
-                          갱얼쥐갱얼쥐갱얼쥐갱
+                          {item.notiPostId}
                         </Text>
                       </div>
                     </NotiBox>

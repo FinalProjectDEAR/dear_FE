@@ -130,7 +130,6 @@ function PostWrite() {
             <Title>카테고리</Title>
             <Select name="category" form="myForm" onChange={SelectCategory}>
               <OptionSelect value="카테고리">카테고리 선택</OptionSelect>
-              <option value="투표">투표</option>
               <option value="솔로">솔로</option>
               <option value="짝사랑">짝사랑</option>
               <option value="썸">썸</option>
@@ -157,7 +156,7 @@ function PostWrite() {
             <Title>내용</Title>
             <TextWrapper>
               <Input
-                placeholder="내용을 입력해주세요. (최소 20자 이상)"
+                placeholder="내용을 입력해주세요. "
                 _onChange={(e) => {
                   setContent(e.target.value);
                 }}

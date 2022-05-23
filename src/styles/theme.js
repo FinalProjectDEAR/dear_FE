@@ -48,7 +48,7 @@ const fonts = {
 const size = {
   mobile: "425px",
   desktop: "1440px",
-  web: "426px",
+  web: "768px",
   isMobile: "767px",
 };
 

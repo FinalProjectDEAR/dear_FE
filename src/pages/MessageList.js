@@ -54,16 +54,33 @@ const MessageWrapper = styled.div`
   margin: auto;
   background-color: #fafafa;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 320px;
+    height: 96px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid red;
+  }
 `;
 const MessageContainer = styled.div`
   height: 250px;
   box-sizing: border-box;
   padding: 20px 34px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 250px;
+    height: 24px;
+    /* margin: auto; */
+    display: flex;
+    flex-direction: column;
+    border: 1px solid red;
+  }
 `;
 const MessageBox = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 20px 34px;
+  border: 1px solid red;
 `;
 const Btn = styled.button`
   background-color: transparent;
