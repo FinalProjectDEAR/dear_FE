@@ -55,7 +55,7 @@ const CounselHistory = (props) => {
       )}
 
       <div className="content">
-        <TextB sub color="#2E2A32">
+        <TextB sub color="#2E2A32" textAlign="left">
           {props?.item.reqComment}
         </TextB>
       </div>
@@ -127,7 +127,11 @@ const CounselHistoryWrapper = styled.div`
     padding-top: 0.1px;
     box-sizing: border-box;
     .content {
-      display: flex;
+      display: block;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       flex-direction: row;
       margin-left: 30px;
       /* border: 1px solid red; */

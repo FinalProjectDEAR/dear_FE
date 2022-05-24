@@ -36,7 +36,7 @@ function PostList(props) {
     };
   }, [page]);
   const postList = useSelector((state) => state.post.post.postPageResponseDto);
-  console.log(postList?.totalPages);
+  // console.log(postList);
   return (
     <React.Fragment>
       <Layout>

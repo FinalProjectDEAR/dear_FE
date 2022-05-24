@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { MsgActionCreators } from "../redux/modules/message";
 import { actionCreators } from "../redux/modules/mypage";
 import { history } from "../redux/configureStore";
+import { red } from "@mui/material/colors";
 
 const MyPage = () => {
   const Mobile = useMediaQuery({
@@ -197,26 +198,50 @@ const MyPage = () => {
                         ) : null}
                       </div>
                     </MobileListener>
+                    <WebListener>
+                      <div className="listenerTag">
+                        {userInfo?.resTag1 ? (
+                          <div className="tag">
+                            <Tag counselReq2>
+                              <Text sub7 margin="3px 8px" color="#7A37BE">
+                                {userInfo?.resTag1}
+                              </Text>
+                            </Tag>
+                          </div>
+                        ) : null}
+                        {userInfo?.resTag2 ? (
+                          <div className="listenerTag">
+                            <Tag counselRes2>
+                              <Text sub7 margin="3px 8px" color="#7A37BE">
+                                {userInfo?.resTag2}
+                              </Text>
+                            </Tag>
+                          </div>
+                        ) : null}
+                      </div>
+                    </WebListener>
 
-                    <Tag sub2>
-                      <TemperatureBox>
-                        <Text sub7>
-                          마음의 온도
-                          <Temperature>{userInfo?.score}°C</Temperature>
-                        </Text>
-                        <TemperatureBar>
-                          <ProgressBar>
-                            <ColorBadge
-                              size="10"
-                              bg="#7A37BE"
-                              border="none"
-                              position="absolute"
-                            />
-                            <Highlight width={userInfo?.score + "%"} />
-                          </ProgressBar>
-                        </TemperatureBar>
-                      </TemperatureBox>
-                    </Tag>
+                    <OndoTag>
+                      <Tag sub2>
+                        <TemperatureBox>
+                          <Text sub7>
+                            마음의 온도
+                            <Temperature>{userInfo?.score}°C</Temperature>
+                          </Text>
+                          <TemperatureBar>
+                            <ProgressBar>
+                              <ColorBadge
+                                size="10"
+                                bg="#7A37BE"
+                                border="none"
+                                position="absolute"
+                              />
+                              <Highlight width={userInfo?.score + "%"} />
+                            </ProgressBar>
+                          </TemperatureBar>
+                        </TemperatureBox>
+                      </Tag>
+                    </OndoTag>
                   </div>
                 </div>
               </TypeWrapper>
@@ -380,6 +405,7 @@ const MypageContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 40px;
+  /* border: 1px solid red; */
   @media ${({ theme }) => theme.device.isMobile} {
     width: 280px;
     display: flex;
@@ -443,21 +469,25 @@ const NicknameBox = styled.div`
 const TypeWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 540px;
+  max-width: 400px;
+  width: 100%;
   height: 200px;
   justify-content: center;
   align-items: center;
+  /* border: 1px solid red; */
   #love {
-    width: 540px;
+    width: 400px;
     height: 26px;
     margin-bottom: 18px;
     display: flex;
     flex-direction: row;
+    /* border: 1px solid red; */
   }
   .loveBox {
     display: flex;
     flex-direction: row;
-    width: 104px;
+    width: 155px;
+    /* border: 1px solid red; */
   }
   .loveTag {
     margin-left: 32px;
@@ -468,7 +498,7 @@ const TypeWrapper = styled.div`
     flex-direction: row;
   }
   #listener {
-    width: 540px;
+    width: 400px;
     display: flex;
     flex-direction: row;
     /* border: 1px solid red; */
@@ -476,7 +506,7 @@ const TypeWrapper = styled.div`
   .listenerBox {
     display: flex;
     flex-direction: row;
-    width: 116px;
+    width: 139px;
     margin-right: 20px;
     /* border: 1px solid red; */
   }
@@ -487,11 +517,11 @@ const TypeWrapper = styled.div`
   }
   .listenerTag {
     gap: 10px;
-    width: 400px;
+    width: 100%;
     height: 26px;
     display: flex;
-    flex-direction: column;
-    /* border: 1px solid red; */
+    flex-direction: row;
+    /* border: 1px solid blue; */
   }
   @media ${({ theme }) => theme.device.isMobile} {
     width: 280px;
@@ -550,8 +580,10 @@ const TypeWrapper = styled.div`
       /* gap: 10px; */
       /* height: 26px; */
       display: flex;
-      flex-direction: column;
-      /* margin: 5px auto; */
+      flex-direction: row;
+      width: 277px;
+      margin-right: 30px;
+      /* margin: auto; */
       /* background: pink; */
     }
   }
@@ -600,10 +632,26 @@ const MobileListener = styled.div`
     display: none;
   }
 `;
+const WebListener = styled.div`
+  @media ${({ theme }) => theme.device.web} {
+    display: flex;
+    justify-content: row;
+  }
+  @media ${({ theme }) => theme.device.isMobile} {
+    display: none;
+  }
+`;
+const OndoTag = styled.div`
+  margin-top: 0px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    margin-top: 30px;
+  }
+`;
 const TemperatureBox = styled.div`
   display: flex;
   flex-direction: row;
-  margin: 5px 26px;
+  margin: 15px 26px;
+  /* border: 1px solid red; */
 `;
 const TemperatureBar = styled.div`
   display: flex;

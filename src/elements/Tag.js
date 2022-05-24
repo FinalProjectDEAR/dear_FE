@@ -240,8 +240,8 @@ const CounselReq = styled.div`
 `;
 
 const CounselReq2 = styled.div`
-  width: 200px;
-  height: 24px;
+  width: auto;
+  height: auto;
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
   padding: ${(props) => props.padding};
   background-color: ${({ theme }) => theme.colors.primary["100"]};
@@ -258,8 +258,8 @@ const CounselReq2 = styled.div`
 `;
 
 const CounselRes2 = styled.div`
-  width: 200px;
-  height: 24px;
+  width: auto;
+  height: auto;
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
   padding: ${(props) => props.padding};
   background-color: ${({ theme }) => theme.colors.primary["100"]};
@@ -294,7 +294,7 @@ const Small = styled.div`
 `;
 
 const Small2 = styled.div`
-  width: 90px;
+  width: auto;
   height: 24px;
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
   padding: 0px;

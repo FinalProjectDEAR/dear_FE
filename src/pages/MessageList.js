@@ -74,13 +74,19 @@ const MessageContainer = styled.div`
   height: 230px;
   box-sizing: border-box;
   margin: 20px 34px;
-  display: inline-block;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
   width: 260px;
+  /* white-space: nowrap; */
+  overflow: hidden;
+  text-overflow: ellipsis;
   /* white-space: normal;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis; */
   @media ${({ theme }) => theme.device.isMobile} {
+    /* background: pink; */
     /* width: 250px; */
     margin: 0px;
     /* height: 24px; */

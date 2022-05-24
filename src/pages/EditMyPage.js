@@ -98,7 +98,7 @@ const EditMyPage = () => {
         <Background>
           <EditWrapper>
             <Text title textAlign="left">
-              내프로필 수정
+              내 프로필 수정
             </Text>
             <EditContainer>
               <NickName>
@@ -314,158 +314,166 @@ const EditMyPage = () => {
                       </div>
                     </div>
 
-                    <div id="ageInfo">
-                      <div className="age">
-                        <div className="typeTitle">
-                          <Text body4 color="#666666" textAlign="left">
-                            나이차
-                          </Text>
-                        </div>
-                        <RadioWrap>
-                          <div className="radioMobile">
-                            <input
-                              type="radio"
-                              value="연상"
-                              name="나이차"
-                              checked={loveType === "연상" ? "연상" : ""}
-                              onChange={(e) => {
-                                setLoveType(e.target.value);
-                              }}
-                            />
-                            <label>
-                              <Text sub6>연상</Text>
-                            </label>
-                            <input
-                              type="radio"
-                              value="동갑"
-                              name="나이차"
-                              checked={loveType === "동갑" ? "동갑" : ""}
-                              onChange={(e) => {
-                                setLoveType(e.target.value);
-                              }}
-                            />
-                            <label>
-                              <Text sub6>동갑</Text>
-                            </label>
+                    {dating === "커플" ? (
+                      <>
+                        <div id="ageInfo">
+                          <div className="age">
+                            <div className="typeTitle">
+                              <Text body4 color="#666666" textAlign="left">
+                                나이차
+                              </Text>
+                            </div>
+                            <RadioWrap>
+                              <div className="radioMobile">
+                                <input
+                                  type="radio"
+                                  value="연상"
+                                  name="나이차"
+                                  checked={loveType === "연상" ? "연상" : ""}
+                                  onChange={(e) => {
+                                    setLoveType(e.target.value);
+                                  }}
+                                />
+                                <label>
+                                  <Text sub6>연상</Text>
+                                </label>
+                                <input
+                                  type="radio"
+                                  value="동갑"
+                                  name="나이차"
+                                  checked={loveType === "동갑" ? "동갑" : ""}
+                                  onChange={(e) => {
+                                    setLoveType(e.target.value);
+                                  }}
+                                />
+                                <label>
+                                  <Text sub6>동갑</Text>
+                                </label>
+                              </div>
+                              <div className="radioMobile">
+                                <input
+                                  type="radio"
+                                  value="연하"
+                                  name="나이차"
+                                  checked={loveType === "연하" ? "연하" : ""}
+                                  onChange={(e) => {
+                                    setLoveType(e.target.value);
+                                  }}
+                                />
+                                <label>
+                                  <Text sub6>연하</Text>
+                                </label>
+                                <input
+                                  type="radio"
+                                  value="해당없음"
+                                  name="나이차"
+                                  checked={
+                                    loveType === "해당없음" ? "해당없음" : ""
+                                  }
+                                  onChange={(e) => {
+                                    setLoveType(e.target.value);
+                                  }}
+                                />
+                                <label>
+                                  <Text sub6>해당없음</Text>
+                                </label>
+                              </div>
+                            </RadioWrap>
                           </div>
-                          <div className="radioMobile">
-                            <input
-                              type="radio"
-                              value="연하"
-                              name="나이차"
-                              checked={loveType === "연하" ? "연하" : ""}
-                              onChange={(e) => {
-                                setLoveType(e.target.value);
-                              }}
-                            />
-                            <label>
-                              <Text sub6>연하</Text>
-                            </label>
-                            <input
-                              type="radio"
-                              value="해당없음"
-                              name="나이차"
-                              checked={
-                                loveType === "해당없음" ? "해당없음" : ""
-                              }
-                              onChange={(e) => {
-                                setLoveType(e.target.value);
-                              }}
-                            />
-                            <label>
-                              <Text sub6>해당없음</Text>
-                            </label>
-                          </div>
-                        </RadioWrap>
-                      </div>
-                    </div>
-
-                    <div id="info">
-                      <div className="age">
-                        <div className="typeTitleM">
-                          <Text body4 color="#666666" textAlign="left">
-                            연애기간
-                          </Text>
                         </div>
 
-                        <div className="ageRadio">
-                          <div className="radio">
-                            <input
-                              type="radio"
-                              value="6개월 미만"
-                              name="연애기간"
-                              checked={
-                                lovePeriod === "6개월 미만" ? "6개월 미만" : ""
-                              }
-                              onChange={(e) => {
-                                setLovePeriod(e.target.value);
-                              }}
-                            />
-                            <label>
-                              <Text sub6>6개월 미만</Text>
-                            </label>
-                            <input
-                              type="radio"
-                              value="6개월~2년"
-                              name="연애기간"
-                              checked={
-                                lovePeriod === "6개월~2년" ? "6개월~2년" : ""
-                              }
-                              onChange={(e) => {
-                                setLovePeriod(e.target.value);
-                              }}
-                            />
-                            <label>
-                              <Text sub6>6개월~2년</Text>
-                            </label>
-                          </div>
-                          <div className="radioTerm">
-                            <input
-                              type="radio"
-                              value="2년 이상"
-                              name="연애기간"
-                              checked={
-                                lovePeriod === "2년 이상" ? "2년 이상" : ""
-                              }
-                              onChange={(e) => {
-                                setLovePeriod(e.target.value);
-                              }}
-                            />
-                            <label>
-                              <Text sub6>2년 이상</Text>
-                            </label>
-                            <input
-                              type="radio"
-                              value="5년 이상"
-                              name="연애기간"
-                              checked={
-                                lovePeriod === "5년 이상" ? "5년 이상" : ""
-                              }
-                              onChange={(e) => {
-                                setLovePeriod(e.target.value);
-                              }}
-                            />
-                            <label>
-                              <Text sub6>5년 이상</Text>
-                            </label>
-                            <input
-                              type="radio"
-                              value="해당없음"
-                              name="연애기간"
-                              checked={
-                                lovePeriod === "해당없음" ? "해당없음" : ""
-                              }
-                              onChange={(e) => {
-                                setLovePeriod(e.target.value);
-                              }}
-                            />
-                            <label>
-                              <Text sub6>해당없음</Text>
-                            </label>
+                        <div id="info">
+                          <div className="age">
+                            <div className="typeTitleM">
+                              <Text body4 color="#666666" textAlign="left">
+                                연애기간
+                              </Text>
+                            </div>
+
+                            <div className="ageRadio">
+                              <div className="radio">
+                                <input
+                                  type="radio"
+                                  value="6개월 미만"
+                                  name="연애기간"
+                                  checked={
+                                    lovePeriod === "6개월 미만"
+                                      ? "6개월 미만"
+                                      : ""
+                                  }
+                                  onChange={(e) => {
+                                    setLovePeriod(e.target.value);
+                                  }}
+                                />
+                                <label>
+                                  <Text sub6>6개월 미만</Text>
+                                </label>
+                                <input
+                                  type="radio"
+                                  value="6개월~2년"
+                                  name="연애기간"
+                                  checked={
+                                    lovePeriod === "6개월~2년"
+                                      ? "6개월~2년"
+                                      : ""
+                                  }
+                                  onChange={(e) => {
+                                    setLovePeriod(e.target.value);
+                                  }}
+                                />
+                                <label>
+                                  <Text sub6>6개월~2년</Text>
+                                </label>
+                              </div>
+                              <div className="radioTerm">
+                                <input
+                                  type="radio"
+                                  value="2년 이상"
+                                  name="연애기간"
+                                  checked={
+                                    lovePeriod === "2년 이상" ? "2년 이상" : ""
+                                  }
+                                  onChange={(e) => {
+                                    setLovePeriod(e.target.value);
+                                  }}
+                                />
+                                <label>
+                                  <Text sub6>2년 이상</Text>
+                                </label>
+                                <input
+                                  type="radio"
+                                  value="5년 이상"
+                                  name="연애기간"
+                                  checked={
+                                    lovePeriod === "5년 이상" ? "5년 이상" : ""
+                                  }
+                                  onChange={(e) => {
+                                    setLovePeriod(e.target.value);
+                                  }}
+                                />
+                                <label>
+                                  <Text sub6>5년 이상</Text>
+                                </label>
+                                <input
+                                  type="radio"
+                                  value="해당없음"
+                                  name="연애기간"
+                                  checked={
+                                    lovePeriod === "해당없음" ? "해당없음" : ""
+                                  }
+                                  onChange={(e) => {
+                                    setLovePeriod(e.target.value);
+                                  }}
+                                />
+                                <label>
+                                  <Text sub6>해당없음</Text>
+                                </label>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
+                      </>
+                    ) : null}
                   </BoxInfo>
                 </InfoBox>
               </InfoContainer>
@@ -535,8 +543,8 @@ const NickName = styled.div`
   }
   @media ${({ theme }) => theme.device.isMobile} {
     width: 320px;
-    height: 415px;
-    margin: 60px auto 20px;
+    height: 215px;
+    margin: 30px auto 20px;
     display: flex;
     flex-direction: column;
     /* border: 1px solid red; */
@@ -780,9 +788,8 @@ const MBtnBox = styled.div`
     display: none;
   }
   @media ${({ theme }) => theme.device.isMobile} {
-    min-width: 387px;
-    width: 100vw;
-    margin: auto;
+    /* width: 500px; */
+    /* margin: auto; */
     height: 48px;
     position: fixed;
     bottom: 0;
@@ -790,7 +797,7 @@ const MBtnBox = styled.div`
       background: #7a37be;
       border: none;
       border-radius: 0px;
-      width: 360px;
+      width: 400px;
       height: 48px;
     }
   }
