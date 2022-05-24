@@ -207,7 +207,7 @@ function PostDetail(props) {
 const CommentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0px auto 0px auto;
+  margin: 30px auto 0px auto;
   max-width: 1032px;
   width: 100%;
   height: 300px;
@@ -252,7 +252,7 @@ const DetailWrapper = styled.div`
   margin: auto;
   max-width: 1032px;
   width: 100%;
-  max-height: 600px;
+  max-height: 700px;
   /* border: 1px solid red; */
   @media ${({ theme }) => theme.device.isMobile} {
     width: 326px;
