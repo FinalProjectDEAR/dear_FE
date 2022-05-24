@@ -1,332 +1,40 @@
 import React from "react";
-import styled, { ThemeProvider } from "styled-components";
-import theme from "../styles/theme";
+import { ReactComponent as Sympathy } from "../assets/tag/Primary.svg";
+import { ReactComponent as Solver } from "../assets/tag/Property 1=Primary.svg";
+import { ReactComponent as Enjoy } from "../assets/tag/Property 1=Primary (1).svg";
+import { ReactComponent as Fact } from "../assets/tag/Property 1=Primary (2).svg";
+import { ReactComponent as Sensitivity } from "../assets/tag/Property 1=Primary (3).svg";
+import { ReactComponent as Sympathy1 } from "../assets/tag/Sub.svg";
+import { ReactComponent as Solver1 } from "../assets/tag/Property 1=Sub.svg";
+import { ReactComponent as Enjoy1 } from "../assets/tag/Property 1=Sub (1).svg";
+import { ReactComponent as Fact1 } from "../assets/tag/Property 1=Sub (2).svg";
+import { ReactComponent as Sensitivity1 } from "../assets/tag/Property 1=Sub (3).svg";
 
-const Tag = (props) => {
-  const {
-    primary,
-    sub,
-    counselRes,
-    counselReq,
-    small,
-    regular,
-    small2,
-    sub2,
-    counselRes2,
-    counselReq2,
-    _style,
-    text,
-    children,
-    margin,
-    width,
-    padding,
-    font,
-    border,
-    borderRadius,
-    img,
-    bg,
-    color,
-    size,
-    fontFamily,
-    fontStyle,
-    lineHeight,
-    textAlign,
-  } = props;
-
-  const styles = {
-    margin: margin,
-    width: width,
-    padding: padding,
-    font: font,
-    border: border,
-    borderRadius: borderRadius,
-    img: img,
-    bg: bg,
-    color: color,
-    size: size,
-    fontFamily: fontFamily,
-    fontStyle: fontStyle,
-    lineHeight: lineHeight,
-    textAlign: textAlign,
-  };
-
-  if (primary) {
-    return (
-      <Primary {...styles} style={_style}>
-        {text ? text : children}
-      </Primary>
-    );
-  }
-
-  if (sub) {
-    return (
-      <Sub {...styles} style={_style}>
-        {text ? text : children}
-      </Sub>
-    );
-  }
-  if (counselRes) {
-    return (
-      <CounselRes {...styles} style={_style}>
-        {text ? text : children}
-      </CounselRes>
-    );
-  }
-  if (counselReq) {
-    return (
-      <CounselReq {...styles} style={_style}>
-        {text ? text : children}
-      </CounselReq>
-    );
-  }
-  if (small) {
-    return (
-      <Small {...styles} style={_style}>
-        {text ? text : children}
-      </Small>
-    );
-  }
-  if (regular) {
-    return (
-      <Regular {...styles} style={_style}>
-        {text ? text : children}
-      </Regular>
-    );
-  }
-  if (small2) {
-    return (
-      <Small2 {...styles} style={_style}>
-        {text ? text : children}
-      </Small2>
-    );
-  }
-  if (sub2) {
-    return (
-      <Sub2 {...styles} style={_style}>
-        {text ? text : children}
-      </Sub2>
-    );
-  }
-  if (counselReq2) {
-    return (
-      <CounselReq2 {...styles} style={_style}>
-        {text ? text : children}
-      </CounselReq2>
-    );
-  }
-  if (counselRes2) {
-    return (
-      <CounselRes2 {...styles} style={_style}>
-        {text ? text : children}
-      </CounselRes2>
-    );
-  }
+const ResTagPrimary = (props) => {
+  console.log(props);
   return (
-    <Sub {...styles} style={_style}>
-      {text ? text : children}
-    </Sub>
+    <React.Fragment>
+      {props?.resTag1 === "공감을 잘해줬어요" ? <Sympathy /> : null}
+
+      {props?.resTag1 === "명쾌한 해결책을 알려줘요" ? <Solver /> : null}
+
+      {props?.resTag1 === "대화가 즐거웠어요" ? <Enjoy /> : null}
+
+      {props?.resTag1 === "시원하게 팩트폭격을 해줘요" ? <Fact /> : null}
+
+      {props?.resTag1 === "감수성이 풍부했어요" ? <Sensitivity /> : null}
+
+      {props?.resTag2 === "공감을 잘해줘요" ? <Sympathy1 /> : null}
+
+      {props?.resTag2 === "명쾌한 해결사!" ? <Solver1 /> : null}
+
+      {props?.resTag2 === "대화가 즐거워요" ? <Enjoy1 /> : null}
+
+      {props?.resTag2 === "아얏! 팩트폭격기!" ? <Fact1 /> : null}
+
+      {props?.resTag2 === "감수성이 풍부해요" ? <Sensitivity1 /> : null}
+    </React.Fragment>
   );
 };
 
-Tag.defaultProps = {
-  className: "",
-  children: null,
-  text: false,
-  width: "100%",
-  margin: false,
-  padding: false,
-  bg: false,
-  img: false,
-  border: "none",
-  borderRadius: "4px",
-  font: "inherit",
-  lineHeight: "14PX",
-  fontFamily:
-    "Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;",
-  fontStyle: "normal",
-  color: "#7A37BE",
-  size: "12px",
-  textAlign: "center",
-};
-
-const Primary = styled.div`
-  width: 120px;
-  height: 24px;
-  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
-  padding: ${(props) => props.padding};
-  background-color: ${({ theme }) => theme.colors.primary["100"]};
-  ${(props) => (props.img ? `background-image : ${props.img};` : "")};
-  border: 1px solid ${({ theme }) => theme.colors.primary.default};
-  border-radius: ${(props) => props.borderRadius};
-  line-height: ${(props) => props.lineHeight};
-  font-family: ${(props) => props.fontFamily};
-  font-style: ${(props) => props.fontStyle};
-  color: ${({ theme }) => theme.colors.primary.default};
-  font-size: ${(props) => props.size};
-  box-sizing: border-box;
-  ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
-`;
-
-const Sub = styled.div`
-  width: 120px;
-  height: 24px;
-  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
-  padding: ${(props) => props.padding};
-  background-color: ${({ theme }) => theme.colors.primary["100"]};
-  ${(props) => (props.img ? `background-image : ${props.img};` : "")};
-  border: 1px solid theme.colors.primary[ "100" ];
-  border-radius: ${(props) => props.borderRadius};
-  line-height: ${(props) => props.lineHeight};
-  font-family: ${(props) => props.fontFamily};
-  font-style: ${(props) => props.fontStyle};
-  color: ${({ theme }) => theme.colors.primary.default};
-  font-size: ${(props) => props.size};
-  box-sizing: border-box;
-  ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
-`;
-
-const Sub2 = styled.div`
-  width: 230px;
-  height: 24px;
-  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
-  padding: ${(props) => props.padding};
-  background-color: ${({ theme }) => theme.colors.primary["100"]};
-  ${(props) => (props.img ? `background-image : ${props.img};` : "")};
-  border: 1px solid theme.colors.primary[ "100" ];
-  border-radius: ${(props) => props.borderRadius};
-  line-height: ${(props) => props.lineHeight};
-  font-family: ${(props) => props.fontFamily};
-  font-style: ${(props) => props.fontStyle};
-  color: ${({ theme }) => theme.colors.primary.default};
-  font-size: ${(props) => props.size};
-  box-sizing: border-box;
-  ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
-`;
-
-const CounselRes = styled.div`
-  width: 70px;
-  height: 24px;
-  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
-  padding: ${(props) => props.padding};
-  background-color: ${({ theme }) => theme.colors.primary["100"]};
-  ${(props) => (props.img ? `background-image : ${props.img};` : "")};
-  border: 1px solid ${({ theme }) => theme.colors.primary["100"]};
-  border-radius: ${(props) => props.borderRadius};
-  line-height: ${(props) => props.lineHeight};
-  font-family: ${(props) => props.fontFamily};
-  font-style: ${(props) => props.fontStyle};
-  color: ${({ theme }) => theme.colors.primary.default};
-  font-size: ${(props) => props.size};
-  box-sizing: border-box;
-  ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
-`;
-
-const CounselReq = styled.div`
-  width: 70px;
-  height: 24px;
-  ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
-  padding: ${(props) => props.padding};
-  background-color: ${({ theme }) => theme.colors.primary["100"]};
-  ${(props) => (props.img ? `background-image : ${props.img};` : "")}
-  border: 1px solid  ${({ theme }) => theme.colors.primary.default};
-  border-radius: ${(props) => props.borderRadius};
-  line-height: ${(props) => props.lineHeight};
-  font-family: ${(props) => props.fontFamily};
-  font-style: ${(props) => props.fontStyle};
-  color: ${({ theme }) => theme.colors.primary.default};
-  font-size: ${(props) => props.size};
-  box-sizing: border-box;
-  ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
-`;
-
-const CounselReq2 = styled.div`
-  width: 200px;
-  height: 24px;
-  ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
-  padding: ${(props) => props.padding};
-  background-color: ${({ theme }) => theme.colors.primary["100"]};
-  ${(props) => (props.img ? `background-image : ${props.img};` : "")}
-  border: 1px solid  ${({ theme }) => theme.colors.primary.default};
-  border-radius: ${(props) => props.borderRadius};
-  line-height: ${(props) => props.lineHeight};
-  font-family: ${(props) => props.fontFamily};
-  font-style: ${(props) => props.fontStyle};
-  color: ${({ theme }) => theme.colors.primary.default};
-  font-size: ${(props) => props.size};
-  box-sizing: border-box;
-  ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
-`;
-
-const CounselRes2 = styled.div`
-  width: 120px;
-  height: 24px;
-  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
-  padding: ${(props) => props.padding};
-  background-color: ${({ theme }) => theme.colors.primary["100"]};
-  ${(props) => (props.img ? `background-image : ${props.img};` : "")};
-  border: 1px solid ${({ theme }) => theme.colors.primary["100"]};
-  border-radius: ${(props) => props.borderRadius};
-  line-height: ${(props) => props.lineHeight};
-  font-family: ${(props) => props.fontFamily};
-  font-style: ${(props) => props.fontStyle};
-  color: ${({ theme }) => theme.colors.primary.default};
-  font-size: ${(props) => props.size};
-  box-sizing: border-box;
-  ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
-`;
-
-const Small = styled.div`
-  width: 40px;
-  height: 26px;
-  ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
-  padding: ${(props) => props.padding};
-  background-color: ${({ theme }) => theme.colors.grayScale["30"]};
-  ${(props) => (props.img ? `background-image : ${props.img};` : "")};
-  border: 1px solid ${({ theme }) => theme.colors.grayScale["30"]};
-  border-radius: ${(props) => props.borderRadius};
-  line-height: ${(props) => props.lineHeight};
-  font-family: ${(props) => props.fontFamily};
-  font-style: ${(props) => props.fontStyle};
-  color: ${({ theme }) => theme.colors.grayScale["700"]};
-  font-size: ${(props) => props.size};
-  box-sizing: border-box;
-  ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
-`;
-
-const Small2 = styled.div`
-  width: 90px;
-  height: 24px;
-  ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
-  padding: 0px;
-  margin: 0px;
-  background-color: ${({ theme }) => theme.colors.grayScale["30"]};
-  ${(props) => (props.img ? `background-image : ${props.img};` : "")}
-  border: 1px solid ${({ theme }) => theme.colors.grayScale["30"]};
-  border-radius: ${(props) => props.borderRadius};
-  font-family: ${(props) => props.fontFamily};
-  font-style: ${(props) => props.fontStyle};
-  color: ${({ theme }) => theme.colors.grayScale["700"]};
-  font-size: ${(props) => props.size};
-  box-sizing: border-box;
-  ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
-`;
-
-const Regular = styled.div`
-  width: 74px;
-  height: 26px;
-  ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
-  padding: ${(props) => props.padding};
-  background-color: ${({ theme }) => theme.colors.grayScale["30"]};
-  ${(props) => (props.img ? `background-image : ${props.img};` : "")}
-  border: 1px solid ${({ theme }) => theme.colors.grayScale["30"]};
-  border-radius: ${(props) => props.borderRadius};
-  line-height: ${(props) => props.lineHeight};
-  font-family: ${(props) => props.fontFamily};
-  font-style: ${(props) => props.fontStyle};
-  color: ${({ theme }) => theme.colors.grayScale["700"]};
-  font-size: ${(props) => props.size};
-  box-sizing: border-box;
-  ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
-`;
-
-export default Tag;
+export default ResTagPrimary;

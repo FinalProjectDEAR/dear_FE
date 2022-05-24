@@ -15,6 +15,7 @@ import CounselHistory from "./CounselHistory";
 import Follow from "./Follow";
 import Post from "../pages/Post";
 import Paginations from "../elements/Pagination";
+import ResTag from "../elements/ResTag";
 //리덕스관련
 import { useDispatch, useSelector } from "react-redux";
 import { MsgActionCreators } from "../redux/modules/message";
@@ -58,6 +59,8 @@ const MyPage = () => {
   }, []);
   const userInfo = useSelector((state) => state.mypage.user.user);
   console.log("멤버인포레스태그", userInfo?.resTag1);
+  const resTag1 = userInfo?.resTag1;
+  const resTag2 = userInfo?.resTag2;
   //페이지별 게시글 전체 조회
   React.useEffect(() => {
     dispatch(actionCreators.getPostListDB(page));
@@ -177,48 +180,26 @@ const MyPage = () => {
                   </div>
                   <div className="types">
                     <MobileListener>
-                      <div className="listenerTag">
-                        {userInfo?.resTag1 ? (
-                          <div className="listenerTag">
-                            <Tag counselReq2>
-                              <Text sub7 margin="3px 8px" color="#7A37BE">
-                                {userInfo?.resTag1}
-                              </Text>
-                            </Tag>
-                          </div>
+                      <ResTags>
+                        {userInfo ? (
+                          <ResTag resTag1={userInfo?.resTag1} />
                         ) : null}
-                        {userInfo?.resTag2 ? (
-                          <div className="listenerTag">
-                            <Tag counselRes2>
-                              <Text sub7 margin="3px 8px" color="#7A37BE">
-                                {userInfo?.resTag2}
-                              </Text>
-                            </Tag>
-                          </div>
+                      </ResTags>
+                      <ResTags>
+                        {userInfo ? (
+                          <ResTag resTag2={userInfo?.resTag2} />
                         ) : null}
-                      </div>
+                      </ResTags>
                     </MobileListener>
                     <WebListener>
-                      <div className="listenerTag">
-                        {userInfo?.resTag1 ? (
-                          <div className="tag">
-                            <Tag counselReq2>
-                              <Text sub7 margin="3px 8px" color="#7A37BE">
-                                {userInfo?.resTag1}
-                              </Text>
-                            </Tag>
-                          </div>
+                      <ResTags>
+                        {userInfo ? (
+                          <ResTag resTag1={userInfo?.resTag1} />
                         ) : null}
-                        {userInfo?.resTag2 ? (
-                          <div className="listenerTag">
-                            <Tag counselRes2>
-                              <Text sub7 margin="3px 8px" color="#7A37BE">
-                                {userInfo?.resTag2}
-                              </Text>
-                            </Tag>
-                          </div>
+                        {userInfo ? (
+                          <ResTag resTag2={userInfo?.resTag2} />
                         ) : null}
-                      </div>
+                      </ResTags>
                     </WebListener>
 
                     <OndoTag>
@@ -370,6 +351,7 @@ const MyPage = () => {
     </React.Fragment>
   );
 };
+
 const PageBtn = styled.div`
   padding-top: 33px;
   display: flex;
@@ -507,7 +489,7 @@ const TypeWrapper = styled.div`
     display: flex;
     flex-direction: row;
     width: 139px;
-    margin-right: 20px;
+    /* margin-right: 20px; */
     /* border: 1px solid red; */
   }
   .types {
@@ -558,7 +540,6 @@ const TypeWrapper = styled.div`
     }
     #listener {
       width: 280px;
-
       display: flex;
       flex-direction: column;
       padding-top: 30px;
@@ -627,11 +608,19 @@ const MobileListener = styled.div`
   @media ${({ theme }) => theme.device.isMobile} {
     display: flex;
     justify-content: row;
+    width: 230px;
+    /* background: pink; */
   }
   @media ${({ theme }) => theme.device.web} {
     display: none;
   }
 `;
+const ResTags = styled.div`
+  display: flex;
+  flex-direction: row;
+  /* border: 1px solid red; */
+`;
+
 const WebListener = styled.div`
   @media ${({ theme }) => theme.device.web} {
     display: flex;
@@ -644,7 +633,7 @@ const WebListener = styled.div`
 const OndoTag = styled.div`
   margin-top: 0px;
   @media ${({ theme }) => theme.device.isMobile} {
-    margin-top: 30px;
+    margin-top: 0px;
   }
 `;
 const TemperatureBox = styled.div`
