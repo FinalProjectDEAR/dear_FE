@@ -17,6 +17,7 @@ const Signup = () => {
   const [pwd, setPwd] = React.useState("");
   const [pwdConfirm, setPwdConfirm] = React.useState("");
   const [isCheck, setIsCheck] = React.useState(false);
+  const [pwdSyncErr, setPwdSyncErr] = React.useState("");
   const nickErr = useSelector((state) => state.user.msg);
 
   const dupCheck = (memberId) => {
@@ -50,6 +51,18 @@ const Signup = () => {
 
     dispatch(userActions.signupDB(memberId, pwd, pwdConfirm));
   };
+
+  const pwdSyncCheck = (e) => {
+    if (pwd.length < 1 || pwdConfirm.length < 1) {
+      setPwdSyncErr("");
+    } else if (pwd === pwdConfirm) {
+      console.log(pwd, pwdConfirm);
+      setPwdSyncErr("비밀번호가 일치합니다.");
+    } else {
+      setPwdSyncErr("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+    }
+  };
+
   // 가운데 수직 붙이기
   return (
     <React.Fragment>
@@ -125,11 +138,15 @@ const Signup = () => {
               placeholder="비밀번호를 한 번 더 입력해주세요."
               _onChange={(e) => {
                 setPwdConfirm(e.target.value);
+                setTimeout(pwdSyncCheck, 100);
               }}
               value={pwdConfirm}
               is_submit
               onSubmit={signup}
             />
+            {/* <Text sub7 textAlign="left" margin="0px 15px">
+              {pwdSyncErr}
+            </Text> */}
           </PasswordBox>
           <ButtonBox>
             <Button
@@ -145,7 +162,7 @@ const Signup = () => {
                 이미 계정이 있으신가요?
               </Text>
               <Text
-                sub5
+                sub3
                 margin="0px 10px"
                 color="#7A37BE"
                 deco="underLine"
@@ -159,7 +176,6 @@ const Signup = () => {
             </LineBox>
           </ButtonBox>
         </SignupWrapper>
-        <Footer />
         <MobileFooter>
           <FooterBtn>
             <Text
@@ -195,7 +211,7 @@ export default Signup;
 
 const Background = styled.div`
   width: 100%;
-  height: 935px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -240,7 +256,7 @@ const PasswordBox = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
-  padding: 0px 0px 30px;
+  padding: 0px 0px 15px;
 `;
 
 const ButtonBox = styled.div`

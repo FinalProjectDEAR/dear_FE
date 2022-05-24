@@ -25,6 +25,7 @@ function VoteCard(props) {
         <Ellipsis>
           <TextB subTitle margin="0px">
             <Question>Q. </Question>
+            {/* {voetInfo.} */}
             누가 누구의 새우를 까줄 때 어떻게 했어야 했나요?
           </TextB>
         </Ellipsis>
@@ -33,14 +34,14 @@ function VoteCard(props) {
           <LineBox>
             <VoteLine>
               <Text sub4 margin="0px 4px">
-                {/* {props.vote[0].imageTitle} */}
+                {/* {voteInfo.vote[0].imageTitle} */}
                 까준다
               </Text>
             </VoteLine>
             <ProgressBar>
               <Highlight
                 width={
-                  // (props.vote[0].selectionList.length / totalCount) * 100 + "%"
+                  // (voteInfo.vote[0].selectionList.length / totalCount) * 100 + "%"
                   (60 / 165) * 100 + "%"
                 }
                 color={leftScore >= rightScore ? "#7A37BE" : "#BB9ED8"}
@@ -50,14 +51,14 @@ function VoteCard(props) {
           <LineBox>
             <VoteLine>
               <Text sub4 margin="0px 4px">
-                {/* {props.vote[1].imageTitle} */}
+                {/* {voteInfo.vote[1].imageTitle} */}
                 안까준다
               </Text>
             </VoteLine>
             <ProgressBar>
               <Highlight
                 width={
-                  // (props.vote[0].selectionList.length / totalCount) * 100 + "%"
+                  // (voteInfo.vote[0].selectionList.length / totalCount) * 100 + "%"
                   (105 / 165) * 100 + "%"
                 }
                 color={rightScore >= leftScore ? "#7A37BE" : "#BB9ED8"}
@@ -68,7 +69,8 @@ function VoteCard(props) {
         <LineBox>
           <PeopleRoundedIcon style={{ width: "16.5px", color: "#999999" }} />
           <Text sub5 margin="0px 5px">
-            {totalCount} {/* 165 */}
+            {/* {totalCount} */}
+            165
           </Text>
         </LineBox>
       </CardWrapper>

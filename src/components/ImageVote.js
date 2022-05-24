@@ -79,26 +79,30 @@ function ImageVote({ voteInfo }) {
           <CheckBox>
             <Vote
               bg={leftSelected ? "#EEE7F5" : "transparent"}
-              border={leftSelected ? "1px solid #7A37BE" : "1px solid #E6E6E6"}
+              border={leftSelected ? "2px solid #7A37BE" : "1px solid #E6E6E6"}
               onClick={selectLeft}
             >
-              <Font color={leftSelected ? "#7A37BE" : "#61586A"}>
+              <Font
+                color={leftSelected ? "#7A37BE" : "#61586A"}
+                weight={leftSelected ? 700 : 500}
+              >
                 {voteInfo.vote[0].imageTitle}
               </Font>
               <VoteImg src={voteInfo.vote[0].imageUrl} alt="선택지 1" />
             </Vote>
-            <Text body2 margin="17px 24px">
+            <Text title margin="17px 24px" color="#7a37be">
               VS
             </Text>
             <Vote
               bg={rightSelected ? "#EEE7F5" : "transparent"}
               border={
-                rightSelected ? "1px solid #7A37BE" : "1px solid #E6E6E6;"
+                rightSelected ? "2px solid #7A37BE" : "1px solid #E6E6E6;"
               }
               onClick={selectRight}
             >
               <Font
                 color={rightSelected ? "#7A37BE" : "#61586A"}
+                weight={rightSelected ? 700 : 500}
                 cursor="pointer"
               >
                 {voteInfo.vote[1].imageTitle}
@@ -164,6 +168,7 @@ export default ImageVote;
 const VoteWrapper = styled.div`
   width: 952px;
   height: 586px;
+  margin: auto;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -227,7 +232,7 @@ const VoteImg = styled.img`
 const Font = styled.p`
   color: ${(props) => props.color};
   margin: 0px;
-  font-weight: 500;
+  font-weight: ${(props) => props.weight};
   font-size: 16px;
   line-height: 24px;
   cursor: pointer;

@@ -125,7 +125,7 @@ const SubTitle = styled.p`
   font-weight: ${({ theme }) => theme.fonts.weight.medium};
   color: ${({ theme }) => theme.colors.secondary["700"]};
   ${(props) => (props.color ? `color: ${props.color}` : "")};
-  font-size: 16px;
+  font-size: 18px;
   line-height: 20px;
   background-color: ${(props) => props.bg};
   font-style: ${(props) => props.fontStyle};

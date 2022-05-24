@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { ReactComponent as Logo } from "../assets/Frame.svg";
 import { history } from "../redux/configureStore";
+import { Text } from "../elements";
 
 import logo from "../assets/main/logoS.png";
 
@@ -31,22 +32,44 @@ const Header = (props) => {
                 height: "66.34px",
               }}
             />
-            <div>
-              <HeaderBtn>서비스 소개</HeaderBtn>
+            <ButtonBox>
+              <HeaderBtn>
+                <Text sub7 cursor="pointer">
+                  서비스 소개
+                </Text>
+              </HeaderBtn>
               <HeaderBtn
                 onClick={() => {
                   history.push("/postList");
                 }}
               >
-                디어상담소
+                <Text sub7 cursor="pointer">
+                  디어상담소
+                </Text>
               </HeaderBtn>
-              <HeaderBtn>마이페이지</HeaderBtn>
+              <HeaderBtn
+                onClick={() => {
+                  history.push("/myPage");
+                }}
+              >
+                <Text sub7 cursor="pointer">
+                  마이페이지
+                </Text>
+              </HeaderBtn>
               {isLogin ? (
-                <HeaderBtn onClick={logout}>로그아웃</HeaderBtn>
+                <HeaderBtn onClick={logout}>
+                  <Text sub7 cursor="pointer">
+                    로그아웃
+                  </Text>
+                </HeaderBtn>
               ) : (
-                <HeaderBtn onClick={history.push("/")}>로그인</HeaderBtn>
+                <HeaderBtn onClick={history.push("/")}>
+                  <Text sub7 cursor="pointer">
+                    로그인
+                  </Text>
+                </HeaderBtn>
               )}
-            </div>
+            </ButtonBox>
           </HeaderBox>
         </HeaderContainer>
       </HeaderWrapper>
@@ -83,9 +106,18 @@ const HeaderBox = styled.div`
 `;
 
 const HeaderBtn = styled.button`
+  display: flex;
+  justify-content: center;
   border: none;
   background-color: transparent;
   color: #61586a;
   cursor: pointer;
-  line-height: 60px;
+  line-height: 15px;
+  margin: 0px 15px;
+`;
+
+const ButtonBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 `;

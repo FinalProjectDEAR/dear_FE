@@ -53,7 +53,7 @@ const signupDB = (memberId, pwd, pwdCheck) => {
       );
       console.log("서버응답", data);
 
-      //   dispatch(setUser(userInfo));
+      // dispatch(setUser(userInfo));
       history.replace("/");
     } catch (err) {
       console.log("회원가입 실패", err);
@@ -83,10 +83,10 @@ const loginDB = (memberId, pwd) => {
       localStorage.setItem("isLogin", true);
 
       if (tokenData.nick) {
+        history.replace("/main");
         const nickname = tokenData.nick;
         localStorage.setItem("nickname", nickname);
         dispatch(setUser(memberId, nickname));
-        history.replace("/main");
       } else {
         history.push("/info");
       }
@@ -230,6 +230,7 @@ export default handleActions(
       produce(state, (draft) => {
         draft.memberId = action.payload.memberId;
         draft.nickname = action.payload.nickname;
+        draft.msg = false;
       }),
     [LOG_OUT]: (state, action) =>
       produce(state, (draft) => {

@@ -75,18 +75,22 @@ function ReqReview(props) {
 
   //고민러 후기 추가하기
   const finish = () => {
+    console.log(
+      "굿클릭",
+      requestReview,
+      Object.values(goodResTag),
+      serviceComment
+    );
+
     let tagLike = "";
-    if (goodClick === true) {
-      console.log(
-        "굿클릭",
-        requestReview,
-        Object.values(goodResTag),
-        serviceComment
-      );
-      if (goodResTag === "") {
-        window.alert("이유를 선택 해주세요!");
-        return;
-      }
+
+    if (goodClick === false && badClick === false) {
+      window.alert("필수항목을 체크해주세요.");
+      return;
+    } else if (goodClick === true && goodResTag === "") {
+      window.alert("이유를 선택 해주세요!");
+      return;
+    } else if (goodClick === true && goodResTag !== "") {
       tagLike = true;
       dispatch(
         actionCreators.addReviewReqDB(
@@ -97,19 +101,18 @@ function ReqReview(props) {
           serviceComment
         )
       );
-      // localStorage.removeItem("request");
     }
-    if (badClick === true) {
+
+    if (badClick === true && badResTag === "") {
       console.log(
         "배드클릭",
         requestReview,
         Object.values(badResTag),
         serviceComment
       );
-      if (badResTag === "") {
-        window.alert("이유를 선택 해주세요!");
-        return;
-      }
+      window.alert("이유를 선택 해주세요!");
+      return;
+    } else if (badClick === true && badResTag !== "") {
       tagLike = false;
       dispatch(
         actionCreators.addReviewReqDB(
@@ -120,10 +123,10 @@ function ReqReview(props) {
           serviceComment
         )
       );
-      localStorage.removeItem("request");
     }
-    // props.informClose();
+    // localStorage.removeItem("request");
   };
+
   //유저찜하기 액션
   const userFollow = () => {
     unFollow(!follow);
