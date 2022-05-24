@@ -1,4 +1,9 @@
 import styled from "styled-components";
+import { ReactComponent as Empathy } from "../assets/tag/favorite.svg";
+import { ReactComponent as Solver } from "../assets/tag/Vector (7).svg";
+import { ReactComponent as Enjoy } from "../assets/tag/Group.svg";
+import { ReactComponent as Fact } from "../assets/tag/Vector (8).svg";
+import { ReactComponent as Sensitivity } from "../assets/tag/Vector (9).svg";
 
 // 자주 사용하는 색을 객체로 만들자.
 const colors = {
@@ -52,6 +57,14 @@ const size = {
   isMobile: "767px",
 };
 
+const icon = {
+  empathy: <Empathy />,
+  solver: <Solver />,
+  enjoy: <Enjoy />,
+  fact: <Fact />,
+  sensitivity: <Sensitivity />,
+};
+
 // 미디어 쿼리의 중복 코드를 줄이기위해 정의된 변수입니다
 const device = {
   mobile: `only screen and (max-width: ${size.mobile})`,
@@ -81,6 +94,7 @@ const theme = {
   colors,
   common,
   device,
+  icon,
 };
 
 export default theme;

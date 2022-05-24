@@ -31,7 +31,7 @@ const AlarmModal = (props) => {
   return (
     <Container>
       <Background onClick={oncloseModal} />
-      {/* <CgClose
+      <CgClose
         className="close"
         size={30}
         onClick={closeModal}
@@ -42,7 +42,7 @@ const AlarmModal = (props) => {
           top: "-140px",
           cursor: "pointer",
         }}
-      /> */}
+      />
       <ModalBlock>
         <Contents>{children}</Contents>
       </ModalBlock>
@@ -77,7 +77,7 @@ const Background = styled.div`
   transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.6);
   /* backdrop-filter: blur(5px); */
   animation: modal-bg-show 1s;
   @keyframes modal-bg-show {
@@ -87,6 +87,10 @@ const Background = styled.div`
     to {
       opacity: 1;
     }
+  }
+  @media ${({ theme }) => theme.device.isMobile} {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
   }
 `;
 
@@ -109,12 +113,16 @@ const ModalBlock = styled.div`
   @keyframes modal-show {
     from {
       opacity: 0;
-      margin-right: -50px;
+      margin-top: -50px;
     }
     to {
       opacity: 1;
       margin-top: 0;
     }
+  }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    top: 0rem;
   }
 `;
 

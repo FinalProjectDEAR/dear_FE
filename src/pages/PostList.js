@@ -9,7 +9,7 @@ import { ReactComponent as Broken } from "../assets/postList/board-cate5.svg";
 import { ReactComponent as Again } from "../assets/postList/board-cate6.svg";
 import { ReactComponent as Solo } from "../assets/postList/board-cate3 (1).svg";
 import { ReactComponent as Etc } from "../assets/postList/board-cate8.svg";
-import { ReactComponent as Pho } from "../assets/postList/Frame 520.svg";
+import { ReactComponent as Blogging } from "../assets/postList/blogging 1.svg";
 
 //리덕스관련
 import { useHistory } from "react-router-dom";
@@ -35,8 +35,8 @@ function PostList(props) {
       dispatch(actionCreators.resetPost());
     };
   }, [page]);
-  const postList = useSelector((state) => state.post.post.content);
-  const pageList = useSelector((state) => state.post.post);
+  const postList = useSelector((state) => state.post.post.postPageResponseDto);
+  console.log(postList?.totalPages);
   return (
     <React.Fragment>
       <Layout>
@@ -60,7 +60,7 @@ function PostList(props) {
               </TextB>
             </InfoContainer>
             <InfoBox>
-              <Pho />
+              <Blogging />
             </InfoBox>
           </InfoWrapper>
 
@@ -178,7 +178,7 @@ function PostList(props) {
                 <InfoItem style={{ marginLeft: "40px" }}>제목</InfoItem>
                 <InfoItem style={{ marginRight: "40px" }}>작성일</InfoItem>
               </TableInfo>
-              {postList?.slice(0, 11).map((item, idx) => {
+              {postList?.content.slice(0, 11).map((item, idx) => {
                 // slice를 이용하여 보여주고 싶은 게시물을 제어
                 return <Post key={idx} item={item} />;
               })}
@@ -212,7 +212,7 @@ function PostList(props) {
               </BtnContainer>
             </BtnWrapper>
             <PageBtn>
-              <Paginations totalPage={pageList?.totalPages} setPage={setPage} />
+              <Paginations totalPage={postList?.totalPages} setPage={setPage} />
             </PageBtn>
           </BoardWrapper>
         </Background>
@@ -236,9 +236,11 @@ const InfoWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin: auto;
-  max-width: 1032px;
+  max-width: 902.67px;
   width: 100%
   height: 150px;
+  /* border: 1px solid red; */
+  align-items: center;
  
 `;
 const InfoContainer = styled.div`
@@ -252,16 +254,18 @@ const InfoContainer = styled.div`
   }
 `;
 const InfoBox = styled.div`
-  width: 592px;
-  height: 150px;
+  width: 416.67px;
+  height: 312.5px;
   box-sizing: border-box;
   /* border: 1px solid red; */
+  padding-bottom: 30px;
   @media ${({ theme }) => theme.device.isMobile} {
     display: none;
   }
 `;
 const VoteWrapper = styled.div`
-  width: 1032px;
+  max-width: 1032px;
+  width: 100%;
   height: 408px;
   margin: 155px auto 200px;
   cursor: pointer;
@@ -311,8 +315,9 @@ const CateGoryWrapper = styled.div`
       /* border: 1px solid red; */
       display: flex;
       flex-direction: row;
-      gap: 20px;
-      height: 90px;
+      gap: 30px;
+      height: 100px;
+      padding-top: 20px;
     }
   }
   @media ${({ theme }) => theme.device.web} {
@@ -412,10 +417,15 @@ const MBtnWrapper = styled.div`
   }
   @media ${({ theme }) => theme.device.isMobile} {
     /* border: 1px solid red; */
-    width: 290px;
+    max-width: 400px;
+    width: 100%;
+    margin: auto;
+    justify-content: left;
     height: 40px;
     display: flex;
+    /* padding-left: 15px; */
     padding-top: 15px;
+    /* border: 1px solid red; */
   }
 `;
 const MBtnContainer = styled.div`

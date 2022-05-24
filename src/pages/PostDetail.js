@@ -42,6 +42,7 @@ function PostDetail(props) {
   }, [page]);
   //상세페이지 가져오기
   const post = useSelector((state) => state.post.detailPost);
+  // console.log(post);
   const commentList = useSelector((state) => state.comment.comments);
   // console.log(post);
   //시간을 알아보자!
@@ -192,13 +193,13 @@ function PostDetail(props) {
         {/* 댓글 */}
         <CommentWrapper>
           <CommentList />
-          <PageWrapper>
-            <Pagination setPage={setPage} totalPage={totalPage} />
-          </PageWrapper>
-          <WriteWrapper>
-            <CommentWrite postId={postId} />
-          </WriteWrapper>
         </CommentWrapper>
+        <PageWrapper>
+          <Pagination setPage={setPage} totalPage={totalPage} />
+        </PageWrapper>
+        <WriteWrapper>
+          <CommentWrite postId={postId} />
+        </WriteWrapper>
       </Layout>
     </React.Fragment>
   );
@@ -209,17 +210,19 @@ const CommentWrapper = styled.div`
   margin: 0px auto 0px auto;
   max-width: 1032px;
   width: 100%;
-  height: 703px;
+  height: 300px;
+  /* border: 1px solid blue; */
 `;
 const PageWrapper = styled.div`
+  /* border: 1px solid red; */
   @media ${({ theme }) => theme.device.isMobile} {
     padding: 10px 0px 10px;
   }
-  padding-top: 65px;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 90px 0px 30px;
+
   /* border: 1px solid red; */
 `;
 const WriteWrapper = styled.div`
@@ -249,7 +252,7 @@ const DetailWrapper = styled.div`
   margin: auto;
   max-width: 1032px;
   width: 100%;
-  height: 450px;
+  max-height: 600px;
   /* border: 1px solid red; */
   @media ${({ theme }) => theme.device.isMobile} {
     width: 326px;
@@ -383,7 +386,7 @@ const ContentBox = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  padding: 30px 40px;
+  padding: 30px;
   gap: 10px;
   max-width: 1032px;
   width: 100%;
@@ -398,9 +401,9 @@ const IsLike = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  /* gap: 10px; */
   margin: auto;
-  height: 150px;
+  height: 20px;
   /* border: 1px solid yellow; */
 `;
 
@@ -454,11 +457,11 @@ const Img = styled.img`
   margin-left: 15px;
   &:hover {
     transition: 0.4s;
-    transform: scale(4.9);
-    -webkit-transform: scale(4.9);
-    -moz-transform: scale(4.9);
-    -ms-transform: scale(4.9);
-    -o-transform: scale(4.9);
+    transform: scale(2.9);
+    -webkit-transform: scale(2.9);
+    -moz-transform: scale(2.9);
+    -ms-transform: scale(2.9);
+    -o-transform: scale(2.9);
   }
 `;
 

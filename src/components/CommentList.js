@@ -8,7 +8,7 @@ import CommentItem from "./CommentItem";
 
 const CommentList = (props) => {
   const commentList = useSelector((state) => state.comment.comments);
-  // console.log(commentList);
+  // console.log(commentList[0].totalComments);
   return (
     <React.Fragment>
       <CommentWrapper>
@@ -16,7 +16,7 @@ const CommentList = (props) => {
           <CommentBox>
             <Text body4>댓글</Text>
             <div style={{ color: "#7A37BE", fontWeight: "500" }}>
-              ({commentList?.length})
+              ({commentList[0]?.totalComments})
             </div>
           </CommentBox>
         </CommentContainer>

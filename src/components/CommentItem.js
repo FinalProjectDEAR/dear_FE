@@ -197,12 +197,14 @@ const CommentWrapper = styled.div`
   width: 100%;
   height: 200px;
   border-bottom: 1px solid #CCCCCC;
+  /* background: orange; */
   @media ${({ theme }) => theme.device.isMobile} {
     /* width: 328px; */
     margin: auto;
     /* border: 1px solid violet; */
     /* text-align: left; */
     display: flex;  
+    /* background: orange; */
 `;
 
 const CommentContainer = styled.div`
@@ -223,7 +225,7 @@ const CommentContainer = styled.div`
 `;
 const TextWrapper = styled.div`
   width: 952px;
-  height: 140px;
+  /* height: 140px; */
   margin: auto;
   @media ${({ theme }) => theme.device.isMobile} {
     width: 90%;
@@ -236,7 +238,7 @@ const EditBtn = styled.div`
   justify-content: right;
   display: flex;
   cursor: pointer;
-  /* border: 1px solid red; */
+  /* background: yellow; */
   /* @media ${({ theme }) => theme.device.isMobile} {
   } */
 `;
@@ -251,8 +253,8 @@ const CommentBox = styled.div`
   flex: none;
   order: 1;
   flex-grow: 0;
-  /* 
-  background-color: red; */
+
+  /* background-color: red; */
 `;
 const BtnBox = styled.button`
   border: none;

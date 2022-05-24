@@ -60,9 +60,9 @@ const MyPage = () => {
   //페이지별 게시글 전체 조회
   React.useEffect(() => {
     dispatch(actionCreators.getPostListDB(page));
-    return () => {
-      dispatch(actionCreators.resetPage());
-    };
+    // return () => {
+    //   dispatch(actionCreators.resetPage());
+    // };
   }, [page]);
   const postList = useSelector((state) => state.mypage.postList.content);
   const postTotalPage = useSelector(
@@ -151,16 +151,20 @@ const MyPage = () => {
                         {userInfo?.dating}
                       </Text>
                     </Tag>
-                    <Tag small2>
-                      <Text sub7 margin="3px 8px">
-                        {userInfo?.loveType}
-                      </Text>
-                    </Tag>
-                    <Tag small2>
-                      <Text sub7 margin="3px 8px">
-                        {userInfo?.lovePeriod}
-                      </Text>
-                    </Tag>
+                    {userInfo?.loveType ? (
+                      <Tag small2>
+                        <Text sub7 margin="3px 8px">
+                          {userInfo?.loveType}
+                        </Text>
+                      </Tag>
+                    ) : null}
+                    {userInfo?.lovePeriod ? (
+                      <Tag small2>
+                        <Text sub7 margin="3px 8px">
+                          {userInfo?.lovePeriod}
+                        </Text>
+                      </Tag>
+                    ) : null}
                   </div>
                 </div>
                 <div id="listener">
@@ -171,19 +175,29 @@ const MyPage = () => {
                     <Help />
                   </div>
                   <div className="types">
-                    {/* <div className="listenerTag"> */}
-                    {userInfo?.resTag1 ? (
+                    <MobileListener>
                       <div className="listenerTag">
-                        <Tag counselReq2>{userInfo?.resTag1}</Tag>
+                        {userInfo?.resTag1 ? (
+                          <div className="listenerTag">
+                            <Tag counselReq2>
+                              <Text sub7 margin="3px 8px" color="#7A37BE">
+                                {userInfo?.resTag1}
+                              </Text>
+                            </Tag>
+                          </div>
+                        ) : null}
+                        {userInfo?.resTag2 ? (
+                          <div className="listenerTag">
+                            <Tag counselRes2>
+                              <Text sub7 margin="3px 8px" color="#7A37BE">
+                                {userInfo?.resTag2}
+                              </Text>
+                            </Tag>
+                          </div>
+                        ) : null}
                       </div>
-                    ) : null}
-                    {userInfo?.resTag2 ? (
-                      <div className="listenerTag">
-                        <Tag sub2>{userInfo?.resTag2}</Tag>{" "}
-                      </div>
-                    ) : null}
+                    </MobileListener>
 
-                    {/* </div> */}
                     <Tag sub2>
                       <TemperatureBox>
                         <Text sub7>
@@ -341,7 +355,7 @@ const PageBtn = styled.div`
 const Background = styled.div`
   height: 2200px;
   @media ${({ theme }) => theme.device.isMobile} {
-    height: 3000px;
+    height: 3200px;
   }
 `;
 const MyPageWrapper = styled.div`
@@ -457,23 +471,27 @@ const TypeWrapper = styled.div`
     width: 540px;
     display: flex;
     flex-direction: row;
+    /* border: 1px solid red; */
   }
   .listenerBox {
     display: flex;
     flex-direction: row;
     width: 116px;
+    margin-right: 20px;
+    /* border: 1px solid red; */
   }
   .types {
     display: flex;
     flex-direction: column;
-    margin-left: 20px;
+    /* margin-left: 20px; */
   }
   .listenerTag {
     gap: 10px;
-    /* width: 400px;
-    height: 26px; */
+    width: 400px;
+    height: 26px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    /* border: 1px solid red; */
   }
   @media ${({ theme }) => theme.device.isMobile} {
     width: 280px;
@@ -500,7 +518,8 @@ const TypeWrapper = styled.div`
       margin-left: 10px;
     }
     .loveTag {
-      margin-left: 0px;
+      margin: 10px auto;
+      justify-content: center;
       width: 280px;
       /* gap: 10px; */
       display: flex;
@@ -509,10 +528,10 @@ const TypeWrapper = styled.div`
     }
     #listener {
       width: 280px;
-      /* background: pink; */
+
       display: flex;
       flex-direction: column;
-      padding-top: 50px;
+      padding-top: 30px;
       box-sizing: border-box;
     }
     .listenerBox {
@@ -520,6 +539,7 @@ const TypeWrapper = styled.div`
       flex-direction: row;
       width: 116px;
       margin-left: 10px;
+      margin-bottom: 10px;
     }
     .types {
       display: flex;
@@ -527,10 +547,12 @@ const TypeWrapper = styled.div`
       margin-left: 20px;
     }
     .listenerTag {
-      gap: 10px;
+      /* gap: 10px; */
       /* height: 26px; */
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
+      /* margin: 5px auto; */
+      /* background: pink; */
     }
   }
 `;
@@ -558,14 +580,24 @@ const MTapeWrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin: 20px auto;
+  margin: 0px auto 30px;
   /* background: red; */
   .tape {
     display: flex;
+    /* background: red; */
   }
   .tapeCnt {
     display: flex;
     justify-content: center;
+  }
+`;
+const MobileListener = styled.div`
+  @media ${({ theme }) => theme.device.isMobile} {
+    display: flex;
+    justify-content: row;
+  }
+  @media ${({ theme }) => theme.device.web} {
+    display: none;
   }
 `;
 const TemperatureBox = styled.div`

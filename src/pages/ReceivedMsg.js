@@ -24,7 +24,7 @@ const ReceivedMsg = () => {
   }, []);
   //메세지 가져오가
   const msgList = useSelector((state) => state.message.messages);
-  // console.log(msgList);
+  console.log(msgList);
   //시간을 알아보자!
   const option = {
     lang: "ko",
@@ -47,7 +47,8 @@ const ReceivedMsg = () => {
                   lineheight="20px"
                   color="#666666"
                 >
-                  <NickNameSpan>{msgList?.reqUser}</NickNameSpan> 님이 보낸 쪽지
+                  <NickNameSpan>{msgList?.reqUserNickName}</NickNameSpan> 님이
+                  보낸 쪽지
                 </TextB>
               </TitleWrapper>
               <MsgContainer>
@@ -68,9 +69,8 @@ const ReceivedMsg = () => {
                 <UserBox>
                   <UserText>
                     <ColorBadge width="24px" height="24px" bg="#40D39C" />
-                    {msgList?.resUser}
+                    {msgList?.reqUserNickName}
                   </UserText>
-                  <UserSpan>(1달 전 상담)</UserSpan>
                 </UserBox>
                 <UserTime>{createdAt}</UserTime>
               </UserContainer>
@@ -95,6 +95,10 @@ const MsgWrapper = styled.div`
   height: 625px;
   background: #ffffff;
   border-radius: 20px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 320px;
+    height: 520px;
+  }
 `;
 const TitleWrapper = styled.div`
   display: flex;
@@ -106,6 +110,12 @@ const TitleWrapper = styled.div`
   margin: 60px auto 0px;
   width: 550px;
   height: 22px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 320px;
+    height: 18px;
+    /* border: 1px solid red; */
+    margin: 30px auto 0px;
+  }
   /* border: 1px solid red; */
 `;
 const NickNameSpan = styled.span`
@@ -119,10 +129,23 @@ const MsgContainer = styled.div`
   width: 470px;
   height: 350px;
   /* border: solid 1px red; */
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 280px;
+    height: 320px;
+
+    /* border: 1px solid red; */
+  }
 `;
 const MsgBox = styled.div`
   display: flex;
   padding: 15px 15px 45px 15px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 280px;
+    height: 258px;
+    margin: auto;
+    padding: 15px 15px 45px 3px;
+    /* border: 1px solid red; */
+  }
 `;
 const UserContainer = styled.div`
   display: flex;
@@ -131,6 +154,11 @@ const UserContainer = styled.div`
   width: 470px;
   height: 24px;
   padding-bottom: 45px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 270px;
+    height: 10px;
+    /* border: 1px solid red; */
+  }
   /* border: solid 1px red; */
 `;
 const UserBox = styled.div`
@@ -144,12 +172,7 @@ const UserText = styled.div`
   line-height: 24px;
   font-weight: 500;
   color: #2e2a32;
-`;
-const UserSpan = styled.span`
-  weight: 300;
-  size: 12px;
-  line-height: 24px;
-  color: #61586a;
+  /* border: solid 1px orange; */
 `;
 const UserTime = styled.div`
   height: 14px;

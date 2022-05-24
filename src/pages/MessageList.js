@@ -28,7 +28,14 @@ const MessageList = (props) => {
   return (
     <MessageWrapper>
       <MessageContainer>
-        <TextB sub color="#2E2A32" textAlign="left">
+        <TextB
+          sub
+          color="#2E2A32"
+          textAlign="left"
+          hiddenText
+          margin="0px"
+          // width="200px"
+        >
           {message}
         </TextB>
       </MessageContainer>
@@ -64,9 +71,9 @@ const MessageWrapper = styled.div`
   }
 `;
 const MessageContainer = styled.div`
-  height: 250px;
+  height: 230px;
   box-sizing: border-box;
-  margin: 10px 34px;
+  margin: 20px 34px;
   display: inline-block;
   width: 260px;
   /* white-space: normal;
@@ -74,16 +81,19 @@ const MessageContainer = styled.div`
   overflow: hidden;
   text-overflow: ellipsis; */
   @media ${({ theme }) => theme.device.isMobile} {
-    width: 250px;
-    height: 24px;
+    /* width: 250px; */
+    margin: 0px;
+    /* height: 24px; */
+    padding: 20px;
     /* margin: auto; */
-    display: flex;
-    flex-direction: column;
+    /* display: flex; */
+    /* flex-direction: column; */
     /* border: 1px solid red; */
-    /* display: inline-block; */
-    /* white-space: nowrap; */
-    /* overflow: hidden; */
-    /* text-overflow: ellipsis; */
+    display: block;
+    /* word-wrap: normal; */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
 const MessageBox = styled.div`

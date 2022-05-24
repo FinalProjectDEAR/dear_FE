@@ -258,7 +258,7 @@ const CounselReq2 = styled.div`
 `;
 
 const CounselRes2 = styled.div`
-  width: 200px;
+  width: 120px;
   height: 24px;
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
   padding: ${(props) => props.padding};

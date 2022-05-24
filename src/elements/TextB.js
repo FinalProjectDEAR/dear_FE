@@ -155,6 +155,12 @@ const Sub = styled.p`
   ${(props) => (props.textAlign ? `text-align: ${props.textAlign};` : "")};
   ${(props) => (props.textShadow ? `text-shadow: ${props.textShadow};` : "")};
   ${(props) => (props.wordBreak ? `word-break: keep-all;` : "")};
+  ${(props) =>
+    props.hiddenText
+      ? "white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+      : ""};
+  /* width: 200px;
+  height: 50px; */
 `;
 
 const Sub2 = styled.p`

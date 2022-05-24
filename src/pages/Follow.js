@@ -44,33 +44,30 @@ const Follow = (props) => {
   };
   const Follower = props?.item.followMemberId;
   const nickname = props?.item.nickname;
-
+  console.log(nickname);
   return (
     <FollowWrapper>
       <FollowContainer>
-        <ColorBox>
-          {Mobile ? (
+        {Mobile ? (
+          <ColorBox>
             <ColorBadge
               border="2px solid #F8F8F8"
               size="30"
               bg={props?.item.color}
               cursor="pointer"
             />
-          ) : (
+          </ColorBox>
+        ) : (
+          <ColorBox>
             <ColorBadge
               border="2px solid #F8F8F8"
               size="40"
               bg={props?.item.color}
               cursor="pointer"
             />
-          )}
-          {/* <ColorBadge
-            border="2px solid #F8F8F8"
-            size="40"
-            bg={props?.item.color}
-            cursor="pointer"
-          /> */}
-        </ColorBox>
+          </ColorBox>
+        )}
+
         <Text body4 color="#333333">
           {props?.item.nickname}
         </Text>

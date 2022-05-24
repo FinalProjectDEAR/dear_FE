@@ -2,11 +2,15 @@ import React from "react";
 import { history } from "../redux/configureStore";
 import { Text, Input, Button, TextB, Modal } from "../elements";
 import styled from "styled-components";
+import { useMediaQuery } from "react-responsive";
 //리덕스관련
 import { useDispatch, useSelector } from "react-redux";
 import { MsgActionCreators } from "../redux/modules/message";
 
 function SendMsg() {
+  const Mobile = useMediaQuery({
+    query: "(max-width:767px)",
+  });
   const dispatch = useDispatch();
   //모달
   const [modalOpen, setModalOpen] = React.useState(true);
@@ -27,7 +31,7 @@ function SendMsg() {
   };
   //팔로우가져오기
   const followNickName = useSelector((state) => state.mypage.follower);
-  console.log(followNickName);
+  // console.log(followNickName);
 
   const send = () => {
     if (msg === "") {
@@ -72,7 +76,6 @@ function SendMsg() {
                   {textLength}/ 500자
                 </Text>
               </MsgBox>
-
               <Button regular text="쪽지보내기" _onClick={send} />
             </MsgWrapper>
           </React.Fragment>
@@ -88,6 +91,10 @@ const MsgWrapper = styled.div`
   height: 625px;
   background: #ffffff;
   border-radius: 20px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 320px;
+    height: 520px;
+  }
 `;
 const TitleWrapper = styled.div`
   display: flex;
@@ -99,6 +106,12 @@ const TitleWrapper = styled.div`
   margin: 60px auto 0px;
   width: 550px;
   height: 22px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 320px;
+    height: 18px;
+    /* border: 1px solid red; */
+    margin: 30px auto 0px;
+  }
   /* border: 1px solid red; */
 `;
 const NickNameSpan = styled.span`
@@ -112,6 +125,11 @@ const MsgBox = styled.div`
   width: 470px;
   height: 350px;
   padding-bottom: 69px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 280px;
+    height: 344px;
+    padding-bottom: 39px;
+  }
 `;
 
 export default SendMsg;
