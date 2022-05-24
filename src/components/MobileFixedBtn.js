@@ -3,11 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { actionCreators } from "../redux/modules/noti";
 import { useHistory } from "react-router-dom";
 
-//id값으로 스크롤
-import { Link } from "react-scroll";
-
 import styled from "styled-components";
-import MobileFixedBtn from "./MobileFixedBtn";
+import { Modal } from "../elements";
 //아이콘
 import { Badge } from "@material-ui/core";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
@@ -15,18 +12,16 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import PersonIcon from "@mui/icons-material/Person";
 import InfoIcon from "@mui/icons-material/Info";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
-import { ReactComponent as Hamburger } from "../assets/Vector (5).svg";
-import { ReactComponent as Cancel } from "../assets/Vector (6).svg";
-//모바일버전 아이콘
-import * as Reacts from "react";
-import Box from "@mui/material/Box";
-import SpeedDial from "@mui/material/SpeedDial";
-import SpeedDialAction from "@mui/material/SpeedDialAction";
-import SpeedDialIcon from "@mui/material/SpeedDialIcon";
 
-function FixedBtn(props) {
+const MobileFixedBtn = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  //모달
+  const [modalOpen, setModalOpen] = React.useState(true);
+  const closeModal = () => {
+    setModalOpen(false);
+    history.push("/myPage");
+  };
   const [isRead, setIsRead] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const user_id = useSelector((state) => state.user.user);
@@ -34,129 +29,69 @@ function FixedBtn(props) {
   const notiCheck = () => {
     history.push("/notification");
     dispatch(actionCreators.getNotiDB());
-    // setOpen(!open);
     setIsRead(true);
-    props._onClick();
+    // props._onClick();
   };
   //알람 갯수 가져오기
   React.useEffect(() => {
     dispatch(actionCreators.getNotiCntDB());
   }, []);
   const alarmNum = useSelector((state) => state.noti.notiCnt);
-
   return (
-    <React.Fragment>
-      <BtnWrap>
-        <Link to="1" smooth={true}>
-          <Up>
-            <ArrowUpwardIcon fontSize="medium" />
-          </Up>
-        </Link>
-        <Desc>
-          <FontBox>
-            <Font>서비스소개</Font>
-          </FontBox>
-          <InfoIcon />
-        </Desc>
-        <Board
-          onClick={() => {
-            history.push("/postList");
-          }}
-        >
-          <FontBox>
-            <Font>디어상담소</Font>
-          </FontBox>
-
-          <QuestionAnswerIcon />
-        </Board>
-        <Follow
-          onClick={() => {
-            history.push("/myPage");
-          }}
-        >
-          <FontBox>
-            <Font>마이페이지</Font>
-          </FontBox>
-
-          <PersonIcon />
-        </Follow>
-        <Badge
-          color="secondary"
-          badgeContent={alarmNum}
-          overlap="circular"
-          invisible={isRead}
-        >
-          <Noti onClick={notiCheck}>
-            <FontBox>
-              <Font>알림</Font>
-            </FontBox>
-            <NotificationsIcon />
-            {/* {open ? <Notification /> : null} */}
-          </Noti>
-        </Badge>
-      </BtnWrap>
-
-      <Mver>
-        {/* <MuiBtn>
-          <Box
-            sx={{
-              height: 320,
-              transform: "translateZ(0px)",
-              flexGrow: 1,
-            }}
-            primary="Project Overview"
-            primaryTypographyProps={{
-              color: "red",
-            }}
-          >
-            <SpeedDial
-              ariaLabel="SpeedDial openIcon example"
-              // sx={{ color: "red" }}
-              icon={<Hamburger openIcon={<Cancel />} />}
-            >
-              <SpeedDialAction icon={<InfoIcon />} tooltipTitle="서비스 소개" />
-              <SpeedDialAction
-                icon={<QuestionAnswerIcon />}
-                tooltipTitle="디어상담소"
+    <>
+      {modalOpen && (
+        <Modal closeModal={closeModal}>
+          <React.Fragment>
+            <BtnWrap>
+              <Desc>
+                <FontBox>
+                  <Font>서비스소개</Font>
+                </FontBox>
+                <InfoIcon />
+              </Desc>
+              <Board
                 onClick={() => {
                   history.push("/postList");
                 }}
-              />{" "}
-              <SpeedDialAction
-                icon={<PersonIcon />}
-                tooltipTitle="마이페이지"
+              >
+                <FontBox>
+                  <Font>디어상담소</Font>
+                </FontBox>
+
+                <QuestionAnswerIcon />
+              </Board>
+              <Follow
                 onClick={() => {
                   history.push("/myPage");
                 }}
-              />
-              <SpeedDialAction
-                icon={<NotificationsIcon />}
-                tooltipTitle="알림"
-                onClick={notiCheck}
-              />
-              {open ? <Notification /> : null}
-            </SpeedDial>
-          </Box>
-        </MuiBtn> */}
-        <Link to="1" smooth={true}>
-          <MBtn>
-            <ArrowUpwardIcon fontSize="medium" />
-          </MBtn>
-        </Link>
+              >
+                <FontBox>
+                  <Font>마이페이지</Font>
+                </FontBox>
 
-        <MBtn>
-          <Hamburger
-            onClick={() => {
-              setOpen(!open);
-            }}
-          />
-          {open ? <MobileFixedBtn /> : null}
-        </MBtn>
-      </Mver>
-    </React.Fragment>
+                <PersonIcon />
+              </Follow>
+              <Badge
+                color="secondary"
+                badgeContent={alarmNum}
+                overlap="circular"
+                invisible={isRead}
+              >
+                <Noti onClick={notiCheck}>
+                  <FontBox>
+                    <Font>알림</Font>
+                  </FontBox>
+                  <NotificationsIcon />
+                  {/* {open ? <Notification /> : null} */}
+                </Noti>
+              </Badge>
+            </BtnWrap>
+          </React.Fragment>
+        </Modal>
+      )}
+    </>
   );
-}
-
+};
 const BtnWrap = styled.div`
   display: flex;
   flex-direction: column;
@@ -195,7 +130,12 @@ const Desc = styled.div`
   align-items: center;
   padding: 0px;
   position: static;
-  width: 54px;
+  background-color: #61586a;
+  justify-content: center;
+  color: white;
+  width: 160px;
+  border-radius: 26px;
+  box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   height: 54px;
   left: 0px;
   top: 0px;
@@ -210,10 +150,7 @@ const Desc = styled.div`
   cursor: pointer;
   overflow: hidden;
 
-  ${FontBox} {
-    display: none;
-  }
-  &: hover {
+  /* &: hover {
     ${FontBox} {
       display: block;
       transition: 0.5s;
@@ -225,7 +162,7 @@ const Desc = styled.div`
     border-radius: 26px;
     box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
     transition: 0.3s;
-  }
+  } */
 `;
 
 const Board = styled.div`
@@ -363,49 +300,4 @@ const Up = styled.div`
   border: none;
   cursor: pointer;
 `;
-const MBtn = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 0px;
-  width: 54px;
-  height: 54px;
-  flex: none;
-  flex-grow: 0;
-  border-radius: 50%;
-  background-color: #61586a;
-  color: white;
-  border: none;
-  cursor: pointer;
-`;
-const MuiBtn = styled.div`
-  .MuiSpeedDial-fab {
-    background: #61586a;
-
-    :hover {
-      background: #61586a;
-    }
-  }
-`;
-//모바일 버전 임시 위치 설정
-const Mver = styled.div`
-  @media ${({ theme }) => theme.device.web} {
-    display: none;
-  }
-  @media ${({ theme }) => theme.device.isMobile} {
-    position: absolute;
-    width: 52px;
-    bottom: 60px;
-    left: 83%;
-    position: fixed;
-
-    border: 1px solid red;
-    box-sizing: border-box;
-  }
-`;
-export default FixedBtn;
-
-FixedBtn.defaultProps = {
-  _onClick: () => {},
-};
+export default MobileFixedBtn;

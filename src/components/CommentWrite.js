@@ -73,6 +73,7 @@ const CommentWriteWrapper = styled.div`
   flex: none;
   order: 0;
   flex-grow: 0;
+  margin: auto;
   /* @media ${({ theme }) => theme.device.isMobile} {
     width: 328px;
     border: 1px solid pink;

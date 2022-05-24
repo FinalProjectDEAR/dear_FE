@@ -24,140 +24,140 @@ const Notification = () => {
   };
   return (
     <>
-      {/* {modalOpen && (
-        <AlarmModal closeModal={closeModal}> */}
-      <React.Fragment>
-        <NotiWrapper>
-          <NotiTitle>
-            <TextB textAlign="left">알림</TextB>
-          </NotiTitle>
-          <NotiContainer>
-            {alarmList &&
-              alarmList.map((item, idx) => {
-                return item.notiType === "COMMENT" && !item.read ? (
-                  <>
-                    <NotiBox
-                      key={idx}
-                      onClick={() => {
-                        history.push(`/postDetail/${item.notiPostId}`);
-                      }}
-                    >
-                      <div className="title">
-                        <Text headline color="#2E2A32" textAlign="left">
-                          게시글에 댓글이 달렸어요.
-                        </Text>
-                        <Text body4 color="#948A9E">
-                          {TimeCounting(item.createAt, option)}
-                        </Text>
-                      </div>
-                      <div className="subtitle">
-                        <Text body4 color="#948A9E">
-                          {item.notiContent}
-                        </Text>
-                      </div>
-                    </NotiBox>
-                  </>
-                ) : null;
-              })}
+      {modalOpen && (
+        <AlarmModal closeModal={closeModal}>
+          <React.Fragment>
+            <NotiWrapper>
+              <NotiTitle>
+                <TextB textAlign="left">알림</TextB>
+              </NotiTitle>
+              <NotiContainer>
+                {alarmList &&
+                  alarmList.map((item, idx) => {
+                    return item.notiType === "COMMENT" && !item.read ? (
+                      <>
+                        <NotiBox
+                          key={idx}
+                          onClick={() => {
+                            history.push(`/postDetail/${item.notiPostId}`);
+                          }}
+                        >
+                          <div className="title">
+                            <Text headline color="#2E2A32" textAlign="left">
+                              게시글에 댓글이 달렸어요.
+                            </Text>
+                            <Text body4 color="#948A9E">
+                              {TimeCounting(item.createAt, option)}
+                            </Text>
+                          </div>
+                          <div className="subtitle">
+                            <Text body4 color="#948A9E">
+                              {item.notiContent}
+                            </Text>
+                          </div>
+                        </NotiBox>
+                      </>
+                    ) : null;
+                  })}
 
-            {alarmList &&
-              alarmList.map((item, idx) => {
-                return item.notiType && !item.read === "FOLLOW" ? (
-                  <>
-                    <NotiBox key={idx}>
-                      <div className="title">
-                        <Text headline color="#2E2A32" textAlign="left">
-                          나를 팔로우 했어요.
-                        </Text>
-                        <Text body4 color="#948A9E">
-                          {TimeCounting(item.createAt, option)}
-                        </Text>
-                      </div>
-                      <div className="subtitle">
-                        <ColorBadge
-                          border="2px solid #F8F8F8"
-                          size="14"
-                          bg={item.oppositeMemberColor}
-                          cursor="pointer"
-                        />
-                        <Text body4 color="#948A9E" textAlign="left">
-                          {item.notiPostId}
-                        </Text>
-                      </div>
-                    </NotiBox>
-                  </>
-                ) : null;
-              })}
+                {alarmList &&
+                  alarmList.map((item, idx) => {
+                    return item.notiType && !item.read === "FOLLOW" ? (
+                      <>
+                        <NotiBox key={idx}>
+                          <div className="title">
+                            <Text headline color="#2E2A32" textAlign="left">
+                              나를 팔로우 했어요.
+                            </Text>
+                            <Text body4 color="#948A9E">
+                              {TimeCounting(item.createAt, option)}
+                            </Text>
+                          </div>
+                          <div className="subtitle">
+                            <ColorBadge
+                              border="2px solid #F8F8F8"
+                              size="14"
+                              bg={item.oppositeMemberColor}
+                              cursor="pointer"
+                            />
+                            <Text body4 color="#948A9E" textAlign="left">
+                              {item.notiPostId}
+                            </Text>
+                          </div>
+                        </NotiBox>
+                      </>
+                    ) : null;
+                  })}
 
-            {alarmList &&
-              alarmList.map((item, idx) => {
-                return item.notiType && !item.read === "CHOICE" ? (
-                  <>
-                    <NotiBox
-                      key={idx}
-                      onClick={() => {
-                        history.push(`/postDetail/${item.notiPostId}`);
-                      }}
-                    >
-                      <div className="title">
-                        <Text headline color="#2E2A32" textAlign="left">
-                          댓글이 채택되었어요.
-                        </Text>
-                        <Text body4 color="#948A9E">
-                          {TimeCounting(item.createAt, option)}
-                        </Text>
-                      </div>
-                      <div className="subtitle">
-                        <Text body4 color="#948A9E" textAlign="left">
-                          {item.notiContent}
-                        </Text>
-                      </div>
-                    </NotiBox>
-                  </>
-                ) : null;
-              })}
+                {alarmList &&
+                  alarmList.map((item, idx) => {
+                    return item.notiType && !item.read === "CHOICE" ? (
+                      <>
+                        <NotiBox
+                          key={idx}
+                          onClick={() => {
+                            history.push(`/postDetail/${item.notiPostId}`);
+                          }}
+                        >
+                          <div className="title">
+                            <Text headline color="#2E2A32" textAlign="left">
+                              댓글이 채택되었어요.
+                            </Text>
+                            <Text body4 color="#948A9E">
+                              {TimeCounting(item.createAt, option)}
+                            </Text>
+                          </div>
+                          <div className="subtitle">
+                            <Text body4 color="#948A9E" textAlign="left">
+                              {item.notiContent}
+                            </Text>
+                          </div>
+                        </NotiBox>
+                      </>
+                    ) : null;
+                  })}
 
-            {alarmList &&
-              alarmList.map((item, idx) => {
-                return item.notiType === "MESSAGE" && !item.read ? (
-                  <>
-                    <NotiBox
-                      key={idx}
-                      onClick={() => {
-                        history.push("/myPage");
-                      }}
-                    >
-                      <div className="title">
-                        <Text headline color="#2E2A32" textAlign="left">
-                          쪽지가 도착했어요.
-                        </Text>
-                        <Text body4 color="#948A9E">
-                          {TimeCounting(item.createAt, option)}
-                        </Text>
-                      </div>
-                      <div className="subtitle">
-                        <ColorBadge
-                          border="2px solid #F8F8F8"
-                          size="14"
-                          bg={item.oppositeMemberColor}
-                          cursor="pointer"
-                        />
-                        <Text body4 color="#948A9E" textAlign="left">
-                          {item.notiPostId}
-                        </Text>
-                      </div>
-                    </NotiBox>
-                  </>
-                ) : null;
-              })}
-          </NotiContainer>
-          {/* <ArrowBox>
+                {alarmList &&
+                  alarmList.map((item, idx) => {
+                    return item.notiType === "MESSAGE" && !item.read ? (
+                      <>
+                        <NotiBox
+                          key={idx}
+                          onClick={() => {
+                            history.push("/myPage");
+                          }}
+                        >
+                          <div className="title">
+                            <Text headline color="#2E2A32" textAlign="left">
+                              쪽지가 도착했어요.
+                            </Text>
+                            <Text body4 color="#948A9E">
+                              {TimeCounting(item.createAt, option)}
+                            </Text>
+                          </div>
+                          <div className="subtitle">
+                            <ColorBadge
+                              border="2px solid #F8F8F8"
+                              size="14"
+                              bg={item.oppositeMemberColor}
+                              cursor="pointer"
+                            />
+                            <Text body4 color="#948A9E" textAlign="left">
+                              {item.notiContent}
+                            </Text>
+                          </div>
+                        </NotiBox>
+                      </>
+                    ) : null;
+                  })}
+              </NotiContainer>
+              {/* <ArrowBox>
             <div className="arrow" />
           </ArrowBox> */}
-        </NotiWrapper>
-      </React.Fragment>
-      {/* </AlarmModal> */}
-      {/* )} */}
+            </NotiWrapper>
+          </React.Fragment>
+        </AlarmModal>
+      )}
     </>
   );
 };
@@ -178,22 +178,21 @@ const NotiWrapper = styled.div`
     background-color: rgba(0, 0, 0, 0);
   }
 
-  position: absolute;
+  /* position: absolute; */
   width: 400px;
   max-height: 708px;
-  right: 160px;
-  bottom: 5px;
+  /* right: 160px;
+  bottom: 5px; */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 30px;
+  /* padding: 30px; */
   gap: 12px;
-  width: 400px;
   background: #ffffff;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 20px;
   @media ${({ theme }) => theme.device.isMobile} {
-    width: 260px;
+    width: 320px;
     height: 452px;
     display: flex;
     justify-content: center;
@@ -206,6 +205,11 @@ const NotiTitle = styled.div`
   width: 340px;
   margin: auto;
   height: 40px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 260px;
+    /* height: 20px; */
+    /* border: 1px solid red; */
+  }
 `;
 const NotiContainer = styled.div`
   display: flex;
@@ -213,6 +217,11 @@ const NotiContainer = styled.div`
   margin: auto;
   width: 340px;
   height: 440px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 260px;
+    height: 352px;
+    /* border: 1px solid red; */
+  }
 `;
 const NotiBox = styled.div`
   display: flex;
@@ -240,6 +249,11 @@ const NotiBox = styled.div`
     justify-content: left;
     text-align: left;
     flex-direction: row;
+  }
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 260px;
+    height: 88px;
+    /* border: 1px solid red; */
   }
 `;
 const ArrowBox = styled.div`

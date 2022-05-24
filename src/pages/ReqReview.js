@@ -12,10 +12,11 @@ import { actionCreators } from "../redux/modules/review";
 
 //고민러가 작성하는 상담후기 페이지
 function ReqReview(props) {
+  console.log(props);
   const dispatch = useDispatch();
 
   const [serviceComment, setServiceComment] = React.useState(null);
-  const [follow, unFollow] = React.useState(false);
+  const [follow, unFollow] = React.useState(true);
   const [goodClick, setGoodClick] = React.useState(false);
   const [badClick, setBadClick] = React.useState(false);
 
@@ -130,7 +131,7 @@ function ReqReview(props) {
   //유저찜하기 액션
   const userFollow = () => {
     unFollow(!follow);
-    dispatch(actionCreators.followDB(props.reqMemberId, follow));
+    dispatch(actionCreators.followDB(props.resMemberId, follow));
   };
 
   return (
@@ -258,7 +259,7 @@ function ReqReview(props) {
             margin="0px 8px"
           >
             <Text color="#7A37BE" cursor="pointer">
-              {follow ? "리스너 찜 취소하기" : "리스너 찜하기"}
+              {follow ? "리스너 찜하기" : "리스너 찜 취소하기"}
             </Text>
           </Button>
           <Button

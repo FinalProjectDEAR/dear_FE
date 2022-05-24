@@ -262,6 +262,7 @@ const TitleContainer = styled.div`
   order: 0;
   flex-grow: 0;
   /* background: orange; */
+  margin: auto;
   @media ${({ theme }) => theme.device.isMobile} {
     width: 155px;
     height: 83px;
@@ -298,6 +299,7 @@ const TitleWrapper = styled.div`
   order: 1;
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
+  margin: auto;
   @media ${({ theme }) => theme.device.isMobile} {
     width: 250px;
     /* background-color: orange; */
@@ -318,6 +320,7 @@ const CategoryWrapper = styled.div`
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
   border-top: 1px solid #948a9e;
+  margin: auto;
   @media ${({ theme }) => theme.device.isMobile} {
     /* background-color: orange; */
     width: 250px;
@@ -382,6 +385,7 @@ const ContentWrapper = styled.div`
   order: 1;
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
+  margin: auto;
   @media ${({ theme }) => theme.device.isMobile} {
     width: 250px;
     border: none;
@@ -409,6 +413,7 @@ const ImageWrapper = styled.div`
   order: 1;
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
+  margin: auto;
   @media ${({ theme }) => theme.device.isMobile} {
     /* background-color: orange; */
     width: 250px;

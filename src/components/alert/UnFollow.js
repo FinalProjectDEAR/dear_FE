@@ -7,6 +7,7 @@ import { useMediaQuery } from "react-responsive";
 
 import { actionCreators } from "../../redux/modules/review";
 import { actionCreators as Follow } from "../../redux/modules/mypage";
+import { style } from "@mui/system";
 
 function UnFollow(props) {
   const Mobile = useMediaQuery({
@@ -29,13 +30,15 @@ function UnFollow(props) {
           <Text headline color="#2E2A32" size="16px">
             {nickname}
           </Text>
-          <TextB size="16px" color="#2E2A32">
+          <TextB body3 size="16px" color="#2E2A32">
             님 찜을 해제할까요?
           </TextB>
         </LineBox>
+
         <Text sub4 color="#999999">
           해제된 찜은 마이페이지에서 복구할 수 없어요
         </Text>
+
         <BottomBox>
           {Mobile ? null : (
             <Button
@@ -79,7 +82,7 @@ const CloseContainer = styled.div`
   @media ${({ theme }) => theme.device.isMobile} {
     padding-top: 15px;
     width: 320px;
-    height: 146px;
+    height: 260px;
     border-radius: 10px;
   }
 `;
@@ -91,6 +94,13 @@ const LineBox = styled.div`
   align-items: center;
   @media ${({ theme }) => theme.device.isMobile} {
     margin: auto;
+    /* border: 1px solid red; */
+    width: 212px;
+    height: 68px;
+    display: flex;
+    margin: 20px auto;
+    padding: 20px 0px 0px 0px;
+    flex-direction: column;
   }
 `;
 
@@ -105,6 +115,11 @@ const BottomBox = styled.div`
   @media ${({ theme }) => theme.device.isMobile} {
     /* border: 1px solid red; */
     justify-content: center;
+    width: 120px;
+    height: 40px;
+    margin: 10px auto;
+    padding: 0px 80px;
+    /* border: 1px solid red; */
     .goBack {
       display: none;
     }

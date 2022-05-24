@@ -35,7 +35,7 @@ const CounselHistory = (props) => {
               {props?.item.nickname} ({createdAt})
             </Text>
           </div>{" "}
-          <div className="tag">
+          <div className="tagM">
             <Tag counselRes2>
               <Text sub7 margin="3px 8px">
                 {props?.item.myRole}
@@ -140,5 +140,11 @@ const CounselHistoryWrapper = styled.div`
 const MobileVer = styled.div`
   display: flex;
   justify-content: space-between;
+  padding-top: 12px;
+  .tagM {
+    display: flex;
+
+    margin: 0px 12px 0px 0px;
+  }
 `;
 export default CounselHistory;
