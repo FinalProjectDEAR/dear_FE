@@ -25,10 +25,12 @@ function MainHotPost() {
     dispatch(mainActions.getHotBoardDB());
   }, []);
 
-  // const hotVoteList = useSelector((state) => state.main.hotVoteList);
-  // const TopVote = hotVoteList.slice(0, 2);
-  // const hotBoardList = useSelector((state) => state.main.hotBoardList);
-  // const TopBoard = hotBoardList.slice(0, 3);
+  const hotVoteList = useSelector((state) => state.main.hotVoteList);
+  const topVote = hotVoteList.slice(0, 3);
+  console.log(topVote);
+  const hotBoardList = useSelector((state) => state.main.hotBoardList);
+  const topBoard = hotBoardList.slice(0, 4);
+  console.log(topBoard);
 
   return (
     <React.Fragment>
@@ -38,21 +40,21 @@ function MainHotPost() {
             디어상담소 인기게시물
           </Text>
           <VoteBox>
-            {/* {TopVote.map((vote, idx) => {
+            {topVote.map((vote, idx) => {
               return <VoteCard key={idx} voteInfo={vote} />;
-            })} */}
+            })}
+            {/* <VoteCard />
             <VoteCard />
-            <VoteCard />
-            <VoteCard />
+            <VoteCard /> */}
           </VoteBox>
           <BoardBox>
-            {/* {TopBoard.map((post, idx) => {
+            {topBoard.map((post, idx) => {
               return <PostCard key={idx} postInfo={post} />;
-            })} */}
+            })}
+            {/* <PostCard />
             <PostCard />
             <PostCard />
-            <PostCard />
-            <PostCard />
+            <PostCard /> */}
           </BoardBox>
           <Text
             sub2
@@ -91,9 +93,9 @@ const HotPostWrapper = styled.div`
   height: 500px;
   margin: 0px auto;
   @media ${({ theme }) => theme.device.mobile} {
-    padding: 0px 25px;
+    padding: 25px 25px;
     width: 360px;
-    height: 650px;
+    height: 640px;
   }
 `;
 

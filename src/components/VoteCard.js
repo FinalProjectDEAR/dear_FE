@@ -9,24 +9,23 @@ import image01 from "../assets/image01.png";
 import image02 from "../assets/image02.png";
 
 function VoteCard(props) {
-  const totalCount =
-    props.vote[0].selectionList.length + props.vote[1].selectionList.length;
+  const leftScore = props.voteInfo?.vote[0].selectionList.length;
+  const rightScore = props.voteInfo?.vote[1].selectionList.length;
 
-  const leftScore = props.vote[0].selectionList.length;
-  const rightScore = props.vote[1].selectionList.length;
+  const totalCount = leftScore + rightScore;
 
   return (
     <React.Fragment>
       <CardWrapper
         onClick={() => {
-          history.push(`/voteDetail/${props.postId}`);
+          history.push(`/voteDetail/${props.voteInfo.postId}`);
         }}
       >
         <Ellipsis>
           <TextB subTitle margin="0px">
             <Question>Q. </Question>
-            {/* {voetInfo.} */}
-            누가 누구의 새우를 까줄 때 어떻게 했어야 했나요?
+            {props.voteInfo.title}
+            {/* 누가 누구의 새우를 까줄 때 어떻게 했어야 했나요? */}
           </TextB>
         </Ellipsis>
 
@@ -34,15 +33,15 @@ function VoteCard(props) {
           <LineBox>
             <VoteLine>
               <Text sub4 margin="0px 4px">
-                {/* {voteInfo.vote[0].imageTitle} */}
-                까준다
+                {props.voteInfo.vote[0].imageTitle}
+                {/* 까준다 */}
               </Text>
             </VoteLine>
             <ProgressBar>
               <Highlight
                 width={
-                  // (voteInfo.vote[0].selectionList.length / totalCount) * 100 + "%"
-                  (60 / 165) * 100 + "%"
+                  (leftScore / totalCount) * 100 + "%"
+                  // (60 / 165) * 100 + "%"
                 }
                 color={leftScore >= rightScore ? "#7A37BE" : "#BB9ED8"}
               />
@@ -51,15 +50,15 @@ function VoteCard(props) {
           <LineBox>
             <VoteLine>
               <Text sub4 margin="0px 4px">
-                {/* {voteInfo.vote[1].imageTitle} */}
-                안까준다
+                {props.voteInfo.vote[1].imageTitle}
+                {/* 안까준다 */}
               </Text>
             </VoteLine>
             <ProgressBar>
               <Highlight
                 width={
-                  // (voteInfo.vote[0].selectionList.length / totalCount) * 100 + "%"
-                  (105 / 165) * 100 + "%"
+                  (rightScore / totalCount) * 100 + "%"
+                  // (105 / 165) * 100 + "%"
                 }
                 color={rightScore >= leftScore ? "#7A37BE" : "#BB9ED8"}
               />
@@ -69,8 +68,8 @@ function VoteCard(props) {
         <LineBox>
           <PeopleRoundedIcon style={{ width: "16.5px", color: "#999999" }} />
           <Text sub5 margin="0px 5px">
-            {/* {totalCount} */}
-            165
+            {totalCount}
+            {/* 165 */}
           </Text>
         </LineBox>
       </CardWrapper>
@@ -114,6 +113,8 @@ const CardWrapper = styled.div`
   filter: drop-shadow(0px 0px 20px rgba(172, 151, 197, 0.25));
   @media ${({ theme }) => theme.device.mobile} {
     margin: 5px;
+    padding: 20px 40px;
+    height: 150px;
   }
 `;
 

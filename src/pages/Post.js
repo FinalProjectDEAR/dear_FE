@@ -17,11 +17,19 @@ function Post(props) {
   };
   const createdAt = TimeCounting(props.item.created_at, option);
 
+  const gotoDetail = () => {
+    if (props.item.category === "투표") {
+      history.push(`/voteDetail/${postId}`);
+    } else {
+      history.push(`/PostDetail/${postId}`);
+    }
+  };
+
   return (
     <React.Fragment>
       <PostWrapper
         onClick={() => {
-          history.push(`/PostDetail/${postId}`);
+          gotoDetail();
         }}
       >
         <Title>

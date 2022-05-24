@@ -84,7 +84,7 @@ const getCateDetailDB = (page, category) => {
       api
         .get(`/anonypost?page=${page}&category=${category}`, {})
         .then((res) => {
-          // console.log("포스트 카테고리 상세보기 get", res.data.data);
+          console.log("포스트 카테고리 상세보기 get", res.data.data);
           dispatch(getPost(res.data.data));
         });
     } catch (err) {

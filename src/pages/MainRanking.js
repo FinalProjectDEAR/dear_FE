@@ -108,6 +108,7 @@ const RankingWrapper = styled.div`
   height: 600px;
   margin: 0px auto;
   @media ${({ theme }) => theme.device.mobile} {
+    height: 640px;
     padding: 0px 20px;
   }
 `;
@@ -120,7 +121,8 @@ const ServiceInfoContainer = styled.div`
   width: 100%;
   height: 50%;
   @media ${({ theme }) => theme.device.mobile} {
-    height: 300px;
+    margin-top: 50px;
+    height: 280px;
   }
 `;
 

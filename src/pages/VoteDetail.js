@@ -109,7 +109,9 @@ function VoteDetail(props) {
             )}
 
             <ContentBox>
-              <Text body3>{voteInfo?.contents}</Text>
+              <Text body3 textAlign="left">
+                {voteInfo?.contents}
+              </Text>
             </ContentBox>
             {voteInfo.vote[0].imageUrl ? (
               <ImageVote voteInfo={voteInfo} />
@@ -255,12 +257,12 @@ const DelText = styled.p`
 
 const ContentBox = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  justify-content: flex-start;
   box-sizing: border-box;
   padding: 30px 40px;
   gap: 10px;
   width: 1032px;
+  word-break: keep-all;
   @media ${({ theme }) => theme.device.mobile} {
     width: 328px;
     padding: 12px 20px;

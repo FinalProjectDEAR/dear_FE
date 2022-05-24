@@ -37,7 +37,8 @@ const VoteList = (props) => {
     pauseOnHover: true,
   };
 
-  // const voteList = useSelector((state) => state.main.hotVoteList);
+  const hotVoteList = useSelector((state) => state.main.hotVoteList);
+  console.log(hotVoteList);
 
   const gotoVote = () => {
     dispatch(actionCreators.getCateDetailDB(1, "투표"));
@@ -50,9 +51,10 @@ const VoteList = (props) => {
           디어상담소 인기게시물
         </Text>
         <Slider {...settings} dotsClass="dotStyle">
-          {/* {voteList.map((v, idx) => {
-            return <VoteCard {...v} key={idx} />;
-          })} */}
+          {hotVoteList.map((vote, idx) => {
+            return <VoteCard key={idx} voteInfo={vote} />;
+          })}
+          {/* <VoteCard />
           <VoteCard />
           <VoteCard />
           <VoteCard />
@@ -61,8 +63,7 @@ const VoteList = (props) => {
           <VoteCard />
           <VoteCard />
           <VoteCard />
-          <VoteCard />
-          <VoteCard />
+          <VoteCard /> */}
         </Slider>
         <Link to="2" smooth={true}>
           <Text

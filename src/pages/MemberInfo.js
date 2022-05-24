@@ -171,7 +171,7 @@ function MemberInfo() {
                         padding="11px 15px"
                         margin="0px"
                         placeholder="닉네임 3자-10자 이내 입력"
-                        maxLength="10"
+                        maxlength="10"
                         alignItems="center"
                         _onChange={(e) => {
                           setNickname(e.target.value);

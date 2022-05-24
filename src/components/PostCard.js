@@ -10,23 +10,27 @@ import ChatBubbleRoundedIcon from "@mui/icons-material/ChatBubbleRounded";
 function PostCard({ postInfo }) {
   return (
     <React.Fragment>
-      <CardWrapper>
-        {/* <Text sub4>{postInfo.category}</Text> */}
-        <Text sub4 color="#999999" textAlign="center">
+      <CardWrapper
+        onClick={() => {
+          history.push(`/postDetail/${postInfo.postId}`);
+        }}
+      >
+        <Text sub4>{postInfo.category}</Text>
+        {/* <Text sub4 color="#999999" textAlign="center">
           연애중
-        </Text>
+        </Text> */}
         <Ellipsis>
-          {/* <Text subTitle>{postInfo.title}</Text> */}
-          <Text subTitle>
+          <Text subTitle>{postInfo.title}</Text>
+          {/* <Text subTitle>
             게시글제목게시물제목게시물제목게시물제목게시물제목게시글제목
-          </Text>
+          </Text> */}
         </Ellipsis>
         <ButtonBox>
           <IconBox>
             <FavoriteRoundedIcon style={{ width: "16px", color: "#948A9E" }} />
             <Text body4 margin="0px 5px">
-              {/* {postInfo.likes} */}
-              22
+              {postInfo.likes}
+              {/* 22 */}
             </Text>
           </IconBox>
           <IconBox>
@@ -34,8 +38,8 @@ function PostCard({ postInfo }) {
               style={{ width: "16px", color: "#948A9E" }}
             />
             <Text body4 margin="0px 5px">
-              {/* {postInfo.comments} */}
-              12
+              {postInfo.comments}
+              {/* 12 */}
             </Text>
           </IconBox>
         </ButtonBox>
@@ -55,13 +59,13 @@ const CardWrapper = styled.div`
   box-sizing: border-box;
   width: 220px;
   height: 198px;
-
+  cursor: pointer;
   background: #fafafa;
   border-radius: 10px;
   @media ${({ theme }) => theme.device.mobile} {
     margin: 5px 0px;
     width: 300px;
-    height: 170px;
+    height: 150px;
     padding: 26px;
   }
 `;
