@@ -21,9 +21,9 @@ import { Link } from "react-scroll";
 const VoteList = (props) => {
   const dispatch = useDispatch();
 
-  // React.useEffect(() => {
-  //   dispatch(mainActions.getHotVoteDB());
-  // }, []);
+  React.useEffect(() => {
+    dispatch(mainActions.getHotVoteDB());
+  }, []);
 
   const settings = {
     dots: false,

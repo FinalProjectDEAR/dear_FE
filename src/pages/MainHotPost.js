@@ -16,13 +16,14 @@ import serviceInfo from "../assets/main/service_info_img.png";
 
 function MainHotPost() {
   const dispatch = useDispatch();
-  // React.useEffect(() => {
-  //   dispatch(mainActions.getHotVoteDB());
-  // }, []);
 
-  // React.useEffect(() => {
-  //   dispatch(mainActions.getHotBoardDB());
-  // }, []);
+  React.useEffect(() => {
+    dispatch(mainActions.getHotVoteDB());
+  }, []);
+
+  React.useEffect(() => {
+    dispatch(mainActions.getHotBoardDB());
+  }, []);
 
   // const hotVoteList = useSelector((state) => state.main.hotVoteList);
   // const TopVote = hotVoteList.slice(0, 2);

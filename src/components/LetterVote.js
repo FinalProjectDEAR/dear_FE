@@ -73,38 +73,39 @@ function LetterVote({ voteInfo }) {
           <CheckBox>
             <Vote
               bg={leftSelected ? "#EEE7F5" : "transparent"}
-              border={leftSelected ? "1px solid #7A37BE" : "1px solid #E6E6E6;"}
+              border={leftSelected ? "2px solid #7A37BE" : "1px solid #E6E6E6;"}
               onClick={selectLeft}
             >
-              <Text
+              <Font
                 body3
                 color={leftSelected ? "#7A37BE" : "#61586A"}
+                weight={leftSelected ? 700 : 500}
                 cursor="pointer"
               >
                 {voteInfo.vote[0].imageTitle}
-              </Text>
+              </Font>
             </Vote>
-            <Text body2 margin="17px 24px">
+            <Text title margin="17px 24px" color="#7a37be">
               VS
             </Text>
             <Vote
               bg={rightSelected ? "#EEE7F5" : "transparent"}
               border={
-                rightSelected ? "1px solid #7A37BE" : "1px solid #E6E6E6;"
+                rightSelected ? "2px solid #7A37BE" : "1px solid #E6E6E6;"
               }
               margin="10px 0px"
               cursor="pointer"
               shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
               onClick={selectRight}
             >
-              <Text
+              <Font
                 margin="0px"
-                body3
                 color={rightSelected ? "#7A37BE" : "#61586A"}
+                weight={rightSelected ? 700 : 500}
                 cursor="pointer"
               >
                 {voteInfo.vote[1].imageTitle}
-              </Text>
+              </Font>
             </Vote>
           </CheckBox>
           <BottomBox>
@@ -132,6 +133,7 @@ const VoteWrapper = styled.div`
   width: 952px;
   height: 240px;
   display: flex;
+  margin: auto;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -182,6 +184,15 @@ const Vote = styled.div`
     height: 54px;
     margin: 0px;
   }
+`;
+
+const Font = styled.p`
+  color: ${(props) => props.color};
+  margin: 0px;
+  font-weight: ${(props) => props.weight};
+  font-size: 16px;
+  line-height: 24px;
+  cursor: pointer;
 `;
 
 const BottomBox = styled.div`

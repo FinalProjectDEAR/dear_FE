@@ -159,6 +159,7 @@ function VoteWrite() {
                   <Input
                     margin="0px"
                     padding="14px"
+                    maxLength="20"
                     placeholder="질문할 내용을 20자 이내로 입력해주세요."
                     value={title}
                     _onChange={(e) => {
@@ -241,6 +242,7 @@ function VoteWrite() {
                   <Input
                     margin="0px"
                     padding="14px"
+                    maxLength="10"
                     placeholder="10자 이내 입력"
                     value={voteLeft}
                     _onChange={(e) => {
@@ -254,6 +256,7 @@ function VoteWrite() {
                   <Input
                     margin="0px"
                     padding="14px"
+                    maxLength="10"
                     placeholder="10자 이내 입력"
                     value={voteRight}
                     _onChange={(e) => {

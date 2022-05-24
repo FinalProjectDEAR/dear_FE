@@ -12,7 +12,7 @@ function ReviewCard({ reviewInfo }) {
 
   function dateFormat(date) {
     let year = date.substring(0, 3);
-    let month = date.substring(5, 6);
+    let month = date.substring(5, 7);
     let day = date.substring(8, 9);
 
     // month = month >= 10 ? month : "0" + month;
@@ -33,16 +33,16 @@ function ReviewCard({ reviewInfo }) {
     <React.Fragment>
       <CardWrapper>
         <Text sub6 color="#948A9E" textAlign="left">
-          {/* [{dateFormat(reviewInfo.createdAt)} 상담]
-          {hideName(reviewInfo.nickname)}님 */}
-          [2022년 5월 23일 상담] 낭*****님
+          [{dateFormat(reviewInfo.createdAt)} 상담]{" "}
+          {hideName(reviewInfo.nickname)}님
+          {/* [2022년 5월 23일 상담] 낭*****님 */}
         </Text>
         <Ellipsis>
-          {/* <Text title>{props.content}</Text> */}
-          <Text title margin="0px">
+          <Text title>{reviewInfo.comment}</Text>
+          {/* <Text title margin="0px">
             어디가서 말하기 어려웠는데, 고마워요 디어! 어디가서말하기 어려웠는데
             고마워요 디어! 어디가서 말하기 어려웠는데 고마워요 디어!
-          </Text>
+          </Text> */}
         </Ellipsis>
       </CardWrapper>
     </React.Fragment>

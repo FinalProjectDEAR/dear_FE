@@ -12,6 +12,15 @@ import kakao from "../assets/kakao.png";
 import Footer from "../components/Footer";
 
 const Login = () => {
+  const isLogin = localStorage.getItem("isLogin");
+
+  const logout = () => {
+    history.push("/");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("memberId");
+    localStorage.removeItem("nickname");
+  };
+
   const dispatch = useDispatch();
 
   const [memberId, setMemberId] = React.useState("");
@@ -97,7 +106,7 @@ const Login = () => {
               계정이 없으신가요?
             </Text>
             <Text
-              sub5
+              sub3
               margin="0px 10px"
               color="#7A37BE"
               deco="underLine"
@@ -114,7 +123,49 @@ const Login = () => {
           <KakaoButton onClick={kakaoAuth} src={kakao} />
         </KakaoBox>
       </LoginWrapper>
-      <Footer />
+      <MobileFooter>
+        {isLogin ? (
+          <FooterBtn>
+            <Text
+              sub
+              margin="2px 6px"
+              color="#666666"
+              _onClick={() => {
+                logout();
+              }}
+            >
+              로그아웃
+            </Text>
+          </FooterBtn>
+        ) : (
+          <FooterBtn>
+            <Text
+              sub
+              margin="2px 6px"
+              color="#666666"
+              _onClick={() => {
+                history.push("/");
+              }}
+            >
+              로그인
+            </Text>
+          </FooterBtn>
+        )}
+
+        <FooterBox>
+          <Text sub color="#666666" margin="0px 6px">
+            의견 및 오류 제보
+          </Text>
+          |
+          <Text sub color="#666666" margin="0px 6px">
+            자주 묻는 질문
+          </Text>
+          |
+          <Text sub color="#666666" margin="0px 6px">
+            개인정보처리방침
+          </Text>
+        </FooterBox>
+      </MobileFooter>
     </Background>
   );
 };
@@ -123,7 +174,7 @@ export default Login;
 
 const Background = styled.div`
   width: 100%;
-  height: 935px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -193,7 +244,7 @@ const KakaoButton = styled.img`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  --size: 60px;
+  --size: 52px;
   width: var(--size);
   height: var(--size);
   border-radius: var(--size);
@@ -201,6 +252,20 @@ const KakaoButton = styled.img`
 
   @media ${({ theme }) => theme.device.mobile} {
     --size: 40px;
+  }
+`;
+
+const FooterBox = styled.div`
+  width: 1032px;
+  margin: 0px auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #666;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 100%;
+    margin-top: 20px;
+    justify-content: center;
   }
 `;
 
@@ -225,21 +290,11 @@ const FooterBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2px 6px;
 
-  width: 38px;
   height: 18px;
 
   background: #f8f8f8;
 
   border: 1px solid #cccccc;
   border-radius: 2px;
-`;
-
-const FooterBox = styled.div`
-  margin: 10px auto;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  color: #666;
 `;

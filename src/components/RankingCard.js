@@ -5,21 +5,21 @@ import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
 //max 5개
-function RankingCard(props) {
+function RankingCard({ rankInfo }) {
   return (
     <React.Fragment>
       <UserRankingWrapper>
         <BadgeBox>
-          {/* <ColorBadge color={props.color} size="40" /> */}
-          <ColorBadge bg="#40D39C" size="40" />
+          <ColorBadge bg={rankInfo.color} size="40" />
+          {/* <ColorBadge bg="#40D39C" size="40" /> */}
         </BadgeBox>
         <LineBox>
-          {/* <Text body3> {props.nickname}</Text> */}
-          <Text body3>닉네임은최대열자에용</Text>
+          <Text body3> {rankInfo.nickname}</Text>
+          {/* <Text body3>닉네임은최대열자에용</Text> */}
         </LineBox>
         <LineBox>
           <Text sub color="#7A37BE">
-            60.4 °C
+            {rankInfo.score} °C
           </Text>
           <TemperatureBar>
             <ProgressBar>
@@ -29,8 +29,8 @@ function RankingCard(props) {
                 border="none"
                 position="absolute"
               />
-              {/* <Highlight width={props.rate + "%"} /> */}
-              <Highlight width="60%" />
+              <Highlight width={rankInfo.score + "%"} />
+              {/* <Highlight width="60%" /> */}
             </ProgressBar>
           </TemperatureBar>
         </LineBox>

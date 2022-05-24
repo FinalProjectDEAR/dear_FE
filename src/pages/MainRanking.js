@@ -7,7 +7,7 @@ import { Text, TextB } from "../elements";
 import styled from "styled-components";
 
 //페이지
-import UserRanking from "../components/RankingCard";
+import RankingCard from "../components/RankingCard";
 
 //assets
 import serviceInfo from "../assets/main/service_info_img.png";
@@ -15,12 +15,14 @@ import MobileRanking from "../components/MobileRanking";
 
 function MainRanking() {
   const dispatch = useDispatch();
+
   React.useEffect(() => {
     dispatch(mainActions.getRankingDB());
   }, []);
 
   const rankingList = useSelector((state) => state.main.rankingList);
-  const topFive = rankingList.slice(0, 4);
+  console.log("랭킹리스트", rankingList);
+
   return (
     <React.Fragment>
       <Background>
@@ -74,14 +76,14 @@ function MainRanking() {
               </Text>
             </LineBox>
             <LineBox>
-              {/* {topFive.map((ranker, idx) => {
-                return <RankingCard key={idx} rankerInfo={ranker} />;
-              })} */}
-              <UserRanking />
-              <UserRanking />
-              <UserRanking />
-              <UserRanking />
-              <UserRanking />
+              {rankingList.map((rank, idx) => {
+                return <RankingCard key={idx} rankInfo={rank} />;
+              })}
+              {/* <RankingCard />
+              <RankingCard />
+              <RankingCard />
+              <RankingCard />
+              <RankingCard /> */}
             </LineBox>
           </RankingContainer>
           <MobileRanking />

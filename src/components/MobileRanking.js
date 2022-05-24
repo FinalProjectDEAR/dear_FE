@@ -14,11 +14,11 @@ import "../styles/libraryStyle/style.css";
 
 function MobileRanking() {
   const dispatch = useDispatch();
-  //   React.useEffect(() => {
-  //     dispatch(mainActions.getRankingDB());
-  //   }, []);
+  React.useEffect(() => {
+    dispatch(mainActions.getRankingDB());
+  }, []);
 
-  //   const rankingList = useSelector((state) => state.main.rankingList);
+  const rankingList = useSelector((state) => state.main.rankingList);
   //   const topFive = rankingList.slice(0, 4);
 
   const settings = {
@@ -37,14 +37,14 @@ function MobileRanking() {
       <RankingWrapper>
         <RankingContainer>
           <Slider {...settings} dotsClass="dotStyle">
-            {/* {topFive.map((v, idx) => {
-                return <RankingCard {...v} key={idx} />;
-              })} */}
+            {rankingList.map((rank, idx) => {
+              return <RankingCard rankInfo={rank} key={idx} />;
+            })}
+            {/* <RankingCard />
             <RankingCard />
             <RankingCard />
             <RankingCard />
-            <RankingCard />
-            <RankingCard />
+            <RankingCard /> */}
           </Slider>
         </RankingContainer>
       </RankingWrapper>

@@ -160,7 +160,7 @@ function MemberInfo() {
                 <InfoContainer>
                   <Preview>
                     <ColorBadge size="40" bg={isSelected} />
-                    <Text margin="0px 15px" batang weight="300" size="16px">
+                    <Text body3 margin="0px 15px">
                       {showName}
                     </Text>
                   </Preview>
@@ -171,6 +171,7 @@ function MemberInfo() {
                         padding="11px 15px"
                         margin="0px"
                         placeholder="닉네임 3자-10자 이내 입력"
+                        maxLength="10"
                         alignItems="center"
                         _onChange={(e) => {
                           setNickname(e.target.value);
@@ -288,7 +289,12 @@ function MemberInfo() {
                             setGender(e.target.value);
                           }}
                         />
-                        <Text weight="300" size="14px" color="#333333">
+                        <Text
+                          weight="300"
+                          size="14px"
+                          color="#333333"
+                          margin="0px 10px"
+                        >
                           남성
                         </Text>
                       </CheckBox>
@@ -301,7 +307,12 @@ function MemberInfo() {
                             setGender(e.target.value);
                           }}
                         />
-                        <Text weight="300" size="14px" color="#333333">
+                        <Text
+                          weight="300"
+                          size="14px"
+                          color="#333333"
+                          margin="0px 10px"
+                        >
                           여성
                         </Text>
                       </CheckBox>
@@ -314,52 +325,61 @@ function MemberInfo() {
                         나이
                       </Text>
                     </Subject>
-                    <div style={{ display: "flex", flexDirection: "column" }}>
-                      <InputBox>
-                        <CheckBox>
-                          <input
-                            type="radio"
-                            name="age"
-                            value="20대 초반"
-                            onChange={(e) => {
-                              setAge(e.target.value);
-                            }}
-                          />
-                          <Text weight="300" size="14px" color="#333333">
-                            20대 초반
-                          </Text>
-                        </CheckBox>
-                        <CheckBox>
-                          <input
-                            type="radio"
-                            name="age"
-                            value="20대 중반"
-                            onChange={(e) => {
-                              setAge(e.target.value);
-                            }}
-                          />
-                          <Text weight="300" size="14px" color="#333333">
-                            20대 중반
-                          </Text>
-                        </CheckBox>
-                        <CheckBox>
-                          <input
-                            type="radio"
-                            name="age"
-                            value="20대 후반"
-                            onChange={(e) => {
-                              setAge(e.target.value);
-                            }}
-                          />
-                          <Text weight="300" size="14px" color="#333333">
-                            20대 후반
-                          </Text>
-                        </CheckBox>
-                      </InputBox>
-                    </div>
-                  </LineBox>
-                  <SecondLine>
-                    <InputBox>
+                    <GridInputBox>
+                      <CheckBox>
+                        <input
+                          type="radio"
+                          name="age"
+                          value="20대 초반"
+                          onChange={(e) => {
+                            setAge(e.target.value);
+                          }}
+                        />
+                        <Text
+                          weight="300"
+                          size="14px"
+                          color="#333333"
+                          margin="0px 10px"
+                        >
+                          20대 초반
+                        </Text>
+                      </CheckBox>
+                      <CheckBox>
+                        <input
+                          type="radio"
+                          name="age"
+                          value="20대 중반"
+                          onChange={(e) => {
+                            setAge(e.target.value);
+                          }}
+                        />
+                        <Text
+                          weight="300"
+                          size="14px"
+                          color="#333333"
+                          margin="0px 10px"
+                        >
+                          20대 중반
+                        </Text>
+                      </CheckBox>
+                      <CheckBox>
+                        <input
+                          type="radio"
+                          name="age"
+                          value="20대 후반"
+                          onChange={(e) => {
+                            setAge(e.target.value);
+                          }}
+                        />
+                        <Text
+                          weight="300"
+                          size="14px"
+                          color="#333333"
+                          margin="0px 10px"
+                        >
+                          20대 후반
+                        </Text>
+                      </CheckBox>
                       <CheckBox>
                         <input
                           type="radio"
@@ -369,7 +389,12 @@ function MemberInfo() {
                             setAge(e.target.value);
                           }}
                         />
-                        <Text weight="300" size="14px" color="#333333">
+                        <Text
+                          weight="300"
+                          size="14px"
+                          color="#333333"
+                          margin="0px 10px"
+                        >
                           30대 초반
                         </Text>
                       </CheckBox>
@@ -382,7 +407,12 @@ function MemberInfo() {
                             setAge(e.target.value);
                           }}
                         />
-                        <Text weight="300" size="14px" color="#333333">
+                        <Text
+                          weight="300"
+                          size="14px"
+                          color="#333333"
+                          margin="0px 10px"
+                        >
                           30대 중반
                         </Text>
                       </CheckBox>
@@ -395,12 +425,17 @@ function MemberInfo() {
                             setAge(e.target.value);
                           }}
                         />
-                        <Text weight="300" size="14px" color="#333333">
+                        <Text
+                          weight="300"
+                          size="14px"
+                          color="#333333"
+                          margin="0px 10px"
+                        >
                           30대 후반
                         </Text>
                       </CheckBox>
-                    </InputBox>
-                  </SecondLine>
+                    </GridInputBox>
+                  </LineBox>
 
                   <LineBox>
                     <Subject>
@@ -419,7 +454,12 @@ function MemberInfo() {
                             setDating(e.target.value);
                           }}
                         />
-                        <Text weight="300" size="14px" color="#333333">
+                        <Text
+                          weight="300"
+                          size="14px"
+                          color="#333333"
+                          margin="0px 10px"
+                        >
                           솔로
                         </Text>
                       </CheckBox>
@@ -432,7 +472,12 @@ function MemberInfo() {
                             setDating(e.target.value);
                           }}
                         />
-                        <Text weight="300" size="14px" color="#333333">
+                        <Text
+                          weight="300"
+                          size="14px"
+                          color="#333333"
+                          margin="0px 10px"
+                        >
                           커플
                         </Text>
                       </CheckBox>
@@ -457,7 +502,12 @@ function MemberInfo() {
                                 setLoveType(e.target.value);
                               }}
                             />
-                            <Text weight="300" size="14px" color="#333333">
+                            <Text
+                              weight="300"
+                              size="14px"
+                              color="#333333"
+                              margin="0px 10px"
+                            >
                               연하
                             </Text>
                           </CheckBox>
@@ -470,7 +520,12 @@ function MemberInfo() {
                                 setLoveType(e.target.value);
                               }}
                             />
-                            <Text weight="300" size="14px" color="#333333">
+                            <Text
+                              weight="300"
+                              size="14px"
+                              color="#333333"
+                              margin="0px 10px"
+                            >
                               동갑
                             </Text>
                           </CheckBox>
@@ -483,7 +538,12 @@ function MemberInfo() {
                                 setLoveType(e.target.value);
                               }}
                             />
-                            <Text weight="300" size="14px" color="#333333">
+                            <Text
+                              weight="300"
+                              size="14px"
+                              color="#333333"
+                              margin="0px 10px"
+                            >
                               연상
                             </Text>
                           </CheckBox>
@@ -495,7 +555,7 @@ function MemberInfo() {
                             연애기간
                           </Text>
                         </Subject>
-                        <InputBox>
+                        <GridInputBox>
                           <CheckBox>
                             <input
                               type="radio"
@@ -505,7 +565,12 @@ function MemberInfo() {
                                 setLovePeriod(e.target.value);
                               }}
                             />
-                            <Text weight="300" size="14px" color="#333333">
+                            <Text
+                              weight="300"
+                              size="14px"
+                              color="#333333"
+                              margin="0px 10px"
+                            >
                               6개월 미만
                             </Text>
                           </CheckBox>
@@ -518,14 +583,15 @@ function MemberInfo() {
                                 setLovePeriod(e.target.value);
                               }}
                             />
-                            <Text weight="300" size="14px" color="#333333">
+                            <Text
+                              weight="300"
+                              size="14px"
+                              color="#333333"
+                              margin="0px 10px"
+                            >
                               6개월 ~ 2년
                             </Text>
                           </CheckBox>
-                        </InputBox>
-                      </LineBox>
-                      <SecondLine>
-                        <InputBox>
                           <CheckBox>
                             <input
                               type="radio"
@@ -535,7 +601,12 @@ function MemberInfo() {
                                 setLovePeriod(e.target.value);
                               }}
                             />
-                            <Text weight="300" size="14px" color="#333333">
+                            <Text
+                              weight="300"
+                              size="14px"
+                              color="#333333"
+                              margin="0px 10px"
+                            >
                               2년 이상
                             </Text>
                           </CheckBox>
@@ -548,7 +619,12 @@ function MemberInfo() {
                                 setLovePeriod(e.target.value);
                               }}
                             />
-                            <Text weight="300" size="14px" color="#333333">
+                            <Text
+                              weight="300"
+                              size="14px"
+                              color="#333333"
+                              margin="0px 10px"
+                            >
                               5년 이상
                             </Text>
                           </CheckBox>
@@ -561,12 +637,22 @@ function MemberInfo() {
                                 setLovePeriod(e.target.value);
                               }}
                             />
-                            <Text weight="300" size="14px" color="#333333">
+                            <Text
+                              weight="300"
+                              size="14px"
+                              color="#333333"
+                              margin="0px 10px"
+                            >
                               해당없음
                             </Text>
                           </CheckBox>
+                        </GridInputBox>
+                      </LineBox>
+                      {/* <SecondLine>
+                        <InputBox>
+                          
                         </InputBox>
-                      </SecondLine>
+                      </SecondLine> */}
                     </>
                   ) : null}
 
@@ -621,7 +707,7 @@ const InfoWrapper = styled.div`
   width: 550px;
   height: 614px;
   border-radius: 20px;
-  padding: 70px;
+  padding: 70px 40px;
   box-sizing: border-box;
   background-color: #fff;
   @media ${({ theme }) => theme.device.mobile} {
@@ -672,29 +758,34 @@ const TitleBox = styled.div`
 
 const LineBox = styled.div`
   margin-top: 5px;
-  width: 400px;
+  margin-left: 15px;
+  width: 480px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   @media ${({ theme }) => theme.device.mobile} {
     margin-top: 15px;
     width: 360px;
-    padding-left: 50px;
+    padding-left: 20px;
   }
 `;
 
-const SecondLine = styled.div`
-  padding-left: 140px;
-  margin-bottom: 10px;
-  width: 400px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  @media ${({ theme }) => theme.device.mobile} {
-    width: 360px;
-    padding-left: 150px;
-  }
-`;
+// const AgeLineBox = style.div`
+
+// `;
+
+// const SecondLine = styled.div`
+//   padding-left: 110px;
+//   margin-bottom: 10px;
+//   width: 400px;
+//   display: flex;
+//   justify-content: flex-start;
+//   align-items: flex-start;
+//   @media ${({ theme }) => theme.device.mobile} {
+//     width: 360px;
+//     padding-left: 150px;
+//   }
+// `;
 
 const Preview = styled.div`
   width: 280px;
@@ -732,17 +823,19 @@ const ButtonBox = styled.div`
 `;
 
 const Subject = styled.div`
+  display: flex;
   width: 70px;
   @media ${({ theme }) => theme.device.mobile} {
     display: flex;
     justify-content: flex-start;
-    width: 50px;
+    width: 70px;
   }
 `;
 
 const CheckBox = styled.div`
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   width: auto;
   height: 24px;
   margin: 8px;
@@ -752,6 +845,17 @@ const InputBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+`;
+
+const GridInputBox = styled.div`
+  width: 390px;
+  display: grid;
+  grid-template-columns: repeat(3, 130px);
+  flex-direction: column;
+  @media ${({ theme }) => theme.device.mobile} {
+    grid-template-columns: repeat(2, 130px);
+    padding-left: 20px;
+  }
 `;
 
 const SubmitBox = styled.div`

@@ -28,7 +28,9 @@ function VoteResult(props) {
     <React.Fragment>
       <ResultWrapper>
         <TitleBox>
-          <Text body4>투표결과</Text>
+          <Text title color="#7a37be">
+            투표결과
+          </Text>
         </TitleBox>
         <LineBox>
           <Vote

@@ -45,6 +45,10 @@ function AudioChat() {
   const [isContinue, setIsContinue] = React.useState(false);
   const [isTimeOver, setIsTimeOver] = React.useState(false);
 
+  //voice
+  const [mVoice, setMvoice] = React.useState(true);
+  const [wVoice, setWvoice] = React.useState(true);
+
   //모달
   const [modalOpen, setModalOpen] = React.useState(false);
   const [noListener, setNoListener] = React.useState(false);
@@ -107,6 +111,32 @@ function AudioChat() {
       .catch((error) => {
         console.error(error);
       });
+  };
+
+  // 음성변조
+  const WVoiceChange = () => {
+    console.log("목소리 바꾼다?", wVoice);
+    setWvoice(!wVoice);
+
+    if (wVoice) {
+      mainStreamManager.stream
+        .applyFilter("GStreamerFilter", {
+          command: "pitch pitch = 1.2",
+        })
+        .then(() => {
+          console.log("필터적용됐어!");
+        });
+    }
+  };
+  const MVoiceChange = () => {
+    setMvoice(!mVoice);
+    console.log("목소리 바꾼다?", mVoice);
+
+    if (mVoice) {
+      publisher.stream.applyFilter("GStreamerFilter", {
+        command: "pitch pitch = 0.8",
+      });
+    }
   };
 
   //세션 연결 및 커넥트
@@ -513,10 +543,18 @@ function AudioChat() {
           </ChatContainer>
           <BottomBox>
             <VoiceBtnBox>
-              <VoiceBtn>
+              <VoiceBtn
+                onClick={() => {
+                  MVoiceChange();
+                }}
+              >
                 <img src={lowPitch} alt="voice1" style={{ width: "20px" }} />
               </VoiceBtn>
-              <VoiceBtn>
+              <VoiceBtn
+                onClick={() => {
+                  WVoiceChange();
+                }}
+              >
                 <img src={highPitch} alt="voice2" style={{ width: "20px" }} />
               </VoiceBtn>
             </VoiceBtnBox>
@@ -765,7 +803,7 @@ const VoiceBtn = styled.div`
   box-sizing: border-box;
   width: 40px;
   height: 40px;
-
+  cursor: pointer;
   background: #fafafa;
   border-radius: 40px;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);

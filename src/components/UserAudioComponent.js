@@ -3,6 +3,7 @@ import OpenViduAudioComponent from "./OvAudio";
 import styled from "styled-components";
 
 function UserAudioComponent(props) {
+  console.log("필터 나오나?", props);
   return (
     <div>
       {props.streamManager !== undefined ? (

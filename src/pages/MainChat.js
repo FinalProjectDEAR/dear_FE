@@ -44,8 +44,8 @@ function MainChat() {
   return (
     <React.Fragment>
       <Header />
-      <Background>
-        <MainWrap id="1">
+      <Background id="1">
+        <MainWrap>
           <IntroWrap>
             <LogoBox>
               <Logo src={logo} />
@@ -67,73 +67,39 @@ function MainChat() {
               }}
             />
             <Text sub6 margin="10px">
-              따듯하고 부드러운 언행을 사용하여 상대방과 진솔한 대화를 나누는
+              따뜻하고 부드러운 언행을 사용하여 상대방과 진솔한 대화를 나누는
               것에 동의합니다.
             </Text>
           </InputWrap>
           <BtnWrap>
             <Btn checkBox={checkBox} onClick={startReq}>
-              <TextB
-                subtitle
-                margin="5px"
-                cursor="pointer"
-                color={checkBox ? "#fff" : "#2E2A32"}
-              >
+              <TextB subtitle margin="5px" cursor="pointer" color="#2E2A32">
                 고민 들어줄 친구 찾기
               </TextB>
               <LineBox>
-                {!checkBox ? (
-                  <img
-                    src={tapeD}
-                    style={{ width: "24px", height: "24px" }}
-                    alt="tape"
-                  />
-                ) : (
-                  <img
-                    src={tapeW}
-                    style={{ width: "24px", height: "24px" }}
-                    alt="tape"
-                  />
-                )}
-                <Text
-                  sub6
-                  margin="0px 5px"
-                  color={checkBox ? "#fff" : "#61586A"}
-                  cursor="pointer"
-                >
+                <img
+                  src={tapeD}
+                  style={{ width: "24px", height: "24px" }}
+                  alt="tape"
+                />
+
+                <Text sub6 margin="0px 5px" color="#61586A" cursor="pointer">
                   -1
                 </Text>
               </LineBox>
             </Btn>
             <Btn checkBox={checkBox} onClick={startRes}>
-              <TextB
-                subtitle
-                margin="5px"
-                cursor="pointer"
-                color={checkBox ? "#fff" : "#61586A"}
-              >
+              <TextB subtitle margin="5px" cursor="pointer" color="#61586A">
                 친구의 고민 들어주기
               </TextB>
               <LineBox>
-                {!checkBox ? (
-                  <img
-                    src={tapeD}
-                    style={{ width: "24px", height: "24px" }}
-                    alt="tape"
-                  />
-                ) : (
-                  <img
-                    src={tapeW}
-                    style={{ width: "24px", height: "24px" }}
-                    alt="tape"
-                  />
-                )}
-                <Text
-                  sub6
-                  margin="0px 5px"
-                  color={checkBox ? "#fff" : "#61586A"}
-                  cursor="pointer"
-                >
+                <img
+                  src={tapeD}
+                  style={{ width: "24px", height: "24px" }}
+                  alt="tape"
+                />
+
+                <Text sub6 margin="0px 5px" color="#61586A" cursor="pointer">
                   +1
                 </Text>
               </LineBox>
@@ -251,8 +217,9 @@ const Btn = styled.button`
   height: 102px;
   border: none;
   cursor: pointer;
-  background-color: ${(props) => (props.checkBox ? "#61586A" : "#fff")};
-  box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
+  background-color: #fff;
+  box-shadow: ${(props) =>
+    props.checkBox ? "" : "0px 0px 20px rgba(172, 151, 197, 0.25)"};
   border-radius: 20px;
   @media ${({ theme }) => theme.device.mobile} {
     flex-direction: row;

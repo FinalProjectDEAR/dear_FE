@@ -11,7 +11,7 @@ const GET_REVIEW = "GET_REVIEW";
 
 //초기값
 const initialState = {
-  rankingList: [],
+  rankingList: [{ color: "#Fff", score: 36.5, nickname: "항해99", restag: "" }],
   tapeCount: "",
   hotVoteList: [],
   hotBoardList: [],
@@ -47,7 +47,7 @@ const getRankingDB = () => {
     console.log("겟랭킹 통신");
     try {
       const { data } = await apis.getRank();
-      console.log("랭킹", data.data);
+      console.log("랭킹정보", data.data);
       dispatch(getRanking(data.data));
     } catch (err) {
       console.log("랭킹데이터 가져오기 실패", err);
@@ -60,8 +60,8 @@ const getHotVoteDB = () => {
     console.log("인기투표 통신");
     try {
       const { data } = await apis.getHotVote();
-      console.log("인기투표", data);
-      dispatch(getHotVote(data.data));
+      console.log("인기투표", data.data);
+      // dispatch(getHotVote(data.data));
     } catch (err) {
       console.log("인기 투표글 가져오기 실패", err);
     }
@@ -74,7 +74,7 @@ const getHotBoardDB = () => {
     try {
       const { data } = await apis.getHotBoard();
       console.log("인기게시글", data);
-      dispatch(getHotBoard(data.data));
+      // dispatch(getHotBoard(data.data));
     } catch (err) {
       console.log("인기 게시글 가져오기 실패", err);
     }
@@ -98,7 +98,7 @@ export default handleActions(
   {
     [GET_RANKING]: (state, action) =>
       produce(state, (draft) => {
-        // console.log("마이페이지 익명게시판리스트 리듀서:", action.payload);
+        console.log("리듀서 랭킹:", action.payload);
         draft.rankingList = action.payload;
       }),
     [GET_HOT_VOTE]: (state, action) =>

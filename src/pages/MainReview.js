@@ -18,11 +18,11 @@ import "slick-carousel/slick/slick-theme.css";
 function MainReview() {
   const dispatch = useDispatch();
 
-  // React.useEffect(() => {
-  //   dispatch(mainActions.getReviewDB());
-  // }, []);
+  React.useEffect(() => {
+    dispatch(mainActions.getReviewDB());
+  }, []);
 
-  // const reviewList = useSelector((state) => state.main.reviewList);
+  const reviewList = useSelector((state) => state.main.reviewList);
 
   const settings = {
     infinite: true,
@@ -45,17 +45,17 @@ function MainReview() {
             </Text>
           </LineBox>
           <Slider {...settings}>
-            {/* {reviewList.map((review, idx) => {
+            {reviewList.map((review, idx) => {
               return <ReviewCard key={idx} reviewInfo={review} />;
-            })} */}
+            })}
+            {/* <ReviewCard />
             <ReviewCard />
             <ReviewCard />
             <ReviewCard />
             <ReviewCard />
             <ReviewCard />
             <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
+            <ReviewCard /> */}
           </Slider>
         </ReviewWrapper>
         <Footer />
