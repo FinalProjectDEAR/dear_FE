@@ -542,7 +542,7 @@ function AudioChat() {
             </div>
           </ChatContainer>
           <BottomBox>
-            <VoiceBtnBox>
+            {/* <VoiceBtnBox>
               <VoiceBtn
                 onClick={() => {
                   MVoiceChange();
@@ -557,7 +557,7 @@ function AudioChat() {
               >
                 <img src={highPitch} alt="voice2" style={{ width: "20px" }} />
               </VoiceBtn>
-            </VoiceBtnBox>
+            </VoiceBtnBox> */}
             {/* <Button
               primaryDefault
               bg={isConnect ? "#7A37BE" : "#999999"}

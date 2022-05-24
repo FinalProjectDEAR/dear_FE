@@ -48,7 +48,7 @@ function FixedBtn(props) {
     <React.Fragment>
       <BtnWrap>
         <Link to="1" smooth={true}>
-          <Up>
+          <Up onClick={window.scrollTo(0, 0)}>
             <ArrowUpwardIcon fontSize="medium" />
           </Up>
         </Link>

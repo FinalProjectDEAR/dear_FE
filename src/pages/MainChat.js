@@ -133,6 +133,9 @@ const Background = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media ${({ theme }) => theme.device.mobile} {
+    height: 100vh - 200px;
+  }
 `;
 
 const MainWrap = styled.div`
@@ -176,6 +179,7 @@ const InputWrap = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  word-break: keep-all;
   width: 556px;
   height: 24px;
   margin: 10px auto;

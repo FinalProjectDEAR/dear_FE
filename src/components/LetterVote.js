@@ -18,7 +18,7 @@ function LetterVote({ voteInfo }) {
   const postId = params.postId;
 
   React.useEffect(() => {
-    // dispatch(voteActions.detailVoteDB(postId));
+    dispatch(voteActions.detailVoteDB(postId));
     showSelection();
   }, [voteInfo.vote[0].selected]);
 
@@ -28,15 +28,13 @@ function LetterVote({ voteInfo }) {
   const [showResult, setShowResult] = React.useState(false);
 
   // const voteInfo = useSelector((state) => state.vote.voteInfo);
-  console.log(voteInfo.vote[0].selected);
-  console.log(leftSelected);
 
   const showSelection = () => {
-    console.log("쇼셀렉션");
     if (
       voteInfo.vote[0].selected === false &&
       voteInfo.vote[1].selected === false
     ) {
+      console.log("나띵");
       return;
     } else if (voteInfo.vote[0].selected === true) {
       console.log("왼쪽");
@@ -118,7 +116,7 @@ function LetterVote({ voteInfo }) {
         </VoteWrapper>
       ) : (
         <VoteResult
-          voteInfo={voteInfo}
+          postId={postId}
           leftSelected={leftSelected}
           rightSelected={rightSelected}
         />

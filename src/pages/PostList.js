@@ -94,7 +94,7 @@ function PostList(props) {
 
           <VoteWrapper>
             <VoteList />
-            <MobileVoteList />
+            {/* <MobileVoteList /> */}
           </VoteWrapper>
           <BoardWrapper id="2">
             <CateGoryWrapper>

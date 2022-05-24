@@ -61,7 +61,7 @@ const getHotVoteDB = () => {
     try {
       const { data } = await apis.getHotVote();
       console.log("인기투표", data.data);
-      // dispatch(getHotVote(data.data));
+      dispatch(getHotVote(data.data));
     } catch (err) {
       console.log("인기 투표글 가져오기 실패", err);
     }
@@ -74,7 +74,7 @@ const getHotBoardDB = () => {
     try {
       const { data } = await apis.getHotBoard();
       console.log("인기게시글", data);
-      // dispatch(getHotBoard(data.data));
+      dispatch(getHotBoard(data.data));
     } catch (err) {
       console.log("인기 게시글 가져오기 실패", err);
     }

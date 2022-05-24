@@ -13,13 +13,20 @@ import styled from "styled-components";
 import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
 
 function VoteResult(props) {
-  console.log(props);
-  const totalCount =
-    props.voteInfo.vote[0].selectionList.length +
-    props.voteInfo.vote[1].selectionList.length;
+  const dispatch = useDispatch();
 
-  const leftScore = props.voteInfo.vote[0].selectionList.length;
-  const rightScore = props.voteInfo.vote[1].selectionList.length;
+  React.useEffect(() => {
+    dispatch(voteActions.detailVoteDB(props.postId));
+  }, []);
+
+  const voteInfo = useSelector((state) => state.vote.voteInfo);
+  console.log("결과페이지 정보", voteInfo);
+
+  const leftScore = voteInfo.vote[0].selectionList.length;
+  const rightScore = voteInfo.vote[1].selectionList.length;
+
+  const totalCount = leftScore + rightScore;
+  console.log(totalCount);
 
   const leftPercentage = parseInt((leftScore / totalCount) * 100);
   const rightPercentage = parseInt((rightScore / totalCount) * 100);
@@ -31,6 +38,12 @@ function VoteResult(props) {
           <Text title color="#7a37be">
             투표결과
           </Text>
+          <CountBox>
+            <PeopleRoundedIcon style={{ width: "20px", color: "#999999" }} />
+            <Text sub margin="0px 5px">
+              {totalCount}
+            </Text>
+          </CountBox>
         </TitleBox>
         <LineBox>
           <Vote
@@ -40,12 +53,12 @@ function VoteResult(props) {
             }
           >
             <Font color={props.leftSelected ? "#7A37BE" : "#61586A"}>
-              {props.voteInfo.vote[0].imageTitle}
+              {voteInfo.vote[0].imageTitle}
             </Font>
           </Vote>
           <PercentageBox>
-            {props.voteInfo.vote[0].imageUrl ? (
-              <VoteImg src={props.voteInfo.vote[0].imageUrl} alt="선택지 2" />
+            {voteInfo.vote[0].imageUrl ? (
+              <VoteImg src={voteInfo.vote[0].imageUrl} alt="선택지 2" />
             ) : null}
             <ProgressBar>
               <Highlight
@@ -66,12 +79,12 @@ function VoteResult(props) {
             }
           >
             <Font color={props.rightSelected ? "#7A37BE" : "#61586A"}>
-              {props.voteInfo.vote[1].imageTitle}
+              {voteInfo.vote[1].imageTitle}
             </Font>
           </Vote>
           <PercentageBox>
-            {props.voteInfo.vote[0].imageUrl ? (
-              <VoteImg src={props.voteInfo.vote[1].imageUrl} alt="선택지 2" />
+            {voteInfo.vote[0].imageUrl ? (
+              <VoteImg src={voteInfo.vote[1].imageUrl} alt="선택지 2" />
             ) : null}
             <ProgressBar>
               <Highlight
@@ -84,12 +97,6 @@ function VoteResult(props) {
             </Percent>
           </PercentageBox>
         </LineBox>
-        <CountBox>
-          <PeopleRoundedIcon style={{ width: "20px", color: "#999999" }} />
-          <Text sub margin="0px 5px">
-            {totalCount}명 참여
-          </Text>
-        </CountBox>
       </ResultWrapper>
     </React.Fragment>
   );
@@ -121,8 +128,9 @@ const ResultWrapper = styled.div`
 const TitleBox = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin: 10px auto;
-  width: 792px;
+  width: 100%;
   height: 36px;
   @media ${({ theme }) => theme.device.mobile} {
     justify-content: flex-start;
@@ -177,6 +185,7 @@ const Font = styled.p`
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
+  word-break: keep-all;
 `;
 
 const Percent = styled.p`
@@ -228,13 +237,13 @@ const Highlight = styled.div`
 `;
 
 const CountBox = styled.div`
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  width: 100%;
+  width: 40px;
   height: 26px;
-  margin-top: 10px;
+  margin-right: 40px;
   @media ${({ theme }) => theme.device.mobile} {
     display: flex;
   }

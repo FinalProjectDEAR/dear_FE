@@ -120,7 +120,7 @@ function ImageVote({ voteInfo }) {
         </VoteWrapper>
       ) : (
         <VoteResult
-          voteInfo={voteInfo}
+          postId={postId}
           leftSelected={leftSelected}
           rightSelected={rightSelected}
           vote={vote}

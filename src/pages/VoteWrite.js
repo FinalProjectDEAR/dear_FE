@@ -159,7 +159,7 @@ function VoteWrite() {
                   <Input
                     margin="0px"
                     padding="14px"
-                    maxLength="20"
+                    maxlength="20"
                     placeholder="질문할 내용을 20자 이내로 입력해주세요."
                     value={title}
                     _onChange={(e) => {
@@ -235,15 +235,15 @@ function VoteWrite() {
                 <Title>
                   <Text body4 textAlign="left">
                     투표 항목
-                    <span style={{ color: "red", marginRight: "4px" }}>*</span>
+                    <span style={{ color: "red", marginLeft: "4px" }}>*</span>
                   </Text>
                 </Title>
                 <InputBox>
                   <Input
                     margin="0px"
                     padding="14px"
-                    maxLength="10"
-                    placeholder="10자 이내 입력"
+                    maxlength="15"
+                    placeholder="12자 이내 입력"
                     value={voteLeft}
                     _onChange={(e) => {
                       setVoteLeft(e.target.value);
@@ -256,8 +256,8 @@ function VoteWrite() {
                   <Input
                     margin="0px"
                     padding="14px"
-                    maxLength="10"
-                    placeholder="10자 이내 입력"
+                    maxlength="15"
+                    placeholder="12자 이내 입력"
                     value={voteRight}
                     _onChange={(e) => {
                       setVoteRight(e.target.value);

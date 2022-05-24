@@ -83,6 +83,7 @@ const Input = (props) => {
             }}
             onKeyUp={_onKeyUp}
             style={_style}
+            maxLength={maxlength}
           />
         ) : (
           <ElInput
@@ -93,6 +94,7 @@ const Input = (props) => {
             placeholder={placeholder}
             onChange={_onChange}
             style={_style}
+            maxLength={maxlength}
           />
         )}
       </div>
@@ -166,6 +168,7 @@ const ElInput = styled.input`
   margin: ${(props) => props.margin};
   border-radius: ${(props) => props.borderRadius};
   box-shadow: ${(props) => props.shadow};
+  ${(props) => (props.maxlength ? `maxlength: ${props.maxLength}` : "")};
 `;
 
 export default Input;

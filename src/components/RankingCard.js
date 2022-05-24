@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Text, TextB, ColorBadge } from "../elements";
+import { Text, TextB, ColorBadge, Tag } from "../elements";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
@@ -34,7 +34,13 @@ function RankingCard({ rankInfo }) {
             </ProgressBar>
           </TemperatureBar>
         </LineBox>
-        <LineBox>Tag</LineBox>
+        <TagBox>
+          <Tag primary>
+            <Text sub7 margin="3px 8px" color="#7A37BE">
+              {rankInfo?.resTag}
+            </Text>
+          </Tag>
+        </TagBox>
       </UserRankingWrapper>
     </React.Fragment>
   );
@@ -99,4 +105,9 @@ const Highlight = styled.div`
   width: ${(props) => props.width};
   height: 6px;
   border-radius: 10px;
+`;
+
+const TagBox = styled.div`
+  margin-top: 10px;
+  width: 120px;
 `;
