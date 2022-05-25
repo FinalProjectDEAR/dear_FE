@@ -1,6 +1,7 @@
 import React from "react";
 import { Input, Text, Button } from "../elements";
 
+import _ from "lodash";
 import { history } from "../redux/configureStore";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
@@ -17,8 +18,30 @@ const Signup = () => {
   const [pwd, setPwd] = React.useState("");
   const [pwdConfirm, setPwdConfirm] = React.useState("");
   const [isCheck, setIsCheck] = React.useState(false);
-  const [pwdSyncErr, setPwdSyncErr] = React.useState("");
-  const nickErr = useSelector((state) => state.user.msg);
+  // const [pwdSyncErr, setPwdSyncErr] = React.useState(false);
+  // const [pwdFormat, setPwdFormat] = React.useState("");
+
+  const nickErr = useSelector((state) => state.user.idMsg);
+
+  // console.log("일치확인", pwdSyncErr);
+
+  // const pwdDebounce = _.debounce((e) => {
+  //   setPwd(e.target.value);
+  //   setTimeout(handleCheck, 100);
+  // }, 1000);
+
+  // const pwdConfirmDebounce = _.debounce((e) => {
+  //   setPwdConfirm(e.target.value);
+  //   setTimeout(handleCheck, 100);
+  // }, 1000);
+
+  // const handleCheck = () => {
+  //   if (pwd === pwdConfirm) {
+  //     setPwdSyncErr(false);
+  //   } else {
+  //     setPwdSyncErr(true);
+  //   }
+  // };
 
   const dupCheck = (memberId) => {
     if (!memberIdCheck(memberId)) {
@@ -40,7 +63,7 @@ const Signup = () => {
     }
 
     if (!pwdCheck(pwd, memberId)) {
-      window.alert("패스워드 형식이 맞지 않습니다!");
+      window.alert("패스워드 형식이 맞지 않습니다! (6-12자 영문, 숫자)");
       return;
     }
 
@@ -52,18 +75,6 @@ const Signup = () => {
     dispatch(userActions.signupDB(memberId, pwd, pwdConfirm));
   };
 
-  const pwdSyncCheck = (e) => {
-    if (pwd.length < 1 || pwdConfirm.length < 1) {
-      setPwdSyncErr("");
-    } else if (pwd === pwdConfirm) {
-      console.log(pwd, pwdConfirm);
-      setPwdSyncErr("비밀번호가 일치합니다.");
-    } else {
-      setPwdSyncErr("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-    }
-  };
-
-  // 가운데 수직 붙이기
   return (
     <React.Fragment>
       <Background>
@@ -106,15 +117,21 @@ const Signup = () => {
               </Button>
             </ButtonBox>
           </IdBox>
-          {nickErr ? (
-            <Text sub7 textAlign="left" margin="15px">
-              {nickErr}
+          {isCheck && nickErr === true ? (
+            <Text sub7 textAlign="left" margin="15px" color="#50BA94">
+              사용 가능한 아이디입니다.
             </Text>
-          ) : (
-            <Text sub7 textAlign="left" margin="15px">
-              영문(소문자), 숫자 3~10자 이내로 입력해 주세요.
+          ) : null}
+          {isCheck && nickErr === false ? (
+            <Text sub7 textAlign="left" margin="15px" color="#D53253">
+              사용할 수 없는 아이디입니다.
             </Text>
-          )}
+          ) : null}
+          {isCheck === false ? (
+            <Text sub7 textAlign="left" margin="15px">
+              영문(소문자), 숫자로 4-10자 이내로 입력해주세요.
+            </Text>
+          ) : null}
 
           <PasswordBox>
             <Input
@@ -123,11 +140,11 @@ const Signup = () => {
               borderRadius="100px"
               shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
               type="password"
+              value={pwd}
               placeholder="비밀번호는 6자이상 입력해주세요."
               _onChange={(e) => {
                 setPwd(e.target.value);
               }}
-              value={pwd}
             />
             <Input
               padding="14px 0px 14px 30px"
@@ -138,15 +155,27 @@ const Signup = () => {
               placeholder="비밀번호를 한 번 더 입력해주세요."
               _onChange={(e) => {
                 setPwdConfirm(e.target.value);
-                setTimeout(pwdSyncCheck, 100);
               }}
-              value={pwdConfirm}
               is_submit
+              value={pwdConfirm}
               onSubmit={signup}
             />
-            {/* <Text sub7 textAlign="left" margin="0px 15px">
-              {pwdSyncErr}
-            </Text> */}
+
+            {/* {pwdSyncErr ? (
+              <Text sub7 textAlign="left" margin="0px 15px" color="#D53253">
+                비밀번호와 비밀번호 확인이 일치하지 않습니다.
+              </Text>
+            ) : null}
+            {pwdSyncErr === false || pwdSyncErr === "" ? (
+              <Text sub7 textAlign="left" margin="0px 15px">
+                영문, 숫자 6-12자 조합으로 입력해주세요.
+              </Text>
+            ) : null}
+            {pwdFormat === false ? (
+              <Text sub7 textAlign="left" margin="0px 15px" color="#D53253">
+                비밀번호 형식이 맞지 않습니다. (영문, 숫자 6-12자 이내)
+              </Text>
+            ) : null} */}
           </PasswordBox>
           <ButtonBox>
             <Button

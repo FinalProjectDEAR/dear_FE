@@ -83,24 +83,25 @@ function VoteDetail(props) {
                 </Text>
               </TimeBox>
             </CategoryBox>
-            {/* {voteInfo?.memberId === loginUser ? ( */}
+
             <LineBox>
               <MobileTimeBox>
                 <Text sub7 margin="0px" textAlign="left">
                   {date}
                 </Text>
               </MobileTimeBox>
-              <Text
-                sub7
-                cursor="pointer"
-                _onClick={() => {
-                  setModalOpen(true);
-                }}
-              >
-                삭제
-              </Text>
+              {voteInfo?.memberId === loginUser ? (
+                <Text
+                  sub7
+                  cursor="pointer"
+                  _onClick={() => {
+                    setModalOpen(true);
+                  }}
+                >
+                  삭제
+                </Text>
+              ) : null}
             </LineBox>
-            {/* ) : null} */}
 
             {modalOpen && (
               <Modal closeModal={closeModal}>

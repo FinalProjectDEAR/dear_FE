@@ -55,7 +55,7 @@ function AudioRoom(props) {
               </TitleBox>
               <AudioChat chatInfo={chatInfo} />
             </LeftBox>
-            {chatInfo.imageUrl.length === 0 ? (
+            {chatInfo.imageUrl?.length === 0 ? (
               <NoImgBox>
                 <NoMsg>
                   <img src={empty} alt="noInfo" style={{ width: "30px" }}></img>

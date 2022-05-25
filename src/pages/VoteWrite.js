@@ -242,8 +242,8 @@ function VoteWrite() {
                   <Input
                     margin="0px"
                     padding="14px"
-                    maxlength="15"
-                    placeholder="12자 이내 입력"
+                    maxlength="10"
+                    placeholder="10자 이내 입력"
                     value={voteLeft}
                     _onChange={(e) => {
                       setVoteLeft(e.target.value);
@@ -256,8 +256,8 @@ function VoteWrite() {
                   <Input
                     margin="0px"
                     padding="14px"
-                    maxlength="15"
-                    placeholder="12자 이내 입력"
+                    maxlength="10"
+                    placeholder="10자 이내 입력"
                     value={voteRight}
                     _onChange={(e) => {
                       setVoteRight(e.target.value);
