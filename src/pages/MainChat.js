@@ -24,10 +24,15 @@ function MainChat() {
   }, []);
 
   const tapeCount = useSelector((state) => state.main.tapeCount);
+  const isLogin = localStorage.getItem("isLogin");
 
   const startReq = () => {
     if (checkBox !== true) {
       window.alert("이용약관에 동의해주세요.");
+      return;
+    } else if (isLogin !== true) {
+      window.alert("로그인 후 이용해 주세요.");
+      history.replace("/");
       return;
     }
     history.push("/startReq");
@@ -37,6 +42,9 @@ function MainChat() {
     if (checkBox !== true) {
       window.alert("이용약관에 동의해주세요.");
       return;
+    } else if (isLogin !== true) {
+      window.alert("로그인 후 이용해 주세요.");
+      history.push("/");
     }
     history.push("/startRes");
   };
