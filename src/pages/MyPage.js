@@ -64,8 +64,6 @@ const MyPage = () => {
   }, []);
   const userInfo = useSelector((state) => state.mypage.user.user);
   console.log("멤버인포레스태그", userInfo?.resTag1);
-  const resTag1 = userInfo?.resTag1;
-  const resTag2 = userInfo?.resTag2;
   //페이지별 게시글 전체 조회
   React.useEffect(() => {
     dispatch(actionCreators.getPostListDB(page));
@@ -214,7 +212,7 @@ const MyPage = () => {
                     <OndoTag>
                       <Tag sub2>
                         <TemperatureBox>
-                          <Text sub7 margin="3px 0px">
+                          <Text sub7 margin="5px 0px">
                             마음의 온도
                             <Temperature>{userInfo?.score}°C</Temperature>
                           </Text>
@@ -668,7 +666,7 @@ const OndoTag = styled.div`
 const TemperatureBox = styled.div`
   display: flex;
   flex-direction: row;
-  margin: 0px 26px;
+  margin: 3px 26px;
   /* border: 1px solid red; */
 `;
 const TemperatureBar = styled.div`

@@ -67,6 +67,7 @@ function App() {
             <Route path="/info" exact component={MemberInfo} />
             <Route path="/commentList" exact component={CommentList} />
             <Route path="/postList" exact component={PostList} />
+            <Route path="/postList/:category" exact component={PostList} />
             <Route path="/postWrite" exact component={PostWrite} />
             <Route path="/postDetail/:postId" exact component={PostDetail} />
             <Route path="/resReview" exact component={ResReview} />

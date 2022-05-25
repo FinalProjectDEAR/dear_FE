@@ -30,10 +30,6 @@ function PostWrite() {
   //글자 수 제한
   const checkMaxLength = (e) => {
     let wordLength = e.target.value.length;
-    // if (wordLength <= 20) {
-    //   window.alert("20자 이상 작성 부탁드립니다");
-    //   return;
-    // }
     if (wordLength >= 1000) {
       window.alert("1,000자 이상 작성할 수 없습니다.");
       return;
@@ -110,7 +106,6 @@ function PostWrite() {
       })
     );
   };
-  //optionalChaining: ?. (useEffect는 리턴 후 실행)
   return (
     <React.Fragment>
       <Layout>

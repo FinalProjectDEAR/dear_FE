@@ -95,7 +95,7 @@ const CommentItem = (props) => {
       <CommentWrapper>
         <CommentContainer>
           <CommentBox>
-            <Text color="#333333" size="13px" weight="300">
+            <Text body6 textAlign="left">
               {comments}
             </Text>
           </CommentBox>
