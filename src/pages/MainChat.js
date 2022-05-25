@@ -66,7 +66,7 @@ function MainChat() {
                 setCheckBox(!checkBox);
               }}
             />
-            <Text sub6 margin="10px">
+            <Text sub6 margin="10px" textAlign="left">
               따뜻하고 부드러운 언행을 사용하여 상대방과 진솔한 대화를 나누는
               것에 동의합니다.
             </Text>

@@ -14,6 +14,7 @@ const ADD_VOTE = "ADD_VOTE";
 const DETAIL_VOTE = "DETAIL_VOTE";
 const DEL_VOTE = "DELETE_VOTE";
 const PUT_VOTE = "PUT_VOTE";
+const DEL_DATA = "DEL_DATA";
 
 // action creators
 const setVote = createAction(SET_VOTE, (voteList) => voteList);
@@ -21,6 +22,7 @@ const setRanking = createAction(SET_RANKING, (RankingList) => RankingList);
 const detailVote = createAction(DETAIL_VOTE, (postId) => postId);
 const delVote = createAction(DEL_VOTE, (postId) => postId);
 const putVote = createAction(PUT_VOTE, (postId) => postId);
+const delData = createAction(DEL_DATA);
 
 // initialState
 const initialState = {
@@ -203,6 +205,11 @@ export default handleActions(
           (v) => v.postId !== action.payload
         );
       }),
+    [DEL_DATA]: (state, action) =>
+      produce(state, (draft) => {
+        draft.voteList = [];
+        draft.voteInfo = [];
+      }),
   },
   initialState
 );
@@ -213,6 +220,7 @@ const actionCreators = {
   detailVoteDB,
   delVoteDB,
   putVoteDB,
+  delData,
 };
 
 export { actionCreators };

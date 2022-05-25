@@ -43,14 +43,17 @@ function ImageVote({ voteInfo }) {
       voteInfo.vote[1].selected === false
     ) {
       console.log("나띵");
-      return;
+      setLeftSelected(false);
+      setRightSelected(false);
     } else if (voteInfo.vote[0].selected === true) {
       console.log("왼쪽");
       setLeftSelected(true);
+      setRightSelected(false);
       setVote(1);
     } else if (voteInfo.vote[1].selected === true) {
       console.log("오른쪽");
       setRightSelected(true);
+      setLeftSelected(false);
       setVote(2);
     }
   };

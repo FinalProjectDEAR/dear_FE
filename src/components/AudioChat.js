@@ -155,7 +155,7 @@ function AudioChat() {
         setSubscribers([...subscribers, ...subscriberList]);
 
         let date = new Date();
-        let target = date.setMinutes(date.getMinutes() + 1); // 테스트는 1분으로 시작!
+        let target = date.setMinutes(date.getMinutes() + 10); // 테스트는 1분으로 시작!
         setTargetTime(target);
         setIsConnect(true);
         dispatch(chatActions.getChatInfoDB(sessionId));
@@ -223,7 +223,7 @@ function AudioChat() {
   React.useEffect(() => {
     if (!isConnect) {
       console.log("30초 카운트");
-      setTimeout(waitTimeOut, 30000);
+      setTimeout(waitTimeOut, 300000); //30000 30초
     }
   }, []);
 
@@ -239,7 +239,7 @@ function AudioChat() {
   // 채팅 종료
   const chatClose = () => {
     sendCloseSignal();
-    setTimeout(leaveSession, 2000);
+    setTimeout(leaveSession, 2000); //2000
   };
 
   //세션,커넥션 종료
@@ -324,11 +324,13 @@ function AudioChat() {
                   askContinue={askContinue}
                   wantMore={wantMore}
                 />
-                <UserAudioComponent
-                  streamManager={subscribers[0]}
-                  // color="#FFD05B"
-                  color={chatInfo.resColor}
-                />
+                <div style={{ width: "85px" }}>
+                  <UserAudioComponent
+                    streamManager={subscribers[0]}
+                    // color="#FFD05B"
+                    color={chatInfo.resColor}
+                  />
+                </div>
               </TapeBox>
             ) : null}
             {role === "response" && publisher !== undefined ? (
