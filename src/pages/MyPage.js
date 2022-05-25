@@ -16,6 +16,11 @@ import Follow from "./Follow";
 import Post from "../pages/Post";
 import Paginations from "../elements/Pagination";
 import ResTag from "../elements/ResTag";
+import EmptyMSG from "../elements/EmptyMSG";
+import EmptyChat from "../elements/EmptyChat";
+import EmptyFollow from "../elements/EmptyFollow";
+import EmptyPost from "../elements/EmptyPost";
+import EmptyRes from "../elements/EmptyRes";
 //리덕스관련
 import { useDispatch, useSelector } from "react-redux";
 import { MsgActionCreators } from "../redux/modules/message";
@@ -52,6 +57,7 @@ const MyPage = () => {
     dispatch(MsgActionCreators.getMessageDB(mPage));
   }, [mPage]);
   const msgList = useSelector((state) => state.message.message);
+  // console.log(msgList);
   //멤버인포조회
   React.useEffect(() => {
     dispatch(actionCreators.getInfoDB());
@@ -180,9 +186,11 @@ const MyPage = () => {
                   <div className="types">
                     <MobileListener>
                       <ResTags>
-                        {userInfo ? (
+                        {userInfo === !null ? (
                           <ResTag resTag1={userInfo?.resTag1} />
-                        ) : null}
+                        ) : (
+                          <EmptyRes />
+                        )}
                       </ResTags>
                       <ResTags>
                         {userInfo ? (
@@ -192,9 +200,11 @@ const MyPage = () => {
                     </MobileListener>
                     <WebListener>
                       <ResTags>
-                        {userInfo ? (
+                        {userInfo === !null ? (
                           <ResTag resTag1={userInfo?.resTag1} />
-                        ) : null}
+                        ) : (
+                          <EmptyRes />
+                        )}
                         {userInfo ? (
                           <ResTag resTag2={userInfo?.resTag2} />
                         ) : null}
@@ -268,12 +278,16 @@ const MyPage = () => {
                 />
               </div>
             </TitleContainer>
-            <MsgContainer>
-              {msgList &&
-                msgList.map((item, idx) => {
-                  return <MessageList key={idx} item={item} />;
-                })}
-            </MsgContainer>
+            {msgList?.length > 0 ? (
+              <MsgContainer>
+                {msgList &&
+                  msgList.map((item, idx) => {
+                    return <MessageList key={idx} item={item} />;
+                  })}
+              </MsgContainer>
+            ) : (
+              <EmptyMSG />
+            )}
           </MsgWrapper>
           <CounselWrapper>
             <Title>
@@ -284,11 +298,15 @@ const MyPage = () => {
                 히스토리는 최대 6개까지 볼 수 있어요
               </Text>
             </Title>
-            <CounselGrid>
-              {chatList?.map((item, idx) => {
-                return <CounselHistory key={idx} item={item} />;
-              })}
-            </CounselGrid>
+            {chatList?.length > 0 ? (
+              <CounselGrid>
+                {chatList?.map((item, idx) => {
+                  return <CounselHistory key={idx} item={item} />;
+                })}
+              </CounselGrid>
+            ) : (
+              <EmptyChat />
+            )}
           </CounselWrapper>
           <FollowWrapper>
             <TitleContainer>
@@ -319,11 +337,15 @@ const MyPage = () => {
                 />
               </div>
             </TitleContainer>
-            <FollowContainer>
-              {follower?.map((item, idx) => {
-                return <Follow key={idx} item={item} />;
-              })}
-            </FollowContainer>
+            {follower?.length > 0 ? (
+              <FollowContainer>
+                {follower?.map((item, idx) => {
+                  return <Follow key={idx} item={item} />;
+                })}
+              </FollowContainer>
+            ) : (
+              <EmptyFollow />
+            )}
           </FollowWrapper>
           <PostWrapper>
             <Title>
@@ -331,19 +353,25 @@ const MyPage = () => {
                 내 게시글 관리
               </Text>
             </Title>
-            <PostTable>
-              <TableInfo>
-                <InfoItem style={{ marginLeft: "40px" }}>제목</InfoItem>
-                <InfoItem style={{ marginRight: "40px" }}>작성일</InfoItem>
-              </TableInfo>
-              {postList?.slice(0, 8).map((item, idx) => {
-                // slice를 이용하여 보여주고 싶은 게시물을 제어
-                return <Post key={idx} item={item} />;
-              })}
-            </PostTable>
-            <PageBtn>
-              <Paginations totalPage={postTotalPage} setPage={setPage} />
-            </PageBtn>
+            {postList?.length > 0 ? (
+              <>
+                <PostTable>
+                  <TableInfo>
+                    <InfoItem style={{ marginLeft: "40px" }}>제목</InfoItem>
+                    <InfoItem style={{ marginRight: "40px" }}>작성일</InfoItem>
+                  </TableInfo>
+                  {postList?.slice(0, 8).map((item, idx) => {
+                    // slice를 이용하여 보여주고 싶은 게시물을 제어
+                    return <Post key={idx} item={item} />;
+                  })}
+                </PostTable>
+                <PageBtn>
+                  <Paginations totalPage={postTotalPage} setPage={setPage} />
+                </PageBtn>
+              </>
+            ) : (
+              <EmptyPost />
+            )}
           </PostWrapper>
         </Background>
       </Layout>
@@ -749,7 +777,7 @@ const CounselWrapper = styled.div`
   margin-top: 100px;
   @media ${({ theme }) => theme.device.isMobile} {
     width: 320px;
-    height: 675px;
+    max-height: 675px;
     /* background-color: violet; */
   }
 `;
