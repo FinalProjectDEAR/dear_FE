@@ -1,7 +1,6 @@
 import React from "react";
 import { Input, Text, Button } from "../elements";
 
-import _ from "lodash";
 import { history } from "../redux/configureStore";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
@@ -18,30 +17,8 @@ const Signup = () => {
   const [pwd, setPwd] = React.useState("");
   const [pwdConfirm, setPwdConfirm] = React.useState("");
   const [isCheck, setIsCheck] = React.useState(false);
-  // const [pwdSyncErr, setPwdSyncErr] = React.useState(false);
-  // const [pwdFormat, setPwdFormat] = React.useState("");
 
   const nickErr = useSelector((state) => state.user.idMsg);
-
-  // console.log("일치확인", pwdSyncErr);
-
-  // const pwdDebounce = _.debounce((e) => {
-  //   setPwd(e.target.value);
-  //   setTimeout(handleCheck, 100);
-  // }, 1000);
-
-  // const pwdConfirmDebounce = _.debounce((e) => {
-  //   setPwdConfirm(e.target.value);
-  //   setTimeout(handleCheck, 100);
-  // }, 1000);
-
-  // const handleCheck = () => {
-  //   if (pwd === pwdConfirm) {
-  //     setPwdSyncErr(false);
-  //   } else {
-  //     setPwdSyncErr(true);
-  //   }
-  // };
 
   const dupCheck = (memberId) => {
     if (!memberIdCheck(memberId)) {
