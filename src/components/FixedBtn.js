@@ -72,7 +72,7 @@ function FixedBtn(props) {
         </Desc>
         <Board
           onClick={() => {
-            history.push("/postList");
+            history.push("/postList/전체");
           }}
         >
           <FontBox>
