@@ -14,6 +14,10 @@ const CommentItem = (props) => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(actionCreators.pages(props.totalPages));
+    //클린업작업
+    return () => {
+      dispatch(actionCreators.resetPost());
+    };
   }, []);
   // const Page = useSelector((state) => state.comment.pages);
   // console.log(Page);
@@ -139,10 +143,11 @@ const CommentItem = (props) => {
       <CommentWrapper>
         <CommentContainer>
           <CommentBox>
-            <Text color="#333333" size="13px" weight="300">
+            <Text body6 textAlign="left">
               {comments}
             </Text>
           </CommentBox>
+
           <CommentBox>
             <Text color="#999999" size="12px" weight="300">
               {createdAt}
@@ -246,7 +251,8 @@ const CommentBox = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 6px 0px 0px;
+  justify-content: left;
+  padding: 6px 0px 10px;
   gap: 8px;
   height: 20px;
   line-height: 20px;

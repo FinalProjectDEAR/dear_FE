@@ -35,8 +35,9 @@ function PostList(props) {
       dispatch(actionCreators.resetPost());
     };
   }, [page]);
-  const postList = useSelector((state) => state.post.post.postPageResponseDto);
-  // console.log(postList);
+  const postList = useSelector((state) => state.post.post.content);
+  const pageList = useSelector((state) => state.post.post);
+  console.log(pageList);
   return (
     <React.Fragment>
       <Layout>
@@ -178,7 +179,7 @@ function PostList(props) {
                 <InfoItem style={{ marginLeft: "40px" }}>제목</InfoItem>
                 <InfoItem style={{ marginRight: "40px" }}>작성일</InfoItem>
               </TableInfo>
-              {postList?.content.slice(0, 11).map((item, idx) => {
+              {postList?.slice(0, 11).map((item, idx) => {
                 // slice를 이용하여 보여주고 싶은 게시물을 제어
                 return <Post key={idx} item={item} />;
               })}
@@ -212,7 +213,7 @@ function PostList(props) {
               </BtnContainer>
             </BtnWrapper>
             <PageBtn>
-              <Paginations totalPage={postList?.totalPages} setPage={setPage} />
+              <Paginations totalPage={pageList?.totalPages} setPage={setPage} />
             </PageBtn>
           </BoardWrapper>
         </Background>
