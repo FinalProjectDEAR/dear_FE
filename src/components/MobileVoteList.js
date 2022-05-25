@@ -19,8 +19,8 @@ import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-scroll";
 
 function MobileVoteList() {
-  // const voteList = useSelector((state) => state.main.hotVoteList);
-  //   const mobileVoteList = voteList.slice(0, 4);
+  const hotVoteList = useSelector((state) => state.main.hotVoteList);
+  const mobileVoteList = hotVoteList.slice(0, 4);
 
   const settings = {
     dots: true,
@@ -41,14 +41,14 @@ function MobileVoteList() {
         </Text>
         <RankingContainer>
           <Slider {...settings} dotsClass="dotStyle">
-            {/* {mobileVoteList.map((v, idx) => {
-            return <VoteCard {...v} key={idx} />;
-          })} */}
+            {mobileVoteList.map((v, idx) => {
+              return <VoteCard voteInfo={v} key={idx} />;
+            })}
+            {/* <VoteCard />
             <VoteCard />
             <VoteCard />
             <VoteCard />
-            <VoteCard />
-            <VoteCard />
+            <VoteCard /> */}
           </Slider>
         </RankingContainer>
       </MobileRanking>
