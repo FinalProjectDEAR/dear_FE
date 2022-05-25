@@ -24,10 +24,11 @@ function Post(props) {
     },
   };
   const createdAt = TimeCounting(props.item.created_at, option);
+
   // const newD = props.item.created_at.replace("T", " ").substring(0, 10);
   // // console.log(newD);
-  // const icon = window.Date();
-  // console.log(icon);
+  const icon = window.Date();
+  // console.log("서버가 준 시간:", props.item.created_at, "내꺼:", icon);
   // const year = icon.getFullYear();
   // const month = ("0" + (icon.getMonth() + 1)).slice(-2);
   // const day = ("0" + icon.getDay()).slice(-2);

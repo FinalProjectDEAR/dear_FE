@@ -12,7 +12,7 @@ import { ReactComponent as Etc } from "../assets/postList/board-cate8.svg";
 import { ReactComponent as Blogging } from "../assets/postList/blogging 1.svg";
 
 //리덕스관련
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { actionCreators } from "../redux/modules/post";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -24,6 +24,9 @@ import Post from "../pages/Post";
 import Paginations from "../elements/Pagination";
 
 function PostList(props) {
+  const params = useParams();
+  const category = params.category;
+
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -31,13 +34,6 @@ function PostList(props) {
 
   //페이지
   const [page, setPage] = React.useState(1);
-  //페이지별 게시글 전체 조회
-  React.useEffect(() => {
-    dispatch(actionCreators.getPostDB(page));
-    return () => {
-      dispatch(actionCreators.resetPost());
-    };
-  }, [page]);
   const postList = useSelector((state) => state.post.post.content);
   const pageList = useSelector((state) => state.post.post);
   console.log(pageList);
@@ -59,6 +55,29 @@ function PostList(props) {
     }
     history.push("/postWrite");
   };
+  //페이지별 게시글조회
+  React.useEffect(() => {
+    if (category === "전체") {
+      dispatch(actionCreators.getPostDB(page));
+    } else if (category === "투표") {
+      dispatch(actionCreators.getCateDetailDB(page, category));
+    } else if (category === "솔로") {
+      dispatch(actionCreators.getCateDetailDB(page, category));
+    } else if (category === "짝사랑") {
+      dispatch(actionCreators.getCateDetailDB(page, category));
+    } else if (category === "썸") {
+      dispatch(actionCreators.getCateDetailDB(page, category));
+    } else if (category === "연애") {
+      dispatch(actionCreators.getCateDetailDB(page, category));
+    } else if (category === "이별") {
+      dispatch(actionCreators.getCateDetailDB(page, category));
+    } else if (category === "기타") {
+      dispatch(actionCreators.getCateDetailDB(page, category));
+    }
+    return () => {
+      dispatch(actionCreators.resetPost());
+    };
+  }, [page]);
 
   return (
     <React.Fragment>
@@ -116,6 +135,8 @@ function PostList(props) {
               <div className="mobile">
                 <CategoryBtn
                   onClick={() => {
+                    setPage(1);
+                    history.push("/postList/전체");
                     dispatch(actionCreators.getPostDB(page));
                   }}
                 >
@@ -128,6 +149,8 @@ function PostList(props) {
                 </CategoryBtn>
                 <CategoryBtn
                   onClick={() => {
+                    setPage(1);
+                    history.push("/postList/투표");
                     dispatch(actionCreators.getCateDetailDB(page, "투표"));
                   }}
                 >
@@ -136,6 +159,8 @@ function PostList(props) {
                 </CategoryBtn>
                 <CategoryBtn
                   onClick={() => {
+                    setPage(1);
+                    history.push("/postList/솔로");
                     dispatch(actionCreators.getCateDetailDB(page, "솔로"));
                   }}
                 >
@@ -144,6 +169,8 @@ function PostList(props) {
                 </CategoryBtn>
                 <CategoryBtn
                   onClick={() => {
+                    setPage(1);
+                    history.push("/postList/짝사랑");
                     dispatch(actionCreators.getCateDetailDB(page, "짝사랑"));
                   }}
                 >
@@ -154,6 +181,8 @@ function PostList(props) {
               <div className="mobile">
                 <CategoryBtn
                   onClick={() => {
+                    setPage(1);
+                    history.push("/postList/썸");
                     dispatch(actionCreators.getCateDetailDB(page, "썸"));
                   }}
                 >
@@ -161,6 +190,8 @@ function PostList(props) {
                 </CategoryBtn>
                 <CategoryBtn
                   onClick={() => {
+                    setPage(1);
+                    history.push("/postList/연애");
                     dispatch(actionCreators.getCateDetailDB(page, "연애"));
                   }}
                 >
@@ -169,6 +200,8 @@ function PostList(props) {
                 </CategoryBtn>
                 <CategoryBtn
                   onClick={() => {
+                    setPage(1);
+                    history.push("/postList/이별");
                     dispatch(actionCreators.getCateDetailDB(page, "이별"));
                   }}
                 >
@@ -177,6 +210,8 @@ function PostList(props) {
                 </CategoryBtn>
                 <CategoryBtn
                   onClick={() => {
+                    setPage(1);
+                    history.push("/postList/기타");
                     dispatch(actionCreators.getCateDetailDB(page, "기타"));
                   }}
                 >

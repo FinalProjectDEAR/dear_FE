@@ -44,7 +44,7 @@ function PostDetail(props) {
   const post = useSelector((state) => state.post.detailPost);
   console.log(post);
   const commentList = useSelector((state) => state.comment.comments);
-  // console.log(post);
+  // console.log(commentList);
   //시간을 알아보자!
   const option = {
     lang: "ko",
@@ -114,7 +114,7 @@ function PostDetail(props) {
               <ThumbUp />
               <Text sub7> {likesList?.length}</Text>
               <CommentNum />
-              <Text sub7> {commentList?.length}</Text>
+              <Text sub7> {commentList[0]?.totalComments}</Text>
             </ThumbComment>
           </TitleBox>
           <BtnContainer>
