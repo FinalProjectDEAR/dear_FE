@@ -13,6 +13,7 @@ import styled from "styled-components";
 import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
 
 function VoteResult(props) {
+  console.log("투표결과 프롭스", props);
   const dispatch = useDispatch();
 
   React.useEffect(() => {

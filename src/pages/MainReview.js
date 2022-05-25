@@ -28,7 +28,7 @@ function MainReview() {
     infinite: true,
     speed: 3000,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 5000,
     centerMode: true,
     centerPadding: "180px",
     slidesToShow: 2,
