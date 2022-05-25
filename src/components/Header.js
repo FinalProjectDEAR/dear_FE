@@ -14,6 +14,16 @@ const logout = () => {
   localStorage.removeItem("accessToken");
   localStorage.removeItem("memberId");
   localStorage.removeItem("nickname");
+  localStorage.removeItem("isLogin");
+};
+
+const gotoMypage = () => {
+  if (isLogin !== "true") {
+    window.alert("로그인 후 이용해주세요.");
+    history.push("/");
+    return;
+  }
+  history.push("/myPage");
 };
 
 const Header = (props) => {
@@ -47,11 +57,7 @@ const Header = (props) => {
                   디어상담소
                 </Text>
               </HeaderBtn>
-              <HeaderBtn
-                onClick={() => {
-                  history.push("/myPage");
-                }}
-              >
+              <HeaderBtn onClick={gotoMypage}>
                 <Text sub7 cursor="pointer">
                   마이페이지
                 </Text>

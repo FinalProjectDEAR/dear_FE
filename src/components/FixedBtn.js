@@ -44,14 +44,26 @@ function FixedBtn(props) {
   }, []);
   const alarmNum = useSelector((state) => state.noti.notiCnt);
 
+  const isLogin = localStorage.getItem("isLogin");
+
+  const gotoMypage = () => {
+    if (isLogin !== "true") {
+      window.alert("로그인 후 이용해주세요.");
+      history.push("/");
+      return;
+    }
+    history.push("/myPage");
+  };
+
   return (
     <React.Fragment>
       <BtnWrap>
         <Link to="1" smooth={true}>
-          <Up onClick={window.scrollTo(0, 0)}>
+          <Up>
             <ArrowUpwardIcon fontSize="medium" />
           </Up>
         </Link>
+
         <Desc>
           <FontBox>
             <Font>서비스소개</Font>
@@ -69,11 +81,7 @@ function FixedBtn(props) {
 
           <QuestionAnswerIcon />
         </Board>
-        <Follow
-          onClick={() => {
-            history.push("/myPage");
-          }}
-        >
+        <Follow onClick={gotoMypage}>
           <FontBox>
             <Font>마이페이지</Font>
           </FontBox>

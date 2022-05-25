@@ -316,7 +316,6 @@ function AudioChat() {
                 <UserAudioComponent
                   streamManager={mainStreamManager}
                   color={chatInfo.reqColor}
-                  // color="#D62020"
                 />
                 <Timer
                   targetTime={targetTime}
@@ -327,7 +326,6 @@ function AudioChat() {
                 <div style={{ width: "85px" }}>
                   <UserAudioComponent
                     streamManager={subscribers[0]}
-                    // color="#FFD05B"
                     color={chatInfo.resColor}
                   />
                 </div>

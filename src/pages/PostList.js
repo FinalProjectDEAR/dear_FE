@@ -26,6 +26,9 @@ import Paginations from "../elements/Pagination";
 function PostList(props) {
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const isLogin = localStorage.getItem("isLogin");
+
   //페이지
   const [page, setPage] = React.useState(1);
   //페이지별 게시글 전체 조회
@@ -38,6 +41,25 @@ function PostList(props) {
   const postList = useSelector((state) => state.post.post.content);
   const pageList = useSelector((state) => state.post.post);
   console.log(pageList);
+
+  const gotoVote = () => {
+    if (isLogin !== true) {
+      window.alert("로그인 후 이용해주세요.");
+      history.push("/");
+      return;
+    }
+    history.push("/voteWrite");
+  };
+
+  const gotoPost = () => {
+    if (isLogin !== true) {
+      window.alert("로그인 후 이용해주세요.");
+      history.push("/");
+      return;
+    }
+    history.push("/postWrite");
+  };
+
   return (
     <React.Fragment>
       <Layout>
@@ -70,22 +92,14 @@ function PostList(props) {
               <Button
                 size="regular"
                 primaryDefault
-                _onClick={() => {
-                  history.push("/postWrite");
-                }}
+                _onClick={gotoPost}
                 cursor="pointer"
               >
                 <Text body4 color="#fff">
                   상담신청하기
                 </Text>
               </Button>
-              <Button
-                size="small"
-                secondaryDefault
-                _onClick={() => {
-                  history.push("/voteWrite");
-                }}
-              >
+              <Button size="small" secondaryDefault _onClick={gotoVote}>
                 <Text body4 color="#7A37BE" cursor="pointer">
                   투표만들기
                 </Text>
@@ -190,9 +204,7 @@ function PostList(props) {
                   size="narrow"
                   secondaryDefault
                   cursor="pointer"
-                  _onClick={() => {
-                    history.push("/voteWrite");
-                  }}
+                  _onClick={gotoVote}
                 >
                   <Text body4 color="#7A37BE" cursor="pointer">
                     투표만들기
@@ -201,9 +213,7 @@ function PostList(props) {
                 <Button
                   size="narrow"
                   primaryDefault
-                  _onClick={() => {
-                    history.push("/postWrite");
-                  }}
+                  _onClick={gotoPost}
                   cursor="pointer"
                 >
                   <Text body4 color="#fff">
