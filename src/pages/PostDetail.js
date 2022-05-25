@@ -432,6 +432,7 @@ const PhotoWrap = styled.div`
   /* flex-direction: row; */
   /* border: 1px solid red; */
   ${({ theme }) => theme.device.isMobile} {
+    display: flex;
     flex-direction: column;
   }
 `;

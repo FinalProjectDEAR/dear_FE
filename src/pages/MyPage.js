@@ -214,7 +214,7 @@ const MyPage = () => {
                     <OndoTag>
                       <Tag sub2>
                         <TemperatureBox>
-                          <Text sub7>
+                          <Text sub7 margin="3px 0px">
                             마음의 온도
                             <Temperature>{userInfo?.score}°C</Temperature>
                           </Text>
@@ -501,10 +501,11 @@ const TypeWrapper = styled.div`
   .loveTag {
     margin-left: 32px;
     gap: 10px;
-    width: 400px;
+    width: 410px;
     height: 26px;
     display: flex;
     flex-direction: row;
+    /* border: 1px solid red; */
   }
   #listener {
     width: 400px;
@@ -658,7 +659,8 @@ const WebListener = styled.div`
   }
 `;
 const OndoTag = styled.div`
-  margin-top: 0px;
+  /* margin-top: 0px; */
+  /* border: 1px solid red; */
   @media ${({ theme }) => theme.device.isMobile} {
     margin-top: 0px;
   }
@@ -666,7 +668,7 @@ const OndoTag = styled.div`
 const TemperatureBox = styled.div`
   display: flex;
   flex-direction: row;
-  margin: 15px 26px;
+  margin: 0px 26px;
   /* border: 1px solid red; */
 `;
 const TemperatureBar = styled.div`
