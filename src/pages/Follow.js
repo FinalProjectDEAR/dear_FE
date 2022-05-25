@@ -108,7 +108,9 @@ const FollowWrapper = styled.div`
     height: 58px;
     display: flex;
     flex-direction: row;
+
     align-items: center;
+    /* background-color: blue; */
   }
 `;
 const FollowContainer = styled.div`
@@ -120,10 +122,12 @@ const FollowContainer = styled.div`
   @media ${({ theme }) => theme.device.isMobile} {
     display: flex;
     width: 320px;
+    height: 40px;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    /* background-color: blue; */
+    padding-bottom: 13px;
+    /* background-color: red; */
   }
 `;
 const ColorBox = styled.div`
@@ -136,8 +140,8 @@ const ColorBox = styled.div`
     flex-direction: row;
     justify-content: left;
     /* background-color: blue; */
-    width: 30px;
-    height: 30px;
+    /* width: 30px;
+    height: 30px; */
     padding-bottom: 5px;
   }
 `;
