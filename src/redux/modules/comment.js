@@ -62,7 +62,7 @@ const addCommentDB = (comment, postId) => {
       api
         .post(`anonypost/board/${postId}/comment`, comment.comment)
         .then((res) => {
-          // console.log("댓글 추가", res.data.data);
+          console.log("댓글 추가", res.data);
           dispatch(addComment(res.data.data));
         });
     } catch (err) {

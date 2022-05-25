@@ -24,7 +24,7 @@ function PostDetail(props) {
   const history = useHistory();
   const dispatch = useDispatch();
   //공감해요 버튼
-  const [like, setLike] = React.useState(false);
+  const [like, setLike] = React.useState(true);
   //페이지
   const [page, setPage] = React.useState(1);
   const totalPage = useSelector((state) => state.comment.pages);
@@ -42,7 +42,7 @@ function PostDetail(props) {
   }, [page]);
   //상세페이지 가져오기
   const post = useSelector((state) => state.post.detailPost);
-  // console.log(post);
+  console.log(post);
   const commentList = useSelector((state) => state.comment.comments);
   // console.log(post);
   //시간을 알아보자!
@@ -84,10 +84,6 @@ function PostDetail(props) {
     dispatch(actionCreators.likeDB(postId, like));
   };
 
-  //optionalChaining ?. 과 같음 , useEffect는 리턴 후 실행
-  // if (post === undefined) {
-  //   return <React.Fragment />;
-  // }
   return (
     <React.Fragment>
       <Layout>
@@ -185,7 +181,7 @@ function PostDetail(props) {
             <Text size="14px" weight="500" color="#333333">
               공감해요
             </Text>
-            <Text weight="700" color="#333333" cursor="pointer">
+            <Text weight="700" color="#7A37BE" cursor="pointer">
               {likesList?.length}
             </Text>
           </IsLike>
@@ -401,7 +397,7 @@ const IsLike = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  /* gap: 10px; */
+  gap: 10px;
   margin: auto;
   height: 20px;
   /* border: 1px solid yellow; */
