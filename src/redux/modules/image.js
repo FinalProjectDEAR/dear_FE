@@ -53,6 +53,7 @@ export default handleActions(
       produce(state, (draft) => {
         draft.imageLeft = initialState.imageLeft;
         draft.imageRight = initialState.imageRight;
+        draft.fileList = initialState.fileList;
       }),
   },
   initialState

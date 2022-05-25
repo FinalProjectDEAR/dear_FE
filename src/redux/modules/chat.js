@@ -1,5 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
+import { actionCreators as imageActions } from "./image";
 
 import { apis } from "../../shared/apis";
 
@@ -62,6 +63,7 @@ const reqChatDB = (payload) => {
       const sessionId = data.data.sessionId;
       console.log(sessionId);
       dispatch(setRoomAuth(data.data));
+      dispatch(imageActions.delData());
       history.push(`/AudioRoom/${sessionId}`);
     } catch (err) {
       console.log(err, "리스너 매칭에 실패하였습니다.");

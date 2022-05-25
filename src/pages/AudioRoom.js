@@ -10,7 +10,9 @@ import AudioChat from "../components/AudioChat";
 
 import styled from "styled-components";
 import { Text, TextB, Modal } from "../elements";
+
 import example from "../assets/imageex.png";
+import empty from "../assets/empty1.png";
 
 function AudioRoom(props) {
   const dispatch = useDispatch();
@@ -18,7 +20,7 @@ function AudioRoom(props) {
   const sessionId = params.sessionId;
 
   const chatInfo = useSelector((state) => state.chat.chatInfo);
-  console.log(chatInfo);
+  console.log("url", chatInfo.imgUrl);
   React.useEffect(() => {
     dispatch(chatActions.getChatInfoDB(sessionId));
   }, []);
@@ -53,19 +55,31 @@ function AudioRoom(props) {
               </TitleBox>
               <AudioChat chatInfo={chatInfo} />
             </LeftBox>
-            <ImageBox>
-              {chatInfo.imageUrl?.map((url, idx) => {
-                return (
-                  <Image
-                    key={idx}
-                    src={url}
-                    onClick={() => {
-                      openModal(url);
-                    }}
-                  />
-                );
-              })}
-            </ImageBox>
+            {chatInfo.imageUrl.length === 0 ? (
+              <NoImgBox>
+                <NoMsg>
+                  <img src={empty} alt="noInfo" style={{ width: "30px" }}></img>
+                  <Text body3 color="#948A9E">
+                    상담에 첨부한 자료가 없어요.
+                  </Text>
+                </NoMsg>
+              </NoImgBox>
+            ) : (
+              <ImageBox>
+                {chatInfo.imageUrl?.map((url, idx) => {
+                  return (
+                    <Image
+                      key={idx}
+                      src={url}
+                      onClick={() => {
+                        openModal(url);
+                      }}
+                    />
+                  );
+                })}
+              </ImageBox>
+            )}
+
             {modalOpen ? (
               <Modal closeModal={closeModal}>
                 <img src={imgUrl} alt="img" style={{ maxHeight: "650px" }} />
@@ -172,6 +186,30 @@ const ImageBox = styled.div`
     width: 330px;
     height: auto;
   }
+`;
+
+const NoImgBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 370px;
+  height: 490px;
+  margin: 10px 20px;
+  padding: 10px;
+  background: #fafafa;
+  box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
+  border-radius: 20px;
+  box-sizing: border-box;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 330px;
+    height: auto;
+  }
+`;
+
+const NoMsg = styled.div`
+  width: 182px;
+  height: 75px;
+  margin: auto;
 `;
 
 const Image = styled.div`

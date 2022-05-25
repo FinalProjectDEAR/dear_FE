@@ -21,7 +21,7 @@ export default function Timer(props) {
     Math.floor((new Date(targetTime) - new Date()) / 1000, 10)
   );
 
-  const isContinue = useResultOfIntervalCalculator(() => remain === 51, 10); //테스트 10초마다 연장의사 묻기
+  const isContinue = useResultOfIntervalCalculator(() => remain === 30, 10); //테스트 10초마다 연장의사 묻기
   const isTimeOver = useResultOfIntervalCalculator(() => remain === 1, 10);
 
   React.useEffect(() => {
@@ -61,6 +61,7 @@ Timer.defaultProps = {
 const TimerBox = styled.div`
   width: 110px;
   height: 44px;
+  margin: 0px 20px;
   background-color: #f8f8f8;
   border-radius: 4px;
   padding: 4px;

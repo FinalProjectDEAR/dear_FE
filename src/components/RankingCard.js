@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Text, TextB, ColorBadge, Tag } from "../elements";
+import { Text, TextB, ColorBadge, ResTag } from "../elements";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
@@ -35,11 +35,7 @@ function RankingCard({ rankInfo }) {
           </TemperatureBar>
         </LineBox>
         <TagBox>
-          <Tag primary>
-            <Text sub7 margin="3px 8px" color="#7A37BE">
-              {rankInfo?.resTag}
-            </Text>
-          </Tag>
+          {rankInfo ? <ResTag resTag1={rankInfo?.resTag1} /> : null}
         </TagBox>
       </UserRankingWrapper>
     </React.Fragment>
