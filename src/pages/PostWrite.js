@@ -219,7 +219,7 @@ function PostWrite() {
               _onClick={addPost}
               cursor="pointer"
             >
-              <Text body4 color="#fff">
+              <Text body4 color="#fff" cursor="pointer">
                 상담신청
               </Text>
             </Button>

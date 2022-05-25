@@ -180,7 +180,7 @@ const likeDB = (postId, likes) => {
       api
         .post(`/anonypost/board/${postId}/postLikes?likes=${likes}`, {})
         .then((res) => {
-          // console.log("공감", res.data);
+          console.log("공감", res.data);
           dispatch(likePost(postId, res.data.data.likes));
         });
     } catch (err) {
