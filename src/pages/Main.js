@@ -1,5 +1,6 @@
 import React from "react";
 
+import styled from "styled-components";
 import ReactPageScroller from "react-page-scroller";
 
 import { Text, TextB } from "../elements";
@@ -22,19 +23,42 @@ function Main() {
 
   return (
     <React.Fragment>
-      <div id="1"></div>
-      <ReactPageScroller
-        pageOnChange={pageChange}
-        onBeforePageScroll={beforePageChange}
-        customPageNumber={currentPage}
-      >
-        <MainChat />
-        <MainRanking />
-        <MainHotPost />
-        <MainReview />
-      </ReactPageScroller>
+      <Background>
+        <ReactPageScroller
+          pageOnChange={pageChange}
+          onBeforePageScroll={beforePageChange}
+          customPageNumber={currentPage}
+        >
+          <MainChat />
+          <MainRanking />
+          <MainHotPost />
+          <MainReview />
+        </ReactPageScroller>
+        <GoTop
+          onClick={() => {
+            pageChange(0);
+          }}
+        />
+      </Background>
     </React.Fragment>
   );
 }
 
 export default Main;
+
+const Background = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
+const GoTop = styled.div`
+  position: absolute;
+  z-index: 10;
+  bottom: 335px;
+  left: 90%;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+`;

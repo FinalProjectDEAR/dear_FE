@@ -11,6 +11,7 @@ const Footer = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("memberId");
     localStorage.removeItem("nickname");
+    localStorage.removeItem("isLogin");
   };
   return (
     <React.Fragment>

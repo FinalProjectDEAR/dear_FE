@@ -184,6 +184,7 @@ const logoutDB = (memberId) => {
       await apis.logout(memberId);
       localStorage.removeItem("nickName");
       localStorage.removeItem("memberId");
+      localStorage.removeItem("isLogin");
     } catch (err) {
       console.log(err, "로그아웃 실패");
     }

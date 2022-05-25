@@ -30,7 +30,7 @@ function MainChat() {
     if (checkBox !== true) {
       window.alert("이용약관에 동의해주세요.");
       return;
-    } else if (isLogin !== true) {
+    } else if (isLogin !== "true") {
       window.alert("로그인 후 이용해 주세요.");
       history.replace("/");
       return;
@@ -42,7 +42,7 @@ function MainChat() {
     if (checkBox !== true) {
       window.alert("이용약관에 동의해주세요.");
       return;
-    } else if (isLogin !== true) {
+    } else if (isLogin !== "true") {
       window.alert("로그인 후 이용해 주세요.");
       history.push("/");
     }
@@ -52,7 +52,7 @@ function MainChat() {
   return (
     <React.Fragment>
       <Header />
-      <Background id="1">
+      <Background>
         <MainWrap>
           <IntroWrap>
             <LogoBox>

@@ -14,10 +14,11 @@ const logout = () => {
   localStorage.removeItem("accessToken");
   localStorage.removeItem("memberId");
   localStorage.removeItem("nickname");
+  localStorage.removeItem("isLogin");
 };
 
 const gotoMypage = () => {
-  if (isLogin !== true) {
+  if (isLogin !== "true") {
     window.alert("로그인 후 이용해주세요.");
     history.push("/");
     return;
