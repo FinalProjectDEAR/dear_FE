@@ -23,33 +23,26 @@ function Main() {
 
   return (
     <React.Fragment>
-      <Background>
-        <ReactPageScroller
-          pageOnChange={pageChange}
-          onBeforePageScroll={beforePageChange}
-          customPageNumber={currentPage}
-        >
-          <MainChat />
-          <MainRanking />
-          <MainHotPost />
-          <MainReview />
-        </ReactPageScroller>
-        <GoTop
-          onClick={() => {
-            pageChange(0);
-          }}
-        />
-      </Background>
+      <ReactPageScroller
+        pageOnChange={pageChange}
+        onBeforePageScroll={beforePageChange}
+        customPageNumber={currentPage}
+      >
+        <MainChat />
+        <MainRanking />
+        <MainHotPost />
+        <MainReview />
+      </ReactPageScroller>
+      <GoTop
+        onClick={() => {
+          pageChange(0);
+        }}
+      />
     </React.Fragment>
   );
 }
 
 export default Main;
-
-const Background = styled.div`
-  width: 100%;
-  height: 100%;
-`;
 
 const GoTop = styled.div`
   position: absolute;
@@ -61,4 +54,7 @@ const GoTop = styled.div`
   border-radius: 50%;
   background-color: transparent;
   cursor: pointer;
+  @media ${({ theme }) => theme.device.isMobile} {
+    bottom: 100px;
+  }
 `;

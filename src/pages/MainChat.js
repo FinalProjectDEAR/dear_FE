@@ -142,7 +142,7 @@ const Background = styled.div`
   justify-content: center;
   align-items: center;
   @media ${({ theme }) => theme.device.mobile} {
-    height: 100vh - 200px;
+    height: 100vh - 100px;
   }
 `;
 
@@ -164,7 +164,7 @@ const IntroWrap = styled.div`
   height: 230px;
   margin: auto;
   @media ${({ theme }) => theme.device.mobile} {
-    margin-top: 60px;
+    margin-top: 30px;
     height: 180px;
   }
 `;
@@ -258,4 +258,7 @@ const ScrollBox = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 150px;
+  @media ${({ theme }) => theme.device.mobile} {
+    margin-top: 100px;
+  }
 `;

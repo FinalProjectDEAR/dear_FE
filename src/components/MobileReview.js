@@ -8,21 +8,13 @@ import styled from "styled-components";
 
 //페이지
 import ReviewCard from "../components/ReviewCard";
-import Footer from "../components/Footer";
 
 //Carousel library
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import MobileReview from "../components/MobileReview";
 
-function MainReview() {
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    dispatch(mainActions.getReviewDB());
-  }, []);
-
+function MobileReview() {
   const reviewList = useSelector((state) => state.main.reviewList);
 
   const settings = {
@@ -30,12 +22,13 @@ function MainReview() {
     speed: 3000,
     autoplay: true,
     autoplaySpeed: 5000,
+    centerPadding: "10px",
     centerMode: true,
-    centerPadding: "180px",
     slidesToShow: 2,
     rows: 2,
     slidesPerRow: 1,
   };
+
   return (
     <React.Fragment>
       <Background>
@@ -59,44 +52,41 @@ function MainReview() {
             <ReviewCard /> */}
           </Slider>
         </ReviewWrapper>
-        <MobileReview reviewList={reviewList} />
-        <Footer />
       </Background>
     </React.Fragment>
   );
 }
 
-export default MainReview;
+export default MobileReview;
 
 const Background = styled.div`
-  width: 100%;
+  padding-top: 60px;
+  width: 360px;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  overflow: hidden;
 `;
 
 const ReviewWrapper = styled.div`
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
   box-sizing: border-box;
-  width: 1440px;
-  height: 600px;
+  width: 780px;
   margin: auto;
   overflow: hidden;
   @media ${({ theme }) => theme.device.mobile} {
-    display: none;
+    display: flex;
   }
 `;
 
 const LineBox = styled.div`
-  display: flex;
+  display: none;
+  margin-left: 25px;
+  width: 360px;
   align-items: center;
   justify-content: flex start;
-  margin-left: 204px;
+  margin-left: 10px;
   @media ${({ theme }) => theme.device.mobile} {
-    margin-left: 25px;
-    width: 360px;
+    display: flex;
   }
 `;

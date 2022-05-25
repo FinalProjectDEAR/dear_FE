@@ -66,6 +66,6 @@ const RankingWrapper = styled.div`
 `;
 
 const RankingContainer = styled.div`
-  width: 650px;
-  margin: 0px -15px;
+  width: 600px;
+  margin: 0px -20px;
 `;

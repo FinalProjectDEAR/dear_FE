@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import { ReactComponent as Logo } from "../assets/Frame.svg";
 import { history } from "../redux/configureStore";
 import { Text } from "../elements";
 
@@ -32,16 +31,16 @@ const Header = (props) => {
       <HeaderWrapper id="1">
         <HeaderContainer>
           <HeaderBox>
-            <Logo
-              onClick={() => {
-                history.push("/main");
-              }}
-              style={{
-                cursor: "pointer",
-                width: "100px",
-                height: "66.34px",
-              }}
-            />
+            <LogoBox>
+              <Logo
+                src={logo}
+                onClick={() => {
+                  history.push("/main");
+                }}
+                alt="logo"
+              />
+            </LogoBox>
+
             <ButtonBox>
               <HeaderBtn>
                 <Text sub7 cursor="pointer">
@@ -92,14 +91,30 @@ const HeaderWrapper = styled.div`
   box-sizing: border-box;
   background: rgba(196, 196, 196, 0);
   @media ${({ theme }) => theme.device.mobile} {
-    display: none;
+    padding: 15px 10px;
+    width: 360px;
+    height: 60px;
   }
 `;
 
 const HeaderContainer = styled.div`
   @media (max-width: 1920px) {
-    padding: 0px 16px;
     box-sizing: border-box;
+  }
+`;
+
+const LogoBox = styled.div`
+  display: flex;
+  justify-content: flex-start;
+`;
+
+const Logo = styled.img`
+  width: 100px;
+  height: 66px;
+  margin: 0px auto;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 60px;
+    height: 36px;
   }
 `;
 
@@ -126,4 +141,7 @@ const ButtonBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  @media ${({ theme }) => theme.device.mobile} {
+    display: none;
+  }
 `;

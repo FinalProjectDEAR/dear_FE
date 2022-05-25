@@ -59,7 +59,8 @@ const UserRankingWrapper = styled.div`
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
 
   @media ${({ theme }) => theme.device.mobile} {
-    margin-left: 20px;
+    margin-left: 15px;
+    width: 180px;
   }
 `;
 

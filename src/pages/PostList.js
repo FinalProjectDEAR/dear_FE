@@ -43,7 +43,7 @@ function PostList(props) {
   console.log(pageList);
 
   const gotoVote = () => {
-    if (isLogin !== true) {
+    if (isLogin !== "true") {
       window.alert("로그인 후 이용해주세요.");
       history.push("/");
       return;
@@ -52,7 +52,7 @@ function PostList(props) {
   };
 
   const gotoPost = () => {
-    if (isLogin !== true) {
+    if (isLogin !== "true") {
       window.alert("로그인 후 이용해주세요.");
       history.push("/");
       return;
@@ -109,7 +109,7 @@ function PostList(props) {
 
           <VoteWrapper>
             <VoteList />
-            {/* <MobileVoteList /> */}
+            <MobileVoteList />
           </VoteWrapper>
           <BoardWrapper id="2">
             <CateGoryWrapper>
