@@ -165,7 +165,7 @@ const Notification = () => {
 const NotiWrapper = styled.div`
   overflow: scroll;
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 0.3px;
   }
   ::-webkit-scrollbar-thumb {
     height: 10%;
@@ -175,7 +175,7 @@ const NotiWrapper = styled.div`
   }
 
   ::-webkit-scrollbar-track {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: transparent;
   }
 
   /* position: absolute; */
