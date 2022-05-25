@@ -12,6 +12,7 @@ const SET_VOTE = "GET_VOTE";
 const SET_RANKING = "SET_RANKING";
 const ADD_VOTE = "ADD_VOTE";
 const DETAIL_VOTE = "DETAIL_VOTE";
+const GET_RESULT = "GET_RESULT";
 const DEL_VOTE = "DELETE_VOTE";
 const PUT_VOTE = "PUT_VOTE";
 const DEL_DATA = "DEL_DATA";
@@ -19,7 +20,8 @@ const DEL_DATA = "DEL_DATA";
 // action creators
 const setVote = createAction(SET_VOTE, (voteList) => voteList);
 const setRanking = createAction(SET_RANKING, (RankingList) => RankingList);
-const detailVote = createAction(DETAIL_VOTE, (postId) => postId);
+const detailVote = createAction(DETAIL_VOTE, (voteInfo) => voteInfo);
+const getResult = createAction(GET_RESULT, (voteInfo) => voteInfo);
 const delVote = createAction(DEL_VOTE, (postId) => postId);
 const putVote = createAction(PUT_VOTE, (postId) => postId);
 const delData = createAction(DEL_DATA);
@@ -88,6 +90,26 @@ const initialState = {
       },
     ],
   },
+  voteResult: {
+    memberId: "럭키세븐호02",
+    createdAt: "22-05-01 10:00:00",
+    title: "남자친구 생일선물 골라주세요!",
+    contents: "생일선물 뭐고를지 모르겠어요 투표 부탁드려요!",
+    vote: [
+      {
+        imageUrl: image01,
+        imageTitle: "신발",
+        selectionList: ["스파르타", "항해99", "럭키세븐호"],
+        selected: false,
+      },
+      {
+        imageUrl: image02,
+        imageTitle: "가방",
+        selectionList: ["스파르타", "항해99"],
+        selected: false,
+      },
+    ],
+  },
 };
 
 //middlewares
@@ -110,6 +132,20 @@ const detailVoteDB = (postId) => {
       const { data } = await apis.detailVote(postId);
       console.log(data);
       dispatch(detailVote(data.data));
+    } catch (err) {
+      window.alert("상세정보 불러오기 실패");
+      console.log(err);
+    }
+  };
+};
+
+const getResultDB = (postId) => {
+  console.log("투표결과 DB 통신 진입");
+  return async function (dispatch, getState, { history }) {
+    try {
+      const { data } = await apis.detailVote(postId);
+      console.log(data);
+      dispatch(getResult(data.data));
     } catch (err) {
       window.alert("상세정보 불러오기 실패");
       console.log(err);
@@ -199,6 +235,11 @@ export default handleActions(
         console.log(action.payload);
         draft.voteInfo = action.payload;
       }),
+    [GET_RESULT]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action.payload);
+        draft.voteResult = action.payload;
+      }),
     [DEL_VOTE]: (state, action) =>
       produce(state, (draft) => {
         draft.voteList = state.voteList.filter(
@@ -220,6 +261,7 @@ const actionCreators = {
   detailVoteDB,
   delVoteDB,
   putVoteDB,
+  getResultDB,
   delData,
 };
 

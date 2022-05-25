@@ -17,10 +17,10 @@ function VoteResult(props) {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(voteActions.detailVoteDB(props.postId));
+    dispatch(voteActions.getResultDB(props.postId));
   }, []);
 
-  const voteInfo = useSelector((state) => state.vote.voteInfo);
+  const voteInfo = useSelector((state) => state.vote.voteResult);
   console.log("결과페이지 정보", voteInfo);
 
   const leftScore = voteInfo.vote[0].selectionList.length;

@@ -9,7 +9,8 @@ const LOG_OUT = "LOG_OUT";
 const GET_USER = "GET_USER";
 const SET_USER = "SET_USER";
 const GET_INFO = "GET_INFO";
-const SET_MSG = "SET_MSG";
+const SET_ID_MSG = "SET_ID_MSG";
+const SET_NICK_MSG = "SET_NICK_MSG";
 
 // action creators
 const logOut = createAction(LOG_OUT, (memberId) => memberId);
@@ -23,7 +24,8 @@ const getInfo = createAction(
     userInfo, followList, historyList, postList
   )
 );
-const setMessage = createAction(SET_MSG, (msg) => msg);
+const setIdMessage = createAction(SET_ID_MSG, (msg) => msg);
+const setNickMessage = createAction(SET_NICK_MSG, (msg) => msg);
 
 // initialState
 const initialState = {
@@ -33,7 +35,8 @@ const initialState = {
   userInfo: null,
   followList: null,
   historyList: null,
-  msg: false,
+  idMsg: false,
+  nickMsg: false,
 };
 
 // middleware actions
@@ -197,12 +200,10 @@ const dupMemberIdDB = (memberId) => {
         }
       );
       console.log(data);
-      const msg = "사용 가능한 아이디 입니다.";
-      dispatch(setMessage(msg));
+      dispatch(setIdMessage(true));
     } catch (err) {
       console.log("아이디 중복조회 실패", err);
-      const msg = "사용 할 수 없는 아이디 입니다.";
-      dispatch(setMessage(msg));
+      dispatch(setIdMessage(false));
     }
   };
 };
@@ -213,12 +214,10 @@ const dupNicknameDB = (nickname) => {
       console.log("중복체크DB", nickname);
       const { data } = await apis.nickCheck(nickname);
       console.log("서버응답", data);
-      const msg = "사용 가능한 닉네임 입니다.";
-      dispatch(setMessage(msg));
+      dispatch(setNickMessage(true));
     } catch (err) {
       console.log("닉네임 중복조회 실패", err);
-      const msg = "사용 할 수 없는 닉네임 입니다.";
-      dispatch(setMessage(msg));
+      dispatch(setNickMessage(false));
     }
   };
 };
@@ -245,10 +244,15 @@ export default handleActions(
         draft.historyList = action.payload.historyList;
         draft.postList = action.payload.postList;
       }),
-    [SET_MSG]: (state, action) =>
+    [SET_ID_MSG]: (state, action) =>
       produce(state, (draft) => {
         console.log("메세지 리덕스", action.payload);
-        draft.msg = action.payload;
+        draft.idMsg = action.payload;
+      }),
+    [SET_NICK_MSG]: (state, action) =>
+      produce(state, (draft) => {
+        console.log("메세지 리덕스", action.payload);
+        draft.nickMsg = action.payload;
       }),
   },
   initialState

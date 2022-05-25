@@ -26,7 +26,7 @@ function MemberInfo() {
 
   const memberId = localStorage.getItem("memberId");
 
-  const nickErr = useSelector((state) => state.user.msg);
+  const nickErr = useSelector((state) => state.user.nickMsg);
 
   //모달
   const [modalOpen, setModalOpen] = React.useState(true);
@@ -191,15 +191,22 @@ function MemberInfo() {
                         </Text>
                       </Button>
                     </div>
-                    {nickErr ? (
-                      <Text sub7 textAlign="left" margin="15px">
-                        {nickErr}
+
+                    {isCheck && nickErr === true ? (
+                      <Text sub7 textAlign="left" margin="15px" color="#50BA94">
+                        사용 가능한 닉네임입니다.
                       </Text>
-                    ) : (
-                      <Text sub7 textAlign="left" margin="15px">
-                        영문, 한글, 숫자조합 3~10자 이내로 입력해 주세요.
+                    ) : null}
+                    {isCheck && nickErr === false ? (
+                      <Text sub7 textAlign="left" margin="15px" color="#D53253">
+                        사용할 수 없는 닉네임입니다.
                       </Text>
-                    )}
+                    ) : null}
+                    {isCheck === false ? (
+                      <Text sub7 textAlign="left" margin="15px">
+                        영문, 한글, 숫자조합 3~10자 이내로 입력해 주세요
+                      </Text>
+                    ) : null}
                   </NickBox>
 
                   <ColorBox>

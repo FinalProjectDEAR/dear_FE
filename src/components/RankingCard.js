@@ -104,6 +104,6 @@ const Highlight = styled.div`
 `;
 
 const TagBox = styled.div`
-  margin-top: 10px;
+  margin-top: 15px;
   width: 120px;
 `;

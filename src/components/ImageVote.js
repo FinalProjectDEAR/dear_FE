@@ -70,9 +70,15 @@ function ImageVote({ voteInfo }) {
     setRightSelected(true);
   };
 
+  const delSelection = () => {
+    setLeftSelected(false);
+    setRightSelected(false);
+  };
+
   const submitVote = () => {
     dispatch(voteActions.putVoteDB(postId, vote));
     setShowResult(true);
+    setTimeout(delSelection(), 500);
   };
 
   return (

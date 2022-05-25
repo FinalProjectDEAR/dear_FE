@@ -22,6 +22,7 @@ function Main() {
 
   return (
     <React.Fragment>
+      <div id="1"></div>
       <ReactPageScroller
         pageOnChange={pageChange}
         onBeforePageScroll={beforePageChange}

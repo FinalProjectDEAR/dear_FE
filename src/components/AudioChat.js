@@ -155,7 +155,7 @@ function AudioChat() {
         setSubscribers([...subscribers, ...subscriberList]);
 
         let date = new Date();
-        let target = date.setMinutes(date.getMinutes() + 10); // 테스트는 1분으로 시작!
+        let target = date.setMinutes(date.getMinutes() + 10);
         setTargetTime(target);
         setIsConnect(true);
         dispatch(chatActions.getChatInfoDB(sessionId));
@@ -173,7 +173,7 @@ function AudioChat() {
         setWantMore({ ...wantMore, agree: wantMoreList });
         if (wantMore.agree.length % 2 === 0) {
           let date = new Date();
-          let extend = date.setMinutes(date.getMinutes() + 1); //연장 테스트 1분
+          let extend = date.setMinutes(date.getMinutes() + 10);
           setTargetTime(extend);
         }
       });
@@ -223,7 +223,7 @@ function AudioChat() {
   React.useEffect(() => {
     if (!isConnect) {
       console.log("30초 카운트");
-      setTimeout(waitTimeOut, 300000); //30000 30초
+      setTimeout(waitTimeOut, 30000);
     }
   }, []);
 
