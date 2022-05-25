@@ -68,10 +68,15 @@ const PostWrapper = styled.div`
 const Title = styled.div`
   padding-left: 40px;
   @media ${({ theme }) => theme.device.isMobile} {
-    height: 36px;
+    height: 38px;
     /* border: 1px solid red; */
     width: 90%;
     box-sizing: border-box;
+    display: block;
+    /* word-wrap: normal; */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
 const Date = styled.div`

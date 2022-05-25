@@ -178,8 +178,8 @@ function PostDetail(props) {
               </PhotoDiv>
             </PhotoDivWrap>
           </CommentPhotoWrap>
-          <IsLike onClick={likePost}>
-            <Thumb likes={post?.likes}>
+          <IsLike>
+            <Thumb likes={post?.likes} onClick={likePost}>
               <LikeUp />
             </Thumb>
             <Text size="14px" weight="500" color="#333333">
