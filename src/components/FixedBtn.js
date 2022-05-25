@@ -144,12 +144,12 @@ function FixedBtn(props) {
           </MBtn>
         </Link>
 
-        <MBtn>
-          <Hamburger
-            onClick={() => {
-              setOpen(!open);
-            }}
-          />
+        <MBtn
+          onClick={() => {
+            setOpen(!open);
+          }}
+        >
+          <Hamburger />
           {open ? <MobileFixedBtn /> : null}
         </MBtn>
       </Mver>
@@ -378,6 +378,7 @@ const MBtn = styled.div`
   color: white;
   border: none;
   cursor: pointer;
+  margin: 10px;
 `;
 const MuiBtn = styled.div`
   .MuiSpeedDial-fab {
@@ -400,7 +401,6 @@ const Mver = styled.div`
     left: 83%;
     position: fixed;
 
-    border: 1px solid red;
     box-sizing: border-box;
   }
 `;

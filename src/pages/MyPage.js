@@ -21,7 +21,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { MsgActionCreators } from "../redux/modules/message";
 import { actionCreators } from "../redux/modules/mypage";
 import { history } from "../redux/configureStore";
-import { red } from "@mui/material/colors";
 
 const MyPage = () => {
   const Mobile = useMediaQuery({

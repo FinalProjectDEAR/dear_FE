@@ -10,7 +10,7 @@ import { ReactComponent as Enjoy1 } from "../assets/tag/Property 1=Sub (1).svg";
 import { ReactComponent as Fact1 } from "../assets/tag/Property 1=Sub (2).svg";
 import { ReactComponent as Sensitivity1 } from "../assets/tag/Property 1=Sub (3).svg";
 
-const ResTagPrimary = (props) => {
+const ResTag = (props) => {
   console.log(props);
   return (
     <React.Fragment>
@@ -37,4 +37,4 @@ const ResTagPrimary = (props) => {
   );
 };
 
-export default ResTagPrimary;
+export default ResTag;
