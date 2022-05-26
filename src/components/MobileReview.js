@@ -34,7 +34,7 @@ function MobileReview() {
       <Background>
         <ReviewWrapper>
           <LineBox>
-            <Text title color="#2E2A32">
+            <Text title color="#2E2A32" margin="0px 15px">
               상담후기
             </Text>
           </LineBox>

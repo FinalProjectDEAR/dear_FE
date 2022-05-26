@@ -68,7 +68,7 @@ export default MobileRanking;
 
 const RankingWrapper = styled.div`
   width: 360px;
-  height: 250px;
+  height: 300px;
   display: none;
   overflow: hidden;
 

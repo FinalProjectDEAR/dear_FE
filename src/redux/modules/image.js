@@ -10,12 +10,12 @@ const DEL_IMAGE = "DEL_IMAGE";
 
 //action creators
 const uploading = createAction(UPLOADING, (uploading) => ({ uploading }));
-const uploadImage = createAction(UPLOAD_IMAGE, (file, where) => ({
-  file,
+const uploadImage = createAction(UPLOAD_IMAGE, (imageFiles, where) => ({
+  imageFiles,
   where,
 }));
 const delData = createAction(DEL_DATA);
-const delImage = createAction(DEL_IMAGE, (i) => i);
+const delImage = createAction(DEL_IMAGE, (idx) => ({ idx }));
 
 //initial state
 const initialState = {
@@ -35,20 +35,23 @@ export default handleActions(
 
         if (action.payload.where === "left") {
           draft.preview[0] = action.payload.preview;
-          draft.imageLeft = action.payload.file;
+          draft.imageLeft = action.payload.imageFiles;
           draft.uploading = false;
         } else if (action.payload.where === "right") {
           draft.preview[1] = action.payload.preview;
-          draft.imageRight = action.payload.file;
+          draft.imageRight = action.payload.imageFiles;
           draft.uploading = false;
         } else {
-          draft.fileList = [...action.payload.file];
+          draft.fileList = [...state.fileList, ...action.payload.imageFiles];
         }
       }),
-    // [UPLOADING]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     draft.uploading = action.payload.uploading;
-    //   }),
+    [DEL_IMAGE]: (state, action) =>
+      produce(state, (draft) => {
+        console.log("삭제한거 idx", action.payload);
+        draft.fileList = draft.fileList.filter(
+          (i, idx) => idx !== action.payload.idx
+        );
+      }),
     [DEL_DATA]: (state, action) =>
       produce(state, (draft) => {
         draft.imageLeft = initialState.imageLeft;
