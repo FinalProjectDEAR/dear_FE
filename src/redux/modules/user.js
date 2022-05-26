@@ -54,6 +54,7 @@ const signupDB = (memberId, pwd, pwdCheck) => {
         process.env.REACT_APP_URL + "/user/signup",
         userInfo
       );
+      window.alert("회원가입이 완료되었습니다.");
       console.log("서버응답", data);
 
       // dispatch(setUser(userInfo));
