@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 
 const ReceivedMsg = () => {
   const params = useParams();
+  const msgId = params.messageId;
   const dispatch = useDispatch();
   //모달
   const [modalOpen, setModalOpen] = React.useState(true);
@@ -20,7 +21,7 @@ const ReceivedMsg = () => {
   };
   //메세지조회
   React.useEffect(() => {
-    dispatch(MsgActionCreators.getDetailMsgDB(params.messageId));
+    dispatch(MsgActionCreators.getDetailMsgDB(msgId));
   }, []);
   //메세지 가져오가
   const msgList = useSelector((state) => state.message.messages);
@@ -78,7 +79,7 @@ const ReceivedMsg = () => {
                 regular
                 text="답장하기"
                 _onClick={() => {
-                  history.push("/sendMsg");
+                  history.push(`/sendMsg/${msgId}`);
                 }}
               />
             </MsgWrapper>

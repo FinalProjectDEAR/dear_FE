@@ -83,7 +83,7 @@ function App() {
             <Route path="/AudioChat" exact component={AudioChat} />
             <Route path="/loading" exact component={Loading} />
             <Route path="/ChatClose" exact component={ChatClose} />
-            <Route path="/sendMsg" exact component={SendMsg} />
+            <Route path="/sendMsg/:messageId" exact component={SendMsg} />
             <Route
               path="/receivedMsg/:messageId"
               exact
