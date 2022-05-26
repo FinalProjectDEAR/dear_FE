@@ -251,7 +251,7 @@ function PostList(props) {
                   _onClick={gotoPost}
                   cursor="pointer"
                 >
-                  <Text body4 color="#fff">
+                  <Text body4 color="#fff" cursor="pointer">
                     상담신청하기
                   </Text>
                 </Button>

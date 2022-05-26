@@ -19,7 +19,7 @@ const CommentItem = (props) => {
     // return () => {
     //   dispatch(actionCreators.resetComment());
     // };
-  }, [props]);
+  }, []);
   // const Page = useSelector((state) => state.comment.pages);
   // console.log(Page);
   const commentList = useSelector((state) => state.comment.comments); //[]빈배열

@@ -54,7 +54,7 @@ function Post(props) {
         >
           <Title>
             <TextB body weight="500" textAlign="left" cursor="pointer">
-              {props.item.title} <Vote />
+              {props.item.title} <Vote style={{ margin: "-4px 5px" }} />
             </TextB>
           </Title>
           <Date>

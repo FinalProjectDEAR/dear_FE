@@ -1,6 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { api } from "../../shared/apis";
+import axios from "axios";
 
 //액션
 const ADD = "comment/ADD";
@@ -45,10 +46,15 @@ const getCommentDB = (postId, page) => {
   // console.log(postId);
   return function (dispatch, getState, { history }) {
     try {
-      api.get(`anonypost/${postId}/comment/${page}`, {}).then((res) => {
-        console.log("댓글가져오기", res.data);
-        dispatch(getComment(res.data));
-      });
+      axios
+        .get(
+          process.env.REACT_APP_URL + `anonypost/${postId}/comment/${page}`,
+          {}
+        )
+        .then((res) => {
+          console.log("댓글가져오기", res.data);
+          dispatch(getComment(res.data));
+        });
     } catch (err) {
       console.log("댓글가져오기", err);
       window.alert("댓글정보를 가져올 수 없습니다.");
