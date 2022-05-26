@@ -15,7 +15,7 @@ function CommentRemove(props) {
   };
   const onRemove = () => {
     deletePost();
-    history.push(`/PostDetail/${postId}`);
+    closeModal();
   };
   return (
     <React.Fragment>

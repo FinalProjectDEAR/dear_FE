@@ -16,10 +16,10 @@ const CommentItem = (props) => {
   React.useEffect(() => {
     dispatch(actionCreators.pages(props.totalPages));
     //클린업작업
-    return () => {
-      dispatch(actionCreators.resetComment());
-    };
-  }, []);
+    // return () => {
+    //   dispatch(actionCreators.resetComment());
+    // };
+  }, [props]);
   // const Page = useSelector((state) => state.comment.pages);
   // console.log(Page);
   const commentList = useSelector((state) => state.comment.comments); //[]빈배열
