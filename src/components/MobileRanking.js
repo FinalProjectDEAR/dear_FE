@@ -4,6 +4,7 @@ import { actionCreators as mainActions } from "../redux/modules/main";
 
 import styled from "styled-components";
 
+import { Text } from "../elements";
 import RankingCard from "./RankingCard";
 
 //Carousel library
@@ -35,6 +36,17 @@ function MobileRanking() {
   return (
     <React.Fragment>
       <RankingWrapper>
+        <TitleBox>
+          <Text title color="#2E2A32">
+            이달의 명예 리스너 TOP 5
+          </Text>
+        </TitleBox>
+        <LineBox>
+          <Text body4 color="#948A9E" margin="0px" textAlign="left">
+            이번달, 친구들의 이야기를 적극적으로 경청해 준 명예 리스너를
+            소개합니다.
+          </Text>
+        </LineBox>
         <RankingContainer>
           <Slider {...settings} dotsClass="dotStyle">
             {rankingList.map((rank, idx) => {
@@ -68,4 +80,16 @@ const RankingWrapper = styled.div`
 const RankingContainer = styled.div`
   width: 600px;
   margin: 0px -20px;
+`;
+
+const TitleBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+`;
+
+const LineBox = styled.div`
+  width: 328px;
+  display: flex;
+  justify-content: flex-start;
 `;

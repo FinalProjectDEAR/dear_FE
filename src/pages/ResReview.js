@@ -126,8 +126,10 @@ function ResReview(props) {
             <TextB subTitle textAlign="left">
               상담후기를 작성해주세요.
             </TextB>
-            <span style={{ color: "red", margin: "4px" }}>*</span>
-            <Text sub7>필수입력</Text>
+            <span style={{ color: "red", marginLeft: "10px" }}>*</span>
+            <Text sub7 margin="0px 4px">
+              필수입력
+            </Text>
           </TitleBox>
           <Text sub5 color="#BB9ED8" margin="0px 0px 10px 0px">
             후기를 작성하여 원활한 서비스문화 만들기에 동참해주세요!

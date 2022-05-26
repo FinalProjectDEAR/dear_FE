@@ -1,6 +1,8 @@
 import React, { useRef } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Input, Text, TextB, Button, Modal } from "../elements";
+import { ReactComponent as ImageUPload } from "../assets/파일첨부.svg";
+
 import { useSelector, useDispatch } from "react-redux";
 import { history } from "../redux/configureStore";
 
@@ -211,7 +213,7 @@ function VoteWrite() {
                         setImageVote(false);
                       }}
                     />
-                    <Text sub6 margin="0px" color="#333333">
+                    <Text sub6 color="#333333" margin="0px 10px">
                       선택지
                     </Text>
                   </CheckBox>
@@ -224,7 +226,7 @@ function VoteWrite() {
                         setImageVote(true);
                       }}
                     />
-                    <Text sub6 margin="0px" color="#333333">
+                    <Text sub6 color="#333333" margin="0px 10px">
                       선택지 + 이미지
                     </Text>
                   </CheckBox>
@@ -270,7 +272,9 @@ function VoteWrite() {
                 {imgVote && (
                   <>
                     <ImageBox>
-                      <ImgButton htmlFor="leftImage"></ImgButton>
+                      <ImgButton htmlFor="leftImage">
+                        <ImageUPload />
+                      </ImgButton>
                       <Image src={leftPreview ? leftPreview : uploadImg} />
                       <FileInput
                         id="leftImage"
@@ -279,10 +283,13 @@ function VoteWrite() {
                         onChange={() => {
                           selectFile("left");
                         }}
+                        accept=".jpg,.png"
                       />
                     </ImageBox>
                     <ImageBox>
-                      <ImgButton htmlFor="rightImage"></ImgButton>
+                      <ImgButton htmlFor="rightImage">
+                        <ImageUPload />
+                      </ImgButton>
                       <Image src={rightPreview ? rightPreview : uploadImg} />
                       <FileInput
                         id="rightImage"
@@ -453,8 +460,6 @@ const ImgButton = styled.label`
   width: 58px;
   height: 20px;
   margin-bottom: 10px;
-  background-size: cover;
-  background-image: url(${attach});
   cursor: pointer;
   @media ${({ theme }) => theme.device.mobile} {
     height: 25px;

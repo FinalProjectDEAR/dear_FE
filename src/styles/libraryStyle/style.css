@@ -50,7 +50,7 @@ body {
 
 .dotStyle {
   position: absolute;
-  bottom: -15px;
+  bottom: -40px;
   display: block;
   width: 100%;
   padding: 0px 120px;
@@ -94,10 +94,11 @@ body {
   content: '•';
   text-align: center;
   opacity: .75;
-  color: #6D6968;
+  color: #fff;
 }
 
 .dotStyle li.slick-active button:before {
   opacity: .75;
-  color: #ffffff;
+  color: #BB9ED8
+  ;
 }

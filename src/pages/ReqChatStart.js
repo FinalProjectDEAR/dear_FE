@@ -123,8 +123,10 @@ function ResChatStart() {
                 <TextB subTitle textAlign="left">
                   여러분의 고민에 대해 알려주세요!
                 </TextB>
-                <span style={{ color: "red", margin: "4px" }}>*</span>
-                <Text sub7>필수입력</Text>
+                <span style={{ color: "red", marginLeft: "10px" }}>*</span>
+                <Text sub7 margin="0px 4px">
+                  필수입력
+                </Text>
               </TitleBox>
               <LineBox>
                 <ChatInfoBox>
@@ -163,7 +165,12 @@ function ResChatStart() {
                         setCategory(e.target.value);
                       }}
                     />
-                    <Text sub6 textAlign="center" color="#333">
+                    <Text
+                      sub6
+                      textAlign="center"
+                      color="#333"
+                      margin="0px 10px"
+                    >
                       솔로
                     </Text>
                   </CheckBox>
@@ -176,7 +183,7 @@ function ResChatStart() {
                         setCategory(e.target.value);
                       }}
                     />
-                    <Text sub6 textAlign="center" color="#333">
+                    <Text sub6 textAlign="center" color="#333" margin="0px 10px">
                       짝사랑
                     </Text>
                   </CheckBox>
@@ -189,7 +196,7 @@ function ResChatStart() {
                         setCategory(e.target.value);
                       }}
                     />
-                    <Text sub6 textAlign="center" color="#333">
+                    <Text sub6 textAlign="center" color="#333" margin="0px 10px">
                       썸
                     </Text>
                   </CheckBox>
@@ -202,7 +209,7 @@ function ResChatStart() {
                         setCategory(e.target.value);
                       }}
                     />
-                    <Text sub6 textAlign="center" color="#333">
+                    <Text sub6 textAlign="center" color="#333" margin="0px 10px">
                       연애
                     </Text>
                   </CheckBox>
@@ -215,7 +222,7 @@ function ResChatStart() {
                         setCategory(e.target.value);
                       }}
                     />
-                    <Text sub6 textAlign="center" color="#333">
+                    <Text sub6 textAlign="center" color="#333" margin="0px 10px">
                       이별
                     </Text>
                   </CheckBox>
@@ -228,7 +235,7 @@ function ResChatStart() {
                         setCategory(e.target.value);
                       }}
                     />
-                    <Text sub6 textAlign="center" color="#333">
+                    <Text sub6 textAlign="center" color="#333" margin="0px 10px">
                       기타
                     </Text>
                   </CheckBox>
@@ -257,7 +264,7 @@ function ResChatStart() {
                           setGender(e.target.value);
                         }}
                       />
-                      <Text sub6 textAlign="center" color="#333">
+                      <Text sub6 textAlign="center" color="#333" margin="0px 10px">
                         상관없음
                       </Text>
                     </CheckBox>
@@ -270,7 +277,7 @@ function ResChatStart() {
                           setGender(e.target.value);
                         }}
                       />
-                      <Text sub6 textAlign="center" color="#333">
+                      <Text sub6 textAlign="center" color="#333" margin="0px 10px">
                         남성
                       </Text>
                     </CheckBox>
@@ -283,7 +290,7 @@ function ResChatStart() {
                           setGender(e.target.value);
                         }}
                       />
-                      <Text sub6 textAlign="center" color="#333">
+                      <Text sub6 textAlign="center" color="#333" margin="0px 10px">
                         여성
                       </Text>
                     </CheckBox>

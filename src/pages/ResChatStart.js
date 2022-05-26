@@ -56,7 +56,7 @@ function ResChatStart() {
                 <TextB subTitle textAlign="left">
                   상담은 어떻게 진행할까요?
                 </TextB>
-                <span style={{ color: "red", marginLeft: "4px" }}> *</span>
+                <span style={{ color: "red", marginLeft: "10px" }}> *</span>
                 <Text sub7 margin="0px 4px">
                   필수입력
                 </Text>
@@ -78,7 +78,12 @@ function ResChatStart() {
                         setCategory(e.target.value);
                       }}
                     />
-                    <Text sub6 textAlign="center" color="#333">
+                    <Text
+                      sub6
+                      textAlign="center"
+                      color="#333"
+                      margin="0px 10px"
+                    >
                       솔로
                     </Text>
                   </CheckBox>
@@ -91,7 +96,12 @@ function ResChatStart() {
                         setCategory(e.target.value);
                       }}
                     />
-                    <Text sub6 textAlign="center" color="#333">
+                    <Text
+                      sub6
+                      textAlign="center"
+                      color="#333"
+                      margin="0px 10px"
+                    >
                       짝사랑
                     </Text>
                   </CheckBox>
@@ -104,7 +114,12 @@ function ResChatStart() {
                         setCategory(e.target.value);
                       }}
                     />
-                    <Text sub6 textAlign="center" color="#333">
+                    <Text
+                      sub6
+                      textAlign="center"
+                      color="#333"
+                      margin="0px 10px"
+                    >
                       썸
                     </Text>
                   </CheckBox>
@@ -117,7 +132,12 @@ function ResChatStart() {
                         setCategory(e.target.value);
                       }}
                     />
-                    <Text sub6 textAlign="center" color="#333">
+                    <Text
+                      sub6
+                      textAlign="center"
+                      color="#333"
+                      margin="0px 10px"
+                    >
                       연애
                     </Text>
                   </CheckBox>
@@ -130,7 +150,12 @@ function ResChatStart() {
                         setCategory(e.target.value);
                       }}
                     />
-                    <Text sub6 textAlign="center" color="#333">
+                    <Text
+                      sub6
+                      textAlign="center"
+                      color="#333"
+                      margin="0px 10px"
+                    >
                       이별
                     </Text>
                   </CheckBox>
@@ -143,7 +168,12 @@ function ResChatStart() {
                         setCategory(e.target.value);
                       }}
                     />
-                    <Text sub6 textAlign="center" color="#333">
+                    <Text
+                      sub6
+                      textAlign="center"
+                      color="#333"
+                      margin="0px 10px"
+                    >
                       기타
                     </Text>
                   </CheckBox>

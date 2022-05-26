@@ -243,7 +243,9 @@ const Btn = styled.button`
   cursor: pointer;
   background-color: #fff;
   box-shadow: ${(props) =>
-    props.checkBox ? "" : "0px 0px 20px rgba(172, 151, 197, 0.25)"};
+    props.checkBox
+      ? "0px 0px 20px rgba(122, 55, 190, 0.2)"
+      : "0px 0px 20px rgba(172, 151, 197, 0.25)"};
   border-radius: 20px;
   @media ${({ theme }) => theme.device.mobile} {
     flex-direction: row;
