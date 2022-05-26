@@ -159,8 +159,8 @@ function VoteWrite() {
                   <Input
                     margin="0px"
                     padding="14px"
-                    maxlength="20"
-                    placeholder="질문할 내용을 20자 이내로 입력해주세요."
+                    maxlength="25"
+                    placeholder="질문할 내용을 25자 이내로 입력해주세요."
                     value={title}
                     _onChange={(e) => {
                       setTitle(e.target.value);
