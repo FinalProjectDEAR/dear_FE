@@ -25,8 +25,14 @@ const MobileFixedBtn = () => {
   };
   const [isRead, setIsRead] = React.useState(false);
   const user_id = useSelector((state) => state.user.user);
+  const isLogin = localStorage.getItem("isLogin");
   //알람 버튼 눌렀을 때 가져오기
   const notiCheck = () => {
+    if (isLogin !== "true") {
+      window.alert("로그인 후 이용해주세요.");
+      history.push("/");
+      return;
+    }
     history.push("/notification");
     dispatch(actionCreators.getNotiDB());
     setIsRead(true);
@@ -37,6 +43,16 @@ const MobileFixedBtn = () => {
     dispatch(actionCreators.getNotiCntDB());
   }, []);
   const alarmNum = useSelector((state) => state.noti.notiCnt);
+
+  const gotoMypage = () => {
+    if (isLogin !== "true") {
+      window.alert("로그인 후 이용해주세요.");
+      history.push("/");
+      return;
+    }
+    history.push("/myPage");
+  };
+
   return (
     <>
       {modalOpen && (
@@ -66,11 +82,7 @@ const MobileFixedBtn = () => {
                     <Font>디어상담소</Font>
                   </FontBox>
                 </Board>
-                <Follow
-                  onClick={() => {
-                    history.push("/myPage");
-                  }}
-                >
+                <Follow onClick={gotoMypage}>
                   <PersonIcon />
                   <FontBox>
                     <Font>마이페이지</Font>

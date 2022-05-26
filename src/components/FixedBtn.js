@@ -30,8 +30,14 @@ function FixedBtn(props) {
   const [isRead, setIsRead] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const user_id = useSelector((state) => state.user.user);
+  const isLogin = localStorage.getItem("isLogin");
   //알람 버튼 눌렀을 때 가져오기
   const notiCheck = () => {
+    if (isLogin !== "true") {
+      window.alert("로그인 후 이용해주세요.");
+      history.push("/");
+      return;
+    }
     history.push("/notification");
     dispatch(actionCreators.getNotiDB());
     // setOpen(!open);
@@ -43,8 +49,6 @@ function FixedBtn(props) {
     dispatch(actionCreators.getNotiCntDB());
   }, []);
   const alarmNum = useSelector((state) => state.noti.notiCnt);
-
-  const isLogin = localStorage.getItem("isLogin");
 
   const gotoMypage = () => {
     if (isLogin !== "true") {
