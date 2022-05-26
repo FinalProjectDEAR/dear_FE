@@ -46,7 +46,7 @@ const getMessageDB = (page) => {
 };
 
 const getDetailMsgDB = (messageId) => {
-  console.log(messageId);
+  // console.log(messageId);
   return function (dispatch, getState, { history }) {
     try {
       api.get(`/message/detail/${messageId}`, {}).then((res) => {

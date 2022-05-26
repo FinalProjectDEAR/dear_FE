@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
 //리덕스관련
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { MsgActionCreators } from "../redux/modules/message";
 
 function SendMsg() {
@@ -29,16 +30,14 @@ function SendMsg() {
     }
     setTextLength(wordLength);
   };
-  //팔로우가져오기
-  const followNickName = useSelector((state) => state.mypage.follower);
-  // console.log(followNickName);
+  const msgList = useSelector((state) => state.message.messages);
 
   const send = () => {
     if (msg === "") {
       window.alert("쪽지를 작성해주세요!");
       return;
     }
-    dispatch(MsgActionCreators.addMessageDB(msg, followNickName));
+    dispatch(MsgActionCreators.addMessageDB(msg, msgList.reqUserNickName));
   };
   return (
     <>
@@ -48,8 +47,8 @@ function SendMsg() {
             <MsgWrapper>
               <TitleWrapper>
                 <TextB sub>
-                  <NickNameSpan>{followNickName}</NickNameSpan> 님에게 쪽지
-                  보내기
+                  <NickNameSpan>{msgList.reqUserNickName}</NickNameSpan> 님에게
+                  쪽지 보내기
                 </TextB>
               </TitleWrapper>
               <MsgBox>

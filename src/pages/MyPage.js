@@ -379,17 +379,18 @@ const MyPage = () => {
 };
 
 const PageBtn = styled.div`
-  padding-top: 33px;
+  padding: 33px 0px 10px;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 const Background = styled.div`
-  height: 2200px;
+  /* height: 2200px;
   @media ${({ theme }) => theme.device.isMobile} {
-    height: 3200px;
-  }
+    height: 2500px;
+    max-height: 3200px;
+  } */
 `;
 const MyPageWrapper = styled.div`
   background-color: #ffffff;
@@ -838,11 +839,11 @@ const FollowContainer = styled.div`
 const PostWrapper = styled.div`
   margin: auto;
   width: 1032px;
-  height: 369px;
+  /* height: 369px; */
   margin-top: 100px;
   @media ${({ theme }) => theme.device.isMobile} {
     width: 328px;
-    height: 536px;
+    /* height: 536px; */
     /* border: 1px solid red; */
     margin-top: 460px;
     box-sizing: border-box;
