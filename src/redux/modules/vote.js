@@ -139,20 +139,6 @@ const detailVoteDB = (postId) => {
   };
 };
 
-const getResultDB = (postId) => {
-  console.log("투표결과 DB 통신 진입");
-  return async function (dispatch, getState, { history }) {
-    try {
-      const { data } = await apis.detailVote(postId);
-      console.log(data);
-      dispatch(getResult(data.data));
-    } catch (err) {
-      window.alert("상세정보 불러오기 실패");
-      console.log(err);
-    }
-  };
-};
-
 const addVoteDB = (
   imgVote,
   title,
@@ -197,7 +183,8 @@ const putVoteDB = (postId, leftSelected) => {
     console.log(postId, leftSelected);
     try {
       const { data } = await apis.putVote(postId, leftSelected);
-      console.log(data);
+      console.log("투표결과", data.data);
+      dispatch(getResult(data.data));
     } catch (err) {
       console.log(err);
       window.alert("투표실패! 다시 시도해주세요.");
@@ -261,7 +248,6 @@ const actionCreators = {
   detailVoteDB,
   delVoteDB,
   putVoteDB,
-  getResultDB,
   delData,
 };
 
