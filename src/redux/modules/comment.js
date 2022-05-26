@@ -48,7 +48,7 @@ const getCommentDB = (postId, page) => {
     try {
       axios
         .get(
-          process.env.REACT_APP_URL + `anonypost/${postId}/comment/${page}`,
+          process.env.REACT_APP_URL + `/anonypost/${postId}/comment/${page}`,
           {}
         )
         .then((res) => {
