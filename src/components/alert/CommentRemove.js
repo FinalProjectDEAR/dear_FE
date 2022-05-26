@@ -8,12 +8,14 @@ import { history } from "../../redux/configureStore";
 import { useDispatch } from "react-redux";
 
 function CommentRemove(props) {
+  console.log(props);
   const dispatch = useDispatch();
-  const { closeModal, postId, comment_id } = props;
+  const { closeModal, postId, comment_id, setPage } = props;
   const deletePost = () => {
     dispatch(actionCreators.delCommentDB({ comment_id, postId }));
   };
   const onRemove = () => {
+    props.setPage(1);
     deletePost();
     closeModal();
   };
