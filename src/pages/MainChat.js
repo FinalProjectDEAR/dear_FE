@@ -25,6 +25,9 @@ function MainChat() {
 
   const tapeCount = useSelector((state) => state.main.tapeCount);
   const isLogin = localStorage.getItem("isLogin");
+  const nickname = localStorage.getItem("nickname");
+
+  console.log(nickname);
 
   const startReq = () => {
     if (checkBox !== true) {
@@ -34,7 +37,12 @@ function MainChat() {
       window.alert("로그인 후 이용해 주세요.");
       history.replace("/");
       return;
+    } else if (isLogin === "true" && nickname === null) {
+      window.alert("상담에 필요한 회원정보를 입력 후 이용해 주세요.");
+      history.replace("/mypage");
+      return;
     }
+
     history.push("/startReq");
   };
 

@@ -6,26 +6,26 @@ import { Text } from "../elements";
 
 import logo from "../assets/main/logoS.png";
 
-const isLogin = localStorage.getItem("isLogin");
-
-const logout = () => {
-  history.push("/");
-  localStorage.removeItem("accessToken");
-  localStorage.removeItem("memberId");
-  localStorage.removeItem("nickname");
-  localStorage.removeItem("isLogin");
-};
-
-const gotoMypage = () => {
-  if (isLogin !== "true") {
-    window.alert("로그인 후 이용해주세요.");
-    history.push("/");
-    return;
-  }
-  history.push("/myPage");
-};
-
 const Header = (props) => {
+  const isLogin = localStorage.getItem("isLogin");
+
+  const logout = () => {
+    history.push("/");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("memberId");
+    localStorage.removeItem("nickname");
+    localStorage.removeItem("isLogin");
+  };
+
+  const gotoMypage = () => {
+    if (isLogin !== "true") {
+      window.alert("로그인 후 이용해주세요.");
+      history.push("/");
+      return;
+    }
+    history.push("/myPage");
+  };
+
   return (
     <React.Fragment>
       <HeaderWrapper id="1">
@@ -112,6 +112,7 @@ const Logo = styled.img`
   width: 100px;
   height: 66px;
   margin: 0px auto;
+  cursor: pointer;
   @media ${({ theme }) => theme.device.mobile} {
     width: 60px;
     height: 36px;

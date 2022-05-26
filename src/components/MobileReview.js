@@ -22,8 +22,8 @@ function MobileReview() {
     speed: 3000,
     autoplay: true,
     autoplaySpeed: 5000,
-    centerPadding: "10px",
     centerMode: true,
+    centerPadding: "20px",
     slidesToShow: 2,
     rows: 2,
     slidesPerRow: 1,
@@ -60,10 +60,14 @@ function MobileReview() {
 export default MobileReview;
 
 const Background = styled.div`
+  display: none;
   padding-top: 60px;
-  width: 360px;
+  min-width: 750px;
   height: 100vh;
   overflow: hidden;
+  @media ${({ theme }) => theme.device.mobile} {
+    display: flex;
+  }
 `;
 
 const ReviewWrapper = styled.div`
@@ -88,5 +92,6 @@ const LineBox = styled.div`
   margin-left: 10px;
   @media ${({ theme }) => theme.device.mobile} {
     display: flex;
+    width: 780px;
   }
 `;
