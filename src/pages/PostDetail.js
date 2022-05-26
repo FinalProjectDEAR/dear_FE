@@ -64,16 +64,6 @@ function PostDetail(props) {
   const closeModal = () => {
     setModalOpen(false);
   };
-  const deletePost = () => {
-    dispatch(actionCreators.deletePostDB(postId));
-  };
-  const onRemove = () => {
-    if (window.confirm("정말 삭제합니까?")) {
-      deletePost();
-    } else {
-      alert("취소합니다.");
-    }
-  };
   //본인인지 확인 하기
   const member = localStorage.getItem("memberId");
   const likePost = () => {
