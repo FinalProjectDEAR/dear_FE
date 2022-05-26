@@ -7,6 +7,7 @@ import Modal from "./Modal";
 import Tag from "./Tag";
 import ResTag from "./ResTag";
 import AlarmModal from "./AlarmModal";
+import FixedModal from "./FixedModal";
 export {
   Button,
   Text,
@@ -17,4 +18,5 @@ export {
   Tag,
   AlarmModal,
   ResTag,
+  FixedModal,
 };

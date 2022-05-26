@@ -4,7 +4,7 @@ import { actionCreators } from "../redux/modules/noti";
 import { useHistory } from "react-router-dom";
 
 import styled from "styled-components";
-import { Modal } from "../elements";
+import { FixedModal } from "../elements";
 //아이콘
 import { Badge } from "@material-ui/core";
 import { ReactComponent as X } from "../assets/Vector (10).svg";
@@ -12,27 +12,25 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import PersonIcon from "@mui/icons-material/Person";
 import InfoIcon from "@mui/icons-material/Info";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
-import { flexbox } from "@mui/system";
 
-const MobileFixedBtn = () => {
+const MobileFixedBtn = ({ close }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   //모달
   const [modalOpen, setModalOpen] = React.useState(true);
   const closeModal = () => {
     setModalOpen(false);
-    history.push("/myPage");
   };
   const [isRead, setIsRead] = React.useState(false);
   const user_id = useSelector((state) => state.user.user);
   const isLogin = localStorage.getItem("isLogin");
   //알람 버튼 눌렀을 때 가져오기
   const notiCheck = () => {
-    if (isLogin !== "true") {
-      window.alert("로그인 후 이용해주세요.");
-      history.push("/");
-      return;
-    }
+    // if (isLogin !== "true") {
+    //   window.alert("로그인 후 이용해주세요.");
+    //   history.push("/");
+    //   return;
+    // }
     history.push("/notification");
     dispatch(actionCreators.getNotiDB());
     setIsRead(true);
@@ -56,13 +54,14 @@ const MobileFixedBtn = () => {
   return (
     <>
       {modalOpen && (
-        <Modal closeModal={closeModal}>
+        <FixedModal closeModal={closeModal}>
           <React.Fragment>
             <div
               style={{
                 // background: "yellow",
+
                 paddingRight: "80px",
-                paddingTop: "220px",
+                paddingTop: "500px",
               }}
             >
               <Mver>
@@ -99,7 +98,6 @@ const MobileFixedBtn = () => {
                     <FontBox>
                       <Font>알림</Font>
                     </FontBox>
-                    {/* {open ? <Notification /> : null} */}
                   </Noti>
                 </Badge>
                 <div style={{ display: "flex", justifyContent: "right" }}>
@@ -110,7 +108,7 @@ const MobileFixedBtn = () => {
               </Mver>
             </div>
           </React.Fragment>
-        </Modal>
+        </FixedModal>
       )}
     </>
   );

@@ -29,11 +29,11 @@ import MainRanking from "../pages/MainRanking";
 import MainHotPost from "../pages/MainHotPost";
 import MainReview from "../pages/MainReview";
 import MobileRanking from "../components/MobileRanking";
-import FiveSec from "../components/alert/FiveSec";
 import LoadingMatch from "../pages/LoadingMatch";
 import NotFound from "../pages/NotFound";
 import Intro from "../pages/Intro";
 import MobileIntro from "../pages/MobileIntro";
+import ListenerInfo from "../components/ListenerInfo";
 
 //레이지 로딩 페이지
 const Login = lazy(() => import("../pages/Login"));
@@ -101,7 +101,6 @@ function App() {
               <Route path="/notification" exact component={Notification} />
               <Route path="/editMyPage" exact component={EditMyPage} />
               <Route path="/MobileRanking" exact component={MobileRanking} />
-              <Route path="/FiveSec" exact component={FiveSec} />
               <Route path="/LoadingMatch" exact component={LoadingMatch} />
               <Route path="*" exact component={NotFound} />
             </Switch>
