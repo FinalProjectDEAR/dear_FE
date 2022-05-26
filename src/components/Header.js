@@ -49,7 +49,7 @@ const Header = (props) => {
               </HeaderBtn>
               <HeaderBtn
                 onClick={() => {
-                  history.push("/postList");
+                  history.push("/postList/전체");
                 }}
               >
                 <Text sub7 cursor="pointer">

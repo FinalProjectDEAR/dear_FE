@@ -120,7 +120,7 @@ const addPostDB = (payload) => {
       dispatch(addPost(data.data));
       //등록함과 동시에 리덕스에 남아있는 사진파일들 리셋해주기
       dispatch(imgActions.resetFile());
-      history.push("/postList");
+      history.push("/postList/전체");
     } catch (err) {
       console.log("포스트 추가하기 error", err);
     }
@@ -167,7 +167,7 @@ const deletePostDB = (postId) => {
       apis.delete(postId).then((res) => {
         // console.log("게시글 삭제하기", res);
         dispatch(deletePost(postId));
-        history.push("/postList");
+        history.push("/postList/전체");
       });
     } catch (error) {
       console.log("게시글 삭제하기", error);

@@ -64,7 +64,7 @@ function MainHotPost() {
             deco="underLine"
             cursor="pointer"
             _onClick={() => {
-              history.push("/postList");
+              history.push("/postList/전체");
             }}
           >
             디어상담소 바로가기 {">"}

@@ -40,7 +40,7 @@ function VoteWrite() {
 
   const closeModal = () => {
     setModalOpen(false);
-    history.push("/postList");
+    history.push("/postList/전체");
   };
 
   const _imageLeft = useSelector((state) => state.image.imageLeft);
