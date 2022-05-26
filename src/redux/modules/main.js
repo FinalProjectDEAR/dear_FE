@@ -1,5 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
+import axios from "axios";
 import { apis } from "../../shared/apis";
 
 //액션
@@ -46,7 +47,10 @@ const getRankingDB = () => {
   return async function (dispatch, getState, { history }) {
     console.log("겟랭킹 통신");
     try {
-      const { data } = await apis.getRank();
+      const { data } = await axios.get(
+        process.env.REACT_APP_URL + "/main/ranking/member"
+      );
+
       console.log("랭킹정보", data.data);
       dispatch(getRanking(data.data));
     } catch (err) {
@@ -59,7 +63,9 @@ const getHotVoteDB = () => {
   return async function (dispatch, getState, { history }) {
     console.log("인기투표 통신");
     try {
-      const { data } = await apis.getHotVote();
+      const { data } = await axios.get(
+        process.env.REACT_APP_URL + "/main/ranking/voteBoard"
+      );
       console.log("인기투표", data.data);
       dispatch(getHotVote(data.data));
     } catch (err) {
@@ -72,7 +78,9 @@ const getHotBoardDB = () => {
   return async function (dispatch, getState, { history }) {
     console.log("인기게시글 통신");
     try {
-      const { data } = await apis.getHotBoard();
+      const { data } = await axios.get(
+        process.env.REACT_APP_URL + "/main/ranking/board"
+      );
       console.log("인기게시글", data);
       dispatch(getHotBoard(data.data));
     } catch (err) {
@@ -85,7 +93,9 @@ const getReviewDB = () => {
   return async function (dispatch, getState, { history }) {
     console.log("겟리뷰 통신");
     try {
-      const { data } = await apis.getServiceCmt();
+      const { data } = await axios.get(
+        process.env.REACT_APP_URL + "/main/serviceComment"
+      );
       console.log("서비스후기", data);
       dispatch(getReview(data.data));
     } catch (err) {

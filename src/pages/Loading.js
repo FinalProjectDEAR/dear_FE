@@ -5,27 +5,6 @@ import { Text, Button, Modal } from "../elements";
 import NoMatch from "../components/alert/NoMatch";
 
 function Loading({ informClose, leaveSession }) {
-  const [modalOpen, setModalOpen] = React.useState(false);
-
-  function openModal() {
-    setModalOpen(true);
-  }
-
-  const closeModal = () => {
-    setModalOpen(false);
-  };
-
-  const noMatch = () => {
-    leaveSession();
-    informClose();
-  };
-
-  React.useEffect(() => {
-    console.log("30초센다?");
-    setTimeout(openModal, 30000);
-    console.log(modalOpen);
-  }, []);
-
   return (
     <React.Fragment>
       <LoaderWrapper>
@@ -37,11 +16,6 @@ function Loading({ informClose, leaveSession }) {
           </InnerSpinner>
         </Loader>
       </LoaderWrapper>
-      {modalOpen ? (
-        <Modal closeModal={closeModal}>
-          <NoMatch noMatch={noMatch} />
-        </Modal>
-      ) : null}
     </React.Fragment>
   );
 }
