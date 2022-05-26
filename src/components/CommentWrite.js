@@ -1,22 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 import { Button, Input } from "../elements";
-
+//리덕스관련
+import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { actionCreators } from "../redux/modules/comment";
 
 const CommentWrite = (props) => {
+  const history = useHistory();
   const dispatch = useDispatch();
+
   const [comment, setComment] = React.useState();
   const [textLength, setTextLength] = React.useState(0);
 
   //글자 수 제한
   const checkMaxLength = (e) => {
     let wordLength = e.target.value.length;
-    // if (wordLength <= 10) {
-    //   window.alert("최소 10자 이상 작성 부탁 드립니다.");
-    //   return;
-    // }
     if (wordLength >= 200) {
       window.alert("200자 이상 작성할 수 없습니다.");
       return;
@@ -24,7 +23,23 @@ const CommentWrite = (props) => {
     setTextLength(wordLength);
   };
 
+  const isLogin = localStorage.getItem("isLogin");
+
+  // const goComment = () => {
+  //   if (isLogin !== "true") {
+  //     window.alert("로그인 후 이용해주세요.");
+  //     history.push(`/postDetail/${props.postId}`);
+  //     return;
+  //   }
+  //   history.push(`/postDetail/${props.postId}`);
+  // };
+
   const addComment = () => {
+    if (isLogin !== "true") {
+      window.alert("로그인 후 이용해주세요.");
+      history.push(`/postDetail/${props.postId}`);
+      return;
+    }
     if (comment === "") {
       window.alert("댓글을 작성해주세요");
       return;

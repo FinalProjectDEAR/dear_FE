@@ -58,7 +58,7 @@ const MobileFixedBtn = () => {
                 </Desc>
                 <Board
                   onClick={() => {
-                    history.push("/postList");
+                    history.push("/postList/전체");
                   }}
                 >
                   <QuestionAnswerIcon />
