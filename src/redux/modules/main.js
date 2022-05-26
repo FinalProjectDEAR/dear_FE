@@ -25,11 +25,6 @@ const getHotVote = createAction(GET_HOT_VOTE, (voteList) => voteList);
 const getHotBoard = createAction(GET_HOT_BOARD, (BoardList) => BoardList);
 const getReview = createAction(GET_REVIEW, (reviewList) => reviewList);
 const getTape = createAction(GET_TAPE, (tapeCnt) => tapeCnt);
-// const getFollow = createAction(FOLLOW_LIST, (follower) => ({ follower }));
-// const getFollower = createAction(FOLLOWER, (follower) => ({ follower }));
-// const getChat = createAction(CHAT_LIST, (chat) => ({ chat }));
-// const getInfo = createAction(GET_INFO, (user) => ({ user }));
-// const addInfo = createAction(GET_INFO, (user) => ({ user }));
 
 const getTapeDB = () => {
   return async function (dispatch, getState, { history }) {

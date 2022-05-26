@@ -16,6 +16,7 @@ function LoadingMatch({ informClose, leaveSession }) {
   };
 
   const noMatch = () => {
+    console.log("나가기");
     leaveSession();
     informClose();
   };
@@ -45,7 +46,7 @@ function LoadingMatch({ informClose, leaveSession }) {
               매칭중입니다. <br />
               잠시만 기다려 주세요.
             </Text>
-            <Button primaryDefault size="small" onClick={noMatch}>
+            <Button primaryDefault size="small" _onClick={noMatch}>
               나가기
             </Button>
           </LineBox>

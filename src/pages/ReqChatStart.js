@@ -25,6 +25,7 @@ function ResChatStart() {
   const sessionId = useSelector((state) => state.chat.sessionId);
   const memberId = localStorage.getItem("memberId");
   const ninckname = localStorage.getItem("ninckname");
+
   const fileList = useSelector((state) => state.image.fileList);
 
   //모달
@@ -72,6 +73,11 @@ function ResChatStart() {
         imageFiles.push(imgList[key]);
       }
     }
+
+    if (imageFiles.length > 3) {
+      imageFiles = imageFiles.slice(0, 3);
+    }
+
     console.log(imageFiles);
     setImgFile(imageFiles);
 
@@ -132,6 +138,7 @@ function ResChatStart() {
                     margin="0px"
                     padding="15px 15px"
                     value={chatTitle}
+                    maxlength="20"
                     placeholder="오늘의 고민을 20자 이내로 입력해주세요."
                     _onChange={(e) => {
                       setChatTitle(e.target.value);
