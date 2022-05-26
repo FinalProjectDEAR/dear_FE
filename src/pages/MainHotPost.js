@@ -12,7 +12,6 @@ import VoteCard from "../components/VoteCard";
 import PostCard from "../components/PostCard";
 
 //assets
-import serviceInfo from "../assets/main/service_info_img.png";
 
 function MainHotPost() {
   const dispatch = useDispatch();
