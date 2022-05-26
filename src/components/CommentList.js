@@ -8,7 +8,8 @@ import CommentItem from "./CommentItem";
 
 const CommentList = (props) => {
   const commentList = useSelector((state) => state.comment.comments);
-  // console.log(commentList[0].totalComments);
+  console.log(commentList);
+  const commentCnt = commentList?.[0]?.totalComments;
   return (
     <React.Fragment>
       <CommentWrapper>
