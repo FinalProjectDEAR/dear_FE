@@ -11,12 +11,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { actionCreators } from "../redux/modules/comment";
 
 const CommentItem = (props) => {
+  console.log(props);
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(actionCreators.pages(props.totalPages));
     //클린업작업
     return () => {
-      dispatch(actionCreators.resetPost());
+      dispatch(actionCreators.resetComment());
     };
   }, []);
   // const Page = useSelector((state) => state.comment.pages);

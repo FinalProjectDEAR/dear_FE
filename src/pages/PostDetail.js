@@ -27,7 +27,6 @@ function PostDetail(props) {
   const [like, setLike] = React.useState(true);
   //페이지
   const [page, setPage] = React.useState(1);
-  const totalPage = useSelector((state) => state.comment.pages);
   //포스트 상세 조회
   React.useEffect(() => {
     dispatch(actionCreators.getDetailDB(postId));
@@ -42,9 +41,11 @@ function PostDetail(props) {
   }, [page]);
   //상세페이지 가져오기
   const post = useSelector((state) => state.post.detailPost);
-  console.log(post);
+  // console.log(post);
   const commentList = useSelector((state) => state.comment.comments);
   // console.log(commentList);
+  const commentPage = commentList?.[0]?.totalPages;
+  // console.log(commentPage);
   //시간을 알아보자!
   const option = {
     lang: "ko",
@@ -191,7 +192,7 @@ function PostDetail(props) {
           <CommentList />
         </CommentWrapper>
         <PageWrapper>
-          <Pagination setPage={setPage} totalPage={totalPage} />
+          <Pagination setPage={setPage} totalPage={commentPage} />
         </PageWrapper>
         <WriteWrapper>
           <CommentWrite postId={postId} />

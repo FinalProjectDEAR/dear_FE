@@ -9,6 +9,7 @@ const DELETE = "comment/DELETE";
 const EDIT = "comment/EDIT";
 const LIKE = "comment/LIKE";
 const TOTAL = "comment/TOTAL";
+const RESET_COMMENT = "RESET_COMMENT";
 
 //초기값
 const initialState = {
@@ -36,6 +37,7 @@ const likeComment = createAction(LIKE, (commentId, likes) => ({
   likes,
 }));
 const pages = createAction(TOTAL, (totalPages) => ({ totalPages }));
+const resetComment = createAction(RESET_COMMENT, () => ({}));
 
 //미듈웨어
 //서버에서 댓글 가져오기
@@ -168,6 +170,13 @@ export default handleActions(
         // console.log("페이지 받아온 값", action.payload);
         draft.pages = action.payload.totalPages;
       }),
+    //클린업작업
+    [RESET_COMMENT]: (state, { payload }) =>
+      produce(state, (draft) => {
+        draft.comment = [];
+        draft.comments = [];
+        draft.pages = [];
+      }),
   },
   initialState
 );
@@ -182,6 +191,7 @@ const actionCreators = {
   delCommentDB,
   likeCommentDB,
   pages,
+  resetComment,
 };
 
 export { actionCreators };
