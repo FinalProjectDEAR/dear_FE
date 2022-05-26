@@ -1,10 +1,14 @@
 import React from "react";
-import { Text, TextB, Input, Button } from "../elements/index";
+import { Text, TextB, Input, Button, Modal } from "../elements/index";
 import styled from "styled-components";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+
+import help from "../assets/help.png";
 import arrowBack from "../assets/arrow_back.png";
+import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
+import ZzimInfo from "../components/ZzimInfo";
 
 import { history } from "../redux/configureStore";
 import { useDispatch } from "react-redux";
@@ -19,6 +23,11 @@ function ReqReview(props) {
   const [follow, unFollow] = React.useState(true);
   const [goodClick, setGoodClick] = React.useState(false);
   const [badClick, setBadClick] = React.useState(false);
+  const [infoOpen, setInfoOpen] = React.useState(false);
+
+  const closeZzim = () => {
+    setInfoOpen(false);
+  };
 
   const goodTag = [
     "공감을 잘해줘요.",
@@ -260,9 +269,21 @@ function ReqReview(props) {
             _onClick={userFollow}
             margin="0px 8px"
           >
-            <Text color="#7A37BE" cursor="pointer">
+            <Text color="#7A37BE" cursor="pointer" margin="0px 5px">
               {follow ? "리스너 찜하기" : "리스너 찜 취소하기"}
             </Text>
+            <HelpOutlineRoundedIcon
+              color="#7A37BE"
+              style={{ width: "18px" }}
+              onClick={() => {
+                setInfoOpen(true);
+              }}
+            />
+            {infoOpen ? (
+              <Modal>
+                <ZzimInfo closeZzim={closeZzim} />
+              </Modal>
+            ) : null}
           </Button>
           <Button
             primaryDefault
@@ -458,11 +479,22 @@ const SvcInput = styled.div`
 
 const BottomBox = styled.div`
   position: absolute;
-  bottom: 50px;
-  left: 8px;
+  bottom: 20px;
+  left: 30px;
   width: 100%;
   height: 36px;
   margin-top: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Info = styled.img`
+  width: 17px;
+  cursor: pointer;
+  color: #7a37be;
+  margintop: ;
 `;
 
 const Star = styled.span`
