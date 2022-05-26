@@ -7,7 +7,6 @@ import { ReactComponent as Left } from "../assets/paging_left.svg";
 import { ReactComponent as Right } from "../assets/paging_right.svg";
 import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
-import ReactTooltip from "react-tooltip";
 //페이지관련
 import Layout from "../components/Layout";
 import MessageList from "./MessageList";
@@ -131,21 +130,6 @@ const MyPage = () => {
                       나의 연애 유형
                     </Text>
                     <Help />
-                    {/* <div className="section">
-                      <p className="subTitle">
-                        <div className="exampleJsx">
-                          <div className="side">
-                            <a data-for="enrich" data-tip>
-                              <Help />
-                            </a>
-                          </div>
-                          <ReactTooltip
-                            id="enrich"
-                            getContent={(dataTip) => "어쩌고저쩌고설명"}
-                          />
-                        </div>
-                      </p>
-                    </div> */}
                   </div>
                   <div className="loveTag">
                     <Tag small2>
@@ -423,7 +407,7 @@ const MypageContainer = styled.div`
   }
 `;
 const MemberWrapper = styled.div`
-  width: 180px;
+  width: 260px;
   height: 200px;
   display: flex;
   flex-direction: row;
@@ -459,10 +443,12 @@ const NicknameBox = styled.div`
   align-items: flex-start;
   padding: 0px;
   gap: 10px;
-  width: 300px;
-  height: 64px;
+  /* width: 280px; */
+  /* height: 64px; */
+  /* border: 1px solid red; */
   .nick {
     display: flex;
+    /* width: 280px; */
   }
   @media ${({ theme }) => theme.device.isMobile} {
     width: 280px;
@@ -603,6 +589,7 @@ const TapeWrapper = styled.div`
   align-items: center;
   flex-direction: column;
   width: 88px;
+  /* border: 1px solid red; */
   .tape {
     display: flex;
   }
