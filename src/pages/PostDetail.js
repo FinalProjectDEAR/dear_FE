@@ -197,15 +197,11 @@ const CommentWrapper = styled.div`
   margin: 30px auto 0px auto;
   max-width: 1032px;
   width: 100%;
-  height: 300px;
+  max-height: 1000px;
   /* border: 1px solid blue; */
 `;
 const PageWrapper = styled.div`
-  /* border: 1px solid red; */
-  @media ${({ theme }) => theme.device.isMobile} {
-    padding: 10px 0px 10px;
-  }
-
+  padding: 20px 0px 10px;
   display: flex;
   justify-content: center;
   align-items: center;
