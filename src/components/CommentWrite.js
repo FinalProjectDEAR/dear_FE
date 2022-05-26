@@ -16,8 +16,8 @@ const CommentWrite = (props) => {
   //글자 수 제한
   const checkMaxLength = (e) => {
     let wordLength = e.target.value.length;
-    if (wordLength >= 200) {
-      window.alert("200자 이상 작성할 수 없습니다.");
+    if (wordLength >= 255) {
+      window.alert("255자 이상 작성할 수 없습니다.");
       return;
     }
     setTextLength(wordLength);

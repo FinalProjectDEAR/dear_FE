@@ -240,6 +240,7 @@ const MyPage = () => {
                 </div>
                 <div className="tapeCnt">
                   <Sound />
+                  &nbsp;&nbsp;
                   <Text body2>{userInfo?.reward ? userInfo?.reward : 0}</Text>
                 </div>
               </TapeWrapper>
@@ -700,7 +701,7 @@ const Highlight = styled.div`
   height: 6px;
   border-radius: 10px;
   @media ${({ theme }) => theme.device.mobile} {
-    height: 24px;
+    height: 6px;
   }
 `;
 

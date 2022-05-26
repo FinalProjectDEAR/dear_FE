@@ -1,6 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
-import moment from "moment";
+import axios from "axios";
 import { imgActions } from "./imagePost";
 import { apis, api } from "../../shared/apis";
 
@@ -52,10 +52,12 @@ const resetPost = createAction(RESET_POST, () => ({}));
 const getPostDB = (page) => {
   return function (dispatch, getState, { history }) {
     try {
-      api.get(`anonypost?page=${page}`, {}).then((res) => {
-        console.log("익명게시판리스트", res.data.data);
-        dispatch(getPost(res.data.data));
-      });
+      axios
+        .get(process.env.REACT_APP_URL + `/anonypost?page=${page}`, {})
+        .then((res) => {
+          console.log("익명게시판리스트", res.data.data);
+          dispatch(getPost(res.data.data));
+        });
     } catch (err) {
       console.log("익명게시판 리스트 error", err);
     }
@@ -67,10 +69,12 @@ const getDetailDB = (postId) => {
   // console.log(postId);
   return function (dispatch, getState, { history }) {
     try {
-      api.get(`anonypost/board/${postId}`, {}).then((res) => {
-        console.log("포스트 상세보기 get", res.data.data);
-        dispatch(getDetail(res.data.data));
-      });
+      axios
+        .get(process.env.REACT_APP_URL + `/anonypost/board/${postId}`, {})
+        .then((res) => {
+          console.log("포스트 상세보기 get", res.data.data);
+          dispatch(getDetail(res.data.data));
+        });
     } catch (err) {
       console.log("포스트 상세보기", err);
       window.alert("게시글 정보를 가져올 수 없습니다.");
@@ -83,8 +87,12 @@ const getCateDetailDB = (page, category) => {
   console.log(page, category);
   return function (dispatch, getState, { history }) {
     try {
-      api
-        .get(`/anonypost?page=${page}&category=${category}`, {})
+      axios
+        .get(
+          process.env.REACT_APP_URL +
+            `/anonypost?page=${page}&category=${category}`,
+          {}
+        )
         .then((res) => {
           console.log("포스트 카테고리 상세보기 get", res.data.data);
           dispatch(getPost(res.data.data));

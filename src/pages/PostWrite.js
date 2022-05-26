@@ -30,8 +30,8 @@ function PostWrite() {
   //글자 수 제한
   const checkMaxLength = (e) => {
     let wordLength = e.target.value.length;
-    if (wordLength >= 1000) {
-      window.alert("1,000자 이상 작성할 수 없습니다.");
+    if (wordLength >= 500) {
+      window.alert("500자 이상 작성할 수 없습니다.");
       return;
     }
     setTextLength(wordLength);
@@ -144,6 +144,7 @@ function PostWrite() {
                   setTitle(e.target.value);
                 }}
                 value={title}
+                padding="11px"
               />
             </InputMobile>
           </TitleWrapper>
@@ -160,6 +161,7 @@ function PostWrite() {
                 multiLine
                 maxlength="1000"
                 rows={16}
+                padding="15px"
               />
             </TextWrapper>
           </ContentWrapper>
@@ -366,7 +368,7 @@ const Select = styled.select`
 `;
 
 const OptionSelect = styled.option`
-  background-color: red;
+  /* background-color: red; */
 `;
 
 const ContentWrapper = styled.div`
