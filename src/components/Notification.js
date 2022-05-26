@@ -51,7 +51,7 @@ const Notification = () => {
                             </Text>
                           </div>
                           <div className="subtitle">
-                            <Text body4 color="#948A9E">
+                            <Text body4 color="#948A9E" textAlign="left">
                               {item.notiContent}
                             </Text>
                           </div>
@@ -245,10 +245,16 @@ const NotiBox = styled.div`
     box-sizing: border-box;
   }
   .subtitle {
+    width: 340px;
     display: flex;
     justify-content: left;
     text-align: left;
     flex-direction: row;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* border: 1px solid red; */
   }
   @media ${({ theme }) => theme.device.isMobile} {
     width: 260px;
