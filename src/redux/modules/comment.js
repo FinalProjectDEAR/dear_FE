@@ -72,6 +72,7 @@ const addCommentDB = (comment, postId) => {
         .then((res) => {
           console.log("댓글 추가", res.data);
           dispatch(addComment(res.data.data));
+          dispatch(getCommentDB(postId, 1));
         });
     } catch (err) {
       console.log(err);
@@ -107,6 +108,7 @@ const delCommentDB = (payload) => {
         )
         .then(() => {
           dispatch(delComment(payload.comment_id));
+          dispatch(getCommentDB(payload.postId, 1));
         });
     } catch (err) {
       console.log("댓글 삭제", err);

@@ -9,20 +9,29 @@ import CommentItem from "./CommentItem";
 const CommentList = (props) => {
   const commentList = useSelector((state) => state.comment.comments);
   // console.log(commentList);
+  const comment = commentList[0]?.totalComments;
   return (
     <React.Fragment>
       <CommentWrapper>
         <CommentContainer>
           <CommentBox>
-            <Text body4>댓글</Text>
             <div style={{ color: "#7A37BE", fontWeight: "500" }}>
-              ({commentList[0]?.totalComments})
+              {commentList[0]?.totalComments ? (
+                <div style={{ display: "flex" }}>
+                  {" "}
+                  <Text body4>댓글</Text> &nbsp;&nbsp;({comment})
+                </div>
+              ) : (
+                <>첫번째 댓글을 작성해주세요!</>
+              )}
             </div>
           </CommentBox>
         </CommentContainer>
         <Comment>
           {commentList?.slice(0, 2).map((comment, idx) => {
-            return <CommentItem key={idx} {...comment} />;
+            return (
+              <CommentItem key={idx} {...comment} setPage={props.setPage} />
+            );
           })}
         </Comment>
       </CommentWrapper>
@@ -68,8 +77,8 @@ const CommentBox = styled.div`
   box-sizing: border-box;
   margin: 13.5px 40px;
   /* height: 88px; */
-  max-width: 100px;
-  width: 100%;
+  /* max-width: 100px; */
+  /* width: 100%; */
   flex: none;
   order: 0;
   flex-grow: 0;

@@ -39,6 +39,11 @@ function PostDetail(props) {
   React.useEffect(() => {
     dispatch(commentActions.getCommentDB(postId, page));
   }, [page]);
+  // React.useEffect(() => {
+  //   if (commentList?.length === 0) {
+  //     dispatch(commentActions.getCommentDB(postId, page));
+  //   }
+  // }, [page]);
   //상세페이지 가져오기
   const post = useSelector((state) => state.post.detailPost);
   // console.log(post);
@@ -179,7 +184,7 @@ function PostDetail(props) {
         </DetailWrapper>
         {/* 댓글 */}
         <CommentWrapper>
-          <CommentList />
+          <CommentList setPage={setPage} />
         </CommentWrapper>
         <PageWrapper>
           <Pagination setPage={setPage} totalPage={commentPage} />
