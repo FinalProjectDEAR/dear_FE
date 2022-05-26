@@ -1,10 +1,12 @@
 import React from "react";
-import { Text, TextB } from "../elements";
+import { Text, TextB, Modal } from "../elements";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { actionCreators as mainActions } from "../redux/modules/main";
+
+import TapeInfo from "../components/TapeInfo";
 
 //assets
 import Header from "../components/Header";
@@ -13,15 +15,21 @@ import tapeD from "../assets/main/tapeD.png";
 import tapeW from "../assets/main/tapeW.png";
 
 import ArrowDropDownRoundedIcon from "@mui/icons-material/ArrowDropDownRounded";
+import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
 
 function MainChat() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [checkBox, setCheckBox] = React.useState(false);
+  const [showInfo, setShowInfo] = React.useState(false);
 
   React.useEffect(() => {
     dispatch(mainActions.getTapeDB());
   }, []);
+
+  const closeTape = () => {
+    setShowInfo(false);
+  };
 
   const tapeCount = useSelector((state) => state.main.tapeCount);
   const isLogin = localStorage.getItem("isLogin");
@@ -126,7 +134,20 @@ function MainChat() {
             </Btn>
           </BtnWrap>
           <TapeCntLine>
-            <Text sub7>현재 보유 테이프: {tapeCount}</Text>
+            <HelpOutlineRoundedIcon
+              style={{ width: "15px", color: "#61586A", cursor: "pointer" }}
+              onClick={() => {
+                setShowInfo(true);
+              }}
+            />
+            {showInfo ? (
+              <Modal>
+                <TapeInfo closeTape={closeTape} />
+              </Modal>
+            ) : null}
+            <Text sub7 margin="0px 5px">
+              현재 보유 테이프: {tapeCount}
+            </Text>
             {/* <Text sub7>현재 나의 보유 테이프: 4</Text> */}
           </TapeCntLine>
 
@@ -257,6 +278,7 @@ const Btn = styled.button`
 const TapeCntLine = styled.div`
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   width: 500px;
   @media ${({ theme }) => theme.device.mobile} {
     justify-content: center;

@@ -3,17 +3,17 @@ import React from "react";
 import styled from "styled-components";
 import { CgClose } from "react-icons/cg";
 
-import zzim from "../assets/infoModal/zzim.png";
-import zzimM from "../assets/infoModal/zzimM.png";
+import tapeInfo from "../assets/infoModal/tapeInfo.png";
+import tapeInfoM from "../assets/infoModal/tapeInfoM.png";
 
-function ZzimInfo({ closeZzim }) {
+function TapeInfo({ closeTape }) {
   return (
     <React.Fragment>
       <Wrapper>
         <CgClose
           className="close"
           size={20}
-          onClick={closeZzim}
+          onClick={closeTape}
           style={{
             color: "#948A9E",
             position: "absolute",
@@ -22,14 +22,14 @@ function ZzimInfo({ closeZzim }) {
             cursor: "pointer",
           }}
         />
-        <Image src={zzim} />
-        <ImageM src={zzimM} />
+        <Image src={tapeInfo} />
+        <ImageM src={tapeInfoM} />
       </Wrapper>
     </React.Fragment>
   );
 }
 
-export default ZzimInfo;
+export default TapeInfo;
 
 const Wrapper = styled.div`
   position: relative;
@@ -47,14 +47,14 @@ const Wrapper = styled.div`
     width: 320px;
     height: 520px;
     padding-top: 56px;
-    padding-bottom: 66px;
+    padding-bottom: 20px;
     border-radius: 10px;
   }
 `;
 
 const Image = styled.div`
   width: 550px;
-  height: 404px;
+  height: 388px;
   box-sizing: border-box;
   background-image: url("${(props) => props.src}");
   background-size: cover;
@@ -65,8 +65,8 @@ const Image = styled.div`
 
 const ImageM = styled.div`
   display: none;
-  width: 329px;
-  height: 398px;
+  width: 320px;
+  height: 444px;
   box-sizing: border-box;
   background-image: url("${(props) => props.src}");
   background-size: cover;
