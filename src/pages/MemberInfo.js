@@ -296,12 +296,7 @@ function MemberInfo() {
                             setGender(e.target.value);
                           }}
                         />
-                        <Text
-                          weight="300"
-                          size="14px"
-                          color="#333333"
-                          margin="0px 10px"
-                        >
+                        <Text sub6 color="#333333" margin="0px 10px">
                           남성
                         </Text>
                       </CheckBox>
@@ -314,12 +309,7 @@ function MemberInfo() {
                             setGender(e.target.value);
                           }}
                         />
-                        <Text
-                          weight="300"
-                          size="14px"
-                          color="#333333"
-                          margin="0px 10px"
-                        >
+                        <Text sub6 color="#333333" margin="0px 10px">
                           여성
                         </Text>
                       </CheckBox>
@@ -342,12 +332,7 @@ function MemberInfo() {
                             setAge(e.target.value);
                           }}
                         />
-                        <Text
-                          weight="300"
-                          size="14px"
-                          color="#333333"
-                          margin="0px 10px"
-                        >
+                        <Text sub6 color="#333333" margin="0px 10px">
                           20대 초반
                         </Text>
                       </CheckBox>
@@ -360,12 +345,7 @@ function MemberInfo() {
                             setAge(e.target.value);
                           }}
                         />
-                        <Text
-                          weight="300"
-                          size="14px"
-                          color="#333333"
-                          margin="0px 10px"
-                        >
+                        <Text sub6 color="#333333" margin="0px 10px">
                           20대 중반
                         </Text>
                       </CheckBox>
@@ -378,12 +358,7 @@ function MemberInfo() {
                             setAge(e.target.value);
                           }}
                         />
-                        <Text
-                          weight="300"
-                          size="14px"
-                          color="#333333"
-                          margin="0px 10px"
-                        >
+                        <Text sub6 color="#333333" margin="0px 10px">
                           20대 후반
                         </Text>
                       </CheckBox>
@@ -396,12 +371,7 @@ function MemberInfo() {
                             setAge(e.target.value);
                           }}
                         />
-                        <Text
-                          weight="300"
-                          size="14px"
-                          color="#333333"
-                          margin="0px 10px"
-                        >
+                        <Text sub6 color="#333333" margin="0px 10px">
                           30대 초반
                         </Text>
                       </CheckBox>
@@ -414,12 +384,7 @@ function MemberInfo() {
                             setAge(e.target.value);
                           }}
                         />
-                        <Text
-                          weight="300"
-                          size="14px"
-                          color="#333333"
-                          margin="0px 10px"
-                        >
+                        <Text sub6 color="#333333" margin="0px 10px">
                           30대 중반
                         </Text>
                       </CheckBox>
@@ -432,12 +397,7 @@ function MemberInfo() {
                             setAge(e.target.value);
                           }}
                         />
-                        <Text
-                          weight="300"
-                          size="14px"
-                          color="#333333"
-                          margin="0px 10px"
-                        >
+                        <Text sub6 color="#333333" margin="0px 10px">
                           30대 후반
                         </Text>
                       </CheckBox>
@@ -461,12 +421,7 @@ function MemberInfo() {
                             setDating(e.target.value);
                           }}
                         />
-                        <Text
-                          weight="300"
-                          size="14px"
-                          color="#333333"
-                          margin="0px 10px"
-                        >
+                        <Text sub6 color="#333333" margin="0px 10px">
                           솔로
                         </Text>
                       </CheckBox>
@@ -479,12 +434,7 @@ function MemberInfo() {
                             setDating(e.target.value);
                           }}
                         />
-                        <Text
-                          weight="300"
-                          size="14px"
-                          color="#333333"
-                          margin="0px 10px"
-                        >
+                        <Text sub6 color="#333333" margin="0px 10px">
                           커플
                         </Text>
                       </CheckBox>
@@ -509,12 +459,7 @@ function MemberInfo() {
                                 setLoveType(e.target.value);
                               }}
                             />
-                            <Text
-                              weight="300"
-                              size="14px"
-                              color="#333333"
-                              margin="0px 10px"
-                            >
+                            <Text sub6 color="#333333" margin="0px 10px">
                               연하
                             </Text>
                           </CheckBox>
@@ -527,12 +472,7 @@ function MemberInfo() {
                                 setLoveType(e.target.value);
                               }}
                             />
-                            <Text
-                              weight="300"
-                              size="14px"
-                              color="#333333"
-                              margin="0px 10px"
-                            >
+                            <Text sub6 color="#333333" margin="0px 10px">
                               동갑
                             </Text>
                           </CheckBox>
@@ -545,12 +485,7 @@ function MemberInfo() {
                                 setLoveType(e.target.value);
                               }}
                             />
-                            <Text
-                              weight="300"
-                              size="14px"
-                              color="#333333"
-                              margin="0px 10px"
-                            >
+                            <Text sub6 color="#333333" margin="0px 10px">
                               연상
                             </Text>
                           </CheckBox>
@@ -572,12 +507,7 @@ function MemberInfo() {
                                 setLovePeriod(e.target.value);
                               }}
                             />
-                            <Text
-                              weight="300"
-                              size="14px"
-                              color="#333333"
-                              margin="0px 10px"
-                            >
+                            <Text sub6 color="#333333" margin="0px 10px">
                               6개월 미만
                             </Text>
                           </CheckBox>
@@ -590,12 +520,7 @@ function MemberInfo() {
                                 setLovePeriod(e.target.value);
                               }}
                             />
-                            <Text
-                              weight="300"
-                              size="14px"
-                              color="#333333"
-                              margin="0px 10px"
-                            >
+                            <Text sub6 color="#333333" margin="0px 10px">
                               6개월 ~ 2년
                             </Text>
                           </CheckBox>
@@ -608,12 +533,7 @@ function MemberInfo() {
                                 setLovePeriod(e.target.value);
                               }}
                             />
-                            <Text
-                              weight="300"
-                              size="14px"
-                              color="#333333"
-                              margin="0px 10px"
-                            >
+                            <Text sub6 color="#333333" margin="0px 10px">
                               2년 이상
                             </Text>
                           </CheckBox>
@@ -626,12 +546,7 @@ function MemberInfo() {
                                 setLovePeriod(e.target.value);
                               }}
                             />
-                            <Text
-                              weight="300"
-                              size="14px"
-                              color="#333333"
-                              margin="0px 10px"
-                            >
+                            <Text sub6 color="#333333" margin="0px 10px">
                               5년 이상
                             </Text>
                           </CheckBox>
@@ -644,12 +559,7 @@ function MemberInfo() {
                                 setLovePeriod(e.target.value);
                               }}
                             />
-                            <Text
-                              weight="300"
-                              size="14px"
-                              color="#333333"
-                              margin="0px 10px"
-                            >
+                            <Text sub6 color="#333333" margin="0px 10px">
                               해당없음
                             </Text>
                           </CheckBox>

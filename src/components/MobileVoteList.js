@@ -59,7 +59,7 @@ function MobileVoteList() {
 export default MobileVoteList;
 
 const MobileRanking = styled.div`
-  width: 350px;
+  width: 360px;
   height: 250px;
   display: none;
   overflow: hidden;
@@ -72,7 +72,7 @@ const MobileRanking = styled.div`
 `;
 
 const RankingContainer = styled.div`
-  width: 950px;
+  width: 960px;
   margin: 0px 5px;
   display: none;
   @media ${({ theme }) => theme.device.mobile} {
