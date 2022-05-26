@@ -8,8 +8,7 @@ import CommentItem from "./CommentItem";
 
 const CommentList = (props) => {
   const commentList = useSelector((state) => state.comment.comments);
-  console.log(commentList);
-  const commentCnt = commentList?.[0]?.totalComments;
+  // console.log(commentList);
   return (
     <React.Fragment>
       <CommentWrapper>
@@ -37,7 +36,7 @@ const CommentWrapper = styled.div`
   box-sizing: border-box;
   @media ${({ theme }) => theme.device.isMobile} {
     /* width: 328px; */
-    height: 300px;
+    /* height: 300px; */
     /* border: 1px solid yellow; */
     /* margin-left: 500px; */
   }
@@ -87,7 +86,7 @@ const CommentBox = styled.div`
 const Comment = styled.div`
   display: flex;
   flex-direction: column;
-  height: 128px;
-  /* background-color: yellow; */
+  /* height: 128px; */
+  /* background-color: red; */
 `;
 export default CommentList;

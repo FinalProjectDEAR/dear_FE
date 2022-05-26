@@ -52,7 +52,7 @@ const getCommentDB = (postId, page) => {
           {}
         )
         .then((res) => {
-          console.log("댓글가져오기", res.data);
+          // console.log("댓글가져오기", res.data);
           dispatch(getComment(res.data));
         });
     } catch (err) {

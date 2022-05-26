@@ -2,7 +2,7 @@ import * as React from "react";
 import Pagination from "@mui/material/Pagination";
 
 export default function Paginations(props) {
-  console.log(props);
+  // console.log(props);
   return (
     <div style={{ textAlign: "center" }}>
       <Pagination

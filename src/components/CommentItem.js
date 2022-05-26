@@ -8,10 +8,11 @@ import TimeCounting from "time-counting";
 import CommentRemove from "../components/alert/CommentRemove";
 //리덕스
 import { useDispatch, useSelector } from "react-redux";
+import { history } from "../redux/configureStore";
 import { actionCreators } from "../redux/modules/comment";
 
 const CommentItem = (props) => {
-  console.log(props);
+  // console.log(props);
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(actionCreators.pages(props.totalPages));
@@ -74,9 +75,9 @@ const CommentItem = (props) => {
   //글자 수 제한
   const checkMaxLength = (e) => {
     let wordLength = e.target.value.length;
-    if (wordLength >= 200) {
-      window.alert("200자 이상 작성할 수 없습니다.");
-      return;
+    if (wordLength >= 255) {
+      window.alert("255자 이상 작성할 수 없습니다.");
+      history.goBack();
     }
     setTextLength(wordLength);
   };
@@ -100,11 +101,11 @@ const CommentItem = (props) => {
               {comments}
             </Text>
           </CommentBox>
-          <CommentBox>
+          <CommentBtn>
             <Text color="#999999" size="12px" weight="300">
               {createdAt}
             </Text>
-          </CommentBox>
+          </CommentBtn>
         </CommentContainer>
         {boardPostId ? (
           <LikeBtn commentLike={commentLike} onClick={likeComment}>
@@ -130,7 +131,7 @@ const CommentItem = (props) => {
             value={comment || ""}
           />
           <EditBtn onClick={editComment}>
-            <Text sub2 color="#948A9E">
+            <Text sub2 color="#948A9E" cursor="pointer">
               수정하기
             </Text>
             {/* <Btn onClick={editComment}>수정하기</Btn> */}
@@ -149,7 +150,7 @@ const CommentItem = (props) => {
             </Text>
           </CommentBox>
 
-          <CommentBox>
+          <CommentBtn>
             <Text color="#999999" size="12px" weight="300">
               {createdAt}
             </Text>
@@ -180,7 +181,7 @@ const CommentItem = (props) => {
                 />
               </Modal>
             )}
-          </CommentBox>
+          </CommentBtn>
         </CommentContainer>
         {boardPostId ? (
           <LikeBtn commentLike={commentLike} onClick={likeComment}>
@@ -201,7 +202,7 @@ const CommentWrapper = styled.div`
   display: flex;
   max-width: 1032px;
   width: 100%;
-  height: 200px;
+  /* height: 200px; */
   border-bottom: 1px solid #CCCCCC;
   /* background: orange; */
   @media ${({ theme }) => theme.device.isMobile} {
@@ -225,7 +226,7 @@ const CommentContainer = styled.div`
   /* border-bottom: 1px solid #cccccc; */
   @media ${({ theme }) => theme.device.isMobile} {
     /* width: 328px; */
-    /* border: 1px solid orange; */
+    /* border: 1px solid red; */
     margin: auto;
     display: flex;
 `;
@@ -235,7 +236,6 @@ const TextWrapper = styled.div`
   margin: auto;
   @media ${({ theme }) => theme.device.isMobile} {
     width: 90%;
-    /* border: 1px solid red; */
   }
 `;
 const EditBtn = styled.div`
@@ -255,7 +255,7 @@ const CommentBox = styled.div`
   justify-content: left;
   padding: 6px 0px 10px;
   gap: 8px;
-  height: 20px;
+  /* height: 20px; */
   line-height: 20px;
   flex: none;
   order: 1;
@@ -263,6 +263,23 @@ const CommentBox = styled.div`
 
   /* background-color: red; */
 `;
+
+const CommentBtn = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  /* padding: 6px 0px 10px; */
+  gap: 8px;
+  /* height: 20px; */
+  margin: 0px;
+  line-height: 20px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  /* background-color: pink; */
+`;
+
 const BtnBox = styled.button`
   border: none;
   background-color: transparent;

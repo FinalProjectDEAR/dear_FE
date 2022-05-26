@@ -72,7 +72,7 @@ const getDetailDB = (postId) => {
       axios
         .get(process.env.REACT_APP_URL + `/anonypost/board/${postId}`, {})
         .then((res) => {
-          console.log("포스트 상세보기 get", res.data.data);
+          // console.log("포스트 상세보기 get", res.data.data);
           dispatch(getDetail(res.data.data));
         });
     } catch (err) {
