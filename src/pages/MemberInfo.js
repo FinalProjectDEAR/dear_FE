@@ -504,7 +504,7 @@ function MemberInfo() {
                             <input
                               type="radio"
                               name="loveType"
-                              value="본인이 연하"
+                              value="연하"
                               onChange={(e) => {
                                 setLoveType(e.target.value);
                               }}
@@ -540,7 +540,7 @@ function MemberInfo() {
                             <input
                               type="radio"
                               name="loveType"
-                              value="본인이 연상"
+                              value="연상"
                               onChange={(e) => {
                                 setLoveType(e.target.value);
                               }}

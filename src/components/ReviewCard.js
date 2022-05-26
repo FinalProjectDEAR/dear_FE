@@ -64,6 +64,8 @@ const CardWrapper = styled.div`
 
   background: #fafafa;
   @media ${({ theme }) => theme.device.mobile} {
+    margin: 10px;
+    margin-top: 20px;
     width: 300px;
   }
 `;

@@ -73,7 +73,7 @@ const Background = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
 `;
 
 const ReviewWrapper = styled.div`
@@ -82,8 +82,8 @@ const ReviewWrapper = styled.div`
   justify-content: center;
   box-sizing: border-box;
   width: 1440px;
-  height: 600px;
-  margin: auto;
+  height: 700px;
+  margin: 0px auto;
   overflow: hidden;
   @media ${({ theme }) => theme.device.mobile} {
     display: none;
