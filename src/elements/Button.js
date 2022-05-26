@@ -257,6 +257,10 @@ const SecondaryDefaultButton = styled.button`
   box-shadow: ${(props) => props.shadow};
   ${sizeStyles}
   cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 const SecondaryHoverButton = styled.button`
   width: ${(props) => props.width};
