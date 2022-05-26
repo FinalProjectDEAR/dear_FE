@@ -109,7 +109,7 @@ function MainChat() {
               </LineBox>
             </Btn>
             <Btn checkBox={checkBox} onClick={startRes}>
-              <TextB subtitle margin="5px" cursor="pointer" color="#61586A">
+              <TextB subtitle margin="5px" cursor="pointer" color="#2E2A32">
                 친구의 고민 들어주기
               </TextB>
               <LineBox>
@@ -243,9 +243,7 @@ const Btn = styled.button`
   cursor: pointer;
   background-color: #fff;
   box-shadow: ${(props) =>
-    props.checkBox
-      ? "0px 0px 20px rgba(122, 55, 190, 0.2)"
-      : "0px 0px 20px rgba(172, 151, 197, 0.25)"};
+    props.checkBox ? "0px 0px 20px rgba(122, 55, 190, 0.2)" : ""};
   border-radius: 20px;
   @media ${({ theme }) => theme.device.mobile} {
     flex-direction: row;

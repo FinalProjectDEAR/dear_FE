@@ -18,8 +18,8 @@ function ResChatStart() {
   const [category, setCategory] = React.useState(false);
   const [gender, setGender] = React.useState("");
   const [previewImg, setPreviewImg] = React.useState([]);
-  const [fileName, setFileName] = React.useState([]);
   const [imgFile, setImgFile] = React.useState([]);
+  const [audioPermit, setAudioPermit] = React.useState([]);
 
   const token = useSelector((state) => state.chat.token);
   const sessionId = useSelector((state) => state.chat.sessionId);
@@ -27,6 +27,22 @@ function ResChatStart() {
   const ninckname = localStorage.getItem("ninckname");
 
   const fileList = useSelector((state) => state.image.fileList);
+  const chatFile = fileList.slice(0, 3);
+  console.log("파일리스트", fileList);
+  console.log("3개파일만 짜르기?", chatFile);
+
+  //오디오 액세스 요청
+  React.useEffect(() => {
+    navigator.mediaDevices
+      .getUserMedia({ audio: true, video: true })
+      .then((stream) => {
+        setAudioPermit(true);
+      })
+      .catch((err) =>
+        alert("오디오 접근이 거절되었습니다. 설정에서 승인 해주세요.")
+      );
+    setAudioPermit(false);
+  }, []);
 
   //모달
   const [modalOpen, setModalOpen] = React.useState(true);
@@ -36,12 +52,12 @@ function ResChatStart() {
   };
 
   const closeModal = () => {
+    dispatch(imageActions.delData());
     setModalOpen(false);
     history.push("/main");
   };
 
   const selectFile = (e) => {
-    console.log(e.target.files);
     const imgList = e.target.files;
 
     let imgUrlList = [...previewImg];
@@ -74,11 +90,7 @@ function ResChatStart() {
       }
     }
 
-    if (imageFiles.length > 3) {
-      imageFiles = imageFiles.slice(0, 3);
-    }
-
-    console.log(imageFiles);
+    console.log("이미지 파일", imageFiles);
     setImgFile(imageFiles);
 
     dispatch(imageActions.uploadImage(imageFiles));
@@ -86,23 +98,23 @@ function ResChatStart() {
 
   //삭제
   const deleteFile = (idx) => {
-    const imgArr = imgFile.filter((item, i) => i !== idx);
+    dispatch(imageActions.delImage(idx));
     const imgUrlArr = previewImg.filter((item, i) => i !== idx);
-    const fileNameArr = fileName.filter((item, i) => i !== idx);
-
-    setFileName([...fileNameArr]);
-    setImgFile([...imgArr]);
     setPreviewImg([...imgUrlArr]);
   };
 
   //매칭신청
   const submit = () => {
+    if (audioPermit === false) {
+      window.alert("오디오와 비디오 권한을 허용해주세요.");
+      return;
+    }
+
     if (chatTitle === "" || gender === "" || category === "") {
       window.alert("필수정보를 모두 입력해주세요!");
       return;
     }
-    console.log("파일리스트", fileList);
-    dispatch(chatActions.reqChatDB({ chatTitle, category, gender, fileList }));
+    dispatch(chatActions.reqChatDB({ chatTitle, category, gender, chatFile }));
   };
 
   return (
@@ -183,7 +195,12 @@ function ResChatStart() {
                         setCategory(e.target.value);
                       }}
                     />
-                    <Text sub6 textAlign="center" color="#333" margin="0px 10px">
+                    <Text
+                      sub6
+                      textAlign="center"
+                      color="#333"
+                      margin="0px 10px"
+                    >
                       짝사랑
                     </Text>
                   </CheckBox>
@@ -196,7 +213,12 @@ function ResChatStart() {
                         setCategory(e.target.value);
                       }}
                     />
-                    <Text sub6 textAlign="center" color="#333" margin="0px 10px">
+                    <Text
+                      sub6
+                      textAlign="center"
+                      color="#333"
+                      margin="0px 10px"
+                    >
                       썸
                     </Text>
                   </CheckBox>
@@ -209,7 +231,12 @@ function ResChatStart() {
                         setCategory(e.target.value);
                       }}
                     />
-                    <Text sub6 textAlign="center" color="#333" margin="0px 10px">
+                    <Text
+                      sub6
+                      textAlign="center"
+                      color="#333"
+                      margin="0px 10px"
+                    >
                       연애
                     </Text>
                   </CheckBox>
@@ -222,7 +249,12 @@ function ResChatStart() {
                         setCategory(e.target.value);
                       }}
                     />
-                    <Text sub6 textAlign="center" color="#333" margin="0px 10px">
+                    <Text
+                      sub6
+                      textAlign="center"
+                      color="#333"
+                      margin="0px 10px"
+                    >
                       이별
                     </Text>
                   </CheckBox>
@@ -235,7 +267,12 @@ function ResChatStart() {
                         setCategory(e.target.value);
                       }}
                     />
-                    <Text sub6 textAlign="center" color="#333" margin="0px 10px">
+                    <Text
+                      sub6
+                      textAlign="center"
+                      color="#333"
+                      margin="0px 10px"
+                    >
                       기타
                     </Text>
                   </CheckBox>
@@ -264,7 +301,12 @@ function ResChatStart() {
                           setGender(e.target.value);
                         }}
                       />
-                      <Text sub6 textAlign="center" color="#333" margin="0px 10px">
+                      <Text
+                        sub6
+                        textAlign="center"
+                        color="#333"
+                        margin="0px 10px"
+                      >
                         상관없음
                       </Text>
                     </CheckBox>
@@ -277,7 +319,12 @@ function ResChatStart() {
                           setGender(e.target.value);
                         }}
                       />
-                      <Text sub6 textAlign="center" color="#333" margin="0px 10px">
+                      <Text
+                        sub6
+                        textAlign="center"
+                        color="#333"
+                        margin="0px 10px"
+                      >
                         남성
                       </Text>
                     </CheckBox>
@@ -290,7 +337,12 @@ function ResChatStart() {
                           setGender(e.target.value);
                         }}
                       />
-                      <Text sub6 textAlign="center" color="#333" margin="0px 10px">
+                      <Text
+                        sub6
+                        textAlign="center"
+                        color="#333"
+                        margin="0px 10px"
+                      >
                         여성
                       </Text>
                     </CheckBox>
@@ -318,9 +370,9 @@ function ResChatStart() {
                   />
 
                   {previewImg !== null || previewImg.length !== 0 ? (
-                    previewImg.map((item, idx) => {
+                    previewImg.map((image, idx) => {
                       return (
-                        <Picture src={previewImg[idx]} key={idx}>
+                        <Picture src={image} key={idx}>
                           <ImgDelbtn
                             onClick={() => {
                               deleteFile(idx);

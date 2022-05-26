@@ -11,7 +11,7 @@ function ReviewCard({ reviewInfo }) {
   const nickname = "낭만고양이";
 
   function dateFormat(date) {
-    let year = date.substring(0, 3);
+    let year = date.substring(0, 4);
     let month = date.substring(5, 7);
     let day = date.substring(8, 9);
 

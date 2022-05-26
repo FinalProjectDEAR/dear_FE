@@ -47,7 +47,7 @@ const reqChatDB = (payload) => {
     try {
       const formData = new FormData();
 
-      payload.fileList.map((e, idx) => {
+      payload.chatFile.map((e, idx) => {
         return formData.append("imgList", e);
       });
       formData.append("reqTitle", payload.chatTitle);
@@ -98,7 +98,7 @@ const getChatInfoDB = (sessionId) => {
       console.log("받아온 채팅정보", chatInfo);
     } catch {
       alert("채팅방 정보를 불러오지 못했습니다.");
-      history.replace("/");
+      history.replace("/main");
     }
   };
 };

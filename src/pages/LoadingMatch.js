@@ -1,10 +1,13 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import { Text, Button, Modal } from "../elements";
+import { history } from "../redux/configureStore";
 
 import NoMatch from "../components/alert/NoMatch";
 
 function LoadingMatch({ informClose, leaveSession }) {
+  const [locationKeys, setLocationKeys] = React.useState([]);
+
   const [modalOpen, setModalOpen] = React.useState(false);
 
   function openModal() {
@@ -21,11 +24,19 @@ function LoadingMatch({ informClose, leaveSession }) {
     informClose();
   };
 
-  // React.useEffect(() => {
-  //   console.log("30초센다?");
-  //   setTimeout(openModal, 30000);
-  //   console.log(modalOpen);
-  // }, []);
+  //뒤로가기 시도시 방삭제
+  React.useEffect(() => {
+    window.onpopstate = () => {
+      informClose();
+    };
+  });
+
+  //유저 매칭 대기시간
+  React.useEffect(() => {
+    console.log("30초센다?");
+    setTimeout(openModal, 30000);
+    console.log(modalOpen);
+  }, []);
 
   return (
     <React.Fragment>
