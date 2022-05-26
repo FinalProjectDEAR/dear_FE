@@ -10,7 +10,7 @@ import styled from "styled-components";
 import RankingCard from "../components/RankingCard";
 
 //assets
-import serviceInfo from "../assets/main/service_info_img.png";
+import { ReactComponent as ServiceInfo } from "../assets/main/serviceInfo.svg";
 import MobileRanking from "../components/MobileRanking";
 
 function MainRanking() {
@@ -54,7 +54,7 @@ function MainRanking() {
                 </TextB>
               </MobileLetterBox>
               <ImageBox>
-                <img src={serviceInfo} alt="example" />
+                <ServiceInfo />
               </ImageBox>
             </InfoBox>
             <LineBox>
