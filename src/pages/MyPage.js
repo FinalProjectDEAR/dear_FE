@@ -5,6 +5,7 @@ import { ReactComponent as Help } from "../assets/help_outline.svg";
 import { ReactComponent as Sound } from "../assets/surround_sound.svg";
 import { ReactComponent as Left } from "../assets/paging_left.svg";
 import { ReactComponent as Right } from "../assets/paging_right.svg";
+import { Modal } from "../elements/index";
 import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
 //페이지관련
@@ -20,6 +21,8 @@ import EmptyChat from "../elements/EmptyChat";
 import EmptyFollow from "../elements/EmptyFollow";
 import EmptyPost from "../elements/EmptyPost";
 import EmptyRes from "../elements/EmptyRes";
+import ListenerInfo from "../components/ListenerInfo";
+import LoveInfo from "../components/LoveInfo";
 //리덕스관련
 import { useDispatch, useSelector } from "react-redux";
 import { MsgActionCreators } from "../redux/modules/message";
@@ -74,6 +77,10 @@ const MyPage = () => {
   const postTotalPage = useSelector(
     (state) => state.mypage.postList.totalPages
   );
+  const [infoOpen, setInfoOpen] = React.useState(false);
+  const close = () => {
+    setInfoOpen(false);
+  };
   return (
     <React.Fragment>
       <Layout>
@@ -129,7 +136,16 @@ const MyPage = () => {
                     <Text body4 color="#2E2A32">
                       나의 연애 유형
                     </Text>
-                    <Help />
+                    <Help
+                      onClick={() => {
+                        setInfoOpen(true);
+                      }}
+                    />
+                    {infoOpen ? (
+                      <Modal>
+                        <LoveInfo close={close} />
+                      </Modal>
+                    ) : null}
                   </div>
                   <div className="loveTag">
                     <Tag small2>
@@ -163,7 +179,16 @@ const MyPage = () => {
                     <Text body4 color="#2E2A32">
                       나의 리스너 유형
                     </Text>
-                    <Help />
+                    <Help
+                      onClick={() => {
+                        setInfoOpen(true);
+                      }}
+                    />
+                    {infoOpen ? (
+                      <Modal>
+                        <ListenerInfo close={close} />
+                      </Modal>
+                    ) : null}
                   </div>
                   <div className="types">
                     <MobileListener>
