@@ -53,6 +53,10 @@ function MainChat() {
     } else if (isLogin !== "true") {
       window.alert("로그인 후 이용해 주세요.");
       history.push("/");
+    } else if (isLogin === "true" && nickname === null) {
+      window.alert("상담에 필요한 회원정보를 입력 후 이용해 주세요.");
+      history.replace("/mypage");
+      return;
     }
     history.push("/startRes");
   };

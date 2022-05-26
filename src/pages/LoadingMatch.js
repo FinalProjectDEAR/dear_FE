@@ -20,24 +20,37 @@ function LoadingMatch({ informClose, leaveSession }) {
     informClose();
   };
 
-  React.useEffect(() => {
-    console.log("30초센다?");
-    setTimeout(openModal, 30000);
-    console.log(modalOpen);
-  }, []);
+  // React.useEffect(() => {
+  //   console.log("30초센다?");
+  //   setTimeout(openModal, 30000);
+  //   console.log(modalOpen);
+  // }, []);
 
   return (
     <React.Fragment>
-      <LoaderWrapper>
-        <Loader>
-          <InnerSpinner>
-            <Circle />
-            <Circle />
-            <Circle />
-          </InnerSpinner>
-          <Text title> 매칭중입니다. 잠시만 기다려 주세요. </Text>
-        </Loader>
-      </LoaderWrapper>
+      <Background>
+        <LoadWrapper>
+          <LoaderBox>
+            <Loader>
+              <InnerSpinner>
+                <Circle />
+                <Circle />
+                <Circle />
+              </InnerSpinner>
+            </Loader>
+          </LoaderBox>
+
+          <LineBox>
+            <Text title color="#fff" margin="20px">
+              매칭중입니다. <br />
+              잠시만 기다려 주세요.
+            </Text>
+            <Button primaryDefault size="small" onClick={noMatch}>
+              나가기
+            </Button>
+          </LineBox>
+        </LoadWrapper>
+      </Background>
       {modalOpen ? (
         <Modal closeModal={closeModal}>
           <NoMatch noMatch={noMatch} />
@@ -49,26 +62,54 @@ function LoadingMatch({ informClose, leaveSession }) {
 
 export default LoadingMatch;
 
-const LoaderWrapper = styled.div`
+const Background = styled.div`
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 100;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   background: #777e90;
 `;
 
+const LoadWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  margin: auto;
+`;
+
+const LoaderBox = styled.div`
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Loader = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  width: 100px;
+  margin: auto;
+
   @keyframes {
     transform: translate(-50%, -50%);
   }
 `;
 
+const LineBox = styled.div`
+  width: 300px;
+  margin: auto;
+`;
+
 const InnerSpinner = styled.div`
+  margin-left: 44px;
+  margin-bottom: 20px;
   position: relative;
   -webkit-transform: translateY(-25px);
   transform: translateY(-25px);

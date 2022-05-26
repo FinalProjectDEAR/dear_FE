@@ -13,21 +13,13 @@ import styled from "styled-components";
 import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
 
 function VoteResult(props) {
-  console.log("투표결과 프롭스", props);
-  const dispatch = useDispatch();
+  const voteResult = useSelector((state) => state.vote.voteResult);
+  console.log("결과페이지 정보", voteResult);
 
-  React.useEffect(() => {
-    dispatch(voteActions.getResultDB(props.postId));
-  }, []);
-
-  const voteInfo = useSelector((state) => state.vote.voteResult);
-  console.log("결과페이지 정보", voteInfo);
-
-  const leftScore = voteInfo.vote[0].selectionList.length;
-  const rightScore = voteInfo.vote[1].selectionList.length;
+  const leftScore = voteResult.vote[0].selectionList.length;
+  const rightScore = voteResult.vote[1].selectionList.length;
 
   const totalCount = leftScore + rightScore;
-  console.log(totalCount);
 
   const leftPercentage = parseInt((leftScore / totalCount) * 100);
   const rightPercentage = parseInt((rightScore / totalCount) * 100);
@@ -54,12 +46,12 @@ function VoteResult(props) {
             }
           >
             <Font color={props.leftSelected ? "#7A37BE" : "#61586A"}>
-              {voteInfo.vote[0].imageTitle}
+              {voteResult.vote[0].imageTitle}
             </Font>
           </Vote>
           <PercentageBox>
-            {voteInfo.vote[0].imageUrl ? (
-              <VoteImg src={voteInfo.vote[0].imageUrl} alt="선택지 2" />
+            {voteResult.vote[0].imageUrl ? (
+              <VoteImg src={voteResult.vote[0].imageUrl} alt="선택지 2" />
             ) : null}
             <ProgressBar>
               <Highlight
@@ -80,12 +72,12 @@ function VoteResult(props) {
             }
           >
             <Font color={props.rightSelected ? "#7A37BE" : "#61586A"}>
-              {voteInfo.vote[1].imageTitle}
+              {voteResult.vote[1].imageTitle}
             </Font>
           </Vote>
           <PercentageBox>
-            {voteInfo.vote[0].imageUrl ? (
-              <VoteImg src={voteInfo.vote[1].imageUrl} alt="선택지 2" />
+            {voteResult.vote[0].imageUrl ? (
+              <VoteImg src={voteResult.vote[1].imageUrl} alt="선택지 2" />
             ) : null}
             <ProgressBar>
               <Highlight
