@@ -861,22 +861,16 @@ const EditContainer = styled.div`
     margin: auto;
     display: flex;
     flex-direction: column;
-    /* background: red; */
   }
 `;
 const NickName = styled.div`
-  /* width: 292px; */
-  /* padding-left: 70px;
-  box-sizing: border-box; */
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 20px;
-  /* background: pink; */
   .nick {
     width: 200px;
-    /* border: 1px solid red; */
   }
   @media ${({ theme }) => theme.device.isMobile} {
     gap: 0px;
@@ -885,16 +879,12 @@ const NickName = styled.div`
     margin: 40px auto 20px;
     display: flex;
     flex-direction: column;
-    /* border: 1px solid red; */
     .nick {
       margin: 20px auto 0px;
-      /* width: 272px; */
-      /* margin-right: 25px; */
     }
   }
 `;
 const Color = styled.div`
-  /* background: violet; */
   box-sizing: border-box;
   /* padding-right: 70px;
   width: 560px; */
@@ -909,13 +899,11 @@ const Color = styled.div`
   @media ${({ theme }) => theme.device.isMobile} {
     width: 272px;
     gap: 6px;
-    /* height: 172px; */
     margin-top: -90px;
     display: grid;
     grid-template-columns: repeat(8, 25px);
     flex-direction: column;
     box-sizing: border-box;
-    /* border: 1px solid red; */
   }
 `;
 const InfoWrapper = styled.div`
@@ -929,7 +917,6 @@ const InfoWrapper = styled.div`
     height: 370px;
     display: flex;
     flex-direction: column;
-    /* gap: 24px; */
     margin: auto;
   }
 `;
@@ -941,7 +928,6 @@ const InfoContainer = styled.div`
     height: 370px;
     display: flex;
     flex-direction: column;
-    /* gap: 24px; */
     margin: auto;
   }
 `;
@@ -953,7 +939,6 @@ const InfoContainerM = styled.div`
     height: 284px;
     display: flex;
     flex-direction: column;
-    /* gap: 24px; */
     margin: auto;
   }
 `;
@@ -962,7 +947,6 @@ const MobileAge = styled.div`
   flex-direction: row;
   gap: 10px;
   padding: 10px 0px;
-  /* background: pink; */
   width: 204px;
   height: 122px;
   box-sizing: border-box;
@@ -975,10 +959,6 @@ const WebAge = styled.div`
   gap: 10px;
   margin-left: 30px;
   box-sizing: border-box;
-  /* width: 327px; */
-  /* height: 66px; */
-
-  /* border: 1px solid red; */
 `;
 const InfoBox = styled.div`
   margin-top: 15px;
@@ -1047,14 +1027,12 @@ const InfoBox = styled.div`
     height: 370px;
     display: flex;
     flex-direction: column;
-    /* gap: 24px; */
     margin: auto;
     .title {
       margin: auto;
       padding-left: 26px;
       width: 294px;
       height: 100px;
-      /* border: 1px solid blue; */
       box-sizing: border-box;
     }
     #info {
@@ -1064,7 +1042,6 @@ const InfoBox = styled.div`
       gap: 8px;
       width: 294px;
       margin: auto;
-      /* border: 1px solid blue; */
     }
     #ageInfo {
       display: flex;
@@ -1073,35 +1050,22 @@ const InfoBox = styled.div`
       height: 80px;
       justify-content: center;
       align-items: center;
-      /* margin-bottom: 5px; */
       box-sizing: border-box;
-      /* background: red; */
       width: 294px;
       margin: auto;
     }
-    /* .gender {
-      display: flex;
-      align-items: center;
-      margin: auto;
-      width: 294px;
-      height: 200px;
-      background: red;
-      box-sizing: border-box;
-    } */
     .radio {
       margin-right: 60px;
       display: flex;
       flex-direction: row;
       gap: 10px;
       width: 220px;
-      /* background: red; */
     }
     .radioMobile {
       display: flex;
       flex-direction: row;
       gap: 31px;
       padding: 10px 0px;
-      /* background: yellow; */
       box-sizing: border-box;
       width: 220px;
       height: 0px;
@@ -1112,11 +1076,9 @@ const InfoBox = styled.div`
       flex-direction: row;
       gap: 2px;
       width: 220px;
-      /* border: 1px solid red; */
     }
     .age {
       width: 294px;
-      /* border: 1px solid orange; */
       height: 100px;
       margin: auto;
       display: flex;
@@ -1130,21 +1092,16 @@ const InfoBox = styled.div`
     }
     .typeTitleM {
       width: 35px;
-      /* border: 1px solid green; */
       padding: 30px;
     }
     .mobileLove {
-      /* width: 75px; */
-      /* border: 1px solid red; */
       padding-bottom: 100px;
     }
     .typeTitle {
       width: 50px;
-      /* border: 1px solid green; */
     }
     .titleType {
       width: 50px;
-      /* border: 1px solid yellow; */
       margin-bottom: 40px;
     }
   }
@@ -1169,8 +1126,6 @@ const LoveRadio2 = styled.div`
   flex-direction: row;
   /* border: 1px solid red; */
   width: 220px;
-  /* height: 18px; */
-  /* background: pink; */
 `;
 const RadioWrap = styled.div`
   @media ${({ theme }) => theme.device.web} {
@@ -1179,18 +1134,18 @@ const RadioWrap = styled.div`
     margin-left: 13px;
   }
   @media ${({ theme }) => theme.device.isMobile} {
-    /* background: pink; */
     margin-bottom: 50px;
   }
 `;
 
 const BoxInfo = styled.div`
-  width: 387px;
+  width: 374px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-item: center;
   height: 158px;
+  /* background: orange; */
 `;
 const TypeBox = styled.div`
   max-width: 504px;

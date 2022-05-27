@@ -271,7 +271,7 @@ function PostList(props) {
 const Background = styled.div`
   height: 2000px;
   @media ${({ theme }) => theme.device.isMobile} {
-    height: 2500px;
+    max-height: 2500px;
   }
 `;
 const PageBtn = styled.div`
@@ -287,7 +287,6 @@ const InfoWrapper = styled.div`
   max-width: 902.67px;
   width: 100%
   height: 150px;
-  /* border: 1px solid red; */
   align-items: center;
  
 `;
@@ -295,13 +294,11 @@ const InfoContainer = styled.div`
   max-width: 400px;
   width: 100%;
   height: 150px;
-  /* border: 1px solid red; */
   @media ${({ theme }) => theme.device.isMobile} {
     box-sizing: border-box;
     padding-top: 20px;
     padding-left: 20px;
     margin: auto;
-    /* border: 1px solid red; */
     height: 190px;
   }
 `;
@@ -309,7 +306,6 @@ const InfoBox = styled.div`
   width: 416.67px;
   height: 312.5px;
   box-sizing: border-box;
-  /* border: 1px solid red; */
   padding-bottom: 30px;
   @media ${({ theme }) => theme.device.isMobile} {
     display: none;
@@ -318,11 +314,9 @@ const InfoBox = styled.div`
 const VoteWrapper = styled.div`
   max-width: 1032px;
   width: 100%;
-  height: 408px;
   margin: 155px auto 200px;
   cursor: pointer;
   text-align: left;
-  /* background: pink; */
 `;
 const MoreVote = styled.span`
   color: #948a9e;
@@ -338,12 +332,10 @@ const BoardWrapper = styled.div`
   margin: auto;
   max-width: 1032px;
   height: 547px;
-  /* border: 1px solid green; */
 `;
 const TitleWrapper = styled.div`
   display: flex;
   max-width: 1032px;
-  /* background: pink; */
   justify-content: space-between;
   padding-top: 36px;
   @media ${({ theme }) => theme.device.isMobile} {
@@ -355,20 +347,15 @@ const CateGoryWrapper = styled.div`
   flex-direction: row;
   margin: auto;
   max-width: 818px;
-  /* height: 200px; */
-  /* background: yellow; */
   justify-content: space-around;
-  /* border: 1px solid black; */
   @media ${({ theme }) => theme.device.isMobile} {
     width: 300px;
     height: 180px;
-    /* background: yellow; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     .mobile {
-      /* border: 1px solid red; */
       display: flex;
       flex-direction: row;
       gap: 30px;
@@ -381,7 +368,6 @@ const CateGoryWrapper = styled.div`
       display: flex;
       width: 390px;
       flex-direction: row;
-      /* border: 1px solid blue; */
       justify-content: space-around;
       align-items: center;
     }
@@ -402,7 +388,6 @@ const CategoryBtn = styled.div`
   flex-grow: 0;
   cursor: pointer;
   @media ${({ theme }) => theme.device.isMobile} {
-    /* border: 1px solid black; */
   }
 `;
 const AllBtn = styled.div`
@@ -411,12 +396,6 @@ const AllBtn = styled.div`
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   width: 76px;
   height: 76px;
-  /* border: 1px solid black; */
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid red;  */
   margin-bottom: 50px;
   padding: 18px;
   box-sizing: border-box;
@@ -449,7 +428,6 @@ const InfoItem = styled.div`
   box-sizing: border-box;
 `;
 const BtnWrapper = styled.div`
-  /* border: 1px solid red; */
   justify-content: right;
   padding-top: 14px;
   display: flex;
@@ -463,7 +441,6 @@ const BtnContainer = styled.div`
   gap: 10px;
   width: 290px;
   height: 40px;
-  /* background-color: orange; */
   @media ${({ theme }) => theme.device.isMobile} {
     display: none;
   }
@@ -474,7 +451,6 @@ const MBtnWrapper = styled.div`
     display: none;
   }
   @media ${({ theme }) => theme.device.isMobile} {
-    /* border: 1px solid red; */
     max-width: 390px;
     width: 100%;
     margin: auto;
@@ -483,9 +459,6 @@ const MBtnWrapper = styled.div`
     display: flex;
     padding-left: 20px;
     box-sizing: border-box;
-    /* padding-left: 15px; */
-    /* padding-top: 45px; */
-    /* border: 1px solid red; */
   }
 `;
 const MBtnContainer = styled.div`
@@ -497,10 +470,6 @@ const MBtnContainer = styled.div`
     flex-direction: row;
     gap: 10px;
     width: 290px;
-    /* height: 40px; */
-    /* padding-left: 10px; */
-    /* padding-bottom: 50px; */
-    /* background-color: orange; */
   }
 `;
 export default PostList;
