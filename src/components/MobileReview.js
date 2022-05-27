@@ -32,12 +32,12 @@ function MobileReview() {
   return (
     <React.Fragment>
       <Background>
+        <LineBox>
+          <Text title color="#2E2A32" margin="0px 15px">
+            상담후기
+          </Text>
+        </LineBox>
         <ReviewWrapper>
-          <LineBox>
-            <Text title color="#2E2A32" margin="0px 15px">
-              상담후기
-            </Text>
-          </LineBox>
           <Slider {...settings}>
             {reviewList.map((review, idx) => {
               return <ReviewCard key={idx} reviewInfo={review} />;
@@ -62,11 +62,12 @@ export default MobileReview;
 const Background = styled.div`
   display: none;
   padding-top: 60px;
-  min-width: 750px;
+  width: 100%;
   height: 100vh;
   overflow: hidden;
   @media ${({ theme }) => theme.device.mobile} {
     display: flex;
+    flex-direction: column;
   }
 `;
 
@@ -92,6 +93,7 @@ const LineBox = styled.div`
   margin-left: 10px;
   @media ${({ theme }) => theme.device.mobile} {
     display: flex;
-    width: 780px;
+    box-sizing: border-box;
+    width: 330px;
   }
 `;

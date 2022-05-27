@@ -75,7 +75,7 @@ function MainRanking() {
                 소개합니다.
               </Text>
             </LineBox>
-            <LineBox>
+            <RankingBox>
               {rankingList.map((rank, idx) => {
                 return <RankingCard key={idx} rankInfo={rank} />;
               })}
@@ -84,7 +84,7 @@ function MainRanking() {
               <RankingCard />
               <RankingCard />
               <RankingCard /> */}
-            </LineBox>
+            </RankingBox>
           </RankingContainer>
           <MobileRanking />
         </RankingWrapper>
@@ -108,6 +108,7 @@ const RankingWrapper = styled.div`
   height: 600px;
   margin: 0px auto;
   @media ${({ theme }) => theme.device.mobile} {
+    width: 360px;
     height: 640px;
     padding: 0px 20px;
   }
@@ -149,9 +150,16 @@ const LineBox = styled.div`
   display: flex;
   justify-content: flex-start;
   @media ${({ theme }) => theme.device.mobile} {
+    width: 100%;
+    box-sizing: border-box;
     word-break: keep-all;
-    width: 360px;
+    margin-left: 0px;
   }
+`;
+
+const RankingBox = styled.div`
+  width: 360px;
+  overflow: hidden;
 `;
 
 const InfoBox = styled.div`
@@ -183,6 +191,7 @@ const MobileLetterBox = styled.div`
   align-items: flex-start;
   height: 90px;
   width: 100%;
+  margin-left: 20px;
   @media ${({ theme }) => theme.device.mobile} {
     word-break: keep-all;
     display: flex;

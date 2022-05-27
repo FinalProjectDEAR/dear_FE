@@ -27,8 +27,8 @@ function Intro() {
           <Image src={info4} />
           <Image src={info5} />
         </ContentBox>
+        <MobileIntro />
       </Wrapper>
-      <MobileIntro />
     </React.Fragment>
   );
 }
@@ -41,7 +41,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   @media ${({ theme }) => theme.device.mobile} {
-    display: none;
+    width: 360px;
   }
 `;
 
@@ -51,6 +51,9 @@ const ContentBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media ${({ theme }) => theme.device.mobile} {
+    display: none;
+  }
 `;
 
 const Image = styled.div`

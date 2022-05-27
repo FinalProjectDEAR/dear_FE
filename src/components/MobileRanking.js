@@ -67,7 +67,8 @@ function MobileRanking() {
 export default MobileRanking;
 
 const RankingWrapper = styled.div`
-  width: 360px;
+  box-sizing: border-box;
+  width: 340px;
   height: 300px;
   display: none;
   overflow: hidden;
@@ -83,7 +84,7 @@ const RankingContainer = styled.div`
 `;
 
 const TitleBox = styled.div`
-  width: 100%;
+  width: 330px;
   display: flex;
   justify-content: flex-start;
 `;
