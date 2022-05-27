@@ -41,6 +41,7 @@
     "redux-thunk": "^2.4.1",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.5",
+    "sweetalert2": "^11.4.17",
     "swiper": "^8.1.4",
     "time-counting": "^2.0.2",
     "validator": "^13.7.0",
