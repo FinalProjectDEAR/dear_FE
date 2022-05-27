@@ -66,8 +66,6 @@ function ResChatStart() {
       imgUrlList.push(previewUrl);
     }
 
-    console.log(imgUrlList);
-
     //이미지 용량 제한
     const imageSize = imgList.size; //이미지용량
     const maxSize = 5 * 1024 * 1024; //5MB
@@ -90,7 +88,6 @@ function ResChatStart() {
       }
     }
 
-    console.log("이미지 파일", imageFiles);
     setImgFile(imageFiles);
 
     dispatch(imageActions.uploadImage(imageFiles));

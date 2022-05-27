@@ -30,71 +30,62 @@ const getTapeDB = () => {
   return async function (dispatch, getState, { history }) {
     try {
       const { data } = await apis.getTape();
-      console.log("테이프갯수", data.data.reward);
       dispatch(getTape(data.data.reward));
     } catch (err) {
-      console.log("테이프 가져오기 실패", err);
+      console.log(err);
     }
   };
 };
 
 const getRankingDB = () => {
   return async function (dispatch, getState, { history }) {
-    console.log("겟랭킹 통신");
     try {
       const { data } = await axios.get(
         process.env.REACT_APP_URL + "/main/ranking/member"
       );
 
-      console.log("랭킹정보", data.data);
       dispatch(getRanking(data.data));
     } catch (err) {
-      console.log("랭킹데이터 가져오기 실패", err);
+      console.log(err);
     }
   };
 };
 
 const getHotVoteDB = () => {
   return async function (dispatch, getState, { history }) {
-    console.log("인기투표 통신");
     try {
       const { data } = await axios.get(
         process.env.REACT_APP_URL + "/main/ranking/voteBoard"
       );
-      console.log("인기투표", data.data);
       dispatch(getHotVote(data.data));
     } catch (err) {
-      console.log("인기 투표글 가져오기 실패", err);
+      console.log(err);
     }
   };
 };
 
 const getHotBoardDB = () => {
   return async function (dispatch, getState, { history }) {
-    console.log("인기게시글 통신");
     try {
       const { data } = await axios.get(
         process.env.REACT_APP_URL + "/main/ranking/board"
       );
-      console.log("인기게시글", data);
       dispatch(getHotBoard(data.data));
     } catch (err) {
-      console.log("인기 게시글 가져오기 실패", err);
+      console.log(err);
     }
   };
 };
 
 const getReviewDB = () => {
   return async function (dispatch, getState, { history }) {
-    console.log("겟리뷰 통신");
     try {
       const { data } = await axios.get(
         process.env.REACT_APP_URL + "/main/serviceComment"
       );
-      console.log("서비스후기", data);
       dispatch(getReview(data.data));
     } catch (err) {
-      console.log("서비스 후기 가져오기 실패", err);
+      console.log(err);
     }
   };
 };
@@ -103,12 +94,10 @@ export default handleActions(
   {
     [GET_RANKING]: (state, action) =>
       produce(state, (draft) => {
-        console.log("리듀서 랭킹:", action.payload);
         draft.rankingList = action.payload;
       }),
     [GET_HOT_VOTE]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
         draft.hotVoteList = action.payload;
       }),
     [GET_HOT_BOARD]: (state, action) =>

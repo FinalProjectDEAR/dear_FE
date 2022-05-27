@@ -71,16 +71,13 @@ function AudioChat() {
   // 채팅중 실시간 시그널
 
   const sendCloseSignal = () => {
-    console.log("종료 시그널 보내", connectObj);
     session
       .signal({
         data: "true", // Any string (optional)
         to: [connectObj], // Array of Connection objects (optional. Broadcast to everyone if empty)
         type: "close", // The type of message (optional)
       })
-      .then(() => {
-        console.log("채팅종료한대");
-      })
+      .then(() => {})
       .catch((error) => {
         console.error(error);
       });
@@ -103,25 +100,20 @@ function AudioChat() {
         to: [connectObj], // Array of Connection objects (optional. Broadcast to everyone if empty)
         type: "continue", // The type of message (optional)
       })
-      .then(() => {
-        console.log("연장하구싶대", wantMore);
-      })
+      .then(() => {})
       .catch((error) => {
         console.error(error);
       });
   };
 
   const sendConnectSignal = () => {
-    console.log("커넥트 시그널 보내:", connectObj);
     session
       .signal({
         data: "true", // Any string (optional)
         to: [connectObj], // Array of Connection objects (optional. Broadcast to everyone if empty)
         type: "connect", // The type of message (optional)
       })
-      .then(() => {
-        console.log("채팅연결했대");
-      })
+      .then(() => {})
       .catch((error) => {
         console.error(error);
       });
@@ -132,14 +124,12 @@ function AudioChat() {
     window.addEventListener("beforeunload", onbeforeunload);
 
     const connectSession = () => {
-      console.log("커넥트 세션시작");
       const OV = new OpenVidu();
 
       var mySession = OV.initSession();
       setSession(mySession);
 
       mySession.on("streamCreated", (event) => {
-        console.log("스트림생성");
         var subscriber = mySession.subscribe(event.stream, undefined);
         var subscriberList = subscribers;
         subscriberList.push(subscriber);
@@ -157,7 +147,6 @@ function AudioChat() {
       });
 
       mySession.on("signal:connect", (event) => {
-        console.log("커넥션 메세지 수신");
         // const fiveSecWait = () => {};
         // setTimeout(fiveSecWait(), 5000);
         // dispatch(chatActions.getChatInfoDB(sessionId));
@@ -165,11 +154,9 @@ function AudioChat() {
 
       mySession.on("signal:close", (event) => {
         setOtherClose(true);
-        console.log("종료 수신", event.data);
       });
 
       mySession.on("signal:continue", (event) => {
-        console.log("연장 수신", wantMore);
         const wantMoreList = wantMore.agree;
         wantMoreList.push("true");
         setWantMore({ ...wantMore, agree: wantMoreList });
@@ -183,13 +170,11 @@ function AudioChat() {
       //메세지 송신을 위한 connect Obj 생성
       mySession.on("connectionCreated", (event) => {
         setConnectObj(event.connection);
-        console.log("커넥션 생성", event.connection);
       });
 
       mySession
         .connect(token, { clientData: nickname })
         .then(async () => {
-          console.log("토큰으로 커넥트");
           var devices = await OV.getDevices();
           var videoDevices = devices.filter(
             (device) => device.kind === "videoinput"
@@ -211,7 +196,7 @@ function AudioChat() {
           setPublisher(publisher);
         })
         .catch((err) => {
-          console.log("커넥팅 실패", err.code, err.message);
+          console.log(err.code, err.message);
         });
     };
 
@@ -224,8 +209,6 @@ function AudioChat() {
 
   //세션,커넥션 종료
   const leaveSession = () => {
-    console.log("오픈비두 세션종료");
-
     session.disconnect();
 
     setSession(undefined);
@@ -237,7 +220,6 @@ function AudioChat() {
   //매칭 안될 때
   React.useEffect(() => {
     if (!isConnect) {
-      console.log("30초 카운트");
       setTimeout(waitTimeOut, 30000);
     }
   }, []);
@@ -259,13 +241,10 @@ function AudioChat() {
 
   //서버에 종료 알리기
   const informClose = () => {
-    console.log("채팅방종료 서버통신");
     const closeTime = new Date();
     if (isConnect) {
-      console.log("채팅시 종료");
       dispatch(chatActions.closeChatDB(sessionId, dateFormat(closeTime)));
     } else {
-      console.log("혼자 종료");
       dispatch(chatActions.disConnectDB(sessionId));
     }
   };

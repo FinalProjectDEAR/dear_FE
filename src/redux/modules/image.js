@@ -31,8 +31,6 @@ export default handleActions(
   {
     [UPLOAD_IMAGE]: (state, action) =>
       produce(state, (draft) => {
-        console.log("이미지 정보 리덕스에 넣음", action.payload);
-
         if (action.payload.where === "left") {
           draft.preview[0] = action.payload.preview;
           draft.imageLeft = action.payload.imageFiles;
@@ -47,7 +45,6 @@ export default handleActions(
       }),
     [DEL_IMAGE]: (state, action) =>
       produce(state, (draft) => {
-        console.log("삭제한거 idx", action.payload);
         draft.fileList = draft.fileList.filter(
           (i, idx) => idx !== action.payload.idx
         );

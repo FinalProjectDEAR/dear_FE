@@ -20,7 +20,6 @@ function AudioRoom(props) {
   const sessionId = params.sessionId;
 
   const chatInfo = useSelector((state) => state.chat.chatInfo);
-  console.log("url", chatInfo.imgUrl);
   React.useEffect(() => {
     dispatch(chatActions.getChatInfoDB(sessionId));
   }, []);

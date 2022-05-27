@@ -14,7 +14,6 @@ import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
 
 function VoteResult(props) {
   const voteResult = useSelector((state) => state.vote.voteResult);
-  console.log("결과페이지 정보", voteResult);
 
   const leftScore = voteResult.vote[0].selectionList.length;
   const rightScore = voteResult.vote[1].selectionList.length;

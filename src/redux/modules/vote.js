@@ -128,11 +128,9 @@ const getVoteDB = (type) => {
 };
 
 const detailVoteDB = (postId) => {
-  console.log("상세정보DB 통신 진입");
   return async function (dispatch, getState, { history }) {
     try {
       const { data } = await apis.detailVote(postId);
-      console.log(data);
       dispatch(detailVote(data.data));
     } catch (err) {
       Swal.fire("투표정보 불러오기 실패, 다시 시도해주세요.");
@@ -152,7 +150,6 @@ const addVoteDB = (
   imageRight
 ) => {
   return async function (dispatch, getState, { history }) {
-    console.log("투표작성 통신시작");
     try {
       console.log(title, contents, vote1, vote2, imageLeft, imageRight);
       const formData = new FormData();
@@ -171,11 +168,10 @@ const addVoteDB = (
       }
 
       const { data } = await apis.addVote(formData);
-      console.log(data);
       //   dispatch(getVoteDB());
       history.replace("/postList/전체");
     } catch (err) {
-      console.log(err, "업로드에 실패하였습니다.");
+      console.log(err);
       Swal.fire("업로드에 실패하였습니다.");
     }
   };
@@ -183,10 +179,8 @@ const addVoteDB = (
 
 const putVoteDB = (postId, leftSelected) => {
   return async function (dispatch, getState, { history }) {
-    console.log(postId, leftSelected);
     try {
       const { data } = await apis.putVote(postId, leftSelected);
-      console.log("투표결과", data.data);
       dispatch(getResult(data.data));
     } catch (err) {
       console.log(err);
@@ -197,12 +191,9 @@ const putVoteDB = (postId, leftSelected) => {
 
 const delVoteDB = (postId) => {
   return async function (dispatch, getState, { history }) {
-    console.log("투표삭제 DB통신");
     try {
       const { data } = await apis.delVote(postId);
-      console.log(data);
       const voteList = getState().vote.voteList;
-      console.log(voteList);
 
       dispatch(delVote(postId));
       history.push("/postList/전체");
@@ -222,12 +213,10 @@ export default handleActions(
       }),
     [DETAIL_VOTE]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
         draft.voteInfo = action.payload;
       }),
     [GET_RESULT]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
         draft.voteResult = action.payload;
       }),
     [DEL_VOTE]: (state, action) =>

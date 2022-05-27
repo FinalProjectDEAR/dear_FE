@@ -21,7 +21,6 @@ function MainRanking() {
   }, []);
 
   const rankingList = useSelector((state) => state.main.rankingList);
-  console.log("랭킹리스트", rankingList);
 
   return (
     <React.Fragment>

@@ -26,10 +26,8 @@ function MainHotPost() {
 
   const hotVoteList = useSelector((state) => state.main.hotVoteList);
   const topVote = hotVoteList.slice(0, 3);
-  console.log(topVote);
   const hotBoardList = useSelector((state) => state.main.hotBoardList);
   const topBoard = hotBoardList.slice(0, 4);
-  console.log(topBoard);
 
   return (
     <React.Fragment>

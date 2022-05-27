@@ -55,10 +55,8 @@ function VoteWrite() {
 
   const selectFile = (where) => {
     const reader = new FileReader();
-    console.log(where);
     if (where === "left") {
       const file = imageLeft.current.files[0];
-      console.log("이미지 파일형태 확인", file);
       reader.readAsDataURL(file);
       reader.onloadend = () => {
         setLeftPreview(reader.result);
@@ -66,7 +64,6 @@ function VoteWrite() {
       };
     } else {
       const file = imageRight.current.files[0];
-      console.log("이미지 파일형태 확인", file);
       reader.readAsDataURL(file);
       reader.onloadend = () => {
         setRightPreview(reader.result);

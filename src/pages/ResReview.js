@@ -15,7 +15,6 @@ import { actionCreators } from "../redux/modules/review";
 function ResReview(props) {
   const dispatch = useDispatch();
   const reqMemberId = useSelector((state) => state.chat.chatInfo.reqMemberId);
-  console.log("고민러 아이디", reqMemberId);
 
   const [serviceComment, setServiceComment] = React.useState(null);
   const [goodClick, setGoodClick] = React.useState(false);
@@ -51,7 +50,6 @@ function ResReview(props) {
     }
   };
   //Object.values()객체의 value값만 뽑아내기
-  // console.log("굿", Object.values(goodResTag));
   const SelectBadTag = (e) => {
     const { value, name } = e.target;
     if (e.target.checked) {
@@ -60,19 +58,12 @@ function ResReview(props) {
       setBadResTag({ ...badResTag, [name]: Boolean(!value) });
     }
   };
-  // console.log("배드", Object.values(badResTag));
   //리스너 고정값
   const requestReview = false;
   //리스너 후기 추가하기
   const finish = () => {
     let tagLike = "";
     if (goodClick === true) {
-      console.log(
-        "굿클릭",
-        requestReview,
-        Object.values(goodResTag),
-        serviceComment
-      );
       if (goodResTag === "") {
         Swal.fire("이유를 선택 해주세요!");
         return;
@@ -91,12 +82,6 @@ function ResReview(props) {
     }
 
     if (badClick === true) {
-      console.log(
-        "배드클릭",
-        requestReview,
-        Object.values(badResTag),
-        serviceComment
-      );
       tagLike = false;
       dispatch(
         actionCreators.addReviewResDB(

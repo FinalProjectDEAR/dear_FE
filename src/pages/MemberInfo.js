@@ -55,6 +55,7 @@ function MemberInfo() {
   const next = () => {
     if (isCheck === false) {
       Swal.fire("닉네임 중복확인을 해주세요!");
+      return;
     }
 
     if (nickname === "" || isSelected === "#fff") {

@@ -35,7 +35,6 @@ function TimeOver(props) {
               size="narrow"
               margin="0px 8px"
               _onClick={() => {
-                console.log("버튼눌렀어");
                 setView(false);
                 setReview(true);
                 leaveSession();

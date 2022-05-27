@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 const KakaoAuthHandle = (props) => {
   const dispatch = useDispatch();
   let code = new URL(window.location.href).searchParams.get("code");
+
   useEffect(() => {
     dispatch(userActions.kakaoLogin(code));
   }, []);
