@@ -31,6 +31,7 @@ function FixedBtn(props) {
   const [open, setOpen] = React.useState(false);
   const user_id = useSelector((state) => state.user.user);
   const isLogin = localStorage.getItem("isLogin");
+
   //알람 버튼 눌렀을 때 가져오기
   const notiCheck = () => {
     if (isLogin !== "true") {
@@ -68,7 +69,11 @@ function FixedBtn(props) {
           </Up>
         </Link>
 
-        <Desc>
+        <Desc
+          onClick={() => {
+            history.push("/intro");
+          }}
+        >
           <FontBox>
             <Font>서비스소개</Font>
           </FontBox>
