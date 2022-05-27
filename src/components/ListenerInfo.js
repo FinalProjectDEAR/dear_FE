@@ -4,8 +4,8 @@ import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
 import { CgClose } from "react-icons/cg";
 
-import listenerWeb from "../assets/infoModal/listener.png";
-import listenerMobile from "../assets/infoModal/listenerMobile.png";
+import { ReactComponent as WebListener } from "../assets/infoModal/listenerWeb.svg";
+import { ReactComponent as MobileListener } from "../assets/infoModal/listenerMobile.svg";
 
 function ListenerInfo({ close }) {
   const Mobile = useMediaQuery({
@@ -26,7 +26,7 @@ function ListenerInfo({ close }) {
             cursor: "pointer",
           }}
         />
-        {Mobile ? <Image src={listenerMobile} /> : <Image src={listenerWeb} />}
+        {Mobile ? <MobileListener /> : <WebListener />}
       </Wrapper>
     </React.Fragment>
   );

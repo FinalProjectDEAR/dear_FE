@@ -4,8 +4,8 @@ import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
 import { CgClose } from "react-icons/cg";
 
-import loveWeb from "../assets/infoModal/love.png";
-import loveMobile from "../assets/infoModal/loveMobile.png";
+import { ReactComponent as WebLove } from "../assets/infoModal/loveWeb.svg";
+import { ReactComponent as MobileLove } from "../assets/infoModal/loveMobile.svg";
 
 function LoveInfo({ close }) {
   const Mobile = useMediaQuery({
@@ -26,7 +26,7 @@ function LoveInfo({ close }) {
             cursor: "pointer",
           }}
         />
-        {Mobile ? <Image src={loveMobile} /> : <Image src={loveWeb} />}
+        {Mobile ? <MobileLove /> : <WebLove />}
       </Wrapper>
     </React.Fragment>
   );
