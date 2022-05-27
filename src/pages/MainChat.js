@@ -2,6 +2,7 @@ import React from "react";
 import { Text, TextB, Modal } from "../elements";
 import styled from "styled-components";
 import Swal from "sweetalert2";
+import "../styles/libraryStyle/style.css";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 

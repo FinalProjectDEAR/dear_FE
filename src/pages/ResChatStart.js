@@ -7,6 +7,7 @@ import { actionCreators as chatActions } from "../redux/modules/chat";
 
 import styled from "styled-components";
 import Swal from "sweetalert2";
+import "../styles/libraryStyle/style.css";
 import arrowBack from "../assets/arrow_back.png";
 
 function ResChatStart() {

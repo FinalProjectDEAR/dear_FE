@@ -4,6 +4,7 @@ import { produce } from "immer";
 import { apis } from "../../shared/apis";
 import jwtDecode from "jwt-decode";
 import Swal from "sweetalert2";
+import "../../styles/libraryStyle/style.css";
 
 // actions
 const LOG_OUT = "LOG_OUT";
@@ -131,7 +132,7 @@ const kakaoLogin = (code) => {
       }
     } catch (err) {
       console.log("소셜로그인 에러", err);
-      Swal.fire("카카오로그인에 실패하였습니다. 다시 시도해주세요.");
+      Swal.fire({ text: "다시 시도해주세요." });
       history.replace("/");
     }
   };

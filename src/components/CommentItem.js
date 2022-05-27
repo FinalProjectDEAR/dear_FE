@@ -3,6 +3,7 @@ import { Text, Input, Modal } from "../elements";
 import { ReactComponent as Like } from "../assets/comment-select.svg";
 import styled from "styled-components";
 import Swal from "sweetalert2";
+import "../styles/libraryStyle/style.css";
 
 //시간알려주는패키지
 import TimeCounting from "time-counting";

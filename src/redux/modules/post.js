@@ -4,6 +4,7 @@ import axios from "axios";
 import { imgActions } from "./imagePost";
 import { apis, api } from "../../shared/apis";
 import Swal from "sweetalert2";
+import "../../styles/libraryStyle/style.css";
 
 // 액션
 const GET_POST = "GET_POST";

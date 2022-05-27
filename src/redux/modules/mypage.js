@@ -101,6 +101,7 @@ const addInfoDB = (memberInfo) => {
           lovePeriod: memberInfo.lovePeriod,
           loveType: memberInfo.loveType,
           nickname: memberInfo.nickname,
+          gender: memberInfo.gender,
         })
         .then((res) => {
           // console.log("멤버 인포수정하기:", res.data.data);

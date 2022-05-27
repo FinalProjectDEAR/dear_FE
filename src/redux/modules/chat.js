@@ -4,6 +4,7 @@ import { actionCreators as imageActions } from "./image";
 
 import { apis } from "../../shared/apis";
 import Swal from "sweetalert2";
+import "../../styles/libraryStyle/style.css";
 
 // actions
 const SET_ROOM_AUTH = "SET_ROOM_AUTH";

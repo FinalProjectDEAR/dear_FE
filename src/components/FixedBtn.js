@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 //id값으로 스크롤
 import { Link } from "react-scroll";
 import Swal from "sweetalert2";
+import "../styles/libraryStyle/style.css";
 
 import styled from "styled-components";
 import MobileFixedBtn from "./MobileFixedBtn";
@@ -52,7 +53,7 @@ function FixedBtn(props) {
       history.push("/");
       return;
     }
-    history.push("/myPage");
+    history.replace("/myPage");
   };
 
   return (
@@ -76,7 +77,7 @@ function FixedBtn(props) {
         </Desc>
         <Board
           onClick={() => {
-            history.push("/postList/전체");
+            history.replace("/postList/전체");
           }}
         >
           <FontBox>

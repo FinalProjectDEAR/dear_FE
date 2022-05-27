@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Button, Input } from "../elements";
 import Swal from "sweetalert2";
+import "../styles/libraryStyle/style.css";
 //리덕스관련
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";

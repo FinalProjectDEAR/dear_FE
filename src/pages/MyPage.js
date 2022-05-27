@@ -9,6 +9,7 @@ import { Modal } from "../elements/index";
 import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
 import Swal from "sweetalert2";
+import "../styles/libraryStyle/style.css";
 //페이지관련
 import Layout from "../components/Layout";
 import MessageList from "./MessageList";
@@ -68,7 +69,7 @@ const MyPage = () => {
     dispatch(actionCreators.getInfoDB());
   }, []);
   const userInfo = useSelector((state) => state.mypage.user.user);
-  console.log("멤버인포레스태그", userInfo?.resTag1);
+  // console.log("멤버인포레스태그", userInfo?.resTag1);
   //페이지별 게시글 전체 조회
   React.useEffect(() => {
     dispatch(actionCreators.getPostListDB(page));

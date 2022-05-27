@@ -5,6 +5,7 @@ import { ReactComponent as CommentNum } from "../assets/postList/post.svg";
 import { ReactComponent as LikeUp } from "../assets/postList/postUp.svg";
 import styled from "styled-components";
 import Swal from "sweetalert2";
+import "../styles/libraryStyle/style.css";
 import { Text, Button, Modal } from "../elements/index";
 //시간알려주는패키지
 import TimeCounting from "time-counting";
