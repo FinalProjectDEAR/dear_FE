@@ -15,6 +15,7 @@ import MobileRanking from "../components/MobileRanking";
 
 function MainRanking() {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   React.useEffect(() => {
     dispatch(mainActions.getRankingDB());
@@ -57,7 +58,15 @@ function MainRanking() {
               </ImageBox>
             </InfoBox>
             <LineBox>
-              <Text sub2 deco="underLine" color="#948A9E" cursor="pointer">
+              <Text
+                sub2
+                deco="underLine"
+                color="#948A9E"
+                cursor="pointer"
+                _onClick={() => {
+                  history.push("/intro");
+                }}
+              >
                 서비스 소개 더보기 {">"}
               </Text>
             </LineBox>
