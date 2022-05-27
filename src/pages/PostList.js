@@ -376,7 +376,7 @@ const CateGoryWrapper = styled.div`
       display: flex;
       width: 390px;
       flex-direction: row;
-      border: 1px solid blue;
+      /* border: 1px solid blue; */
       justify-content: space-around;
       align-items: center;
     }
