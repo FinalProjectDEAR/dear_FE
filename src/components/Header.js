@@ -42,7 +42,11 @@ const Header = (props) => {
             </LogoBox>
 
             <ButtonBox>
-              <HeaderBtn>
+              <HeaderBtn
+                onClick={() => {
+                  history.push("/intro");
+                }}
+              >
                 <Text sub7 cursor="pointer">
                   서비스 소개
                 </Text>

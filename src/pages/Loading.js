@@ -29,7 +29,7 @@ const LoaderWrapper = styled.div`
   width: 100%;
   height: 100%;
   z-index: 100;
-  background: #777e90;
+  background: #bb9ed8;
 `;
 
 const Loader = styled.div`

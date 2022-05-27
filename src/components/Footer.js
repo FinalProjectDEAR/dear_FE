@@ -31,7 +31,7 @@ const Footer = () => {
         </FooterBox>
       </FooterWrapper>
       <MobileFooter>
-        {isLogin ? (
+        {isLogin === "true" ? (
           <FooterBtn>
             <Text
               sub

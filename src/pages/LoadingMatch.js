@@ -86,7 +86,7 @@ const Background = styled.div`
   justify-content: center;
   align-items: center;
 
-  background: #777e90;
+  background: #bb9ed8;
 `;
 
 const LoadWrapper = styled.div`
