@@ -13,6 +13,7 @@ import Footer from "../components/Footer";
 import Survey from "../components/Survey";
 
 import Swal from "sweetalert2";
+import "../styles/libraryStyle/style.css";
 
 const Login = () => {
   const [open, setOpen] = React.useState(true);

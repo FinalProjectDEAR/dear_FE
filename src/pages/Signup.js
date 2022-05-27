@@ -8,6 +8,7 @@ import { memberIdCheck, pwdCheck } from "../shared/Check";
 
 import styled from "styled-components";
 import Swal from "sweetalert2";
+import "../styles/libraryStyle/style.css";
 import logo from "../assets/main/logoS.png";
 import Footer from "../components/Footer";
 

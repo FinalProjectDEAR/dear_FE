@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 import { BiX } from "react-icons/bi";
 import Swal from "sweetalert2";
+import "../styles/libraryStyle/style.css";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";

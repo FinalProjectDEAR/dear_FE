@@ -2,6 +2,7 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { api } from "../../shared/apis";
 import Swal from "sweetalert2";
+import "../../styles/libraryStyle/style.css";
 
 //액션
 const GET_MESSAGE = "message/GET_MESSAGE";

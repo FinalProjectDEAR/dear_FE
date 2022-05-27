@@ -4,6 +4,7 @@ import { produce } from "immer";
 import { apis } from "../../shared/apis";
 import jwtDecode from "jwt-decode";
 import Swal from "sweetalert2";
+import "../../styles/libraryStyle/style.css";
 
 // actions
 const LOG_OUT = "LOG_OUT";

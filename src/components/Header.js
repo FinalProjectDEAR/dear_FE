@@ -6,6 +6,7 @@ import { Text } from "../elements";
 
 import logo from "../assets/main/logoS.png";
 import Swal from "sweetalert2";
+import "../styles/libraryStyle/style.css";
 
 const Header = (props) => {
   const isLogin = localStorage.getItem("isLogin");
