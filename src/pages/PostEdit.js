@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Text, Button, Input } from "../elements/index";
 import { ReactComponent as ImageUPload } from "../assets/파일첨부.svg";
+import { BiX } from "react-icons/bi";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
