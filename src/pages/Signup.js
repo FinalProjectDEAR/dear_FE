@@ -62,7 +62,7 @@ const Signup = () => {
             <Logo
               src={logo}
               onClick={() => {
-                history.push("/");
+                history.push("/login");
               }}
             />
           </LogoBox>
@@ -176,7 +176,7 @@ const Signup = () => {
                 deco="underLine"
                 cursor="pointer"
                 _onClick={() => {
-                  history.push("/");
+                  history.push("/login");
                 }}
               >
                 로그인
@@ -190,7 +190,7 @@ const Signup = () => {
               sub
               color="#666666"
               _onClick={() => {
-                history.push("/");
+                history.push("/login");
               }}
             >
               로그인

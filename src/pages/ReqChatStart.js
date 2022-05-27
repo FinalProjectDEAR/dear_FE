@@ -54,7 +54,7 @@ function ResChatStart() {
   const closeModal = () => {
     dispatch(imageActions.delData());
     setModalOpen(false);
-    history.push("/main");
+    history.push("/");
   };
 
   const selectFile = (e) => {

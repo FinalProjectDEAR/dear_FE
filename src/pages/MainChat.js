@@ -34,18 +34,18 @@ function MainChat() {
   };
 
   const tapeCount = useSelector((state) => state.main.tapeCount);
-  const isLogin = localStorage.getItem("isLogin");
+  const Token = localStorage.getItem("accessToken");
   const nickname = localStorage.getItem("nickname");
 
   const startReq = () => {
     if (checkBox !== true) {
       Swal.fire("이용약관에 동의해주세요.");
       return;
-    } else if (isLogin !== "true") {
+    } else if (!Token) {
       Swal.fire("로그인 후 이용해 주세요.");
-      history.replace("/");
+      history.replace("/login");
       return;
-    } else if (isLogin === "true" && nickname === null) {
+    } else if (Token && nickname === null) {
       Swal.fire("상담에 필요한 회원정보를 입력 후 이용해 주세요.");
 
       history.replace("/mypage");
@@ -59,10 +59,10 @@ function MainChat() {
     if (checkBox !== true) {
       Swal.fire("이용약관에 동의해주세요.");
       return;
-    } else if (isLogin !== "true") {
+    } else if (!Token) {
       Swal.fire("로그인 후 이용해 주세요.");
-      history.push("/");
-    } else if (isLogin === "true" && nickname === null) {
+      history.push("/login");
+    } else if (Token && nickname === null) {
       Swal.fire("상담에 필요한 회원정보를 입력 후 이용해 주세요.");
       history.replace("/mypage");
       return;

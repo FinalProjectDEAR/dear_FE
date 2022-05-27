@@ -17,10 +17,15 @@ function Main() {
     setCurrentPage(number);
   };
 
+  const beforePageChange = (number) => {
+    console.log(number);
+  };
+
   return (
     <React.Fragment>
       <ReactPageScroller
         pageOnChange={pageChange}
+        onBeforePageScroll={beforePageChange}
         customPageNumber={currentPage}
       >
         <MainChat />
@@ -50,7 +55,6 @@ const GoTop = styled.div`
   background-color: transparent;
   cursor: pointer;
   @media ${({ theme }) => theme.device.isMobile} {
-    bottom: 133px;
-    left: 85%;
+    bottom: 100px;
   }
 `;

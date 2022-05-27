@@ -201,4 +201,7 @@ const BottomBox = styled.div`
   align-items: center;
   width: 792px;
   height: 66px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 330px;
+  }
 `;

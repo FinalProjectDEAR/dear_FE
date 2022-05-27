@@ -39,7 +39,7 @@ function MemberInfo() {
 
   const closeModal = () => {
     setModalOpen(false);
-    history.push("/");
+    history.push("/login");
   };
 
   const dupCheck = (nickname) => {

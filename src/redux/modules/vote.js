@@ -151,7 +151,6 @@ const addVoteDB = (
 ) => {
   return async function (dispatch, getState, { history }) {
     try {
-      console.log(title, contents, vote1, vote2, imageLeft, imageRight);
       const formData = new FormData();
       if (imgVote === true) {
         formData.append("imgLeftFile", imageLeft);

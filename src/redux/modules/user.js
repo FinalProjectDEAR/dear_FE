@@ -33,7 +33,6 @@ const setNickMessage = createAction(SET_NICK_MSG, (msg) => msg);
 const initialState = {
   memberId: null,
   nickname: null,
-  isLogin: false,
   userInfo: null,
   followList: null,
   historyList: null,
@@ -50,7 +49,6 @@ const signupDB = (memberId, pwd, pwdCheck) => {
         password: pwd,
         passwordCheck: pwdCheck,
       };
-      console.log(userInfo);
       const { data } = await axios.post(
         process.env.REACT_APP_URL + "/user/signup",
         userInfo
@@ -58,10 +56,23 @@ const signupDB = (memberId, pwd, pwdCheck) => {
       Swal.fire("회원가입이 완료되었습니다.");
 
       // dispatch(setUser(userInfo));
-      history.replace("/");
+      history.replace("/login");
     } catch (err) {
       console.log(err);
       Swal.fire("회원가입이 실패했습니다. 다시 시도해주세요.");
+    }
+  };
+};
+
+const loginCheck = () => {
+  return function (dispatch, getState, { history }) {
+    const nickname = localStorage.getItem("nickname");
+    const memberId = localStorage.getItem("memberId");
+    const tokenCheck = localStorage.accessToken;
+    if (tokenCheck) {
+      dispatch(setUser(memberId, nickname));
+    } else {
+      dispatch(logOut());
     }
   };
 };
@@ -85,7 +96,7 @@ const loginDB = (memberId, pwd) => {
       localStorage.setItem("isLogin", true);
 
       if (tokenData.nick) {
-        history.replace("/main");
+        history.replace("/");
         const nickname = tokenData.nick;
         localStorage.setItem("nickname", nickname);
         dispatch(setUser(memberId, nickname));
@@ -119,14 +130,14 @@ const kakaoLogin = (code) => {
         localStorage.setItem("memberId", memberId);
         localStorage.setItem("nickname", nickname);
         dispatch(setUser(memberId, nickname));
-        history.replace("/main");
+        history.replace("/");
       } else {
         history.push("/info");
       }
     } catch (err) {
       console.log(err);
       Swal.fire("다시 시도해주세요.");
-      history.replace("/");
+      history.replace("/login");
     }
   };
 };
@@ -140,7 +151,7 @@ const memberInfoDB = (memberId, memberInfo) => {
       localStorage.setItem("memberId", memberId);
       localStorage.setItem("nickname", nickname);
       dispatch(setUser(memberId, nickname));
-      history.replace("/main");
+      history.replace("/");
     } catch (err) {
       console.log(err);
       Swal.fire("회원등록에 실패하였습니다. 다시 시도해주세요.");
@@ -170,18 +181,6 @@ const getUserInfoDB = () => {
   };
 };
 
-const logoutDB = (memberId) => {
-  return async function (dispatch, getState, { history }) {
-    try {
-      await apis.logout(memberId);
-      localStorage.removeItem("nickName");
-      localStorage.removeItem("memberId");
-      localStorage.removeItem("isLogin");
-    } catch (err) {
-      console.log(err);
-    }
-  };
-};
 const dupMemberIdDB = (memberId) => {
   return async function (dispatch, getState, { history }) {
     try {
@@ -248,12 +247,12 @@ export default handleActions(
 const actionCreators = {
   logOut,
   loginDB,
+  loginCheck,
   dupMemberIdDB,
   dupNicknameDB,
   memberInfoDB,
   getUserInfoDB,
   signupDB,
-  logoutDB,
   kakaoLogin,
 };
 

@@ -32,31 +32,32 @@ function PostList(props) {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const isLogin = localStorage.getItem("isLogin");
-
   //페이지
   const [page, setPage] = React.useState(1);
   const postList = useSelector((state) => state.post.post.content);
   const pageList = useSelector((state) => state.post.post);
   // console.log(postList);
 
+  const Token = localStorage.getItem("accessToken");
+
   const gotoVote = () => {
-    if (isLogin !== "true") {
+    if (!Token) {
       Swal.fire("로그인 후 이용해주세요.");
-      history.push("/");
-      return;
+      history.push("/login");
+    } else {
+      history.push("/voteWrite");
     }
-    history.push("/voteWrite");
   };
 
   const gotoPost = () => {
-    if (isLogin !== "true") {
+    if (!Token) {
       Swal.fire("로그인 후 이용해주세요.");
-      history.push("/");
-      return;
+      history.push("/login");
+    } else {
+      history.push("/postWrite");
     }
-    history.push("/postWrite");
   };
+
   //페이지별 게시글조회
   React.useEffect(() => {
     if (category === "전체") {

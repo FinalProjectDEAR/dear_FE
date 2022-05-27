@@ -4,13 +4,14 @@ import { Text } from "../elements";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
+import { useSelector, useDispatch } from "react-redux";
 
 const Footer = () => {
-  const isLogin = localStorage.getItem("isLogin");
+  const Token = localStorage.getItem("accessToken");
 
   const logout = () => {
     Swal.fire("로그아웃 되었습니다.");
-    history.push("/");
+    history.push("/login");
     localStorage.removeItem("accessToken");
     localStorage.removeItem("memberId");
     localStorage.removeItem("nickname");
@@ -55,7 +56,20 @@ const Footer = () => {
         </FooterBox>
       </FooterWrapper>
       <MobileFooter>
-        {isLogin === "true" ? (
+        {!Token ? (
+          <FooterBtn>
+            <Text
+              sub
+              margin="2px 6px"
+              color="#666666"
+              _onClick={() => {
+                history.push("/login");
+              }}
+            >
+              로그인
+            </Text>
+          </FooterBtn>
+        ) : (
           <FooterBtn>
             <Text
               sub
@@ -66,19 +80,6 @@ const Footer = () => {
               }}
             >
               로그아웃
-            </Text>
-          </FooterBtn>
-        ) : (
-          <FooterBtn>
-            <Text
-              sub
-              margin="2px 6px"
-              color="#666666"
-              _onClick={() => {
-                history.push("/");
-              }}
-            >
-              로그인
             </Text>
           </FooterBtn>
         )}
