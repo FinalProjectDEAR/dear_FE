@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Swal from "sweetalert2";
+import "../styles/libraryStyle/style.css";
 import { Button, Text, ColorBadge, Input } from "../elements";
 import { useMediaQuery } from "react-responsive";
 

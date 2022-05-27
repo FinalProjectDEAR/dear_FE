@@ -5,6 +5,7 @@ import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import arrowBack from "../assets/arrow_back.png";
 import Swal from "sweetalert2";
+import "../styles/libraryStyle/style.css";
 
 import { history } from "../redux/configureStore";
 import { useSelector, useDispatch } from "react-redux";

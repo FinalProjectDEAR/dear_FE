@@ -3,6 +3,7 @@ import { history } from "../redux/configureStore";
 import { Text } from "../elements";
 import styled from "styled-components";
 import Swal from "sweetalert2";
+import "../styles/libraryStyle/style.css";
 
 const Footer = () => {
   const isLogin = localStorage.getItem("isLogin");

@@ -3,6 +3,7 @@ import { produce } from "immer";
 import { api } from "../../shared/apis";
 import axios from "axios";
 import Swal from "sweetalert2";
+import "../../styles/libraryStyle/style.css";
 
 //액션
 const ADD = "comment/ADD";

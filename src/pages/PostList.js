@@ -11,6 +11,7 @@ import { ReactComponent as Solo } from "../assets/postList/board-cate3 (1).svg";
 import { ReactComponent as Etc } from "../assets/postList/board-cate8.svg";
 import { ReactComponent as Blogging } from "../assets/postList/blogging 1.svg";
 import Swal from "sweetalert2";
+import "../styles/libraryStyle/style.css";
 
 //리덕스관련
 import { useHistory, useParams } from "react-router-dom";

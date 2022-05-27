@@ -10,6 +10,7 @@ import TimeCounting from "time-counting";
 
 const Notification = () => {
   const alarmList = useSelector((state) => state.noti.noti);
+  const lastIdx = alarmList[alarmList.length - 1];
   //모달
   const [modalOpen, setModalOpen] = React.useState(true);
   const closeModal = () => {
@@ -35,7 +36,7 @@ const Notification = () => {
                 </Text>
               </NotiTitle>
               <NotiContainer>
-                {alarmList?.[0]?.read ? (
+                {lastIdx?.read ? (
                   <EmptyBox>
                     <EmptyMsg style={{ paddingBottom: "10px" }} />
                   </EmptyBox>
@@ -160,9 +161,6 @@ const Notification = () => {
                     ) : null;
                   })}
               </NotiContainer>
-              {/* <ArrowBox>
-            <div className="arrow" />
-          </ArrowBox> */}
             </NotiWrapper>
           </React.Fragment>
         </AlarmModal>
@@ -214,10 +212,11 @@ const NotiTitle = styled.div`
   width: 340px;
   margin: auto;
   height: 40px;
+  border: 10px solid white;
   @media ${({ theme }) => theme.device.isMobile} {
     width: 260px;
     height: 20px;
-    /* border: 1px solid red; */
+    border: 10px solid white;
   }
 `;
 const NotiContainer = styled.div`

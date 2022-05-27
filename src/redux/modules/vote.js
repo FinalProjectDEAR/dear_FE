@@ -5,6 +5,7 @@ import axios from "axios";
 import { apis } from "../../shared/apis";
 
 import Swal from "sweetalert2";
+import "../../styles/libraryStyle/style.css";
 import image01 from "../../assets/image01.png";
 import image02 from "../../assets/image02.png";
 

@@ -91,14 +91,19 @@ body {
   left: 0;
   width: 20px;
   height: 20px;
-  content: '•';
+  content: "•";
   text-align: center;
-  opacity: .75;
+  opacity: 0.75;
   color: #fff;
 }
 
 .dotStyle li.slick-active button:before {
-  opacity: .75;
-  color: #BB9ED8
-  ;
+  opacity: 0.75;
+  color: #bb9ed8;
+}
+.swal2-title {
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
+    "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR",
+    "Malgun Gothic", sans-serif;
+  font-size: 20px;
 }

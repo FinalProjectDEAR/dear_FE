@@ -9,6 +9,7 @@ import { Text, TextB, Input, Button, ColorBadge, Modal } from "../elements";
 import arrowBack from "../assets/arrow_back.png";
 import styled from "styled-components";
 import Swal from "sweetalert2";
+import "../styles/libraryStyle/style.css";
 
 function MemberInfo() {
   const dispatch = useDispatch();

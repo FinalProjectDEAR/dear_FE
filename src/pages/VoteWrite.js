@@ -15,6 +15,7 @@ import attach from "../assets/vote/attach.png";
 import arrowBack from "../assets/arrow_back.png";
 import styled from "styled-components";
 import Swal from "sweetalert2";
+import "../styles/libraryStyle/style.css";
 
 function VoteWrite() {
   //모바일 사이즈
