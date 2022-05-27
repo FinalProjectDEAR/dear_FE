@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { actionCreators as mainActions } from "../redux/modules/main";
 
-import { Text, TextB } from "../elements";
 import styled from "styled-components";
+import { Text, TextB } from "../elements";
 
 //페이지
 import RankingCard from "../components/RankingCard";
