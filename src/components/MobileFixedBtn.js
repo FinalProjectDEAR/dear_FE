@@ -26,11 +26,11 @@ const MobileFixedBtn = ({ close }) => {
   const isLogin = localStorage.getItem("isLogin");
   //알람 버튼 눌렀을 때 가져오기
   const notiCheck = () => {
-    // if (isLogin !== "true") {
-    //   window.alert("로그인 후 이용해주세요.");
-    //   history.push("/");
-    //   return;
-    // }
+    if (isLogin !== "true") {
+      window.alert("로그인 후 이용해주세요.");
+      history.push("/");
+      return;
+    }
     history.push("/notification");
     dispatch(actionCreators.getNotiDB());
     setIsRead(true);
@@ -58,10 +58,11 @@ const MobileFixedBtn = ({ close }) => {
           <React.Fragment>
             <div
               style={{
-                // background: "yellow",
-
-                paddingRight: "80px",
-                paddingTop: "500px",
+                minHeight: "667px",
+                height: "100vh",
+                paddingRight: "100px",
+                display: "flex",
+                alignItems: "flex-end",
               }}
             >
               <Mver>
@@ -100,7 +101,13 @@ const MobileFixedBtn = ({ close }) => {
                     </FontBox>
                   </Noti>
                 </Badge>
-                <div style={{ display: "flex", justifyContent: "right" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "right",
+                    paddingBottom: "90px",
+                  }}
+                >
                   <MBtn closeModal={closeModal}>
                     <X />
                   </MBtn>
@@ -188,7 +195,6 @@ const Board = styled.div`
   order: 1;
   flex-grow: 0;
   margin: 10px 0px;
-
   background-color: white;
   border: none;
   color: #61586a;
