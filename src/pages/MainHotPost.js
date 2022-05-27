@@ -93,7 +93,7 @@ const HotPostWrapper = styled.div`
     padding: 25px 25px;
     width: 360px;
     height: 640px;
-  }
+    
 `;
 
 const VoteBox = styled.div`

@@ -67,7 +67,11 @@ const MobileFixedBtn = ({ close }) => {
               }}
             >
               <Mver>
-                <Desc>
+                <Desc
+                  onClick={() => {
+                    history.push("/intro");
+                  }}
+                >
                   <InfoIcon />
                   <FontBox>
                     <Font>서비스소개</Font>

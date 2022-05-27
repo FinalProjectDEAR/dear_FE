@@ -433,7 +433,7 @@ const PhotoWrap = styled.div`
 const PhotoDesc = styled.div`
   display: flex;
   padding: 4px;
-  width: 220px;
+  width: 180px;
   height: 18px;
   font-size: 12px;
   text-align: center;

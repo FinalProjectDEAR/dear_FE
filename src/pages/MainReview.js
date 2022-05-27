@@ -98,5 +98,6 @@ const LineBox = styled.div`
   @media ${({ theme }) => theme.device.mobile} {
     margin-left: 25px;
     width: 360px;
+    background: orange;
   }
 `;
