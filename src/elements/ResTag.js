@@ -11,7 +11,7 @@ import { ReactComponent as Fact1 } from "../assets/tag/Property 1=Sub (2).svg";
 import { ReactComponent as Sensitivity1 } from "../assets/tag/Property 1=Sub (3).svg";
 
 const ResTag = (props) => {
-  console.log(props);
+  // console.log(props);
   return (
     <React.Fragment>
       {props?.resTag1 === "공감을 잘해줬어요" ? <Sympathy /> : null}

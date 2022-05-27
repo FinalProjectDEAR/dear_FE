@@ -23,6 +23,8 @@ import EmptyPost from "../elements/EmptyPost";
 import EmptyRes from "../elements/EmptyRes";
 import ListenerInfo from "../components/ListenerInfo";
 import LoveInfo from "../components/LoveInfo";
+import TapeInfo from "../components/TapeInfo";
+import ZzimInfo from "../components/ZzimInfo";
 //리덕스관련
 import { useDispatch, useSelector } from "react-redux";
 import { MsgActionCreators } from "../redux/modules/message";
@@ -119,7 +121,17 @@ const MyPage = () => {
                   <MTapeWrapper>
                     <div className="tape">
                       <Text sub6>보유 테이프</Text>
-                      <Help />
+                      <Help
+                        onClick={() => {
+                          setInfoOpen(true);
+                        }}
+                        style={{ cursor: "pointer" }}
+                      />
+                      {infoOpen ? (
+                        <Modal>
+                          <TapeInfo closeTape={close} />
+                        </Modal>
+                      ) : null}
                     </div>
                     <div className="tapeCnt">
                       <Sound />
@@ -140,6 +152,7 @@ const MyPage = () => {
                       onClick={() => {
                         setInfoOpen(true);
                       }}
+                      style={{ cursor: "pointer" }}
                     />
                     {infoOpen ? (
                       <Modal>
@@ -183,6 +196,7 @@ const MyPage = () => {
                       onClick={() => {
                         setInfoOpen(true);
                       }}
+                      style={{ cursor: "pointer" }}
                     />
                     {infoOpen ? (
                       <Modal>
@@ -245,7 +259,17 @@ const MyPage = () => {
               <TapeWrapper>
                 <div className="tape">
                   <Text sub6>보유 테이프</Text>
-                  <Help />
+                  <Help
+                    onClick={() => {
+                      setInfoOpen(true);
+                    }}
+                    style={{ cursor: "pointer" }}
+                  />
+                  {infoOpen ? (
+                    <Modal>
+                      <TapeInfo closeTape={close} />
+                    </Modal>
+                  ) : null}
                 </div>
                 <div className="tapeCnt">
                   <Sound />
@@ -322,7 +346,17 @@ const MyPage = () => {
                 <Text title color="#2E2A32" textAlign="left">
                   찜한 리스너
                 </Text>
-                <Help />
+                <Help
+                  onClick={() => {
+                    setInfoOpen(true);
+                  }}
+                  style={{ cursor: "pointer" }}
+                />
+                {infoOpen ? (
+                  <Modal>
+                    <ZzimInfo closeZzim={close} />
+                  </Modal>
+                ) : null}
               </div>
               <div className="page">
                 <Left
