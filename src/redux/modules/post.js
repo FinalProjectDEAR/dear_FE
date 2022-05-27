@@ -57,7 +57,7 @@ const getPostDB = (page) => {
       axios
         .get(process.env.REACT_APP_URL + `/anonypost?page=${page}`, {})
         .then((res) => {
-          console.log("익명게시판리스트", res.data.data);
+          // console.log("익명게시판리스트", res.data.data);
           dispatch(getPost(res.data.data));
         });
     } catch (err) {
