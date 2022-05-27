@@ -61,7 +61,7 @@ const getPostDB = (page) => {
           dispatch(getPost(res.data.data));
         });
     } catch (err) {
-      console.log("익명게시판 리스트 error", err);
+      console.log(err);
     }
   };
 };
@@ -78,7 +78,7 @@ const getDetailDB = (postId) => {
           dispatch(getDetail(res.data.data));
         });
     } catch (err) {
-      console.log("포스트 상세보기", err);
+      console.log(err);
       Swal.fire("게시글 정보를 가져올 수 없습니다.");
     }
   };
@@ -86,7 +86,7 @@ const getDetailDB = (postId) => {
 
 // 게시판 카테고리별 상세페이지 서버에서 받아오기
 const getCateDetailDB = (page, category) => {
-  console.log(page, category);
+  // console.log(page, category);
   return function (dispatch, getState, { history }) {
     try {
       axios
@@ -96,12 +96,12 @@ const getCateDetailDB = (page, category) => {
           {}
         )
         .then((res) => {
-          console.log("포스트 카테고리 상세보기 get", res.data.data);
+          // console.log("포스트 카테고리 상세보기 get", res.data.data);
           dispatch(getPost(res.data.data));
           dispatch(getCateDetail(res.data.data));
         });
     } catch (err) {
-      console.log("포스트 상세보기", err);
+      console.log(err);
       Swal.fire("게시글 정보를 가져올 수 없습니다.");
     }
   };
@@ -132,7 +132,7 @@ const addPostDB = (payload) => {
       dispatch(imgActions.resetFile());
       history.push("/postList/전체");
     } catch (err) {
-      console.log("포스트 추가하기 error", err);
+      console.log(err);
     }
   };
 };
@@ -163,10 +163,10 @@ const editPostDB = (payload) => {
           },
         }
       );
-      console.log("포스트 수정하기", data);
+      // console.log("포스트 수정하기", data);
       history.push(`/postDetail/${payload.postId}`);
     } catch (err) {
-      console.log("포스트 수정하기 에러", err);
+      console.log(err);
     }
   };
 };
@@ -180,7 +180,7 @@ const deletePostDB = (postId) => {
         history.push("/postList/전체");
       });
     } catch (error) {
-      console.log("게시글 삭제하기", error);
+      console.log(error);
     }
   };
 };
@@ -193,13 +193,13 @@ const likeDB = (postId, likes) => {
       api
         .post(`/anonypost/board/${postId}/postLikes?likes=${likes}`, {})
         .then((res) => {
-          console.log("공감", res.data);
+          // console.log("공감", res.data);
           dispatch(
             likePost(postId, res.data.data.likes, res.data.data.memberIdList)
           );
         });
     } catch (err) {
-      console.log("공감하기", err);
+      console.log(err);
     }
   };
 };
@@ -214,7 +214,7 @@ export default handleActions(
       }),
     [GET_CATEDETAIL]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
+        // console.log(action.payload);
         draft.pages = action.payload.detailPostCategory.totalPages;
       }),
     [GET_DETAIL]: (state, action) =>
@@ -229,7 +229,7 @@ export default handleActions(
       }),
     [DELETE_POST]: (state, action) =>
       produce(state, (draft) => {
-        console.log(state.detail_post, action.payload);
+        // console.log(state.detail_post, action.payload);
         draft.detail_post = draft.detail_post.filter(
           (p) => p.postId !== action.payload.postId
         );
@@ -242,8 +242,8 @@ export default handleActions(
     //   }),
     [LIKE_POST]: (state, action) =>
       produce(state, (draft) => {
-        console.log("공감 받아온 값", action.payload);
-        console.log("공감 state", state);
+        // console.log("공감 받아온 값", action.payload);
+        // console.log("공감 state", state);
         draft.detailPost.likes = action.payload.likes;
         draft.detailPost.likesList = action.payload.list;
       }),

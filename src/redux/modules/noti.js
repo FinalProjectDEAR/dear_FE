@@ -27,7 +27,7 @@ const getNotiDB = () => {
         dispatch(getNoti(res.data.data));
       });
     } catch (err) {
-      console.log("알람가져오기 err", err);
+      console.log(err);
       Swal.fire("알림정보를 가져올 수 없습니다.");
     }
   };
@@ -41,7 +41,7 @@ const getNotiCntDB = () => {
         dispatch(getNotiCnt(res.data.data.unReadAlarmNum));
       });
     } catch (err) {
-      console.log("알람개수 가져오기 err:", err);
+      console.log(err);
       Swal.fire("알림정보를 가져올 수 없습니다.");
     }
   };

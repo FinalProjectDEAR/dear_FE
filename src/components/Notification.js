@@ -1,14 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 import { TextB, Text, ColorBadge, AlarmModal } from "../elements";
+import { CgClose } from "react-icons/cg";
 import { ReactComponent as EmptyMsg } from "../assets/Empty/emptyMsg.svg";
 //리덕스 관련
 import { history } from "../redux/configureStore";
 import { useSelector } from "react-redux";
+import { useMediaQuery } from "react-responsive";
 //시간알려주는패키지
 import TimeCounting from "time-counting";
 
-const Notification = () => {
+const Notification = (close) => {
+  const Mobile = useMediaQuery({
+    query: "(max-width:767px)",
+  });
   const alarmList = useSelector((state) => state.noti.noti);
   const lastIdx = alarmList[alarmList.length - 1];
   //모달
@@ -29,6 +34,34 @@ const Notification = () => {
       {modalOpen && (
         <AlarmModal closeModal={closeModal}>
           <React.Fragment>
+            {Mobile ? (
+              <CgClose
+                className="close"
+                size={20}
+                onClick={closeModal}
+                style={{
+                  color: "#948A9E",
+                  position: "absolute",
+                  right: "180px",
+                  top: "40px",
+                  cursor: "pointer",
+                }}
+              />
+            ) : (
+              <CgClose
+                className="close"
+                size={20}
+                onClick={closeModal}
+                style={{
+                  color: "#948A9E",
+                  position: "absolute",
+                  right: "140px",
+                  top: "40px",
+                  cursor: "pointer",
+                }}
+              />
+            )}
+
             <NotiWrapper>
               <NotiTitle>
                 <Text title textAlign="left">

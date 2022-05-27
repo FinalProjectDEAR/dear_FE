@@ -58,7 +58,7 @@ const getCommentDB = (postId, page) => {
           dispatch(getComment(res.data));
         });
     } catch (err) {
-      console.log("댓글가져오기", err);
+      console.log(err);
       Swal.fire("댓글정보를 가져올 수 없습니다.");
     }
   };
@@ -72,7 +72,7 @@ const addCommentDB = (comment, postId) => {
       api
         .post(`anonypost/board/${postId}/comment`, comment.comment)
         .then((res) => {
-          console.log("댓글 추가", res.data);
+          // console.log("댓글 추가", res.data);
           dispatch(addComment(res.data.data));
           dispatch(getCommentDB(postId, 1));
         });
@@ -94,7 +94,7 @@ const editCommentDB = (comment_id, comment, postId) => {
           dispatch(editComment(comment_id, comment));
         });
     } catch (err) {
-      console.log("댓글 수정 error", err);
+      console.log(err);
       Swal.fire("본인 댓글만 수정이 가능합니다!");
     }
   };
@@ -113,13 +113,13 @@ const delCommentDB = (payload) => {
           dispatch(getCommentDB(payload.postId, 1));
         });
     } catch (err) {
-      console.log("댓글 삭제", err);
+      console.log(err);
     }
   };
 };
 //댓글 좋아요
 const likeCommentDB = (postId, commentId) => {
-  console.log("댓글 좋아요", postId, commentId);
+  // console.log("댓글 좋아요", postId, commentId);
   return function (dispatch, getState, { history }) {
     try {
       api
@@ -129,7 +129,7 @@ const likeCommentDB = (postId, commentId) => {
           dispatch(likeComment(commentId, res.data.data.likes));
         });
     } catch (err) {
-      console.loe("댓글 좋아요 err", err);
+      console.loe(err);
     }
   };
 };

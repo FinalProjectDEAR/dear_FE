@@ -1,7 +1,9 @@
 import React from "react";
 import { history } from "../redux/configureStore";
 import { Text, Button, ColorBadge, TextB, Modal, Tag } from "../elements";
+import { CgClose } from "react-icons/cg";
 import styled from "styled-components";
+import { useMediaQuery } from "react-responsive";
 //시간알려주는패키지
 import TimeCounting from "time-counting";
 //리덕스관련
@@ -10,6 +12,9 @@ import { MsgActionCreators } from "../redux/modules/message";
 import { useParams } from "react-router-dom";
 
 const ReceivedMsg = () => {
+  const Mobile = useMediaQuery({
+    query: "(max-width:767px)",
+  });
   const params = useParams();
   const msgId = params.messageId;
   const dispatch = useDispatch();
@@ -25,7 +30,7 @@ const ReceivedMsg = () => {
   }, []);
   //메세지 가져오가
   const msgList = useSelector((state) => state.message.messages);
-  console.log(msgList);
+  // console.log(msgList);
   //시간을 알아보자!
   const option = {
     lang: "ko",
@@ -39,6 +44,33 @@ const ReceivedMsg = () => {
       {modalOpen && (
         <Modal closeModal={closeModal}>
           <React.Fragment>
+            {Mobile ? (
+              <CgClose
+                className="close"
+                size={20}
+                onClick={closeModal}
+                style={{
+                  color: "#948A9E",
+                  position: "absolute",
+                  right: "180px",
+                  top: "60px",
+                  cursor: "pointer",
+                }}
+              />
+            ) : (
+              <CgClose
+                className="close"
+                size={20}
+                onClick={closeModal}
+                style={{
+                  color: "#948A9E",
+                  position: "absolute",
+                  right: "70px",
+                  top: "40px",
+                  cursor: "pointer",
+                }}
+              />
+            )}
             <MsgWrapper>
               <TitleWrapper>
                 <TextB
@@ -69,8 +101,8 @@ const ReceivedMsg = () => {
               <UserContainer>
                 <UserBox>
                   <UserText>
-                    <ColorBadge width="24px" height="24px" bg="#40D39C" />
-                    {msgList?.reqUserNickName}
+                    {/* <ColorBadge width="24px" height="24px" bg={msgList?.color} /> */}
+                    {msgList?.resUserNickName}
                   </UserText>
                 </UserBox>
                 <UserTime>{createdAt}</UserTime>
