@@ -17,12 +17,6 @@ import InfoIcon from "@mui/icons-material/Info";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import { ReactComponent as Hamburger } from "../assets/Vector (5).svg";
 import { ReactComponent as Cancel } from "../assets/Vector (6).svg";
-//모바일버전 아이콘
-import * as Reacts from "react";
-import Box from "@mui/material/Box";
-import SpeedDial from "@mui/material/SpeedDial";
-import SpeedDialAction from "@mui/material/SpeedDialAction";
-import SpeedDialIcon from "@mui/material/SpeedDialIcon";
 
 function FixedBtn(props) {
   const dispatch = useDispatch();
