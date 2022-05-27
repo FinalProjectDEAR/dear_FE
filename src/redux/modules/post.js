@@ -3,6 +3,7 @@ import { produce } from "immer";
 import axios from "axios";
 import { imgActions } from "./imagePost";
 import { apis, api } from "../../shared/apis";
+import Swal from "sweetalert2";
 
 // 액션
 const GET_POST = "GET_POST";
@@ -77,7 +78,7 @@ const getDetailDB = (postId) => {
         });
     } catch (err) {
       console.log("포스트 상세보기", err);
-      window.alert("게시글 정보를 가져올 수 없습니다.");
+      Swal.fire("게시글 정보를 가져올 수 없습니다.");
     }
   };
 };
@@ -100,7 +101,7 @@ const getCateDetailDB = (page, category) => {
         });
     } catch (err) {
       console.log("포스트 상세보기", err);
-      window.alert("게시글 정보를 가져올 수 없습니다.");
+      Swal.fire("게시글 정보를 가져올 수 없습니다.");
     }
   };
 };

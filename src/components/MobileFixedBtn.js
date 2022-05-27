@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 
 import styled from "styled-components";
 import { FixedModal } from "../elements";
+import Swal from "sweetalert2";
 //아이콘
 import { Badge } from "@material-ui/core";
 import { ReactComponent as X } from "../assets/Vector (10).svg";
@@ -27,7 +28,7 @@ const MobileFixedBtn = ({ close }) => {
   //알람 버튼 눌렀을 때 가져오기
   const notiCheck = () => {
     if (isLogin !== "true") {
-      window.alert("로그인 후 이용해주세요.");
+      Swal.fire("로그인 후 이용해주세요.");
       history.push("/");
       return;
     }
@@ -44,7 +45,7 @@ const MobileFixedBtn = ({ close }) => {
 
   const gotoMypage = () => {
     if (isLogin !== "true") {
-      window.alert("로그인 후 이용해주세요.");
+      Swal.fire("로그인 후 이용해주세요.");
       history.push("/");
       return;
     }

@@ -3,6 +3,7 @@ import { history } from "../redux/configureStore";
 import { Text, Input, Button, TextB, Modal } from "../elements";
 import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
+import Swal from "sweetalert2";
 //리덕스관련
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -25,7 +26,7 @@ function SendMsg() {
   const checkMaxLength = (e) => {
     let wordLength = e.target.value.length;
     if (wordLength >= 500) {
-      window.alert("500자 이상 작성할 수 없습니다.");
+      Swal.fire("500자 이상 작성할 수 없습니다.");
       return;
     }
     setTextLength(wordLength);
@@ -34,7 +35,7 @@ function SendMsg() {
 
   const send = () => {
     if (msg === "") {
-      window.alert("쪽지를 작성해주세요!");
+      Swal.fire("쪽지를 작성해주세요!");
       return;
     }
     dispatch(MsgActionCreators.addMessageDB(msg, msgList.reqUserNickName));

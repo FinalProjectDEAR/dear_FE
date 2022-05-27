@@ -1,6 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { api } from "../../shared/apis";
+import Swal from "sweetalert2";
 
 //액션
 const GET_NOTI = "GET_NOTI ";
@@ -26,7 +27,7 @@ const getNotiDB = () => {
       });
     } catch (err) {
       console.log("알람가져오기 err", err);
-      window.alert("알림정보를 가져올 수 없습니다.");
+      Swal.fire("알림정보를 가져올 수 없습니다.");
     }
   };
 };
@@ -40,7 +41,7 @@ const getNotiCntDB = () => {
       });
     } catch (err) {
       console.log("알람개수 가져오기 err:", err);
-      window.alert("알림정보를 가져올 수 없습니다.");
+      Swal.fire("알림정보를 가져올 수 없습니다.");
     }
   };
 };

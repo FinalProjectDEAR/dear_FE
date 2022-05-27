@@ -4,6 +4,7 @@ import { Input, Button, Text } from "../elements";
 import styled from "styled-components";
 
 import { BiX } from "react-icons/bi";
+import Swal from "sweetalert2";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
@@ -31,7 +32,7 @@ function PostWrite() {
   const checkMaxLength = (e) => {
     let wordLength = e.target.value.length;
     if (wordLength >= 500) {
-      window.alert("500자 이상 작성할 수 없습니다.");
+      Swal.fire("500자 이상 작성할 수 없습니다.");
       return;
     }
     setTextLength(wordLength);
@@ -49,12 +50,12 @@ function PostWrite() {
     let imageUrlList = [...imgPreview];
     const maxImageCnt = 3;
     if (imageList.length > maxImageCnt) {
-      window.alert("첨부 파일은 최대 3개까지 가능합니다.");
+      Swal.fire("첨부 파일은 최대 3개까지 가능합니다.");
       console.log("한번에 3장 이상 인풋한 경우");
       return;
     }
     if (files.length + imageList.length > 3) {
-      window.alert("첨부 파일은 최대 3개까지 가능합니다.");
+      Swal.fire("첨부 파일은 최대 3개까지 가능합니다.");
       console.log("이미 3장이 입력 되어있는데 1장 더 추가 한 경우");
       return;
     } else {
@@ -62,7 +63,7 @@ function PostWrite() {
       const imageSize = imageList.size; //이미지용량
       const maxSize = 5 * 1024 * 1024; //5MB
       if (imageSize > maxSize) {
-        window.alert("첨부파일 용량은 5MB 이내로 등록 가능합니다.");
+        Swal.fire("첨부파일 용량은 5MB 이내로 등록 가능합니다.");
         return;
       }
       //파일들을 꺼내 배열 안에 넣어주기
@@ -93,7 +94,7 @@ function PostWrite() {
   //추가하기 액션
   const addPost = () => {
     if (title === "" || category === "" || contents === "") {
-      window.alert("내용을 모두 작성해주세요!");
+      Swal.fire("내용을 모두 작성해주세요!");
       return;
     }
     dispatch(

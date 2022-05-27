@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 
 //id값으로 스크롤
 import { Link } from "react-scroll";
+import Swal from "sweetalert2";
 
 import styled from "styled-components";
 import MobileFixedBtn from "./MobileFixedBtn";
@@ -29,7 +30,7 @@ function FixedBtn(props) {
   //알람 버튼 눌렀을 때 가져오기
   const notiCheck = () => {
     if (isLogin !== "true") {
-      window.alert("로그인 후 이용해주세요.");
+      Swal.fire("로그인 후 이용해주세요.");
       history.push("/");
       return;
     }
@@ -47,7 +48,7 @@ function FixedBtn(props) {
 
   const gotoMypage = () => {
     if (isLogin !== "true") {
-      window.alert("로그인 후 이용해주세요.");
+      Swal.fire("로그인 후 이용해주세요.");
       history.push("/");
       return;
     }
