@@ -32,26 +32,26 @@ const Footer = () => {
           >
             의견 및 오류 제보
           </Text>
-          <Text sub7 color="#666666" margin="0px 24px">
+          <FooterText>
             <Text sub4 color="#948A9E">
               BE
             </Text>
             임인혁 박형기 김현규
-          </Text>
+          </FooterText>
           |
-          <Text sub7 color="#666666" margin="0px 24px">
+          <FooterText>
             <Text sub4 color="#948A9E">
               FE
             </Text>
             김혜리 김가경
-          </Text>
+          </FooterText>
           |
-          <Text sub7 color="#666666" margin="0px 24px">
+          <FooterText>
             <Text sub4 color="#948A9E">
               DE
             </Text>
             김현경 최혜지
-          </Text>
+          </FooterText>
         </FooterBox>
       </FooterWrapper>
       <MobileFooter>
@@ -125,7 +125,11 @@ const FooterBox = styled.div`
     justify-content: center;
   }
 `;
-
+const FooterText = styled.div`
+  margin: 0px 24px;
+  font-size: 12px;
+  line-height: 14px;
+`;
 const MobileFooter = styled.div`
   display: none;
   flex-direction: column;

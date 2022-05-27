@@ -52,8 +52,8 @@ const CommentItem = (props) => {
   };
   //댓글 채택
   const likeComment = () => {
-    if (boardPostId === memberId) {
-      Swal.fire("본인 댓글은 채택이 불가합니다.");
+    if (boardPostId !== memberId) {
+      Swal.fire("댓글 채택은 게시글 작성자만 가능합니다.");
       return;
     }
     dispatch(actionCreators.likeCommentDB(postId, comment_id));
