@@ -19,7 +19,7 @@ function ResChatStart() {
   const [gender, setGender] = React.useState("");
   const [previewImg, setPreviewImg] = React.useState([]);
   const [imgFile, setImgFile] = React.useState([]);
-  const [audioPermit, setAudioPermit] = React.useState([]);
+  const [audioPermit, setAudioPermit] = React.useState("");
 
   const token = useSelector((state) => state.chat.token);
   const sessionId = useSelector((state) => state.chat.sessionId);

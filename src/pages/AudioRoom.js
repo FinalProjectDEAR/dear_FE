@@ -209,7 +209,7 @@ const NoImgBox = styled.div`
 const NoMsg = styled.div`
   width: 182px;
   height: 75px;
-  margin: auto;
+  margin: 50px auto;
 `;
 
 const Image = styled.div`
