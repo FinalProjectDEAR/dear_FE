@@ -4,16 +4,17 @@ import styled from "styled-components";
 import { history } from "../redux/configureStore";
 import { Text } from "../elements";
 
+import { useSelector, useDispatch } from "react-redux";
 import logo from "../assets/main/logoS.png";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
 
 const Header = (props) => {
-  const isLogin = localStorage.getItem("isLogin");
+  const Token = localStorage.getItem("accessToken");
 
   const logout = () => {
     Swal.fire("로그아웃 되었습니다.");
-    history.push("/");
+    history.push("/login");
     localStorage.removeItem("accessToken");
     localStorage.removeItem("memberId");
     localStorage.removeItem("nickname");
@@ -21,9 +22,9 @@ const Header = (props) => {
   };
 
   const gotoMypage = () => {
-    if (isLogin !== "true") {
+    if (!Token) {
       Swal.fire("로그인 후 이용해주세요.");
-      history.push("/");
+      history.push("/login");
       return;
     }
     history.push("/myPage");
@@ -38,7 +39,7 @@ const Header = (props) => {
               <Logo
                 src={logo}
                 onClick={() => {
-                  history.push("/main");
+                  history.push("/");
                 }}
                 alt="logo"
               />
@@ -68,16 +69,20 @@ const Header = (props) => {
                   마이페이지
                 </Text>
               </HeaderBtn>
-              {isLogin ? (
-                <HeaderBtn onClick={logout}>
+              {!Token ? (
+                <HeaderBtn
+                  onClick={() => {
+                    history.push("/login");
+                  }}
+                >
                   <Text sub7 cursor="pointer">
-                    로그아웃
+                    로그인
                   </Text>
                 </HeaderBtn>
               ) : (
-                <HeaderBtn onClick={history.push("/")}>
+                <HeaderBtn onClick={logout}>
                   <Text sub7 cursor="pointer">
-                    로그인
+                    로그아웃
                   </Text>
                 </HeaderBtn>
               )}

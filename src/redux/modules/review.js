@@ -23,11 +23,11 @@ const getReviewDB = () => {
   return function (dispatch, getState, { history }) {
     try {
       apis.get().then((res) => {
-        console.log("후기가져오기", res);
+        console.log(res);
         dispatch(getReview(res));
       });
     } catch (err) {
-      console.log("후기가져오기 error", err);
+      console.log(err);
     }
   };
 };
@@ -39,14 +39,6 @@ const addReviewReqDB = (
   tagSelectList,
   serviceComment
 ) => {
-  console.log(
-    "고민러 후기 통신시작",
-    requestReview,
-    resMemberId,
-    tagLike,
-    tagSelectList,
-    serviceComment
-  );
   return function (dispatch, getState, { history }) {
     try {
       api
@@ -58,12 +50,11 @@ const addReviewReqDB = (
           serviceComment: serviceComment,
         })
         .then((res) => {
-          history.replace("/main");
-          console.log("후기추가하기", res);
+          history.replace("/");
           dispatch(addReview(res));
         });
     } catch (err) {
-      console.log("고민러 후기추가하기error", err);
+      console.log(err);
     }
   };
 };
@@ -75,14 +66,6 @@ const addReviewResDB = (
   tagSelectList,
   serviceComment
 ) => {
-  console.log(
-    "리스너 후기 통신시작",
-    requestReview,
-    reqMemberId,
-    tagLike,
-    tagSelectList,
-    serviceComment
-  );
   return function (dispatch, getState, { history }) {
     try {
       api
@@ -94,26 +77,23 @@ const addReviewResDB = (
           serviceComment: serviceComment,
         })
         .then((res) => {
-          history.replace("/main");
-          console.log("후기추가하기", res);
+          history.replace("/");
           dispatch(addReview(res));
         });
     } catch (err) {
-      console.log("리스너 후기추가하기error", err);
+      console.log(err);
     }
   };
 };
 //유저팔로우하기
 const followDB = (memberId, follow) => {
-  console.log("팔로우", memberId, follow);
   return function (dispatch, getState, { history }) {
     try {
       api.post(`user/${memberId}/follow?follow=${follow}`, {}).then((res) => {
-        console.log("팔로우하기", res.data);
         // dispatch(follow(memberId, res.data.data));
       });
     } catch (err) {
-      console.log("팔로우하기 err", err);
+      console.log(err);
     }
   };
 };
@@ -128,7 +108,6 @@ export default handleActions(
       }),
     [ADD_REVIEW]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
         draft.review.unshift(action.payload.review);
       }),
     // [FOLLOW]: (state, action) =>

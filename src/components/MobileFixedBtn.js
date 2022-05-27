@@ -24,12 +24,12 @@ const MobileFixedBtn = ({ close }) => {
   };
   const [isRead, setIsRead] = React.useState(false);
   const user_id = useSelector((state) => state.user.user);
-  const isLogin = localStorage.getItem("isLogin");
+  const Token = localStorage.getItem("accessToken");
   //알람 버튼 눌렀을 때 가져오기
   const notiCheck = () => {
-    if (isLogin !== "true") {
+    if (!Token) {
       Swal.fire("로그인 후 이용해주세요.");
-      history.push("/");
+      history.push("/login");
       return;
     }
     history.push("/notification");
@@ -44,9 +44,9 @@ const MobileFixedBtn = ({ close }) => {
   const alarmNum = useSelector((state) => state.noti.notiCnt);
 
   const gotoMypage = () => {
-    if (isLogin !== "true") {
+    if (!Token) {
       Swal.fire("로그인 후 이용해주세요.");
-      history.push("/");
+      history.push("/login");
       return;
     }
     history.push("/myPage");

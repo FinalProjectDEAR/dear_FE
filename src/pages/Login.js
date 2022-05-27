@@ -26,10 +26,10 @@ const Login = () => {
   const COOKIE_KEY = "notAgain";
   const [cookies, setCookie] = useCookies([COOKIE_KEY]);
 
-  const isLogin = localStorage.getItem("isLogin");
+  const Token = localStorage.getItem("accessToken");
 
   const logout = () => {
-    history.push("/");
+    history.push("/login");
     localStorage.removeItem("accessToken");
     localStorage.removeItem("memberId");
     localStorage.removeItem("nickname");
@@ -137,7 +137,20 @@ const Login = () => {
         </KakaoBox>
       </LoginWrapper>
       <MobileFooter>
-        {isLogin ? (
+        {!Token ? (
+          <FooterBtn>
+            <Text
+              sub
+              margin="2px 6px"
+              color="#666666"
+              _onClick={() => {
+                history.push("/login");
+              }}
+            >
+              로그인
+            </Text>
+          </FooterBtn>
+        ) : (
           <FooterBtn>
             <Text
               sub
@@ -148,19 +161,6 @@ const Login = () => {
               }}
             >
               로그아웃
-            </Text>
-          </FooterBtn>
-        ) : (
-          <FooterBtn>
-            <Text
-              sub
-              margin="2px 6px"
-              color="#666666"
-              _onClick={() => {
-                history.push("/");
-              }}
-            >
-              로그인
             </Text>
           </FooterBtn>
         )}

@@ -105,7 +105,7 @@ function ResReview(props) {
             <ArrowBack
               src={arrowBack}
               onClick={() => {
-                history.replace("/main");
+                history.replace("/");
               }}
             />
           </ArrowLine>

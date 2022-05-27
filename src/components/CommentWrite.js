@@ -5,8 +5,8 @@ import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
 //리덕스관련
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { actionCreators } from "../redux/modules/comment";
+import { useSelector, useDispatch } from "react-redux";
 
 const CommentWrite = (props) => {
   const history = useHistory();
@@ -25,23 +25,23 @@ const CommentWrite = (props) => {
     setTextLength(wordLength);
   };
 
-  const isLogin = localStorage.getItem("isLogin");
+  const Token = localStorage.getItem("accessToken");
 
-  // const goComment = () => {
-  //   if (isLogin !== "true") {
-  // Swal.fire("로그인 후 이용해주세요.");
-  //     history.push(`/postDetail/${props.postId}`);
-  //     return;
-  //   }
-  //   history.push(`/postDetail/${props.postId}`);
-  // };
-
-  const addComment = () => {
-    if (isLogin !== "true") {
+  const goComment = () => {
+    if (!Token) {
       Swal.fire("로그인 후 이용해주세요.");
       history.push(`/postDetail/${props.postId}`);
       return;
     }
+    history.push(`/postDetail/${props.postId}`);
+  };
+
+  const addComment = () => {
+    // if (!isLogin) {
+    //   Swal.fire("로그인 후 이용해주세요.");
+    //   history.push(`/postDetail/${props.postId}`);
+    //   return;
+    // }
     if (comment === "") {
       Swal.fire("댓글을 작성해주세요");
       return;

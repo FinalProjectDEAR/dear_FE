@@ -90,7 +90,7 @@ const getChatInfoDB = (sessionId) => {
       const chatInfo = data.data;
       dispatch(getChatInfo(chatInfo));
     } catch {
-      history.replace("/main");
+      history.replace("/");
     }
   };
 };
@@ -100,8 +100,7 @@ const closeChatDB = (sessionId, time) => {
     try {
       const { data } = await apis.closeChat(sessionId, time);
     } catch {
-      console.log("채팅방을 종료하는데 오류가 발생했습니다.");
-      history.replace("/main");
+      history.replace("/");
     }
   };
 };
@@ -111,10 +110,9 @@ const disConnectDB = (sessionId, role) => {
     try {
       const { data } = await apis.disConnect(sessionId);
 
-      history.replace("/main");
+      history.replace("/");
     } catch {
-      console.log("채팅방을 종료하는데 오류가 발생했습니다.");
-      history.replace("/main");
+      history.replace("/");
     }
   };
 };

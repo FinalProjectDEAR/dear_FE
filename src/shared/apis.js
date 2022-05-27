@@ -37,7 +37,6 @@ api.interceptors.response.use(
     if (status === 401) {
       if (response.data.accessToken) {
         // access token이 재발급 된 상태,
-        console.log(response);
         localStorage.setItem("access_token", response.data.accessToken);
         originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`;
         return axios(originalRequest);
@@ -45,7 +44,7 @@ api.interceptors.response.use(
       if (response.data.reason === "refreshtoken expired") {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
-        history.replace("/");
+        history.replace("/login");
       }
     }
   }

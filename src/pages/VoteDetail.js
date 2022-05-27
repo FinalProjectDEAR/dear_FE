@@ -211,6 +211,7 @@ const TitleContent = styled.div`
     width: 5px;
   }
   @media ${({ theme }) => theme.device.mobile} {
+    width: 340px;
     height: 36px;
   }
 `;

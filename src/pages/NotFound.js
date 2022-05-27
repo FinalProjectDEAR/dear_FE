@@ -24,7 +24,7 @@ function NotFound() {
             deco="underLine"
             cursor="pointer"
             _onClick={() => {
-              history.replace("/main");
+              history.replace("/");
             }}
           >
             메인페이지로 돌아가기

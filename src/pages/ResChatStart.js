@@ -25,7 +25,7 @@ function ResChatStart() {
 
   const closeModal = () => {
     setModalOpen(false);
-    history.push("/main");
+    history.push("/");
   };
 
   //정보 송부

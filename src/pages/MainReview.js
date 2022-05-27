@@ -70,7 +70,7 @@ export default MainReview;
 
 const Background = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -82,7 +82,7 @@ const ReviewWrapper = styled.div`
   justify-content: center;
   box-sizing: border-box;
   width: 1440px;
-  height: 700px;
+  height: 750px;
   margin: 0px auto;
   overflow: hidden;
   @media ${({ theme }) => theme.device.mobile} {
