@@ -1,12 +1,16 @@
 import React from "react";
 
 import styled from "styled-components";
+import { useMediaQuery } from "react-responsive";
 import { CgClose } from "react-icons/cg";
 
-import zzim from "../assets/infoModal/zzim.png";
-import zzimM from "../assets/infoModal/zzimM.png";
+import { ReactComponent as WebZzim } from "../assets/infoModal/ZzimWeb.svg";
+import { ReactComponent as MobileZzim } from "../assets/infoModal/zzimMobile.svg";
 
 function ZzimInfo({ closeZzim }) {
+  const Mobile = useMediaQuery({
+    query: "(max-width:767px)",
+  });
   return (
     <React.Fragment>
       <Wrapper>
@@ -22,8 +26,7 @@ function ZzimInfo({ closeZzim }) {
             cursor: "pointer",
           }}
         />
-        <Image src={zzim} />
-        <ImageM src={zzimM} />
+        {Mobile ? <MobileZzim /> : <WebZzim />}
       </Wrapper>
     </React.Fragment>
   );

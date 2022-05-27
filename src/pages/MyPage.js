@@ -79,9 +79,21 @@ const MyPage = () => {
   const postTotalPage = useSelector(
     (state) => state.mypage.postList.totalPages
   );
-  const [infoOpen, setInfoOpen] = React.useState(false);
+  const [listenerOpen, setListenerOpen] = React.useState(false);
   const close = () => {
-    setInfoOpen(false);
+    setListenerOpen(false);
+  };
+  const [tapeOpen, setTapeOpen] = React.useState(false);
+  const tapeClose = () => {
+    setTapeOpen(false);
+  };
+  const [zzimOpen, setZzimOpen] = React.useState(false);
+  const zzimClose = () => {
+    setZzimOpen(false);
+  };
+  const [loveOpen, setLoveOpen] = React.useState(false);
+  const loveClose = () => {
+    setLoveOpen(false);
   };
   return (
     <React.Fragment>
@@ -123,13 +135,13 @@ const MyPage = () => {
                       <Text sub6>보유 테이프</Text>
                       <Help
                         onClick={() => {
-                          setInfoOpen(true);
+                          setTapeOpen(true);
                         }}
                         style={{ cursor: "pointer" }}
                       />
-                      {infoOpen ? (
+                      {tapeOpen ? (
                         <Modal>
-                          <TapeInfo closeTape={close} />
+                          <TapeInfo closeTape={tapeClose} />
                         </Modal>
                       ) : null}
                     </div>
@@ -150,13 +162,13 @@ const MyPage = () => {
                     </Text>
                     <Help
                       onClick={() => {
-                        setInfoOpen(true);
+                        setLoveOpen(true);
                       }}
                       style={{ cursor: "pointer" }}
                     />
-                    {infoOpen ? (
+                    {loveOpen ? (
                       <Modal>
-                        <LoveInfo close={close} />
+                        <LoveInfo close={loveClose} />
                       </Modal>
                     ) : null}
                   </div>
@@ -194,11 +206,11 @@ const MyPage = () => {
                     </Text>
                     <Help
                       onClick={() => {
-                        setInfoOpen(true);
+                        setListenerOpen(true);
                       }}
                       style={{ cursor: "pointer" }}
                     />
-                    {infoOpen ? (
+                    {listenerOpen ? (
                       <Modal>
                         <ListenerInfo close={close} />
                       </Modal>
@@ -261,13 +273,13 @@ const MyPage = () => {
                   <Text sub6>보유 테이프</Text>
                   <Help
                     onClick={() => {
-                      setInfoOpen(true);
+                      setTapeOpen(true);
                     }}
                     style={{ cursor: "pointer" }}
                   />
-                  {infoOpen ? (
+                  {tapeOpen ? (
                     <Modal>
-                      <TapeInfo closeTape={close} />
+                      <TapeInfo closeTape={tapeClose} />
                     </Modal>
                   ) : null}
                 </div>
@@ -348,13 +360,13 @@ const MyPage = () => {
                 </Text>
                 <Help
                   onClick={() => {
-                    setInfoOpen(true);
+                    setZzimOpen(true);
                   }}
                   style={{ cursor: "pointer" }}
                 />
-                {infoOpen ? (
+                {zzimOpen ? (
                   <Modal>
-                    <ZzimInfo closeZzim={close} />
+                    <ZzimInfo closeZzim={zzimClose} />
                   </Modal>
                 ) : null}
               </div>

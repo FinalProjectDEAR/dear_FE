@@ -1,12 +1,16 @@
 import React from "react";
 
 import styled from "styled-components";
+import { useMediaQuery } from "react-responsive";
 import { CgClose } from "react-icons/cg";
 
-import tapeInfo from "../assets/infoModal/tapeInfo.png";
-import tapeInfoM from "../assets/infoModal/tapeInfoM.png";
+import { ReactComponent as WebTape } from "../assets/infoModal/TapeWeb.svg";
+import { ReactComponent as MobileTape } from "../assets/infoModal/TapeMobile.svg";
 
 function TapeInfo({ closeTape }) {
+  const Mobile = useMediaQuery({
+    query: "(max-width:767px)",
+  });
   return (
     <React.Fragment>
       <Wrapper>
@@ -22,8 +26,7 @@ function TapeInfo({ closeTape }) {
             cursor: "pointer",
           }}
         />
-        <Image src={tapeInfo} />
-        <ImageM src={tapeInfoM} />
+        {Mobile ? <MobileTape /> : <WebTape />}
       </Wrapper>
     </React.Fragment>
   );
