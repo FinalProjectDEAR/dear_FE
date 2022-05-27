@@ -63,6 +63,20 @@ const EditMyPage = () => {
 
   const nickErr = useSelector((state) => state.user.nickMsg);
 
+  //멤버인포조회
+  React.useEffect(() => {
+    dispatch(actionCreators.getInfoDB());
+  }, []);
+  const userInfo = useSelector((state) => state.mypage.user.user);
+  //defaultValue가 아닌 진짜 Value로 불러오기 위한 작업
+  useEffect(() => {
+    setNickname(userInfo?.nickname);
+    setAge(userInfo?.age);
+    setLoveType(userInfo?.loveType);
+    setLovePeriod(userInfo?.lovePeriod);
+    setIsSelected(userInfo?.color);
+    setDating(userInfo?.dating);
+  }, [userInfo]);
   const dupCheck = (nickname) => {
     if (!nicknameCheck(nickname)) {
       Swal.fire("닉네임이 형식에 맞지 않습니다. 영문/한글/숫자 포함 3-10자");
@@ -84,6 +98,7 @@ const EditMyPage = () => {
       dating: dating,
       loveType: loveType,
       lovePeriod: lovePeriod,
+      gender: userInfo.gender,
     };
     dispatch(actionCreators.addInfoDB(memberInfo));
   };
@@ -100,6 +115,7 @@ const EditMyPage = () => {
       dating: dating,
       loveType: loveType,
       lovePeriod: lovePeriod,
+      gender: userInfo.gender,
     };
     dispatch(actionCreators.addInfoDB(memberInfo));
   };
@@ -113,28 +129,8 @@ const EditMyPage = () => {
     }
     if (dating === "커플") {
       submitCouple();
-      // } else {
-      // Swal.fire("정보를 모두 입력해주세요.");
-      //   return;
     }
   };
-
-  //멤버인포조회
-  React.useEffect(() => {
-    dispatch(actionCreators.getInfoDB());
-  }, []);
-  const userInfo = useSelector((state) => state.mypage.user.user);
-  // console.log(userInfo);
-  //defaultValue가 아닌 진짜 Value로 불러오기 위한 작업
-  useEffect(() => {
-    setNickname(userInfo?.nickname);
-    setAge(userInfo?.age);
-    setLoveType(userInfo?.loveType);
-    setLovePeriod(userInfo?.lovePeriod);
-    setIsSelected(userInfo?.color);
-    setDating(userInfo?.dating);
-  }, [userInfo]);
-
   return (
     <React.Fragment>
       <Layout>

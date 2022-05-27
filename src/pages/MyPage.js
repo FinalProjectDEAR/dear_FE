@@ -69,7 +69,7 @@ const MyPage = () => {
     dispatch(actionCreators.getInfoDB());
   }, []);
   const userInfo = useSelector((state) => state.mypage.user.user);
-  console.log("멤버인포레스태그", userInfo?.resTag1);
+  // console.log("멤버인포레스태그", userInfo?.resTag1);
   //페이지별 게시글 전체 조회
   React.useEffect(() => {
     dispatch(actionCreators.getPostListDB(page));
