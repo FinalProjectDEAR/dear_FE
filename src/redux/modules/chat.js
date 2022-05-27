@@ -3,6 +3,7 @@ import { produce } from "immer";
 import { actionCreators as imageActions } from "./image";
 
 import { apis } from "../../shared/apis";
+import Swal from "sweetalert2";
 
 // actions
 const SET_ROOM_AUTH = "SET_ROOM_AUTH";
@@ -67,7 +68,7 @@ const reqChatDB = (payload) => {
       history.push(`/AudioRoom/${sessionId}`);
     } catch (err) {
       console.log(err, "리스너 매칭에 실패하였습니다.");
-      window.alert("리스너 매칭에 실패하였습니다.");
+      Swal.fire("리스너 매칭에 실패하였습니다.");
     }
   };
 };
@@ -83,7 +84,7 @@ const resChatDB = (category) => {
       history.push(`/AudioRoom/${sessionId}`);
     } catch (err) {
       console.log(err, "고민러 매칭에 실패하였습니다.");
-      window.alert("고민러 매칭에 실패하였습니다.");
+      Swal.fire("고민러 매칭에 실패하였습니다.");
     }
   };
 };
@@ -97,7 +98,6 @@ const getChatInfoDB = (sessionId) => {
       dispatch(getChatInfo(chatInfo));
       console.log("받아온 채팅정보", chatInfo);
     } catch {
-      alert("채팅방 정보를 불러오지 못했습니다.");
       history.replace("/main");
     }
   };
@@ -110,7 +110,7 @@ const closeChatDB = (sessionId, time) => {
       const { data } = await apis.closeChat(sessionId, time);
       console.log(data);
     } catch {
-      alert("채팅방을 종료하는데 오류가 발생했습니다.");
+      console.log("채팅방을 종료하는데 오류가 발생했습니다.");
       history.replace("/main");
     }
   };
@@ -125,7 +125,7 @@ const disConnectDB = (sessionId, role) => {
 
       history.replace("/main");
     } catch {
-      alert("채팅방을 종료하는데 오류가 발생했습니다.");
+      console.log("채팅방을 종료하는데 오류가 발생했습니다.");
       history.replace("/main");
     }
   };

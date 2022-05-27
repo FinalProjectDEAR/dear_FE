@@ -4,6 +4,7 @@ import axios from "axios";
 
 import { apis } from "../../shared/apis";
 
+import Swal from "sweetalert2";
 import image01 from "../../assets/image01.png";
 import image02 from "../../assets/image02.png";
 
@@ -34,57 +35,57 @@ const initialState = {
       vote: [
         {
           imageUrl: false,
-          imageTitle: "신발",
+          imageTitle: "",
           selectionList: ["스파르타", "항해99"],
           selected: true,
         },
         {
           imageUrl: false,
-          imageTitle: "가방",
+          imageTitle: "",
           selectionList: ["스파르타", "항해99", "럭키세븐호"],
           selected: false,
         },
       ],
-      createdAt: "22-05-01 10:00:00",
-      title: "남자친구 생일선물 골라주세요!",
-      contents: "생일선물 뭐고를지 모르겠어요 투표 부탁드려요!",
+      createdAt: "",
+      title: "",
+      contents: "",
     },
     {
       memberId: "luckyseven",
       vote: [
         {
-          imageUrl: image01,
-          imageTitle: "신발",
+          imageUrl: "",
+          imageTitle: "",
           selectionList: ["스파르타", "항해99", "럭키세븐호"],
           selected: false,
         },
         {
-          imageUrl: image02,
-          imageTitle: "가방",
+          imageUrl: "",
+          imageTitle: "",
           selectionList: ["스파르타"],
           selected: false,
         },
       ],
-      createdAt: "22-05-01 10:00:00",
-      title: "남자친구 생일선물 골라주세요!",
-      contents: "생일선물 뭐고를지 모르겠어요 투표 부탁드려요!",
+      createdAt: "",
+      title: "",
+      contents: "",
     },
   ],
   voteInfo: {
     memberId: "럭키세븐호02",
-    createdAt: "22-05-01 10:00:00",
-    title: "남자친구 생일선물 골라주세요!",
-    contents: "생일선물 뭐고를지 모르겠어요 투표 부탁드려요!",
+    createdAt: "",
+    title: "",
+    contents: "",
     vote: [
       {
-        imageUrl: image01,
-        imageTitle: "신발",
+        imageUrl: "",
+        imageTitle: "",
         selectionList: ["스파르타", "항해99", "럭키세븐호"],
         selected: false,
       },
       {
-        imageUrl: image02,
-        imageTitle: "가방",
+        imageUrl: "",
+        imageTitle: "",
         selectionList: ["스파르타", "항해99"],
         selected: false,
       },
@@ -93,18 +94,18 @@ const initialState = {
   voteResult: {
     memberId: "럭키세븐호02",
     createdAt: "22-05-01 10:00:00",
-    title: "남자친구 생일선물 골라주세요!",
-    contents: "생일선물 뭐고를지 모르겠어요 투표 부탁드려요!",
+    title: "",
+    contents: "",
     vote: [
       {
-        imageUrl: image01,
-        imageTitle: "신발",
+        imageUrl: "",
+        imageTitle: "",
         selectionList: ["스파르타", "항해99", "럭키세븐호"],
         selected: false,
       },
       {
-        imageUrl: image02,
-        imageTitle: "가방",
+        imageUrl: "",
+        imageTitle: "",
         selectionList: ["스파르타", "항해99"],
         selected: false,
       },
@@ -133,7 +134,8 @@ const detailVoteDB = (postId) => {
       console.log(data);
       dispatch(detailVote(data.data));
     } catch (err) {
-      window.alert("상세정보 불러오기 실패");
+      Swal.fire("투표정보 불러오기 실패, 다시 시도해주세요.");
+      history.push("/postList");
       console.log(err);
     }
   };
@@ -173,7 +175,7 @@ const addVoteDB = (
       history.replace("/postList/전체");
     } catch (err) {
       console.log(err, "업로드에 실패하였습니다.");
-      window.alert("업로드에 실패하였습니다.");
+      Swal.fire("업로드에 실패하였습니다.");
     }
   };
 };
@@ -187,7 +189,7 @@ const putVoteDB = (postId, leftSelected) => {
       dispatch(getResult(data.data));
     } catch (err) {
       console.log(err);
-      window.alert("투표실패! 다시 시도해주세요.");
+      Swal.fire("투표하기 실패, 다시 시도해주세요.");
     }
   };
 };
@@ -205,7 +207,7 @@ const delVoteDB = (postId) => {
       history.push("/postList/전체");
     } catch (err) {
       console.log(err);
-      window.alert("삭제실패! 다시 시도해주세요.");
+      Swal.fire("삭제실패, 다시 시도해주세요.");
     }
   };
 };

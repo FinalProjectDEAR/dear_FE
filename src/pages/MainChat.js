@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, TextB, Modal } from "../elements";
 import styled from "styled-components";
+import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -39,14 +40,15 @@ function MainChat() {
 
   const startReq = () => {
     if (checkBox !== true) {
-      window.alert("이용약관에 동의해주세요.");
+      Swal.fire("이용약관에 동의해주세요.");
       return;
     } else if (isLogin !== "true") {
-      window.alert("로그인 후 이용해 주세요.");
+      Swal.fire("로그인 후 이용해 주세요.");
       history.replace("/");
       return;
     } else if (isLogin === "true" && nickname === null) {
-      window.alert("상담에 필요한 회원정보를 입력 후 이용해 주세요.");
+      Swal.fire("상담에 필요한 회원정보를 입력 후 이용해 주세요.");
+
       history.replace("/mypage");
       return;
     }
@@ -56,13 +58,13 @@ function MainChat() {
 
   const startRes = () => {
     if (checkBox !== true) {
-      window.alert("이용약관에 동의해주세요.");
+      Swal.fire("이용약관에 동의해주세요.");
       return;
     } else if (isLogin !== "true") {
-      window.alert("로그인 후 이용해 주세요.");
+      Swal.fire("로그인 후 이용해 주세요.");
       history.push("/");
     } else if (isLogin === "true" && nickname === null) {
-      window.alert("상담에 필요한 회원정보를 입력 후 이용해 주세요.");
+      Swal.fire("상담에 필요한 회원정보를 입력 후 이용해 주세요.");
       history.replace("/mypage");
       return;
     }

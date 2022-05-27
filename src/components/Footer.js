@@ -2,11 +2,13 @@ import React from "react";
 import { history } from "../redux/configureStore";
 import { Text } from "../elements";
 import styled from "styled-components";
+import Swal from "sweetalert2";
 
 const Footer = () => {
   const isLogin = localStorage.getItem("isLogin");
 
   const logout = () => {
+    Swal.fire("로그아웃 되었습니다.");
     history.push("/");
     localStorage.removeItem("accessToken");
     localStorage.removeItem("memberId");

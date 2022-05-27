@@ -5,11 +5,13 @@ import { history } from "../redux/configureStore";
 import { Text } from "../elements";
 
 import logo from "../assets/main/logoS.png";
+import Swal from "sweetalert2";
 
 const Header = (props) => {
   const isLogin = localStorage.getItem("isLogin");
 
   const logout = () => {
+    Swal.fire("로그아웃 되었습니다.");
     history.push("/");
     localStorage.removeItem("accessToken");
     localStorage.removeItem("memberId");
@@ -19,7 +21,7 @@ const Header = (props) => {
 
   const gotoMypage = () => {
     if (isLogin !== "true") {
-      window.alert("로그인 후 이용해주세요.");
+      Swal.fire("로그인 후 이용해주세요.");
       history.push("/");
       return;
     }

@@ -8,6 +8,7 @@ import { actionCreators as imageActions } from "../redux/modules/image";
 import { actionCreators as chatActions } from "../redux/modules/chat";
 
 import styled from "styled-components";
+import Swal from "sweetalert2";
 import attach from "../assets/vote/attach.png";
 import arrowBack from "../assets/arrow_back.png";
 
@@ -28,8 +29,6 @@ function ResChatStart() {
 
   const fileList = useSelector((state) => state.image.fileList);
   const chatFile = fileList.slice(0, 3);
-  console.log("파일리스트", fileList);
-  console.log("3개파일만 짜르기?", chatFile);
 
   //오디오 액세스 요청
   React.useEffect(() => {
@@ -39,7 +38,7 @@ function ResChatStart() {
         setAudioPermit(true);
       })
       .catch((err) =>
-        alert("오디오 접근이 거절되었습니다. 설정에서 승인 해주세요.")
+        Swal.fire("오디오 접근이 거절되었습니다. 설정에서 승인해주세요.")
       );
     setAudioPermit(false);
   }, []);
@@ -72,13 +71,13 @@ function ResChatStart() {
     const imageSize = imgList.size; //이미지용량
     const maxSize = 5 * 1024 * 1024; //5MB
     if (imageSize > maxSize) {
-      window.alert("첨부파일 용량은 5MB 이내로 등록 가능합니다.");
+      Swal.fire("첨부파일 용량은 5MB 이내로 등록 가능합니다.");
       return;
     }
 
     // 이미지 장수 제한
     if (imgUrlList.length > 3) {
-      window.alert("이미지는 최대 3장까지 등록 가능합니다.");
+      Swal.fire("이미지는 최대 3장까지 등록 가능합니다.");
       imgUrlList = imgUrlList.slice(0, 3);
     }
     setPreviewImg(imgUrlList);
@@ -106,12 +105,12 @@ function ResChatStart() {
   //매칭신청
   const submit = () => {
     if (audioPermit === false) {
-      window.alert("오디오와 비디오 권한을 허용해주세요.");
+      Swal.fire("오디오와 비디오 권한을 허용해주세요.");
       return;
     }
 
     if (chatTitle === "" || gender === "" || category === "") {
-      window.alert("필수정보를 모두 입력해주세요!");
+      Swal.fire("필수정보를 모두 입력해주세요.");
       return;
     }
     dispatch(chatActions.reqChatDB({ chatTitle, category, gender, chatFile }));

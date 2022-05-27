@@ -12,6 +12,8 @@ import kakao from "../assets/kakao.png";
 import Footer from "../components/Footer";
 import Survey from "../components/Survey";
 
+import Swal from "sweetalert2";
+
 const Login = () => {
   const [open, setOpen] = React.useState(true);
   const close = () => {
@@ -33,15 +35,14 @@ const Login = () => {
 
   const login = () => {
     if (memberId === "" || pwd === "") {
-      window.alert("아이디 혹은 비밀번호가 공란입니다. 입력해주세요.");
+      Swal.fire("아이디 혹은 비밀번호가 공란입니다. 입력해주세요.");
       return;
     }
 
     if (!memberIdCheck(memberId)) {
-      window.alert("아이디 형식이 맞지 않습니다.");
+      Swal.fire("아이디 형식이 맞지 않습니다.");
       return;
     }
-
     dispatch(userActions.loginDB(memberId, pwd));
   };
 
