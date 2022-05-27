@@ -346,6 +346,9 @@ const TitleWrapper = styled.div`
   /* background: pink; */
   justify-content: space-between;
   padding-top: 36px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 360px;
+  }
 `;
 const CateGoryWrapper = styled.div`
   display: flex;

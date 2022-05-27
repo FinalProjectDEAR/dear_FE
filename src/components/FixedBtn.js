@@ -53,7 +53,7 @@ function FixedBtn(props) {
       history.push("/");
       return;
     }
-    history.push("/myPage");
+    history.replace("/myPage");
   };
 
   return (
@@ -77,7 +77,7 @@ function FixedBtn(props) {
         </Desc>
         <Board
           onClick={() => {
-            history.push("/postList/전체");
+            history.replace("/postList/전체");
           }}
         >
           <FontBox>

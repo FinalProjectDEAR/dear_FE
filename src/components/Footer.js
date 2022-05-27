@@ -20,16 +20,37 @@ const Footer = () => {
     <React.Fragment>
       <FooterWrapper>
         <FooterBox>
+          <Text
+            sub4
+            margin="0px 15px"
+            color="#948A9E"
+            deco="underLine"
+            cursor="pointer"
+            _onClick={() => {
+              window.open("https://respond.listovey.com/rs/EctfU25gC");
+            }}
+          >
+            의견 및 오류 제보
+          </Text>
           <Text sub7 color="#666666" margin="0px 24px">
-            BE임인혁 BE박형기 BE김현규
+            <Text sub4 color="#948A9E">
+              BE
+            </Text>
+            임인혁 박형기 김현규
           </Text>
           |
           <Text sub7 color="#666666" margin="0px 24px">
-            FE김혜리 FE김가경
+            <Text sub4 color="#948A9E">
+              FE
+            </Text>
+            김혜리 김가경
           </Text>
           |
           <Text sub7 color="#666666" margin="0px 24px">
-            DE김현경 DE최혜지
+            <Text sub4 color="#948A9E">
+              DE
+            </Text>
+            김현경 최혜지
           </Text>
         </FooterBox>
       </FooterWrapper>

@@ -6,6 +6,7 @@ import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
 import Swal from "sweetalert2";
+import "../styles/libraryStyle/style.css";
 import help from "../assets/help.png";
 import arrowBack from "../assets/arrow_back.png";
 import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
