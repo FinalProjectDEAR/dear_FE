@@ -61,7 +61,7 @@ Timer.defaultProps = {
 const TimerBox = styled.div`
   width: 110px;
   height: 44px;
-  margin: 0px 20px;
+  margin: 0px 10px;
   background-color: #f8f8f8;
   border-radius: 4px;
   padding: 4px;

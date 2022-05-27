@@ -31,18 +31,21 @@ const Modal = (props) => {
   return (
     <Container>
       <Background onClick={oncloseModal} />
-      <CgClose
-        className="close"
-        size={30}
-        onClick={closeModal}
-        style={{
-          color: "white",
-          position: "absolute",
-          right: "20px",
-          top: "-140px",
-          cursor: "pointer",
-        }}
-      />
+      <CloseBox>
+        <CgClose
+          className="close"
+          size={30}
+          onClick={closeModal}
+          style={{
+            color: "white",
+            position: "absolute",
+            right: "20px",
+            top: "-140px",
+            cursor: "pointer",
+          }}
+        />
+      </CloseBox>
+
       <ModalBlock>
         <Contents>{children}</Contents>
       </ModalBlock>
@@ -92,18 +95,15 @@ const Background = styled.div`
 
 const ModalBlock = styled.div`
   position: fixed;
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   top: 1rem;
   border-radius: 10px;
   padding: 1.5rem;
-  /* background-color: white; */
   width: 600px;
-  /* @media (max-width: 1120px) {
-    width: 50rem;
-  }
-  @media (max-width: 50rem) {
-    width: 80%;
-  } */
+
   min-height: 35rem;
   animation: modal-show 1s;
   @keyframes modal-show {
@@ -126,6 +126,13 @@ const Contents = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const CloseBox = styled.div`
+  display: flex;
+  @media ${({ theme }) => theme.device.mobile} {
+    display: none;
+  }
 `;
 
 export default Modal;
