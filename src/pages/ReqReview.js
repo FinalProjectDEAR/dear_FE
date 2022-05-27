@@ -19,7 +19,6 @@ import { actionCreators } from "../redux/modules/review";
 
 //고민러가 작성하는 상담후기 페이지
 function ReqReview(props) {
-  console.log(props);
   const dispatch = useDispatch();
 
   const [serviceComment, setServiceComment] = React.useState(null);
@@ -71,7 +70,6 @@ function ReqReview(props) {
     }
   };
   //Object.values()객체의 value값만 뽑아내기
-  // console.log("굿", Object.values(goodResTag));
 
   const SelectBadTag = (e) => {
     const { value, name } = e.target;
@@ -81,20 +79,12 @@ function ReqReview(props) {
       setBadResTag({ ...badResTag, [name]: Boolean(!value) });
     }
   };
-  // console.log("배드", Object.values(badResTag));
 
   //고민러 고정값
   const requestReview = true;
 
   //고민러 후기 추가하기
   const finish = () => {
-    console.log(
-      "굿클릭",
-      requestReview,
-      Object.values(goodResTag),
-      serviceComment
-    );
-
     let tagLike = "";
 
     if (goodClick === false && badClick === false) {
@@ -147,12 +137,6 @@ function ReqReview(props) {
           "불순한 의도로 접근했어요.": false,
         }
     ) {
-      console.log(
-        "배드클릭",
-        requestReview,
-        Object.values(badResTag),
-        serviceComment
-      );
       Swal.fire("세부항목에 체크해주세요.");
       return;
     } else if (

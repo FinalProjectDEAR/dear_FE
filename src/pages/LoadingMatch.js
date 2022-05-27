@@ -19,7 +19,6 @@ function LoadingMatch({ informClose, leaveSession }) {
   };
 
   const noMatch = () => {
-    console.log("나가기");
     leaveSession();
     informClose();
   };
@@ -33,9 +32,7 @@ function LoadingMatch({ informClose, leaveSession }) {
 
   //유저 매칭 대기시간
   React.useEffect(() => {
-    console.log("30초센다?");
     setTimeout(openModal, 30000);
-    console.log(modalOpen);
   }, []);
 
   return (

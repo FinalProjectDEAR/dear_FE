@@ -38,7 +38,6 @@ const VoteList = (props) => {
   };
 
   const hotVoteList = useSelector((state) => state.main.hotVoteList);
-  console.log(hotVoteList);
 
   const gotoVote = () => {
     dispatch(actionCreators.getCateDetailDB(1, "투표"));

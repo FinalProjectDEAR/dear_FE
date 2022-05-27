@@ -37,8 +37,6 @@ function MainChat() {
   const isLogin = localStorage.getItem("isLogin");
   const nickname = localStorage.getItem("nickname");
 
-  console.log(nickname);
-
   const startReq = () => {
     if (checkBox !== true) {
       Swal.fire("이용약관에 동의해주세요.");

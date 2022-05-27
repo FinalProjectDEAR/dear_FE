@@ -21,8 +21,6 @@ const Modal = (props) => {
   }, []);
 
   const oncloseModal = (e) => {
-    console.log("e.target: ", e.target);
-    console.log("e.currentTarget: ", e.currentTarget);
     if (e.target === e.currentTarget) {
       closeModal();
     }

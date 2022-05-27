@@ -17,15 +17,10 @@ function Main() {
     setCurrentPage(number);
   };
 
-  const beforePageChange = (number) => {
-    console.log(number);
-  };
-
   return (
     <React.Fragment>
       <ReactPageScroller
         pageOnChange={pageChange}
-        onBeforePageScroll={beforePageChange}
         customPageNumber={currentPage}
       >
         <MainChat />

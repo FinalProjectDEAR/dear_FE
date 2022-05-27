@@ -17,7 +17,6 @@ function ImageVote({ voteInfo }) {
 
   const params = useParams();
   const postId = params.postId;
-  console.log(postId);
 
   React.useEffect(() => {
     // dispatch(voteActions.detailVoteDB(postId));
@@ -32,26 +31,18 @@ function ImageVote({ voteInfo }) {
   const [rightSelected, setRightSelected] = React.useState(false);
   const [showResult, setShowResult] = React.useState(false);
 
-  // const voteInfo = useSelector((state) => state.vote.voteInfo);
-  console.log(voteInfo.vote[0].selected);
-  console.log(leftSelected);
-  console.log(rightSelected);
-
   const showSelection = () => {
     if (
       voteInfo.vote[0].selected === false &&
       voteInfo.vote[1].selected === false
     ) {
-      console.log("나띵");
       setLeftSelected(false);
       setRightSelected(false);
     } else if (voteInfo.vote[0].selected === true) {
-      console.log("왼쪽");
       setLeftSelected(true);
       setRightSelected(false);
       setVote(1);
     } else if (voteInfo.vote[1].selected === true) {
-      console.log("오른쪽");
       setRightSelected(true);
       setLeftSelected(false);
       setVote(2);
