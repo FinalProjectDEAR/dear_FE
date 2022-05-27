@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
 //리덕스관련
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 import { MsgActionCreators } from "../redux/modules/message";
 
 function SendMsg() {
