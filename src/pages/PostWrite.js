@@ -167,11 +167,11 @@ function PostWrite() {
           </ContentWrapper>
           <ImageWrapper>
             <Title>첨부파일</Title>
-            <div>
+            <div style={{ padding: "15px" }}>
               <PhotoContainer>
                 <PhotoUpload>
                   <label>
-                    <ImageUPload />
+                    <ImageUPload style={{ cursor: "pointer" }} />
                     <input
                       type="file"
                       onChange={selectFile}
@@ -338,6 +338,7 @@ const Title = styled.div`
   flex-grow: 0;
   border-right: 1px solid #cccccc;
   color: #666666;
+  /* border: 1px solid red; */
   @media ${({ theme }) => theme.device.isMobile} {
     display: none;
   }
@@ -411,6 +412,7 @@ const ImageWrapper = styled.div`
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
   margin: auto;
+  /* border: 1px solid red; */
   @media ${({ theme }) => theme.device.isMobile} {
     /* background-color: orange; */
     width: 250px;
@@ -445,6 +447,7 @@ const PhotoUpload = styled.div`
   flex-direction: row;
   cursor: pointer;
   padding: 4px;
+  /* border: 1px solid red; */
   input[type="file"] {
     position: absolute;
     width: 0;

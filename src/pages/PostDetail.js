@@ -408,16 +408,19 @@ const CommentPhotoWrap = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  /* border: 1px solid red; */
+  ${({ theme }) => theme.device.isMobile} {
+    flex-direction: column;
+  }
 `;
 const PhotoDivWrap = styled.div`
   display: flex;
-  /* flex-direction: column; */
 `;
 const PhotoDiv = styled.div`
   display: flex;
   /* flex-direction: row; */
   margin: 10px;
-  /* border: 1px solid red; */
+  /* border: 1px solid blue; */
 `;
 const PhotoWrap = styled.div`
   display: flex;
@@ -435,15 +438,16 @@ const PhotoUpload1 = styled.div`
   align-items: center;
   text-align: center;
   width: 80px;
-  height: 80px;
+  /* height: 80px; */
   padding-top: 30px;
   display: block;
-  /* border: 1px solid red; */
+  /* border: 1px solid blue; */
 `;
 const Img = styled.img`
   width: 100%;
   margin-top: 10px;
   margin-left: 15px;
+  background: 1px solid red;
   &:hover {
     transition: 0.4s;
     transform: scale(2.9);
@@ -451,6 +455,18 @@ const Img = styled.img`
     -moz-transform: scale(2.9);
     -ms-transform: scale(2.9);
     -o-transform: scale(2.9);
+  }
+  ${({ theme }) => theme.device.isMobile} {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 80px;
+    height: 100px;
+    padding-top: 30px;
+    display: block;
+    border: 1px solid blue;
   }
 `;
 

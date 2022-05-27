@@ -58,7 +58,7 @@ function Post(props) {
             </TextB>
           </Title>
           <Date>
-            <Text sub7 textAlign="left">
+            <Text sub7 textAlign="left" cursor="pointer">
               {createdAt}
             </Text>
           </Date>
@@ -112,6 +112,7 @@ const PostWrapper = styled.div`
 `;
 const Title = styled.div`
   padding-left: 40px;
+  cursor: pointer;
   @media ${({ theme }) => theme.device.isMobile} {
     height: 38px;
     /* border: 1px solid red; */

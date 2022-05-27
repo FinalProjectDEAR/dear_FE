@@ -18,11 +18,15 @@ const CommentList = (props) => {
             <div style={{ color: "#7A37BE", fontWeight: "500" }}>
               {commentList[0]?.totalComments ? (
                 <div style={{ display: "flex" }}>
-                  {" "}
                   <Text body4>댓글</Text> &nbsp;&nbsp;({comment})
                 </div>
               ) : (
-                <>첫번째 댓글을 작성해주세요!</>
+                <>
+                  <div style={{ display: "flex" }}>
+                    <Text body4>댓글</Text> &nbsp;&nbsp;(0) &nbsp;&nbsp;첫번째로
+                    댓글을 남겨보세요!
+                  </div>
+                </>
               )}
             </div>
           </CommentBox>
