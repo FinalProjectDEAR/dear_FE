@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, Input, Button } from "../elements";
+import { Text, Input, Button, Modal } from "../elements";
 
 import { history } from "../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,8 +10,13 @@ import styled from "styled-components";
 import logo from "../assets/main/logoS.png";
 import kakao from "../assets/kakao.png";
 import Footer from "../components/Footer";
+import Survey from "../components/Survey";
 
 const Login = () => {
+  const [open, setOpen] = React.useState(true);
+  const close = () => {
+    setOpen(false);
+  };
   const isLogin = localStorage.getItem("isLogin");
 
   const logout = () => {
@@ -166,6 +171,11 @@ const Login = () => {
           </Text>
         </FooterBox>
       </MobileFooter>
+      {open ? (
+        <Modal>
+          <Survey close={close} />
+        </Modal>
+      ) : null}
     </Background>
   );
 };

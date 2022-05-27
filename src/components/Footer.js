@@ -18,15 +18,15 @@ const Footer = () => {
       <FooterWrapper>
         <FooterBox>
           <Text sub7 color="#666666" margin="0px 24px">
-            의견 및 오류 제보
+            BE임인혁 BE박형기 BE김현규
           </Text>
           |
           <Text sub7 color="#666666" margin="0px 24px">
-            자주 묻는 질문
+            FE김혜리 FE김가경
           </Text>
           |
           <Text sub7 color="#666666" margin="0px 24px">
-            개인정보처리방침
+            DE김현경 DE최혜지
           </Text>
         </FooterBox>
       </FooterWrapper>
@@ -60,16 +60,16 @@ const Footer = () => {
         )}
 
         <FooterBox>
-          <Text sub color="#666666" margin="0px 6px">
-            의견 및 오류 제보
+          <Text sub color="#666666" margin="0px 5px">
+            BE임인혁 BE박형기 BE김현규
           </Text>
           |
-          <Text sub color="#666666" margin="0px 6px">
-            자주 묻는 질문
+          <Text sub color="#666666" margin="0px 5px">
+            FE김혜리 FE김가경
           </Text>
           |
-          <Text sub color="#666666" margin="0px 6px">
-            개인정보처리방침
+          <Text sub color="#666666" margin="0px 5px">
+            DE김현경 DE최혜지
           </Text>
         </FooterBox>
       </MobileFooter>
