@@ -89,27 +89,18 @@ const getInfoDB = () => {
   };
 };
 //멤버인포 수정하기
-const addInfoDB = (
-  age,
-  color,
-  dating,
-  gender,
-  lovePeriod,
-  loveType,
-  nickname
-) => {
-  console.log(age, color, gender, lovePeriod, loveType, dating, nickname);
+const addInfoDB = (memberInfo) => {
+  console.log(memberInfo);
   return function (dispatch, getState, { history }) {
     try {
       api
         .post("/user/info", {
-          age: age,
-          color: color,
-          dating: dating,
-          gender: gender,
-          lovePeriod: lovePeriod,
-          loveType: loveType,
-          nickname: nickname,
+          age: memberInfo.age,
+          color: memberInfo.color,
+          dating: memberInfo.dating,
+          lovePeriod: memberInfo.lovePeriod,
+          loveType: memberInfo.loveType,
+          nickname: memberInfo.nickname,
         })
         .then((res) => {
           // console.log("멤버 인포수정하기:", res.data.data);
