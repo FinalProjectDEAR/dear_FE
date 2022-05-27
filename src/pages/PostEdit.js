@@ -23,7 +23,7 @@ function PostEdit() {
     if (postId) dispatch(actionCreators.getDetailDB(postId));
   }, []);
   const post = useSelector((state) => state.post.detailPost);
-  console.log(post);
+  // console.log(post);
 
   const [imgPreview, setImgPreview] = useState([]);
   const [title, setTitle] = React.useState(post?.title);
@@ -53,7 +53,7 @@ function PostEdit() {
   const fileInput = React.useRef();
   //리듀서로 보낸 사진파일들 불러오기
   const files = useSelector((state) => state.imagePost.files);
-  console.log("리듀서로 보낸 사진파일들 불러오기", files);
+  // console.log("리듀서로 보낸 사진파일들 불러오기", files);
   //이미지 선택하기 및 미리보기
   const selectFile = (e) => {
     const imageList = e.target.files;
@@ -61,12 +61,12 @@ function PostEdit() {
     const maxImageCnt = 3;
     if (imageList.length > maxImageCnt) {
       Swal.fire("첨부 파일은 최대 3개까지 가능합니다.");
-      console.log("한번에 3장 이상 인풋한 경우");
+      // console.log("한번에 3장 이상 인풋한 경우");
       return;
     }
     if (files.length + imageList.length > 3) {
       Swal.fire("첨부 파일은 최대 3개까지 가능합니다.");
-      console.log("이미 3장이 입력 되어있는데 1장 더 추가 한 경우");
+      // console.log("이미 3장이 입력 되어있는데 1장 더 추가 한 경우");
       return;
     } else {
       let file = [];
@@ -103,22 +103,22 @@ function PostEdit() {
   };
   //기존 이미지 url
   const imgUrl = post?.imgUrl;
-  console.log("기존 이미지 url", imgUrl);
+  // console.log("기존 이미지 url", imgUrl);
   //새로 올린 파일과 기존 사진 url을 분리
   let newFiles = [];
   let editUrl = [];
   files.map((e, i) => {
     if (newFiles > 4) {
-      console.log("리듀서에 3장 넘게 들어간 경우");
+      // console.log("리듀서에 3장 넘게 들어간 경우");
       return;
     }
     if (e) {
       newFiles.push(e);
-      console.log("새로운 사진", newFiles);
+      // console.log("새로운 사진", newFiles);
     }
     if (!e) {
       editUrl.push(e);
-      console.log("기존url", editUrl);
+      // console.log("기존url", editUrl);
     }
   });
   useEffect(() => {
@@ -127,12 +127,12 @@ function PostEdit() {
     imgUrl &&
       imgUrl.map((e, i) => {
         if (e !== null) {
-          console.log(e);
+          // console.log(e);
           return editPreview.push(imgUrl[i]);
         }
       });
     setImgPreview(editPreview);
-    console.log(editPreview);
+    // console.log(editPreview);
     //리덕스 files 인덱스를 맞추기 위해 url도 같이 넣어줌
     dispatch(imgActions.setPre(editPreview));
   }, []);

@@ -41,7 +41,7 @@ const getMessageDB = (page) => {
         dispatch(getMessage(res.data));
       });
     } catch (err) {
-      console.log("쪽지가져오기", err);
+      console.log(err);
       Swal.fire("쪽지 리스트를 가져올 수 없습니다.");
     }
   };
@@ -52,11 +52,11 @@ const getDetailMsgDB = (messageId) => {
   return function (dispatch, getState, { history }) {
     try {
       api.get(`/message/detail/${messageId}`, {}).then((res) => {
-        console.log("쪽지 상세 가져오기", res.data);
+        // console.log("쪽지 상세 가져오기", res.data);
         dispatch(getDetailMessage(res.data));
       });
     } catch (err) {
-      console.log("쪽지 상세 가져오기", err);
+      console.log(err);
       Swal.fire("쪽지를 가져올 수 없습니다.");
     }
   };
@@ -91,7 +91,7 @@ export default handleActions(
     //   }),
     [GET_MESSAGE]: (state, action) =>
       produce(state, (draft) => {
-        console.log("리듀서 쪽지받기", action.payload.message.data);
+        // console.log("리듀서 쪽지받기", action.payload.message.data);
         draft.message = action.payload.message.data;
       }),
     [GET_DETAIL_MSG]: (state, action) =>

@@ -52,12 +52,12 @@ function PostWrite() {
     const maxImageCnt = 3;
     if (imageList.length > maxImageCnt) {
       Swal.fire("첨부 파일은 최대 3개까지 가능합니다.");
-      console.log("한번에 3장 이상 인풋한 경우");
+      // console.log("한번에 3장 이상 인풋한 경우");
       return;
     }
     if (files.length + imageList.length > 3) {
       Swal.fire("첨부 파일은 최대 3개까지 가능합니다.");
-      console.log("이미 3장이 입력 되어있는데 1장 더 추가 한 경우");
+      // console.log("이미 3장이 입력 되어있는데 1장 더 추가 한 경우");
       return;
     } else {
       let file = [];

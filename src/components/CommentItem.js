@@ -15,7 +15,7 @@ import { history } from "../redux/configureStore";
 import { actionCreators } from "../redux/modules/comment";
 
 const CommentItem = (props) => {
-  console.log(props);
+  // console.log(props);
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(actionCreators.pages(props.totalPages));

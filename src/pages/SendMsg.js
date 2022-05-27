@@ -1,6 +1,7 @@
 import React from "react";
 import { history } from "../redux/configureStore";
 import { Text, Input, Button, TextB, Modal } from "../elements";
+import { CgClose } from "react-icons/cg";
 import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
 import Swal from "sweetalert2";
@@ -45,6 +46,33 @@ function SendMsg() {
       {modalOpen && (
         <Modal closeModal={closeModal}>
           <React.Fragment>
+            {Mobile ? (
+              <CgClose
+                className="close"
+                size={20}
+                onClick={closeModal}
+                style={{
+                  color: "#948A9E",
+                  position: "absolute",
+                  right: "180px",
+                  top: "60px",
+                  cursor: "pointer",
+                }}
+              />
+            ) : (
+              <CgClose
+                className="close"
+                size={20}
+                onClick={closeModal}
+                style={{
+                  color: "#948A9E",
+                  position: "absolute",
+                  right: "70px",
+                  top: "40px",
+                  cursor: "pointer",
+                }}
+              />
+            )}
             <MsgWrapper>
               <TitleWrapper>
                 <TextB sub>

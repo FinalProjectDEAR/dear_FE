@@ -44,7 +44,7 @@ const Follow = (props) => {
   };
   const Follower = props?.item.followMemberId;
   const nickname = props?.item.nickname;
-  console.log(nickname);
+  // console.log(nickname);
   return (
     <FollowWrapper>
       <FollowContainer>

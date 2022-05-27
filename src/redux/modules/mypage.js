@@ -44,7 +44,7 @@ const getPostListDB = (page) => {
         dispatch(getPostList(res.data.data));
       });
     } catch (err) {
-      console.log("익명게시판 리스트 error", err);
+      console.log(err);
     }
   };
 };
@@ -58,7 +58,7 @@ const getFollowDB = (page) => {
         dispatch(getFollow(res.data.data));
       });
     } catch (err) {
-      console.log("마이페이지 팔로우리스트: error", err);
+      console.log(err);
     }
   };
 };
@@ -71,7 +71,7 @@ const getChatDB = () => {
         dispatch(getChat(res.data.data));
       });
     } catch (err) {
-      console.log("상담 히스토리 가져오기 error", err);
+      console.log(err);
     }
   };
 };
@@ -84,7 +84,7 @@ const getInfoDB = () => {
         dispatch(getInfo(res.data.data));
       });
     } catch (err) {
-      console.log("멤버 인포가져오기 error", err);
+      console.log(err);
     }
   };
 };
@@ -109,7 +109,7 @@ const addInfoDB = (memberInfo) => {
           history.push("/myPage");
         });
     } catch (err) {
-      console.log("멤버 인포수정하기 error", err);
+      console.log(err);
     }
   };
 };
