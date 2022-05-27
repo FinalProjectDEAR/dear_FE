@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { memberIdCheck } from "../shared/Check";
 
+import { useCookies } from "react-cookie";
+import moment from "moment";
+
 import styled from "styled-components";
 import logo from "../assets/main/logoS.png";
 import kakao from "../assets/kakao.png";
@@ -20,6 +23,9 @@ const Login = () => {
   const close = () => {
     setOpen(false);
   };
+  const COOKIE_KEY = "notAgain";
+  const [cookies, setCookie] = useCookies([COOKIE_KEY]);
+
   const isLogin = localStorage.getItem("isLogin");
 
   const logout = () => {
@@ -173,11 +179,11 @@ const Login = () => {
           </Text>
         </FooterBox>
       </MobileFooter>
-      {open ? (
+      {cookies[COOKIE_KEY] ? null : (
         <Modal>
           <Survey close={close} />
         </Modal>
-      ) : null}
+      )}
     </Background>
   );
 };
