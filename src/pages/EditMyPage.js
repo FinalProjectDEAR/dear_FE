@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import Swal from "sweetalert2";
 import { Button, Text, ColorBadge, Input } from "../elements";
 import { useMediaQuery } from "react-responsive";
 
@@ -63,7 +64,7 @@ const EditMyPage = () => {
 
   const dupCheck = (nickname) => {
     if (!nicknameCheck(nickname)) {
-      window.alert("닉네임이 형식에 맞지 않습니다. 영문/한글/숫자 포함 3-10자");
+      Swal.fire("닉네임이 형식에 맞지 않습니다. 영문/한글/숫자 포함 3-10자");
       return;
     }
     setIsCheck(true);
@@ -72,7 +73,7 @@ const EditMyPage = () => {
   };
   const submitSolo = () => {
     if (age === "") {
-      window.alert("솔로 정보를 모두 입력해주세요.");
+      Swal.fire("정보를 모두 입력해주세요.");
       return;
     }
     const memberInfo = {
@@ -88,7 +89,7 @@ const EditMyPage = () => {
 
   const submitCouple = () => {
     if (age === "" || loveType === "" || lovePeriod === "") {
-      window.alert("커플 정보를 모두 입력해주세요.");
+      Swal.fire("정보를 모두 입력해주세요.");
       return;
     }
     const memberInfo = {
@@ -104,7 +105,7 @@ const EditMyPage = () => {
 
   const addInfo = (dating) => {
     if (isCheck === false) {
-      window.alert("닉네임 중복확인을 해주세요!");
+      Swal.fire("닉네임 중복확인을 해주세요.");
     }
     if (dating === "솔로") {
       submitSolo();
@@ -112,7 +113,7 @@ const EditMyPage = () => {
     if (dating === "커플") {
       submitCouple();
       // } else {
-      //   window.alert("정보를 모두 입력해주세요.");
+      // Swal.fire("정보를 모두 입력해주세요.");
       //   return;
     }
   };
