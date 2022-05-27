@@ -105,6 +105,10 @@ const HeaderContainer = styled.div`
   @media (max-width: 1920px) {
     box-sizing: border-box;
   }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 320px;
+  }
 `;
 
 const LogoBox = styled.div`
@@ -129,6 +133,10 @@ const HeaderBox = styled.div`
   margin: auto;
   display: flex;
   justify-content: space-between;
+  @media ${({ theme }) => theme.device.mobile} {
+    margin: 0px;
+    width: 340px;
+  }
 `;
 
 const HeaderBtn = styled.button`
