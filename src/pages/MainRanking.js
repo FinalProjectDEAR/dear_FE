@@ -158,8 +158,8 @@ const LineBox = styled.div`
 `;
 
 const RankingBox = styled.div`
-  width: 360px;
-  overflow: hidden;
+  width: 100%;
+  display: flex;
 `;
 
 const InfoBox = styled.div`
