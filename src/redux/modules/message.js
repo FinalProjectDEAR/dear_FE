@@ -1,6 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { api } from "../../shared/apis";
+import Swal from "sweetalert2";
 
 //액션
 const GET_MESSAGE = "message/GET_MESSAGE";
@@ -40,7 +41,7 @@ const getMessageDB = (page) => {
       });
     } catch (err) {
       console.log("쪽지가져오기", err);
-      window.alert("쪽지 리스트를 가져올 수 없습니다.");
+      Swal.fire("쪽지 리스트를 가져올 수 없습니다.");
     }
   };
 };
@@ -55,7 +56,7 @@ const getDetailMsgDB = (messageId) => {
       });
     } catch (err) {
       console.log("쪽지 상세 가져오기", err);
-      window.alert("쪽지를 가져올 수 없습니다.");
+      Swal.fire("쪽지를 가져올 수 없습니다.");
     }
   };
 };
@@ -75,7 +76,7 @@ const addMessageDB = (message, resUser) => {
         });
     } catch (err) {
       console.log(err);
-      window.alert("댓글 추가 실패, 다시 시도해 주세요.");
+      Swal.fire("댓글 추가 실패, 다시 시도해 주세요.");
     }
   };
 };
