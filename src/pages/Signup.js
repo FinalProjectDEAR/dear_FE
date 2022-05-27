@@ -7,6 +7,7 @@ import { actionCreators as userActions } from "../redux/modules/user";
 import { memberIdCheck, pwdCheck } from "../shared/Check";
 
 import styled from "styled-components";
+import Swal from "sweetalert2";
 import logo from "../assets/main/logoS.png";
 import Footer from "../components/Footer";
 
@@ -22,7 +23,7 @@ const Signup = () => {
 
   const dupCheck = (memberId) => {
     if (!memberIdCheck(memberId)) {
-      window.alert("아이디가 형식에 맞지 않습니다. 영문/숫자 포함 3-10자");
+      Swal.fire("아이디가 형식에 맞지 않습니다. 영문/숫자 포함 3-10자");
       return;
     }
     setIsCheck(true);
@@ -31,21 +32,21 @@ const Signup = () => {
 
   const signup = () => {
     if (isCheck === false) {
-      window.alert("아이디 중복확인을 해주세요!");
+      Swal.fire("아이디 중복확인을 해주세요!");
     }
 
     if (memberId === "" || pwd === "") {
-      window.alert("아이디, 패스워드를 모두 입력해주세요!");
+      Swal.fire("아이디, 패스워드를 모두 입력해주세요!");
       return;
     }
 
     if (!pwdCheck(pwd, memberId)) {
-      window.alert("패스워드 형식이 맞지 않습니다! (6-12자 영문, 숫자)");
+      Swal.fire("패스워드 형식이 맞지 않습니다! (6-12자 영문, 숫자)");
       return;
     }
 
     if (pwd !== pwdConfirm) {
-      window.alert("패스워드가 일치하지 않습니다!");
+      Swal.fire("패스워드가 일치하지 않습니다!");
       return;
     }
 

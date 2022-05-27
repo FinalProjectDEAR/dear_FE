@@ -5,6 +5,7 @@ import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
+import Swal from "sweetalert2";
 import help from "../assets/help.png";
 import arrowBack from "../assets/arrow_back.png";
 import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
@@ -96,12 +97,32 @@ function ReqReview(props) {
     let tagLike = "";
 
     if (goodClick === false && badClick === false) {
-      window.alert("필수항목을 체크해주세요.");
+      Swal.fire("필수항목을 체크해주세요.");
       return;
-    } else if (goodClick === true && goodResTag === "") {
-      window.alert("이유를 선택 해주세요!");
+    } else if (
+      goodClick === true &&
+      goodResTag ===
+        {
+          "공감을 잘해줘요.": false,
+          "대화가 즐거웠어요.": false,
+          "감수성이 풍부했어요.": false,
+          "시원하게 팩트폭격을 해줘요.": false,
+          "명쾌한 해결책을 알려줘요.": false,
+        }
+    ) {
+      Swal.fire("세부항목에 체크해주세요.");
       return;
-    } else if (goodClick === true && goodResTag !== "") {
+    } else if (
+      goodClick === true &&
+      goodResTag !==
+        {
+          "공감을 잘해줘요.": false,
+          "대화가 즐거웠어요.": false,
+          "감수성이 풍부했어요.": false,
+          "시원하게 팩트폭격을 해줘요.": false,
+          "명쾌한 해결책을 알려줘요.": false,
+        }
+    ) {
       tagLike = true;
       dispatch(
         actionCreators.addReviewReqDB(
@@ -114,16 +135,36 @@ function ReqReview(props) {
       );
     }
 
-    if (badClick === true && badResTag === "") {
+    if (
+      badClick === true &&
+      badResTag ===
+        {
+          "욕설, 비속어를 사용했어요.": false,
+          "주제와 관련없는 이야기를 했어요.": false,
+          "이야기를 꺼내도 답이 없었어요.": false,
+          "대화 태도가 불량해요": false,
+          "불순한 의도로 접근했어요.": false,
+        }
+    ) {
       console.log(
         "배드클릭",
         requestReview,
         Object.values(badResTag),
         serviceComment
       );
-      window.alert("이유를 선택 해주세요!");
+      Swal.fire("세부항목에 체크해주세요.");
       return;
-    } else if (badClick === true && badResTag !== "") {
+    } else if (
+      badClick === true &&
+      badResTag !==
+        {
+          "욕설, 비속어를 사용했어요.": false,
+          "주제와 관련없는 이야기를 했어요.": false,
+          "이야기를 꺼내도 답이 없었어요.": false,
+          "대화 태도가 불량해요": false,
+          "불순한 의도로 접근했어요.": false,
+        }
+    ) {
       tagLike = false;
       dispatch(
         actionCreators.addReviewReqDB(

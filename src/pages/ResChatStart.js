@@ -6,6 +6,7 @@ import { history } from "../redux/configureStore";
 import { actionCreators as chatActions } from "../redux/modules/chat";
 
 import styled from "styled-components";
+import Swal from "sweetalert2";
 import arrowBack from "../assets/arrow_back.png";
 
 function ResChatStart() {
@@ -29,7 +30,7 @@ function ResChatStart() {
   //정보 송부
   const submit = () => {
     if (category === "") {
-      window.alert("필수정보를 모두 입력해주세요!");
+      Swal.fire("필수정보를 모두 입력해주세요.");
       return;
     }
     const chatInfo = {

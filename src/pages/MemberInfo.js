@@ -8,6 +8,7 @@ import { nicknameCheck } from "../shared/Check";
 import { Text, TextB, Input, Button, ColorBadge, Modal } from "../elements";
 import arrowBack from "../assets/arrow_back.png";
 import styled from "styled-components";
+import Swal from "sweetalert2";
 
 function MemberInfo() {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ function MemberInfo() {
 
   const dupCheck = (nickname) => {
     if (!nicknameCheck(nickname)) {
-      window.alert("닉네임이 형식에 맞지 않습니다. 영문/한글/숫자 포함 3-10자");
+      Swal.fire("닉네임이 형식에 맞지 않습니다. 영문/한글/숫자 포함 3-10자");
       return;
     }
     setIsCheck(true);
@@ -52,11 +53,11 @@ function MemberInfo() {
 
   const next = () => {
     if (isCheck === false) {
-      window.alert("닉네임 중복확인을 해주세요!");
+      Swal.fire("닉네임 중복확인을 해주세요!");
     }
 
     if (nickname === "" || isSelected === "#fff") {
-      window.alert("닉네임, 퍼스널 컬러를 모두 입력해주세요!");
+      Swal.fire("닉네임, 퍼스널 컬러를 모두 입력해주세요!");
       return;
     }
     setIsNext(2);
@@ -64,7 +65,7 @@ function MemberInfo() {
 
   const submitSolo = () => {
     if (gender === "" || age === "") {
-      window.alert("솔로 정보를 모두 입력해주세요.");
+      Swal.fire("정보를 모두 입력해주세요.");
       return;
     }
     const memberInfo = {
@@ -81,7 +82,7 @@ function MemberInfo() {
 
   const submitCouple = () => {
     if (gender === "" || age === "" || loveType === "" || lovePeriod === "") {
-      window.alert("커플 정보를 모두 입력해주세요.");
+      Swal.fire("정보를 모두 입력해주세요.");
       return;
     }
     const memberInfo = {
@@ -102,7 +103,7 @@ function MemberInfo() {
     } else if (dating === "커플") {
       submitCouple();
     } else {
-      window.alert("정보를 모두 입력해주세요.");
+      Swal.fire("정보를 모두 입력해주세요.");
       return;
     }
   };

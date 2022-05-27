@@ -7,13 +7,10 @@ import { OpenVidu } from "openvidu-browser";
 import styled from "styled-components";
 import { Text, Button, ColorBadge, Modal } from "../elements";
 
-import highPitch from "../assets/chat/highPitch.png";
-import lowPitch from "../assets/chat/lowPitch.png";
-
 //page
 import UserAudioComponent from "../components/UserAudioComponent";
 import Timer from "../components/Timer";
-import Loading from "../pages/Loading";
+import LoadingMatch from "../pages/LoadingMatch";
 import ChatClose from "./alert/ChatClose";
 import OtherClose from "./alert/OtherClose";
 import AddTime from "./alert/AddTime";
@@ -54,6 +51,7 @@ function AudioChat() {
   const [noListener, setNoListener] = React.useState(false);
   const [showReqInfo, setShowReqInfo] = React.useState(false);
   const [showResInfo, setShowResInfo] = React.useState(false);
+  const [showFiveSec, setShowFiveSec] = React.useState(false);
 
   const closeModal = () => {
     setModalOpen(false);
@@ -71,6 +69,7 @@ function AudioChat() {
   };
 
   // 채팅중 실시간 시그널
+
   const sendCloseSignal = () => {
     console.log("종료 시그널 보내", connectObj);
     session
@@ -88,7 +87,6 @@ function AudioChat() {
   };
 
   const sendContinueSignal = () => {
-    console.log("연장송부", wantMore);
     const wantMoreList = wantMore.agree;
     wantMoreList.push("true");
     setWantMore({ ...wantMore, agree: wantMoreList });
@@ -113,52 +111,56 @@ function AudioChat() {
       });
   };
 
-  // 음성변조
-  const WVoiceChange = () => {
-    console.log("목소리 바꾼다?", wVoice);
-    setWvoice(!wVoice);
-
-    if (wVoice) {
-      mainStreamManager.stream
-        .applyFilter("GStreamerFilter", {
-          command: "pitch pitch = 1.2",
-        })
-        .then(() => {
-          console.log("필터적용됐어!");
-        });
-    }
-  };
-  const MVoiceChange = () => {
-    setMvoice(!mVoice);
-    console.log("목소리 바꾼다?", mVoice);
-
-    if (mVoice) {
-      publisher.stream.applyFilter("GStreamerFilter", {
-        command: "pitch pitch = 0.8",
+  const sendConnectSignal = () => {
+    console.log("커넥트 시그널 보내:", connectObj);
+    session
+      .signal({
+        data: "true", // Any string (optional)
+        to: [connectObj], // Array of Connection objects (optional. Broadcast to everyone if empty)
+        type: "connect", // The type of message (optional)
+      })
+      .then(() => {
+        console.log("채팅연결했대");
+      })
+      .catch((error) => {
+        console.error(error);
       });
-    }
   };
 
   //세션 연결 및 커넥트
   React.useEffect(() => {
     window.addEventListener("beforeunload", onbeforeunload);
+
     const connectSession = () => {
+      console.log("커넥트 세션시작");
       const OV = new OpenVidu();
 
       var mySession = OV.initSession();
       setSession(mySession);
 
       mySession.on("streamCreated", (event) => {
+        console.log("스트림생성");
         var subscriber = mySession.subscribe(event.stream, undefined);
         var subscriberList = subscribers;
         subscriberList.push(subscriber);
         setSubscribers([...subscribers, ...subscriberList]);
 
-        let date = new Date();
-        let target = date.setMinutes(date.getMinutes() + 10);
-        setTargetTime(target);
+        // let date = new Date();
+        // let target = date.setMinutes(date.getMinutes() + 10);
+        // setTargetTime(target);
         setIsConnect(true);
+        // sendConnectSignal();
         dispatch(chatActions.getChatInfoDB(sessionId));
+
+        // setShowFiveSec(true);
+        // setShowFiveSec(false);
+      });
+
+      mySession.on("signal:connect", (event) => {
+        console.log("커넥션 메세지 수신");
+        // const fiveSecWait = () => {};
+        // setTimeout(fiveSecWait(), 5000);
+        // dispatch(chatActions.getChatInfoDB(sessionId));
       });
 
       mySession.on("signal:close", (event) => {
@@ -181,12 +183,13 @@ function AudioChat() {
       //메세지 송신을 위한 connect Obj 생성
       mySession.on("connectionCreated", (event) => {
         setConnectObj(event.connection);
-        console.log("커넥션 created", event.connection);
+        console.log("커넥션 생성", event.connection);
       });
 
       mySession
         .connect(token, { clientData: nickname })
         .then(async () => {
+          console.log("토큰으로 커넥트");
           var devices = await OV.getDevices();
           var videoDevices = devices.filter(
             (device) => device.kind === "videoinput"
@@ -219,29 +222,6 @@ function AudioChat() {
     };
   }, []);
 
-  //매칭 안될 때
-  React.useEffect(() => {
-    if (!isConnect) {
-      console.log("30초 카운트");
-      setTimeout(waitTimeOut, 30000);
-    }
-  }, []);
-
-  const noMatch = () => {
-    leaveSession();
-    informClose();
-  };
-
-  const waitTimeOut = () => {
-    setNoListener(true);
-  };
-
-  // 채팅 종료
-  const chatClose = () => {
-    sendCloseSignal();
-    setTimeout(leaveSession, 2000); //2000
-  };
-
   //세션,커넥션 종료
   const leaveSession = () => {
     console.log("오픈비두 세션종료");
@@ -252,6 +232,29 @@ function AudioChat() {
     setSubscribers([]);
     setMySessionId("");
     setPublisher(undefined);
+  };
+
+  //매칭 안될 때
+  React.useEffect(() => {
+    if (!isConnect) {
+      console.log("30초 카운트");
+      setTimeout(waitTimeOut, 30000);
+    }
+  }, []);
+
+  const noMatch = () => {
+    leaveSession();
+    setTimeout(informClose(), 500);
+  };
+
+  const waitTimeOut = () => {
+    setNoListener(true);
+  };
+
+  // 채팅 종료
+  const chatClose = () => {
+    sendCloseSignal();
+    setTimeout(leaveSession, 2000); //2000
   };
 
   //서버에 종료 알리기
@@ -266,6 +269,13 @@ function AudioChat() {
       dispatch(chatActions.disConnectDB(sessionId));
     }
   };
+
+  // 뒤로가기
+  React.useEffect(() => {
+    window.onpopstate = () => {
+      noMatch();
+    };
+  });
 
   // 채팅종료시간
   function dateFormat(date) {
@@ -579,7 +589,7 @@ function AudioChat() {
         </ChatWrapper>
       ) : null}
       {role === "response" && isConnect === false ? (
-        <Loading informClose={informClose} leaveSession={leaveSession} />
+        <LoadingMatch informClose={informClose} leaveSession={leaveSession} />
       ) : null}
       {modalOpen && (
         <Modal>
@@ -604,7 +614,6 @@ function AudioChat() {
           <NoMatch noMatch={noMatch} />
         </Modal>
       ) : null}
-
       {isContinue === true ? (
         <Modal closeModal={closeModal}>
           <AddTime
@@ -728,7 +737,7 @@ const TagInfo = styled.div`
   align-items: center;
   flex-direction: column;
   position: absolute;
-  top: 260px;
+  top: 320px;
   background-color: #fff;
   border-radius: 10px;
 `;

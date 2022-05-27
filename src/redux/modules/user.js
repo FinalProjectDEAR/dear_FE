@@ -3,6 +3,7 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../shared/apis";
 import jwtDecode from "jwt-decode";
+import Swal from "sweetalert2";
 
 // actions
 const LOG_OUT = "LOG_OUT";
@@ -54,14 +55,14 @@ const signupDB = (memberId, pwd, pwdCheck) => {
         process.env.REACT_APP_URL + "/user/signup",
         userInfo
       );
-      window.alert("회원가입이 완료되었습니다.");
+      Swal.fire("회원가입이 완료되었습니다.");
       console.log("서버응답", data);
 
       // dispatch(setUser(userInfo));
       history.replace("/");
     } catch (err) {
       console.log("회원가입 실패", err);
-      window.alert("회원가입이 실패했습니다. 다시 시도해주세요.");
+      Swal.fire("회원가입이 실패했습니다. 다시 시도해주세요.");
     }
   };
 };
@@ -96,7 +97,7 @@ const loginDB = (memberId, pwd) => {
       }
     } catch (err) {
       console.log("로그인 실패", err);
-      window.alert("일치하는 회원정보가 없습니다. 회원가입을 해주세요.");
+      Swal.fire("일치하는 회원정보가 없습니다. 회원가입을 해주세요.");
     }
   };
 };
@@ -130,7 +131,7 @@ const kakaoLogin = (code) => {
       }
     } catch (err) {
       console.log("소셜로그인 에러", err);
-      window.alert("카카오로그인에 실패하였습니다. 다시 시도해주세요.");
+      Swal.fire("카카오로그인에 실패하였습니다. 다시 시도해주세요.");
       history.replace("/");
     }
   };
@@ -151,7 +152,7 @@ const memberInfoDB = (memberId, memberInfo) => {
       history.replace("/main");
     } catch (err) {
       console.log("유저정보 등록 에러", err);
-      window.alert("등록에 실패하였습니다. 다시 시도해주세요.");
+      Swal.fire("회원등록에 실패하였습니다. 다시 시도해주세요.");
     }
   };
 };
@@ -174,7 +175,7 @@ const getUserInfoDB = () => {
       dispatch(getInfo(userInfo, followList, historyList, postList));
     } catch (err) {
       console.log("유저정보 조회 에러", err);
-      window.alert("유저정보 조회에 실패하였습니다. 다시 시도해주세요.");
+      Swal.fire("유저정보 조회에 실패하였습니다. 다시 시도해주세요.");
     }
   };
 };

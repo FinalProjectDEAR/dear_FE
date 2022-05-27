@@ -14,6 +14,7 @@ import uploadImg from "../assets/upload.png";
 import attach from "../assets/vote/attach.png";
 import arrowBack from "../assets/arrow_back.png";
 import styled from "styled-components";
+import Swal from "sweetalert2";
 
 function VoteWrite() {
   //모바일 사이즈
@@ -98,7 +99,7 @@ function VoteWrite() {
         voteLeft === "" ||
         voteRight === ""
       ) {
-        window.alert("이미지와 컨텐츠 모두 작성해주세요!");
+        Swal.fire("이미지와 컨텐츠 모두 작성해주세요.");
         return;
       }
       dispatch(
@@ -119,7 +120,7 @@ function VoteWrite() {
         voteLeft === "" ||
         voteRight === ""
       ) {
-        window.alert("컨텐츠를 모두 작성해주세요!");
+        Swal.fire("컨텐츠를 모두 작성해주세요.");
         return;
       }
       dispatch(
