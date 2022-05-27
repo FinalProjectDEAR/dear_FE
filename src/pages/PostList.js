@@ -38,7 +38,7 @@ function PostList(props) {
   const [page, setPage] = React.useState(1);
   const postList = useSelector((state) => state.post.post.content);
   const pageList = useSelector((state) => state.post.post);
-  console.log(postList);
+  // console.log(postList);
 
   const gotoVote = () => {
     if (isLogin !== "true") {

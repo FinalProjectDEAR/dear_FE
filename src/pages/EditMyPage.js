@@ -123,6 +123,7 @@ const EditMyPage = () => {
   const addInfo = (dating) => {
     if (isCheck === false) {
       Swal.fire("닉네임 중복확인을 해주세요.");
+      return;
     }
     if (dating === "솔로") {
       submitSolo();

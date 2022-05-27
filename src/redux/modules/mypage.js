@@ -90,7 +90,7 @@ const getInfoDB = () => {
 };
 //멤버인포 수정하기
 const addInfoDB = (memberInfo) => {
-  console.log(memberInfo);
+  // console.log(memberInfo);
   return function (dispatch, getState, { history }) {
     try {
       api
