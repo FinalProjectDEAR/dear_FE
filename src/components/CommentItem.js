@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Text, Input, Modal } from "../elements";
 import { ReactComponent as Like } from "../assets/comment-select.svg";
 import styled from "styled-components";
+import Swal from "sweetalert2";
+
 //시간알려주는패키지
 import TimeCounting from "time-counting";
 //페이지
@@ -50,7 +52,7 @@ const CommentItem = (props) => {
   //댓글 채택
   const likeComment = () => {
     if (boardPostId === memberId) {
-      window.alert("본인 댓글은 채택이 불가합니다.");
+      Swal.fire("본인 댓글은 채택이 불가합니다.");
       return;
     }
     dispatch(actionCreators.likeCommentDB(postId, comment_id));
@@ -76,18 +78,18 @@ const CommentItem = (props) => {
   const checkMaxLength = (e) => {
     let wordLength = e.target.value.length;
     if (wordLength >= 255) {
-      window.alert("255자 이상 작성할 수 없습니다.");
+      Swal.fire("255자 이상 작성할 수 없습니다.");
       history.goBack();
     }
     setTextLength(wordLength);
   };
   const editMode = () => {
     if (commentLike === true) {
-      window.alert("이미 채택 된 댓글은 수정이 불가합니다!");
+      Swal.fire("이미 채택 된 댓글은 수정이 불가합니다!");
       return;
     }
     if (memberId !== props.member) {
-      window.alert("본인이 작성한 댓글이 아닙니다.");
+      Swal.fire("본인이 작성한 댓글이 아닙니다.");
       return;
     }
     setIsEdit(true);

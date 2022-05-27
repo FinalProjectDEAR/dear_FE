@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Button, Input } from "../elements";
+import Swal from "sweetalert2";
 //리덕스관련
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -17,7 +18,7 @@ const CommentWrite = (props) => {
   const checkMaxLength = (e) => {
     let wordLength = e.target.value.length;
     if (wordLength >= 255) {
-      window.alert("255자 이상 작성할 수 없습니다.");
+      Swal.fire("255자 이상 작성할 수 없습니다.");
       return;
     }
     setTextLength(wordLength);
@@ -27,7 +28,7 @@ const CommentWrite = (props) => {
 
   // const goComment = () => {
   //   if (isLogin !== "true") {
-  //     window.alert("로그인 후 이용해주세요.");
+  // Swal.fire("로그인 후 이용해주세요.");
   //     history.push(`/postDetail/${props.postId}`);
   //     return;
   //   }
@@ -36,12 +37,12 @@ const CommentWrite = (props) => {
 
   const addComment = () => {
     if (isLogin !== "true") {
-      window.alert("로그인 후 이용해주세요.");
+      Swal.fire("로그인 후 이용해주세요.");
       history.push(`/postDetail/${props.postId}`);
       return;
     }
     if (comment === "") {
-      window.alert("댓글을 작성해주세요");
+      Swal.fire("댓글을 작성해주세요");
       return;
     }
     dispatch(

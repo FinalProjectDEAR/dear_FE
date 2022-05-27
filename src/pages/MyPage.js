@@ -8,6 +8,7 @@ import { ReactComponent as Right } from "../assets/paging_right.svg";
 import { Modal } from "../elements/index";
 import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
+import Swal from "sweetalert2";
 //페이지관련
 import Layout from "../components/Layout";
 import MessageList from "./MessageList";
@@ -314,7 +315,7 @@ const MyPage = () => {
                   style={{ cursor: "pointer" }}
                   onClick={() => {
                     if (mPage === msgPage) {
-                      window.alert("마지막 쪽지 페이지입니다.");
+                      Swal.fire("마지막 쪽지 페이지입니다.");
                       return;
                     }
                     setMpage(mPage + 1);
@@ -383,7 +384,7 @@ const MyPage = () => {
                   style={{ cursor: "pointer" }}
                   onClick={() => {
                     if (fPage === followPage) {
-                      window.alert("마지막 찜 페이지입니다.");
+                      Swal.fire("마지막 찜 페이지입니다.");
                       return;
                     }
                     setFpage(fPage + 1);

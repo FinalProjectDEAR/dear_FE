@@ -4,6 +4,7 @@ import { ReactComponent as ThumbUp } from "../assets/postList/posthumb.svg";
 import { ReactComponent as CommentNum } from "../assets/postList/post.svg";
 import { ReactComponent as LikeUp } from "../assets/postList/postUp.svg";
 import styled from "styled-components";
+import Swal from "sweetalert2";
 import { Text, Button, Modal } from "../elements/index";
 //시간알려주는패키지
 import TimeCounting from "time-counting";
@@ -73,7 +74,7 @@ function PostDetail(props) {
   const member = localStorage.getItem("memberId");
   const likePost = () => {
     if (post?.memberId === member) {
-      window.alert("본인 글의 공감은 불가합니다.");
+      Swal.fire("본인 글의 공감은 불가합니다.");
       return;
     }
     setLike(!like);
