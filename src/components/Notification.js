@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { TextB, Text, ColorBadge, AlarmModal } from "../elements";
+import { ReactComponent as EmptyMsg } from "../assets/Empty/emptyMsg.svg";
 //리덕스 관련
 import { history } from "../redux/configureStore";
 import { useSelector } from "react-redux";
@@ -29,9 +30,17 @@ const Notification = () => {
           <React.Fragment>
             <NotiWrapper>
               <NotiTitle>
-                <TextB textAlign="left">알림</TextB>
+                <Text title textAlign="left">
+                  알림
+                </Text>
               </NotiTitle>
               <NotiContainer>
+                {alarmList?.[0]?.read ? (
+                  <EmptyBox>
+                    <EmptyMsg style={{ paddingBottom: "10px" }} />
+                  </EmptyBox>
+                ) : null}
+
                 {alarmList &&
                   alarmList.map((item, idx) => {
                     return item.notiType === "COMMENT" && !item.read ? (
@@ -207,7 +216,7 @@ const NotiTitle = styled.div`
   height: 40px;
   @media ${({ theme }) => theme.device.isMobile} {
     width: 260px;
-    /* height: 20px; */
+    height: 20px;
     /* border: 1px solid red; */
   }
 `;
@@ -217,6 +226,21 @@ const NotiContainer = styled.div`
   margin: auto;
   width: 340px;
   height: 440px;
+  /* border: 1px solid red; */
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 260px;
+    height: 352px;
+    /* border: 1px solid red; */
+  }
+`;
+const EmptyBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  width: 340px;
+  height: 440px;
+  /* border: 1px solid red; */
   @media ${({ theme }) => theme.device.isMobile} {
     width: 260px;
     height: 352px;

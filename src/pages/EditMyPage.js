@@ -9,7 +9,6 @@ import { actionCreators } from "../redux/modules/mypage";
 import { nicknameCheck } from "../shared/Check";
 //페이지관련
 import Layout from "../components/Layout";
-import { display, flexbox } from "@mui/system";
 
 const EditMyPage = () => {
   const Mobile = useMediaQuery({
@@ -59,8 +58,9 @@ const EditMyPage = () => {
   const [showName, setShowName] = React.useState("");
   const [isCheck, setIsCheck] = React.useState(false);
   const [nickError, setNickError] = React.useState(null);
-  const [isNext, setIsNext] = React.useState(1);
+
   const nickErr = useSelector((state) => state.user.nickMsg);
+
   const dupCheck = (nickname) => {
     if (!nicknameCheck(nickname)) {
       window.alert("닉네임이 형식에 맞지 않습니다. 영문/한글/숫자 포함 3-10자");
@@ -69,6 +69,52 @@ const EditMyPage = () => {
     setIsCheck(true);
     setShowName(nickname);
     dispatch(userActions.dupNicknameDB(nickname, setNickError));
+  };
+  const submitSolo = () => {
+    if (age === "") {
+      window.alert("솔로 정보를 모두 입력해주세요.");
+      return;
+    }
+    const memberInfo = {
+      nickname: nickname,
+      color: isSelected,
+      age: age,
+      dating: dating,
+      loveType: loveType,
+      lovePeriod: lovePeriod,
+    };
+    dispatch(actionCreators.addInfoDB(memberInfo));
+  };
+
+  const submitCouple = () => {
+    if (age === "" || loveType === "" || lovePeriod === "") {
+      window.alert("커플 정보를 모두 입력해주세요.");
+      return;
+    }
+    const memberInfo = {
+      nickname: nickname,
+      color: isSelected,
+      age: age,
+      dating: dating,
+      loveType: loveType,
+      lovePeriod: lovePeriod,
+    };
+    dispatch(actionCreators.addInfoDB(memberInfo));
+  };
+
+  const addInfo = (dating) => {
+    if (isCheck === false) {
+      window.alert("닉네임 중복확인을 해주세요!");
+    }
+    if (dating === "솔로") {
+      submitSolo();
+    }
+    if (dating === "커플") {
+      submitCouple();
+      // } else {
+      //   window.alert("정보를 모두 입력해주세요.");
+      //   return;
+    }
   };
 
   //멤버인포조회
@@ -79,7 +125,6 @@ const EditMyPage = () => {
   // console.log(userInfo);
   //defaultValue가 아닌 진짜 Value로 불러오기 위한 작업
   useEffect(() => {
-    // console.log("유즈이펙트 시작한다~~");
     setNickname(userInfo?.nickname);
     setAge(userInfo?.age);
     setLoveType(userInfo?.loveType);
@@ -88,36 +133,9 @@ const EditMyPage = () => {
     setDating(userInfo?.dating);
   }, [userInfo]);
 
-  const addInfo = () => {
-    if (isCheck === false) {
-      window.alert("닉네임 중복확인을 해주세요!");
-    }
-    if (
-      age === "" ||
-      loveType === "" ||
-      lovePeriod === "" ||
-      dating === "" ||
-      isSelected === "" ||
-      nickname === ""
-    ) {
-      window.alert("정보를 모두 입력해주세요.");
-      return;
-    }
-    dispatch(
-      actionCreators.addInfoDB(
-        age,
-        isSelected,
-        dating,
-        lovePeriod,
-        loveType,
-        nickname
-      )
-    );
-  };
   return (
     <React.Fragment>
       <Layout>
-        {" "}
         <Background>
           <EditWrapper>
             <Text title textAlign="left">
@@ -184,7 +202,9 @@ const EditMyPage = () => {
                       <Text
                         sub3
                         color="#7A37BE"
-                        _onClick={dupCheck}
+                        _onClick={() => {
+                          dupCheck(nickname);
+                        }}
                         cursor="pointer"
                       >
                         중복확인
@@ -235,7 +255,9 @@ const EditMyPage = () => {
                     <Text
                       sub3
                       color="#7A37BE"
-                      _onClick={dupCheck}
+                      _onClick={() => {
+                        dupCheck(nickname);
+                      }}
                       cursor="pointer"
                     >
                       중복확인
@@ -778,14 +800,26 @@ const EditMyPage = () => {
             </TypeBox>
           </InfoWrapper>
           <BtnBox>
-            <Button primary size="regular" cursor="pointer" _onClick={addInfo}>
+            <Button
+              primary
+              size="regular"
+              cursor="pointer"
+              _onClick={() => {
+                addInfo(dating);
+              }}
+            >
               <Text body4 color="#ffffff" cursor="pointer">
                 정보 수정하기
               </Text>
             </Button>
           </BtnBox>
           <MBtnBox>
-            <button onClick={addInfo} className="mobile">
+            <button
+              onClick={() => {
+                addInfo(dating);
+              }}
+              className="mobile"
+            >
               <Text body4 color="#ffffff" cursor="pointer">
                 정보 수정하기
               </Text>
@@ -881,6 +915,7 @@ const Color = styled.div`
     display: grid;
     grid-template-columns: repeat(8, 25px);
     flex-direction: column;
+    box-sizing: border-box;
     /* border: 1px solid red; */
   }
 `;
@@ -931,6 +966,7 @@ const MobileAge = styled.div`
   /* background: pink; */
   width: 204px;
   height: 122px;
+  box-sizing: border-box;
 `;
 const WebAge = styled.div`
   display: flex;
@@ -939,10 +975,11 @@ const WebAge = styled.div`
   padding: 10px 0px;
   gap: 10px;
   margin-left: 30px;
+  box-sizing: border-box;
   /* width: 327px; */
   /* height: 66px; */
-  /* 
-  border: 1px solid red; */
+
+  /* border: 1px solid red; */
 `;
 const InfoBox = styled.div`
   margin-top: 15px;
@@ -981,7 +1018,7 @@ const InfoBox = styled.div`
     display: flex;
     flex-direction: row;
     gap: 10px;
-    margin-left: 35px;
+    /* margin-left: 35px; */
   }
   .radioTerm {
     margin-left: 35px;
@@ -1053,7 +1090,7 @@ const InfoBox = styled.div`
       box-sizing: border-box;
     } */
     .radio {
-      /* margin-left: 35px; */
+      margin-right: 60px;
       display: flex;
       flex-direction: row;
       gap: 10px;
@@ -1140,6 +1177,7 @@ const RadioWrap = styled.div`
   @media ${({ theme }) => theme.device.web} {
     display: flex;
     flex-direction: row;
+    margin-left: 13px;
   }
   @media ${({ theme }) => theme.device.isMobile} {
     /* background: pink; */

@@ -296,7 +296,11 @@ const InfoContainer = styled.div`
   /* border: 1px solid red; */
   @media ${({ theme }) => theme.device.isMobile} {
     box-sizing: border-box;
+    padding-top: 20px;
+    padding-left: 20px;
     margin: auto;
+    /* border: 1px solid red; */
+    height: 190px;
   }
 `;
 const InfoBox = styled.div`
@@ -316,6 +320,7 @@ const VoteWrapper = styled.div`
   margin: 155px auto 200px;
   cursor: pointer;
   text-align: left;
+  /* background: pink; */
 `;
 const MoreVote = styled.span`
   color: #948a9e;
@@ -335,7 +340,7 @@ const BoardWrapper = styled.div`
 `;
 const TitleWrapper = styled.div`
   display: flex;
-  width: 1032px;
+  max-width: 1032px;
   /* background: pink; */
   justify-content: space-between;
   padding-top: 36px;
@@ -369,9 +374,9 @@ const CateGoryWrapper = styled.div`
   @media ${({ theme }) => theme.device.web} {
     .mobile {
       display: flex;
-      width: 409px;
+      width: 390px;
       flex-direction: row;
-      /* border: 1px solid blue; */
+      border: 1px solid blue;
       justify-content: space-around;
       align-items: center;
     }
@@ -401,6 +406,7 @@ const AllBtn = styled.div`
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   width: 76px;
   height: 76px;
+  /* border: 1px solid black; */
   /* display: flex;
   flex-direction: column;
   justify-content: center;
@@ -435,6 +441,7 @@ const InfoItem = styled.div`
   line-height: 18px;
   font-weight: 500;
   vertical-align: middle;
+  box-sizing: border-box;
 `;
 const BtnWrapper = styled.div`
   /* border: 1px solid red; */
@@ -463,14 +470,16 @@ const MBtnWrapper = styled.div`
   }
   @media ${({ theme }) => theme.device.isMobile} {
     /* border: 1px solid red; */
-    max-width: 400px;
+    max-width: 390px;
     width: 100%;
     margin: auto;
     justify-content: left;
-    height: 40px;
+    height: 80px;
     display: flex;
+    padding-left: 20px;
+    box-sizing: border-box;
     /* padding-left: 15px; */
-    padding-top: 15px;
+    /* padding-top: 45px; */
     /* border: 1px solid red; */
   }
 `;
@@ -483,7 +492,9 @@ const MBtnContainer = styled.div`
     flex-direction: row;
     gap: 10px;
     width: 290px;
-    height: 40px;
+    /* height: 40px; */
+    /* padding-left: 10px; */
+    /* padding-bottom: 50px; */
     /* background-color: orange; */
   }
 `;
