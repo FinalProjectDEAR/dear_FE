@@ -10,6 +10,7 @@ import { ReactComponent as Again } from "../assets/postList/board-cate6.svg";
 import { ReactComponent as Solo } from "../assets/postList/board-cate3 (1).svg";
 import { ReactComponent as Etc } from "../assets/postList/board-cate8.svg";
 import { ReactComponent as Blogging } from "../assets/postList/blogging 1.svg";
+import Swal from "sweetalert2";
 
 //리덕스관련
 import { useHistory, useParams } from "react-router-dom";
@@ -40,7 +41,7 @@ function PostList(props) {
 
   const gotoVote = () => {
     if (isLogin !== "true") {
-      window.alert("로그인 후 이용해주세요.");
+      Swal.fire("로그인 후 이용해주세요.");
       history.push("/");
       return;
     }
@@ -49,7 +50,7 @@ function PostList(props) {
 
   const gotoPost = () => {
     if (isLogin !== "true") {
-      window.alert("로그인 후 이용해주세요.");
+      Swal.fire("로그인 후 이용해주세요.");
       history.push("/");
       return;
     }

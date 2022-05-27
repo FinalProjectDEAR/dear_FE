@@ -4,6 +4,7 @@ import styled from "styled-components";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import arrowBack from "../assets/arrow_back.png";
+import Swal from "sweetalert2";
 
 import { history } from "../redux/configureStore";
 import { useSelector, useDispatch } from "react-redux";
@@ -72,7 +73,7 @@ function ResReview(props) {
         serviceComment
       );
       if (goodResTag === "") {
-        window.alert("이유를 선택 해주세요!");
+        Swal.fire("이유를 선택 해주세요!");
         return;
       }
       tagLike = true;

@@ -4,6 +4,7 @@ import { ReactComponent as ImageUPload } from "../assets/파일첨부.svg";
 import styled from "styled-components";
 
 import { BiX } from "react-icons/bi";
+import Swal from "sweetalert2";
 //페이지관련
 import Layout from "../components/Layout";
 
@@ -39,12 +40,8 @@ function PostEdit() {
   //글자 수 제한
   const checkMaxLength = (e) => {
     let wordLength = e.target.value.length;
-    if (wordLength <= 20) {
-      window.alert("20자 이상 작성 부탁드립니다");
-      return;
-    }
     if (wordLength >= 1000) {
-      window.alert("1,000자 이상 작성할 수 없습니다.");
+      Swal.fire("1,000자 이상 작성할 수 없습니다.");
       return;
     }
     setTextLength(wordLength);
@@ -63,12 +60,12 @@ function PostEdit() {
     let imageUrlList = [...imgPreview];
     const maxImageCnt = 3;
     if (imageList.length > maxImageCnt) {
-      window.alert("첨부 파일은 최대 3개까지 가능합니다.");
+      Swal.fire("첨부 파일은 최대 3개까지 가능합니다.");
       console.log("한번에 3장 이상 인풋한 경우");
       return;
     }
     if (files.length + imageList.length > 3) {
-      window.alert("첨부 파일은 최대 3개까지 가능합니다.");
+      Swal.fire("첨부 파일은 최대 3개까지 가능합니다.");
       console.log("이미 3장이 입력 되어있는데 1장 더 추가 한 경우");
       return;
     } else {
@@ -76,7 +73,7 @@ function PostEdit() {
       const imageSize = imageList.size; //이미지용량
       const maxSize = 5 * 1024 * 1024; //5MB
       if (imageSize > maxSize) {
-        window.alert("첨부파일 용량은 5MB 이내로 등록 가능합니다.");
+        Swal.fire("첨부파일 용량은 5MB 이내로 등록 가능합니다.");
         return;
       }
       //파일들을 꺼내 배열 안에 넣어주기

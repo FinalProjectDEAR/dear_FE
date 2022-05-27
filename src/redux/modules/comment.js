@@ -2,6 +2,7 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { api } from "../../shared/apis";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 //액션
 const ADD = "comment/ADD";
@@ -57,7 +58,7 @@ const getCommentDB = (postId, page) => {
         });
     } catch (err) {
       console.log("댓글가져오기", err);
-      window.alert("댓글정보를 가져올 수 없습니다.");
+      Swal.fire("댓글정보를 가져올 수 없습니다.");
     }
   };
 };
@@ -76,7 +77,7 @@ const addCommentDB = (comment, postId) => {
         });
     } catch (err) {
       console.log(err);
-      window.alert("댓글 추가 실패, 다시 시도해 주세요.");
+      Swal.fire("댓글 추가 실패, 다시 시도해 주세요.");
     }
   };
 };
@@ -93,7 +94,7 @@ const editCommentDB = (comment_id, comment, postId) => {
         });
     } catch (err) {
       console.log("댓글 수정 error", err);
-      window.alert("본인 댓글만 수정이 가능합니다!");
+      Swal.fire("본인 댓글만 수정이 가능합니다!");
     }
   };
 };
