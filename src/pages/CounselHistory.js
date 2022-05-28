@@ -118,7 +118,7 @@ const CounselHistoryWrapper = styled.div`
     flex-direction: row;
     margin-left: 30px;
     /* border: 1px solid red; */
-    width: 150px;
+    width: 200px;
   }
   @media ${({ theme }) => theme.device.isMobile} {
     background-color: #fafafa;
