@@ -19,7 +19,7 @@ const CommentWrite = (props) => {
   const checkMaxLength = (e) => {
     let wordLength = e.target.value.length;
     if (wordLength >= 255) {
-      Swal.fire("255자 이상 작성할 수 없습니다.");
+      Swal.fire("255 이상 작성할 수 없습니다.");
       return;
     }
     setTextLength(wordLength);
@@ -65,7 +65,7 @@ const CommentWrite = (props) => {
             _onKeyUp={checkMaxLength}
             value={comment}
             multiLine
-            maxlength="200"
+            maxlength="255"
             rows={7}
           />
         </TextWrapper>

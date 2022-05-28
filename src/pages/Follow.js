@@ -14,6 +14,7 @@ import TimeCounting from "time-counting";
 import UnFollow from "../components/alert/UnFollow";
 
 const Follow = (props) => {
+  // console.log(props);
   const Mobile = useMediaQuery({
     query: "(max-width:767px)",
   });

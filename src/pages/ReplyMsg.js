@@ -33,8 +33,6 @@ function SendMsg() {
     setTextLength(wordLength);
   };
   const msgList = useSelector((state) => state.message.messages);
-  const follower = useSelector((state) => state.mypage.follower);
-  // console.log(follower);
 
   const send = () => {
     if (msg === "") {
@@ -78,7 +76,8 @@ function SendMsg() {
             <MsgWrapper>
               <TitleWrapper>
                 <TextB sub>
-                  <NickNameSpan>{follower}</NickNameSpan> 님에게 쪽지 보내기
+                  <NickNameSpan>{msgList.reqUserNickName}</NickNameSpan> 님에게
+                  쪽지 보내기
                 </TextB>
               </TitleWrapper>
               <MsgBox>

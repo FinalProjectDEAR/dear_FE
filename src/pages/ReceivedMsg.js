@@ -111,7 +111,7 @@ const ReceivedMsg = () => {
                 regular
                 text="답장하기"
                 _onClick={() => {
-                  history.push(`/sendMsg/${msgId}`);
+                  history.push(`/ReplyMsg/${msgId}`);
                 }}
               />
             </MsgWrapper>

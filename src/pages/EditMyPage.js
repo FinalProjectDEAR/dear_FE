@@ -60,6 +60,7 @@ const EditMyPage = () => {
   const [showName, setShowName] = React.useState("");
   const [isCheck, setIsCheck] = React.useState(false);
   const [nickError, setNickError] = React.useState(null);
+  const [nickChk, setNickChk] = React.useState(false);
 
   const nickErr = useSelector((state) => state.user.nickMsg);
 
@@ -123,6 +124,10 @@ const EditMyPage = () => {
   const addInfo = (dating) => {
     if (isCheck === false) {
       Swal.fire("닉네임 중복확인을 해주세요.");
+      return;
+    }
+    if (nickErr === false) {
+      Swal.fire("사용가능한 닉네임이어야 합니다.");
       return;
     }
     if (dating === "솔로") {
