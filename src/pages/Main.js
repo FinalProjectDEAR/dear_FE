@@ -50,7 +50,7 @@ const GoTop = styled.div`
   width: 54px;
   height: 54px;
   border-radius: 50%;
-  background-color: yellow;
+  background-color: transparent;
   cursor: pointer;
   @media ${({ theme }) => theme.device.isMobile} {
     bottom: 200px;
