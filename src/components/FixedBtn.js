@@ -27,13 +27,13 @@ function FixedBtn(props) {
   const [open, setOpen] = React.useState(false);
   const user_id = useSelector((state) => state.user.user);
 
-  const Token = localStorage.getItem("accessToken");
+  const Token = localStorage.accessToken;
+  console.log(Token);
 
   //알람 버튼 눌렀을 때 가져오기
   const notiCheck = () => {
     if (!Token) {
       Swal.fire("로그인 후 이용해주세요.");
-      history.push("/login");
       return;
     }
     history.push("/notification");

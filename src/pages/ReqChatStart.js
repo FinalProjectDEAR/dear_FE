@@ -37,6 +37,7 @@ function ResChatStart() {
       .getUserMedia({ audio: true, video: true })
       .then((stream) => {
         setAudioPermit(true);
+        return;
       })
       .catch((err) =>
         Swal.fire("오디오 접근이 거절되었습니다. 설정에서 승인해주세요.")

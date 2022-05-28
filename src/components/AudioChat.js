@@ -135,9 +135,9 @@ function AudioChat() {
         subscriberList.push(subscriber);
         setSubscribers([...subscribers, ...subscriberList]);
 
-        // let date = new Date();
-        // let target = date.setMinutes(date.getMinutes() + 10);
-        // setTargetTime(target);
+        let date = new Date();
+        let target = date.setMinutes(date.getMinutes() + 10);
+        setTargetTime(target);
         setIsConnect(true);
         // sendConnectSignal();
         dispatch(chatActions.getChatInfoDB(sessionId));
@@ -338,6 +338,7 @@ function AudioChat() {
                 />
               </TapeBox>
             ) : null}
+
             <div style={{ display: "flex", justifyContent: "center" }}>
               <UserBox>
                 <Text body3>{chatInfo.reqNickname}</Text>
@@ -431,12 +432,13 @@ function AudioChat() {
                   </TagInfo>
                 ) : null}
               </MobileUserBox>
+
               <UserBox>
                 <Text body3>{chatInfo.resNickname}</Text>
                 {chatInfo.resNickname ? (
                   <TagBox>
                     <TagLine>
-                      {chatInfo.reqAge ? (
+                      {chatInfo.resAge ? (
                         <Tag>
                           <Text sub7 margin="6px 8px">
                             {chatInfo.resAge}
@@ -452,14 +454,14 @@ function AudioChat() {
                       ) : null}
                     </TagLine>
                     <TagLine>
-                      {chatInfo.reqLoveType ? (
+                      {chatInfo.resLoveType ? (
                         <Tag>
                           <Text sub7 margin="6px 8px">
                             {chatInfo.resLoveType}
                           </Text>
                         </Tag>
                       ) : null}
-                      {chatInfo.reqLovePeriod ? (
+                      {chatInfo.resLovePeriod ? (
                         <Tag>
                           <Text sub7 margin="6px 8px">
                             {chatInfo.resLovePeriod}

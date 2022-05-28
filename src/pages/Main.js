@@ -17,9 +17,7 @@ function Main() {
     setCurrentPage(number);
   };
 
-  const beforePageChange = (number) => {
-    console.log(number);
-  };
+  const beforePageChange = (number) => {};
 
   return (
     <React.Fragment>
