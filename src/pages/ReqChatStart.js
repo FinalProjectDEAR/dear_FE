@@ -39,10 +39,11 @@ function ResChatStart() {
         setAudioPermit(true);
         return;
       })
-      .catch((err) =>
-        Swal.fire("오디오 접근이 거절되었습니다. 설정에서 승인해주세요.")
-      );
-    setAudioPermit(false);
+      .catch((err) => {
+        Swal.fire("오디오 접근이 거절되었습니다. 설정에서 승인해주세요.");
+        setAudioPermit(false);
+        return;
+      });
   }, []);
 
   //모달
