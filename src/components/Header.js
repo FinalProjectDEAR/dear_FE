@@ -9,7 +9,11 @@ import logo from "../assets/main/logoS.png";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
 
+import { cookies } from "../shared/cookie";
+import isLogin from "../shared/auth/isLogin";
+
 const Header = (props) => {
+  const logged = isLogin();
   const Token = localStorage.getItem("accessToken");
 
   const logout = () => {
@@ -19,10 +23,13 @@ const Header = (props) => {
     localStorage.removeItem("memberId");
     localStorage.removeItem("nickname");
     localStorage.removeItem("isLogin");
+    cookies.remove("accessToken", {
+      path: "/",
+    });
   };
 
   const gotoMypage = () => {
-    if (!Token) {
+    if (!logged) {
       Swal.fire("로그인 후 이용해주세요.");
       history.push("/login");
       return;
@@ -69,7 +76,7 @@ const Header = (props) => {
                   마이페이지
                 </Text>
               </HeaderBtn>
-              {!Token ? (
+              {!logged ? (
                 <HeaderBtn
                   onClick={() => {
                     history.push("/login");

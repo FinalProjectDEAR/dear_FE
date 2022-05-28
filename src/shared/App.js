@@ -10,6 +10,9 @@ import { history } from "../redux/configureStore";
 import { Switch } from "react-router-dom";
 import { Route } from "react-router-dom";
 
+//Hoc
+import PrivateRoute from "../shared/auth/PrivateRoute";
+
 //컴포넌트
 import ScrollToTop from "../components/ScrollToTop";
 import FixedBtn from "../components/FixedBtn";
@@ -69,8 +72,14 @@ function App() {
                 exact
                 component={ReceivedMsg}
               />
-              <Route path="/myPage" exact component={MyPage} />
-              <Route path="/notification" exact component={Notification} />
+              <PrivateRoute Component={MyPage} path="/myPage" exact />
+              <PrivateRoute
+                Component={Notification}
+                path="/notification"
+                exact
+              />
+              {/* <Route path="/myPage" exact component={MyPage} /> */}
+              {/* <Route path="/notification" exact component={Notification} /> */}
               <Route path="/editMyPage" exact component={EditMyPage} />
               <Route path="/LoadingMatch" exact component={LoadingMatch} />
               <Route path="/signup" exact component={Signup} />

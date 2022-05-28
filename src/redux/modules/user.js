@@ -6,6 +6,9 @@ import jwtDecode from "jwt-decode";
 import Swal from "sweetalert2";
 import "../../styles/libraryStyle/style.css";
 
+import { cookies } from "../../shared/cookie";
+import isLogin from "../../shared/auth/isLogin";
+
 // actions
 const LOG_OUT = "LOG_OUT";
 const GET_USER = "GET_USER";
@@ -15,7 +18,7 @@ const SET_ID_MSG = "SET_ID_MSG";
 const SET_NICK_MSG = "SET_NICK_MSG";
 
 // action creators
-const logOut = createAction(LOG_OUT, (memberId) => memberId);
+const logOut = createAction(LOG_OUT, (userInfo) => userInfo);
 const setUser = createAction(
   SET_USER,
   (memberId, nickname) => (memberId, nickname)
@@ -64,12 +67,24 @@ const signupDB = (memberId, pwd, pwdCheck) => {
   };
 };
 
-const loginCheck = () => {
+// export const __loginCheck =
+//   (isLogin, user) =>
+//   async (dispatch, getState, { history }) => {
+//     try {
+//       const {
+//         data: { ok: isLogin, user, tutorial },
+//       } = await userApi.loginCheck();
+//       dispatch(loginCheck(isLogin, user, tutorial));
+//     } catch (e) {}
+//   };
+
+const loginCheckDB = () => {
   return function (dispatch, getState, { history }) {
     const nickname = localStorage.getItem("nickname");
     const memberId = localStorage.getItem("memberId");
     const tokenCheck = localStorage.accessToken;
-    if (tokenCheck) {
+    const logged = isLogin();
+    if (logged) {
       dispatch(setUser(memberId, nickname));
     } else {
       dispatch(logOut());
@@ -88,7 +103,11 @@ const loginDB = (memberId, pwd) => {
         }
       );
       let accessToken = data.data.accessToken;
-      let refreshToken = data.data.refreshToken;
+
+      cookies.set("accessToken", accessToken, {
+        path: "/",
+        maxAge: 14400, // 4시간
+      });
 
       const tokenData = jwtDecode(accessToken);
       localStorage.setItem("accessToken", accessToken);
@@ -247,7 +266,7 @@ export default handleActions(
 const actionCreators = {
   logOut,
   loginDB,
-  loginCheck,
+  loginCheckDB,
   dupMemberIdDB,
   dupNicknameDB,
   memberInfoDB,
