@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators } from "../redux/modules/noti";
 import { actionCreators as userActions } from "../redux/modules/user";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 //id값으로 스크롤
 import { Link } from "react-scroll";
@@ -31,6 +31,12 @@ function FixedBtn(props) {
     dispatch(userActions.loginCheckDB());
   }, []);
 
+  let location = useLocation();
+
+  const path = location.pathname;
+  let pathname = path.split("/");
+  console.log("패스", pathname[1]);
+
   // const isCookies = cookies.get("accessToken", { path: "/" }) ? true : false;
   const isUser = useSelector((state) => state.user.isLogin);
 
@@ -50,8 +56,9 @@ function FixedBtn(props) {
 
   //알람 버튼 눌렀을 때 가져오기
   const notiCheck = () => {
-    if (window.location.pathname === "/AudioRoom") {
+    if (pathname[1] == "AudioRoom") {
       Swal.fire("채팅을 종료해주세요.");
+      return;
     }
     if (!isUser) {
       Swal.fire("로그인 후 이용해주세요.");
@@ -72,8 +79,9 @@ function FixedBtn(props) {
   const alarmNum = useSelector((state) => state.noti.notiCnt);
 
   const gotoMypage = () => {
-    if (window.location.pathname === "/AudioRoom") {
+    if (pathname[1] == "AudioRoom") {
       Swal.fire("채팅을 종료해주세요.");
+      return;
     }
     if (!isUser) {
       Swal.fire("로그인 후 이용해주세요.");
@@ -84,7 +92,7 @@ function FixedBtn(props) {
   };
 
   const gotoPost = () => {
-    if (window.location.pathname === "/AudioRoom") {
+    if (pathname[1] == "AudioRoom") {
       Swal.fire("채팅을 종료해주세요.");
     } else {
       history.push("/postList/전체");
@@ -92,7 +100,7 @@ function FixedBtn(props) {
   };
 
   const gotoIntro = () => {
-    if (window.location.pathname === "/AudioRoom") {
+    if (pathname[1] == "AudioRoom") {
       Swal.fire("채팅을 종료해주세요.");
     } else {
       history.push("/intro");
