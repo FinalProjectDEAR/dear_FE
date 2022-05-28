@@ -348,15 +348,17 @@ const MyPage = () => {
                 히스토리는 최대 6개까지 볼 수 있어요
               </Text>
             </Title>
-            {chatList?.length > 0 ? (
-              <CounselGrid>
-                {chatList?.map((item, idx) => {
-                  return <CounselHistory key={idx} item={item} />;
-                })}
-              </CounselGrid>
-            ) : (
-              <EmptyChat />
-            )}
+            <MobileGridWrapper>
+              {chatList?.length > 0 ? (
+                <CounselGrid>
+                  {chatList?.map((item, idx) => {
+                    return <CounselHistory key={idx} item={item} />;
+                  })}
+                </CounselGrid>
+              ) : (
+                <EmptyChat />
+              )}
+            </MobileGridWrapper>
           </CounselWrapper>
           <FollowWrapper>
             <TitleContainer>
@@ -779,10 +781,9 @@ const MsgWrapper = styled.div`
   @media ${({ theme }) => theme.device.isMobile} {
     width: 320px;
     height: 390px;
-    /* background-color: red; */
     display: flex;
     flex-direction: column;
-    margin-top: 100px;
+    /* margin-top: 100px; */
   }
 `;
 const MsgContainer = styled.div`
@@ -791,9 +792,9 @@ const MsgContainer = styled.div`
   margin: 20px auto;
   @media ${({ theme }) => theme.device.isMobile} {
     width: 320px;
-    height: 300px;
+    /* height: 300px; */
     gap: 10px;
-    /* background-color: orange; */
+
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -839,12 +840,13 @@ const Title = styled.div`
 const CounselWrapper = styled.div`
   margin: auto;
   width: 1032px;
-  height: 342px;
+  /* height: 342px; */
   margin-top: 100px;
   @media ${({ theme }) => theme.device.isMobile} {
     width: 320px;
     max-height: 675px;
-    /* background-color: violet; */
+    display: flex;
+    flex-direction: column;
   }
 `;
 const CounselGrid = styled.div`
@@ -859,29 +861,39 @@ const CounselGrid = styled.div`
   flex-direction: column;
   @media ${({ theme }) => theme.device.isMobile} {
     width: 320px;
-    height: 96px;
+    /* height: 96px; */
+    /* margin-bottom: 100px; */
     /* background-color: red; */
     display: flex;
     flex-direction: column;
-    margin-top: 100px;
+    /* margin-top: 100px; */
+  }
+`;
+const MobileGridWrapper = styled.div`
+  @media ${({ theme }) => theme.device.isMobile} {
+    width: 320px;
+    /* max-height: 675px; */
+    display: flex;
+    flex-direction: column;
+    display: flex;
+  }
+  @media ${({ theme }) => theme.device.web} {
   }
 `;
 const FollowWrapper = styled.div`
   margin: auto;
   width: 1034px;
-  height: 236px;
+  /* height: 236px; */
   margin-top: 100px;
   @media ${({ theme }) => theme.device.isMobile} {
-    /* width: 328px;
-    height: 440px;
-    background-color: violet; */
     width: 320px;
-    height: 92px;
+    max-height: 675px;
+    /* border: 1px solid red; */
     /* background-color: orange; */
     display: flex;
     flex-direction: column;
     margin: auto;
-    margin-top: 100px;
+    margin-top: 220px;
   }
 `;
 const FollowContainer = styled.div`
@@ -891,11 +903,11 @@ const FollowContainer = styled.div`
   padding: 0px;
   gap: 26px;
   width: 1034px;
-  height: 186px;
+  /* height: 186px; */
   @media ${({ theme }) => theme.device.isMobile} {
     width: 320px;
-    height: 502px;
-    /* background-color: orange; */
+    border: 1px solid red;
+    /* height: 502px; */
     display: flex;
     flex-direction: column;
   }
@@ -909,7 +921,7 @@ const PostWrapper = styled.div`
     width: 328px;
     /* height: 536px; */
     /* border: 1px solid red; */
-    margin-top: 460px;
+    /* margin-top: 460px; */
     box-sizing: border-box;
   }
 `;
