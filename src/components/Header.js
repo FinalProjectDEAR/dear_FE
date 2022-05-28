@@ -5,6 +5,7 @@ import { history } from "../redux/configureStore";
 import { Text } from "../elements";
 
 import { useSelector, useDispatch } from "react-redux";
+import { actionCreators as userActions } from "../redux/modules/user";
 import logo from "../assets/main/logoS.png";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
@@ -13,28 +14,23 @@ import { cookies } from "../shared/cookie";
 import isLogin from "../shared/auth/isLogin";
 
 const Header = (props) => {
+  const dispatch = useDispatch();
+
   const logged = isLogin();
-  const Token = localStorage.getItem("accessToken");
 
   const logout = () => {
+    dispatch(userActions.logOut());
     Swal.fire("로그아웃 되었습니다.");
     history.push("/login");
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("memberId");
-    localStorage.removeItem("nickname");
-    localStorage.removeItem("isLogin");
-    cookies.remove("accessToken", {
-      path: "/",
-    });
   };
 
   const gotoMypage = () => {
     if (!logged) {
       Swal.fire("로그인 후 이용해주세요.");
       history.push("/login");
-      return;
+    } else {
+      history.push("/myPage");
     }
-    history.push("/myPage");
   };
 
   return (

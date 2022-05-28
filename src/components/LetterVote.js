@@ -11,6 +11,9 @@ import { useParams } from "react-router-dom";
 import VoteResult from "./VoteResult";
 import styled from "styled-components";
 
+import Swal from "sweetalert2";
+import "../styles/libraryStyle/style.css";
+
 function LetterVote({ voteInfo }) {
   const dispatch = useDispatch();
 
@@ -27,6 +30,7 @@ function LetterVote({ voteInfo }) {
   const [rightSelected, setRightSelected] = React.useState(false);
   const [showResult, setShowResult] = React.useState(false);
 
+  const isUser = useSelector((state) => state.user.isLogin);
   // const voteInfo = useSelector((state) => state.vote.voteInfo);
 
   const showSelection = () => {
@@ -60,9 +64,19 @@ function LetterVote({ voteInfo }) {
     setRightSelected(true);
   };
 
+  const delSelection = () => {
+    setLeftSelected(false);
+    setRightSelected(false);
+  };
+
   const submitVote = () => {
-    dispatch(voteActions.putVoteDB(postId, vote));
-    setShowResult(true);
+    if (!isUser) {
+      Swal.fire("로그인 후 이용해주세요.");
+    } else {
+      dispatch(voteActions.putVoteDB(postId, vote));
+      setShowResult(true);
+      setTimeout(delSelection(), 500);
+    }
   };
 
   return (

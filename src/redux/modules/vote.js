@@ -130,7 +130,9 @@ const getVoteDB = (type) => {
 const detailVoteDB = (postId) => {
   return async function (dispatch, getState, { history }) {
     try {
-      const { data } = await apis.detailVote(postId);
+      const { data } = await axios.get(
+        process.env.REACT_APP_URL + `/anonypost/vote/${postId}`
+      );
       dispatch(detailVote(data.data));
     } catch (err) {
       Swal.fire("투표정보 불러오기 실패, 다시 시도해주세요.");

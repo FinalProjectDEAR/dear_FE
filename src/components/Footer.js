@@ -1,5 +1,6 @@
 import React from "react";
 import { history } from "../redux/configureStore";
+import { actionCreators as userActions } from "../redux/modules/user";
 import { Text } from "../elements";
 import styled from "styled-components";
 import Swal from "sweetalert2";
@@ -7,15 +8,13 @@ import "../styles/libraryStyle/style.css";
 import { useSelector, useDispatch } from "react-redux";
 
 const Footer = () => {
+  const dispatch = useDispatch();
   const Token = localStorage.getItem("accessToken");
 
   const logout = () => {
+    dispatch(userActions.logOut());
     Swal.fire("로그아웃 되었습니다.");
     history.push("/login");
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("memberId");
-    localStorage.removeItem("nickname");
-    localStorage.removeItem("isLogin");
   };
   return (
     <React.Fragment>
