@@ -13,7 +13,7 @@ function ReviewCard({ reviewInfo }) {
   function dateFormat(date) {
     let year = date.substring(0, 4);
     let month = date.substring(5, 7);
-    let day = date.substring(8, 9);
+    let day = date.substring(8, 10);
 
     // month = month >= 10 ? month : "0" + month;
     // day = day >= 10 ? day : "0" + day;
