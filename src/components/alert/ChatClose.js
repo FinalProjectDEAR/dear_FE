@@ -27,7 +27,7 @@ function ChatClose(props) {
       setView(false);
       leaveSession();
       informClose();
-      history.push("/main");
+      history.push("/");
     }
   };
 
