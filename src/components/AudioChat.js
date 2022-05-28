@@ -142,6 +142,9 @@ function AudioChat() {
         // sendConnectSignal();
         dispatch(chatActions.getChatInfoDB(sessionId));
 
+        var video = document.getElementById("hidden-video").play();
+        video();
+
         // setShowFiveSec(true);
         // setShowFiveSec(false);
       });
@@ -615,6 +618,7 @@ function AudioChat() {
           />
         </Modal>
       ) : null}
+      <video id="hidden-video"></video>
     </React.Fragment>
   );
 }
