@@ -25,6 +25,8 @@ import Layout from "../components/Layout";
 import Post from "../pages/Post";
 import Paginations from "../elements/Pagination";
 
+import { Link } from "react-scroll";
+
 function PostList(props) {
   const params = useParams();
   const category = params.category;
@@ -134,95 +136,97 @@ function PostList(props) {
             <MobileVoteList />
           </VoteWrapper>
           <BoardWrapper id="2">
-            <CateGoryWrapper>
-              <div className="mobile">
-                <CategoryBtn
-                  onClick={() => {
-                    setPage(1);
-                    history.push("/postList/전체");
-                    dispatch(actionCreators.getPostDB(page));
-                  }}
-                >
-                  <AllBtn>
-                    <All />
-                  </AllBtn>
-                  <p style={{ marginTop: "83px", position: "absolute" }}>
-                    전체
-                  </p>
-                </CategoryBtn>
-                <CategoryBtn
-                  onClick={() => {
-                    setPage(1);
-                    history.push("/postList/투표");
-                    dispatch(actionCreators.getCateDetailDB(page, "투표"));
-                  }}
-                >
-                  <Vote />
-                  투표
-                </CategoryBtn>
-                <CategoryBtn
-                  onClick={() => {
-                    setPage(1);
-                    history.push("/postList/솔로");
-                    dispatch(actionCreators.getCateDetailDB(page, "솔로"));
-                  }}
-                >
-                  <Solo />
-                  솔로
-                </CategoryBtn>
-                <CategoryBtn
-                  onClick={() => {
-                    setPage(1);
-                    history.push("/postList/짝사랑");
-                    dispatch(actionCreators.getCateDetailDB(page, "짝사랑"));
-                  }}
-                >
-                  <Love />
-                  짝사랑
-                </CategoryBtn>
-              </div>
-              <div className="mobile">
-                <CategoryBtn
-                  onClick={() => {
-                    setPage(1);
-                    history.push("/postList/썸");
-                    dispatch(actionCreators.getCateDetailDB(page, "썸"));
-                  }}
-                >
-                  <Some />썸
-                </CategoryBtn>
-                <CategoryBtn
-                  onClick={() => {
-                    setPage(1);
-                    history.push("/postList/연애");
-                    dispatch(actionCreators.getCateDetailDB(page, "연애"));
-                  }}
-                >
-                  <Again />
-                  연애
-                </CategoryBtn>
-                <CategoryBtn
-                  onClick={() => {
-                    setPage(1);
-                    history.push("/postList/이별");
-                    dispatch(actionCreators.getCateDetailDB(page, "이별"));
-                  }}
-                >
-                  <Broken />
-                  이별
-                </CategoryBtn>
-                <CategoryBtn
-                  onClick={() => {
-                    setPage(1);
-                    history.push("/postList/기타");
-                    dispatch(actionCreators.getCateDetailDB(page, "기타"));
-                  }}
-                >
-                  <Etc />
-                  기타
-                </CategoryBtn>
-              </div>
-            </CateGoryWrapper>
+            <Link to="2" smooth={true}>
+              <CateGoryWrapper>
+                <div className="mobile">
+                  <CategoryBtn
+                    onClick={() => {
+                      setPage(1);
+                      history.push("/postList/전체");
+                      dispatch(actionCreators.getPostDB(page));
+                    }}
+                  >
+                    <AllBtn>
+                      <All />
+                    </AllBtn>
+                    <p style={{ marginTop: "83px", position: "absolute" }}>
+                      전체
+                    </p>
+                  </CategoryBtn>
+                  <CategoryBtn
+                    onClick={() => {
+                      setPage(1);
+                      history.push("/postList/투표");
+                      dispatch(actionCreators.getCateDetailDB(page, "투표"));
+                    }}
+                  >
+                    <Vote />
+                    투표
+                  </CategoryBtn>
+                  <CategoryBtn
+                    onClick={() => {
+                      setPage(1);
+                      history.push("/postList/솔로");
+                      dispatch(actionCreators.getCateDetailDB(page, "솔로"));
+                    }}
+                  >
+                    <Solo />
+                    솔로
+                  </CategoryBtn>
+                  <CategoryBtn
+                    onClick={() => {
+                      setPage(1);
+                      history.push("/postList/짝사랑");
+                      dispatch(actionCreators.getCateDetailDB(page, "짝사랑"));
+                    }}
+                  >
+                    <Love />
+                    짝사랑
+                  </CategoryBtn>
+                </div>
+                <div className="mobile">
+                  <CategoryBtn
+                    onClick={() => {
+                      setPage(1);
+                      history.push("/postList/썸");
+                      dispatch(actionCreators.getCateDetailDB(page, "썸"));
+                    }}
+                  >
+                    <Some />썸
+                  </CategoryBtn>
+                  <CategoryBtn
+                    onClick={() => {
+                      setPage(1);
+                      history.push("/postList/연애");
+                      dispatch(actionCreators.getCateDetailDB(page, "연애"));
+                    }}
+                  >
+                    <Again />
+                    연애
+                  </CategoryBtn>
+                  <CategoryBtn
+                    onClick={() => {
+                      setPage(1);
+                      history.push("/postList/이별");
+                      dispatch(actionCreators.getCateDetailDB(page, "이별"));
+                    }}
+                  >
+                    <Broken />
+                    이별
+                  </CategoryBtn>
+                  <CategoryBtn
+                    onClick={() => {
+                      setPage(1);
+                      history.push("/postList/기타");
+                      dispatch(actionCreators.getCateDetailDB(page, "기타"));
+                    }}
+                  >
+                    <Etc />
+                    기타
+                  </CategoryBtn>
+                </div>
+              </CateGoryWrapper>
+            </Link>
             <TitleWrapper>
               <Text title>익명상담소</Text>
             </TitleWrapper>
@@ -330,7 +334,7 @@ const MoreVote = styled.span`
   line-height: 720px;
 `;
 const BoardWrapper = styled.div`
-  margin: auto;
+  margin: 30px auto;
   max-width: 1032px;
   height: 547px;
 `;
