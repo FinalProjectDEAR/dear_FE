@@ -11,7 +11,7 @@ export const nicknameCheck = (nickname) => {
 };
 
 export const pwdCheck = (pwd, memberId) => {
-  if (!/[a-zA-Z]{6,12}/.test(pwd)) {
+  if (!/[a-zA-Z0-9]{6,12}/.test(pwd)) {
     return false;
   } else if (pwd.search(memberId) > -1) {
     alert("비밀번호에 아이디가 포함되었습니다.");
