@@ -61,6 +61,7 @@ const EditMyPage = () => {
   const [isCheck, setIsCheck] = React.useState(false);
   const [nickError, setNickError] = React.useState(null);
   const [nickChk, setNickChk] = React.useState(false);
+  const [isDup, setIsDup] = React.useState(true);
 
   const nickErr = useSelector((state) => state.user.nickMsg);
 
@@ -78,15 +79,21 @@ const EditMyPage = () => {
     setIsSelected(userInfo?.color);
     setDating(userInfo?.dating);
   }, [userInfo]);
+
+  // const localNick = localStorage.getItem("nickname");
+  // console.log(localNick);
   const dupCheck = (nickname) => {
     if (!nicknameCheck(nickname)) {
       Swal.fire("닉네임이 형식에 맞지 않습니다. 영문/한글/숫자 포함 3-10자");
       return;
+    } else {
+      setIsDup(false);
     }
     setIsCheck(true);
     setShowName(nickname);
     dispatch(userActions.dupNicknameDB(nickname, setNickError));
   };
+
   const submitSolo = () => {
     if (age === "") {
       Swal.fire("정보를 모두 입력해주세요.");
@@ -122,12 +129,21 @@ const EditMyPage = () => {
   };
 
   const addInfo = (dating) => {
-    if (isCheck === false) {
+    if (userInfo.nickname === nickname) {
+      if (dating === "솔로") {
+        submitSolo();
+      }
+      if (dating === "커플") {
+        submitCouple();
+      }
+    } else if (isCheck === false) {
       Swal.fire("닉네임 중복확인을 해주세요.");
       return;
-    }
-    if (nickErr === false) {
+    } else if (nickErr === false) {
       Swal.fire("사용가능한 닉네임이어야 합니다.");
+      return;
+    } else if (!nicknameCheck(nickname)) {
+      Swal.fire("닉네임이 형식에 맞지 않습니다. 영문/한글/숫자 포함 3-10자");
       return;
     }
     if (dating === "솔로") {

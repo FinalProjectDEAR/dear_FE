@@ -44,6 +44,7 @@ function MainChat() {
       return;
     } else if (!isUser) {
       Swal.fire("로그인 후 이용해 주세요.");
+      history.replace("/login");
       return;
     } else if (isUser && nickname === null) {
       Swal.fire("상담에 필요한 회원정보를 입력 후 이용해 주세요.");
@@ -61,6 +62,7 @@ function MainChat() {
       return;
     } else if (!isUser) {
       Swal.fire("로그인 후 이용해 주세요.");
+      history.replace("/login");
       return;
     } else if (isUser && nickname === null) {
       Swal.fire("상담에 필요한 회원정보를 입력 후 이용해 주세요.");
