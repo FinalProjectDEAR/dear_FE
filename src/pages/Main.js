@@ -45,7 +45,7 @@ export default Main;
 const GoTop = styled.div`
   position: absolute;
   z-index: 10;
-  bottom: 335px;
+  bottom: 410px;
   left: 90%;
   width: 54px;
   height: 54px;
@@ -53,6 +53,7 @@ const GoTop = styled.div`
   background-color: transparent;
   cursor: pointer;
   @media ${({ theme }) => theme.device.isMobile} {
-    bottom: 100px;
+    bottom: 200px;
+    left: 83%;
   }
 `;
