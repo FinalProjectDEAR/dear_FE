@@ -16,7 +16,7 @@ import isLogin from "../shared/auth/isLogin";
 const Header = (props) => {
   const dispatch = useDispatch();
 
-  const logged = isLogin();
+  const isUser = useSelector((state) => state.user.isLogin);
 
   const logout = () => {
     dispatch(userActions.logOut());
@@ -25,7 +25,7 @@ const Header = (props) => {
   };
 
   const gotoMypage = () => {
-    if (!logged) {
+    if (!isUser) {
       Swal.fire("로그인 후 이용해주세요.");
       history.push("/login");
     } else {
@@ -72,7 +72,7 @@ const Header = (props) => {
                   마이페이지
                 </Text>
               </HeaderBtn>
-              {!logged ? (
+              {!isUser ? (
                 <HeaderBtn
                   onClick={() => {
                     history.push("/login");
