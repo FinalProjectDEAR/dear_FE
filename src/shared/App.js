@@ -29,6 +29,8 @@ import Main from "../pages/Main";
 import LoadingMatch from "../pages/LoadingMatch";
 import NotFound from "../pages/NotFound";
 import Intro from "../pages/Intro";
+import reqReview from "../pages/ReqReview.js";
+import resReview from "../pages/ResReview.js";
 
 //레이지 로딩 페이지
 const Login = lazy(() => import("../pages/Login"));
@@ -87,6 +89,8 @@ function App() {
               <Route path="/notification" exact component={Notification} /> */}
               <Route path="/editMyPage" exact component={EditMyPage} />
               <Route path="/LoadingMatch" exact component={LoadingMatch} />
+              <Route path="/resReview" exact component={resReview} />
+              <Route path="/reqReview" exact component={reqReview} />
               <Route path="/signup" exact component={Signup} />
               <Route path="/login" exact component={Login} />
               <Route path="*" exact component={NotFound} />
