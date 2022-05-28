@@ -10,7 +10,9 @@ import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
 
 import styled from "styled-components";
+import { Text, Modal } from "../elements";
 import MobileFixedBtn from "./MobileFixedBtn";
+import Survey from "./Survey";
 //아이콘
 import { Badge } from "@material-ui/core";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
@@ -36,7 +38,15 @@ function FixedBtn(props) {
   const history = useHistory();
   const [isRead, setIsRead] = React.useState(false);
   const [open, setOpen] = React.useState(false);
+  const [eventOpen, setEvenOpen] = React.useState(false);
   const user_id = useSelector((state) => state.user.user);
+
+  const openModal = () => {
+    setEvenOpen(true);
+  };
+  const closeModal = () => {
+    setEvenOpen(false);
+  };
 
   //알람 버튼 눌렀을 때 가져오기
   const notiCheck = () => {
@@ -132,7 +142,17 @@ function FixedBtn(props) {
             {/* {open ? <Notification /> : null} */}
           </Noti>
         </Badge>
+        <Event onClick={openModal}>
+          <Text body4 color="#fff" textAlign="center" cursor="pointer">
+            이벤트
+          </Text>
+        </Event>
       </BtnWrap>
+      {eventOpen ? (
+        <Modal>
+          <Survey close={closeModal} />
+        </Modal>
+      ) : null}
 
       <Mver>
         {/* <MuiBtn>
@@ -190,6 +210,11 @@ function FixedBtn(props) {
           <Hamburger />
           {open ? <MobileFixedBtn /> : null}
         </MBtn>
+        <MEvent onClick={openModal}>
+          <Text body4 color="#fff" textAlign="center" cursor="pointer">
+            이벤트
+          </Text>
+        </MEvent>
       </Mver>
     </React.Fragment>
   );
@@ -342,6 +367,27 @@ const Follow = styled.div`
   }
 `;
 
+const Event = styled.div`
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  position: static;
+  width: 54px;
+  height: 54px;
+  left: 0px;
+  top: 184px;
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+  margin: 10px 0px;
+  border-radius: 50%;
+  background-color: #7a37be;
+  border: none;
+  cursor: pointer;
+`;
+
 const Noti = styled.div`
   position: fixed;
   display: flex;
@@ -427,19 +473,38 @@ const MuiBtn = styled.div`
     }
   }
 `;
+
+const MEvent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  width: 54px;
+  height: 54px;
+  flex: none;
+  flex-grow: 0;
+  border-radius: 50%;
+  background-color: #7a37be;
+  color: white;
+  border: none;
+  cursor: pointer;
+`;
+
 //모바일 버전 임시 위치 설정
 const Mver = styled.div`
-  @media ${({ theme }) => theme.device.web} {
-    display: none;
-  }
+  display: none;
   @media ${({ theme }) => theme.device.isMobile} {
     position: absolute;
     width: 52px;
     bottom: 60px;
     left: 83%;
-    position: fixed;
-
     box-sizing: border-box;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 `;
 export default FixedBtn;

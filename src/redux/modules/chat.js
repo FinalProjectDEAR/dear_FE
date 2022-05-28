@@ -67,6 +67,7 @@ const reqChatDB = (payload) => {
       history.push(`/AudioRoom/${sessionId}`);
     } catch (err) {
       Swal.fire("리스너 매칭에 실패하였습니다.");
+      history.replace("/");
     }
   };
 };
@@ -80,6 +81,7 @@ const resChatDB = (category) => {
       history.push(`/AudioRoom/${sessionId}`);
     } catch (err) {
       Swal.fire("고민러 매칭에 실패하였습니다.");
+      history.replace("/");
     }
   };
 };

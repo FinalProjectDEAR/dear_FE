@@ -52,7 +52,7 @@ const Signup = () => {
     }
 
     if (!pwdCheck(pwd, memberId)) {
-      Swal.fire("패스워드 형식이 맞지 않습니다! (6-12자 영문, 숫자)");
+      Swal.fire("패스워드 형식이 맞지 않습니다! (6-12자 영문, 숫자 조합)");
       return;
     }
 

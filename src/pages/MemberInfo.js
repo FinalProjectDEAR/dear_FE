@@ -31,8 +31,6 @@ function MemberInfo() {
 
   const nickErr = useSelector((state) => state.user.nickMsg);
 
-  console.log(nickErr);
-
   //모달
   const [modalOpen, setModalOpen] = React.useState(true);
 
