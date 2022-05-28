@@ -45,14 +45,15 @@ export default Main;
 const GoTop = styled.div`
   position: absolute;
   z-index: 10;
-  bottom: 335px;
+  bottom: 410px;
   left: 90%;
   width: 54px;
   height: 54px;
   border-radius: 50%;
-  background-color: transparent;
+  background-color: yellow;
   cursor: pointer;
   @media ${({ theme }) => theme.device.isMobile} {
-    bottom: 100px;
+    bottom: 200px;
+    left: 83%;
   }
 `;
