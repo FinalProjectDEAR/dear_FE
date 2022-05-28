@@ -5,6 +5,8 @@ import { useMediaQuery } from "react-responsive";
 //시간알려주는패키지
 import TimeCounting from "time-counting";
 
+import ChatTag from "../elements/ChatTag";
+
 const CounselHistory = (props) => {
   const Mobile = useMediaQuery({
     query: "(max-width:767px)",
@@ -17,6 +19,7 @@ const CounselHistory = (props) => {
       justNow: 60,
     },
   };
+  // console.log(props.item.myRole);
   const createdAt = TimeCounting(props.item.createdAt, option);
   return (
     // <HistoryWrapper>
@@ -34,23 +37,20 @@ const CounselHistory = (props) => {
             <Text sub4 color="#66666">
               {props?.item.nickname} ({createdAt})
             </Text>
-          </div>{" "}
+          </div>
           <div className="tagM">
-            <Tag counselRes2>
-              <Text sub7 margin="3px 8px">
-                {props?.item.myRole}
-              </Text>
-            </Tag>
+            {props.item.myRole ? <ChatTag Tag={props.item.myRole} /> : null}
           </div>
         </MobileVer>
       ) : null}
       {Mobile ? null : (
         <div className="tag">
-          <Tag counselRes2>
+          {props.item.myRole ? <ChatTag Tag={props.item.myRole} /> : null}
+          {/* <Tag counselRes2>
             <Text sub7 margin="3px 8px">
               {props?.item.myRole}
             </Text>
-          </Tag>
+          </Tag> */}
         </div>
       )}
 
@@ -123,7 +123,7 @@ const CounselHistoryWrapper = styled.div`
   @media ${({ theme }) => theme.device.isMobile} {
     background-color: #fafafa;
     width: 320px;
-    height: 96px;
+    /* height: 96px; */
     padding-top: 0.1px;
     box-sizing: border-box;
     .content {
