@@ -25,10 +25,13 @@ function MemberInfo() {
   const [nickError, setNickError] = React.useState(null);
   const [isSelected, setIsSelected] = React.useState("#fff");
   const [isNext, setIsNext] = React.useState(1);
+  const [isDup, setIsDup] = React.useState(true);
 
   const memberId = localStorage.getItem("memberId");
 
   const nickErr = useSelector((state) => state.user.nickMsg);
+
+  console.log(nickErr);
 
   //모달
   const [modalOpen, setModalOpen] = React.useState(true);
@@ -46,6 +49,8 @@ function MemberInfo() {
     if (!nicknameCheck(nickname)) {
       Swal.fire("닉네임이 형식에 맞지 않습니다. 영문/한글/숫자 포함 3-10자");
       return;
+    } else {
+      setIsDup(false);
     }
     setIsCheck(true);
     setShowName(nickname);
@@ -53,6 +58,10 @@ function MemberInfo() {
   };
 
   const next = () => {
+    if (!nickErr) {
+      Swal.fire("사용가능한 닉네임이어야 합니다.");
+      return;
+    }
     if (isCheck === false) {
       Swal.fire("닉네임 중복확인을 해주세요!");
       return;
