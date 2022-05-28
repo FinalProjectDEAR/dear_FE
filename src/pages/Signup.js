@@ -44,6 +44,7 @@ const Signup = () => {
     if (!memberIdCheck(memberId)) {
       Swal.fire("아이디 형식이 맞지 않습니다! (3-10자 영문, 숫자 조합)");
       return;
+    }
 
     if (memberId === "" || pwd === "") {
       Swal.fire("아이디, 패스워드를 모두 입력해주세요!");
@@ -117,7 +118,7 @@ const Signup = () => {
           ) : null}
           {isCheck === false ? (
             <Text sub7 textAlign="left" margin="15px">
-              영문(소문자), 숫자로 4-10자 이내로 입력해주세요.
+              영문(소문자), 숫자로 3-10자 이내로 입력해주세요.
             </Text>
           ) : null}
 
