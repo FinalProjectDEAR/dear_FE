@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators } from "../redux/modules/noti";
+import { actionCreators as userActions } from "../redux/modules/user";
 import { useHistory } from "react-router-dom";
 
 import styled from "styled-components";
@@ -15,6 +16,10 @@ import InfoIcon from "@mui/icons-material/Info";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 
 const MobileFixedBtn = ({ close }) => {
+  React.useEffect(() => {
+    dispatch(userActions.loginCheckDB());
+  }, []);
+
   const dispatch = useDispatch();
   const history = useHistory();
   //모달
@@ -23,20 +28,23 @@ const MobileFixedBtn = ({ close }) => {
     setModalOpen(false);
   };
   const [isRead, setIsRead] = React.useState(false);
+  const isUser = useSelector((state) => state.user.isLogin);
   const user_id = useSelector((state) => state.user.user);
   const Token = localStorage.getItem("accessToken");
+
   //알람 버튼 눌렀을 때 가져오기
   const notiCheck = () => {
-    if (!Token) {
+    if (!isUser) {
       Swal.fire("로그인 후 이용해주세요.");
       history.push("/login");
-      return;
+    } else {
+      history.push("/notification");
+      dispatch(actionCreators.getNotiDB());
+      setIsRead(true);
+      // props._onClick();
     }
-    history.push("/notification");
-    dispatch(actionCreators.getNotiDB());
-    setIsRead(true);
-    // props._onClick();
   };
+
   //알람 갯수 가져오기
   React.useEffect(() => {
     dispatch(actionCreators.getNotiCntDB());
@@ -44,12 +52,13 @@ const MobileFixedBtn = ({ close }) => {
   const alarmNum = useSelector((state) => state.noti.notiCnt);
 
   const gotoMypage = () => {
-    if (!Token) {
+    if (!isUser) {
       Swal.fire("로그인 후 이용해주세요.");
       history.push("/login");
       return;
+    } else {
+      history.push("/myPage");
     }
-    history.push("/myPage");
   };
 
   return (
