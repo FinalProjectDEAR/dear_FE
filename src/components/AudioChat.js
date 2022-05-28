@@ -123,6 +123,11 @@ function AudioChat() {
   React.useEffect(() => {
     window.addEventListener("beforeunload", onbeforeunload);
 
+    const videoPlay = () => {
+      var video = document.getElementById("hidden-video");
+      video.play();
+    };
+
     const connectSession = () => {
       const OV = new OpenVidu();
 
@@ -141,10 +146,7 @@ function AudioChat() {
         setIsConnect(true);
         // sendConnectSignal();
         dispatch(chatActions.getChatInfoDB(sessionId));
-
-        var video = document.getElementById("hidden-video").play();
-        video();
-
+        videoPlay();
         // setShowFiveSec(true);
         // setShowFiveSec(false);
       });
