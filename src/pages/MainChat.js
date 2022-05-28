@@ -33,6 +33,7 @@ function MainChat() {
     setShowInfo(false);
   };
 
+  const isUser = useSelector((state) => state.user.isLogin);
   const tapeCount = useSelector((state) => state.main.tapeCount);
   const Token = localStorage.getItem("accessToken");
   const nickname = localStorage.getItem("nickname");
@@ -41,11 +42,10 @@ function MainChat() {
     if (checkBox !== true) {
       Swal.fire("이용약관에 동의해주세요.");
       return;
-    } else if (!Token) {
+    } else if (!isUser) {
       Swal.fire("로그인 후 이용해 주세요.");
-      history.replace("/login");
       return;
-    } else if (Token && nickname === null) {
+    } else if (isUser && nickname === null) {
       Swal.fire("상담에 필요한 회원정보를 입력 후 이용해 주세요.");
 
       history.replace("/mypage");
@@ -59,10 +59,10 @@ function MainChat() {
     if (checkBox !== true) {
       Swal.fire("이용약관에 동의해주세요.");
       return;
-    } else if (!Token) {
+    } else if (!isUser) {
       Swal.fire("로그인 후 이용해 주세요.");
-      history.push("/login");
-    } else if (Token && nickname === null) {
+      return;
+    } else if (isUser && nickname === null) {
       Swal.fire("상담에 필요한 회원정보를 입력 후 이용해 주세요.");
       history.replace("/mypage");
       return;
