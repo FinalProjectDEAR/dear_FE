@@ -18,9 +18,9 @@ function TimeOver(props) {
   const role = useSelector((state) => state.chat.roomAuthInfo.role);
   const chatInfo = useSelector((state) => state.chat.chatInfo);
 
-  // React.useEffect(() => {
-  //   informClose();
-  // });
+  React.useEffect(() => {
+    informClose();
+  }, []);
 
   return (
     <React.Fragment>
