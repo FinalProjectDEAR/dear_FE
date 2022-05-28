@@ -377,7 +377,7 @@ const OptionSelect = styled.option`
 const ContentWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  padding: 10px 0px;
+  padding: 0px 0px 25px;
   gap: 20px;
   width: 952px;
   height: 303px;
@@ -395,7 +395,9 @@ const ContentWrapper = styled.div`
 `;
 const TextWrapper = styled.div`
   width: 860px;
-  height: 295px;
+  /* padding-bottom: 20px; */
+  /* height: 300px; */
+  /* background-color: orange; */
   @media ${({ theme }) => theme.device.isMobile} {
     /* background-color: orange; */
     width: 350px;
