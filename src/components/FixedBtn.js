@@ -40,6 +40,9 @@ function FixedBtn(props) {
 
   //알람 버튼 눌렀을 때 가져오기
   const notiCheck = () => {
+    if (window.location.pathname === "/AudioRoom") {
+      Swal.fire("채팅을 종료해주세요.");
+    }
     if (!isUser) {
       Swal.fire("로그인 후 이용해주세요.");
       history.push("/login");
@@ -59,11 +62,30 @@ function FixedBtn(props) {
   const alarmNum = useSelector((state) => state.noti.notiCnt);
 
   const gotoMypage = () => {
+    if (window.location.pathname === "/AudioRoom") {
+      Swal.fire("채팅을 종료해주세요.");
+    }
     if (!isUser) {
       Swal.fire("로그인 후 이용해주세요.");
       history.push("/login");
     } else {
       history.replace("/myPage");
+    }
+  };
+
+  const gotoPost = () => {
+    if (window.location.pathname === "/AudioRoom") {
+      Swal.fire("채팅을 종료해주세요.");
+    } else {
+      history.push("/postList/전체");
+    }
+  };
+
+  const gotoIntro = () => {
+    if (window.location.pathname === "/AudioRoom") {
+      Swal.fire("채팅을 종료해주세요.");
+    } else {
+      history.push("/intro");
     }
   };
 
@@ -76,21 +98,13 @@ function FixedBtn(props) {
           </Up>
         </Link>
 
-        <Desc
-          onClick={() => {
-            history.push("/intro");
-          }}
-        >
+        <Desc onClick={gotoIntro}>
           <FontBox>
             <Font>서비스소개</Font>
           </FontBox>
           <InfoIcon />
         </Desc>
-        <Board
-          onClick={() => {
-            history.replace("/postList/전체");
-          }}
-        >
+        <Board onClick={gotoPost}>
           <FontBox>
             <Font>디어상담소</Font>
           </FontBox>
