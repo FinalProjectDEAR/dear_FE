@@ -31,7 +31,6 @@ function FixedBtn(props) {
 
   // const isCookies = cookies.get("accessToken", { path: "/" }) ? true : false;
   const isUser = useSelector((state) => state.user.isLogin);
-  console.log("로그인 여부쳌", isUser);
 
   const dispatch = useDispatch();
   const history = useHistory();

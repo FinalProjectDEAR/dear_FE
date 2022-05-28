@@ -81,8 +81,6 @@ const signupDB = (memberId, pwd, pwdCheck) => {
 
 const loginCheckDB = () => {
   return function (dispatch, getState, { history }) {
-    console.log("로그인 체크");
-
     const nickname = localStorage.getItem("nickname");
     const memberId = localStorage.getItem("memberId");
     const tokenCheck = cookies.get("accessToken", { path: "/" });
