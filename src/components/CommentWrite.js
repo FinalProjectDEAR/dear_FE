@@ -30,7 +30,7 @@ const CommentWrite = (props) => {
   const goComment = () => {
     if (!isUser) {
       Swal.fire("로그인 후 이용해주세요.");
-      history.push(`/postDetail/${props.postId}`);
+      history.push(`/login`);
       return;
     }
     history.push(`/postDetail/${props.postId}`);
