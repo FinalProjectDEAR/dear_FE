@@ -20,22 +20,24 @@ import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import { ReactComponent as Hamburger } from "../assets/Vector (5).svg";
 import { ReactComponent as Cancel } from "../assets/Vector (6).svg";
 
+import { cookies } from "../shared/cookie";
+import isLogin from "../shared/auth/isLogin";
+
 function FixedBtn(props) {
+  const logged = isLogin();
+
   const dispatch = useDispatch();
   const history = useHistory();
   const [isRead, setIsRead] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const user_id = useSelector((state) => state.user.user);
 
-  const Token = localStorage.accessToken;
-  console.log(Token);
-
   //알람 버튼 눌렀을 때 가져오기
   const notiCheck = () => {
-    if (!Token) {
-      Swal.fire("로그인 후 이용해주세요.");
-      return;
-    }
+    // if (!logged) {
+    //   Swal.fire("로그인 후 이용해주세요.");
+    //   return;
+    // }
     history.push("/notification");
     dispatch(actionCreators.getNotiDB());
     // setOpen(!open);
@@ -49,11 +51,11 @@ function FixedBtn(props) {
   const alarmNum = useSelector((state) => state.noti.notiCnt);
 
   const gotoMypage = () => {
-    if (!Token) {
-      Swal.fire("로그인 후 이용해주세요.");
-      history.push("/login");
-      return;
-    }
+    // if (!logged) {
+    //   Swal.fire("로그인 후 이용해주세요.");
+    //   history.push("/login");
+    //   return;
+    // }
     history.replace("/myPage");
   };
 
