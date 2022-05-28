@@ -906,7 +906,7 @@ const FollowContainer = styled.div`
   /* height: 186px; */
   @media ${({ theme }) => theme.device.isMobile} {
     width: 320px;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     /* height: 502px; */
     display: flex;
     flex-direction: column;

@@ -42,6 +42,7 @@ const PostEdit = lazy(() => import("../pages/PostEdit"));
 const VoteWrite = lazy(() => import("../pages/VoteWrite"));
 const SendMsg = lazy(() => import("../pages/SendMsg"));
 const ReceivedMsg = lazy(() => import("../pages/ReceivedMsg"));
+const ReplyMsg = lazy(() => import("../pages/ReplyMsg"));
 const VoteDetail = lazy(() => import("../pages/VoteDetail"));
 const MyPage = lazy(() => import("../pages/MyPage"));
 const Notification = lazy(() => import("../components/Notification"));
@@ -69,7 +70,8 @@ function App() {
               <Route path="/startRes" exact component={ResChatStart} />
               <Route path="/AudioRoom/:sessionId" component={AudioRoom} />
               <Route path="/loading" exact component={Loading} />
-              <Route path="/sendMsg/:messageId" exact component={SendMsg} />
+              <Route path="/sendMsg" exact component={SendMsg} />
+              <Route path="/replyMsg/:messageId" exact component={ReplyMsg} />
               <Route
                 path="/receivedMsg/:messageId"
                 exact

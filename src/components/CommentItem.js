@@ -31,7 +31,7 @@ const CommentItem = (props) => {
   const comments = props.comment;
   const postId = props.boardPostId;
   const boardPostId = props.member;
-
+  // console.log(props);
   //시간을 알아보자!
   const option = {
     lang: "ko",
@@ -44,6 +44,7 @@ const CommentItem = (props) => {
   const commentLike = props.likes;
   //수정을 알 수 있는 방법
   const memberId = localStorage.getItem("memberId");
+  const post = useSelector((state) => state.post.detailPost);
   //수정하기
   const editComment = () => {
     dispatch(actionCreators.editCommentDB(comment_id, comment, postId));
@@ -52,11 +53,18 @@ const CommentItem = (props) => {
   };
   //댓글 채택
   const likeComment = () => {
-    if (boardPostId !== memberId) {
-      Swal.fire("댓글 채택은 게시글 작성자만 가능합니다.");
+    if (post.memberId === boardPostId) {
+      Swal.fire("게시글 작성자 본인의 댓글은 채택이 불가합니다");
       return;
     }
-    dispatch(actionCreators.likeCommentDB(postId, comment_id));
+    if (post.memberId !== memberId) {
+      Swal.fire("게시글 작성자만 댓글 채택이 가능합니다");
+      return;
+    }
+    if (post.memberId) {
+      dispatch(actionCreators.likeCommentDB(postId, comment_id));
+    }
+
     // setLike(!like);
   };
   //모달
@@ -79,7 +87,7 @@ const CommentItem = (props) => {
   const checkMaxLength = (e) => {
     let wordLength = e.target.value.length;
     if (wordLength >= 255) {
-      Swal.fire("255자 이상 작성할 수 없습니다.");
+      Swal.fire("255 이상 작성할 수 없습니다.");
       history.goBack();
     }
     setTextLength(wordLength);
@@ -129,7 +137,7 @@ const CommentItem = (props) => {
             }}
             _onKeyUp={checkMaxLength}
             multiLine
-            maxlength="200"
+            maxlength="255"
             rows={7}
             value={comment || ""}
           />
@@ -208,15 +216,16 @@ const CommentWrapper = styled.div`
   max-width: 1032px;
   width: 100%;
   /* height: 200px; */
-  border-bottom: 1px solid #CCCCCC;
+  border-bottom: 1px solid #cccccc;
   /* background: orange; */
   @media ${({ theme }) => theme.device.isMobile} {
     /* width: 328px; */
     margin: auto;
     /* border: 1px solid violet; */
     /* text-align: left; */
-    display: flex;  
+    display: flex;
     /* background: orange; */
+  }
 `;
 
 const CommentContainer = styled.div`
@@ -225,15 +234,17 @@ const CommentContainer = styled.div`
   flex-direction: column;
   padding: 20px 40px;
   margin: auto;
-  max-width: 1032px;
+  max-width: 952px;
   width: 100%;
   height: 100%;
+  /* border: 1px solid red; */
   /* border-bottom: 1px solid #cccccc; */
   @media ${({ theme }) => theme.device.isMobile} {
     /* width: 328px; */
     /* border: 1px solid red; */
     margin: auto;
     display: flex;
+  }
 `;
 const TextWrapper = styled.div`
   width: 952px;
