@@ -3,7 +3,7 @@ import { Text, TextB, Modal } from "../elements";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { actionCreators as mainActions } from "../redux/modules/main";
@@ -52,7 +52,7 @@ function MainChat() {
       return;
     }
 
-    history.push("/startReq");
+    history.replace("/startReq");
   };
 
   const startRes = () => {
@@ -67,7 +67,7 @@ function MainChat() {
       history.replace("/mypage");
       return;
     }
-    history.push("/startRes");
+    history.replace("/startRes");
   };
 
   return (
