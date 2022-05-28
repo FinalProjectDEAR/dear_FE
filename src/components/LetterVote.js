@@ -72,6 +72,7 @@ function LetterVote({ voteInfo }) {
   const submitVote = () => {
     if (!isUser) {
       Swal.fire("로그인 후 이용해주세요.");
+      history.replace("/login");
     } else {
       dispatch(voteActions.putVoteDB(postId, vote));
       setShowResult(true);
