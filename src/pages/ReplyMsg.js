@@ -10,7 +10,7 @@ import "../styles/libraryStyle/style.css";
 import { useDispatch, useSelector } from "react-redux";
 import { MsgActionCreators } from "../redux/modules/message";
 
-function SendMsg() {
+function ReplyMsg() {
   const Mobile = useMediaQuery({
     query: "(max-width:767px)",
   });
@@ -160,4 +160,4 @@ const MsgBox = styled.div`
   }
 `;
 
-export default SendMsg;
+export default ReplyMsg;
