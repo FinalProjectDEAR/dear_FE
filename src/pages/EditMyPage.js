@@ -70,6 +70,7 @@ const EditMyPage = () => {
     dispatch(actionCreators.getInfoDB());
   }, []);
   const userInfo = useSelector((state) => state.mypage.user.user);
+  console.log(userInfo);
   //defaultValue가 아닌 진짜 Value로 불러오기 위한 작업
   useEffect(() => {
     setNickname(userInfo?.nickname);
@@ -80,6 +81,8 @@ const EditMyPage = () => {
     setDating(userInfo?.dating);
   }, [userInfo]);
 
+  // const localNick = localStorage.getItem("nickname");
+  // console.log(localNick);
   const dupCheck = (nickname) => {
     if (!nicknameCheck(nickname)) {
       Swal.fire("닉네임이 형식에 맞지 않습니다. 영문/한글/숫자 포함 3-10자");
@@ -127,15 +130,20 @@ const EditMyPage = () => {
   };
 
   const addInfo = (dating) => {
-    if (isCheck === false) {
+    if (userInfo.nickname === nickname) {
+      if (dating === "솔로") {
+        submitSolo();
+      }
+      if (dating === "커플") {
+        submitCouple();
+      }
+    } else if (isCheck === false) {
       Swal.fire("닉네임 중복확인을 해주세요.");
       return;
-    }
-    if (nickErr === false) {
+    } else if (nickErr === false) {
       Swal.fire("사용가능한 닉네임이어야 합니다.");
       return;
-    }
-    if (!nicknameCheck(nickname)) {
+    } else if (!nicknameCheck(nickname)) {
       Swal.fire("닉네임이 형식에 맞지 않습니다. 영문/한글/숫자 포함 3-10자");
       return;
     }
