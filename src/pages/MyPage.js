@@ -18,6 +18,7 @@ import Follow from "./Follow";
 import Post from "../pages/Post";
 import Paginations from "../elements/Pagination";
 import ResTag from "../elements/ResTag";
+import ResTag2 from "../elements/ResTag2";
 import EmptyMSG from "../elements/EmptyMSG";
 import EmptyChat from "../elements/EmptyChat";
 import EmptyFollow from "../elements/EmptyFollow";
@@ -69,7 +70,7 @@ const MyPage = () => {
     dispatch(actionCreators.getInfoDB());
   }, []);
   const userInfo = useSelector((state) => state.mypage.user.user);
-  // console.log("멤버인포레스태그", userInfo?.resTag1);
+  // console.log("멤버인포레스태그", userInfo?.resTag1, userInfo?.resTag2);
   //페이지별 게시글 전체 조회
   React.useEffect(() => {
     dispatch(actionCreators.getPostListDB(page));
@@ -220,30 +221,33 @@ const MyPage = () => {
                   </div>
                   <div className="types">
                     <MobileListener>
-                      <ResTags>
-                        {userInfo === !null ? (
+                      {userInfo?.resTag1 === null ? (
+                        <EmptyRes />
+                      ) : (
+                        <ResTags>
                           <ResTag resTag1={userInfo?.resTag1} />
-                        ) : (
-                          <EmptyRes />
-                        )}
-                      </ResTags>
-                      <ResTags>
-                        {userInfo ? (
-                          <ResTag resTag2={userInfo?.resTag2} />
-                        ) : null}
-                      </ResTags>
+                        </ResTags>
+                      )}
+                      {userInfo?.resTag2 ? (
+                        <ResTags>
+                          <ResTag2 resTag2={userInfo?.resTag2} />
+                        </ResTags>
+                      ) : null}
                     </MobileListener>
+
                     <WebListener>
-                      <ResTags>
-                        {userInfo === !null ? (
+                      {userInfo?.resTag1 === null ? (
+                        <EmptyRes />
+                      ) : (
+                        <ResTags>
                           <ResTag resTag1={userInfo?.resTag1} />
-                        ) : (
-                          <EmptyRes />
-                        )}
-                        {userInfo ? (
-                          <ResTag resTag2={userInfo?.resTag2} />
-                        ) : null}
-                      </ResTags>
+                        </ResTags>
+                      )}
+                      {userInfo?.resTag2 ? (
+                        <ResTags>
+                          <ResTag2 resTag2={userInfo?.resTag2} />
+                        </ResTags>
+                      ) : null}
                     </WebListener>
 
                     <OndoTag>
@@ -695,7 +699,7 @@ const MTapeWrapper = styled.div`
 const MobileListener = styled.div`
   @media ${({ theme }) => theme.device.isMobile} {
     display: flex;
-    justify-content: row;
+    flex-direction: row;
     width: 230px;
     /* background: pink; */
   }
