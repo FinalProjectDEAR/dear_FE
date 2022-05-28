@@ -2,10 +2,12 @@ import React from "react";
 import styled from "styled-components";
 
 import { history } from "../redux/configureStore";
-import { Text } from "../elements";
+import { Text, Modal } from "../elements";
 
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
+
+import Survey from "./Survey";
 import logo from "../assets/main/logoS.png";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
@@ -14,6 +16,15 @@ import { cookies } from "../shared/cookie";
 import isLogin from "../shared/auth/isLogin";
 
 const Header = (props) => {
+  const [eventOpen, setEvenOpen] = React.useState(false);
+
+  const openModal = () => {
+    setEvenOpen(true);
+  };
+  const closeModal = () => {
+    setEvenOpen(false);
+  };
+
   const dispatch = useDispatch();
 
   const isUser = useSelector((state) => state.user.isLogin);
@@ -72,6 +83,18 @@ const Header = (props) => {
                   마이페이지
                 </Text>
               </HeaderBtn>
+              <HeaderBtn onClick={openModal}>
+                <Text sub4 cursor="pointer" color="#7A37BE">
+                  설문이벤트
+                </Text>
+              </HeaderBtn>
+
+              {eventOpen ? (
+                <Modal>
+                  <Survey close={closeModal} />
+                </Modal>
+              ) : null}
+
               {!isUser ? (
                 <HeaderBtn
                   onClick={() => {
