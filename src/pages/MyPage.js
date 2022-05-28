@@ -783,7 +783,6 @@ const MsgWrapper = styled.div`
     height: 390px;
     display: flex;
     flex-direction: column;
-    /* margin-top: 100px; */
   }
 `;
 const MsgContainer = styled.div`
@@ -792,9 +791,7 @@ const MsgContainer = styled.div`
   margin: 20px auto;
   @media ${({ theme }) => theme.device.isMobile} {
     width: 320px;
-    /* height: 300px; */
     gap: 10px;
-
     display: flex;
     flex-direction: column;
     margin: auto;
