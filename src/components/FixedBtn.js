@@ -35,7 +35,6 @@ function FixedBtn(props) {
 
   const path = location.pathname;
   let pathname = path.split("/");
-
   // const isCookies = cookies.get("accessToken", { path: "/" }) ? true : false;
   const isUser = useSelector((state) => state.user.isLogin);
 
