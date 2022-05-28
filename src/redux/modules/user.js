@@ -117,11 +117,6 @@ const loginDB = (memberId, pwd) => {
       );
       let accessToken = data.data.accessToken;
 
-      cookies.set("accessToken", accessToken, {
-        path: "/",
-        maxAge: 14400, // 4시간
-      });
-
       const tokenData = jwtDecode(accessToken);
       localStorage.setItem("memberId", memberId);
       localStorage.setItem("accessToken", accessToken);
@@ -130,6 +125,10 @@ const loginDB = (memberId, pwd) => {
         history.replace("/");
         const nickname = tokenData.nick;
         localStorage.setItem("nickname", nickname);
+        cookies.set("accessToken", accessToken, {
+          path: "/",
+          maxAge: 14400, // 4시간
+        });
         dispatch(setUser(memberId, nickname));
       } else {
         history.push("/info");
