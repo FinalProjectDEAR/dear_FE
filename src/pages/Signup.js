@@ -32,6 +32,11 @@ const Signup = () => {
   };
 
   const signup = () => {
+    if (!nickErr) {
+      Swal.fire("사용가능한 아이디여야 합니다.");
+      return;
+    }
+
     if (isCheck === false) {
       Swal.fire("아이디 중복확인을 해주세요!");
     }
