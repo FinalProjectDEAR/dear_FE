@@ -11,6 +11,22 @@ import "../styles/libraryStyle/style.css";
 import arrowBack from "../assets/arrow_back.png";
 
 function ResChatStart() {
+  const [audioPermit, setAudioPermit] = React.useState("");
+
+  React.useEffect(() => {
+    navigator.mediaDevices
+      .getUserMedia({ audio: true, video: true })
+      .then((stream) => {
+        setAudioPermit(true);
+        return;
+      })
+      .catch((err) => {
+        Swal.fire("오디오 접근이 거절되었습니다. 설정에서 승인해주세요.");
+        setAudioPermit(false);
+        return;
+      });
+  }, []);
+
   const dispatch = useDispatch();
   const [category, setCategory] = React.useState("");
 
@@ -30,6 +46,11 @@ function ResChatStart() {
 
   //정보 송부
   const submit = () => {
+    if (audioPermit === false) {
+      Swal.fire("오디오와 비디오 권한을 허용해주세요.");
+      return;
+    }
+
     if (category === "") {
       Swal.fire("상담 카테고리를 입력해주세요.");
       return;
