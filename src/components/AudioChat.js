@@ -167,7 +167,7 @@ function AudioChat() {
         setWantMore({ ...wantMore, agree: wantMoreList });
         if (wantMore.agree.length % 2 === 0) {
           let date = new Date();
-          let extend = date.setMinutes(date.getMinutes() + 10);
+          let extend = date.setMinutes(date.getMinutes() + 1);
           setTargetTime(extend);
         }
       });
