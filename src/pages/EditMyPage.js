@@ -70,7 +70,6 @@ const EditMyPage = () => {
     dispatch(actionCreators.getInfoDB());
   }, []);
   const userInfo = useSelector((state) => state.mypage.user.user);
-  console.log(userInfo);
   //defaultValue가 아닌 진짜 Value로 불러오기 위한 작업
   useEffect(() => {
     setNickname(userInfo?.nickname);
