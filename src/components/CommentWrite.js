@@ -25,10 +25,10 @@ const CommentWrite = (props) => {
     setTextLength(wordLength);
   };
 
-  const Token = localStorage.getItem("accessToken");
+  const isUser = useSelector((state) => state.user.isLogin);
 
   const goComment = () => {
-    if (!Token) {
+    if (!isUser) {
       Swal.fire("로그인 후 이용해주세요.");
       history.push(`/postDetail/${props.postId}`);
       return;

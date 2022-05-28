@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators } from "../redux/modules/noti";
+import { actionCreators as userActions } from "../redux/modules/user";
 import { useHistory } from "react-router-dom";
 
 //id값으로 스크롤
@@ -24,7 +25,13 @@ import { cookies } from "../shared/cookie";
 import isLogin from "../shared/auth/isLogin";
 
 function FixedBtn(props) {
-  const logged = isLogin();
+  React.useEffect(() => {
+    dispatch(userActions.loginCheckDB());
+  }, []);
+
+  // const isCookies = cookies.get("accessToken", { path: "/" }) ? true : false;
+  const isUser = useSelector((state) => state.user.isLogin);
+  console.log("로그인 여부쳌", isUser);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -34,16 +41,18 @@ function FixedBtn(props) {
 
   //알람 버튼 눌렀을 때 가져오기
   const notiCheck = () => {
-    // if (!logged) {
-    //   Swal.fire("로그인 후 이용해주세요.");
-    //   return;
-    // }
-    history.push("/notification");
-    dispatch(actionCreators.getNotiDB());
-    // setOpen(!open);
-    setIsRead(true);
-    props._onClick();
+    if (!isUser) {
+      Swal.fire("로그인 후 이용해주세요.");
+      history.push("/login");
+    } else {
+      history.push("/notification");
+      dispatch(actionCreators.getNotiDB());
+      // setOpen(!open);
+      setIsRead(true);
+      props._onClick();
+    }
   };
+
   //알람 갯수 가져오기
   React.useEffect(() => {
     dispatch(actionCreators.getNotiCntDB());
@@ -51,12 +60,12 @@ function FixedBtn(props) {
   const alarmNum = useSelector((state) => state.noti.notiCnt);
 
   const gotoMypage = () => {
-    // if (!logged) {
-    //   Swal.fire("로그인 후 이용해주세요.");
-    //   history.push("/login");
-    //   return;
-    // }
-    history.replace("/myPage");
+    if (!isUser) {
+      Swal.fire("로그인 후 이용해주세요.");
+      history.push("/login");
+    } else {
+      history.replace("/myPage");
+    }
   };
 
   return (

@@ -38,10 +38,10 @@ function PostList(props) {
   const pageList = useSelector((state) => state.post.post);
   // console.log(postList);
 
-  const Token = localStorage.getItem("accessToken");
+  const isUser = useSelector((state) => state.user.isLogin);
 
   const gotoVote = () => {
-    if (!Token) {
+    if (!isUser) {
       Swal.fire("로그인 후 이용해주세요.");
       history.push("/login");
     } else {
@@ -50,7 +50,7 @@ function PostList(props) {
   };
 
   const gotoPost = () => {
-    if (!Token) {
+    if (!isUser) {
       Swal.fire("로그인 후 이용해주세요.");
       history.push("/login");
     } else {

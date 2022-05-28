@@ -12,7 +12,15 @@ import uploadImg from "../assets/upload.png";
 import styled from "styled-components";
 import VoteResult from "./VoteResult";
 
+import Swal from "sweetalert2";
+import "../styles/libraryStyle/style.css";
+
+import { cookies } from "../shared/cookie";
+import isLogin from "../shared/auth/isLogin";
+
 function ImageVote({ voteInfo }) {
+  const isUser = useSelector((state) => state.user.isLogin);
+
   const dispatch = useDispatch();
 
   const params = useParams();
@@ -67,9 +75,13 @@ function ImageVote({ voteInfo }) {
   };
 
   const submitVote = () => {
-    dispatch(voteActions.putVoteDB(postId, vote));
-    setShowResult(true);
-    setTimeout(delSelection(), 500);
+    if (!isUser) {
+      Swal.fire("로그인 후 이용해주세요.");
+    } else {
+      dispatch(voteActions.putVoteDB(postId, vote));
+      setShowResult(true);
+      setTimeout(delSelection(), 500);
+    }
   };
 
   return (

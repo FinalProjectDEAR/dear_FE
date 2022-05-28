@@ -37,6 +37,7 @@ const initialState = {
   memberId: null,
   nickname: null,
   userInfo: null,
+  isLogin: false,
   followList: null,
   historyList: null,
   idMsg: false,
@@ -80,17 +81,31 @@ const signupDB = (memberId, pwd, pwdCheck) => {
 
 const loginCheckDB = () => {
   return function (dispatch, getState, { history }) {
+    console.log("로그인 체크");
+
     const nickname = localStorage.getItem("nickname");
     const memberId = localStorage.getItem("memberId");
-    const tokenCheck = localStorage.accessToken;
-    const logged = isLogin();
-    if (logged) {
+    const tokenCheck = cookies.get("accessToken", { path: "/" });
+    if (tokenCheck) {
       dispatch(setUser(memberId, nickname));
-    } else {
-      dispatch(logOut());
+      return;
     }
   };
 };
+
+// const loginCheckDB = () => {
+//   return function (dispatch, getState, { history }) {
+//     const nickname = localStorage.getItem("nickname");
+//     const memberId = localStorage.getItem("memberId");
+//     const tokenCheck = localStorage.accessToken;
+//     const logged = isLogin();
+//     if (logged) {
+//       dispatch(setUser(memberId, nickname));
+//     } else {
+//       dispatch(logOut());
+//     }
+//   };
+// };
 
 const loginDB = (memberId, pwd) => {
   return async function (dispatch, getState, { history }) {
@@ -110,9 +125,8 @@ const loginDB = (memberId, pwd) => {
       });
 
       const tokenData = jwtDecode(accessToken);
-      localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("memberId", memberId);
-      localStorage.setItem("isLogin", true);
+      localStorage.setItem("accessToken", accessToken);
 
       if (tokenData.nick) {
         history.replace("/");
@@ -140,8 +154,10 @@ const kakaoLogin = (code) => {
 
       const tokenData = jwtDecode(accessToken);
       localStorage.setItem("accessToken", accessToken);
-
-      localStorage.setItem("isLogin", true);
+      cookies.set("accessToken", accessToken, {
+        path: "/",
+        maxAge: 14400, // 4시간
+      });
 
       if (tokenData.nick) {
         const memberId = tokenData.sub;
@@ -237,11 +253,17 @@ export default handleActions(
         draft.memberId = action.payload.memberId;
         draft.nickname = action.payload.nickname;
         draft.msg = false;
+        draft.isLogin = true;
       }),
     [LOG_OUT]: (state, action) =>
       produce(state, (draft) => {
         draft.memberId = null;
         draft.nickname = null;
+        draft.isLogin = false;
+        localStorage.removeItem("memberId");
+        localStorage.removeItem("nickname");
+        localStorage.removeItem("accessToken");
+        cookies.remove("accessToken", { path: "/" });
       }),
     [GET_INFO]: (state, action) =>
       produce(state, (draft) => {
