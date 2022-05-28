@@ -12,7 +12,7 @@ import arrowBack from "../assets/arrow_back.png";
 
 function ResChatStart() {
   const dispatch = useDispatch();
-  const [category, setCategory] = React.useState(false);
+  const [category, setCategory] = React.useState("");
 
   const memberId = localStorage.getItem("memberId");
 
@@ -31,13 +31,14 @@ function ResChatStart() {
   //정보 송부
   const submit = () => {
     if (category === "") {
-      Swal.fire("필수정보를 모두 입력해주세요.");
+      Swal.fire("상담 카테고리를 입력해주세요.");
       return;
+    } else {
+      const chatInfo = {
+        category: category,
+      };
+      dispatch(chatActions.resChatDB(category));
     }
-    const chatInfo = {
-      category: category,
-    };
-    dispatch(chatActions.resChatDB(category));
   };
 
   return (
