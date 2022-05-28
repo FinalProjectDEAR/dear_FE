@@ -20,32 +20,31 @@ function Survey({ close }) {
       path: "/", // path를 지정해주고
       expires: decade.toDate(), // 여기서 날짜를 지정해준다
     });
+    close();
   };
 
   return (
     <React.Fragment>
-      {cookies[COOKIE_KEY] ? null : (
-        <Wrapper>
-          <CgClose
-            className="close"
-            size={20}
-            onClick={hiddenModal}
-            style={{
-              color: "#948A9E",
-              position: "absolute",
-              right: "30px",
-              top: "30px",
-              cursor: "pointer",
-            }}
-          />
-          <SurveyThumb
-            style={{ cursor: "pointer" }}
-            onClick={() => {
-              window.open("https://respond.listovey.com/rs/EctfU25gC");
-            }}
-          />
-        </Wrapper>
-      )}
+      <Wrapper>
+        <CgClose
+          className="close"
+          size={20}
+          onClick={hiddenModal}
+          style={{
+            color: "#948A9E",
+            position: "absolute",
+            right: "30px",
+            top: "30px",
+            cursor: "pointer",
+          }}
+        />
+        <SurveyThumb
+          style={{ cursor: "pointer" }}
+          onClick={() => {
+            window.open("https://respond.listovey.com/rs/EctfU25gC");
+          }}
+        />
+      </Wrapper>
     </React.Fragment>
   );
 }

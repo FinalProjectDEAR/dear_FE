@@ -337,7 +337,7 @@ const ReviewWrapper = styled.div`
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 20px;
   @media ${({ theme }) => theme.device.mobile} {
-    height: 712px;
+    height: 640px;
     width: 360px;
     padding: 44px 20px;
     border-radius: 0px;

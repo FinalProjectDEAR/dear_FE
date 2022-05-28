@@ -238,7 +238,7 @@ const ReviewWrapper = styled.div`
   border-radius: 20px;
   @media ${({ theme }) => theme.device.mobile} {
     width: 360px;
-    min-height: 712px;
+    min-height: 640px;
     padding: 44px 20px;
     border-radius: 0px;
     overflow: scroll;
