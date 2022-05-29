@@ -67,6 +67,8 @@ const CommentWrite = (props) => {
             multiLine
             maxlength="255"
             rows={7}
+            is_submit
+            onSubmit={addComment}
           />
         </TextWrapper>
         <BtnWrapper>
