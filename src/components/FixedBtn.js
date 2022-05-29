@@ -495,6 +495,7 @@ const MEvent = styled.div`
   color: white;
   border: none;
   cursor: pointer;
+  margin: 10px;
 `;
 
 //모바일 버전 임시 위치 설정
