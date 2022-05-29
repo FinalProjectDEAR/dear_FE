@@ -70,7 +70,9 @@ function LetterVote({ voteInfo }) {
   };
 
   const submitVote = () => {
-    if (!isUser) {
+    if (vote === "") {
+      Swal.fire("투표항목을 선택해주세요.");
+    } else if (!isUser) {
       Swal.fire("로그인 후 이용해주세요.");
       history.replace("/login");
     } else {
