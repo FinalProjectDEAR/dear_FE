@@ -26,19 +26,19 @@ function MobileIntro() {
           <img
             src={info3}
             alt="mobileIntro"
-            style={{ width: "328px", marginTop: "90px 0px" }}
+            style={{ width: "328px", margin: "90px 0px" }}
           />
           <img
             src={info4}
             alt="mobileIntro"
-            style={{ width: "328px", marginTop: "90px 0px" }}
+            style={{ width: "328px", margin: "90px 0px" }}
           />
           <img
             src={info5}
             alt="mobileIntro"
             style={{
               width: "328px",
-              marginTop: "90px 0px",
+              margin: "90px 0px",
               marginBottom: "135px",
             }}
           />
