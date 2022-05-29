@@ -146,12 +146,21 @@ function PostList(props) {
                       dispatch(actionCreators.getPostDB(page));
                     }}
                   >
-                    <AllBtn>
-                      <All />
-                    </AllBtn>
-                    <p style={{ marginTop: "83px", position: "absolute" }}>
-                      전체
-                    </p>
+                    {params.category === "전체" ? (
+                      <>
+                        <AllBtn>
+                          <All />
+                        </AllBtn>
+                        <p style={{ marginTop: "83px", position: "absolute" }}>
+                          전체
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <All />
+                        전체
+                      </>
+                    )}
                   </CategoryBtn>
                   <CategoryBtn
                     onClick={() => {
@@ -160,8 +169,20 @@ function PostList(props) {
                       dispatch(actionCreators.getCateDetailDB(page, "투표"));
                     }}
                   >
-                    <Vote />
-                    투표
+                    {params.category === "투표" ? (
+                      <>
+                        <AllBtn>
+                          <Vote />
+                        </AllBtn>
+                        <p style={{ marginTop: "83px", position: "absolute" }}>
+                          투표
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <Vote /> 투표
+                      </>
+                    )}
                   </CategoryBtn>
                   <CategoryBtn
                     onClick={() => {
@@ -170,8 +191,21 @@ function PostList(props) {
                       dispatch(actionCreators.getCateDetailDB(page, "솔로"));
                     }}
                   >
-                    <Solo />
-                    솔로
+                    {params.category === "솔로" ? (
+                      <>
+                        <AllBtn>
+                          <Solo />
+                        </AllBtn>
+                        <p style={{ marginTop: "83px", position: "absolute" }}>
+                          솔로
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <Solo />
+                        솔로
+                      </>
+                    )}
                   </CategoryBtn>
                   <CategoryBtn
                     onClick={() => {
@@ -180,8 +214,21 @@ function PostList(props) {
                       dispatch(actionCreators.getCateDetailDB(page, "짝사랑"));
                     }}
                   >
-                    <Love />
-                    짝사랑
+                    {params.category === "짝사랑" ? (
+                      <>
+                        <AllBtn>
+                          <Love />
+                        </AllBtn>
+                        <p style={{ marginTop: "83px", position: "absolute" }}>
+                          짝사랑
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <Love />
+                        짝사랑
+                      </>
+                    )}
                   </CategoryBtn>
                 </div>
                 <div className="mobile">
@@ -192,7 +239,20 @@ function PostList(props) {
                       dispatch(actionCreators.getCateDetailDB(page, "썸"));
                     }}
                   >
-                    <Some />썸
+                    {params.category === "썸" ? (
+                      <>
+                        <AllBtn>
+                          <Some />
+                        </AllBtn>
+                        <p style={{ marginTop: "83px", position: "absolute" }}>
+                          썸
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <Some />썸
+                      </>
+                    )}
                   </CategoryBtn>
                   <CategoryBtn
                     onClick={() => {
@@ -201,8 +261,21 @@ function PostList(props) {
                       dispatch(actionCreators.getCateDetailDB(page, "연애"));
                     }}
                   >
-                    <Again />
-                    연애
+                    {params.category === "연애" ? (
+                      <>
+                        <AllBtn>
+                          <Again />
+                        </AllBtn>
+                        <p style={{ marginTop: "83px", position: "absolute" }}>
+                          연애
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <Again />
+                        연애
+                      </>
+                    )}
                   </CategoryBtn>
                   <CategoryBtn
                     onClick={() => {
@@ -211,8 +284,21 @@ function PostList(props) {
                       dispatch(actionCreators.getCateDetailDB(page, "이별"));
                     }}
                   >
-                    <Broken />
-                    이별
+                    {params.category === "이별" ? (
+                      <>
+                        <AllBtn>
+                          <Broken />
+                        </AllBtn>
+                        <p style={{ marginTop: "83px", position: "absolute" }}>
+                          이별
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <Broken />
+                        이별
+                      </>
+                    )}
                   </CategoryBtn>
                   <CategoryBtn
                     onClick={() => {
@@ -221,8 +307,21 @@ function PostList(props) {
                       dispatch(actionCreators.getCateDetailDB(page, "기타"));
                     }}
                   >
-                    <Etc />
-                    기타
+                    {params.category === "기타" ? (
+                      <>
+                        <AllBtn>
+                          <Etc />
+                        </AllBtn>
+                        <p style={{ marginTop: "83px", position: "absolute" }}>
+                          기타
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <Etc />
+                        기타
+                      </>
+                    )}
                   </CategoryBtn>
                 </div>
               </CateGoryWrapper>
@@ -323,16 +422,6 @@ const VoteWrapper = styled.div`
   cursor: pointer;
   text-align: left;
 `;
-const MoreVote = styled.span`
-  color: #948a9e;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  text-decoration-line: underline;
-  width: 129px;
-  height: 18px;
-  line-height: 720px;
-`;
 const BoardWrapper = styled.div`
   margin: 30px auto;
   max-width: 1032px;
@@ -365,7 +454,7 @@ const CateGoryWrapper = styled.div`
       flex-direction: row;
       gap: 30px;
       height: 100px;
-      padding-top: 20px;
+      padding-top: 25px;
     }
   }
   @media ${({ theme }) => theme.device.web} {

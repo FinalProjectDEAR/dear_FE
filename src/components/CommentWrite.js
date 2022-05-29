@@ -58,7 +58,7 @@ const CommentWrite = (props) => {
         <TextBox>댓글 쓰기</TextBox>
         <TextWrapper>
           <Input
-            placeholder="선플은 선택이 아닌 의무입니다! (최소 10자 이상)"
+            placeholder="선플은 선택이 아닌 의무입니다!"
             _onChange={(e) => {
               setComment(e.target.value);
             }}
