@@ -75,6 +75,9 @@ function ImageVote({ voteInfo }) {
   };
 
   const submitVote = () => {
+    if (vote === "") {
+      Swal.fire("투표항목을 선택해주세요.");
+    }
     if (!isUser) {
       Swal.fire("로그인 후 이용해주세요.");
       history.replace("/login");
