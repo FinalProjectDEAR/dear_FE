@@ -99,7 +99,7 @@ body {
 
 .swal2-title {
   font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
-  font-size: 20px;
+  font-size: 18px !important;
 }
 
 .dotStyle li.slick-active button:before {
