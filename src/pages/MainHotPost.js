@@ -76,9 +76,13 @@ export default MainHotPost;
 
 const Background = styled.div`
   width: 100%;
+  height: 100vh;
   display: flex;
   align-items: center;
   scroll-snap-align: start;
+  @media ${({ theme }) => theme.device.mobile} {
+    height: 100%;
+  }
 `;
 
 const HotPostWrapper = styled.div`
@@ -92,7 +96,7 @@ const HotPostWrapper = styled.div`
     padding: 25px 25px;
     width: 360px;
     height: 640px;
-    
+  }
 `;
 
 const VoteBox = styled.div`
