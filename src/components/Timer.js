@@ -40,16 +40,16 @@ export default function Timer(props) {
           {parseInt(remain / 60)} : {remain % 60}
         </Text>
       ) : (
-        <Text body>대기 중</Text>
+        <Text body>대기 중...</Text>
       )}
 
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      {/* <div style={{ display: "flex", justifyContent: "center" }}>
         <ColorBadge size="6" bg="#948A9E" margin="0px 2px" />
         <ColorBadge size="6" bg="#948A9E" margin="0px 2px" />
         <ColorBadge size="6" bg="#948A9E" margin="0px 2px" />
         <ColorBadge size="6" bg="#948A9E" margin="0px 2px" />
         <ColorBadge size="6" bg="#948A9E" margin="0px 2px" />
-      </div>
+      </div> */}
     </TimerBox>
   );
 }
