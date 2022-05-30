@@ -448,13 +448,7 @@ const PageBtn = styled.div`
   align-items: center;
 `;
 
-const Background = styled.div`
-  /* height: 2200px;
-  @media ${({ theme }) => theme.device.isMobile} {
-    height: 2500px;
-    max-height: 3200px;
-  } */
-`;
+const Background = styled.div``;
 const MyPageWrapper = styled.div`
   background-color: #ffffff;
   display: flex;
@@ -477,12 +471,10 @@ const MypageContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 40px;
-  /* border: 1px solid red; */
   @media ${({ theme }) => theme.device.isMobile} {
     width: 280px;
     display: flex;
     flex-direction: column;
-    /* border: 1px solid red; */
   }
 `;
 const MemberWrapper = styled.div`
@@ -492,14 +484,12 @@ const MemberWrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  /* border: 1px solid red; */
   @media ${({ theme }) => theme.device.isMobile} {
     width: 280px;
     height: 120px;
     display: flex;
     flex-direction: column;
     margin: auto;
-    /* border: 1px solid red; */
   }
 `;
 const ColorBox = styled.div`
@@ -513,7 +503,6 @@ const ColorBox = styled.div`
     justify-content: center;
     align-items: center;
     margin: 0px auto;
-    /* border: 1px solid red; */
   }
 `;
 const NicknameBox = styled.div`
@@ -522,12 +511,8 @@ const NicknameBox = styled.div`
   align-items: flex-start;
   padding: 0px;
   gap: 10px;
-  /* width: 280px; */
-  /* height: 64px; */
-  /* border: 1px solid red; */
   .nick {
     display: flex;
-    /* width: 280px; */
   }
   @media ${({ theme }) => theme.device.isMobile} {
     width: 280px;
@@ -537,7 +522,6 @@ const NicknameBox = styled.div`
     justify-content: center;
     align-items: center;
     margin: 20px auto;
-    /* border: 1px solid red; */
   }
 `;
 const TypeWrapper = styled.div`
@@ -548,20 +532,17 @@ const TypeWrapper = styled.div`
   height: 200px;
   justify-content: center;
   align-items: center;
-  /* border: 1px solid red; */
   #love {
     width: 400px;
     height: 26px;
     margin-bottom: 18px;
     display: flex;
     flex-direction: row;
-    /* border: 1px solid red; */
   }
   .loveBox {
     display: flex;
     flex-direction: row;
     width: 155px;
-    /* border: 1px solid red; */
   }
   .loveTag {
     margin-left: 32px;
@@ -570,25 +551,20 @@ const TypeWrapper = styled.div`
     height: 26px;
     display: flex;
     flex-direction: row;
-    /* border: 1px solid red; */
   }
   #listener {
     width: 400px;
     display: flex;
     flex-direction: row;
-    /* border: 1px solid red; */
   }
   .listenerBox {
     display: flex;
     flex-direction: row;
     width: 139px;
-    /* margin-right: 20px; */
-    /* border: 1px solid red; */
   }
   .types {
     display: flex;
     flex-direction: column;
-    /* margin-left: 20px; */
   }
   .listenerTag {
     gap: 10px;
@@ -596,7 +572,6 @@ const TypeWrapper = styled.div`
     height: 26px;
     display: flex;
     flex-direction: row;
-    /* border: 1px solid blue; */
   }
   @media ${({ theme }) => theme.device.isMobile} {
     width: 280px;
@@ -606,30 +581,23 @@ const TypeWrapper = styled.div`
     justify-content: center;
     align-items: center;
     margin: auto;
-    /* border: 1px solid blue; */
     #love {
       width: 280px;
-      /* height: 26px; */
-      /* margin-bottom: 18px; */
       display: flex;
       flex-direction: column;
-      /* background: yellow; */
     }
     .loveBox {
       display: flex;
       flex-direction: row;
       width: 104px;
-      /* background: blue; */
       margin-left: 10px;
     }
     .loveTag {
       margin: 10px auto;
       justify-content: center;
       width: 280px;
-      /* gap: 10px; */
       display: flex;
       flex-direction: row;
-      /* background: pink; */
     }
     #listener {
       width: 280px;
@@ -651,14 +619,10 @@ const TypeWrapper = styled.div`
       margin-left: 20px;
     }
     .listenerTag {
-      /* gap: 10px; */
-      /* height: 26px; */
       display: flex;
       flex-direction: row;
       width: 277px;
       margin-right: 30px;
-      /* margin: auto; */
-      /* background: pink; */
     }
   }
 `;
@@ -668,7 +632,6 @@ const TapeWrapper = styled.div`
   align-items: center;
   flex-direction: column;
   width: 88px;
-  /* border: 1px solid red; */
   .tape {
     display: flex;
   }
@@ -688,10 +651,8 @@ const MTapeWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin: 0px auto 30px;
-  /* background: red; */
   .tape {
     display: flex;
-    /* background: red; */
   }
   .tapeCnt {
     display: flex;
@@ -703,7 +664,6 @@ const MobileListener = styled.div`
     display: flex;
     flex-direction: row;
     width: 230px;
-    /* background: pink; */
   }
   @media ${({ theme }) => theme.device.web} {
     display: none;
@@ -712,7 +672,6 @@ const MobileListener = styled.div`
 const ResTags = styled.div`
   display: flex;
   flex-direction: row;
-  /* border: 1px solid red; */
 `;
 
 const WebListener = styled.div`
@@ -725,8 +684,6 @@ const WebListener = styled.div`
   }
 `;
 const OndoTag = styled.div`
-  /* margin-top: 0px; */
-  /* border: 1px solid red; */
   @media ${({ theme }) => theme.device.isMobile} {
     margin-top: 0px;
   }
@@ -735,7 +692,6 @@ const TemperatureBox = styled.div`
   display: flex;
   flex-direction: row;
   margin: 3px 26px;
-  /* border: 1px solid red; */
 `;
 const TemperatureBar = styled.div`
   display: flex;
@@ -817,11 +773,7 @@ const TitleContainer = styled.div`
   }
   @media ${({ theme }) => theme.device.isMobile} {
     width: 320px;
-    /* height: 390px; */
-    /* margin: auto; */
-    /* border: 1px solid red; */
     .page {
-      /* border: 1px solid red; */
       width: 80px;
       height: 40px;
       display: flex;
@@ -837,7 +789,6 @@ const Title = styled.div`
 const CounselWrapper = styled.div`
   margin: auto;
   width: 1032px;
-  /* height: 342px; */
   margin-top: 100px;
   @media ${({ theme }) => theme.device.isMobile} {
     width: 320px;
@@ -858,18 +809,13 @@ const CounselGrid = styled.div`
   flex-direction: column;
   @media ${({ theme }) => theme.device.isMobile} {
     width: 320px;
-    /* height: 96px; */
-    /* margin-bottom: 100px; */
-    /* background-color: red; */
     display: flex;
     flex-direction: column;
-    /* margin-top: 100px; */
   }
 `;
 const MobileGridWrapper = styled.div`
   @media ${({ theme }) => theme.device.isMobile} {
     width: 320px;
-    /* max-height: 675px; */
     display: flex;
     flex-direction: column;
     display: flex;
@@ -880,12 +826,10 @@ const MobileGridWrapper = styled.div`
 const FollowWrapper = styled.div`
   margin: auto;
   width: 1034px;
-  /* height: 236px; */
   margin-top: 100px;
   @media ${({ theme }) => theme.device.isMobile} {
     width: 320px;
     max-height: 675px;
-    /* background-color: orange; */
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -900,11 +844,8 @@ const FollowContainer = styled.div`
   padding: 0px;
   gap: 26px;
   width: 1034px;
-  /* height: 186px; */
   @media ${({ theme }) => theme.device.isMobile} {
     width: 320px;
-    /* border: 1px solid red; */
-    /* height: 502px; */
     display: flex;
     flex-direction: column;
   }
@@ -912,13 +853,9 @@ const FollowContainer = styled.div`
 const PostWrapper = styled.div`
   margin: auto;
   width: 1032px;
-  /* height: 369px; */
   margin-top: 100px;
   @media ${({ theme }) => theme.device.isMobile} {
     width: 328px;
-    /* height: 536px; */
-    /* border: 1px solid red; */
-    /* margin-top: 460px; */
     box-sizing: border-box;
   }
 `;
