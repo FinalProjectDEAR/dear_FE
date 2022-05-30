@@ -51,8 +51,14 @@ const CommentItem = (props) => {
     //isEdit이 바뀌는거
     setIsEdit(false);
   };
+  const isUser = useSelector((state) => state.user.isLogin);
   //댓글 채택
   const likeComment = () => {
+    if (!isUser) {
+      Swal.fire("로그인 후 이용해주세요.");
+      history.push(`/login`);
+      return;
+    }
     if (post.memberId === boardPostId) {
       Swal.fire("게시글 작성자 본인의 댓글은 채택이 불가합니다");
       return;
