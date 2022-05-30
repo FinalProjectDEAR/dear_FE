@@ -41,6 +41,7 @@ const VoteList = (props) => {
 
   const gotoVote = () => {
     dispatch(actionCreators.getCateDetailDB(1, "투표"));
+    history.push("/postList/투표");
   };
 
   return (

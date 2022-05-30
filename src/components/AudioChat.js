@@ -90,7 +90,7 @@ function AudioChat() {
 
     if (wantMore.agree.length % 2 === 0) {
       let date = new Date();
-      let extend = date.setMinutes(date.getMinutes() + 1); //연장 테스트 1분
+      let extend = date.setMinutes(date.getMinutes() + 10); //연장 테스트 1분
       setTargetTime(extend);
     }
 
@@ -167,7 +167,7 @@ function AudioChat() {
         setWantMore({ ...wantMore, agree: wantMoreList });
         if (wantMore.agree.length % 2 === 0) {
           let date = new Date();
-          let extend = date.setMinutes(date.getMinutes() + 1);
+          let extend = date.setMinutes(date.getMinutes() + 10);
           setTargetTime(extend);
         }
       });
@@ -214,6 +214,7 @@ function AudioChat() {
 
   //세션,커넥션 종료
   const leaveSession = () => {
+    console.log("세션", session);
     session.disconnect();
 
     setSession(undefined);
@@ -254,12 +255,28 @@ function AudioChat() {
     }
   };
 
-  // 뒤로가기
+  // 뒤로가기;
   React.useEffect(() => {
     window.onpopstate = () => {
       noMatch();
     };
   });
+
+  // React.useEffect(() => {
+  //   let unlisten = history.listen((location) => {
+  //     if (
+  //       history.action === "PUSH" ||
+  //       history.action === "POP" ||
+  //       history.action === "replace"
+  //     ) {
+  //       noMatch();
+  //     }
+  //   });
+
+  //   return () => {
+  //     unlisten();
+  //   };
+  // }, [history]);
 
   // 채팅종료시간
   function dateFormat(date) {
@@ -597,7 +614,7 @@ function AudioChat() {
 
       {noListener && isConnect === false && role === "request" ? (
         <Modal closeModal={closeModal}>
-          <NoMatch noMatch={noMatch} />
+          <NoMatch noMatch={noMatch} leaveSession={leaveSession} />
         </Modal>
       ) : null}
       {isContinue === true ? (
