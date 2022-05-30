@@ -131,7 +131,7 @@ const ServiceInfoContainer = styled.div`
   height: 50%;
   @media ${({ theme }) => theme.device.mobile} {
     margin-top: 50px;
-    height: 280px;
+    height: 250px;
   }
 `;
 
