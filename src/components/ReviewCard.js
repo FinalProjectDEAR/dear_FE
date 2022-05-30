@@ -38,7 +38,9 @@ function ReviewCard({ reviewInfo }) {
           {/* [2022년 5월 23일 상담] 낭*****님 */}
         </Text>
         <Ellipsis>
-          <Text title>{reviewInfo.comment}</Text>
+          <Text title textAlign="left">
+            {reviewInfo.comment}
+          </Text>
           {/* <Text title margin="0px">
             어디가서 말하기 어려웠는데, 고마워요 디어! 어디가서말하기 어려웠는데
             고마워요 디어! 어디가서 말하기 어려웠는데 고마워요 디어!
