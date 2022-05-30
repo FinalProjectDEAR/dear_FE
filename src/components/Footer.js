@@ -137,7 +137,7 @@ const MobileFooter = styled.div`
   align-items: center;
 
   width: 100%;
-  height: 200px;
+  height: 150px;
 
   background: #fafafa;
   border-radius: 0px;
