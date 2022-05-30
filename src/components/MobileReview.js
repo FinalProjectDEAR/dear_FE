@@ -63,7 +63,7 @@ const Background = styled.div`
   display: none;
   padding-top: 60px;
   width: 100%;
-  height: 100vh;
+  height: 500px;
   overflow: hidden;
   @media ${({ theme }) => theme.device.mobile} {
     display: flex;

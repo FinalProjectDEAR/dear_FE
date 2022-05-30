@@ -21,16 +21,24 @@ function Main() {
 
   return (
     <React.Fragment>
-      <ReactPageScroller
-        pageOnChange={pageChange}
-        onBeforePageScroll={beforePageChange}
-        customPageNumber={currentPage}
-      >
+      <Wrapper>
+        <ReactPageScroller
+          pageOnChange={pageChange}
+          onBeforePageScroll={beforePageChange}
+          customPageNumber={currentPage}
+        >
+          <MainChat />
+          <MainRanking />
+          <MainHotPost />
+          <MainReview />
+        </ReactPageScroller>
+      </Wrapper>
+      <MobileWrapper>
         <MainChat />
         <MainRanking />
         <MainHotPost />
         <MainReview />
-      </ReactPageScroller>
+      </MobileWrapper>
       <GoTop
         onClick={() => {
           pageChange(0);
@@ -41,6 +49,23 @@ function Main() {
 }
 
 export default Main;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  @media ${({ theme }) => theme.device.isMobile} {
+    display: none;
+  }
+`;
+
+const MobileWrapper = styled.div`
+  display: none;
+  @media ${({ theme }) => theme.device.isMobile} {
+    display: block;
+  }
+`;
 
 const GoTop = styled.div`
   position: absolute;
