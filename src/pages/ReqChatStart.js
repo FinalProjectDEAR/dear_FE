@@ -151,8 +151,8 @@ function ResChatStart() {
                     margin="0px"
                     padding="15px 15px"
                     value={chatTitle}
-                    maxlength="20"
-                    placeholder="오늘의 고민을 20자 이내로 입력해주세요."
+                    maxlength="30"
+                    placeholder="오늘의 고민을 30자 이내로 입력해주세요."
                     _onChange={(e) => {
                       setChatTitle(e.target.value);
                     }}
