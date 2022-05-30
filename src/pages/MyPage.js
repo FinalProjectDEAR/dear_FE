@@ -817,7 +817,7 @@ const TitleContainer = styled.div`
   }
   @media ${({ theme }) => theme.device.isMobile} {
     width: 320px;
-    height: 390px;
+    /* height: 390px; */
     /* margin: auto; */
     /* border: 1px solid red; */
     .page {
@@ -885,12 +885,12 @@ const FollowWrapper = styled.div`
   @media ${({ theme }) => theme.device.isMobile} {
     width: 320px;
     max-height: 675px;
-    /* border: 1px solid red; */
     /* background-color: orange; */
     display: flex;
     flex-direction: column;
     margin: auto;
     margin-top: 220px;
+    box-sizing: border-box;
   }
 `;
 const FollowContainer = styled.div`
