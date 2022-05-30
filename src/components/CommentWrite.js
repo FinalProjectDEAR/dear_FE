@@ -37,11 +37,11 @@ const CommentWrite = (props) => {
   };
 
   const addComment = () => {
-    // if (!isLogin) {
-    //   Swal.fire("로그인 후 이용해주세요.");
-    //   history.push(`/postDetail/${props.postId}`);
-    //   return;
-    // }
+    if (!isUser) {
+      Swal.fire("로그인 후 이용해주세요.");
+      history.push(`/login`);
+      return;
+    }
     if (comment === "") {
       Swal.fire("댓글을 작성해주세요");
       return;

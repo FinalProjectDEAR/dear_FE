@@ -73,7 +73,13 @@ function PostDetail(props) {
   };
   //본인인지 확인 하기
   const member = localStorage.getItem("memberId");
+  const isUser = useSelector((state) => state.user.isLogin);
   const likePost = () => {
+    if (!isUser) {
+      Swal.fire("로그인 후 이용해주세요.");
+      history.push(`/login`);
+      return;
+    }
     if (post?.memberId === member) {
       Swal.fire("본인 글의 공감은 불가합니다.");
       return;
