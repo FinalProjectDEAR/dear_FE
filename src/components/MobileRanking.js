@@ -81,6 +81,7 @@ const RankingWrapper = styled.div`
 const RankingContainer = styled.div`
   width: 600px;
   margin: 0px -20px;
+  margin-bottom: 50px;
 `;
 
 const TitleBox = styled.div`

@@ -85,15 +85,15 @@ const Footer = () => {
 
         <FooterBox>
           <Text sub color="#666666" margin="0px 5px">
-            BE임인혁 BE박형기 BE김현규
+            BE 임인혁 박형기 김현규
           </Text>
           |
           <Text sub color="#666666" margin="0px 5px">
-            FE김혜리 FE김가경
+            FE 김혜리 김가경
           </Text>
           |
           <Text sub color="#666666" margin="0px 5px">
-            DE김현경 DE최혜지
+            DE 김현경 최혜지
           </Text>
         </FooterBox>
       </MobileFooter>
