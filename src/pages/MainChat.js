@@ -1,23 +1,22 @@
 import React from "react";
-import { Text, TextB, Modal } from "../elements";
+
+//라우트
+import { useHistory } from "react-router-dom";
+//리덕스
+import { useSelector, useDispatch } from "react-redux";
+import { actionCreators as mainActions } from "../redux/modules/main";
+//스타일
 import styled from "styled-components";
+import { Text, TextB, Modal } from "../elements";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
-import { useHistory, useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-
-import { actionCreators as mainActions } from "../redux/modules/main";
-
-import TapeInfo from "../components/TapeInfo";
-
-//assets
 import Header from "../components/Header";
 import logo from "../assets/main/logoL.png";
 import tapeD from "../assets/main/tapeD.png";
-import tapeW from "../assets/main/tapeW.png";
-
 import ArrowDropDownRoundedIcon from "@mui/icons-material/ArrowDropDownRounded";
 import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
+//컴포넌트
+import TapeInfo from "../components/TapeInfo";
 
 function MainChat() {
   const dispatch = useDispatch();
@@ -98,7 +97,7 @@ function MainChat() {
               }}
             />
             <Text sub6 margin="10px" textAlign="left">
-              따뜻하고 부드러운 언행을 사용하여 상대방과 진솔한 대화를 나누는
+              따뜻하고 부드러운 언어를 사용하여 상대방과 진솔한 대화를 나누는
               것에 동의합니다.
             </Text>
           </InputWrap>
@@ -173,10 +172,7 @@ export default MainChat;
 const Background = styled.div`
   width: 100%;
   height: 100vh - 180px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenterColumn};
   @media ${({ theme }) => theme.device.mobile} {
     height: 100vh - 100px;
   }
@@ -185,12 +181,10 @@ const Background = styled.div`
 const MainWrap = styled.div`
   width: 100%;
   margin-top: 70px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  ${({ theme }) => theme.common.flexCenterColumn};
   @media ${({ theme }) => theme.device.mobile} {
-    margin-top: 0px;
+    margin-top: 40px;
+    margin-bottom: 50px;
   }
 `;
 
@@ -221,8 +215,8 @@ const Logo = styled.img`
 
 const InputWrap = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   word-break: keep-all;
   width: 556px;
   height: 24px;
@@ -234,9 +228,7 @@ const InputWrap = styled.div`
 `;
 
 const LineBox = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  ${({ theme }) => theme.common.flexCenter};
 `;
 
 const BtnWrap = styled.div`
@@ -255,10 +247,7 @@ const BtnWrap = styled.div`
 `;
 
 const Btn = styled.button`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenterColumn};
   padding: 22px 0px 22px;
   margin: 0px 10px;
   width: 240px;
@@ -290,12 +279,9 @@ const TapeCntLine = styled.div`
 `;
 
 const ScrollBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  ${({ theme }) => theme.common.flexCenterColumn};
   margin-top: 150px;
   @media ${({ theme }) => theme.device.mobile} {
-    margin-top: 100px;
+    display: none;
   }
 `;

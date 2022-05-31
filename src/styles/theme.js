@@ -64,7 +64,7 @@ const device = {
 const common = {
   flexCenter: `
     display: flex;
-    justify-contents: center;
+    justify-content: center;
     align-items: center;
   `,
   flexCenterColumn: `
