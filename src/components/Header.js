@@ -212,7 +212,7 @@ const MHeaderBtn = styled.button`
   color: #61586a;
   cursor: pointer;
   line-height: 15px;
-  margin: 0px 30px;
+  margin: 0px 9%;
   @media ${({ theme }) => theme.device.mobile} {
     display: flex;
   }

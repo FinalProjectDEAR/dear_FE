@@ -17,5 +17,5 @@ function OpenViduAudioComponent(props) {
 export default OpenViduAudioComponent;
 
 const Source = styled.video`
-  width: 0.5px;
+  width: 0.2px;
 `;
