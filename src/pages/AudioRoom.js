@@ -1,18 +1,18 @@
 import React, { useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { history } from "../redux/configureStore";
+
+//라우트
 import { useParams } from "react-router-dom";
-
+//리덕스
+import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as chatActions } from "../redux/modules/chat";
-
-import Header from "../components/Header";
-import AudioChat from "../components/AudioChat";
-
+//스타일
 import styled from "styled-components";
 import { Text, TextB, Modal } from "../elements";
 
-import example from "../assets/imageex.png";
-import empty from "../assets/empty1.png";
+import { ReactComponent as Empty } from "../assets/chat/empty.svg";
+//컴포넌트
+import Header from "../components/Header";
+import AudioChat from "../components/AudioChat";
 
 function AudioRoom(props) {
   const dispatch = useDispatch();
@@ -57,7 +57,7 @@ function AudioRoom(props) {
             {chatInfo.imageUrl?.length === 0 ? (
               <NoImgBox>
                 <NoMsg>
-                  <img src={empty} alt="noInfo" style={{ width: "30px" }}></img>
+                  <Empty style={{ width: "30px" }} />
                   <Text body3 color="#948A9E">
                     상담에 첨부한 자료가 없어요.
                   </Text>
