@@ -373,8 +373,8 @@ function PostList(props) {
 
 const Background = styled.div`
   height: 2500px;
-  @media ${({ theme }) => theme.device.mobile} {
-    max-height: 2500px;
+  @media ${({ theme }) => theme.device.isMobile} {
+    height: 2800px;
   }
 `;
 
@@ -398,7 +398,7 @@ const InfoContainer = styled.div`
   max-width: 400px;
   width: 100%;
   height: 150px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     height: 190px;
     padding: 20px 0px 0px 20px;
     margin: auto;
@@ -408,7 +408,7 @@ const InfoContainer = styled.div`
 
 const InfoBox = styled.div`
   box-sizing: border-box;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: none;
   }
 `;
@@ -420,7 +420,7 @@ const VoteWrapper = styled.div`
   cursor: pointer;
   text-align: left;
   padding-top: 151px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     padding-top: 100px;
   }
 `;
@@ -430,7 +430,7 @@ const BoardWrapper = styled.div`
   max-width: 1032px;
   padding-top: 150px;
   box-sizing: border-box;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     padding-top: 100px;
   }
 `;
@@ -440,7 +440,7 @@ const TitleWrapper = styled.div`
   justify-content: space-between;
   max-width: 1032px;
   padding-top: 36px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     width: 360px;
   }
 `;
@@ -451,7 +451,7 @@ const CateGoryWrapper = styled.div`
   justify-content: space-around;
   max-width: 818px;
   margin: auto;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -512,7 +512,7 @@ const TableInfo = styled.div`
   width: 100%;
   height: 45px;
   border-bottom: 1px solid #666666;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: none;
   }
 `;
@@ -531,7 +531,7 @@ const BtnWrapper = styled.div`
   display: flex;
   justify-content: right;
   padding-top: 14px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: none;
   }
 `;
@@ -542,7 +542,7 @@ const BtnContainer = styled.div`
   width: 290px;
   height: 40px;
   gap: 10px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: none;
   }
 `;
@@ -551,7 +551,7 @@ const MBtnWrapper = styled.div`
   @media ${({ theme }) => theme.device.web} {
     display: none;
   }
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: flex;
     justify-content: left;
     max-width: 390px;
@@ -567,7 +567,7 @@ const MBtnContainer = styled.div`
   @media ${({ theme }) => theme.device.web} {
     display: none;
   }
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: flex;
     flex-direction: row;
     width: 290px;

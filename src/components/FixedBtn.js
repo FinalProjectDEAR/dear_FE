@@ -191,7 +191,7 @@ const BtnWrap = styled.div`
   left: 90%;
   position: fixed;
   padding: 0px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: none;
   }
 `;

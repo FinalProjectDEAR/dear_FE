@@ -1,20 +1,16 @@
 import React, { lazy, Suspense } from "react";
-import "./App.css";
-
-import styled, { ThemeProvider } from "styled-components";
-import theme from "../styles/theme";
-
-import { ConnectedRouter } from "connected-react-router";
-import { history } from "../redux/configureStore";
 
 import { Switch } from "react-router-dom";
 import { Route } from "react-router-dom";
+import { ConnectedRouter } from "connected-react-router";
+import { history } from "../redux/configureStore";
+
+import { ThemeProvider } from "styled-components";
+import theme from "../styles/theme";
+import "./App.css";
 
 //HOC
 import PrivateRoute from "../shared/auth/PrivateRoute";
-
-import { actionCreators as userActions } from "../redux/modules/user";
-import { useDispatch, useSelector } from "react-redux";
 
 //컴포넌트
 import ScrollToTop from "../components/ScrollToTop";
@@ -85,8 +81,6 @@ function App() {
                 path="/notification"
                 exact
               />
-              {/* <Route path="/myPage" exact component={MyPage} />
-              <Route path="/notification" exact component={Notification} /> */}
               <Route path="/editMyPage" exact component={EditMyPage} />
               <Route path="/LoadingMatch" exact component={LoadingMatch} />
               <Route path="/resReview" exact component={resReview} />
