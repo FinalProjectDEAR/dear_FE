@@ -839,6 +839,7 @@ const Background = styled.div`
   height: 900px;
   @media ${({ theme }) => theme.device.mobile} {
     height: 1300px;
+    padding-top: 30px;
   }
 `;
 
