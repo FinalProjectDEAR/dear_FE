@@ -1,17 +1,18 @@
 import React from "react";
+
+import { useHistory } from "react-router-dom";
+
+import { actionCreators } from "../redux/modules/comment";
+import { useSelector, useDispatch } from "react-redux";
+
 import styled from "styled-components";
 import { Button, Input } from "../elements";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
-//리덕스관련
-import { useHistory } from "react-router-dom";
-import { actionCreators } from "../redux/modules/comment";
-import { useSelector, useDispatch } from "react-redux";
 
 const CommentWrite = (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
-
   const [comment, setComment] = React.useState();
   const [textLength, setTextLength] = React.useState(0);
 
@@ -26,15 +27,6 @@ const CommentWrite = (props) => {
   };
 
   const isUser = useSelector((state) => state.user.isLogin);
-
-  const goComment = () => {
-    if (!isUser) {
-      Swal.fire("로그인 후 이용해주세요.");
-      history.push(`/login`);
-      return;
-    }
-    history.push(`/postDetail/${props.postId}`);
-  };
 
   const addComment = () => {
     if (!isUser) {
@@ -80,66 +72,62 @@ const CommentWrite = (props) => {
     </React.Fragment>
   );
 };
+
 const CommentWriteWrapper = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 1032px;
   width: 100%;
   height: 250px;
+  margin: auto;
   background: #ffffff;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 10px;
   flex: none;
   order: 0;
   flex-grow: 0;
-  margin: auto;
-  /* @media ${({ theme }) => theme.device.isMobile} {
-    width: 328px;
-    border: 1px solid pink;
-    margin: auto;
-  } */
 `;
+
 const TextWrapper = styled.div`
   width: 952px;
   height: 140px;
   margin: auto;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     width: 90%;
-    /* border: 1px solid red; */
   }
 `;
+
 const TextBox = styled.div`
   display: flex;
-  padding: 10px;
-  margin-left: 10px;
+  align-items: flex-start;
   weight: 100%;
+  padding: 15px;
+  margin-left: 10px;
   size: 14px;
   line-height: 18px;
-  align-items: flex-start;
-  padding-top: 15px;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: none;
   }
 `;
 
 const BtnWrapper = styled.div`
   display: flex;
-  box-sizing: border-box;
-  margin: 0px auto;
-  flex-direction: row;
-  margin: 10px;
   justify-content: right;
   align-items: right;
+  flex-direction: row;
   max-width: 992px;
   width: 100%;
   height: 51px;
+  margin: 0px auto;
+  box-sizing: border-box;
   flex: none;
   order: 1;
   flex-grow: 0;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     width: 100%;
-    /* border: 1px solid red; */
     margin: auto;
+    justify-content: center;
+    align-items: center;
   }
 `;
 export default CommentWrite;

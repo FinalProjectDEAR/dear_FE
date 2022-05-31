@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { CgClose } from "react-icons/cg";
 
 import { useCookies } from "react-cookie";
-import moment from "moment";
+import dayjs from "dayjs";
 
 import { ReactComponent as SurveyThumb } from "../assets/infoModal/survey.svg";
 
@@ -13,12 +13,12 @@ function Survey({ close }) {
   const [cookies, setCookie] = useCookies([COOKIE_KEY]);
 
   const hiddenModal = () => {
-    const decade = moment(); // 일단 moment 로 시간변수를 만들어주고
-    decade.add(1, "d"); // 1년뒤로 값을 add 해준다.
+    const date = dayjs(); // 일단 dayjs 로 시간변수를 만들어주고
+    const modalExpire = date.add(1, "day"); // 하루 뒤로 값을 add 해준다.
     setCookie(COOKIE_KEY, "true", {
       // 쿠키를 셋해준다.
       path: "/", // path를 지정해주고
-      expires: decade.toDate(), // 여기서 날짜를 지정해준다
+      expires: modalExpire.toDate(), // 여기서 날짜를 지정해준다
     });
     close();
   };
@@ -53,12 +53,12 @@ export default Survey;
 
 const Wrapper = styled.div`
   position: relative;
-  width: 550px;
-  height: 600px;
-  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 550px;
+  height: 600px;
+  box-sizing: border-box;
   background-color: #fff;
   border-radius: 20px;
   @media ${({ theme }) => theme.device.mobile} {

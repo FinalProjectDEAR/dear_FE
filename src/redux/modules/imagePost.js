@@ -23,14 +23,11 @@ export default handleActions(
     // 서버에서 받아온 URL 새로 추가하는 URL 포함해서 files에 넣음
     [SET_PRE]: (state, action) =>
       produce(state, (draft) => {
-        // console.log(action.payload.data);
         draft.files = [...state.files, ...action.payload.data];
       }),
     // 인덱스로 삭제를 함
     [DELETE_PRE]: (state, action) =>
       produce(state, (draft) => {
-        // console.log(action.payload.imageId);
-        // console.log(state);
         draft.files = draft.files.filter(
           (i, idx) => idx !== action.payload.imageId
         );

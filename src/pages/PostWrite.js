@@ -1,21 +1,21 @@
 import React, { useState } from "react";
+
+import { useParams } from "react-router-dom";
+
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators } from "../redux/modules/post";
+import { imgActions } from "../redux/modules/imagePost";
+
 import { ReactComponent as ImageUPload } from "../assets/파일첨부.svg";
 import { Input, Button, Text } from "../elements";
 import styled from "styled-components";
-
 import { BiX } from "react-icons/bi";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
 
-import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
-import { actionCreators } from "../redux/modules/post";
-import { imgActions } from "../redux/modules/imagePost";
-//페이지관련
 import Layout from "../components/Layout";
 
 function PostWrite() {
-  const history = useHistory();
   const dispatch = useDispatch();
   const params = useParams();
   const postId = params.postId;
@@ -38,6 +38,14 @@ function PostWrite() {
     }
     setTextLength(wordLength);
   };
+  const chkMaxLength = (e) => {
+    let wordLength = e.target.value.length;
+    if (wordLength >= 30) {
+      Swal.fire("제목은 30자 이상 작성할 수 없습니다.");
+      return;
+    }
+    setTextLength(wordLength);
+  };
   const SelectCategory = (e) => {
     setCategory(e.target.value);
   };
@@ -51,13 +59,13 @@ function PostWrite() {
     let imageUrlList = [...imgPreview];
     const maxImageCnt = 3;
     if (imageList.length > maxImageCnt) {
+      //한번에 3장 이상 인풋한 경우"
       Swal.fire("첨부 파일은 최대 3개까지 가능합니다.");
-      // console.log("한번에 3장 이상 인풋한 경우");
       return;
     }
     if (files.length + imageList.length > 3) {
+      // 이미 3장이 입력 되어있는데 1장 더 추가 한 경우
       Swal.fire("첨부 파일은 최대 3개까지 가능합니다.");
-      // console.log("이미 3장이 입력 되어있는데 1장 더 추가 한 경우");
       return;
     } else {
       let file = [];
@@ -92,6 +100,7 @@ function PostWrite() {
     //프리뷰 삭제
     setImgPreview(imgPreview.filter((b, idx) => idx !== id));
   };
+
   //추가하기 액션
   const addPost = () => {
     if (title === "" || category === "" || contents === "") {
@@ -108,6 +117,7 @@ function PostWrite() {
       })
     );
   };
+
   return (
     <React.Fragment>
       <Layout>
@@ -126,7 +136,7 @@ function PostWrite() {
           <CategoryWrapper>
             <Title>카테고리</Title>
             <Select name="category" form="myForm" onChange={SelectCategory}>
-              <OptionSelect value="카테고리">카테고리 선택</OptionSelect>
+              <option value="카테고리">카테고리 선택</option>
               <option value="솔로">솔로</option>
               <option value="짝사랑">짝사랑</option>
               <option value="썸">썸</option>
@@ -145,8 +155,10 @@ function PostWrite() {
                 _onChange={(e) => {
                   setTitle(e.target.value);
                 }}
+                _onKeyUp={chkMaxLength}
                 value={title}
                 padding="11px"
+                maxlength="30"
               />
             </InputMobile>
           </TitleWrapper>
@@ -191,10 +203,6 @@ function PostWrite() {
                     <PhotoWrap>
                       <Img
                         key={id}
-                        style={{
-                          width: "80px",
-                          marginTop: "5px",
-                        }}
                         src={`${image}` ? `${image}` : null}
                         alt={`${image}-${id}`}
                       />
@@ -242,41 +250,38 @@ const WriteWrapper = styled.div`
   background: #ffffff;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 10px;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     width: 328px;
     margin: auto;
     box-sizing: border-box;
   }
 `;
+
 const TitleContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: flex-end;
-  padding: 0px 0px 10px 16px;
-  gap: 660px;
   width: 952px;
   height: 60px;
+  margin: auto;
+  padding: 0px 0px 10px 16px;
+  gap: 660px;
   flex: none;
   order: 0;
   flex-grow: 0;
-  /* background: orange; */
-  margin: auto;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
+    ${({ theme }) => theme.common.flexCenterColumn};
     width: 155px;
     height: 83px;
     margin: auto;
-    /* background: orange; */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     box-sizing: border-box;
-    align-items: center;
     gap: 0px;
   }
 `;
+
 const SubTitle = styled.div`
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: none;
   }
 `;
@@ -290,140 +295,128 @@ const Sub5Title = styled.div`
 const TitleWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  padding: 10px 0px;
-  gap: 20px;
   width: 952px;
   height: 60px;
+  margin: auto;
+  padding: 10px 0px;
+  gap: 20px;
   flex: none;
   order: 1;
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
-  margin: auto;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     width: 250px;
-    /* background-color: orange; */
     border: none;
     padding: 0px;
     box-sizing: border-box;
   }
 `;
+
 const CategoryWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  padding: 10px 0px;
-  gap: 20px;
   width: 952px;
   height: 60px;
+  margin: auto;
+  padding: 10px 0px;
   flex: none;
   order: 1;
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
   border-top: 1px solid #948a9e;
-  margin: auto;
-  @media ${({ theme }) => theme.device.isMobile} {
-    /* background-color: orange; */
+  gap: 20px;
+  @media ${({ theme }) => theme.device.mobile} {
     width: 250px;
     border: none;
     box-sizing: border-box;
   }
 `;
+
 const Title = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 5px 0px 5px 40px;
-  gap: 10px;
   width: 160px;
   height: 28px;
+  padding: 5px 0px 5px 40px;
   flex: none;
   order: 0;
   flex-grow: 0;
+  gap: 10px;
   border-right: 1px solid #cccccc;
   color: #666666;
-  /* border: 1px solid red; */
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: none;
   }
 `;
+
 const InputMobile = styled.div`
   width: 860px;
   height: 40px;
-  @media ${({ theme }) => theme.device.isMobile} {
-    /* background-color: orange; */
+  @media ${({ theme }) => theme.device.mobile} {
     width: 250px;
     box-sizing: border-box;
   }
 `;
 
 const Select = styled.select`
+  ${({ theme }) => theme.common.flexCenter};
   width: 302px;
   height: 40px;
-  background: #ffffff;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
   margin-left: 10px;
   margin-top: 6px;
   padding: 10px 0px 10px 15px;
   border: 1px solid #e6e6e6;
+  background: #ffffff;
   cursor: pointer;
-`;
-
-const OptionSelect = styled.option`
-  /* background-color: red; */
 `;
 
 const ContentWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  padding: 0px 0px 25px;
-  gap: 20px;
   width: 952px;
   height: 303px;
+  padding: 10px 0px 25px;
+  margin: auto;
+  gap: 20px;
   flex: none;
   order: 1;
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
-  margin: auto;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     width: 250px;
     border: none;
-    /* background-color: orange; */
     box-sizing: border-box;
   }
 `;
+
 const TextWrapper = styled.div`
   width: 860px;
-  /* padding-bottom: 20px; */
-  /* height: 300px; */
-  /* background-color: orange; */
-  @media ${({ theme }) => theme.device.isMobile} {
-    /* background-color: orange; */
+  @media ${({ theme }) => theme.device.mobile} {
     width: 350px;
     box-sizing: border-box;
   }
 `;
+
 const ImageWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  padding: 10px 0px;
-  gap: 20px;
   width: 952px;
   height: 182px;
+  padding: 10px 0px;
+  margin: auto;
   flex: none;
   order: 1;
   flex-grow: 0;
+  gap: 20px;
   border-bottom: 1px solid #e6e6e6;
-  margin: auto;
-  /* border: 1px solid red; */
-  @media ${({ theme }) => theme.device.isMobile} {
-    /* background-color: orange; */
+  @media ${({ theme }) => theme.device.mobile} {
     width: 250px;
     border: none;
     box-sizing: border-box;
   }
 `;
+
 const PhotoWrap = styled.div`
   display: flex;
   height: 8px;
@@ -432,26 +425,28 @@ const PhotoWrap = styled.div`
   display: flex;
   flex-direction: row;
 `;
+
 const PhotoDesc = styled.div`
   display: flex;
-  padding: 4px;
   width: 180px;
   height: 18px;
+  padding: 4px;
+  color: #666;
   font-size: 12px;
   text-align: center;
-  color: #666;
   outline: none;
 `;
+
 const PhotoDiv = styled.div`
   display: flex;
   flex-direction: row;
 `;
+
 const PhotoUpload = styled.div`
   display: flex;
   flex-direction: row;
-  cursor: pointer;
   padding: 4px;
-  /* border: 1px solid red; */
+  cursor: pointer;
   input[type="file"] {
     position: absolute;
     width: 0;
@@ -463,45 +458,39 @@ const PhotoUpload = styled.div`
     border: 0;
   }
 `;
+
 const Img = styled.img`
-  width: 100%;
-  margin-right: -10px;
   width: 80px;
   height: 80px;
-  &:hover {
-    transition: 0.4s;
-    transform: scale(4.9);
-    -webkit-transform: scale(4.9);
-    -moz-transform: scale(4.9);
-    -ms-transform: scale(4.9);
-    -o-transform: scale(4.9);
-  }
+  margin: 1px;
+  box-sizing: border-box;
 `;
+
 const PhotoContainer = styled.div`
   display: flex;
   height: 40px;
 `;
+
 const BtnWrap = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: auto;
-  gap: 20px;
   width: 952px;
   height: 60px;
+  padding-left: 830px;
+  margin: auto;
   flex: none;
   order: 1;
   flex-grow: 0;
-  padding-left: 830px;
-  /* background: pink; */
-  @media ${({ theme }) => theme.device.isMobile} {
+  gap: 20px;
+  @media ${({ theme }) => theme.device.mobile} {
+    justify-content: center;
     width: 250px;
     height: 56px;
     margin: auto;
-    /* background: orange; */
     padding: 0px;
-    justify-content: center;
     box-sizing: border-box;
   }
 `;
+
 export default PostWrite;
