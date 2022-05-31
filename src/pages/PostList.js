@@ -322,19 +322,21 @@ function PostList(props) {
                 </div>
               </CateGoryWrapper>
             </Link>
-            <TitleWrapper>
-              <Text title>익명상담소</Text>
-            </TitleWrapper>
-            <PostTable>
-              <TableInfo>
-                <InfoItem style={{ marginLeft: "40px" }}>제목</InfoItem>
-                <InfoItem style={{ marginRight: "40px" }}>작성일</InfoItem>
-              </TableInfo>
-              {postList?.slice(0, 11).map((item, idx) => {
-                // slice를 이용하여 보여주고 싶은 게시물을 제어
-                return <Post key={idx} item={item} />;
-              })}
-            </PostTable>
+            <div style={{ paddingTop: "100px" }}>
+              <TitleWrapper>
+                <Text title>익명상담소</Text>
+              </TitleWrapper>
+              <PostTable>
+                <TableInfo>
+                  <InfoItem style={{ marginLeft: "40px" }}>제목</InfoItem>
+                  <InfoItem style={{ marginRight: "40px" }}>작성일</InfoItem>
+                </TableInfo>
+                {postList?.slice(0, 11).map((item, idx) => {
+                  // slice를 이용하여 보여주고 싶은 게시물을 제어
+                  return <Post key={idx} item={item} />;
+                })}
+              </PostTable>
+            </div>
             <BtnWrapper>
               <BtnContainer>
                 <Button
@@ -418,6 +420,9 @@ const VoteWrapper = styled.div`
   cursor: pointer;
   text-align: left;
   padding-top: 151px;
+  @media ${({ theme }) => theme.device.mobile} {
+    padding-top: 100px;
+  }
 `;
 
 const BoardWrapper = styled.div`
@@ -425,6 +430,9 @@ const BoardWrapper = styled.div`
   max-width: 1032px;
   padding-top: 150px;
   box-sizing: border-box;
+  @media ${({ theme }) => theme.device.mobile} {
+    padding-top: 100px;
+  }
 `;
 
 const TitleWrapper = styled.div`
