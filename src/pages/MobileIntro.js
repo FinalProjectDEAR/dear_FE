@@ -1,12 +1,14 @@
 import React from "react";
 
+//스타일
 import styled from "styled-components";
-
 import info1 from "../assets/intro/s-info-1m.png";
 import info2 from "../assets/intro/s-info-2m.png";
 import info3 from "../assets/intro/s-info-3m.png";
 import info4 from "../assets/intro/s-info-4m.png";
 import info5 from "../assets/intro/s-info-5m.png";
+//컴포넌트
+import Footer from "../components/Footer";
 
 function MobileIntro() {
   return (
@@ -16,7 +18,7 @@ function MobileIntro() {
           <img
             src={info1}
             alt="mobileIntro"
-            style={{ width: "240px", marginTop: "240px", marginBottom: "90px" }}
+            style={{ width: "240px", marginTop: "160px", marginBottom: "90px" }}
           />
           <img
             src={info2}
@@ -58,16 +60,14 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   @media ${({ theme }) => theme.device.mobile} {
-    display: flex;
+    padding: 0px;
+    ${({ theme }) => theme.common.flexCenterColumn};
   }
 `;
 
 const ContentBox = styled.div`
   width: 328px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenterColumn};
 `;
 
 const Image = styled.div`

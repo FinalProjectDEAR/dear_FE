@@ -1,14 +1,14 @@
 import React from "react";
-import styled from "styled-components";
 
+//리덕스
 import { history } from "../redux/configureStore";
-import { Text, Modal } from "../elements";
-
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
-
+//스타일
+import styled from "styled-components";
+import { Text, Modal } from "../elements";
 import Survey from "./Survey";
-import logo from "../assets/main/logoS.png";
+import logo from "../assets/main/logoL.png";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
 
@@ -65,7 +65,7 @@ const Header = (props) => {
                   history.push("/intro");
                 }}
               >
-                <Text sub7 cursor="pointer">
+                <Text sub4 cursor="pointer">
                   서비스 소개
                 </Text>
               </HeaderBtn>
@@ -74,12 +74,12 @@ const Header = (props) => {
                   history.push("/postList/전체");
                 }}
               >
-                <Text sub7 cursor="pointer">
+                <Text sub4 cursor="pointer">
                   디어상담소
                 </Text>
               </HeaderBtn>
               <HeaderBtn onClick={gotoMypage}>
-                <Text sub7 cursor="pointer">
+                <Text sub4 cursor="pointer">
                   마이페이지
                 </Text>
               </HeaderBtn>
@@ -101,18 +101,35 @@ const Header = (props) => {
                     history.push("/login");
                   }}
                 >
-                  <Text sub7 cursor="pointer">
+                  <Text sub4 cursor="pointer">
                     로그인
                   </Text>
                 </HeaderBtn>
               ) : (
                 <HeaderBtn onClick={logout}>
-                  <Text sub7 cursor="pointer">
+                  <Text sub4 cursor="pointer">
                     로그아웃
                   </Text>
                 </HeaderBtn>
               )}
             </ButtonBox>
+            {!isUser ? (
+              <MHeaderBtn
+                onClick={() => {
+                  history.push("/login");
+                }}
+              >
+                <Text sub4 cursor="pointer">
+                  로그인
+                </Text>
+              </MHeaderBtn>
+            ) : (
+              <MHeaderBtn onClick={logout}>
+                <Text sub4 cursor="pointer">
+                  로그아웃
+                </Text>
+              </MHeaderBtn>
+            )}
           </HeaderBox>
         </HeaderContainer>
       </HeaderWrapper>
@@ -129,9 +146,11 @@ const HeaderWrapper = styled.div`
   box-sizing: border-box;
   background: rgba(196, 196, 196, 0);
   @media ${({ theme }) => theme.device.mobile} {
-    padding: 15px 10px;
+    display: flex;
+    align-items: flex-end;
+    padding: 10px 30px;
     width: 360px;
-    height: 60px;
+    height: 80px;
   }
 `;
 
@@ -151,8 +170,8 @@ const LogoBox = styled.div`
 `;
 
 const Logo = styled.img`
-  width: 100px;
-  height: 66px;
+  width: 80px;
+  height: 52px;
   margin: 0px auto;
   cursor: pointer;
   @media ${({ theme }) => theme.device.mobile} {
@@ -181,7 +200,22 @@ const HeaderBtn = styled.button`
   color: #61586a;
   cursor: pointer;
   line-height: 15px;
-  margin: 0px 15px;
+  margin: 0px 10px;
+`;
+
+const MHeaderBtn = styled.button`
+  display: none;
+  justify-content: center;
+  align-items: flex-end;
+  border: none;
+  background-color: transparent;
+  color: #61586a;
+  cursor: pointer;
+  line-height: 15px;
+  margin: 0px 30px;
+  @media ${({ theme }) => theme.device.mobile} {
+    display: flex;
+  }
 `;
 
 const ButtonBox = styled.div`

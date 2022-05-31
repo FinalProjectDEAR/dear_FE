@@ -1,10 +1,9 @@
 import React from "react";
 
+//스타일
 import styled from "styled-components";
 import ReactPageScroller from "react-page-scroller";
-
-import { Text, TextB } from "../elements";
-
+//페이지
 import MainChat from "./MainChat";
 import MainRanking from "./MainRanking";
 import MainHotPost from "./MainHotPost";
@@ -51,10 +50,7 @@ function Main() {
 export default Main;
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  ${({ theme }) => theme.common.flexCenterColumn};
   @media ${({ theme }) => theme.device.isMobile} {
     display: none;
   }
