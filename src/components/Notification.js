@@ -1,12 +1,13 @@
 import React from "react";
-import styled from "styled-components";
-import { TextB, Text, ColorBadge, AlarmModal } from "../elements";
-import { CgClose } from "react-icons/cg";
-import { ReactComponent as EmptyMsg } from "../assets/Empty/emptyMsg.svg";
-//리덕스 관련
+
 import { history } from "../redux/configureStore";
 import { useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
+
+import styled from "styled-components";
+import { Text, ColorBadge, AlarmModal } from "../elements";
+import { CgClose } from "react-icons/cg";
+import { ReactComponent as EmptyMsg } from "../assets/Empty/emptyMsg.svg";
 //시간알려주는패키지
 import TimeCounting from "time-counting";
 
@@ -29,6 +30,7 @@ const Notification = (close) => {
       justNow: 60,
     },
   };
+
   return (
     <>
       {modalOpen && (
@@ -61,7 +63,6 @@ const Notification = (close) => {
                 }}
               />
             )}
-
             <NotiWrapper>
               <NotiTitle>
                 <Text title textAlign="left">
@@ -74,7 +75,6 @@ const Notification = (close) => {
                     <EmptyMsg style={{ paddingBottom: "10px" }} />
                   </EmptyBox>
                 ) : null}
-
                 {alarmList &&
                   alarmList.map((item, idx) => {
                     return item.notiType === "COMMENT" && !item.read ? (
@@ -102,7 +102,6 @@ const Notification = (close) => {
                       </>
                     ) : null;
                   })}
-
                 {alarmList &&
                   alarmList.map((item, idx) => {
                     return item.notiType && !item.read === "FOLLOW" ? (
@@ -131,7 +130,6 @@ const Notification = (close) => {
                       </>
                     ) : null;
                   })}
-
                 {alarmList &&
                   alarmList.map((item, idx) => {
                     return item.notiType && !item.read === "CHOICE" ? (
@@ -159,7 +157,6 @@ const Notification = (close) => {
                       </>
                     ) : null;
                   })}
-
                 {alarmList &&
                   alarmList.map((item, idx) => {
                     return item.notiType === "MESSAGE" && !item.read ? (
@@ -210,75 +207,67 @@ const NotiWrapper = styled.div`
   ::-webkit-scrollbar-thumb {
     height: 10%;
     background-color: rgba(255, 255, 255, 1);
-    /* 스크롤바 둥글게 설정    */
+    /* 스크롤바 둥글게 설정  */
     border-radius: 100%;
   }
-
   ::-webkit-scrollbar-track {
     background-color: transparent;
   }
-
-  /* position: absolute; */
-  width: 400px;
-  max-height: 708px;
-  /* right: 160px;
-  bottom: 5px; */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  /* padding: 30px; */
+  width: 400px;
+  max-height: 708px;
   gap: 12px;
   background: #ffffff;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 20px;
-  @media ${({ theme }) => theme.device.isMobile} {
-    width: 320px;
-    height: 452px;
+  @media ${({ theme }) => theme.device.mobile} {
     display: flex;
     justify-content: center;
-    margin: auto;
     align-items: center;
+    width: 320px;
+    height: 452px;
+    margin: auto;
     right: 0px;
   }
 `;
+
 const NotiTitle = styled.div`
   width: 340px;
-  margin: auto;
   height: 40px;
+  margin: auto;
   border: 10px solid white;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     width: 260px;
     height: 20px;
     border: 10px solid white;
   }
 `;
+
 const NotiContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: auto;
   width: 340px;
   height: 440px;
-  /* border: 1px solid red; */
-  @media ${({ theme }) => theme.device.isMobile} {
+  margin: auto;
+  @media ${({ theme }) => theme.device.mobile} {
     width: 260px;
     height: 352px;
-    /* border: 1px solid red; */
   }
 `;
+
 const EmptyBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
+  ${({ theme }) => theme.common.flexCenter};
   width: 340px;
   height: 440px;
-  /* border: 1px solid red; */
-  @media ${({ theme }) => theme.device.isMobile} {
+  margin: auto;
+  @media ${({ theme }) => theme.device.mobile} {
     width: 260px;
     height: 352px;
-    /* border: 1px solid red; */
   }
 `;
+
 const NotiBox = styled.div`
   display: flex;
   justify-content: center;
@@ -301,42 +290,20 @@ const NotiBox = styled.div`
     box-sizing: border-box;
   }
   .subtitle {
-    width: 340px;
     display: flex;
     justify-content: left;
     text-align: left;
     flex-direction: row;
     display: block;
+    width: 340px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    /* border: 1px solid red; */
   }
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     width: 260px;
     height: 88px;
-    /* border: 1px solid red; */
   }
 `;
-const ArrowBox = styled.div`
-  display: flex;
-  position: absolute;
 
-  max-height: 708px;
-  right: 1px;
-  bottom: 5px;
-  /* justify-content: center;
-  text-align: center; */
-  /* flex-direction: column; */
-  /* width: 100px; */
-  border: 1px solid red;
-  .arrow {
-    width: 0;
-    height: 0;
-    z-index: 40;
-    border-top: 20px solid transparent;
-    border-bottom: 20px solid transparent;
-    border-left: 20px solid red; /* 화살표 */
-  }
-`;
 export default Notification;

@@ -1,42 +1,45 @@
 import React, { useEffect, useState } from "react";
-import { Text, Button, Input } from "../elements/index";
-import { ReactComponent as ImageUPload } from "../assets/파일첨부.svg";
-import { BiX } from "react-icons/bi";
+
+import { useHistory, useParams } from "react-router-dom";
+
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators } from "../redux/modules/post";
+import { imgActions } from "../redux/modules/imagePost";
+
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
-//페이지관련
-import Layout from "../components/Layout";
+import { Text, Button, Input } from "../elements/index";
+import { BiX } from "react-icons/bi";
+import { ReactComponent as ImageUPload } from "../assets/파일첨부.svg";
 
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
-import { actionCreators } from "../redux/modules/post";
-import { imgActions } from "../redux/modules/imagePost";
+import Layout from "../components/Layout";
 
 function PostEdit() {
   const history = useHistory();
   const dispatch = useDispatch();
   const params = useParams();
   const postId = parseInt(params.postId);
+
   // //상세페이지에 있는 정보 가져오기
   React.useEffect(() => {
     if (postId) dispatch(actionCreators.getDetailDB(postId));
   }, []);
   const post = useSelector((state) => state.post.detailPost);
-  // console.log(post);
 
   const [imgPreview, setImgPreview] = useState([]);
   const [title, setTitle] = React.useState(post?.title);
   const [contents, setContent] = React.useState(post?.contents);
   const [category, setCategory] = React.useState(post?.category);
   const [textLength, setTextLength] = React.useState(0);
+
   //defaultValue가 아닌 진짜 Value로 불러오기 위한 작업
   useEffect(() => {
-    // console.log("유즈이펙트 시작한다~~");
     setTitle(post?.title);
     setContent(post?.contents);
     setCategory(post?.category);
   }, [post]);
+
   //글자 수 제한
   const checkMaxLength = (e) => {
     let wordLength = e.target.value.length;
@@ -49,11 +52,11 @@ function PostEdit() {
   const SelectCategory = (e) => {
     setCategory(e.target.value);
   };
+
   // 이미지 관련
   const fileInput = React.useRef();
   //리듀서로 보낸 사진파일들 불러오기
   const files = useSelector((state) => state.imagePost.files);
-  // console.log("리듀서로 보낸 사진파일들 불러오기", files);
   //이미지 선택하기 및 미리보기
   const selectFile = (e) => {
     const imageList = e.target.files;
@@ -61,12 +64,10 @@ function PostEdit() {
     const maxImageCnt = 3;
     if (imageList.length > maxImageCnt) {
       Swal.fire("첨부 파일은 최대 3개까지 가능합니다.");
-      // console.log("한번에 3장 이상 인풋한 경우");
       return;
     }
     if (files.length + imageList.length > 3) {
       Swal.fire("첨부 파일은 최대 3개까지 가능합니다.");
-      // console.log("이미 3장이 입력 되어있는데 1장 더 추가 한 경우");
       return;
     } else {
       let file = [];
@@ -103,36 +104,33 @@ function PostEdit() {
   };
   //기존 이미지 url
   const imgUrl = post?.imgUrl;
-  // console.log("기존 이미지 url", imgUrl);
+
   //새로 올린 파일과 기존 사진 url을 분리
   let newFiles = [];
   let editUrl = [];
   files.map((e, i) => {
     if (newFiles > 4) {
-      // console.log("리듀서에 3장 넘게 들어간 경우");
+      //리듀서에 3장 넘게 들어간 경우
       return;
     }
     if (e) {
-      newFiles.push(e);
-      // console.log("새로운 사진", newFiles);
+      newFiles.push(e); // 새로운 사진: newFiles
     }
     if (!e) {
-      editUrl.push(e);
-      // console.log("기존url", editUrl);
+      editUrl.push(e); //기존url: editUrl)
     }
   });
+
   useEffect(() => {
     let editPreview = [];
     //서버에서 받은 url을 preview에 넣어줌
     imgUrl &&
       imgUrl.map((e, i) => {
         if (e !== null) {
-          // console.log(e);
           return editPreview.push(imgUrl[i]);
         }
       });
     setImgPreview(editPreview);
-    // console.log(editPreview);
     //리덕스 files 인덱스를 맞추기 위해 url도 같이 넣어줌
     dispatch(imgActions.setPre(editPreview));
   }, []);
@@ -151,6 +149,7 @@ function PostEdit() {
     );
     dispatch(imgActions.resetFile());
   };
+
   return (
     <React.Fragment>
       <Layout>
@@ -230,15 +229,7 @@ function PostEdit() {
                   imgPreview.map((image, id) => {
                     return (
                       <PhotoWrap>
-                        <Img
-                          key={id}
-                          style={{
-                            width: "80px",
-                            marginTop: "5px",
-                          }}
-                          src={image}
-                          alt={`${image}-${id}`}
-                        />
+                        <Img key={id} src={image} alt={`${image}-${id}`} />
                         <BiX
                           type="button"
                           onClick={() => {
@@ -289,12 +280,12 @@ const WriteWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 40px;
   max-width: 1032px;
   width: 100%;
   height: 861px;
   margin: auto;
   margin-top: 30px;
+  padding: 40px;
   background: #ffffff;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 10px;
@@ -310,76 +301,69 @@ const TitleContainer = styled.div`
   flex-direction: row;
   max-width: 952px;
   width: 100%;
-  /* height: 60px; */
+  margin: auto;
+  padding: 0px 0px 10px 22px;
   flex: none;
   order: 0;
   flex-grow: 0;
-  /* border: 1px solid red; */
-  padding: 20px 10px 0px;
-`;
-
-const SubTitle = styled.div`
   @media ${({ theme }) => theme.device.mobile} {
-    display: none;
-  }
-`;
-
-const Sub5Title = styled.div`
-  @media ${({ theme }) => theme.device.web} {
-    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
   }
 `;
 
 const TitleWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  padding: 10px 0px;
-  gap: 20px;
   width: 952px;
   height: 60px;
+  margin: auto;
+  padding: 10px 0px;
+  gap: 20px;
   flex: none;
   order: 1;
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
-  /* background: pink; */
   @media ${({ theme }) => theme.device.mobile} {
     width: 250px;
-    /* background-color: orange; */
-    border: none;
     padding: 0px;
+    border: none;
     box-sizing: border-box;
   }
 `;
+
 const CategoryWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  padding: 10px 0px;
-  gap: 20px;
   width: 952px;
   height: 60px;
+  margin: auto;
+  padding: 10px 0px;
+  gap: 20px;
   flex: none;
   order: 1;
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
   border-top: 1px solid #948a9e;
   @media ${({ theme }) => theme.device.mobile} {
-    /* background-color: orange; */
     width: 250px;
     border: none;
     box-sizing: border-box;
   }
 `;
+
 const Title = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 5px 0px 5px 40px;
-  gap: 10px;
   width: 160px;
   height: 28px;
+  padding: 5px 0px 5px 40px;
   flex: none;
   order: 0;
   flex-grow: 0;
+  gap: 10px;
   border-right: 1px solid #cccccc;
   color: #666666;
   @media ${({ theme }) => theme.device.mobile} {
@@ -390,32 +374,30 @@ const Title = styled.div`
 const InputMobile = styled.div`
   width: 860px;
   @media ${({ theme }) => theme.device.mobile} {
-    /* background-color: orange; */
     width: 250px;
     box-sizing: border-box;
   }
 `;
+
 const Select = styled.select`
+  ${({ theme }) => theme.common.flexCenter};
   width: 302px;
   height: 40px;
-  background: #ffffff;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-left: 10px;
-  margin-top: 6px;
+  margin: 6px 0px 0px 10px;
   padding: 10px 0px 10px 15px;
   border: 1px solid #e6e6e6;
+  background: #ffffff;
   cursor: pointer;
 `;
+
 const ContentWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  padding: 10px 0px;
-  gap: 20px;
   width: 952px;
   height: 303px;
+  margin: auto;
+  padding: 10px 0px;
+  gap: 20px;
   flex: none;
   order: 1;
   flex-grow: 0;
@@ -423,66 +405,67 @@ const ContentWrapper = styled.div`
   @media ${({ theme }) => theme.device.mobile} {
     width: 250px;
     border: none;
-    /* background-color: orange; */
     box-sizing: border-box;
   }
-  /* background: pink; */
 `;
+
 const TextWrapper = styled.div`
   width: 860px;
   height: 295px;
   @media ${({ theme }) => theme.device.mobile} {
-    /* background-color: orange; */
     width: 350px;
     box-sizing: border-box;
   }
 `;
+
 const ImageWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  padding: 10px 0px;
-  gap: 20px;
   width: 952px;
   height: 182px;
+  padding: 10px 0px;
+  margin: auto;
+  gap: 20px;
   flex: none;
   order: 1;
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
   @media ${({ theme }) => theme.device.mobile} {
-    /* background-color: orange; */
     width: 250px;
     border: none;
     box-sizing: border-box;
   }
-  /* background: green; */
 `;
+
 const PhotoWrap = styled.div`
   display: flex;
+  flex-direction: row;
   height: 8px;
   padding-top: 10px;
   padding-right: 10px;
-  display: flex;
-  flex-direction: row;
 `;
+
 const PhotoDesc = styled.div`
   display: flex;
-  padding: 4px;
   width: 220px;
   height: 18px;
+  padding: 4px;
+  color: #666;
   font-size: 12px;
   text-align: center;
-  color: #666;
   outline: none;
 `;
+
 const PhotoDiv = styled.div`
   display: flex;
   flex-direction: row;
 `;
+
 const PhotoUpload = styled.div`
   display: flex;
   flex-direction: row;
-  cursor: pointer;
   padding: 4px;
+  cursor: pointer;
   input[type="file"] {
     position: absolute;
     width: 0;
@@ -494,45 +477,37 @@ const PhotoUpload = styled.div`
     border: 0;
   }
 `;
+
 const Img = styled.img`
-  width: 100%;
-  margin-right: -10px;
   width: 80px;
   height: 80px;
-  &:hover {
-    transition: 0.4s;
-    transform: scale(4.9);
-    -webkit-transform: scale(4.9);
-    -moz-transform: scale(4.9);
-    -ms-transform: scale(4.9);
-    -o-transform: scale(4.9);
-  }
+  margin: 1px;
+  box-sizing: border-box;
 `;
+
 const PhotoContainer = styled.div`
   display: flex;
   height: 40px;
 `;
+
 const BtnWrap = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: auto;
-  /* padding: 20px 0px 0px; */
-  gap: 20px;
+  justify-content: space-between;
   max-width: 952px;
   width: 100%;
   height: 60px;
+  margin: auto;
   flex: none;
   order: 1;
   flex-grow: 0;
-  justify-content: space-between;
-  /* background: pink; */
+  gap: 20px;
   @media ${({ theme }) => theme.device.mobile} {
     .goback {
       display: none;
     }
     justify-content: center;
-    /* width: 952px; */
   }
 `;
 export default PostEdit;

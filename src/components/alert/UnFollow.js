@@ -1,25 +1,25 @@
 import React from "react";
+
 import { useDispatch } from "react-redux";
+import { actionCreators } from "../../redux/modules/review";
 
 import styled from "styled-components";
 import { Text, Button, TextB } from "../../elements";
 import { useMediaQuery } from "react-responsive";
 
-import { actionCreators } from "../../redux/modules/review";
-import { actionCreators as Follow } from "../../redux/modules/mypage";
-import { style } from "@mui/system";
-
 function UnFollow(props) {
   const Mobile = useMediaQuery({
     query: "(max-width:767px)",
   });
+
   const dispatch = useDispatch();
+
   const { closeModal, Follower, nickname } = props;
   const [follow, unFollow] = React.useState(false);
+
   const userFollow = () => {
     unFollow(!follow);
     dispatch(actionCreators.followDB(Follower, follow));
-    // dispatch(Follow.getFollowDB)
     closeModal();
   };
 
@@ -34,11 +34,9 @@ function UnFollow(props) {
             님 찜을 해제할까요?
           </TextB>
         </LineBox>
-
         <Text sub4 color="#999999">
           해제된 찜은 마이페이지에서 복구할 수 없어요
         </Text>
-
         <BottomBox>
           {Mobile ? null : (
             <Button
@@ -52,7 +50,6 @@ function UnFollow(props) {
               </Text>
             </Button>
           )}
-
           <Button
             primaryDefault
             shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
@@ -79,47 +76,43 @@ const CloseContainer = styled.div`
   box-sizing: border-box;
   background: #ffffff;
   border-radius: 20px;
-  @media ${({ theme }) => theme.device.isMobile} {
-    padding-top: 15px;
+  @media ${({ theme }) => theme.device.mobile} {
     width: 320px;
     height: 260px;
+    padding-top: 15px;
     border-radius: 10px;
   }
 `;
 
 const LineBox = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     margin: auto;
-    /* border: 1px solid red; */
     width: 212px;
     height: 68px;
     display: flex;
     margin: 20px auto;
     padding: 20px 0px 0px 0px;
     flex-direction: column;
-  }
+  } ;
 `;
 
 const BottomBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 296px;
   height: 40px;
   margin: 40px auto;
   padding: 0px 80px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  @media ${({ theme }) => theme.device.isMobile} {
-    /* border: 1px solid red; */
+  @media ${({ theme }) => theme.device.mobile} {
     justify-content: center;
     width: 120px;
     height: 40px;
     margin: 10px auto;
     padding: 0px 80px;
-    /* border: 1px solid red; */
     .goBack {
       display: none;
     }

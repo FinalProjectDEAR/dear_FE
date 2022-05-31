@@ -37,7 +37,6 @@ const getMessageDB = (page) => {
   return function (dispatch, getState, { history }) {
     try {
       api.get(`/user/info/message/${page}`, {}).then((res) => {
-        // console.log("쪽지 전체가져오기", res.data);
         dispatch(getMessage(res.data));
       });
     } catch (err) {
@@ -48,11 +47,9 @@ const getMessageDB = (page) => {
 };
 
 const getDetailMsgDB = (messageId) => {
-  // console.log(messageId);
   return function (dispatch, getState, { history }) {
     try {
       api.get(`/message/detail/${messageId}`, {}).then((res) => {
-        // console.log("쪽지 상세 가져오기", res.data);
         dispatch(getDetailMessage(res.data));
       });
     } catch (err) {
@@ -64,15 +61,13 @@ const getDetailMsgDB = (messageId) => {
 
 const addMessageDB = (message, resUser) => {
   return function (dispatch, getState, { history }) {
-    // console.log("쪽지보내기!", message, resUser);
     try {
       api
         .post(`/message/request`, {
           message: message,
-          resUserNickName: resUser,
+          resUserId: resUser,
         })
         .then((res) => {
-          // console.log("쪽지 추가", res);
           history.push("/myPage");
         });
     } catch (err) {
@@ -84,24 +79,16 @@ const addMessageDB = (message, resUser) => {
 
 export default handleActions(
   {
-    // [ADD_MESSAGE]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     // console.log("리듀서 쪽지추가", action.payload.message.data);
-    //     draft.message.unshift(action.payload.message);
-    //   }),
     [GET_MESSAGE]: (state, action) =>
       produce(state, (draft) => {
-        // console.log("리듀서 쪽지받기", action.payload.message.data);
         draft.message = action.payload.message.data;
       }),
     [GET_DETAIL_MSG]: (state, action) =>
       produce(state, (draft) => {
-        // console.log("리듀서 상세 쪽지 받기", action.payload.message.data);
         draft.messages = action.payload.message.data;
       }),
     [MSG_PAGE]: (state, action) =>
       produce(state, (draft) => {
-        // console.log("메시지 토탈페이지:", action.payload);
         draft.page = action.payload.page;
       }),
     //클린업작업

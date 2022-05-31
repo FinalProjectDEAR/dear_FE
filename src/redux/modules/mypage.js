@@ -40,7 +40,6 @@ const getPostListDB = (page) => {
   return function (dispatch, getState, { history }) {
     try {
       api.get(`/user/info/board/${page}`, {}).then((res) => {
-        // console.log("마이페이지 익명게시판리스트:", res.data.data);
         dispatch(getPostList(res.data.data));
       });
     } catch (err) {
@@ -54,7 +53,6 @@ const getFollowDB = (page) => {
   return function (dispatch, getState, { history }) {
     try {
       api.get(`/user/info/follow/${page}`, {}).then((res) => {
-        // console.log("마이페이지 팔로우리스트:", res.data.data);
         dispatch(getFollow(res.data.data));
       });
     } catch (err) {
@@ -67,7 +65,6 @@ const getChatDB = () => {
   return function (dispatch, getState, { history }) {
     try {
       api.get("/user/info/chatHistory", {}).then((res) => {
-        // console.log("상담 히스토리 가져오기:", res.data.data);
         dispatch(getChat(res.data.data));
       });
     } catch (err) {
@@ -80,7 +77,6 @@ const getInfoDB = () => {
   return function (dispatch, getState, { history }) {
     try {
       api.get("/user/info/profile", {}).then((res) => {
-        // console.log("멤버 인포가져오기:", res.data.data);
         dispatch(getInfo(res.data.data));
       });
     } catch (err) {
@@ -90,7 +86,6 @@ const getInfoDB = () => {
 };
 //멤버인포 수정하기
 const addInfoDB = (memberInfo) => {
-  // console.log(memberInfo);
   return function (dispatch, getState, { history }) {
     try {
       api
@@ -104,7 +99,6 @@ const addInfoDB = (memberInfo) => {
           gender: memberInfo.gender,
         })
         .then((res) => {
-          // console.log("멤버 인포수정하기:", res.data.data);
           dispatch(addInfo(res.data.data));
           history.push("/myPage");
         });
@@ -118,32 +112,26 @@ export default handleActions(
   {
     [GET_POST_LIST]: (state, action) =>
       produce(state, (draft) => {
-        // console.log("마이페이지 익명게시판리스트 리듀서:", action.payload);
         draft.postList = action.payload.post;
       }),
     [FOLLOW_LIST]: (state, action) =>
       produce(state, (draft) => {
-        // console.log("마이페이지 팔로우리스트 리듀서:", action.payload);
         draft.followList = action.payload.follower;
       }),
     [FOLLOWER]: (state, action) =>
       produce(state, (draft) => {
-        // console.log("마이페이지 팔로워 리듀서:", action.payload);
         draft.follower = action.payload.follower;
       }),
     [CHAT_LIST]: (state, action) =>
       produce(state, (draft) => {
-        // console.log("마이페이지 채팅기록 리듀서:", action.payload);
         draft.chatList = action.payload.chat;
       }),
     [GET_INFO]: (state, action) =>
       produce(state, (draft) => {
-        // console.log("마이페이지 유저인포 리듀서:", action.payload.user);
         draft.user = action.payload;
       }),
     [FOLLOW_PAGE]: (state, action) =>
       produce(state, (draft) => {
-        // console.log("마이페이지 팔로우 토탈페이지:", action.payload);
         draft.page = action.payload.page;
       }),
     [RESET_PAGE]: (state, action) =>
