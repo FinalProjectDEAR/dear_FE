@@ -1,17 +1,15 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { history } from "../../redux/configureStore";
-
-import { actionCreators } from "../../redux/modules/user";
-
+//리덕스
+import { useSelector } from "react-redux";
+//스타일
 import styled from "styled-components";
 import { Text, TextB, Button } from "../../elements";
-
+//페이지
 import ResReview from "../../pages/ResReview";
 import ReqReview from "../../pages/ReqReview";
 
 function OtherClose(props) {
-  const { informClose, leaveSession } = props;
+  const { informClose, leaveSession, noMatch } = props;
   const [review, setReview] = React.useState(false);
   const [view, setView] = React.useState(true);
 
@@ -33,7 +31,7 @@ function OtherClose(props) {
               _onClick={() => {
                 setView(false);
                 setReview(true);
-                leaveSession();
+                noMatch();
               }}
             >
               <Text margin="0px" color="#fff" body4 cursor="pointer">
@@ -67,22 +65,20 @@ export default OtherClose;
 const CloseContainer = styled.div`
   width: 400px;
   height: 200px;
-  padding: 35px 0px;
   box-sizing: border-box;
+  padding: 35px 0px;
   background: #ffffff;
   border-radius: 20px;
   @media ${({ theme }) => theme.device.mobile} {
-    padding-top: 15px;
     width: 320px;
     height: 146px;
+    padding-top: 15px;
     border-radius: 10px;
   }
 `;
 
 const LineBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenter};
   @media ${({ theme }) => theme.device.mobile} {
     margin: auto;
   }
@@ -92,7 +88,5 @@ const BottomBox = styled.div`
   height: 36px;
   margin: 15px auto;
   padding: 0px 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenter};
 `;
