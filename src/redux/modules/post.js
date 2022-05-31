@@ -57,7 +57,6 @@ const getPostDB = (page) => {
       axios
         .get(process.env.REACT_APP_URL + `/anonypost?page=${page}`, {})
         .then((res) => {
-          // console.log("익명게시판리스트", res.data.data);
           dispatch(getPost(res.data.data));
         });
     } catch (err) {
@@ -68,13 +67,11 @@ const getPostDB = (page) => {
 
 // 게시판 상세페이지 서버에서 받아오기
 const getDetailDB = (postId) => {
-  // console.log(postId);
   return function (dispatch, getState, { history }) {
     try {
       axios
         .get(process.env.REACT_APP_URL + `/anonypost/board/${postId}`, {})
         .then((res) => {
-          // console.log("포스트 상세보기 get", res.data.data);
           dispatch(getDetail(res.data.data));
         });
     } catch (err) {
@@ -86,7 +83,6 @@ const getDetailDB = (postId) => {
 
 // 게시판 카테고리별 상세페이지 서버에서 받아오기
 const getCateDetailDB = (page, category) => {
-  // console.log(page, category);
   return function (dispatch, getState, { history }) {
     try {
       axios
@@ -96,7 +92,6 @@ const getCateDetailDB = (page, category) => {
           {}
         )
         .then((res) => {
-          // console.log("포스트 카테고리 상세보기 get", res.data.data);
           dispatch(getPost(res.data.data));
           dispatch(getCateDetail(res.data.data));
         });
@@ -109,7 +104,6 @@ const getCateDetailDB = (page, category) => {
 
 //post 서버로 보내기
 const addPostDB = (payload) => {
-  // console.log("포스트 추가하기", payload);
   return async function (dispatch, getState, { history }) {
     try {
       const formData = new FormData();
@@ -126,20 +120,19 @@ const addPostDB = (payload) => {
           "Content-Type": "multipart/form-data",
         },
       });
-      // console.log("포스트추가하기", data.data);
       dispatch(addPost(data.data));
       //등록함과 동시에 리덕스에 남아있는 사진파일들 리셋해주기
       dispatch(imgActions.resetFile());
       history.push("/postList/전체");
     } catch (err) {
       console.log(err);
+      Swal.fire("게시글을 다시 작성해주세요.");
     }
   };
 };
 
 //수정하기 테스트 남음
 const editPostDB = (payload) => {
-  // console.log("포스트 수정하기 payload", payload);
   return async function (dispatch, getState, { history }) {
     try {
       const formData = new FormData();
@@ -163,7 +156,6 @@ const editPostDB = (payload) => {
           },
         }
       );
-      // console.log("포스트 수정하기", data);
       history.push(`/postDetail/${payload.postId}`);
     } catch (err) {
       console.log(err);
@@ -175,7 +167,6 @@ const deletePostDB = (postId) => {
   return function (dispatch, getState, { history }) {
     try {
       apis.delete(postId).then((res) => {
-        // console.log("게시글 삭제하기", res);
         dispatch(deletePost(postId));
         history.push("/postList/전체");
       });
@@ -187,13 +178,11 @@ const deletePostDB = (postId) => {
 
 // 공감 버튼
 const likeDB = (postId, likes) => {
-  // console.log("공감 payload", postId, likes);
   return function (dispatch, getState, { history }) {
     try {
       api
         .post(`/anonypost/board/${postId}/postLikes?likes=${likes}`, {})
         .then((res) => {
-          // console.log("공감", res.data);
           dispatch(
             likePost(postId, res.data.data.likes, res.data.data.memberIdList)
           );
@@ -209,41 +198,28 @@ export default handleActions(
   {
     [GET_POST]: (state, action) =>
       produce(state, (draft) => {
-        // console.log(action.payload)
         draft.post = action.payload.post;
       }),
     [GET_CATEDETAIL]: (state, action) =>
       produce(state, (draft) => {
-        // console.log(action.payload);
         draft.pages = action.payload.detailPostCategory.totalPages;
       }),
     [GET_DETAIL]: (state, action) =>
       produce(state, (draft) => {
-        // console.log("상세보기 리듀서", action.payload.detailPost);
         draft.detailPost = action.payload.detailPost;
       }),
     [ADD_POST]: (state, action) =>
       produce(state, (draft) => {
-        // console.log("add 포스트 리듀서", action.payload.postList);
         draft.postList.unshift(action.payload.postList);
       }),
     [DELETE_POST]: (state, action) =>
       produce(state, (draft) => {
-        // console.log(state.detail_post, action.payload);
         draft.detail_post = draft.detail_post.filter(
           (p) => p.postId !== action.payload.postId
         );
       }),
-    // [EDIT_POST]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     draft.comment = draft.comment.filter(
-    //       (p) => p.postId === action.payload.postId
-    //     );
-    //   }),
     [LIKE_POST]: (state, action) =>
       produce(state, (draft) => {
-        // console.log("공감 받아온 값", action.payload);
-        // console.log("공감 state", state);
         draft.detailPost.likes = action.payload.likes;
         draft.detailPost.likesList = action.payload.list;
       }),

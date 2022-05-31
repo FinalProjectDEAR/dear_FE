@@ -1,19 +1,20 @@
 import React from "react";
 
+import { actionCreators } from "../../redux/modules/comment";
+import { useDispatch } from "react-redux";
+
 import styled from "styled-components";
 import { Text, Button, TextB } from "../../elements";
 
-import { actionCreators } from "../../redux/modules/comment";
-import { history } from "../../redux/configureStore";
-import { useDispatch } from "react-redux";
-
 function CommentRemove(props) {
-  // console.log(props);
   const dispatch = useDispatch();
-  const { closeModal, postId, comment_id, setPage } = props;
+
+  const { closeModal, postId, comment_id } = props;
+
   const deletePost = () => {
     dispatch(actionCreators.delCommentDB({ comment_id, postId }));
   };
+
   const onRemove = () => {
     props.setPage(1);
     deletePost();
@@ -66,10 +67,10 @@ const CloseContainer = styled.div`
   box-sizing: border-box;
   background: #ffffff;
   border-radius: 20px;
-  @media ${({ theme }) => theme.device.isMobile} {
-    padding-top: 15px;
+  @media ${({ theme }) => theme.device.mobile} {
     width: 320px;
     height: 146px;
+    padding-top: 15px;
     border-radius: 10px;
   }
 `;
@@ -78,20 +79,19 @@ const LineBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     margin: auto;
   }
 `;
 
 const BottomBox = styled.div`
-  height: 36px;
-  margin: 15px auto;
-  padding: 0px 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  @media ${({ theme }) => theme.device.isMobile} {
-    /* border: 1px solid red; */
+  height: 36px;
+  margin: 15px auto;
+  padding: 0px 50px;
+  @media ${({ theme }) => theme.device.mobile} {
     justify-content: center;
     .goBack {
       display: none;
