@@ -2,11 +2,12 @@ import React from "react";
 
 //스타일
 import styled from "styled-components";
-import info1 from "../assets/intro/s-info-1.png";
-import info2 from "../assets/intro/s-info-2.png";
-import info3 from "../assets/intro/s-info-3.png";
-import info4 from "../assets/intro/s-info-4.png";
-import info5 from "../assets/intro/s-info-5.png";
+import { ReactComponent as Info1 } from "../assets/intro/s-info-1.svg";
+import { ReactComponent as Info2 } from "../assets/intro/s-info-2.svg";
+import { ReactComponent as Info3 } from "../assets/intro/s-info-3.svg";
+import { ReactComponent as Info4 } from "../assets/intro/s-info-4.svg";
+import { ReactComponent as Info5 } from "../assets/intro/s-info-5.svg";
+
 //페이지
 import Header from "../components/Header";
 import MobileIntro from "../pages/MobileIntro";
@@ -18,22 +19,24 @@ function Intro() {
       <Header />
       <Wrapper>
         <ContentBox>
-          <img
-            src={info1}
+          <Info1
             style={{ width: "292px", marginTop: "120px", marginBottom: "80px" }}
-            alt="intro"
           />
-          <Image src={info2} />
-          <Image src={info3} />
-          <Image src={info4} />
-          <img
-            src={info5}
+          <Image>
+            <Info2 />
+          </Image>
+          <Image>
+            <Info3 />
+          </Image>
+          <Image>
+            <Info4 />
+          </Image>
+          <Info5
             style={{
               width: "1032px",
               marginTop: "80px",
               marginBottom: "300px",
             }}
-            alt="intro"
           />
         </ContentBox>
         <MobileIntro />
@@ -46,16 +49,16 @@ function Intro() {
 export default Intro;
 
 const Wrapper = styled.div`
-  width: 100%;
   ${({ theme }) => theme.common.flexCenter};
+  width: 100%;
   @media ${({ theme }) => theme.device.mobile} {
     width: 360px;
   }
 `;
 
 const ContentBox = styled.div`
-  width: 1032px;
   ${({ theme }) => theme.common.flexCenterColumn};
+  width: 1032px;
   margin: auto;
   @media ${({ theme }) => theme.device.mobile} {
     display: none;
@@ -67,6 +70,5 @@ const Image = styled.div`
   height: 240px;
   margin: 80px 0px;
   box-sizing: border-box;
-  background-image: url("${(props) => props.src}");
   background-size: cover;
 `;
