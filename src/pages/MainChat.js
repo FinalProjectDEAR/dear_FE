@@ -17,19 +17,30 @@ import ArrowDropDownRoundedIcon from "@mui/icons-material/ArrowDropDownRounded";
 import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
 //컴포넌트
 import TapeInfo from "../components/TapeInfo";
+import ChatIntro from "../components/ChatIntro";
 
 function MainChat() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [checkBox, setCheckBox] = React.useState(false);
   const [showInfo, setShowInfo] = React.useState(false);
+  const [showChatInfo, setShowChatInfo] = React.useState(false);
 
   React.useEffect(() => {
     dispatch(mainActions.getTapeDB());
   }, []);
 
+  const CheckBox = () => {
+    setCheckBox(!checkBox);
+    setShowChatInfo(true);
+  };
+
   const closeTape = () => {
     setShowInfo(false);
+  };
+
+  const closeChatInfo = () => {
+    setShowChatInfo(false);
   };
 
   const isUser = useSelector((state) => state.user.isLogin);
@@ -92,15 +103,19 @@ function MainChat() {
               type="checkbox"
               name="completed"
               id="check"
-              onChange={() => {
-                setCheckBox(!checkBox);
-              }}
+              onChange={CheckBox}
             />
             <Text sub6 margin="10px" textAlign="left">
               따뜻하고 부드러운 언어를 사용하여 상대방과 진솔한 대화를 나누는
               것에 동의합니다.
             </Text>
           </InputWrap>
+          {showChatInfo ? (
+            <Modal>
+              <ChatIntro closeChatInfo={closeChatInfo} />
+            </Modal>
+          ) : null}
+
           <BtnWrap>
             <Btn checkBox={checkBox} onClick={startReq}>
               <TextB subtitle margin="5px" cursor="pointer" color="#2E2A32">

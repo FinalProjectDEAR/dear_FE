@@ -66,6 +66,7 @@ const reqChatDB = (payload) => {
       dispatch(imageActions.delData());
       history.push(`/AudioRoom/${sessionId}`);
     } catch (err) {
+      console.log(err);
       Swal.fire("리스너 매칭에 실패하였습니다.");
       history.replace("/");
     }

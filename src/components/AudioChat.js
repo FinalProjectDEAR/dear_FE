@@ -1,13 +1,14 @@
 import React, { useRef, useIn } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { history } from "../redux/configureStore";
-import { actionCreators as chatActions } from "../redux/modules/chat";
 import { OpenVidu } from "openvidu-browser";
-
+//라우트
+import { useLocation } from "react-router-dom";
+//리덕스
+import { useSelector, useDispatch } from "react-redux";
+import { actionCreators as chatActions } from "../redux/modules/chat";
+//스타일
 import styled from "styled-components";
 import { Text, Button, ColorBadge, Modal } from "../elements";
-
-//page
+//페이지
 import UserAudioComponent from "../components/UserAudioComponent";
 import Timer from "../components/Timer";
 import LoadingMatch from "../pages/LoadingMatch";
@@ -65,8 +66,13 @@ function AudioChat() {
   const onbeforeunload = (event) => {
     event.preventDefault();
     event.returnValue = "";
-    informClose();
+    chatClose();
   };
+
+  let location = useLocation();
+
+  const path = location.pathname;
+  let pathname = path.split("/");
 
   // 채팅중 실시간 시그널
 
@@ -77,7 +83,9 @@ function AudioChat() {
         to: [connectObj], // Array of Connection objects (optional. Broadcast to everyone if empty)
         type: "close", // The type of message (optional)
       })
-      .then(() => {})
+      .then(() => {
+        informClose();
+      })
       .catch((error) => {
         console.error(error);
       });
@@ -159,6 +167,7 @@ function AudioChat() {
 
       mySession.on("signal:close", (event) => {
         setOtherClose(true);
+        informClose();
       });
 
       mySession.on("signal:continue", (event) => {
@@ -214,8 +223,8 @@ function AudioChat() {
 
   //세션,커넥션 종료
   const leaveSession = () => {
-    console.log("세션", session);
-    session.disconnect();
+    const mySession = session;
+    mySession.disconnect();
 
     setSession(undefined);
     setSubscribers([]);
@@ -232,7 +241,7 @@ function AudioChat() {
 
   const noMatch = () => {
     leaveSession();
-    setTimeout(informClose(), 500);
+    setTimeout(informClose(), 1000);
   };
 
   const waitTimeOut = () => {
@@ -261,22 +270,6 @@ function AudioChat() {
       noMatch();
     };
   });
-
-  // React.useEffect(() => {
-  //   let unlisten = history.listen((location) => {
-  //     if (
-  //       history.action === "PUSH" ||
-  //       history.action === "POP" ||
-  //       history.action === "replace"
-  //     ) {
-  //       noMatch();
-  //     }
-  //   });
-
-  //   return () => {
-  //     unlisten();
-  //   };
-  // }, [history]);
 
   // 채팅종료시간
   function dateFormat(date) {
@@ -555,29 +548,6 @@ function AudioChat() {
             </div>
           </ChatContainer>
           <BottomBox>
-            {/* <VoiceBtnBox>
-              <VoiceBtn
-                onClick={() => {
-                  MVoiceChange();
-                }}
-              >
-                <img src={lowPitch} alt="voice1" style={{ width: "20px" }} />
-              </VoiceBtn>
-              <VoiceBtn
-                onClick={() => {
-                  WVoiceChange();
-                }}
-              >
-                <img src={highPitch} alt="voice2" style={{ width: "20px" }} />
-              </VoiceBtn>
-            </VoiceBtnBox> */}
-            {/* <Button
-              primaryDefault
-              bg={isConnect ? "#7A37BE" : "#999999"}
-              margin="0px 10px"
-            >
-              ON AIR
-            </Button> */}
             <Button
               primaryDefault
               size="regular"
@@ -723,11 +693,7 @@ const InfoBtn = styled.div`
   width: 62px;
   height: 22px;
   margin: 5px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-
+  ${({ theme }) => theme.common.flexCenter};
   background: #e6e6e6;
   border-radius: 4px;
 `;
@@ -736,10 +702,7 @@ const TagInfo = styled.div`
   width: 160px;
   padding: 15px;
   margin-top: 14px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  ${({ theme }) => theme.common.flexCenterColumn};
   position: absolute;
   top: 320px;
   background-color: #fff;
@@ -762,18 +725,14 @@ const TagBox = styled.div`
 `;
 
 const TagLine = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  ${({ theme }) => theme.common.flexCenter};
   width: 175px;
   height: 26px;
   margin-bottom: 2px;
 `;
 
 const Tag = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenter};
   height: 26px;
   background: #e6e6e6;
   border-radius: 4px;
@@ -784,9 +743,7 @@ const BottomBox = styled.div`
   height: 40px;
   margin: 17px auto;
   padding: 0px 113px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenter};
   @media ${({ theme }) => theme.device.mobile} {
     padding: 0px;
     margin: 5px;
@@ -794,9 +751,7 @@ const BottomBox = styled.div`
 `;
 
 const VoiceBtnBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenter};
   width: 100px;
   height: 44px;
   margin-right: 10px;
@@ -807,10 +762,7 @@ const VoiceBtnBox = styled.div`
 `;
 
 const VoiceBtn = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenter};
   padding: 20px 10px;
   margin: 0px 10px;
   box-sizing: border-box;
