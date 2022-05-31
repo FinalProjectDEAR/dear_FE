@@ -66,13 +66,8 @@ function AudioChat() {
   const onbeforeunload = (event) => {
     event.preventDefault();
     event.returnValue = "";
-    chatClose();
+    informClose();
   };
-
-  let location = useLocation();
-
-  const path = location.pathname;
-  let pathname = path.split("/");
 
   // 채팅중 실시간 시그널
 
@@ -83,9 +78,7 @@ function AudioChat() {
         to: [connectObj], // Array of Connection objects (optional. Broadcast to everyone if empty)
         type: "close", // The type of message (optional)
       })
-      .then(() => {
-        informClose();
-      })
+      .then(() => {})
       .catch((error) => {
         console.error(error);
       });
@@ -98,7 +91,7 @@ function AudioChat() {
 
     if (wantMore.agree.length % 2 === 0) {
       let date = new Date();
-      let extend = date.setMinutes(date.getMinutes() + 10); //연장 테스트 1분
+      let extend = date.setMinutes(date.getMinutes() + 1); //연장 테스트 1분
       setTargetTime(extend);
     }
 
@@ -131,11 +124,6 @@ function AudioChat() {
   React.useEffect(() => {
     window.addEventListener("beforeunload", onbeforeunload);
 
-    const videoPlay = () => {
-      var video = document.getElementById("hidden-video");
-      video.play();
-    };
-
     const connectSession = () => {
       const OV = new OpenVidu();
 
@@ -147,14 +135,12 @@ function AudioChat() {
         var subscriberList = subscribers;
         subscriberList.push(subscriber);
         setSubscribers([...subscribers, ...subscriberList]);
-
         let date = new Date();
         let target = date.setMinutes(date.getMinutes() + 10);
         setTargetTime(target);
         setIsConnect(true);
         // sendConnectSignal();
         dispatch(chatActions.getChatInfoDB(sessionId));
-        videoPlay();
         // setShowFiveSec(true);
         // setShowFiveSec(false);
       });
@@ -167,7 +153,6 @@ function AudioChat() {
 
       mySession.on("signal:close", (event) => {
         setOtherClose(true);
-        informClose();
       });
 
       mySession.on("signal:continue", (event) => {
@@ -223,8 +208,7 @@ function AudioChat() {
 
   //세션,커넥션 종료
   const leaveSession = () => {
-    const mySession = session;
-    mySession.disconnect();
+    session.disconnect();
 
     setSession(undefined);
     setSubscribers([]);
@@ -241,7 +225,7 @@ function AudioChat() {
 
   const noMatch = () => {
     leaveSession();
-    setTimeout(informClose(), 1000);
+    setTimeout(informClose(), 500);
   };
 
   const waitTimeOut = () => {
@@ -252,10 +236,13 @@ function AudioChat() {
   const chatClose = () => {
     sendCloseSignal();
     setTimeout(leaveSession, 2000); //2000
+    informClose();
   };
 
   //서버에 종료 알리기
   const informClose = () => {
+    console.log("이즈커넥트", isConnect);
+
     const closeTime = new Date();
     if (isConnect) {
       dispatch(chatActions.closeChatDB(sessionId, dateFormat(closeTime)));
@@ -264,7 +251,7 @@ function AudioChat() {
     }
   };
 
-  // 뒤로가기;
+  // 뒤로가기
   React.useEffect(() => {
     window.onpopstate = () => {
       noMatch();
@@ -578,7 +565,7 @@ function AudioChat() {
 
       {otherClose ? (
         <Modal>
-          <OtherClose informClose={informClose} leaveSession={leaveSession} />
+          <OtherClose informClose={informClose} leaveSession={leaveSession} noMatch={noMatch}/>
         </Modal>
       ) : null}
 
@@ -645,30 +632,30 @@ const ChatContainer = styled.div`
 `;
 
 const TapeBox = styled.div`
-  width: 374px;
-  height: 106px;
-  padding: 14px;
-  margin: 0px auto;
-  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 374px;
+  height: 106px;
+  box-sizing: border-box;
+  padding: 14px;
+  margin: 0px auto;
+  background: #ffffff;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 200px;
-  background: #ffffff;
   @media ${({ theme }) => theme.device.mobile} {
-    padding: 7px;
     width: 194px;
     height: 58px;
+    padding: 7px;
   }
 `;
 
 const UserBox = styled.div`
-  width: 175px;
-  height: 94px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 175px;
+  height: 94px;
   padding: 0px;
   margin: 14px 48px;
   @media ${({ theme }) => theme.device.mobile} {
@@ -677,13 +664,12 @@ const UserBox = styled.div`
 `;
 
 const MobileUserBox = styled.div`
-  width: 72px;
-  height: 60px;
-  margin: 7px 30px;
   display: none;
   flex-direction: column;
   align-items: center;
-
+  width: 72px;
+  height: 60px;
+  margin: 7px 30px;
   @media ${({ theme }) => theme.device.mobile} {
     display: flex;
   }
@@ -718,10 +704,10 @@ const Ellipsis = styled.div`
 `;
 
 const TagBox = styled.div`
-  width: 175px;
-  margin-top: 14px;
   display: flex;
   flex-direction: column;
+  width: 175px;
+  margin-top: 14px;
 `;
 
 const TagLine = styled.div`
@@ -734,9 +720,9 @@ const TagLine = styled.div`
 const Tag = styled.div`
   ${({ theme }) => theme.common.flexCenter};
   height: 26px;
+  margin: 0px 2px;
   background: #e6e6e6;
   border-radius: 4px;
-  margin: 0px 2px;
 `;
 
 const BottomBox = styled.div`
@@ -763,15 +749,15 @@ const VoiceBtnBox = styled.div`
 
 const VoiceBtn = styled.div`
   ${({ theme }) => theme.common.flexCenter};
+  width: 40px;
+  height: 40px;
   padding: 20px 10px;
   margin: 0px 10px;
   box-sizing: border-box;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
   background: #fafafa;
   border-radius: 40px;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
+  cursor: pointer;
   @media ${({ theme }) => theme.device.mobile} {
     width: 32px;
     height: 32px;

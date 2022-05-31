@@ -1,11 +1,12 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+
+//리덕스
+import { useSelector } from "react-redux";
 import { history } from "../../redux/configureStore";
-
-import { actionCreators } from "../../redux/modules/user";
-
+//스타일
 import styled from "styled-components";
 import { Text, TextB, Button } from "../../elements";
+//페이지
 
 import ResReview from "../../pages/ResReview";
 import ReqReview from "../../pages/ReqReview";
@@ -88,8 +89,8 @@ export default ChatClose;
 const CloseContainer = styled.div`
   width: 400px;
   height: 200px;
-  padding: 35px 0px;
   box-sizing: border-box;
+  padding: 35px 0px;
   background: #ffffff;
   border-radius: 20px;
   @media ${({ theme }) => theme.device.mobile} {
@@ -101,9 +102,7 @@ const CloseContainer = styled.div`
 `;
 
 const LineBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: flex ${({ theme }) => theme.common.flexCenter};
   @media ${({ theme }) => theme.device.mobile} {
     margin: auto;
   }
@@ -113,7 +112,5 @@ const BottomBox = styled.div`
   height: 36px;
   margin: 15px auto;
   padding: 0px 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenter};
 `;
