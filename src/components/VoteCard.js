@@ -1,12 +1,12 @@
 import React from "react";
+
+//리덕스
 import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/configureStore";
-
+//스타일
 import styled from "styled-components";
 import { Text, TextB } from "../elements";
 import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
-import image01 from "../assets/image01.png";
-import image02 from "../assets/image02.png";
 
 function VoteCard(props) {
   const leftScore = props.voteInfo?.vote[0].selectionList.length;
@@ -25,7 +25,6 @@ function VoteCard(props) {
           <TextB subTitle margin="0px">
             <Question>Q. </Question>
             {props.voteInfo.title}
-            {/* 누가 누구의 새우를 까줄 때 어떻게 했어야 했나요? */}
           </TextB>
         </Ellipsis>
 
@@ -34,15 +33,11 @@ function VoteCard(props) {
             <VoteLine>
               <Text sub4 margin="0px 4px">
                 {props.voteInfo.vote[0].imageTitle}
-                {/* 까준다 */}
               </Text>
             </VoteLine>
             <ProgressBar>
               <Highlight
-                width={
-                  (leftScore / totalCount) * 100 + "%"
-                  // (60 / 165) * 100 + "%"
-                }
+                width={(leftScore / totalCount) * 100 + "%"}
                 color={leftScore >= rightScore ? "#7A37BE" : "#BB9ED8"}
               />
             </ProgressBar>
@@ -51,15 +46,11 @@ function VoteCard(props) {
             <VoteLine>
               <Text sub4 margin="0px 4px">
                 {props.voteInfo.vote[1].imageTitle}
-                {/* 안까준다 */}
               </Text>
             </VoteLine>
             <ProgressBar>
               <Highlight
-                width={
-                  (rightScore / totalCount) * 100 + "%"
-                  // (105 / 165) * 100 + "%"
-                }
+                width={(rightScore / totalCount) * 100 + "%"}
                 color={rightScore >= leftScore ? "#7A37BE" : "#BB9ED8"}
               />
             </ProgressBar>
@@ -69,7 +60,6 @@ function VoteCard(props) {
           <PeopleRoundedIcon style={{ width: "16.5px", color: "#999999" }} />
           <Text sub5 margin="0px 5px">
             {totalCount}
-            {/* 165 */}
           </Text>
         </LineBox>
       </CardWrapper>
@@ -83,13 +73,13 @@ VoteCard.defaultProps = {
   nickname: "럭키세븐호",
   vote: [
     {
-      imageUrl: image01,
+      imageUrl: "",
       imageTitle: "친구가애인새우우우",
       selectionList: ["스파르타", "항해99"],
       selected: true,
     },
     {
-      imageUrl: image02,
+      imageUrl: "",
       imageTitle: "애인이친구새우",
       selectionList: ["스파르타", "항해99", "럭키세븐호"],
       selected: false,
@@ -103,10 +93,9 @@ VoteCard.defaultProps = {
 const CardWrapper = styled.div`
   width: 300px;
   height: 158px;
+  box-sizing: border-box;
   margin: 15px;
   padding: 30px 40px;
-  box-sizing: border-box;
-
   background: #fafafa;
   border-radius: 10px;
   cursor: pointer;
@@ -135,11 +124,11 @@ const Question = styled.span`
 `;
 
 const Ellipsis = styled.div`
+  display: -webkit-box;
   width: 230px;
   height: 24px;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 `;
@@ -156,11 +145,11 @@ const Font = styled.p`
 `;
 
 const BottomBox = styled.div`
-  margin: 8px 0px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin: 8px 0px;
 `;
 
 const VoteContainer = styled.div`
@@ -171,9 +160,9 @@ const VoteContainer = styled.div`
 `;
 
 const VoteLine = styled.div`
-  width: 250px;
   display: flex;
   justify-content: flex-end;
+  width: 250px;
 `;
 
 const VoteTitle = styled.div`
@@ -190,14 +179,14 @@ const VoteTitle = styled.div`
 const ProgressBar = styled.div`
   display: flex;
   align-items: center;
-  background-color: #fafafa;
   width: 100%;
   height: 14px;
+  background-color: #fafafa;
 `;
 
 const Highlight = styled.div`
-  background-color: ${(props) => props.color};
-  transition: 1s;
   width: ${(props) => props.width};
   height: 14px;
+  background-color: ${(props) => props.color};
+  transition: 1s;
 `;
