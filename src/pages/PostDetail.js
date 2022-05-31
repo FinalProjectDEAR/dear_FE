@@ -87,114 +87,116 @@ function PostDetail(props) {
   return (
     <React.Fragment>
       <Layout>
-        <DetailWrapper>
-          <CategoryBox>
-            <Title>
-              <Text body4>카테고리</Text>
-            </Title>
-            <CateContent>
-              <Text body4>{post?.category}</Text>
-            </CateContent>
-            <TitleContent>
-              <Text sub7>{createdAt}</Text>
-            </TitleContent>
-          </CategoryBox>
-          <MobileCategory>
-            <Text body4 color="#7A37BE">
-              {post?.category}
-            </Text>
-          </MobileCategory>
-          <TitleBox>
-            <Title>
-              <Text body4>제목</Text>
-            </Title>
-            <TitleContent>{post?.title}</TitleContent>
-            <ThumbComment>
-              <ThumbUp />
-              <Text sub7> {likesList?.length}</Text>
-              <CommentNum />
-              <Text sub7> {commentList[0]?.totalComments}</Text>
-            </ThumbComment>
-          </TitleBox>
-          <BtnContainer>
-            <div className="time">
-              <Text sub7>{createdAt}</Text>
-            </div>
-            {post?.memberId === loginUser ? (
-              <div className="smallBtn">
-                <BtnL
-                  onClick={() => {
-                    history.push(`/PostEdit/${postId}`);
-                  }}
-                >
-                  수정
-                </BtnL>
-                <BtnR
-                  onClick={() => {
-                    setModalOpen(true);
-                  }}
-                >
-                  삭제
-                </BtnR>
-                {modalOpen && (
-                  <Modal closModal={closeModal}>
-                    <PostRemove closeModal={closeModal} postId={postId} />
-                  </Modal>
-                )}
+        <BackGround>
+          <DetailWrapper>
+            <CategoryBox>
+              <Title>
+                <Text body4>카테고리</Text>
+              </Title>
+              <CateContent>
+                <Text body4>{post?.category}</Text>
+              </CateContent>
+              <TitleContent>
+                <Text sub7>{createdAt}</Text>
+              </TitleContent>
+            </CategoryBox>
+            <MobileCategory>
+              <Text body4 color="#7A37BE">
+                {post?.category}
+              </Text>
+            </MobileCategory>
+            <TitleBox>
+              <Title>
+                <Text body4>제목</Text>
+              </Title>
+              <TitleContent>{post?.title}</TitleContent>
+              <ThumbComment>
+                <ThumbUp />
+                <Text sub7> {likesList?.length}</Text>
+                <CommentNum />
+                <Text sub7> {commentList[0]?.totalComments}</Text>
+              </ThumbComment>
+            </TitleBox>
+            <BtnContainer>
+              <div className="time">
+                <Text sub7>{createdAt}</Text>
               </div>
-            ) : null}
-          </BtnContainer>
-          <ContentBox>
-            <Text body6 textAlign="left">
-              {post?.contents}
-            </Text>
-          </ContentBox>
-          <CommentPhotoWrap>
-            <PhotoDivWrap>
-              <PhotoDiv>
-                <PhotoUpload1>
-                  <PhotoWrap>
-                    {post?.imgUrl &&
-                      post?.imgUrl.map((image, id) => {
-                        return (
-                          <Img
-                            key={id}
-                            style={{
-                              width: "80px",
-                              marginTop: "5px",
-                            }}
-                            src={`${image}` ? `${image}` : null}
-                            alt={`${image}-${id}`}
-                          />
-                        );
-                      })}
-                  </PhotoWrap>
-                </PhotoUpload1>
-              </PhotoDiv>
-            </PhotoDivWrap>
-          </CommentPhotoWrap>
-          <IsLike>
-            <Thumb likes={post?.likes} onClick={likePost}>
-              <LikeUp />
-            </Thumb>
-            <Text size="14px" weight="500" color="#333333">
-              공감해요
-            </Text>
-            <Text weight="700" color="#7A37BE" cursor="pointer">
-              {likesList?.length}
-            </Text>
-          </IsLike>
-        </DetailWrapper>
-        {/* 댓글 */}
-        <CommentWrapper>
-          <CommentList setPage={setPage} />
-        </CommentWrapper>
-        <PageWrapper>
-          <Pagination setPage={setPage} totalPage={commentPage} />
-        </PageWrapper>
-        <WriteWrapper>
-          <CommentWrite postId={postId} />
-        </WriteWrapper>
+              {post?.memberId === loginUser ? (
+                <div className="smallBtn">
+                  <BtnL
+                    onClick={() => {
+                      history.push(`/PostEdit/${postId}`);
+                    }}
+                  >
+                    수정
+                  </BtnL>
+                  <BtnR
+                    onClick={() => {
+                      setModalOpen(true);
+                    }}
+                  >
+                    삭제
+                  </BtnR>
+                  {modalOpen && (
+                    <Modal closModal={closeModal}>
+                      <PostRemove closeModal={closeModal} postId={postId} />
+                    </Modal>
+                  )}
+                </div>
+              ) : null}
+            </BtnContainer>
+            <ContentBox>
+              <Text body6 textAlign="left">
+                {post?.contents}
+              </Text>
+            </ContentBox>
+            <CommentPhotoWrap>
+              <PhotoDivWrap>
+                <PhotoDiv>
+                  <PhotoUpload1>
+                    <PhotoWrap>
+                      {post?.imgUrl &&
+                        post?.imgUrl.map((image, id) => {
+                          return (
+                            <Img
+                              key={id}
+                              style={{
+                                width: "80px",
+                                marginTop: "5px",
+                              }}
+                              src={`${image}` ? `${image}` : null}
+                              alt={`${image}-${id}`}
+                            />
+                          );
+                        })}
+                    </PhotoWrap>
+                  </PhotoUpload1>
+                </PhotoDiv>
+              </PhotoDivWrap>
+            </CommentPhotoWrap>
+            <IsLike>
+              <Thumb likes={post?.likes} onClick={likePost}>
+                <LikeUp />
+              </Thumb>
+              <Text size="14px" weight="500" color="#333333">
+                공감해요
+              </Text>
+              <Text weight="700" color="#7A37BE" cursor="pointer">
+                {likesList?.length}
+              </Text>
+            </IsLike>
+          </DetailWrapper>
+          {/* 댓글 */}
+          <CommentWrapper>
+            <CommentList setPage={setPage} />
+          </CommentWrapper>
+          <PageWrapper>
+            <Pagination setPage={setPage} totalPage={commentPage} />
+          </PageWrapper>
+          <WriteWrapper>
+            <CommentWrite postId={postId} />
+          </WriteWrapper>
+        </BackGround>
       </Layout>
     </React.Fragment>
   );
@@ -208,6 +210,13 @@ const CommentWrapper = styled.div`
   margin: 30px auto 0px auto;
 `;
 
+const BackGround = styled.div`
+  padding: 80px 0px 200px;
+  @media ${({ theme }) => theme.device.mobile} {
+    padding: 30px 0px 80px;
+  }
+`;
+
 const PageWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -216,7 +225,10 @@ const PageWrapper = styled.div`
 `;
 
 const WriteWrapper = styled.div`
-  padding: 10px 0px 10px;
+  padding: 60px 0px 0px;
+  @media ${({ theme }) => theme.device.mobile} {
+    padding: 75px 0px 0px;
+  }
 `;
 
 const BtnContainer = styled.div`
@@ -256,7 +268,6 @@ const CategoryBox = styled.div`
   max-width: 1032px;
   width: 100%;
   height: 45px;
-  padding: 0px;
   border-top: 1px solid #666666;
   border-bottom: 1px solid #cccccc;
   box-sizing: border-box;
