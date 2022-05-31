@@ -8,12 +8,9 @@ import { actionCreators as userActions } from "../redux/modules/user";
 import styled from "styled-components";
 import { Text, Modal } from "../elements";
 import Survey from "./Survey";
-import logo from "../assets/main/logoL.png";
+import { ReactComponent as Logo } from "../assets/main/Logo.svg";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
-
-import { cookies } from "../shared/cookie";
-import isLogin from "../shared/auth/isLogin";
 
 const Header = (props) => {
   const [eventOpen, setEvenOpen] = React.useState(false);
@@ -51,7 +48,6 @@ const Header = (props) => {
           <HeaderBox>
             <LogoBox>
               <Logo
-                src={logo}
                 onClick={() => {
                   history.push("/");
                 }}
@@ -148,9 +144,9 @@ const HeaderWrapper = styled.div`
   @media ${({ theme }) => theme.device.mobile} {
     display: flex;
     align-items: flex-end;
-    padding: 10px 30px;
     width: 360px;
     height: 80px;
+    padding: 10px 9%;
   }
 `;
 
@@ -165,14 +161,9 @@ const HeaderContainer = styled.div`
 `;
 
 const LogoBox = styled.div`
-  display: flex;
-  justify-content: flex-start;
-`;
-
-const Logo = styled.img`
+  ${({ theme }) => theme.common.flexCenter};
   width: 80px;
   height: 52px;
-  margin: 0px auto;
   cursor: pointer;
   @media ${({ theme }) => theme.device.mobile} {
     width: 60px;
@@ -181,11 +172,11 @@ const Logo = styled.img`
 `;
 
 const HeaderBox = styled.div`
+  display: flex;
+  justify-content: space-between;
   width: 1032px;
   height: 100%;
   margin: auto;
-  display: flex;
-  justify-content: space-between;
   @media ${({ theme }) => theme.device.mobile} {
     margin: 0px;
     width: 340px;
@@ -195,24 +186,24 @@ const HeaderBox = styled.div`
 const HeaderBtn = styled.button`
   display: flex;
   justify-content: center;
-  border: none;
+  margin: 0px 10px;
   background-color: transparent;
   color: #61586a;
-  cursor: pointer;
+  border: none;
   line-height: 15px;
-  margin: 0px 10px;
+  cursor: pointer;
 `;
 
 const MHeaderBtn = styled.button`
   display: none;
   justify-content: center;
   align-items: flex-end;
+  margin: 0px 9%;
+  color: #61586a;
+  line-height: 15px;
   border: none;
   background-color: transparent;
-  color: #61586a;
   cursor: pointer;
-  line-height: 15px;
-  margin: 0px 9%;
   @media ${({ theme }) => theme.device.mobile} {
     display: flex;
   }
