@@ -1,6 +1,15 @@
 import React from "react";
-import { Button, Text, TextB } from "../elements";
+
+import { useHistory, useParams } from "react-router-dom";
+
+import { actionCreators } from "../redux/modules/post";
+import { useDispatch, useSelector } from "react-redux";
+
 import styled from "styled-components";
+import Swal from "sweetalert2";
+import "../styles/libraryStyle/style.css";
+import { Link } from "react-scroll";
+import { Button, Text, TextB } from "../elements";
 import { ReactComponent as All } from "../assets/postList/board-cate1.svg";
 import { ReactComponent as Vote } from "../assets/postList/board-cate2.svg";
 import { ReactComponent as Some } from "../assets/postList/board-cate3.svg";
@@ -9,23 +18,13 @@ import { ReactComponent as Broken } from "../assets/postList/board-cate5.svg";
 import { ReactComponent as Again } from "../assets/postList/board-cate6.svg";
 import { ReactComponent as Solo } from "../assets/postList/board-cate3 (1).svg";
 import { ReactComponent as Etc } from "../assets/postList/board-cate8.svg";
-import { ReactComponent as Blogging } from "../assets/postList/blogging 1.svg";
-import Swal from "sweetalert2";
-import "../styles/libraryStyle/style.css";
+import { ReactComponent as Blogging } from "../assets/postList/Group 573.svg";
 
-//리덕스관련
-import { useHistory, useParams } from "react-router-dom";
-import { actionCreators } from "../redux/modules/post";
-import { useDispatch, useSelector } from "react-redux";
-
-//페이지관련
 import VoteList from "../components/VoteList";
 import MobileVoteList from "../components/MobileVoteList";
 import Layout from "../components/Layout";
 import Post from "../pages/Post";
 import Paginations from "../elements/Pagination";
-
-import { Link } from "react-scroll";
 
 function PostList(props) {
   const params = useParams();
@@ -38,7 +37,6 @@ function PostList(props) {
   const [page, setPage] = React.useState(1);
   const postList = useSelector((state) => state.post.post.content);
   const pageList = useSelector((state) => state.post.post);
-  // console.log(postList);
 
   const isUser = useSelector((state) => state.user.isLogin);
 
@@ -110,7 +108,6 @@ function PostList(props) {
               <Blogging />
             </InfoBox>
           </InfoWrapper>
-
           <MBtnWrapper>
             <MBtnContainer>
               <Button
@@ -130,7 +127,6 @@ function PostList(props) {
               </Button>
             </MBtnContainer>
           </MBtnWrapper>
-
           <VoteWrapper>
             <VoteList />
             <MobileVoteList />
@@ -372,127 +368,128 @@ function PostList(props) {
     </React.Fragment>
   );
 }
+
 const Background = styled.div`
-  height: 2000px;
-  @media ${({ theme }) => theme.device.isMobile} {
+  height: 2500px;
+  @media ${({ theme }) => theme.device.mobile} {
     max-height: 2500px;
   }
 `;
+
 const PageBtn = styled.div`
+  ${({ theme }) => theme.common.flexCenter};
   padding-top: 33px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
+
 const InfoWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin: auto;
-  max-width: 902.67px;
+  max-width: 1030px;
   width: 100%
   height: 150px;
   align-items: center;
- 
+  padding-top: 145px;
 `;
+
 const InfoContainer = styled.div`
   max-width: 400px;
   width: 100%;
   height: 150px;
-  @media ${({ theme }) => theme.device.isMobile} {
-    box-sizing: border-box;
-    padding-top: 20px;
-    padding-left: 20px;
-    margin: auto;
+  @media ${({ theme }) => theme.device.mobile} {
     height: 190px;
+    padding: 20px 0px 0px 20px;
+    margin: auto;
+    box-sizing: border-box;
   }
 `;
+
 const InfoBox = styled.div`
-  width: 416.67px;
-  height: 312.5px;
   box-sizing: border-box;
-  padding-bottom: 30px;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: none;
   }
 `;
+
 const VoteWrapper = styled.div`
   max-width: 1032px;
   width: 100%;
   margin: 155px auto 200px;
   cursor: pointer;
   text-align: left;
+  padding-top: 151px;
 `;
+
 const BoardWrapper = styled.div`
   margin: 30px auto;
   max-width: 1032px;
-  height: 547px;
+  padding-top: 150px;
+  box-sizing: border-box;
 `;
+
 const TitleWrapper = styled.div`
   display: flex;
-  max-width: 1032px;
   justify-content: space-between;
+  max-width: 1032px;
   padding-top: 36px;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     width: 360px;
   }
 `;
+
 const CateGoryWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  margin: auto;
-  max-width: 818px;
   justify-content: space-around;
-  @media ${({ theme }) => theme.device.isMobile} {
-    width: 300px;
-    height: 180px;
+  max-width: 818px;
+  margin: auto;
+  @media ${({ theme }) => theme.device.mobile} {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 300px;
+    height: 180px;
     .mobile {
       display: flex;
       flex-direction: row;
-      gap: 30px;
       height: 100px;
       padding-top: 25px;
+      gap: 30px;
     }
   }
   @media ${({ theme }) => theme.device.web} {
     .mobile {
       display: flex;
-      width: 390px;
       flex-direction: row;
       justify-content: space-around;
       align-items: center;
+      width: 390px;
     }
   }
 `;
 
 const CategoryBtn = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 0px;
-  gap: 30px;
+  ${({ theme }) => theme.common.flexCenterColumn};
   width: 54px;
   height: 82px;
+  padding: 0px;
   flex: none;
   order: 0;
   flex-grow: 0;
+  gap: 30px;
   cursor: pointer;
-  @media ${({ theme }) => theme.device.isMobile} {
-  }
 `;
+
 const AllBtn = styled.div`
-  background-color: #fafafa;
-  border-radius: 10px;
-  box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   width: 76px;
   height: 76px;
   margin-bottom: 50px;
   padding: 18px;
   box-sizing: border-box;
+  background-color: #fafafa;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
 `;
 
 const PostTable = styled.div`
@@ -501,41 +498,43 @@ const PostTable = styled.div`
 `;
 
 const TableInfo = styled.div`
-  width: 100%;
-  height: 45px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  height: 45px;
   border-bottom: 1px solid #666666;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: none;
   }
 `;
 
 const InfoItem = styled.div`
+  vertical-align: middle;
+  box-sizing: border-box;
   padding: 25px 0px 23px 0;
   color: #61586a;
   font-size: 14px;
   line-height: 18px;
   font-weight: 500;
-  vertical-align: middle;
-  box-sizing: border-box;
 `;
+
 const BtnWrapper = styled.div`
+  display: flex;
   justify-content: right;
   padding-top: 14px;
-  display: flex;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: none;
   }
 `;
+
 const BtnContainer = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 10px;
   width: 290px;
   height: 40px;
-  @media ${({ theme }) => theme.device.isMobile} {
+  gap: 10px;
+  @media ${({ theme }) => theme.device.mobile} {
     display: none;
   }
 `;
@@ -544,26 +543,27 @@ const MBtnWrapper = styled.div`
   @media ${({ theme }) => theme.device.web} {
     display: none;
   }
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
+    display: flex;
+    justify-content: left;
     max-width: 390px;
     width: 100%;
-    margin: auto;
-    justify-content: left;
     height: 80px;
-    display: flex;
+    margin: auto;
     padding-left: 20px;
     box-sizing: border-box;
   }
 `;
+
 const MBtnContainer = styled.div`
   @media ${({ theme }) => theme.device.web} {
     display: none;
   }
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: flex;
     flex-direction: row;
-    gap: 10px;
     width: 290px;
+    gap: 10px;
   }
 `;
 export default PostList;

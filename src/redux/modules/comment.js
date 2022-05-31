@@ -19,8 +19,6 @@ const initialState = {
   comment: [],
   comments: [],
   pages: [],
-  // is_edit: false,
-  // likes: false,
 };
 
 //액션 생성 함수
@@ -54,7 +52,6 @@ const getCommentDB = (postId, page) => {
           {}
         )
         .then((res) => {
-          // console.log("댓글가져오기", res.data);
           dispatch(getComment(res.data));
         });
     } catch (err) {
@@ -67,12 +64,10 @@ const getCommentDB = (postId, page) => {
 //서버에게 댓글 보내기
 const addCommentDB = (comment, postId) => {
   return function (dispatch, getState, { history }) {
-    // console.log("댓글추가하기!", comment.comment, postId);
     try {
       api
         .post(`anonypost/board/${postId}/comment`, comment.comment)
         .then((res) => {
-          // console.log("댓글 추가", res.data);
           dispatch(addComment(res.data.data));
           dispatch(getCommentDB(postId, 1));
         });
@@ -84,13 +79,11 @@ const addCommentDB = (comment, postId) => {
 };
 //댓글 수정하기
 const editCommentDB = (comment_id, comment, postId) => {
-  // console.log("댓글수정하기", comment_id, comment, postId);
   return function (dispatch, getState, { history }) {
     try {
       api
         .put(`anonypost/board/${postId}/comment/${comment_id}`, { comment })
         .then((res) => {
-          // console.log("댓글 수정", res);
           dispatch(editComment(comment_id, comment));
         });
     } catch (err) {
@@ -101,7 +94,6 @@ const editCommentDB = (comment_id, comment, postId) => {
 };
 //댓글삭제하기
 const delCommentDB = (payload) => {
-  // console.log("댓글 삭제", payload.comment_id, payload.postId);
   return function (dispatch, getState, { history }) {
     try {
       api
@@ -119,13 +111,11 @@ const delCommentDB = (payload) => {
 };
 //댓글 좋아요
 const likeCommentDB = (postId, commentId) => {
-  // console.log("댓글 좋아요", postId, commentId);
   return function (dispatch, getState, { history }) {
     try {
       api
         .post(`anonypost/board/${postId}/commentLikes/${commentId}`, {})
         .then((res) => {
-          // console.log("댓글좋아요 Res", res);
           dispatch(likeComment(commentId, res.data.data.likes));
         });
     } catch (err) {
@@ -138,17 +128,14 @@ export default handleActions(
   {
     [LOAD]: (state, action) =>
       produce(state, (draft) => {
-        // console.log("리듀서 로드", action.payload.comments.data);
         draft.comments = action.payload.comments.data;
       }),
     [ADD]: (state, action) =>
       produce(state, (draft) => {
-        // console.log("리듀서 댓글추가", action.payload.comments);
         draft.comments.unshift(action.payload.comments);
       }),
     [EDIT]: (state, action) =>
       produce(state, (draft) => {
-        // console.log("댓글 수정 리듀서", action.payload);
         let idx = draft.comments.findIndex((c) => {
           return parseInt(c.commentId) === parseInt(action.payload.commentId);
         });
@@ -159,7 +146,6 @@ export default handleActions(
       }),
     [DELETE]: (state, action) =>
       produce(state, (draft) => {
-        // console.log(action.payload);
         //걔빼고 전부 다
         draft.comments = draft.comments.filter(
           (p) => p.commentId !== action.payload.commentId
@@ -167,8 +153,6 @@ export default handleActions(
       }),
     [LIKE]: (state, action) =>
       produce(state, (draft) => {
-        // console.log("댓글 좋아요 받아온 값", action.payload);
-        // console.log("댓글 좋아요 state", state);
         draft.comments.map((e, id) => {
           if (action.payload.commentId === e.commentId) {
             e.likes = action.payload.likes;
@@ -177,7 +161,6 @@ export default handleActions(
       }),
     [TOTAL]: (state, action) =>
       produce(state, (draft) => {
-        // console.log("페이지 받아온 값", action.payload);
         draft.pages = action.payload.totalPages;
       }),
     //클린업작업

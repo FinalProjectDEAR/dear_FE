@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as userActions } from "../redux/modules/user";
+import { actionCreators } from "../redux/modules/mypage";
+import { nicknameCheck } from "../shared/Check";
+
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
 import { Button, Text, ColorBadge, Input } from "../elements";
 import { useMediaQuery } from "react-responsive";
 
-import { useDispatch, useSelector } from "react-redux";
-import { actionCreators as userActions } from "../redux/modules/user";
-import { actionCreators } from "../redux/modules/mypage";
-import { nicknameCheck } from "../shared/Check";
-//페이지관련
 import Layout from "../components/Layout";
 
 const EditMyPage = () => {
@@ -17,6 +18,7 @@ const EditMyPage = () => {
     query: "(max-width:767px)",
   });
   const dispatch = useDispatch();
+
   const [isSelected, setIsSelected] = React.useState("#CCCCCC");
   const [nickname, setNickname] = React.useState("");
   const [age, setAge] = React.useState("");
@@ -69,6 +71,7 @@ const EditMyPage = () => {
   React.useEffect(() => {
     dispatch(actionCreators.getInfoDB());
   }, []);
+
   const userInfo = useSelector((state) => state.mypage.user.user);
   //defaultValue가 아닌 진짜 Value로 불러오기 위한 작업
   useEffect(() => {
@@ -80,8 +83,6 @@ const EditMyPage = () => {
     setDating(userInfo?.dating);
   }, [userInfo]);
 
-  // const localNick = localStorage.getItem("nickname");
-  // console.log(localNick);
   const dupCheck = (nickname) => {
     if (!nicknameCheck(nickname)) {
       Swal.fire("닉네임이 형식에 맞지 않습니다. 영문/한글/숫자 포함 3-10자");
@@ -153,6 +154,7 @@ const EditMyPage = () => {
       submitCouple();
     }
   };
+
   return (
     <React.Fragment>
       <Layout>
@@ -209,16 +211,7 @@ const EditMyPage = () => {
                         </Text>
                       ) : null}
                     </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        height: "110px",
-                        // background: "red",
-                        alignItems: "center",
-                        width: "50px",
-                        justifyContent: "right",
-                      }}
-                    >
+                    <DupChk>
                       <Text
                         sub3
                         color="#7A37BE"
@@ -229,11 +222,10 @@ const EditMyPage = () => {
                       >
                         중복확인
                       </Text>
-                    </div>
+                    </DupChk>
                   </div>
                 ) : (
                   <>
-                    {" "}
                     <div className="nick">
                       <Input
                         padding="11px 15px"
@@ -304,7 +296,6 @@ const EditMyPage = () => {
               </Color>
             </EditContainer>
           </EditWrapper>
-
           <InfoWrapper>
             <InfoContainerM>
               <Text title textAlign="left">
@@ -328,7 +319,6 @@ const EditMyPage = () => {
                       </Text>
                     </div>
                   )}
-
                   <div id="info">
                     <div className="age">
                       <div className="typeTitleM">
@@ -421,7 +411,6 @@ const EditMyPage = () => {
                           </>
                         ) : (
                           <>
-                            {" "}
                             <WebAge>
                               <input
                                 type="radio"
@@ -473,7 +462,6 @@ const EditMyPage = () => {
                               <label>
                                 <Text sub6>30대 초반</Text>
                               </label>
-
                               <input
                                 type="radio"
                                 value="30대 중반"
@@ -551,7 +539,6 @@ const EditMyPage = () => {
                         </div>
                       </div>
                     </div>
-
                     {dating === "커플" ? (
                       <>
                         <div id="ageInfo">
@@ -619,7 +606,6 @@ const EditMyPage = () => {
                             </RadioWrap>
                           </div>
                         </div>
-
                         <div id="info">
                           <div className="age">
                             <div className="mobileLove">
@@ -630,7 +616,6 @@ const EditMyPage = () => {
                             {Mobile ? (
                               <div
                                 style={{
-                                  // border: "1px solid red",
                                   marginLeft: "30px",
                                   marginBottom: "55px",
                                 }}
@@ -852,126 +837,135 @@ const EditMyPage = () => {
 };
 const Background = styled.div`
   height: 900px;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     height: 1300px;
   }
 `;
+
 const EditWrapper = styled.div`
-  margin: auto;
   max-width: 1032px;
   height: 245px;
-  @media ${({ theme }) => theme.device.isMobile} {
+  margin: auto;
+  @media ${({ theme }) => theme.device.mobile} {
     width: 320px;
     height: 465px;
   }
 `;
+
 const EditContainer = styled.div`
+  ${({ theme }) => theme.common.flexCenter};
   width: 100%;
   height: 200px;
-  background: #ffffff;
+  margin-top: 15px;
+  gap: 68px;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 20px;
-  margin-top: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 68px;
-  @media ${({ theme }) => theme.device.isMobile} {
+  background: #ffffff;
+  @media ${({ theme }) => theme.device.mobile} {
+    display: flex;
+    flex-direction: column;
     width: 320px;
     height: 415px;
     margin: auto;
-    display: flex;
-    flex-direction: column;
   }
 `;
+
 const NickName = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenter};
   gap: 20px;
   .nick {
     width: 200px;
   }
-  @media ${({ theme }) => theme.device.isMobile} {
-    gap: 0px;
+  @media ${({ theme }) => theme.device.mobile} {
+    display: flex;
+    flex-direction: column;
     width: 272px;
     height: 215px;
     margin: 40px auto 20px;
-    display: flex;
-    flex-direction: column;
+    gap: 0px;
     .nick {
       margin: 20px auto 0px;
     }
   }
 `;
+
 const Color = styled.div`
-  box-sizing: border-box;
-  /* padding-right: 70px;
-  width: 560px; */
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(16, 20px);
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 16px 0px;
   gap: 10px;
-  display: grid;
-  grid-template-columns: repeat(16, 20px);
-  flex-direction: column;
-  @media ${({ theme }) => theme.device.isMobile} {
-    width: 272px;
-    gap: 6px;
-    margin-top: -90px;
+  box-sizing: border-box;
+  @media ${({ theme }) => theme.device.mobile} {
     display: grid;
     grid-template-columns: repeat(8, 25px);
     flex-direction: column;
+    width: 272px;
+    margin-top: -90px;
+    gap: 6px;
     box-sizing: border-box;
   }
 `;
+
+const DupChk = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  width: 50px;
+  height: 110px;
+`;
+
 const InfoWrapper = styled.div`
   display: flex;
   flex-direction: row;
   margin: 75px auto 30px;
   max-width: 1032px;
   gap: 24px;
-  @media ${({ theme }) => theme.device.isMobile} {
-    width: 320px;
-    height: 370px;
+  @media ${({ theme }) => theme.device.mobile} {
     display: flex;
     flex-direction: column;
+    width: 320px;
+    height: 370px;
     margin: auto;
   }
 `;
+
 const InfoContainer = styled.div`
   width: 100%;
   height: 284px;
-  @media ${({ theme }) => theme.device.isMobile} {
-    width: 320px;
-    height: 370px;
+  @media ${({ theme }) => theme.device.mobile} {
     display: flex;
     flex-direction: column;
+    width: 320px;
+    height: 370px;
     margin: auto;
   }
 `;
+
 const InfoContainerM = styled.div`
   width: 100%;
   height: 284px;
-  @media ${({ theme }) => theme.device.isMobile} {
-    width: 320px;
-    height: 284px;
+  @media ${({ theme }) => theme.device.mobile} {
     display: flex;
     flex-direction: column;
+    width: 320px;
+    height: 284px;
     margin: auto;
   }
 `;
+
 const MobileAge = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 10px;
-  padding: 10px 0px;
   width: 204px;
   height: 122px;
+  padding: 10px 0px;
+  gap: 10px;
   box-sizing: border-box;
 `;
+
 const WebAge = styled.div`
   display: flex;
   flex-direction: row;
@@ -981,25 +975,23 @@ const WebAge = styled.div`
   margin-left: 30px;
   box-sizing: border-box;
 `;
+
 const InfoBox = styled.div`
-  margin-top: 15px;
+  ${({ theme }) => theme.common.flexCenterColumn};
   width: 504px;
   height: 240px;
-  background: #ffffff;
+  margin-top: 15px;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  background: #ffffff;
   .title {
     margin-bottom: 18px;
   }
   #info {
     display: flex;
     flex-direction: column;
-    gap: 8px;
     height: 112px;
+    gap: 8px;
   }
   .gender {
     display: flex;
@@ -1008,30 +1000,28 @@ const InfoBox = styled.div`
     height: 38px;
   }
   .radio {
-    margin-left: 35px;
     display: flex;
     flex-direction: row;
+    margin-left: 35px;
     gap: 10px;
   }
   .radioMobile {
-    margin-left: 35px;
     display: flex;
     flex-direction: row;
+    margin-left: 35px;
     gap: 10px;
-    /* margin-left: 35px; */
   }
   .radioTerm {
-    margin-left: 35px;
     display: flex;
     flex-direction: row;
+    margin-left: 35px;
     gap: 16.3px;
   }
   .age {
-    width: 387px;
-    height: 66px;
     display: flex;
     align-items: center;
-    /* border: 1px solid red; */
+    width: 387px;
+    height: 66px;
   }
   .ageRadio {
     display: flex;
@@ -1043,73 +1033,69 @@ const InfoBox = styled.div`
   .typeTitleM {
     width: 50px;
   }
-  @media ${({ theme }) => theme.device.isMobile} {
-    width: 320px;
-    height: 370px;
+  @media ${({ theme }) => theme.device.mobile} {
     display: flex;
     flex-direction: column;
+    width: 320px;
+    height: 370px;
     margin: auto;
     .title {
-      margin: auto;
-      padding-left: 26px;
       width: 294px;
       height: 100px;
+      margin: auto;
+      padding-left: 26px;
       box-sizing: border-box;
     }
     #info {
       display: flex;
-      /* padding-left: 26px; */
       flex-direction: column;
-      gap: 8px;
       width: 294px;
       margin: auto;
+      gap: 8px;
     }
     #ageInfo {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      height: 80px;
-      justify-content: center;
-      align-items: center;
-      box-sizing: border-box;
+      ${({ theme }) => theme.common.flexCenterColumn};
       width: 294px;
+      height: 80px;
       margin: auto;
+      gap: 8px;
+      box-sizing: border-box;
     }
     .radio {
-      margin-right: 60px;
       display: flex;
       flex-direction: row;
-      gap: 10px;
       width: 220px;
+      margin-right: 60px;
+      gap: 10px;
     }
     .radioMobile {
       display: flex;
       flex-direction: row;
-      gap: 31px;
-      padding: 10px 0px;
-      box-sizing: border-box;
       width: 220px;
       height: 0px;
+      padding: 10px 0px;
+      gap: 31px;
+      box-sizing: border-box;
     }
     .radioTerm {
-      margin-left: 35px;
       display: flex;
       flex-direction: row;
-      gap: 2px;
       width: 220px;
+      margin-left: 35px;
+      gap: 2px;
     }
     .age {
+      display: flex;
+      align-items: center;
       width: 294px;
       height: 100px;
       margin: auto;
-      display: flex;
-      align-items: center;
       padding-top: 24px;
     }
     .ageRadio {
       display: flex;
-      height: 122px;
       flex-direction: column;
+      height: 122px;
     }
     .typeTitleM {
       width: 35px;
@@ -1129,55 +1115,51 @@ const InfoBox = styled.div`
 `;
 
 const LoveRadio = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 220px;
   padding: 0px 0px 0px 12px;
   margin-bottom: 10px;
   gap: 18px;
+`;
+
+const LoveRadio2 = styled.div`
   display: flex;
   flex-direction: row;
-  /* background: red; */
   width: 220px;
-  /* height: 18px; */
-  /* background: pink; */
-`;
-const LoveRadio2 = styled.div`
   padding: 0px 0px 0px 12px;
   margin-bottom: 10px;
   gap: 24px;
-  display: flex;
-  flex-direction: row;
-  /* border: 1px solid red; */
-  width: 220px;
 `;
+
 const RadioWrap = styled.div`
   @media ${({ theme }) => theme.device.web} {
     display: flex;
     flex-direction: row;
     margin-left: 13px;
   }
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     margin-bottom: 50px;
   }
 `;
 
 const BoxInfo = styled.div`
-  width: 374px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-item: center;
+  ${({ theme }) => theme.common.flexCenterColumn};
   height: 158px;
-  /* background: orange; */
+  width: 374px;
 `;
+
 const TypeBox = styled.div`
   max-width: 504px;
   height: 284px;
 `;
+
 const BtnBox = styled.div`
-  max-width: 1032px;
   display: flex;
   justify-content: right;
+  max-width: 1032px;
   margin: auto;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: none;
   }
 `;
@@ -1186,19 +1168,15 @@ const MBtnBox = styled.div`
   @media ${({ theme }) => theme.device.web} {
     display: none;
   }
-  @media ${({ theme }) => theme.device.isMobile} {
-    /* width: 500px; */
-    /* margin: auto; */
-    /* height: 48px; */
+  @media ${({ theme }) => theme.device.mobile} {
     position: fixed;
     bottom: 0;
     .mobile {
+      width: 100vw;
+      height: 48px;
       background: #7a37be;
       border: none;
       border-radius: 0px;
-      width: 100vw;
-      height: 48px;
-      /* background: red; */
     }
   }
 `;

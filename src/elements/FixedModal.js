@@ -72,18 +72,11 @@ const Background = styled.div`
 const ModalBlock = styled.div`
   position: fixed;
   display: block;
+  width: 600px;
+  min-height: 35rem;
   top: 1rem;
   border-radius: 10px;
   padding: 1.5rem;
-  /* background-color: white; */
-  width: 600px;
-  /* @media (max-width: 1120px) {
-    width: 50rem;
-  }
-  @media (max-width: 50rem) {
-    width: 80%;
-  } */
-  min-height: 35rem;
   animation: modal-show 1s;
   @keyframes modal-show {
     from {
@@ -95,7 +88,6 @@ const ModalBlock = styled.div`
       margin-top: 0;
     }
   }
-
   @media ${({ theme }) => theme.device.mobile} {
     top: 0rem;
   }

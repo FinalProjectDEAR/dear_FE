@@ -1,19 +1,22 @@
 import React from "react";
+
 import { history } from "../redux/configureStore";
-import { Text, Input, Button, TextB, Modal } from "../elements";
-import { CgClose } from "react-icons/cg";
-import styled from "styled-components";
-import { useMediaQuery } from "react-responsive";
-import Swal from "sweetalert2";
-import "../styles/libraryStyle/style.css";
-//리덕스관련
+
 import { useDispatch, useSelector } from "react-redux";
 import { MsgActionCreators } from "../redux/modules/message";
+
+import styled from "styled-components";
+import Swal from "sweetalert2";
+import { CgClose } from "react-icons/cg";
+import "../styles/libraryStyle/style.css";
+import { useMediaQuery } from "react-responsive";
+import { Text, Input, Button, TextB, Modal } from "../elements";
 
 function ReplyMsg() {
   const Mobile = useMediaQuery({
     query: "(max-width:767px)",
   });
+
   const dispatch = useDispatch();
   //모달
   const [modalOpen, setModalOpen] = React.useState(true);
@@ -21,6 +24,7 @@ function ReplyMsg() {
     setModalOpen(false);
     history.push("/myPage");
   };
+
   const [textLength, setTextLength] = React.useState(0);
   const [msg, setMsg] = React.useState();
   //글자 수 제한
@@ -33,13 +37,15 @@ function ReplyMsg() {
     setTextLength(wordLength);
   };
   const msgList = useSelector((state) => state.message.messages);
+  console.log(msgList);
+  // const follower = useSelector((state) => state.mypage.follower);
 
   const send = () => {
     if (msg === "") {
       Swal.fire("쪽지를 작성해주세요!");
       return;
     }
-    dispatch(MsgActionCreators.addMessageDB(msg, msgList.reqUserNickName));
+    dispatch(MsgActionCreators.addMessageDB(msg, msgList.reqUserId));
   };
   return (
     <>
@@ -114,46 +120,47 @@ function ReplyMsg() {
 }
 
 const MsgWrapper = styled.div`
-  margin: auto;
   width: 550px;
   height: 625px;
+  margin: auto;
   background: #ffffff;
   border-radius: 20px;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     width: 320px;
     height: 520px;
   }
 `;
+
 const TitleWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: flex-end;
-  padding-top: 30px;
-  gap: 4px;
-  margin: 60px auto 0px;
   width: 550px;
   height: 22px;
-  @media ${({ theme }) => theme.device.isMobile} {
+  padding-top: 30px;
+  margin: 60px auto 0px;
+  gap: 4px;
+  @media ${({ theme }) => theme.device.mobile} {
     width: 320px;
     height: 18px;
-    /* border: 1px solid red; */
     margin: 30px auto 0px;
   }
-  /* border: 1px solid red; */
 `;
+
 const NickNameSpan = styled.span`
   font-weight: 700px;
   size: 16px;
   line-height: 22px;
   color: #2e2a32;
 `;
+
 const MsgBox = styled.div`
-  margin: auto;
   width: 470px;
   height: 350px;
+  margin: auto;
   padding-bottom: 69px;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     width: 280px;
     height: 344px;
     padding-bottom: 39px;

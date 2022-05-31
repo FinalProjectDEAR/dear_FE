@@ -1,13 +1,14 @@
 import React from "react";
+
+import { useHistory } from "react-router-dom";
+
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators } from "../redux/modules/noti";
 import { actionCreators as userActions } from "../redux/modules/user";
-import { useHistory } from "react-router-dom";
 
 import styled from "styled-components";
 import { FixedModal } from "../elements";
 import Swal from "sweetalert2";
-//아이콘
 import { Badge } from "@material-ui/core";
 import { ReactComponent as X } from "../assets/Vector (10).svg";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -86,7 +87,7 @@ const MobileFixedBtn = ({ close }) => {
                     <Font>서비스소개</Font>
                   </FontBox>
                 </Desc>
-                <Board
+                <Desc
                   onClick={() => {
                     history.push("/postList/전체");
                   }}
@@ -95,25 +96,25 @@ const MobileFixedBtn = ({ close }) => {
                   <FontBox>
                     <Font>디어상담소</Font>
                   </FontBox>
-                </Board>
-                <Follow onClick={gotoMypage}>
+                </Desc>
+                <Desc onClick={gotoMypage}>
                   <PersonIcon />
                   <FontBox>
                     <Font>마이페이지</Font>
                   </FontBox>
-                </Follow>
+                </Desc>
                 <Badge
                   color="secondary"
                   badgeContent={alarmNum}
                   overlap="circular"
                   invisible={isRead}
                 >
-                  <Noti onClick={notiCheck}>
+                  <Desc onClick={notiCheck}>
                     <NotificationsIcon />
                     <FontBox>
                       <Font>알림</Font>
                     </FontBox>
-                  </Noti>
+                  </Desc>
                 </Badge>
                 <div
                   style={{
@@ -138,16 +139,11 @@ const Mver = styled.div`
   @media ${({ theme }) => theme.device.web} {
     display: none;
   }
-  @media ${({ theme }) => theme.device.isMobile} {
-    /* position: absolute; */
-    /* width: 52px;
-    bottom: 60px;
-    left: 87%;
-    position: fixed; */
-    /* border: 1px solid red; */
+  @media ${({ theme }) => theme.device.mobile} {
     box-sizing: border-box;
   }
 `;
+
 const FontBox = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -167,112 +163,27 @@ const Font = styled.p`
 `;
 
 const Desc = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenter};
+  width: 160px;
+  height: 54px;
   padding: 0px;
-  /* position: static; */
+  margin: 10px 0px;
+  flex: none;
   background-color: #61586a;
-  justify-content: center;
   color: white;
-  width: 160px;
+  background-color: white;
   border-radius: 26px;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
-  height: 54px;
-  /* left: 0px;
-  top: 0px; */
-  flex: none;
-  /* order: 0;
-  flex-grow: 0; */
-  margin: 10px 0px;
-  /* border-radius: 50%; */
-  background-color: white;
   border: none;
   color: #61586a;
   cursor: pointer;
 `;
 
-const Board = styled.div`
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0px;
-  position: static;
-  width: 160px;
-  border-radius: 26px;
-  box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
-  height: 54px;
-  left: 0px;
-  top: 92px;
-  flex: none;
-  order: 1;
-  flex-grow: 0;
-  margin: 10px 0px;
-  background-color: white;
-  border: none;
-  color: #61586a;
-  cursor: pointer;
-  transition: 0.4s;
-`;
-
-const Follow = styled.div`
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0px;
-  position: static;
-  width: 160px;
-  border-radius: 26px;
-  box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
-  height: 54px;
-  left: 0px;
-  top: 184px;
-  flex: none;
-  order: 2;
-  flex-grow: 0;
-  margin: 10px 0px;
-  background-color: white;
-  border: none;
-  color: #61586a;
-    transition: 0.3s;
-  }
-`;
-
-const Noti = styled.div`
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0px;
-  position: static;
-  width: 160px;
-    border-radius: 26px;
-    box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
-  height: 54px;
-  left: 0px;
-  top: 276px;
-  flex: none;
-  order: 3;
-  flex-grow: 0;
-  margin: 10px 0px;
-  background-color: white;
-  border: none;
-  color: #61586a;
-  cursor: pointer;
-  transition: 0.4s;
-    transition: 0.3s;
-  }
-`;
 const MBtn = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 0px;
+  ${({ theme }) => theme.common.flexCenterColumn};
   width: 54px;
   height: 54px;
+  padding: 0px;
   flex: none;
   flex-grow: 0;
   border-radius: 50%;

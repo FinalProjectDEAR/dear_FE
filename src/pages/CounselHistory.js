@@ -1,17 +1,17 @@
 import React from "react";
+
 import styled from "styled-components";
-import { Text, TextB, Tag, ColorBadge } from "../elements";
+import { Text, TextB, ColorBadge } from "../elements";
 import { useMediaQuery } from "react-responsive";
-//시간알려주는패키지
-import TimeCounting from "time-counting";
 
 import ChatTag from "../elements/ChatTag";
+//시간알려주는패키지
+import TimeCounting from "time-counting";
 
 const CounselHistory = (props) => {
   const Mobile = useMediaQuery({
     query: "(max-width:767px)",
   });
-  // console.log(props.item);
   //시간을 알아보자!
   const option = {
     lang: "ko",
@@ -19,11 +19,10 @@ const CounselHistory = (props) => {
       justNow: 60,
     },
   };
-  // console.log(props.item.myRole);
+
   const createdAt = TimeCounting(props.item.createdAt, option);
+
   return (
-    // <HistoryWrapper>
-    //   <HistoryList>
     <CounselHistoryWrapper>
       {Mobile ? (
         <MobileVer>
@@ -46,14 +45,8 @@ const CounselHistory = (props) => {
       {Mobile ? null : (
         <div className="tag">
           {props.item.myRole ? <ChatTag Tag={props.item.myRole} /> : null}
-          {/* <Tag counselRes2>
-            <Text sub7 margin="3px 8px">
-              {props?.item.myRole}
-            </Text>
-          </Tag> */}
         </div>
       )}
-
       <div className="content">
         <TextB sub color="#2E2A32" textAlign="left">
           {props?.item.reqComment}
@@ -73,36 +66,15 @@ const CounselHistory = (props) => {
         </div>
       )}
     </CounselHistoryWrapper>
-    //   </HistoryList>
-    // </HistoryWrapper>
   );
 };
 
-CounselHistory.defaultProps = {
-  role: "request",
-  color: "ddd",
-  chatTitle: "고백을 어떻게 할까요?",
-  nickName: "내연애는못하는사람",
-  createdAt: "2",
-};
-
-const HistoryWrapper = styled.div`
-  width: 1032px;
-  height: 270px;
-  box-sizing: border-box;
-`;
-const HistoryList = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-top: 20px;
-  gap: 24px;
-`;
 const CounselHistoryWrapper = styled.div`
-  background-color: #fafafa;
   width: 328px;
   height: 120px;
   padding-top: 0.1px;
   box-sizing: border-box;
+  background-color: #fafafa;
   .content {
     display: flex;
     flex-direction: row;
@@ -116,38 +88,34 @@ const CounselHistoryWrapper = styled.div`
   .nick {
     display: flex;
     flex-direction: row;
-    margin-left: 30px;
-    /* border: 1px solid red; */
     width: 200px;
+    margin-left: 30px;
   }
   @media ${({ theme }) => theme.device.isMobile} {
-    background-color: #fafafa;
     width: 320px;
-    /* height: 96px; */
     padding-top: 0.1px;
     box-sizing: border-box;
+    background-color: #fafafa;
     .content {
       display: block;
-
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       flex-direction: row;
-      margin-left: 30px;
-      /* border: 1px solid red; */
       width: 250px;
+      margin-left: 30px;
       padding: 0px;
       box-sizing: border-box;
     }
   }
 `;
+
 const MobileVer = styled.div`
   display: flex;
   justify-content: space-between;
   padding-top: 12px;
   .tagM {
     display: flex;
-
     margin: 0px 12px 0px 0px;
   }
 `;
