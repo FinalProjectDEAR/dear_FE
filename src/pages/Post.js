@@ -64,7 +64,7 @@ function Post(props) {
                   &nbsp;({props.item.comments})
                 </span>
               ) : null}
-              {likes > 5 ? <Hot style={{ margin: "-5px 5px" }} /> : null}
+              {likes > 5 ? <Hot style={{ margin: "-2px 5px" }} /> : null}
             </TextB>
           </Title>
 
@@ -89,7 +89,7 @@ const PostWrapper = styled.div`
   font-size: 12px;
   border-bottom: 1px solid #cccccc;
   color: #333333;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     border-bottom: 1px solid #948a9e;
     display: flex;
     justify-content: left;
@@ -101,7 +101,7 @@ const PostWrapper = styled.div`
 const Title = styled.div`
   padding-left: 40px;
   cursor: pointer;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: block;
     height: 38px;
     width: 90%;
@@ -114,7 +114,7 @@ const Title = styled.div`
 
 const Date = styled.div`
   padding-right: 40px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     width: 90%;
     padding: 10px 0px 0px 35px;
     box-sizing: border-box;

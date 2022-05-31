@@ -450,7 +450,7 @@ const PageBtn = styled.div`
 
 const BackGround = styled.div`
   padding: 80px 0px 200px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     padding: 30px 0px 80px;
   }
 `;
@@ -464,7 +464,7 @@ const MyPageWrapper = styled.div`
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 20px;
   background-color: #ffffff;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: flex;
     flex-direction: column;
     width: 320px;
@@ -478,7 +478,7 @@ const MypageContainer = styled.div`
   flex-direction: row;
   margin: auto;
   gap: 40px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: flex;
     flex-direction: column;
     width: 320px;
@@ -492,7 +492,7 @@ const MemberWrapper = styled.div`
   align-items: center;
   width: 260px;
   height: 200px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -505,7 +505,7 @@ const ColorBox = styled.div`
   width: 60px;
   height: 60px;
   margin-right: 20px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     ${({ theme }) => theme.common.flexCenterColumn};
     width: 320px;
     margin: 0px auto;
@@ -521,7 +521,7 @@ const NicknameBox = styled.div`
   .nick {
     display: flex;
   }
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     ${({ theme }) => theme.common.flexCenterColumn};
     width: 320px;
     height: 60px;
@@ -574,7 +574,7 @@ const TypeWrapper = styled.div`
     height: 26px;
     gap: 10px;
   }
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     ${({ theme }) => theme.common.flexCenterColumn};
     width: 320px;
     height: 159px;
@@ -635,7 +635,7 @@ const TapeWrapper = styled.div`
     display: flex;
     justify-content: center;
   }
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: none;
   }
 `;
@@ -655,7 +655,7 @@ const MTapeWrapper = styled.div`
 `;
 
 const MobileListener = styled.div`
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: flex;
     flex-direction: row;
     width: 280px;
@@ -676,13 +676,13 @@ const WebListener = styled.div`
     display: flex;
     justify-content: row;
   }
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: none;
   }
 `;
 
 const OndoTag = styled.div`
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     margin-top: 0px;
   }
 `;
@@ -714,7 +714,7 @@ const ProgressBar = styled.div`
   background-color: #fff;
   border: 1px solid #bb9ed8;
   border-radius: 10px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     height: 10px;
   }
 `;
@@ -725,7 +725,7 @@ const Highlight = styled.div`
   width: ${(props) => props.width};
   height: 6px;
   border-radius: 10px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     height: 6px;
   }
 `;
@@ -736,7 +736,7 @@ const MsgWrapper = styled.div`
   margin: auto;
   margin-top: 60px;
   box-sizing: border-box;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: flex;
     flex-direction: column;
     width: 320px;
@@ -747,7 +747,7 @@ const MsgContainer = styled.div`
   display: flex;
   flex-direction: row;
   margin: 20px auto;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: flex;
     flex-direction: column;
     width: 320px;
@@ -772,7 +772,7 @@ const TitleContainer = styled.div`
   .follow {
     display: flex;
   }
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     width: 320px;
     .page {
       ${({ theme }) => theme.common.flexCenter};
@@ -791,7 +791,7 @@ const CounselWrapper = styled.div`
   margin: auto;
   width: 1032px;
   margin-top: 100px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: flex;
     flex-direction: column;
     width: 320px;
@@ -808,7 +808,7 @@ const CounselGrid = styled.div`
   width: 1032px;
   margin: 16px 0px;
   gap: 10px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: flex;
     flex-direction: column;
     width: 320px;
@@ -816,7 +816,7 @@ const CounselGrid = styled.div`
 `;
 
 const MobileGridWrapper = styled.div`
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: flex;
     flex-direction: column;
     width: 320px;
@@ -829,7 +829,7 @@ const FollowWrapper = styled.div`
   width: 1034px;
   margin: auto;
   margin-top: 100px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: flex;
     flex-direction: column;
     width: 320px;
@@ -847,7 +847,7 @@ const FollowContainer = styled.div`
   margin-top: 18px;
   padding: 0px;
   gap: 26px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: flex;
     flex-direction: column;
     width: 320px;
@@ -858,7 +858,7 @@ const PostWrapper = styled.div`
   width: 1032px;
   margin: auto;
   margin-top: 100px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     width: 328px;
     box-sizing: border-box;
   }
@@ -876,7 +876,7 @@ const TableInfo = styled.div`
   width: 100%;
   height: 45px;
   border-bottom: 1px solid #666666;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: none;
   }
 `;

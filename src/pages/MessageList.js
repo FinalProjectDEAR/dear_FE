@@ -55,7 +55,7 @@ const MessageWrapper = styled.div`
   margin: auto;
   background-color: #fafafa;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: flex;
     flex-direction: column;
     width: 320px;
@@ -74,7 +74,7 @@ const MessageContainer = styled.div`
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: block;
     white-space: nowrap;
     overflow: hidden;

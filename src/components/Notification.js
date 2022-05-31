@@ -222,7 +222,7 @@ const NotiWrapper = styled.div`
   background: #ffffff;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 20px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -238,7 +238,7 @@ const NotiTitle = styled.div`
   height: 40px;
   margin: auto;
   border: 10px solid white;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     width: 260px;
     height: 20px;
     border: 10px solid white;
@@ -251,7 +251,7 @@ const NotiContainer = styled.div`
   width: 340px;
   height: 440px;
   margin: auto;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     width: 260px;
     height: 352px;
   }
@@ -262,7 +262,7 @@ const EmptyBox = styled.div`
   width: 340px;
   height: 440px;
   margin: auto;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     width: 260px;
     height: 352px;
   }
@@ -300,7 +300,7 @@ const NotiBox = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     width: 260px;
     height: 88px;
   }
