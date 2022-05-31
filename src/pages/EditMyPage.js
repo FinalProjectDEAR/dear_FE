@@ -837,7 +837,7 @@ const EditMyPage = () => {
 };
 const Background = styled.div`
   height: 900px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     height: 1300px;
     padding-top: 30px;
   }
@@ -847,7 +847,7 @@ const EditWrapper = styled.div`
   max-width: 1032px;
   height: 245px;
   margin: auto;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     width: 320px;
     height: 465px;
   }
@@ -862,7 +862,7 @@ const EditContainer = styled.div`
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 20px;
   background: #ffffff;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: flex;
     flex-direction: column;
     width: 320px;
@@ -877,7 +877,7 @@ const NickName = styled.div`
   .nick {
     width: 200px;
   }
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: flex;
     flex-direction: column;
     width: 272px;
@@ -899,7 +899,7 @@ const Color = styled.div`
   margin: 16px 0px;
   gap: 10px;
   box-sizing: border-box;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: grid;
     grid-template-columns: repeat(8, 25px);
     flex-direction: column;
@@ -924,7 +924,7 @@ const InfoWrapper = styled.div`
   margin: 75px auto 30px;
   max-width: 1032px;
   gap: 24px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: flex;
     flex-direction: column;
     width: 320px;
@@ -936,7 +936,7 @@ const InfoWrapper = styled.div`
 const InfoContainer = styled.div`
   width: 100%;
   height: 284px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: flex;
     flex-direction: column;
     width: 320px;
@@ -948,7 +948,7 @@ const InfoContainer = styled.div`
 const InfoContainerM = styled.div`
   width: 100%;
   height: 284px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: flex;
     flex-direction: column;
     width: 320px;
@@ -1034,7 +1034,7 @@ const InfoBox = styled.div`
   .typeTitleM {
     width: 50px;
   }
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: flex;
     flex-direction: column;
     width: 320px;
@@ -1139,7 +1139,7 @@ const RadioWrap = styled.div`
     flex-direction: row;
     margin-left: 13px;
   }
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     margin-bottom: 50px;
   }
 `;
@@ -1160,7 +1160,7 @@ const BtnBox = styled.div`
   justify-content: right;
   max-width: 1032px;
   margin: auto;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: none;
   }
 `;
@@ -1169,7 +1169,7 @@ const MBtnBox = styled.div`
   @media ${({ theme }) => theme.device.web} {
     display: none;
   }
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     position: fixed;
     bottom: 0;
     .mobile {

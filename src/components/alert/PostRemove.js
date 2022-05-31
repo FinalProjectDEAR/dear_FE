@@ -68,7 +68,7 @@ const CloseContainer = styled.div`
   box-sizing: border-box;
   background: #ffffff;
   border-radius: 20px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     width: 320px;
     height: 146px;
     padding-top: 15px;
@@ -80,7 +80,7 @@ const LineBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     margin: auto;
   }
 `;
@@ -92,7 +92,7 @@ const BottomBox = styled.div`
   height: 36px;
   margin: 15px auto;
   padding: 0px 50px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     justify-content: center;
     .goBack {
       display: none;

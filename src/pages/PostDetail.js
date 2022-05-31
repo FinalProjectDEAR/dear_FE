@@ -212,7 +212,7 @@ const CommentWrapper = styled.div`
 
 const BackGround = styled.div`
   padding: 80px 0px 200px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     padding: 30px 0px 80px;
   }
 `;
@@ -226,7 +226,7 @@ const PageWrapper = styled.div`
 
 const WriteWrapper = styled.div`
   padding: 60px 0px 0px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     padding: 75px 0px 0px;
   }
 `;
@@ -236,7 +236,7 @@ const BtnContainer = styled.div`
   justify-content: right;
   width: 1032px;
   padding-top: 20px;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     width: 326px;
     border-top: 1px solid #666666;
     justify-content: space-between;
@@ -255,7 +255,7 @@ const DetailWrapper = styled.div`
   width: 100%;
   max-height: 700px;
   margin: auto;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     width: 326px;
     margin: auto;
   }
@@ -271,7 +271,7 @@ const CategoryBox = styled.div`
   border-top: 1px solid #666666;
   border-bottom: 1px solid #cccccc;
   box-sizing: border-box;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: none;
   }
 `;
@@ -286,14 +286,14 @@ const TitleBox = styled.div`
   padding: 0px;
   box-sizing: border-box;
   border-bottom: 1px solid #cccccc;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     width: 326px;
     margin: auto;
   }
 `;
 
 const MobileCategory = styled.div`
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -316,7 +316,7 @@ const Title = styled.div`
   flex: none;
   order: 0;
   flex-grow: 0;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: none;
   }
 `;
@@ -347,7 +347,7 @@ const TitleContent = styled.div`
   order: 1;
   flex-grow: 0;
   font-family: "KoPub Batang";
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     width: 326px;
     margin: auto;
   }
@@ -363,7 +363,7 @@ const ThumbComment = styled.div`
   order: 1;
   flex-grow: 0;
   font-family: "KoPub Batang";
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     display: none;
   }
 `;
@@ -392,7 +392,7 @@ const ContentBox = styled.div`
   padding: 30px;
   gap: 10px;
   box-sizing: border-box;
-  @media ${({ theme }) => theme.device.mobile} {
+  @media ${({ theme }) => theme.device.isMobile} {
     padding: 30px 0px;
   }
 `;
@@ -418,7 +418,7 @@ const CommentPhotoWrap = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  ${({ theme }) => theme.device.mobile} {
+  ${({ theme }) => theme.device.isMobile} {
     flex-direction: column;
   }
 `;
@@ -434,7 +434,7 @@ const PhotoDiv = styled.div`
 
 const PhotoWrap = styled.div`
   display: flex;
-  ${({ theme }) => theme.device.mobile} {
+  ${({ theme }) => theme.device.isMobile} {
     display: flex;
     flex-direction: column;
   }
@@ -463,7 +463,7 @@ const Img = styled.img`
     -ms-transform: scale(2.9);
     -o-transform: scale(2.9);
   }
-  ${({ theme }) => theme.device.mobile} {
+  ${({ theme }) => theme.device.isMobile} {
     display: flex;
     justify-content: center;
     align-items: center;
