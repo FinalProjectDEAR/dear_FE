@@ -3,11 +3,10 @@ import { produce } from "immer";
 import axios from "axios";
 
 import { apis } from "../../shared/apis";
+import { cookies } from "../../shared/cookie";
 
 import Swal from "sweetalert2";
 import "../../styles/libraryStyle/style.css";
-import image01 from "../../assets/image01.png";
-import image02 from "../../assets/image02.png";
 
 // actions
 const SET_VOTE = "GET_VOTE";
@@ -130,8 +129,9 @@ const getVoteDB = (type) => {
 const detailVoteDB = (postId) => {
   return async function (dispatch, getState, { history }) {
     try {
+      const memberId = cookies.get("memberId");
       const { data } = await axios.get(
-        process.env.REACT_APP_URL + `/anonypost/vote/${postId}`
+        process.env.REACT_APP_URL + `/anonypost/vote/${postId}?id=${memberId}`
       );
       dispatch(detailVote(data.data));
     } catch (err) {
