@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useInterval } from "../shared/hooks";
 
+//스타일
 import styled from "styled-components";
 import { Text, ColorBadge } from "../elements";
+
+import { useInterval } from "../shared/hooks";
 
 export default function Timer(props) {
   const { targetTime, timeOverSet, askContinue, wantMore } = props;
@@ -34,23 +36,78 @@ export default function Timer(props) {
   });
 
   return (
-    <TimerBox>
-      {remain ? (
-        <Text body margin="5px">
-          {parseInt(remain / 60)} : {remain % 60}
-        </Text>
-      ) : (
-        <Text body>대기 중...</Text>
-      )}
+    <React.Fragment>
+      <TimerBox>
+        {remain ? (
+          <Text title margin="-3px 2px">
+            {parseInt(remain / 60)} : {remain % 60}
+          </Text>
+        ) : (
+          <Text body margin="0px 3px">
+            대기 중
+          </Text>
+        )}
 
-      {/* <div style={{ display: "flex", justifyContent: "center" }}>
-        <ColorBadge size="6" bg="#948A9E" margin="0px 2px" />
-        <ColorBadge size="6" bg="#948A9E" margin="0px 2px" />
-        <ColorBadge size="6" bg="#948A9E" margin="0px 2px" />
-        <ColorBadge size="6" bg="#948A9E" margin="0px 2px" />
-        <ColorBadge size="6" bg="#948A9E" margin="0px 2px" />
-      </div> */}
-    </TimerBox>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {Array.from({ length: 5 }, (item, idx) => {
+            return (
+              <ColorBadge
+                key={idx}
+                size="5"
+                bg={
+                  idx < 5 - parseInt(wantMore.agree.length / 2)
+                    ? "#948A9E"
+                    : "#fff"
+                }
+                margin="0px 2px"
+                border="2px solid #948A9E"
+              />
+            );
+          })}
+        </div>
+      </TimerBox>
+      <MTimerBox>
+        {remain ? (
+          <Text sub margin="2px">
+            {parseInt(remain / 60)} : {remain % 60}
+          </Text>
+        ) : (
+          <Text sub margin="0px 3px">
+            대기 중
+          </Text>
+        )}
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {Array.from({ length: 5 }, (item, idx) => {
+            return (
+              <ColorBadge
+                key={idx}
+                size="4"
+                bg={
+                  idx < 5 - parseInt(wantMore.agree.length / 2)
+                    ? "#948A9E"
+                    : "#fff"
+                }
+                margin="0px 1px"
+                border="1px solid #948A9E"
+              />
+            );
+          })}
+        </div>
+      </MTimerBox>
+    </React.Fragment>
   );
 }
 
@@ -66,12 +123,22 @@ const TimerBox = styled.div`
   border-radius: 4px;
   padding: 4px;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenterColumn};
   @media ${({ theme }) => theme.device.mobile} {
-    width: 60px;
-    height: 24px;
+    display: none;
+  }
+`;
+
+const MTimerBox = styled.div`
+  display: none;
+  width: 60px;
+  height: 30px;
+  margin: 0px 11px;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+  padding: 5px 8px;
+  box-sizing: border-box;
+  @media ${({ theme }) => theme.device.mobile} {
+    ${({ theme }) => theme.common.flexCenterColumn};
   }
 `;

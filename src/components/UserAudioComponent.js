@@ -23,9 +23,7 @@ const OuterCircle = styled.div`
   width: var(--size);
   height: var(--size);
   border-radius: var(--size);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenter};
   border: 4px solid #948a9e;
   background-color: #fff;
   position: relative;
@@ -40,9 +38,7 @@ const InnerCircle = styled.div`
   width: var(--size);
   height: var(--size);
   border-radius: var(--size);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenter};
   background-color: ${(props) => props.color};
   position: absolute;
   left: 4px;
