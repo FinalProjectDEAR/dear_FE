@@ -9,7 +9,7 @@ import { ReactComponent as MobileListener } from "../assets/infoModal/listenerMo
 
 function ListenerInfo({ close }) {
   const Mobile = useMediaQuery({
-    query: "(max-width:767px)",
+    query: "(max-width:425px)",
   });
   return (
     <React.Fragment>

@@ -92,7 +92,7 @@ const TextWrapper = styled.div`
   width: 952px;
   height: 140px;
   margin: auto;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     width: 90%;
   }
 `;
@@ -105,7 +105,7 @@ const TextBox = styled.div`
   margin-left: 10px;
   size: 14px;
   line-height: 18px;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: none;
   }
 `;
@@ -123,7 +123,7 @@ const BtnWrapper = styled.div`
   flex: none;
   order: 1;
   flex-grow: 0;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     width: 100%;
     margin: auto;
     justify-content: center;

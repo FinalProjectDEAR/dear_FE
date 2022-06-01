@@ -10,7 +10,7 @@ import TimeCounting from "time-counting";
 
 const CounselHistory = (props) => {
   const Mobile = useMediaQuery({
-    query: "(max-width:767px)",
+    query: "(max-width:425px)",
   });
   //시간을 알아보자!
   const option = {
@@ -91,7 +91,7 @@ const CounselHistoryWrapper = styled.div`
     width: 200px;
     margin-left: 30px;
   }
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     width: 320px;
     padding-top: 0.1px;
     box-sizing: border-box;

@@ -9,7 +9,7 @@ import { useMediaQuery } from "react-responsive";
 
 function UnFollow(props) {
   const Mobile = useMediaQuery({
-    query: "(max-width:767px)",
+    query: "(max-width:425px)",
   });
 
   const dispatch = useDispatch();

@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
+import { useMediaQuery } from "react-responsive";
 import { Link } from "react-scroll";
 import { Button, Text, TextB } from "../elements";
 import { ReactComponent as All } from "../assets/postList/board-cate1.svg";
@@ -27,6 +28,10 @@ import Post from "../pages/Post";
 import Paginations from "../elements/Pagination";
 
 function PostList(props) {
+  const Mobile = useMediaQuery({
+    query: "(max-width:425px)",
+  });
+
   const params = useParams();
   const category = params.category;
 
@@ -108,25 +113,27 @@ function PostList(props) {
               <Blogging />
             </InfoBox>
           </InfoWrapper>
-          <MBtnWrapper>
-            <MBtnContainer>
-              <Button
-                size="regular"
-                primaryDefault
-                _onClick={gotoPost}
-                cursor="pointer"
-              >
-                <Text body4 color="#fff">
-                  상담신청하기
-                </Text>
-              </Button>
-              <Button size="small" secondaryDefault _onClick={gotoVote}>
-                <Text body4 color="#7A37BE" cursor="pointer">
-                  투표만들기
-                </Text>
-              </Button>
-            </MBtnContainer>
-          </MBtnWrapper>
+          {Mobile ? (
+            <MBtnWrapper>
+              <MBtnContainer>
+                <Button
+                  size="regular"
+                  primaryDefault
+                  _onClick={gotoPost}
+                  cursor="pointer"
+                >
+                  <Text body4 color="#fff">
+                    상담신청하기
+                  </Text>
+                </Button>
+                <Button size="small" secondaryDefault _onClick={gotoVote}>
+                  <Text body4 color="#7A37BE" cursor="pointer">
+                    투표만들기
+                  </Text>
+                </Button>
+              </MBtnContainer>
+            </MBtnWrapper>
+          ) : null}
           <VoteWrapper>
             <VoteList />
             <MobileVoteList />
@@ -387,50 +394,52 @@ const InfoWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin: auto;
-  max-width: 1030px;
-  width: 100%
+  width: 1030px;
   height: 150px;
   align-items: center;
   padding-top: 145px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 360px;
+  }
 `;
 
 const InfoContainer = styled.div`
-  max-width: 400px;
-  width: 100%;
+  width: 400px;
   height: 150px;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 360px;
     height: 190px;
     padding: 20px 0px 0px 20px;
-    margin: auto;
     box-sizing: border-box;
   }
 `;
 
 const InfoBox = styled.div`
   box-sizing: border-box;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: none;
   }
 `;
 
 const VoteWrapper = styled.div`
-  max-width: 1032px;
-  width: 100%;
+  width: 1032px;
+  padding-top: 151px;
   margin: 155px auto 200px;
   cursor: pointer;
   text-align: left;
-  padding-top: 151px;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 360px;
     padding-top: 100px;
   }
 `;
 
 const BoardWrapper = styled.div`
   margin: 30px auto;
-  max-width: 1032px;
+  width: 1032px;
   padding-top: 150px;
   box-sizing: border-box;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 360px;
     padding-top: 100px;
   }
 `;
@@ -438,9 +447,9 @@ const BoardWrapper = styled.div`
 const TitleWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  max-width: 1032px;
+  width: 1032px;
   padding-top: 36px;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     width: 360px;
   }
 `;
@@ -449,14 +458,14 @@ const CateGoryWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  max-width: 818px;
+  width: 818px;
   margin: auto;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 300px;
+    width: 360px;
     height: 180px;
     .mobile {
       display: flex;
@@ -466,14 +475,12 @@ const CateGoryWrapper = styled.div`
       gap: 30px;
     }
   }
-  @media ${({ theme }) => theme.device.web} {
-    .mobile {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      align-items: center;
-      width: 390px;
-    }
+  .mobile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 390px;
   }
 `;
 
@@ -512,7 +519,7 @@ const TableInfo = styled.div`
   width: 100%;
   height: 45px;
   border-bottom: 1px solid #666666;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: none;
   }
 `;
@@ -531,7 +538,7 @@ const BtnWrapper = styled.div`
   display: flex;
   justify-content: right;
   padding-top: 14px;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: none;
   }
 `;
@@ -542,7 +549,7 @@ const BtnContainer = styled.div`
   width: 290px;
   height: 40px;
   gap: 10px;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: none;
   }
 `;
@@ -551,11 +558,10 @@ const MBtnWrapper = styled.div`
   @media ${({ theme }) => theme.device.web} {
     display: none;
   }
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: flex;
     justify-content: left;
-    max-width: 390px;
-    width: 100%;
+    width: 370px;
     height: 80px;
     margin: auto;
     padding-left: 20px;
@@ -567,11 +573,12 @@ const MBtnContainer = styled.div`
   @media ${({ theme }) => theme.device.web} {
     display: none;
   }
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: flex;
     flex-direction: row;
     width: 290px;
     gap: 10px;
   }
 `;
+
 export default PostList;

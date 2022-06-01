@@ -9,7 +9,7 @@ import { ReactComponent as MobileTape } from "../assets/infoModal/TapeMobile.svg
 
 function TapeInfo({ closeTape }) {
   const Mobile = useMediaQuery({
-    query: "(max-width:767px)",
+    query: "(max-width:425px)",
   });
   return (
     <React.Fragment>
