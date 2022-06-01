@@ -3,6 +3,7 @@ import React from "react";
 //스타일
 import styled from "styled-components";
 import ReactPageScroller from "react-page-scroller";
+import { Link } from "react-scroll";
 //페이지
 import MainChat from "./MainChat";
 import MainRanking from "./MainRanking";
@@ -14,6 +15,10 @@ function Main() {
 
   const pageChange = (number) => {
     setCurrentPage(number);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   const beforePageChange = (number) => {};
@@ -59,14 +64,16 @@ const Wrapper = styled.div`
 `;
 
 const MobileWrapper = styled.div`
+  position: relative;
   display: none;
   @media ${({ theme }) => theme.device.isMobile} {
     display: block;
+    height: 100%;
   }
 `;
 
 const GoTop = styled.div`
-  position: absolute;
+  position: fixed;
   z-index: 10;
   bottom: 410px;
   left: 90%;
@@ -76,7 +83,8 @@ const GoTop = styled.div`
   background-color: transparent;
   cursor: pointer;
   @media ${({ theme }) => theme.device.isMobile} {
-    bottom: 200px;
+    /* display: none; */
+    bottom: 220px;
     left: 83%;
   }
 `;
