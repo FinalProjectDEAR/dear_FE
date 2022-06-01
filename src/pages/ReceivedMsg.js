@@ -10,6 +10,7 @@ import { Text, Button, TextB, Modal } from "../elements";
 import { CgClose } from "react-icons/cg";
 import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
+
 //시간알려주는패키지
 import TimeCounting from "time-counting";
 

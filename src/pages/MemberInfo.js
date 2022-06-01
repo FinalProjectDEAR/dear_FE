@@ -1,15 +1,17 @@
 import React from "react";
+
+//리덕스
 import { useSelector, useDispatch } from "react-redux";
 import { history } from "../redux/configureStore";
-
 import { actionCreators as userActions } from "../redux/modules/user";
-import { nicknameCheck } from "../shared/Check";
-
-import { Text, TextB, Input, Button, ColorBadge, Modal } from "../elements";
-import arrowBack from "../assets/arrow_back.png";
+//스타일
 import styled from "styled-components";
+import { Text, TextB, Input, Button, ColorBadge, Modal } from "../elements";
+import { ReactComponent as Arrow } from "../assets/main/arrow.svg";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
+
+import { nicknameCheck } from "../shared/Check";
 
 function MemberInfo() {
   const dispatch = useDispatch();
@@ -265,8 +267,7 @@ function MemberInfo() {
             {isNext === 2 ? (
               <InfoWrapper>
                 <ArrowLine>
-                  <ArrowBack
-                    src={arrowBack}
+                  <Arrow
                     onClick={() => {
                       setIsNext(1);
                     }}
@@ -633,26 +634,28 @@ export default MemberInfo;
 const InfoWrapper = styled.div`
   width: 550px;
   height: 614px;
-  border-radius: 20px;
-  padding: 70px 40px;
   box-sizing: border-box;
+  padding: 70px 40px;
   background-color: #fff;
+  border-radius: 20px;
   @media ${({ theme }) => theme.device.mobile} {
     width: 360px;
     height: 834px;
-    padding: 40px 0px;
+    padding: 45px 0px;
+    overflow: scroll;
     border-radius: 0px;
   }
 `;
 
 const InfoContainer = styled.div`
-  width: 360px;
-  margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 360px;
+  margin: auto;
   @media ${({ theme }) => theme.device.mobile} {
     height: 676px;
+    overflow: scroll;
   }
 `;
 
@@ -662,19 +665,12 @@ const ArrowLine = styled.div`
   @media ${({ theme }) => theme.device.mobile} {
     display: flex;
     justify-content: flex-start;
-    margin: -10px 20px;
+    margin: 20px 20px;
   }
 `;
 
-const ArrowBack = styled.img`
-  width: 24px;
-  cursor: pointer;
-`;
-
 const TitleBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenter};
   @media ${({ theme }) => theme.device.mobile} {
     flex-direction: column;
     width: 200px;
@@ -684,12 +680,12 @@ const TitleBox = styled.div`
 `;
 
 const LineBox = styled.div`
-  margin-top: 5px;
-  margin-left: 15px;
-  width: 480px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  width: 480px;
+  margin-top: 5px;
+  margin-left: 15px;
   @media ${({ theme }) => theme.device.mobile} {
     margin-top: 15px;
     width: 360px;
@@ -697,47 +693,28 @@ const LineBox = styled.div`
   }
 `;
 
-// const AgeLineBox = style.div`
-
-// `;
-
-// const SecondLine = styled.div`
-//   padding-left: 110px;
-//   margin-bottom: 10px;
-//   width: 400px;
-//   display: flex;
-//   justify-content: flex-start;
-//   align-items: flex-start;
-//   @media ${({ theme }) => theme.device.mobile} {
-//     width: 360px;
-//     padding-left: 150px;
-//   }
-// `;
-
 const Preview = styled.div`
   width: 280px;
   height: 92px;
   margin: 15px 0px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenter};
   background: #f8f8f8;
   border-radius: 10px;
 `;
 
 const NickBox = styled.div`
-  width: 280px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 280px;
 `;
 
 const ColorBox = styled.div`
-  margin: 10px 0px;
   display: grid;
   grid-template-columns: repeat(8, 30px);
   flex-direction: column;
   justify-content: space-between;
+  margin: 10px 0px;
 `;
 
 const ButtonBox = styled.div`
@@ -775,10 +752,10 @@ const InputBox = styled.div`
 `;
 
 const GridInputBox = styled.div`
-  width: 390px;
   display: grid;
   grid-template-columns: repeat(3, 130px);
   flex-direction: column;
+  width: 390px;
   @media ${({ theme }) => theme.device.mobile} {
     grid-template-columns: repeat(2, 130px);
     padding-left: 20px;
@@ -791,9 +768,7 @@ const SubmitBox = styled.div`
   height: 36px;
   left: 150px;
   top: 540px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  ${({ theme }) => theme.common.flexCenter};
   @media ${({ theme }) => theme.device.mobile} {
     display: none;
   }
@@ -804,16 +779,12 @@ const MobileButton = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
   width: 360px;
   height: 48px;
-
   background: #7a37be;
   border-radius: 0px;
-
   @media ${({ theme }) => theme.device.mobile} {
     display: flex;
-    position: fixed;
-    bottom: 0;
+    margin-top: 20px;
   }
 `;

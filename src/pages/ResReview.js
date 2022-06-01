@@ -1,15 +1,17 @@
 import React from "react";
-import { Text, TextB, Input, Button } from "../elements/index";
-import styled from "styled-components";
-import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
-import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
-import arrowBack from "../assets/arrow_back.png";
-import Swal from "sweetalert2";
-import "../styles/libraryStyle/style.css";
 
+//리덕스
 import { history } from "../redux/configureStore";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators } from "../redux/modules/review";
+//스타일
+import styled from "styled-components";
+import { Text, TextB, Input, Button } from "../elements/index";
+import { ReactComponent as Arrow } from "../assets/main/arrow.svg";
+import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
+import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
+import Swal from "sweetalert2";
+import "../styles/libraryStyle/style.css";
 
 //리스너가 작성하는 상담후기 페이지
 function ResReview(props) {
@@ -102,8 +104,7 @@ function ResReview(props) {
       <ReviewWrapper>
         <ReviewContainer>
           <ArrowLine>
-            <ArrowBack
-              src={arrowBack}
+            <Arrow
               onClick={() => {
                 history.replace("/");
               }}
@@ -307,9 +308,7 @@ const LikeContainer = styled.div`
 `;
 
 const ThumbContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  ${({ theme }) => theme.common.flexCenter};
   width: 90px;
   height: 30px;
   @media ${({ theme }) => theme.device.mobile} {
@@ -320,9 +319,7 @@ const ThumbContainer = styled.div`
 `;
 
 const ThumbUpBtn = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenter};
   width: 30px;
   height: 30px;
   box-sizing: border-box;
@@ -338,9 +335,7 @@ const ThumbUpBtn = styled.div`
 `;
 
 const ThumbDownBtn = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenter};
   border: 1px solid #e6e6e6;
   cursor: pointer;
   width: 30px;

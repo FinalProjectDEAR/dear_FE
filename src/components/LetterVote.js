@@ -1,18 +1,17 @@
 import React from "react";
-import { Text, Button } from "../elements";
-import { useSelector, useDispatch } from "react-redux";
-
-import { history } from "../redux/configureStore";
-
-import { actionCreators as voteActions } from "../redux/modules/vote";
+//라우트
 import { useParams } from "react-router-dom";
-
-// import assets
-import VoteResult from "./VoteResult";
+//리덕스
+import { useSelector, useDispatch } from "react-redux";
+import { history } from "../redux/configureStore";
+import { actionCreators as voteActions } from "../redux/modules/vote";
+//스타일
 import styled from "styled-components";
-
+import { Text, Button } from "../elements";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
+//페이지
+import VoteResult from "./VoteResult";
 
 function LetterVote({ voteInfo }) {
   const dispatch = useDispatch();
@@ -24,6 +23,8 @@ function LetterVote({ voteInfo }) {
     dispatch(voteActions.detailVoteDB(postId));
     showSelection();
   }, [voteInfo.vote[0].selected]);
+
+  console.log(voteInfo);
 
   const [vote, setVote] = React.useState("");
   const [leftSelected, setLeftSelected] = React.useState(false);
@@ -146,16 +147,12 @@ function LetterVote({ voteInfo }) {
 export default LetterVote;
 
 const VoteWrapper = styled.div`
+  ${({ theme }) => theme.common.flexCenterColumn};
   width: 952px;
   height: 240px;
-  display: flex;
   margin: auto;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
   padding: 60px 0px;
-
+  box-sizing: border-box;
   background: #ffffff;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 10px;
@@ -167,13 +164,11 @@ const VoteWrapper = styled.div`
 `;
 
 const CheckBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  margin: 30px;
+  ${({ theme }) => theme.common.flexCenter};
   width: 792px;
   height: 54px;
+  margin: 30px;
+  box-sizing: border-box;
   @media ${({ theme }) => theme.device.mobile} {
     flex-direction: column;
     width: 328px;
@@ -182,15 +177,12 @@ const CheckBox = styled.div`
 `;
 
 const Vote = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 15px 0px;
-  margin: 10px 0px;
+  ${({ theme }) => theme.common.flexCenter};
   width: 360px;
   height: 54px;
   box-sizing: border-box;
+  padding: 15px 0px;
+  margin: 10px 0px;
   background-color: ${(props) => props.bg};
   border: ${(props) => props.border};
   border-radius: 30px;
@@ -203,8 +195,8 @@ const Vote = styled.div`
 `;
 
 const Font = styled.p`
-  color: ${(props) => props.color};
   margin: 0px;
+  color: ${(props) => props.color};
   font-weight: ${(props) => props.weight};
   font-size: 16px;
   line-height: 24px;
@@ -212,10 +204,7 @@ const Font = styled.p`
 `;
 
 const BottomBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenterColumn};
   width: 792px;
   height: 66px;
   @media ${({ theme }) => theme.device.mobile} {

@@ -14,10 +14,7 @@ const EmptyChat = () => {
   );
 };
 const EmptyWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenterColumn};
   /* border: 1px solid red; */
   height: 400px;
 `;

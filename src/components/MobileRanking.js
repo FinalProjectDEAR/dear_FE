@@ -1,17 +1,18 @@
 import React from "react";
+
+//리덕스
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as mainActions } from "../redux/modules/main";
-
+//스타일
 import styled from "styled-components";
-
 import { Text } from "../elements";
-import RankingCard from "./RankingCard";
-
 //Carousel library
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../styles/libraryStyle/style.css";
+//컴포넌트
+import RankingCard from "./RankingCard";
 
 function MobileRanking() {
   const dispatch = useDispatch();
@@ -67,10 +68,10 @@ function MobileRanking() {
 export default MobileRanking;
 
 const RankingWrapper = styled.div`
-  box-sizing: border-box;
+  display: none;
   width: 340px;
   height: 300px;
-  display: none;
+  box-sizing: border-box;
   overflow: hidden;
 
   @media ${({ theme }) => theme.device.mobile} {
@@ -85,13 +86,13 @@ const RankingContainer = styled.div`
 `;
 
 const TitleBox = styled.div`
-  width: 330px;
   display: flex;
   justify-content: flex-start;
+  width: 330px;
 `;
 
 const LineBox = styled.div`
-  width: 328px;
   display: flex;
   justify-content: flex-start;
+  width: 328px;
 `;

@@ -1,12 +1,11 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { history } from "../../redux/configureStore";
 
-import { actionCreators } from "../../redux/modules/user";
-
+//리덕스
+import { useSelector } from "react-redux";
+//스타일
 import styled from "styled-components";
 import { Text, TextB, Button } from "../../elements";
-
+//페이지
 import ResReview from "../../pages/ResReview";
 import ReqReview from "../../pages/ReqReview";
 
@@ -17,10 +16,6 @@ function TimeOver(props) {
 
   const role = useSelector((state) => state.chat.roomAuthInfo.role);
   const chatInfo = useSelector((state) => state.chat.chatInfo);
-
-  React.useEffect(() => {
-    informClose();
-  }, []);
 
   return (
     <React.Fragment>
@@ -38,6 +33,7 @@ function TimeOver(props) {
                 setView(false);
                 setReview(true);
                 leaveSession();
+                informClose();
               }}
             >
               <Text margin="0px" color="#fff" body4 cursor="pointer">
@@ -85,9 +81,7 @@ const CloseContainer = styled.div`
 `;
 
 const LineBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenter};
   @media ${({ theme }) => theme.device.mobile} {
     margin: auto;
   }
@@ -97,7 +91,5 @@ const BottomBox = styled.div`
   height: 36px;
   margin: 15px auto;
   padding: 0px 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenter};
 `;

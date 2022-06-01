@@ -52,12 +52,12 @@ export default ChatIntro;
 
 const Wrapper = styled.div`
   position: relative;
+  ${({ theme }) => theme.common.flexCenter};
   width: 550px;
   height: 700px;
   padding-top: 74px;
   padding-bottom: 64px;
   box-sizing: border-box;
-  ${({ theme }) => theme.common.flexCenter};
   background-color: #fff;
   border-radius: 20px;
   @media ${({ theme }) => theme.device.mobile} {
@@ -94,10 +94,10 @@ const ImageM = styled.div`
 
 const InputWrap = styled.div`
   ${({ theme }) => theme.common.flexCenter};
-  word-break: keep-all;
   width: 556px;
   height: 24px;
   margin: 10px auto;
+  word-break: keep-all;
   @media ${({ theme }) => theme.device.mobile} {
     width: 262px;
     height: 32px;

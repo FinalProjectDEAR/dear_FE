@@ -1,14 +1,15 @@
 import React, { useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Text, TextB, Button, Modal } from "../elements";
-import { history } from "../redux/configureStore";
 
+//리덕스
 import { actionCreators as chatActions } from "../redux/modules/chat";
-
+import { history } from "../redux/configureStore";
+import { useDispatch } from "react-redux";
+//스타일
 import styled from "styled-components";
+import { Text, TextB, Button, Modal } from "../elements";
+import { ReactComponent as Arrow } from "../assets/main/arrow.svg";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
-import arrowBack from "../assets/arrow_back.png";
 
 function ResChatStart() {
   const [audioPermit, setAudioPermit] = React.useState("");
@@ -69,8 +70,7 @@ function ResChatStart() {
           <React.Fragment>
             <ResContainer>
               <ArrowLine>
-                <ArrowBack
-                  src={arrowBack}
+                <Arrow
                   onClick={() => {
                     history.goBack();
                   }}
@@ -233,8 +233,8 @@ export default ResChatStart;
 const ResContainer = styled.div`
   width: 840px;
   height: 290px;
-  padding: 60px 40px;
   box-sizing: border-box;
+  padding: 60px 40px;
   background: #ffffff;
   border-radius: 20px;
   @media ${({ theme }) => theme.device.mobile} {
@@ -311,16 +311,16 @@ const CheckBox = styled.div`
 `;
 
 const CategoryBox = styled.div`
-  width: 428px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 428px;
   padding: 18px 0px;
   @media ${({ theme }) => theme.device.mobile} {
-    width: 320px;
-    height: 40px;
     flex-wrap: wrap;
     justify-content: flex-start;
+    width: 320px;
+    height: 40px;
     padding: 0px;
     margin-bottom: 20px;
   }
@@ -341,13 +341,10 @@ const MobileButton = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
   width: 360px;
   height: 48px;
-
   background: #7a37be;
   border-radius: 0px;
-
   @media ${({ theme }) => theme.device.mobile} {
     display: flex;
     position: fixed;
