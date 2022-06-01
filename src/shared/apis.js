@@ -57,21 +57,19 @@ export const apis = {
   post: (payload) => api.post("/anonypost/board", payload),
   edit: (postId, payload) => api.put(`/anonypost/board/${postId}`, payload),
   delete: (postId) => api.delete(`/anonypost/board/${postId}`),
-  like: (postId, likeId) =>
-    api.post(`/anonypost/board/${postId}/postLikes`, { likeId }),
+  like: (postId, likes) =>
+    api.post(`/anonypost/board/${postId}/postLikes?likes=${likes}`),
 
   // comment
-  addComment: (postId) => api.get(`/anonypost/${postId}/comment`),
-  postComment: (comment, postId) =>
-    api.post(`/anonypost/board/${postId}/comment`, { comment, postId }),
-  putComment: (postId, commentId) =>
-    api.put(`/anonypost/board/${postId}/comment/${commentId}`),
+  getComment: (postId) => api.get(`/anonypost/${postId}/comment`),
+  postComment: (postId, payload) =>
+    api.post(`anonypost/board/${postId}/comment`, payload),
+  putComment: (postId, commentId, comment) =>
+    api.put(`anonypost/board/${postId}/comment/${commentId}`, { comment }),
   deleteComment: (postId, commentId) =>
-    api.delete(`/anonypost/board/${postId}/comment/${commentId}`),
-  commentLike: (postId, commentId, likeId) =>
-    api.post(`/anonypost/board/${postId}/commentLikes/${commentId}`, {
-      likeId,
-    }),
+    api.delete(`anonypost/board/${postId}/comment/${commentId}`),
+  commentLike: (postId, commentId) =>
+    api.post(`anonypost/board/${postId}/commentLikes/${commentId}`),
 
   //vote
   getVote: (type) => api.get(`/anonypost?type=${type}`),
@@ -94,4 +92,21 @@ export const apis = {
 
   //main
   getTape: () => api.get(`/user/info/reward`),
+
+  //message
+  getMsg: (page) => api.get(`/user/info/message/${page}`),
+  getDetailMsg: (messageId) => api.get(`/message/detail/${messageId}`),
+  addMsg: (message, resUserId) =>
+    api.post(`/message/request`, { message, resUserId }),
+
+  //myPage
+  getPost: (page) => api.get(`/user/info/board/${page}`),
+  getFollow: (page) => api.get(`/user/info/follow/${page}`),
+  getChatList: () => api.get("/user/info/chatHistory"),
+  getMember: () => api.get("/user/info/profile"),
+  putInfo: (memberInfo) => api.post("/user/info", memberInfo),
+
+  //noti
+  getAlarm: () => api.get("/alarm/all"),
+  getAlarmCnt: () => api.get("/alarm"),
 };
