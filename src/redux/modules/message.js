@@ -1,6 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
-import { api } from "../../shared/apis";
+import { api, apis } from "../../shared/apis";
 import Swal from "sweetalert2";
 import "../../styles/libraryStyle/style.css";
 
@@ -33,46 +33,40 @@ const msgPage = createAction(MSG_PAGE, (page) => ({ page }));
 const resetMsg = createAction(RESET_MSG, () => ({}));
 
 //미듈웨어
+//쪽지리스트받기
 const getMessageDB = (page) => {
-  return function (dispatch, getState, { history }) {
+  return async function (dispatch, getState, { history }) {
     try {
-      api.get(`/user/info/message/${page}`, {}).then((res) => {
-        dispatch(getMessage(res.data));
-      });
+      const { data } = await apis.getMsg(page);
+      dispatch(getMessage(data));
     } catch (err) {
       console.log(err);
       Swal.fire("쪽지 리스트를 가져올 수 없습니다.");
     }
   };
 };
-
+//쪽지자세히보기
 const getDetailMsgDB = (messageId) => {
-  return function (dispatch, getState, { history }) {
+  return async function (dispatch, getState, { history }) {
     try {
-      api.get(`/message/detail/${messageId}`, {}).then((res) => {
-        dispatch(getDetailMessage(res.data));
-      });
+      const { data } = await apis.getDetailMsg(messageId);
+      dispatch(getDetailMessage(data));
     } catch (err) {
       console.log(err);
       Swal.fire("쪽지를 가져올 수 없습니다.");
     }
   };
 };
-
-const addMessageDB = (message, resUser) => {
-  return function (dispatch, getState, { history }) {
+//쪽지보내기
+const addMessageDB = (message, resUserId) => {
+  console.log(message, resUserId);
+  return async function (dispatch, getState, { history }) {
     try {
-      api
-        .post(`/message/request`, {
-          message: message,
-          resUserId: resUser,
-        })
-        .then((res) => {
-          history.push("/myPage");
-        });
+      const { data } = await apis.addMsg(message, resUserId);
+      history.push("/myPage");
     } catch (err) {
       console.log(err);
-      Swal.fire("댓글 추가 실패, 다시 시도해 주세요.");
+      Swal.fire("쪽지보내기에 실패했어요..");
     }
   };
 };

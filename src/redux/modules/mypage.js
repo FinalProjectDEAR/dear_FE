@@ -1,6 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
-import { api } from "../../shared/apis";
+import { apis } from "../../shared/apis";
 
 //액션
 const GET_POST_LIST = "GET_POST_LIST";
@@ -37,11 +37,10 @@ const resetPage = createAction(RESET_PAGE, () => ({}));
 
 //내가 작성한 글 가져오기
 const getPostListDB = (page) => {
-  return function (dispatch, getState, { history }) {
+  return async function (dispatch, getState, { history }) {
     try {
-      api.get(`/user/info/board/${page}`, {}).then((res) => {
-        dispatch(getPostList(res.data.data));
-      });
+      const { data } = await apis.getPost(page);
+      dispatch(getPostList(data.data));
     } catch (err) {
       console.log(err);
     }
@@ -49,12 +48,10 @@ const getPostListDB = (page) => {
 };
 //팔로우한 사람 가져오기
 const getFollowDB = (page) => {
-  // console.log(page);
-  return function (dispatch, getState, { history }) {
+  return async function (dispatch, getState, { history }) {
     try {
-      api.get(`/user/info/follow/${page}`, {}).then((res) => {
-        dispatch(getFollow(res.data.data));
-      });
+      const { data } = await apis.getFollow(page);
+      dispatch(getFollow(data.data));
     } catch (err) {
       console.log(err);
     }
@@ -62,11 +59,10 @@ const getFollowDB = (page) => {
 };
 //상담 히스토리 가져오기
 const getChatDB = () => {
-  return function (dispatch, getState, { history }) {
+  return async function (dispatch, getState, { history }) {
     try {
-      api.get("/user/info/chatHistory", {}).then((res) => {
-        dispatch(getChat(res.data.data));
-      });
+      const { data } = await apis.getChatList();
+      dispatch(getChat(data.data));
     } catch (err) {
       console.log(err);
     }
@@ -74,11 +70,10 @@ const getChatDB = () => {
 };
 //멤버 인포가져오기
 const getInfoDB = () => {
-  return function (dispatch, getState, { history }) {
+  return async function (dispatch, getState, { history }) {
     try {
-      api.get("/user/info/profile", {}).then((res) => {
-        dispatch(getInfo(res.data.data));
-      });
+      const { data } = await apis.getMember();
+      dispatch(getInfo(data.data));
     } catch (err) {
       console.log(err);
     }
@@ -86,22 +81,19 @@ const getInfoDB = () => {
 };
 //멤버인포 수정하기
 const addInfoDB = (memberInfo) => {
-  return function (dispatch, getState, { history }) {
+  return async function (dispatch, getState, { history }) {
     try {
-      api
-        .post("/user/info", {
-          age: memberInfo.age,
-          color: memberInfo.color,
-          dating: memberInfo.dating,
-          lovePeriod: memberInfo.lovePeriod,
-          loveType: memberInfo.loveType,
-          nickname: memberInfo.nickname,
-          gender: memberInfo.gender,
-        })
-        .then((res) => {
-          dispatch(addInfo(res.data.data));
-          history.push("/myPage");
-        });
+      const { data } = await apis.putInfo({
+        age: memberInfo.age,
+        color: memberInfo.color,
+        dating: memberInfo.dating,
+        lovePeriod: memberInfo.lovePeriod,
+        loveType: memberInfo.loveType,
+        nickname: memberInfo.nickname,
+        gender: memberInfo.gender,
+      });
+      dispatch(addInfo(data.data));
+      history.push("/myPage");
     } catch (err) {
       console.log(err);
     }

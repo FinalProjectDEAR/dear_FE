@@ -39,7 +39,9 @@ const CommentWrite = (props) => {
       return;
     }
     dispatch(
-      actionCreators.addCommentDB({ comment: { comment } }, props.postId)
+      actionCreators.addCommentDB(parseInt(props.postId), {
+        comment: { comment },
+      })
     );
     //버튼 누르면 인풋에 값 날리기
     setComment("");

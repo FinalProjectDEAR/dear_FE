@@ -1,6 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
-import { api } from "../../shared/apis";
+import { apis } from "../../shared/apis";
 import Swal from "sweetalert2";
 import "../../styles/libraryStyle/style.css";
 
@@ -20,11 +20,10 @@ const getNotiCnt = createAction(GET_NOTI_CNT, (alarm) => ({ alarm }));
 
 //알람버튼 눌렀을 때 겟
 const getNotiDB = () => {
-  return function (dispatch, getState, { history }) {
+  return async function (dispatch, getState, { history }) {
     try {
-      api.get("/alarm/all", {}).then((res) => {
-        dispatch(getNoti(res.data.data));
-      });
+      const { data } = await apis.getAlarm();
+      dispatch(getNoti(data.data));
     } catch (err) {
       console.log(err);
       Swal.fire("알림정보를 가져올 수 없습니다.");
@@ -33,11 +32,10 @@ const getNotiDB = () => {
 };
 //로그인 시 모든 페이지에서 겟
 const getNotiCntDB = () => {
-  return function (dispatch, getState, { history }) {
+  return async function (dispatch, getState, { history }) {
     try {
-      api.get("/alarm", {}).then((res) => {
-        dispatch(getNotiCnt(res.data.data.unReadAlarmNum));
-      });
+      const { data } = await apis.getAlarmCnt();
+      dispatch(getNotiCnt(data.data.unReadAlarmNum));
     } catch (err) {
       console.log(err);
       Swal.fire("알림정보를 가져올 수 없습니다.");

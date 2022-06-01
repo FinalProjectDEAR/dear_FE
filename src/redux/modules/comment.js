@@ -1,6 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
-import { api } from "../../shared/apis";
+import { apis } from "../../shared/apis";
 import axios from "axios";
 import Swal from "sweetalert2";
 import "../../styles/libraryStyle/style.css";
@@ -43,7 +43,6 @@ const resetComment = createAction(RESET_COMMENT, () => ({}));
 //미듈웨어
 //서버에서 댓글 가져오기
 const getCommentDB = (postId, page) => {
-  // console.log(postId);
   return function (dispatch, getState, { history }) {
     try {
       axios
@@ -62,30 +61,25 @@ const getCommentDB = (postId, page) => {
 };
 
 //서버에게 댓글 보내기
-const addCommentDB = (comment, postId) => {
-  return function (dispatch, getState, { history }) {
+const addCommentDB = (postId, comment) => {
+  return async function (dispatch, getState, { history }) {
     try {
-      api
-        .post(`anonypost/board/${postId}/comment`, comment.comment)
-        .then((res) => {
-          dispatch(addComment(res.data.data));
-          dispatch(getCommentDB(postId, 1));
-        });
+      const { data } = await apis.postComment(postId, comment.comment);
+      dispatch(addComment(data.data.data));
+      dispatch(getCommentDB(postId, 1));
     } catch (err) {
       console.log(err);
       Swal.fire("댓글 추가 실패, 다시 시도해 주세요.");
     }
   };
 };
+
 //댓글 수정하기
-const editCommentDB = (comment_id, comment, postId) => {
-  return function (dispatch, getState, { history }) {
+const editCommentDB = (postId, commentId, comment) => {
+  return async function (dispatch, getState, { history }) {
     try {
-      api
-        .put(`anonypost/board/${postId}/comment/${comment_id}`, { comment })
-        .then((res) => {
-          dispatch(editComment(comment_id, comment));
-        });
+      const { data } = await apis.putComment(postId, commentId, comment);
+      dispatch(editComment(commentId, comment));
     } catch (err) {
       console.log(err);
       Swal.fire("본인 댓글만 수정이 가능합니다!");
@@ -94,16 +88,14 @@ const editCommentDB = (comment_id, comment, postId) => {
 };
 //댓글삭제하기
 const delCommentDB = (payload) => {
-  return function (dispatch, getState, { history }) {
+  return async function (dispatch, getState, { history }) {
     try {
-      api
-        .delete(
-          `anonypost/board/${payload.postId}/comment/${payload.comment_id}`
-        )
-        .then(() => {
-          dispatch(delComment(payload.comment_id));
-          dispatch(getCommentDB(payload.postId, 1));
-        });
+      const { data } = await apis.deleteComment(
+        payload.postId,
+        payload.commentId
+      );
+      dispatch(delComment(payload.commentId));
+      dispatch(getCommentDB(payload.postId, 1));
     } catch (err) {
       console.log(err);
     }
@@ -111,15 +103,12 @@ const delCommentDB = (payload) => {
 };
 //댓글 좋아요
 const likeCommentDB = (postId, commentId) => {
-  return function (dispatch, getState, { history }) {
+  return async function (dispatch, getState, { history }) {
     try {
-      api
-        .post(`anonypost/board/${postId}/commentLikes/${commentId}`, {})
-        .then((res) => {
-          dispatch(likeComment(commentId, res.data.data.likes));
-        });
+      const { data } = await apis.commentLike(postId, commentId);
+      dispatch(likeComment(commentId, data.data.likes));
     } catch (err) {
-      console.loe(err);
+      console.log(err);
     }
   };
 };
