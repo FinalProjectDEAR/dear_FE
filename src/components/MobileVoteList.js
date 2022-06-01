@@ -1,20 +1,17 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { actionCreators as mainActions } from "../redux/modules/main";
-import { actionCreators } from "../redux/modules/post";
-import { history } from "../redux/configureStore";
 
+//리덕스
+import { useSelector } from "react-redux";
+//스타일
 import { Text } from "../elements";
 import styled from "styled-components";
 import "../styles/libraryStyle/style.css";
-
+//페이지
 import VoteCard from "./VoteCard";
-
 //Carousel library
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
 //스크롤
 import { Link } from "react-scroll";
 
@@ -59,9 +56,9 @@ function MobileVoteList() {
 export default MobileVoteList;
 
 const MobileRanking = styled.div`
+  display: none;
   width: 360px;
   height: 250px;
-  display: none;
   overflow: hidden;
   ::-webkit-scrollbar {
     display: none !important; /* Chrome, Safari, and Opera */
@@ -72,9 +69,9 @@ const MobileRanking = styled.div`
 `;
 
 const RankingContainer = styled.div`
+  display: none;
   width: 960px;
   margin: 0px 5px;
-  display: none;
   @media ${({ theme }) => theme.device.mobile} {
     display: block;
   }

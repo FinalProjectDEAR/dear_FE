@@ -43,7 +43,7 @@ export default function Timer(props) {
             {parseInt(remain / 60)} : {remain % 60}
           </Text>
         ) : (
-          <Text body margin="0px 3px">
+          <Text body margin="5px 3px">
             대기 중
           </Text>
         )}
@@ -118,11 +118,11 @@ Timer.defaultProps = {
 const TimerBox = styled.div`
   width: 110px;
   height: 44px;
+  box-sizing: border-box;
   margin: 0px 10px;
+  padding: 4px;
   background-color: #f8f8f8;
   border-radius: 4px;
-  padding: 4px;
-  box-sizing: border-box;
   ${({ theme }) => theme.common.flexCenterColumn};
   @media ${({ theme }) => theme.device.mobile} {
     display: none;
@@ -133,11 +133,11 @@ const MTimerBox = styled.div`
   display: none;
   width: 60px;
   height: 30px;
+  box-sizing: border-box;
   margin: 0px 11px;
+  padding: 5px 8px;
   background-color: #f8f8f8;
   border-radius: 4px;
-  padding: 5px 8px;
-  box-sizing: border-box;
   @media ${({ theme }) => theme.device.mobile} {
     ${({ theme }) => theme.common.flexCenterColumn};
   }

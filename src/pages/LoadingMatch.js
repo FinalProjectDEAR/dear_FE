@@ -1,8 +1,9 @@
 import React from "react";
+
+//스타일
 import styled, { keyframes } from "styled-components";
 import { Text, Button, Modal } from "../elements";
-import { history } from "../redux/configureStore";
-
+//페이지
 import NoMatch from "../components/alert/NoMatch";
 
 function LoadingMatch({ informClose, leaveSession }) {
@@ -22,13 +23,6 @@ function LoadingMatch({ informClose, leaveSession }) {
     leaveSession();
     informClose();
   };
-
-  //뒤로가기 시도시 방삭제
-  React.useEffect(() => {
-    window.onpopstate = () => {
-      informClose();
-    };
-  });
 
   //유저 매칭 대기시간
   React.useEffect(() => {
@@ -75,31 +69,22 @@ const Background = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  ${({ theme }) => theme.common.flexCenter};
   width: 100%;
   height: 100%;
-  z-index: 100;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   background: #bb9ed8;
+  z-index: 100;
 `;
 
 const LoadWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenterColumn};
   width: 300px;
   margin: auto;
 `;
 
 const LoaderBox = styled.div`
+  ${({ theme }) => theme.common.flexCenter};
   width: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 const Loader = styled.div`

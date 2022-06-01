@@ -1,11 +1,11 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { history } from "../../redux/configureStore";
-
+//리덕스
+import { useDispatch } from "react-redux";
+import { actionCreators as voteActions } from "../../redux/modules/vote";
+//스타일
 import styled from "styled-components";
 import { Text, TextB, Button } from "../../elements";
-
-import { actionCreators as voteActions } from "../../redux/modules/vote";
+//페이지
 
 function VoteDel(props) {
   const dispatch = useDispatch();
@@ -60,16 +60,12 @@ const CloseContainer = styled.div`
 `;
 
 const LineBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenter};
 `;
 
 const BottomBox = styled.div`
   height: 36px;
   margin: 15px auto;
   padding: 0px 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenter};
 `;

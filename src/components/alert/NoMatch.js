@@ -1,8 +1,8 @@
 import React from "react";
-import styled from "styled-components";
 
+//스타일
+import styled from "styled-components";
 import { Text, TextB, Button } from "../../elements";
-import { history } from "../../redux/configureStore";
 
 function NoMatch(props) {
   return (
@@ -34,22 +34,20 @@ export default NoMatch;
 const CloseContainer = styled.div`
   width: 400px;
   height: 200px;
-  padding: 35px 0px;
   box-sizing: border-box;
+  padding: 35px 0px;
   background: #ffffff;
   border-radius: 20px;
   @media ${({ theme }) => theme.device.mobile} {
-    padding-top: 15px;
     width: 320px;
     height: 146px;
+    padding-top: 15px;
     border-radius: 10px;
   }
 `;
 
 const LineBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenter};
   border-radius: 20px;
   @media ${({ theme }) => theme.device.mobile} {
     margin: auto;
@@ -60,7 +58,5 @@ const BottomBox = styled.div`
   height: 36px;
   margin: 15px auto;
   padding: 0px 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenter};
 `;

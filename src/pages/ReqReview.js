@@ -1,21 +1,20 @@
 import React from "react";
-import { Text, TextB, Input, Button, Modal } from "../elements/index";
-import styled from "styled-components";
-import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
-import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
-import Swal from "sweetalert2";
-import "../styles/libraryStyle/style.css";
-import help from "../assets/help.png";
-import arrowBack from "../assets/arrow_back.png";
-import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
-
-import ZzimInfo from "../components/ZzimInfo";
-
+//리덕스
 import { history } from "../redux/configureStore";
 import { useDispatch } from "react-redux";
 import { actionCreators } from "../redux/modules/review";
+//스타일
+import styled from "styled-components";
+import { Text, TextB, Input, Button, Modal } from "../elements/index";
+import { ReactComponent as Arrow } from "../assets/main/arrow.svg";
+import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
+import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
+import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
+import Swal from "sweetalert2";
+import "../styles/libraryStyle/style.css";
+//컴포넌트
+import ZzimInfo from "../components/ZzimInfo";
 
 //고민러가 작성하는 상담후기 페이지
 function ReqReview(props) {
@@ -175,8 +174,7 @@ function ReqReview(props) {
       <ReviewWrapper>
         <ReviewContainer>
           <ArrowLine>
-            <ArrowBack
-              src={arrowBack}
+            <Arrow
               onClick={() => {
                 history.goBack();
               }}
@@ -407,9 +405,7 @@ const LikeContainer = styled.div`
 `;
 
 const ThumbContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  ${({ theme }) => theme.common.flexCenter};
   width: 90px;
   height: 30px;
   @media ${({ theme }) => theme.device.mobile} {
@@ -420,9 +416,7 @@ const ThumbContainer = styled.div`
 `;
 
 const ThumbUpBtn = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenter};
   width: 30px;
   height: 30px;
   box-sizing: border-box;
@@ -438,9 +432,7 @@ const ThumbUpBtn = styled.div`
 `;
 
 const ThumbDownBtn = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenter};
   border: 1px solid #e6e6e6;
   cursor: pointer;
   width: 30px;

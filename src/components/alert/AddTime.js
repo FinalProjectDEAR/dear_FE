@@ -1,6 +1,7 @@
 import React from "react";
+//리덕스
 import { history } from "../../redux/configureStore";
-
+//스타일
 import styled from "styled-components";
 import { Text, TextB, Button } from "../../elements";
 
@@ -62,21 +63,18 @@ const CloseContainer = styled.div`
   background: #ffffff;
   border-radius: 20px;
   @media ${({ theme }) => theme.device.mobile} {
-    padding-top: 30px;
     width: 320px;
     height: 234px;
+    padding-top: 30px;
     border-radius: 10px;
   }
 `;
 
 const LineBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenter};
   @media ${({ theme }) => theme.device.mobile} {
-    margin: auto;
     width: 200px;
+    margin: auto;
     word-break: keep-all;
   }
 `;
@@ -85,7 +83,5 @@ const BottomBox = styled.div`
   height: 36px;
   margin: 50px auto;
   padding: 0px 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenter};
 `;

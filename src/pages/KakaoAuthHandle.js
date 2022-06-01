@@ -1,9 +1,11 @@
-import axios from "axios";
 import { useEffect } from "react";
-import { CircularProgress } from "@mui/material";
-import styled from "styled-components";
+
+//리덕스
 import { actionCreators as userActions } from "../redux/modules/user";
 import { useDispatch } from "react-redux";
+//스타일
+import styled from "styled-components";
+import { CircularProgress } from "@mui/material";
 
 const KakaoAuthHandle = (props) => {
   const dispatch = useDispatch();
@@ -25,9 +27,7 @@ const KakaoAuthHandle = (props) => {
 export default KakaoAuthHandle;
 
 const KaKaoContainer = styled.div`
+  ${({ theme }) => theme.common.flexCenter};
   width: 100vw;
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;

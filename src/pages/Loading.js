@@ -1,7 +1,7 @@
 import React from "react";
+//스타일
 import styled, { keyframes } from "styled-components";
-import { Text, Button, Modal } from "../elements";
-
+//페이지
 import NoMatch from "../components/alert/NoMatch";
 
 function Loading({ informClose, leaveSession }) {

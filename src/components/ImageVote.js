@@ -1,19 +1,18 @@
 import React from "react";
-import { Text, Button } from "../elements";
-import { useSelector, useDispatch } from "react-redux";
-
-import { history } from "../redux/configureStore";
-
-import { actionCreators as voteActions } from "../redux/modules/vote";
+//라우트
 import { useParams } from "react-router-dom";
-
-// import assets
-import uploadImg from "../assets/upload.png";
+//리덕스
+import { useSelector, useDispatch } from "react-redux";
+import { history } from "../redux/configureStore";
+import { actionCreators as voteActions } from "../redux/modules/vote";
+//스타일
 import styled from "styled-components";
-import VoteResult from "./VoteResult";
-
+import { Text, Button } from "../elements";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
+import uploadImg from "../assets/upload.png";
+// 페이지
+import VoteResult from "./VoteResult";
 
 import { cookies } from "../shared/cookie";
 import isLogin from "../shared/auth/isLogin";
@@ -182,14 +181,11 @@ function ImageVote({ voteInfo }) {
 export default ImageVote;
 
 const VoteWrapper = styled.div`
+  ${({ theme }) => theme.common.flexCenterColumn};
   width: 952px;
   height: 586px;
-  margin: auto;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  margin: auto;
   background: #ffffff;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 10px;
@@ -201,12 +197,10 @@ const VoteWrapper = styled.div`
 `;
 
 const CheckBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 30px;
+  ${({ theme }) => theme.common.flexCenter};
   width: 792px;
   height: 400px;
+  margin: 30px;
   @media ${({ theme }) => theme.device.mobile} {
     flex-direction: column;
     width: 248px;
@@ -218,17 +212,17 @@ const Vote = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 360px;
+  height: 399px;
   padding: 30px;
-  gap: 15px;
   margin: 10px 0px;
-  cursor: pointer;
-  box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
+  gap: 15px;
   background-color: ${(props) => props.bg};
+  box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border: ${(props) => props.border};
   border-radius: 20px;
   box-sizing: border-box;
-  width: 360px;
-  height: 399px;
+  cursor: pointer;
 
   @media ${({ theme }) => theme.device.mobile} {
     img {
@@ -246,8 +240,8 @@ const VoteImg = styled.img`
 `;
 
 const Font = styled.p`
-  color: ${(props) => props.color};
   margin: 0px;
+  color: ${(props) => props.color};
   font-weight: ${(props) => props.weight};
   font-size: 16px;
   line-height: 24px;

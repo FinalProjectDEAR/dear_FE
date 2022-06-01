@@ -1,9 +1,9 @@
 import React from "react";
 
+//스타일
 import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
 import { CgClose } from "react-icons/cg";
-
 import { ReactComponent as WebZzim } from "../assets/infoModal/ZzimWeb.svg";
 import { ReactComponent as MobileZzim } from "../assets/infoModal/zzimMobile.svg";
 
@@ -36,14 +36,12 @@ export default ZzimInfo;
 
 const Wrapper = styled.div`
   position: relative;
+  ${({ theme }) => theme.common.flexCenter};
   width: 550px;
   height: 539px;
+  box-sizing: border-box;
   padding-top: 85px;
   padding-bottom: 50px;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: #fff;
   border-radius: 20px;
   @media ${({ theme }) => theme.device.mobile} {

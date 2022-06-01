@@ -55,9 +55,7 @@ const Circle = styled.div`
   border: ${(props) => props.border};
   cursor: ${(props) => props.cursor};
   position: ${(props) => props.position};
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenter};
 `;
 
 export default ColorBadge;

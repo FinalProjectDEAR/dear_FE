@@ -11,8 +11,9 @@ import { Text, TextB, Modal } from "../elements";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
 import Header from "../components/Header";
-import logo from "../assets/main/logoL.png";
-import tapeD from "../assets/main/tapeD.png";
+
+import { ReactComponent as Logo } from "../assets/main/Logo.svg";
+import { ReactComponent as Tape } from "../assets/main/Tape.svg";
 import ArrowDropDownRoundedIcon from "@mui/icons-material/ArrowDropDownRounded";
 import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
 //컴포넌트
@@ -89,7 +90,7 @@ function MainChat() {
         <MainWrap>
           <IntroWrap>
             <LogoBox>
-              <Logo src={logo} />
+              <Logo />
             </LogoBox>
             <TextB title color="#2E2A32" margin="0px">
               오늘은 연애 고민이 있는 친구를 위해
@@ -122,12 +123,7 @@ function MainChat() {
                 고민 들어줄 친구 찾기
               </TextB>
               <LineBox>
-                <img
-                  src={tapeD}
-                  style={{ width: "24px", height: "24px" }}
-                  alt="tape"
-                />
-
+                <Tape style={{ width: "24px" }} />
                 <Text sub6 margin="0px 5px" color="#61586A" cursor="pointer">
                   -1
                 </Text>
@@ -138,12 +134,7 @@ function MainChat() {
                 친구의 고민 들어주기
               </TextB>
               <LineBox>
-                <img
-                  src={tapeD}
-                  style={{ width: "24px", height: "24px" }}
-                  alt="tape"
-                />
-
+                <Tape style={{ width: "24px" }} />
                 <Text sub6 margin="0px 5px" color="#61586A" cursor="pointer">
                   +1
                 </Text>
@@ -185,18 +176,18 @@ function MainChat() {
 export default MainChat;
 
 const Background = styled.div`
+  ${({ theme }) => theme.common.flexCenterColumn};
   width: 100%;
   height: 100vh - 180px;
-  ${({ theme }) => theme.common.flexCenterColumn};
   @media ${({ theme }) => theme.device.mobile} {
     height: 100vh - 100px;
   }
 `;
 
 const MainWrap = styled.div`
+  ${({ theme }) => theme.common.flexCenterColumn};
   width: 100%;
   margin-top: 70px;
-  ${({ theme }) => theme.common.flexCenterColumn};
   @media ${({ theme }) => theme.device.mobile} {
     margin-top: 40px;
     margin-bottom: 50px;
@@ -215,12 +206,10 @@ const IntroWrap = styled.div`
 `;
 
 const LogoBox = styled.div`
-  padding: 0px 0px 40px;
-`;
-
-const Logo = styled.img`
+  ${({ theme }) => theme.common.flexCenterColumn};
   width: 140px;
   height: 94px;
+  padding: 0px 0px 40px;
   margin: 0px auto;
   @media ${({ theme }) => theme.device.mobile} {
     width: 100px;
@@ -263,10 +252,10 @@ const BtnWrap = styled.div`
 
 const Btn = styled.button`
   ${({ theme }) => theme.common.flexCenterColumn};
-  padding: 22px 0px 22px;
-  margin: 0px 10px;
   width: 240px;
   height: 102px;
+  padding: 22px 0px 22px;
+  margin: 0px 10px;
   border: none;
   cursor: pointer;
   background-color: #fff;
@@ -275,10 +264,10 @@ const Btn = styled.button`
   border-radius: 20px;
   @media ${({ theme }) => theme.device.mobile} {
     flex-direction: row;
-    border-radius: 16px;
     height: 50px;
-    padding: 13px 20px;
     margin: 5px 0px;
+    padding: 13px 20px;
+    border-radius: 16px;
   }
 `;
 

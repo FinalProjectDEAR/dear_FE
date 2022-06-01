@@ -1,11 +1,11 @@
 import React from "react";
+
+//리덕스
 import { useSelector, useDispatch } from "react-redux";
-
 import { actionCreators as mainActions } from "../redux/modules/main";
-
-import { Text } from "../elements";
+//스타일
 import styled from "styled-components";
-
+import { Text } from "../elements";
 //페이지
 import ReviewCard from "../components/ReviewCard";
 
@@ -61,9 +61,9 @@ export default MobileReview;
 
 const Background = styled.div`
   display: none;
-  padding-top: 60px;
   width: 100%;
   height: 500px;
+  padding-top: 60px;
   overflow: hidden;
   @media ${({ theme }) => theme.device.mobile} {
     display: flex;
@@ -75,8 +75,8 @@ const ReviewWrapper = styled.div`
   display: none;
   flex-direction: column;
   justify-content: center;
-  box-sizing: border-box;
   width: 780px;
+  box-sizing: border-box;
   margin: auto;
   overflow: hidden;
   @media ${({ theme }) => theme.device.mobile} {
@@ -86,14 +86,14 @@ const ReviewWrapper = styled.div`
 
 const LineBox = styled.div`
   display: none;
-  margin-left: 25px;
-  width: 360px;
   align-items: center;
   justify-content: flex start;
-  margin-left: 10px;
+  width: 360px;
+  margin-left: 25px;
   @media ${({ theme }) => theme.device.mobile} {
     display: flex;
-    box-sizing: border-box;
     width: 330px;
+    box-sizing: border-box;
+    margin-left: 10px;
   }
 `;
