@@ -20,7 +20,7 @@ const CommentItem = (props) => {
     dispatch(actionCreators.pages(props.totalPages));
   }, []);
   const commentList = useSelector((state) => state.comment.comments); //[]빈배열
-  const comment_id = props.commentId;
+  const commentId = props.commentId;
   const comments = props.comment;
   const postId = props.boardPostId;
   const boardPostId = props.member;
@@ -41,7 +41,7 @@ const CommentItem = (props) => {
   const post = useSelector((state) => state.post.detailPost);
   //수정하기
   const editComment = () => {
-    dispatch(actionCreators.editCommentDB(comment_id, comment, postId));
+    dispatch(actionCreators.editCommentDB(postId, commentId, comment));
     //isEdit이 바뀌는거
     setIsEdit(false);
   };
@@ -62,7 +62,7 @@ const CommentItem = (props) => {
       return;
     }
     if (post.memberId) {
-      dispatch(actionCreators.likeCommentDB(postId, comment_id));
+      dispatch(actionCreators.likeCommentDB(postId, commentId));
     }
   };
 
@@ -199,7 +199,7 @@ const CommentItem = (props) => {
                 <CommentRemove
                   closeModal={closeModal}
                   postId={postId}
-                  comment_id={comment_id}
+                  commentId={commentId}
                   commentItem={props}
                   setPage={props.setPage}
                 />

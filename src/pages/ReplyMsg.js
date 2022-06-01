@@ -37,8 +37,6 @@ function ReplyMsg() {
     setTextLength(wordLength);
   };
   const msgList = useSelector((state) => state.message.messages);
-  console.log(msgList);
-  // const follower = useSelector((state) => state.mypage.follower);
 
   const send = () => {
     if (msg === "") {

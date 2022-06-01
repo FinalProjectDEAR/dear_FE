@@ -2,7 +2,7 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import axios from "axios";
 import { imgActions } from "./imagePost";
-import { apis, api } from "../../shared/apis";
+import { apis } from "../../shared/apis";
 import Swal from "sweetalert2";
 import "../../styles/libraryStyle/style.css";
 
@@ -131,7 +131,7 @@ const addPostDB = (payload) => {
   };
 };
 
-//수정하기 테스트 남음
+//수정하기
 const editPostDB = (payload) => {
   return async function (dispatch, getState, { history }) {
     try {
@@ -147,15 +147,11 @@ const editPostDB = (payload) => {
       formData.append("title", payload.title);
       formData.append("category", payload.category);
       formData.append("contents", payload.contents);
-      const { data } = await api.put(
-        `anonypost/board/${payload.postId}`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const { data } = await apis.edit(payload.postId, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       history.push(`/postDetail/${payload.postId}`);
     } catch (err) {
       console.log(err);
@@ -163,13 +159,13 @@ const editPostDB = (payload) => {
   };
 };
 
+//삭제하기
 const deletePostDB = (postId) => {
-  return function (dispatch, getState, { history }) {
+  return async function (dispatch, getState, { history }) {
     try {
-      apis.delete(postId).then((res) => {
-        dispatch(deletePost(postId));
-        history.push("/postList/전체");
-      });
+      const { data } = await apis.delete(postId);
+      dispatch(deletePost(postId));
+      history.push("/postList/전체");
     } catch (error) {
       console.log(error);
     }
@@ -178,15 +174,10 @@ const deletePostDB = (postId) => {
 
 // 공감 버튼
 const likeDB = (postId, likes) => {
-  return function (dispatch, getState, { history }) {
+  return async function (dispatch, getState, { history }) {
     try {
-      api
-        .post(`/anonypost/board/${postId}/postLikes?likes=${likes}`, {})
-        .then((res) => {
-          dispatch(
-            likePost(postId, res.data.data.likes, res.data.data.memberIdList)
-          );
-        });
+      const { data } = await apis.like(postId, likes);
+      dispatch(likePost(postId, data.data.likes, data.data.memberIdList));
     } catch (err) {
       console.log(err);
     }

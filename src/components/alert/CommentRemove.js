@@ -9,10 +9,10 @@ import { Text, Button, TextB } from "../../elements";
 function CommentRemove(props) {
   const dispatch = useDispatch();
 
-  const { closeModal, postId, comment_id } = props;
+  const { closeModal, postId, commentId } = props;
 
   const deletePost = () => {
-    dispatch(actionCreators.delCommentDB({ comment_id, postId }));
+    dispatch(actionCreators.delCommentDB({ postId, commentId }));
   };
 
   const onRemove = () => {
