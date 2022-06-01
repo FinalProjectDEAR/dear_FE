@@ -16,7 +16,7 @@ import UnFollow from "../components/alert/UnFollow";
 
 const Follow = (props) => {
   const Mobile = useMediaQuery({
-    query: "(max-width:767px)",
+    query: "(max-width:425px)",
   });
 
   const dispatch = useDispatch();
@@ -106,7 +106,7 @@ const FollowWrapper = styled.div`
   width: 186px;
   height: 186px;
   background-color: #fafafa;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -118,7 +118,7 @@ const FollowWrapper = styled.div`
 const FollowContainer = styled.div`
   ${({ theme }) => theme.common.flexCenterColumn};
   margin-top: 20px;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -132,7 +132,7 @@ const FollowContainer = styled.div`
 const ColorBox = styled.div`
   ${({ theme }) => theme.common.flexCenter};
   margin: 5px auto;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: flex;
     flex-direction: row;
     justify-content: left;
@@ -147,7 +147,7 @@ const BtnBox = styled.div`
   width: 70px;
   height: 30px;
   margin: 14px auto;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: flex;
     flex-direction: row;
     justify-content: space-between;

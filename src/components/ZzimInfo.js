@@ -9,7 +9,7 @@ import { ReactComponent as MobileZzim } from "../assets/infoModal/zzimMobile.svg
 
 function ZzimInfo({ closeZzim }) {
   const Mobile = useMediaQuery({
-    query: "(max-width:767px)",
+    query: "(max-width:425px)",
   });
   return (
     <React.Fragment>

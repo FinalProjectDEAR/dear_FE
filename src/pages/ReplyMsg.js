@@ -14,7 +14,7 @@ import { Text, Input, Button, TextB, Modal } from "../elements";
 
 function ReplyMsg() {
   const Mobile = useMediaQuery({
-    query: "(max-width:767px)",
+    query: "(max-width:425px)",
   });
 
   const dispatch = useDispatch();

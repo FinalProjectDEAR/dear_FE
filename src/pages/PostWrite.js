@@ -431,6 +431,9 @@ const PhotoWrap = styled.div`
   padding-right: 10px;
   display: flex;
   flex-direction: row;
+  @media ${({ theme }) => theme.device.mobile} {
+    padding-right: 0px;
+  }
 `;
 
 const PhotoDesc = styled.div`
@@ -471,6 +474,9 @@ const Img = styled.img`
   height: 80px;
   margin: 1px;
   box-sizing: border-box;
+  @media ${({ theme }) => theme.device.mobile} {
+    margin: -3px;
+  }
 `;
 
 const PhotoContainer = styled.div`
