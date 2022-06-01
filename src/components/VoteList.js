@@ -1,20 +1,19 @@
 import React from "react";
+//리덕스
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as mainActions } from "../redux/modules/main";
 import { actionCreators } from "../redux/modules/post";
 import { history } from "../redux/configureStore";
-
+//스타일
 import { Text } from "../elements";
 import styled from "styled-components";
 import "../styles/libraryStyle/style.css";
-
-import VoteCard from "./VoteCard";
-
 //Carousel library
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+//페이지
+import VoteCard from "./VoteCard";
 //스크롤
 import { Link } from "react-scroll";
 

@@ -1,17 +1,15 @@
 import React from "react";
+
+//리덕스
 import { useSelector, useDispatch } from "react-redux";
 import { history } from "../redux/configureStore";
-
 import { actionCreators as mainActions } from "../redux/modules/main";
-
-import { Text, TextB } from "../elements";
+//스타일
 import styled from "styled-components";
-
-//페이지
+import { Text } from "../elements";
+//컴포넌트
 import VoteCard from "../components/VoteCard";
 import PostCard from "../components/PostCard";
-
-//assets
 
 function MainHotPost() {
   const dispatch = useDispatch();
@@ -75,10 +73,10 @@ function MainHotPost() {
 export default MainHotPost;
 
 const Background = styled.div`
-  width: 100%;
-  height: 100vh;
   display: flex;
   align-items: center;
+  width: 100%;
+  height: 100vh;
   scroll-snap-align: start;
   @media ${({ theme }) => theme.device.mobile} {
     height: 100%;
@@ -93,17 +91,17 @@ const HotPostWrapper = styled.div`
   height: 500px;
   margin: 0px auto;
   @media ${({ theme }) => theme.device.mobile} {
-    padding: 25px 25px;
     width: 360px;
     height: 640px;
+    padding: 25px 25px;
   }
 `;
 
 const VoteBox = styled.div`
-  height: 160px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  height: 160px;
   margin-top: 30px;
   @media ${({ theme }) => theme.device.mobile} {
     flex-direction: column;
@@ -113,15 +111,15 @@ const VoteBox = styled.div`
 `;
 
 const BoardBox = styled.div`
-  height: 200px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 200px;
   margin-top: 20px;
   @media ${({ theme }) => theme.device.mobile} {
-    margin-top: 5px;
     flex-direction: column;
     height: 650px;
+    margin-top: 5px;
     overflow: hidden;
   }
 `;

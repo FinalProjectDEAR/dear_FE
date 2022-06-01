@@ -1,9 +1,9 @@
 import React from "react";
 
+//스타일
 import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
 import { CgClose } from "react-icons/cg";
-
 import { ReactComponent as WebTape } from "../assets/infoModal/TapeWeb.svg";
 import { ReactComponent as MobileTape } from "../assets/infoModal/TapeMobile.svg";
 
@@ -36,14 +36,12 @@ export default TapeInfo;
 
 const Wrapper = styled.div`
   position: relative;
+  ${({ theme }) => theme.common.flexCenter};
   width: 550px;
   height: 539px;
   padding-top: 85px;
   padding-bottom: 50px;
   box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: #fff;
   border-radius: 20px;
   @media ${({ theme }) => theme.device.mobile} {

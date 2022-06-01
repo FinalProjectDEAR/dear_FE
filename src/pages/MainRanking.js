@@ -1,16 +1,16 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { actionCreators as mainActions } from "../redux/modules/main";
 
+//라우트
+import { useHistory } from "react-router-dom";
+//리덕스
+import { useSelector, useDispatch } from "react-redux";
+import { actionCreators as mainActions } from "../redux/modules/main";
+//스타일
 import styled from "styled-components";
 import { Text, TextB } from "../elements";
-
-//페이지
-import RankingCard from "../components/RankingCard";
-
-//assets
 import { ReactComponent as ServiceInfo } from "../assets/main/serviceInfo.svg";
+//컴포넌트
+import RankingCard from "../components/RankingCard";
 import MobileRanking from "../components/MobileRanking";
 
 function MainRanking() {
@@ -104,16 +104,16 @@ function MainRanking() {
 export default MainRanking;
 
 const Background = styled.div`
-  width: 100%;
-  height: 100vh;
   display: flex;
   align-items: center;
+  width: 100%;
+  height: 100vh;
 `;
 
 const RankingWrapper = styled.div`
-  box-sizing: border-box;
   width: 1020px;
   height: 600px;
+  box-sizing: border-box;
   margin: 0px auto;
   @media ${({ theme }) => theme.device.mobile} {
     width: 360px;
@@ -148,15 +148,15 @@ const RankingContainer = styled.div`
 `;
 
 const TitleBox = styled.div`
-  width: 100%;
   display: flex;
   justify-content: flex-start;
+  width: 100%;
 `;
 
 const LineBox = styled.div`
-  width: 100%;
   display: flex;
   justify-content: flex-start;
+  width: 100%;
   @media ${({ theme }) => theme.device.mobile} {
     width: 100%;
     box-sizing: border-box;
@@ -166,15 +166,15 @@ const LineBox = styled.div`
 `;
 
 const RankingBox = styled.div`
-  width: 100%;
   display: flex;
+  width: 100%;
 `;
 
 const InfoBox = styled.div`
-  width: 100%;
-  height: 122px;
   display: flex;
   align-items: center;
+  width: 100%;
+  height: 122px;
   @media ${({ theme }) => theme.device.mobile} {
     width: 360px;
   }

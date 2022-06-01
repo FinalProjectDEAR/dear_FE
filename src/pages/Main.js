@@ -51,6 +51,8 @@ export default Main;
 
 const Wrapper = styled.div`
   ${({ theme }) => theme.common.flexCenterColumn};
+  width: 100%;
+  height: 100%;
   @media ${({ theme }) => theme.device.isMobile} {
     display: none;
   }

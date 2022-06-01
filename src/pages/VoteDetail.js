@@ -1,21 +1,21 @@
 import React from "react";
-import { useParams, useHistory } from "react-router-dom";
-import { ReactComponent as ThumbUp } from "../assets/post-select.svg";
 
+//라우트
+import { useParams, useHistory } from "react-router-dom";
+//리덕스
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as voteActions } from "../redux/modules/vote";
+import { actionCreators as commentActions } from "../redux/modules/comment";
+//스타일
 import styled from "styled-components";
 import { Text, TextB, Modal } from "../elements/index";
-import vote from "../assets/vote/vote.png";
-
-//페이지 관련
+import { ReactComponent as VoteIcon } from "../assets/vote/vote.svg";
+import { ReactComponent as ThumbUp } from "../assets/post-select.svg";
+//컴포넌트
 import ImageVote from "../components/ImageVote";
 import LetterVote from "../components/LetterVote";
 import VoteDel from "../components/alert/VoteDel";
 import Layout from "../components/Layout";
-
-// 리덕스 관련
-import { useDispatch, useSelector } from "react-redux";
-import { actionCreators as voteActions } from "../redux/modules/vote";
-import { actionCreators as commentActions } from "../redux/modules/comment";
 
 function VoteDetail(props) {
   const params = useParams();
@@ -55,9 +55,7 @@ function VoteDetail(props) {
                 <TextB subTitle margin="0px">
                   {voteInfo?.title}
                 </TextB>
-                <img
-                  src={vote}
-                  alt={vote}
+                <VoteIcon
                   style={{
                     width: "18px",
                   }}
@@ -122,37 +120,34 @@ const Background = styled.div`
 `;
 
 const DetailWrapper = styled.div`
-  margin: auto;
   width: 1032px;
   min-height: 490px;
+  margin: auto;
   margin-top: 80px;
   margin-bottom: 40px;
   @media ${({ theme }) => theme.device.mobile} {
     min-height: 0px;
-    margin-top: 0px;
-    box-sizing: border-box;
     width: 328px;
+    box-sizing: border-box;
+    margin-top: 0px;
     border-radius: 0px;
   }
 `;
 
 const TimeBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-right: 36px;
-  gap: 2px;
+  ${({ theme }) => theme.common.flexCenter};
   width: 120px;
   height: 45px;
+  margin-right: 36px;
+  gap: 2px;
 `;
 
 const CategoryBox = styled.div`
-  box-sizing: border-box;
   display: flex;
-  padding: 0px;
   width: 1032px;
   height: 45px;
+  box-sizing: border-box;
+  padding: 0px;
   border-top: 1px solid #666666;
   border-bottom: 1px solid #cccccc;
   @media ${({ theme }) => theme.device.mobile} {
@@ -174,7 +169,6 @@ const MobileTimeBox = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
   width: 120px;
   height: 14px;
   @media ${({ theme }) => theme.device.mobile} {
@@ -186,11 +180,11 @@ const Title = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0px 40px;
-  gap: 10px;
+  flex: none;
   width: 130px;
   height: 45px;
-  flex: none;
+  gap: 10px;
+  padding: 0px 40px;
   order: 0;
   flex-grow: 0;
   @media ${({ theme }) => theme.device.mobile} {
@@ -204,9 +198,9 @@ const TitleContent = styled.div`
   align-items: center;
   justify-content: flex-start;
   box-sizing: border-box;
-  gap: 10px;
   width: 782px;
   height: 45px;
+  gap: 10px;
   img {
     width: 5px;
   }
@@ -222,12 +216,12 @@ const LineBox = styled.div`
   justify-content: flex-end;
   align-items: center;
   box-sizing: border-box;
-  padding-right: 40px;
   width: 1032px;
   height: 45px;
+  padding-right: 40px;
   @media ${({ theme }) => theme.device.mobile} {
-    width: 328px;
     justify-content: space-between;
+    width: 328px;
     height: 24px;
     margin-top: 10px;
     padding-right: 0px;
@@ -246,10 +240,10 @@ const DelText = styled.p`
 const ContentBox = styled.div`
   display: flex;
   justify-content: flex-start;
-  box-sizing: border-box;
-  padding: 30px 40px;
-  gap: 10px;
   width: 1032px;
+  box-sizing: border-box;
+  gap: 10px;
+  padding: 30px 40px;
   word-break: keep-all;
   @media ${({ theme }) => theme.device.mobile} {
     width: 328px;
@@ -259,11 +253,10 @@ const ContentBox = styled.div`
 
 const BtnContainer = styled.div`
   display: flex;
-  width: 1032px;
-  /* border: 1px solid pink; */
-  margin: 40px auto 15px auto;
   align-items: flex-start;
   justify-content: space-between;
+  width: 1032px;
+  margin: 40px auto 15px auto;
 `;
 
 export default VoteDetail;

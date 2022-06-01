@@ -1,16 +1,11 @@
 import React from "react";
-import { div, Input, Text, Button } from "../elements";
-import { useSelector, useDispatch } from "react-redux";
-
-import { history } from "../redux/configureStore";
-
-import { actionCreators as voteActions } from "../redux/modules/vote";
-import { useParams } from "react-router-dom";
-
-// import assets
-import uploadImg from "../assets/upload.png";
+//리덕스
+import { useSelector } from "react-redux";
+//스타일
 import styled from "styled-components";
+import { Text } from "../elements";
 import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
+//페이지
 
 function VoteResult(props) {
   const voteResult = useSelector((state) => state.vote.voteResult);
@@ -97,19 +92,15 @@ function VoteResult(props) {
 export default VoteResult;
 
 const ResultWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenterColumn};
+  width: 952px;
+  height: 311px;
   box-sizing: border-box;
   padding: 60px 44px;
   margin: auto;
-  width: 952px;
-  height: 311px;
   background: #fff;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 10px;
-
   @media ${({ theme }) => theme.device.mobile} {
     width: 328px;
     height: 374px;
@@ -121,9 +112,9 @@ const TitleBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 10px auto;
   width: 100%;
   height: 36px;
+  margin: 10px auto;
   @media ${({ theme }) => theme.device.mobile} {
     justify-content: flex-start;
     align-items: left;
@@ -133,12 +124,10 @@ const TitleBox = styled.div`
 `;
 
 const LineBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 5px auto;
+  ${({ theme }) => theme.common.flexCenter};
   width: 792px;
   height: 54px;
+  margin: 5px auto;
   @media ${({ theme }) => theme.device.mobile} {
     justify-content: flex-start;
     flex-direction: column;
@@ -148,13 +137,10 @@ const LineBox = styled.div`
 `;
 
 const Vote = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 15px 0px;
+  ${({ theme }) => theme.common.flexCenter};
   width: 236px;
   height: 54px;
+  padding: 15px 0px;
   background-color: ${(props) => props.bg};
   border: ${(props) => props.border};
   border-radius: 10px;
@@ -172,8 +158,8 @@ const VoteImg = styled.img`
 `;
 
 const Font = styled.p`
-  color: ${(props) => props.color};
   margin: 0px;
+  color: ${(props) => props.color};
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
@@ -181,22 +167,20 @@ const Font = styled.p`
 `;
 
 const Percent = styled.p`
+  width: 44px;
+  margin: 0px auto;
   color: ${(props) => props.color};
   text-align: center;
-  margin: 0px auto;
-  width: 44px;
   font-weight: 700;
   font-size: 16px;
   line-height: 16px;
 `;
 
 const PercentageBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 10px 0px;
+  ${({ theme }) => theme.common.flexCenter};
   width: 550px;
   height: 38px;
+  margin: 10px 0px;
   @media ${({ theme }) => theme.device.mobile} {
     img {
       width: 38px;
@@ -209,32 +193,30 @@ const PercentageBox = styled.div`
 const ProgressBar = styled.div`
   display: flex;
   align-items: center;
-  background-color: #fff;
   width: 488px;
   height: 38px;
+  background-color: #fff;
   @media ${({ theme }) => theme.device.mobile} {
     height: 24px;
   }
 `;
 
 const Highlight = styled.div`
-  background-color: ${(props) => props.color};
-  transition: 1s;
   width: ${(props) => props.width};
   height: 38px;
   margin-right: 10px;
+  background-color: ${(props) => props.color};
+  transition: 1s;
   @media ${({ theme }) => theme.device.mobile} {
     height: 24px;
   }
 `;
 
 const CountBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
+  ${({ theme }) => theme.common.flexCenter};
   width: 40px;
   height: 26px;
+  box-sizing: border-box;
   margin-right: 40px;
   @media ${({ theme }) => theme.device.mobile} {
     display: flex;

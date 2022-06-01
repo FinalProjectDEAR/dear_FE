@@ -1,22 +1,21 @@
 import React from "react";
-import { Text, Input, Button, Modal } from "../elements";
-
+//라우트
+//리덕스
 import { history } from "../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
-import { memberIdCheck } from "../shared/Check";
-
-import { useCookies } from "react-cookie";
-import moment from "moment";
-
+//스타일
 import styled from "styled-components";
-import logo from "../assets/main/logoS.png";
-import kakao from "../assets/kakao.png";
+import { Text, Input, Button, Modal } from "../elements";
+import { ReactComponent as Logo } from "../assets/main/Logo.svg";
+import { ReactComponent as Kakao } from "../assets/kakao_sns.svg";
 import Footer from "../components/Footer";
 import Survey from "../components/Survey";
-
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
+
+import { memberIdCheck } from "../shared/Check";
+import { useCookies } from "react-cookie";
 
 const Login = () => {
   const [open, setOpen] = React.useState(true);
@@ -40,6 +39,8 @@ const Login = () => {
   const [memberId, setMemberId] = React.useState("");
   const [pwd, setPwd] = React.useState("");
 
+  const isUser = useSelector((state) => state.user.isLogin);
+
   const login = () => {
     if (memberId === "" || pwd === "") {
       Swal.fire("아이디 혹은 비밀번호가 공란입니다. 입력해주세요.");
@@ -61,9 +62,9 @@ const Login = () => {
   return (
     <Background>
       <LoginWrapper>
-        <div style={{ padding: "50px 0px" }}>
+        <div style={{ paddingBottom: "50px" }}>
           <LogoBox>
-            <Logo src={logo} />
+            <Logo />
           </LogoBox>
           <InputBox>
             <Input
@@ -133,11 +134,12 @@ const Login = () => {
           </LineBox>
         </ButtonBox>
         <KakaoBox>
-          <KakaoButton onClick={kakaoAuth} src={kakao} />
+          <Kakao onClick={kakaoAuth} />
         </KakaoBox>
       </LoginWrapper>
+
       <MobileFooter>
-        {!Token ? (
+        {!isUser ? (
           <FooterBtn>
             <Text
               sub
@@ -165,19 +167,42 @@ const Login = () => {
           </FooterBtn>
         )}
 
-        <FooterBox>
-          <Text sub color="#666666" margin="0px 6px">
+        <MFooterBox>
+          <Text
+            sub4
+            margin="0px 15px"
+            color="#948A9E"
+            deco="underLine"
+            cursor="pointer"
+            _onClick={() => {
+              window.open("https://respond.listovey.com/rs/EctfU25gC");
+            }}
+          >
             의견 및 오류 제보
           </Text>
-          |
-          <Text sub color="#666666" margin="0px 6px">
-            자주 묻는 질문
-          </Text>
-          |
-          <Text sub color="#666666" margin="0px 6px">
-            개인정보처리방침
-          </Text>
-        </FooterBox>
+          <FooterText>
+            <Text sub4 color="#948A9E" margin="22px 4px 0px 4px">
+              Backend
+            </Text>
+            <Text sub7 color="#948A9E" margin="22px 8px 0px 0px">
+              임인혁 박형기 김현규
+            </Text>
+            <Text sub4 color="#948A9E" margin="22px 4px 0px 4px">
+              Frontend
+            </Text>
+            <Text sub7 color="#948A9E" margin="22px 8px 0px 0px">
+              김혜리 김가경
+            </Text>
+          </FooterText>
+          <FooterText>
+            <Text sub4 color="#948A9E" margin="8px">
+              Designer
+            </Text>
+            <Text sub7 color="#948A9E">
+              김현경 최혜지
+            </Text>
+          </FooterText>
+        </MFooterBox>
       </MobileFooter>
       {cookies[COOKIE_KEY] ? null : (
         <Modal>
@@ -191,36 +216,31 @@ const Login = () => {
 export default Login;
 
 const Background = styled.div`
+  ${({ theme }) => theme.common.flexCenterColumn};
   width: 100%;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @media ${({ theme }) => theme.device.mobile} {
+    height: 100%;
+  }
 `;
 
 const LoginWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenterColumn};
   width: 300px;
   margin: auto;
 
   @media ${({ theme }) => theme.device.mobile} {
     width: 300px;
-    height: 935px;
+    height: 750px;
   }
 `;
 
 const LogoBox = styled.div`
-  padding: 0px 0px 40px;
-`;
-
-const Logo = styled.img`
+  ${({ theme }) => theme.common.flexCenter};
   width: 140px;
   height: 94px;
   margin: 0px auto;
+  padding: 0px 0px 40px;
   @media ${({ theme }) => theme.device.mobile} {
     width: 120px;
     height: 80px;
@@ -236,17 +256,15 @@ const InputBox = styled.div`
 `;
 
 const ButtonBox = styled.div`
+  justify-content: center;
+  align-items: center;
   width: 300px;
   height: 69px;
   margin-bottom: 30px;
-  justify-content: center;
-  align-items: center;
 `;
 
 const LineBox = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  ${({ theme }) => theme.common.flexCenter};
   width: 100%;
   height: 19px;
   margin: 10px auto;
@@ -255,36 +273,28 @@ const LineBox = styled.div`
 const KakaoBox = styled.div`
   justify-content: center;
   align-items: center;
-`;
-
-const KakaoButton = styled.img`
-  margin: 0px auto;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  --size: 52px;
-  width: var(--size);
-  height: var(--size);
-  border-radius: var(--size);
-  box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
-
   @media ${({ theme }) => theme.device.mobile} {
-    --size: 40px;
+    width: 40px;
   }
 `;
 
-const FooterBox = styled.div`
-  width: 1032px;
-  margin: 0px auto;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+const MFooterBox = styled.div`
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
   color: #666;
   @media ${({ theme }) => theme.device.mobile} {
-    width: 100%;
-    margin-top: 20px;
-    justify-content: center;
+    display: flex;
   }
+`;
+
+const FooterText = styled.div`
+  ${({ theme }) => theme.common.flexCenter};
+  margin: 0px 24px;
+  font-size: 12px;
+  line-height: 14px;
 `;
 
 const MobileFooter = styled.div`
@@ -292,27 +302,19 @@ const MobileFooter = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   width: 100%;
   height: 200px;
-
   background: #fafafa;
   border-radius: 0px;
-
   @media ${({ theme }) => theme.device.mobile} {
     display: flex;
   }
 `;
 
 const FooterBtn = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
+  ${({ theme }) => theme.common.flexCenter};
   height: 18px;
-
   background: #f8f8f8;
-
   border: 1px solid #cccccc;
   border-radius: 2px;
 `;

@@ -1,17 +1,17 @@
 import React, { useRef } from "react";
+
+//리덕스
 import { useSelector, useDispatch } from "react-redux";
 import { history } from "../redux/configureStore";
-
-import { Text, TextB, Input, Button, Modal } from "../elements";
-
 import { actionCreators as imageActions } from "../redux/modules/image";
 import { actionCreators as chatActions } from "../redux/modules/chat";
-
+//스타일
 import styled from "styled-components";
+import { Text, TextB, Input, Button, Modal } from "../elements";
+import { ReactComponent as Arrow } from "../assets/main/arrow.svg";
+import { ReactComponent as ImageUPload } from "../assets/파일첨부.svg";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
-import attach from "../assets/vote/attach.png";
-import arrowBack from "../assets/arrow_back.png";
 
 function ResChatStart() {
   const dispatch = useDispatch();
@@ -123,8 +123,7 @@ function ResChatStart() {
           <React.Fragment>
             <RequestContainer>
               <ArrowLine>
-                <ArrowBack
-                  src={arrowBack}
+                <Arrow
                   onClick={() => {
                     history.goBack();
                   }}
@@ -353,8 +352,12 @@ function ResChatStart() {
                   </ChatInfoBox>
                   <FileBox>
                     <ImgButtonLine>
-                      <ImgButton htmlFor="subInfo" />
-                      <Text sub7>이미지는 최대 3장까지 업로드 가능합니다.</Text>
+                      <ImgButton htmlFor="subInfo">
+                        <ImageUPload />
+                      </ImgButton>
+                      <Text sub7 margin="0px 10px">
+                        이미지는 최대 3장까지 업로드 가능합니다.
+                      </Text>
                     </ImgButtonLine>
                   </FileBox>
                 </LineBox>
@@ -412,13 +415,13 @@ export default ResChatStart;
 const RequestContainer = styled.div`
   width: 840px;
   height: 575px;
-  padding: 40px 40px;
   box-sizing: border-box;
+  padding: 40px 40px;
   background: #ffffff;
   border-radius: 20px;
   @media ${({ theme }) => theme.device.mobile} {
     width: 360px;
-    min-height: 700px;
+    min-height: 100%;
     padding: 44px 20px;
     border-radius: 0px;
     overflow: scroll;
@@ -467,8 +470,8 @@ const LineBox = styled.div`
   justify-content: flex-start;
   align-items: center;
   @media ${({ theme }) => theme.device.mobile} {
-    width: 320px;
     flex-direction: column;
+    width: 320px;
   }
 `;
 
@@ -485,11 +488,11 @@ const ChatInfoBox = styled.div`
 `;
 
 const InputBox = styled.div`
-  width: 70%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   height: 54px;
+  width: 70%;
   @media ${({ theme }) => theme.device.mobile} {
     width: 320px;
     height: 40px;
@@ -516,12 +519,12 @@ const FileInput = styled.input`
 `;
 
 const FileBox = styled.div`
-  width: 560px;
-  height: 54px;
-  padding: 15px 0px 0px 10px;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  width: 560px;
+  height: 54px;
+  box-sizing: border-box;
+  padding-top: 15px;
   @media ${({ theme }) => theme.device.mobile} {
     width: 320px;
     height: 40px;
@@ -538,12 +541,10 @@ const ImgButtonLine = styled.div`
 `;
 
 const ImgButton = styled.label`
-  border: none;
   width: 58px;
   height: 20px;
-  margin-right: 8px;
-  background-size: cover;
-  background-image: url(${attach});
+  margin-right: 10px;
+  border: none;
   cursor: pointer;
   @media ${({ theme }) => theme.device.mobile} {
     width: 63px;
@@ -555,64 +556,50 @@ const ImageBox = styled.div`
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  margin-left: 235px;
   width: 523px;
   height: 110px;
-
+  margin-left: 235px;
   border: 1px solid #e6e6e6;
   @media ${({ theme }) => theme.device.mobile} {
-    margin-left: 0px;
-    width: 320px;
     flex-direction: column;
+    width: 320px;
     height: auto;
+    margin-left: 0px;
     border: none;
   }
 `;
 
 const Picture = styled.div`
+  position: relative;
   width: 80px;
   height: 80px;
-  border: 1px solid rgba(0, 0, 0, 0.07);
   margin: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.07);
   border-radius: 4px;
   background-image: url("${(props) => props.src}");
   background-size: cover;
-  position: relative;
   @media ${({ theme }) => theme.device.mobile} {
     width: 304px;
     height: 180px;
   }
 `;
 const ImgDelbtn = styled.div`
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 18px;
+  height: 18px;
   color: #333;
   font-size: 15px;
   text-align: center;
   line-height: 18px;
-  width: 18px;
-  height: 18px;
-  position: absolute;
-  right: 0px;
-  top: 0px;
   cursor: pointer;
 `;
-
-// const Deletebutton = styled.div`
-//   color: #cccccc;
-//   font-size: 20px;
-//   text-align: center;
-//   line-height: 13px;
-//   margin: 0px 0px 5px 10px;
-//   /* position: absolute;
-//   right: -5px;
-//   top: -5px; */
-//   cursor: pointer;
-// `;
 
 const BottomBox = styled.div`
   width: 100%;
   height: 36px;
   margin: auto;
-
   @media ${({ theme }) => theme.device.mobile} {
     display: none;
   }
@@ -623,10 +610,8 @@ const MobileButton = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
   width: 360px;
   height: 48px;
-
   background: #7a37be;
   border-radius: 0px;
 

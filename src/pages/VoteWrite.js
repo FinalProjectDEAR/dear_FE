@@ -1,18 +1,16 @@
 import React, { useRef } from "react";
+
+//리덕스
+import { useSelector, useDispatch } from "react-redux";
+import { history } from "../redux/configureStore";
+import { actionCreators as imageActions } from "../redux/modules/image";
+import { actionCreators as voteActions } from "../redux/modules/vote";
+//스타일
 import { useMediaQuery } from "react-responsive";
 import { Input, Text, TextB, Button, Modal } from "../elements";
 import { ReactComponent as ImageUPload } from "../assets/파일첨부.svg";
-
-import { useSelector, useDispatch } from "react-redux";
-import { history } from "../redux/configureStore";
-
-import { actionCreators as imageActions } from "../redux/modules/image";
-import { actionCreators as voteActions } from "../redux/modules/vote";
-
-// import assets
+import { ReactComponent as Arrow } from "../assets/main/arrow.svg";
 import uploadImg from "../assets/upload.png";
-import attach from "../assets/vote/attach.png";
-import arrowBack from "../assets/arrow_back.png";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
@@ -134,8 +132,7 @@ function VoteWrite() {
           <React.Fragment>
             <VoteWrapper>
               <LineBox>
-                <ArrowBack
-                  src={arrowBack}
+                <Arrow
                   onClick={() => {
                     history.goBack();
                   }}
@@ -325,15 +322,14 @@ function VoteWrite() {
 export default VoteWrite;
 
 const VoteWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
   width: 736px;
   height: 680px;
   background: #ffffff;
   border-radius: 20px;
   padding: 40px 60px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-
   @media ${({ theme }) => theme.device.mobile} {
     width: 360px;
     height: 834px;
@@ -443,11 +439,11 @@ const CheckBox = styled.div`
 `;
 
 const ImageBox = styled.div`
-  width: 210px;
-  height: 130px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  width: 210px;
+  height: 130px;
   @media ${({ theme }) => theme.device.mobile} {
     width: 130px;
     height: 130px;
@@ -455,10 +451,10 @@ const ImageBox = styled.div`
 `;
 
 const ImgButton = styled.label`
-  border: none;
   width: 58px;
   height: 20px;
   margin-bottom: 10px;
+  border: none;
   cursor: pointer;
   @media ${({ theme }) => theme.device.mobile} {
     height: 25px;
@@ -468,9 +464,9 @@ const ImgButton = styled.label`
 const Image = styled.label`
   width: 100px;
   height: 90px;
+  box-sizing: border-box;
   background: #f2f2f2;
   border-radius: 10px;
-  box-sizing: border-box;
   background-image: url("${(props) => props.src}");
   background-size: cover;
   @media ${({ theme }) => theme.device.mobile} {
@@ -483,7 +479,6 @@ const BottomBox = styled.div`
   width: 100%;
   height: 36px;
   margin: 10px auto;
-
   @media ${({ theme }) => theme.device.mobile} {
     display: none;
   }
@@ -494,13 +489,10 @@ const MobileButton = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
   width: 360px;
   height: 48px;
-
   background: #7a37be;
   border-radius: 0px;
-
   @media ${({ theme }) => theme.device.mobile} {
     display: flex;
     position: fixed;
