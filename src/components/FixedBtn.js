@@ -191,7 +191,7 @@ const BtnWrap = styled.div`
   left: 90%;
   position: fixed;
   padding: 0px;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: none;
   }
 `;
@@ -323,7 +323,7 @@ const MEvent = styled.div`
 
 const Mver = styled.div`
   display: none;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     position: absolute;
     ${({ theme }) => theme.common.flexCenterColumn};
     width: 52px;

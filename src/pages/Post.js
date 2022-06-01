@@ -89,7 +89,7 @@ const PostWrapper = styled.div`
   font-size: 12px;
   border-bottom: 1px solid #cccccc;
   color: #333333;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     border-bottom: 1px solid #948a9e;
     display: flex;
     justify-content: left;
@@ -101,7 +101,7 @@ const PostWrapper = styled.div`
 const Title = styled.div`
   padding-left: 40px;
   cursor: pointer;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: block;
     height: 38px;
     width: 90%;
@@ -114,7 +114,7 @@ const Title = styled.div`
 
 const Date = styled.div`
   padding-right: 40px;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     width: 90%;
     padding: 10px 0px 0px 35px;
     box-sizing: border-box;

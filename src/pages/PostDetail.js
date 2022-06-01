@@ -204,15 +204,16 @@ function PostDetail(props) {
 const CommentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 1032px;
-  width: 100%;
-  max-height: 1000px;
+  width: 1032px;
   margin: 30px auto 0px auto;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 326px;
+  }
 `;
 
 const BackGround = styled.div`
   padding: 80px 0px 200px;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     padding: 30px 0px 80px;
   }
 `;
@@ -226,7 +227,7 @@ const PageWrapper = styled.div`
 
 const WriteWrapper = styled.div`
   padding: 60px 0px 0px;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     padding: 75px 0px 0px;
   }
 `;
@@ -236,7 +237,7 @@ const BtnContainer = styled.div`
   justify-content: right;
   width: 1032px;
   padding-top: 20px;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     width: 326px;
     border-top: 1px solid #666666;
     justify-content: space-between;
@@ -251,11 +252,11 @@ const BtnContainer = styled.div`
 `;
 
 const DetailWrapper = styled.div`
-  max-width: 1032px;
-  width: 100%;
+  width: 1032px;
+  /* width: 100%; */
   max-height: 700px;
   margin: auto;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     width: 326px;
     margin: auto;
   }
@@ -265,13 +266,12 @@ const CategoryBox = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  max-width: 1032px;
-  width: 100%;
+  width: 1032px;
   height: 45px;
   border-top: 1px solid #666666;
   border-bottom: 1px solid #cccccc;
   box-sizing: border-box;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: none;
   }
 `;
@@ -280,20 +280,19 @@ const TitleBox = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  max-width: 1032px;
-  width: 100%;
+  width: 1032px;
   height: 45px;
   padding: 0px;
   box-sizing: border-box;
   border-bottom: 1px solid #cccccc;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     width: 326px;
     margin: auto;
   }
 `;
 
 const MobileCategory = styled.div`
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -308,15 +307,15 @@ const Title = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  max-width: 130px;
-  width: 100%;
+  width: 130px;
+  /* width: 100%; */
   height: 45px;
   padding: 0px 40px;
   gap: 10px;
   flex: none;
   order: 0;
   flex-grow: 0;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: none;
   }
 `;
@@ -347,7 +346,7 @@ const TitleContent = styled.div`
   order: 1;
   flex-grow: 0;
   font-family: "KoPub Batang";
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     width: 326px;
     margin: auto;
   }
@@ -363,7 +362,7 @@ const ThumbComment = styled.div`
   order: 1;
   flex-grow: 0;
   font-family: "KoPub Batang";
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: none;
   }
 `;
@@ -387,12 +386,12 @@ const ContentBox = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  max-width: 1032px;
-  width: 100%;
+  width: 1032px;
   padding: 30px;
   gap: 10px;
   box-sizing: border-box;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 326px;
     padding: 30px 0px;
   }
 `;
@@ -418,7 +417,7 @@ const CommentPhotoWrap = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  ${({ theme }) => theme.device.isMobile} {
+  ${({ theme }) => theme.device.mobile} {
     flex-direction: column;
   }
 `;
@@ -434,7 +433,7 @@ const PhotoDiv = styled.div`
 
 const PhotoWrap = styled.div`
   display: flex;
-  ${({ theme }) => theme.device.isMobile} {
+  ${({ theme }) => theme.device.mobile} {
     display: flex;
     flex-direction: column;
   }
@@ -463,7 +462,7 @@ const Img = styled.img`
     -ms-transform: scale(2.9);
     -o-transform: scale(2.9);
   }
-  ${({ theme }) => theme.device.isMobile} {
+  ${({ theme }) => theme.device.mobile} {
     display: flex;
     justify-content: center;
     align-items: center;

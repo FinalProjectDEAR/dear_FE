@@ -214,10 +214,10 @@ const CommentItem = (props) => {
 
 const CommentWrapper = styled.div`
   display: flex;
-  max-width: 1032px;
-  width: 100%;
+  width: 1032px;
   border-bottom: 1px solid #cccccc;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 320px;
     display: flex;
     margin: auto;
   }
@@ -231,7 +231,7 @@ const CommentContainer = styled.div`
   padding: 20px 40px;
   margin: auto;
   box-sizing: border-box;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: flex;
     margin: auto;
   }
@@ -240,7 +240,7 @@ const CommentContainer = styled.div`
 const TextWrapper = styled.div`
   width: 952px;
   margin: auto;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     width: 90%;
   }
 `;

@@ -153,124 +153,126 @@ function PostEdit() {
   return (
     <React.Fragment>
       <Layout>
-        <WriteWrapper>
-          <TitleContainer>
-            <Text title textAlign="left">
-              수정하기
-            </Text>
-          </TitleContainer>
-          <CategoryWrapper>
-            <Title>카테고리</Title>
-            <Select
-              name="category"
-              form="myForm"
-              onChange={SelectCategory}
-              value={category || ""}
-            >
-              <option value="null">카테고리 선택</option>
-              <option value="솔로">솔로</option>
-              <option value="짝사랑">짝사랑</option>
-              <option value="썸">썸</option>
-              <option value="연애">연애</option>
-              <option value="이별">이별</option>
-              <option value="기타">기타</option>
-            </Select>
-          </CategoryWrapper>
-          <TitleWrapper>
-            <Title>제목</Title>
-            <InputMobile>
-              <Input
-                multiLine
-                rows={2}
-                placeholder="제목을 입력해주세요."
-                _onChange={(e) => {
-                  setTitle(e.target.value);
-                }}
-                value={title || ""}
-              />
-            </InputMobile>
-          </TitleWrapper>
-          <ContentWrapper>
-            <Title>내용</Title>
-            <TextWrapper>
-              <Input
-                placeholder="내용을 입력해주세요. (최소 20자 이상)"
-                _onChange={(e) => {
-                  setContent(e.target.value);
-                }}
-                _onKeyUp={checkMaxLength}
-                value={contents || ""}
-                multiLine
-                maxlength="1000"
-                rows={16}
-              />
-            </TextWrapper>
-          </ContentWrapper>
-          <ImageWrapper>
-            <Title>첨부파일</Title>
-            <div>
-              <PhotoContainer>
-                <PhotoUpload>
-                  <label>
-                    <ImageUPload />
-                    <input
-                      type="file"
-                      onChange={selectFile}
-                      ref={fileInput}
-                      multiple="multiple"
-                      accept=".jpg,.png"
-                    />
-                  </label>
-                  <PhotoDesc>사진은 최대 3장 업로드 가능합니다.</PhotoDesc>
-                </PhotoUpload>
-              </PhotoContainer>
-              <PhotoDiv>
-                {imgPreview &&
-                  imgPreview.map((image, id) => {
-                    return (
-                      <PhotoWrap>
-                        <Img key={id} src={image} alt={`${image}-${id}`} />
-                        <BiX
-                          type="button"
-                          onClick={() => {
-                            CancelImage(image, id);
-                          }}
-                          style={{ cursor: "pointer" }}
-                        />
-                      </PhotoWrap>
-                    );
-                  })}
-              </PhotoDiv>
-            </div>
-          </ImageWrapper>
-          <BtnWrap>
-            <div className="goback">
+        <BackGround>
+          <WriteWrapper>
+            <TitleContainer>
+              <Text title textAlign="left">
+                수정하기
+              </Text>
+            </TitleContainer>
+            <CategoryWrapper>
+              <Title>카테고리</Title>
+              <Select
+                name="category"
+                form="myForm"
+                onChange={SelectCategory}
+                value={category || ""}
+              >
+                <option value="null">카테고리 선택</option>
+                <option value="솔로">솔로</option>
+                <option value="짝사랑">짝사랑</option>
+                <option value="썸">썸</option>
+                <option value="연애">연애</option>
+                <option value="이별">이별</option>
+                <option value="기타">기타</option>
+              </Select>
+            </CategoryWrapper>
+            <TitleWrapper>
+              <Title>제목</Title>
+              <InputMobile>
+                <Input
+                  multiLine
+                  rows={2}
+                  placeholder="제목을 입력해주세요."
+                  _onChange={(e) => {
+                    setTitle(e.target.value);
+                  }}
+                  value={title || ""}
+                />
+              </InputMobile>
+            </TitleWrapper>
+            <ContentWrapper>
+              <Title>내용</Title>
+              <TextWrapper>
+                <Input
+                  placeholder="내용을 입력해주세요. (최소 20자 이상)"
+                  _onChange={(e) => {
+                    setContent(e.target.value);
+                  }}
+                  _onKeyUp={checkMaxLength}
+                  value={contents || ""}
+                  multiLine
+                  maxlength="1000"
+                  rows={16}
+                />
+              </TextWrapper>
+            </ContentWrapper>
+            <ImageWrapper>
+              <Title>첨부파일</Title>
+              <div>
+                <PhotoContainer>
+                  <PhotoUpload>
+                    <label>
+                      <ImageUPload />
+                      <input
+                        type="file"
+                        onChange={selectFile}
+                        ref={fileInput}
+                        multiple="multiple"
+                        accept=".jpg,.png"
+                      />
+                    </label>
+                    <PhotoDesc>사진은 최대 3장 업로드 가능합니다.</PhotoDesc>
+                  </PhotoUpload>
+                </PhotoContainer>
+                <PhotoDiv>
+                  {imgPreview &&
+                    imgPreview.map((image, id) => {
+                      return (
+                        <PhotoWrap>
+                          <Img key={id} src={image} alt={`${image}-${id}`} />
+                          <BiX
+                            type="button"
+                            onClick={() => {
+                              CancelImage(image, id);
+                            }}
+                            style={{ cursor: "pointer" }}
+                          />
+                        </PhotoWrap>
+                      );
+                    })}
+                </PhotoDiv>
+              </div>
+            </ImageWrapper>
+            <BtnWrap>
+              <div className="goback">
+                <Button
+                  _onClick={() => {
+                    history.goBack();
+                  }}
+                  secondaryDefault
+                  cursor="pointer"
+                  size="narrow"
+                >
+                  <Text body4 color="#7A37BE">
+                    뒤로 가기
+                  </Text>
+                </Button>
+              </div>
               <Button
-                _onClick={() => {
-                  history.goBack();
-                }}
-                secondaryDefault
+                _onClick={editPost}
+                primaryDefault
+                shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
                 cursor="pointer"
                 size="narrow"
               >
-                <Text body4 color="#7A37BE">
-                  뒤로 가기
+                <Text body4 color="#fff" cursor="pointer">
+                  수정하기
                 </Text>
               </Button>
-            </div>
-            <Button
-              _onClick={editPost}
-              primaryDefault
-              shadow="0px 0px 20px rgba(172, 151, 197, 0.25)"
-              cursor="pointer"
-              size="narrow"
-            >
-              <Text body4 color="#fff" cursor="pointer">
-                수정하기
-              </Text>
-            </Button>
-          </BtnWrap>
-        </WriteWrapper>
+            </BtnWrap>
+          </WriteWrapper>
+        </BackGround>
       </Layout>
     </React.Fragment>
   );
@@ -280,8 +282,7 @@ const WriteWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  max-width: 1032px;
-  width: 100%;
+  width: 1032px;
   height: 861px;
   margin: auto;
   margin-top: 30px;
@@ -289,24 +290,31 @@ const WriteWrapper = styled.div`
   background: #ffffff;
   box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border-radius: 10px;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     width: 328px;
     margin: auto;
     box-sizing: border-box;
   }
 `;
 
+const BackGround = styled.div`
+  padding: 80px 0px 200px;
+  @media ${({ theme }) => theme.device.mobile} {
+    padding: 30px 0px 80px;
+  }
+`;
+
 const TitleContainer = styled.div`
   display: flex;
   flex-direction: row;
-  max-width: 952px;
-  width: 100%;
+  width: 952px;
   margin: auto;
   padding: 0px 0px 10px 22px;
   flex: none;
   order: 0;
   flex-grow: 0;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 250px;
     justify-content: center;
     align-items: center;
     padding: 0px;
@@ -325,7 +333,7 @@ const TitleWrapper = styled.div`
   order: 1;
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     width: 250px;
     padding: 0px;
     border: none;
@@ -346,7 +354,7 @@ const CategoryWrapper = styled.div`
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
   border-top: 1px solid #948a9e;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     width: 250px;
     border: none;
     box-sizing: border-box;
@@ -366,14 +374,14 @@ const Title = styled.div`
   gap: 10px;
   border-right: 1px solid #cccccc;
   color: #666666;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     display: none;
   }
 `;
 
 const InputMobile = styled.div`
   width: 860px;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     width: 250px;
     box-sizing: border-box;
   }
@@ -402,7 +410,7 @@ const ContentWrapper = styled.div`
   order: 1;
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     width: 250px;
     border: none;
     box-sizing: border-box;
@@ -412,7 +420,7 @@ const ContentWrapper = styled.div`
 const TextWrapper = styled.div`
   width: 860px;
   height: 295px;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
     width: 350px;
     box-sizing: border-box;
   }
@@ -430,10 +438,12 @@ const ImageWrapper = styled.div`
   order: 1;
   flex-grow: 0;
   border-bottom: 1px solid #e6e6e6;
-  @media ${({ theme }) => theme.device.isMobile} {
-    width: 250px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 220px;
+    border: 1px solid red;
     border: none;
     box-sizing: border-box;
+    padding: 5px 0px;
   }
 `;
 
@@ -443,6 +453,9 @@ const PhotoWrap = styled.div`
   height: 8px;
   padding-top: 10px;
   padding-right: 10px;
+  @media ${({ theme }) => theme.device.mobile} {
+    padding-right: 0px;
+  }
 `;
 
 const PhotoDesc = styled.div`
@@ -483,6 +496,9 @@ const Img = styled.img`
   height: 80px;
   margin: 1px;
   box-sizing: border-box;
+  @media ${({ theme }) => theme.device.mobile} {
+    margin: -3px;
+  }
 `;
 
 const PhotoContainer = styled.div`
@@ -495,19 +511,20 @@ const BtnWrap = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  max-width: 952px;
-  width: 100%;
+  width: 952px;
   height: 60px;
   margin: auto;
   flex: none;
   order: 1;
   flex-grow: 0;
   gap: 20px;
-  @media ${({ theme }) => theme.device.isMobile} {
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 250px;
     .goback {
       display: none;
     }
     justify-content: center;
   }
 `;
+
 export default PostEdit;
