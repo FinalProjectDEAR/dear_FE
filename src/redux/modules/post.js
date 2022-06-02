@@ -76,7 +76,6 @@ const getDetailDB = (postId) => {
         process.env.REACT_APP_URL + `/anonypost/board/${postId}?id=${memberId}`,
         {}
       );
-      console.log(data.data);
       dispatch(getDetail(data.data));
     } catch (err) {
       console.log(err);
@@ -112,7 +111,7 @@ const addPostDB = (payload) => {
     try {
       const formData = new FormData();
       //postWrite페이지에서 미리보기를 리듀서로 보낼 때 []로 보내서 서버에서 받을 때 형식이 달라졌다.
-      //따라서 map 돌려서 하나씩 넣어줬고 files란 이름으로 다중이미지업로드 성공!
+      //따라서 map 돌려서 하나씩 넣어줬고 files란 이름으로 다중이미지업로드 성공
       payload.files.map((e, idx) => {
         return formData.append("files", e);
       });
@@ -181,7 +180,6 @@ const likeDB = (postId, likes) => {
   return async function (dispatch, getState, { history }) {
     try {
       const { data } = await apis.like(postId, likes);
-      console.log(data);
       dispatch(likePost(postId, data.data.likes, data.data.memberIdList));
     } catch (err) {
       console.log(err);
