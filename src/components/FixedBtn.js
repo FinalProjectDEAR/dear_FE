@@ -15,7 +15,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import PersonIcon from "@mui/icons-material/Person";
 import InfoIcon from "@mui/icons-material/Info";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
-import { ReactComponent as Hamburger } from "../assets/Vector (5).svg";
+import { ReactComponent as Hamburger } from "../assets/etc/Vector (5).svg";
 //id값으로 스크롤
 import { Link } from "react-scroll";
 

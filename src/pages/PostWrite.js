@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { actionCreators } from "../redux/modules/post";
 import { imgActions } from "../redux/modules/imagePost";
 
-import { ReactComponent as ImageUPload } from "../assets/파일첨부.svg";
+import { ReactComponent as ImageUPload } from "../assets/postList/파일첨부.svg";
 import { Input, Button, Text } from "../elements";
 import styled from "styled-components";
 import { BiX } from "react-icons/bi";

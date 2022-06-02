@@ -10,7 +10,6 @@ import styled from "styled-components";
 import { Text, Button } from "../elements";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
-import uploadImg from "../assets/upload.png";
 // 페이지
 import VoteResult from "./VoteResult";
 

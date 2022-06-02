@@ -6,8 +6,8 @@ import { actionCreators } from "../redux/modules/mypage";
 
 import styled from "styled-components";
 import { Text, ColorBadge, Modal } from "../elements";
-import { ReactComponent as UnFollower } from "../assets/찜해제.svg";
-import { ReactComponent as Msg } from "../assets/Group 493.svg";
+import { ReactComponent as UnFollower } from "../assets/mypage/찜해제.svg";
+import { ReactComponent as Msg } from "../assets/mypage/Group 493.svg";
 import { useMediaQuery } from "react-responsive";
 //시간알려주는패키지
 import TimeCounting from "time-counting";
