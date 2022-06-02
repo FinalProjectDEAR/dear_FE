@@ -3,6 +3,7 @@ import { produce } from "immer";
 import axios from "axios";
 
 import { apis } from "../../shared/apis";
+import { cookies } from "../../shared/cookie";
 
 import Swal from "sweetalert2";
 import "../../styles/libraryStyle/style.css";
@@ -128,7 +129,8 @@ const getVoteDB = (type) => {
 const detailVoteDB = (postId) => {
   return async function (dispatch, getState, { history }) {
     try {
-      const memberId = localStorage.getItem("memberId");
+      const memberId = cookies.get("memberId", { path: "/" });
+      console.log(memberId);
       const { data } = await axios.get(
         process.env.REACT_APP_URL + `/anonypost/vote/${postId}?id=${memberId}`
       );

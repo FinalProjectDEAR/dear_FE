@@ -15,6 +15,8 @@ import LetterVote from "../components/LetterVote";
 import VoteDel from "../components/alert/VoteDel";
 import Layout from "../components/Layout";
 
+import { cookies } from "../shared/cookie";
+
 function VoteDetail(props) {
   const params = useParams();
   const postId = params.postId;
@@ -33,8 +35,7 @@ function VoteDetail(props) {
 
   const voteInfo = useSelector((state) => state.vote.voteInfo);
 
-  const loginUser = localStorage.getItem("memberId");
-
+  const loginUser = cookies.get("memberId", { path: "/" });
   const date = voteInfo.createdAt.replace("T", " ").substring(0, 16);
 
   return (

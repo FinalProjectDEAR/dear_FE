@@ -24,8 +24,6 @@ function LetterVote({ voteInfo }) {
     showSelection();
   }, [voteInfo.vote[0].selected]);
 
-  console.log(voteInfo);
-
   const [vote, setVote] = React.useState("");
   const [leftSelected, setLeftSelected] = React.useState(false);
   const [rightSelected, setRightSelected] = React.useState(false);

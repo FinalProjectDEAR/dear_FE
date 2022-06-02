@@ -18,6 +18,7 @@ import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
 //컴포넌트
 import TapeInfo from "../components/TapeInfo";
 import ChatIntro from "../components/ChatIntro";
+import { cookies } from "../shared/cookie";
 
 function MainChat() {
   const dispatch = useDispatch();
@@ -45,8 +46,8 @@ function MainChat() {
 
   const isUser = useSelector((state) => state.user.isLogin);
   const tapeCount = useSelector((state) => state.main.tapeCount);
-  const Token = localStorage.getItem("accessToken");
-  const nickname = localStorage.getItem("nickname");
+
+  const nickname = cookies.get("nickname", { path: "/" });
 
   const startReq = () => {
     if (checkBox !== true) {

@@ -17,10 +17,12 @@ import AddTime from "./alert/AddTime";
 import TimeOver from "./alert/TimeOver";
 import NoMatch from "./alert/NoMatch";
 
+import { cookies } from "../shared/cookie";
+
 function AudioChat() {
   const dispatch = useDispatch();
 
-  const nickname = localStorage.getItem("nickname");
+  const nickname = cookies.get("nickname", { path: "/" });
   const token = useSelector((state) => state.chat.roomAuthInfo.token);
   const sessionId = useSelector((state) => state.chat.roomAuthInfo.sessionId);
   const role = useSelector((state) => state.chat.roomAuthInfo.role);
