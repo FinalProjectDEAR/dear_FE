@@ -8,7 +8,7 @@ import { actionCreators as userActions } from "../redux/modules/user";
 import styled from "styled-components";
 import { Text, Input, Button, Modal } from "../elements";
 import { ReactComponent as Logo } from "../assets/main/Logo.svg";
-import { ReactComponent as Kakao } from "../assets/kakao_sns.svg";
+import { ReactComponent as Kakao } from "../assets/etc/kakao_sns.svg";
 import Footer from "../components/Footer";
 import Survey from "../components/Survey";
 import Swal from "sweetalert2";

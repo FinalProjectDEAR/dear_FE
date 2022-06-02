@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { ReactComponent as EmptyIcon } from "../assets/Empty/empty2.svg";
-import { ReactComponent as EmptyMsg } from "../assets/Empty/Group 565.svg";
+import { ReactComponent as EmptyIcon } from "../assets/empty/empty2.svg";
+import { ReactComponent as EmptyMsg } from "../assets/empty/Group 565.svg";
 
 const EmptyMSG = () => {
   return (

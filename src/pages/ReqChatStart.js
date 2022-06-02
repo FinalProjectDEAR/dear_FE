@@ -9,7 +9,7 @@ import { actionCreators as chatActions } from "../redux/modules/chat";
 import styled from "styled-components";
 import { Text, TextB, Input, Button, Modal } from "../elements";
 import { ReactComponent as Arrow } from "../assets/main/arrow.svg";
-import { ReactComponent as ImageUPload } from "../assets/파일첨부.svg";
+import { ReactComponent as ImageUPload } from "../assets/postList/파일첨부.svg";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
 

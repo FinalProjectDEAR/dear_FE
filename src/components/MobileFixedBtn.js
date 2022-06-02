@@ -10,7 +10,7 @@ import styled from "styled-components";
 import { FixedModal } from "../elements";
 import Swal from "sweetalert2";
 import { Badge } from "@material-ui/core";
-import { ReactComponent as X } from "../assets/Vector (10).svg";
+import { ReactComponent as X } from "../assets/etc/Vector (10).svg";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import PersonIcon from "@mui/icons-material/Person";
 import InfoIcon from "@mui/icons-material/Info";

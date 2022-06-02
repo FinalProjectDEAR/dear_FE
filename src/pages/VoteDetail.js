@@ -10,7 +10,7 @@ import { actionCreators as commentActions } from "../redux/modules/comment";
 import styled from "styled-components";
 import { Text, TextB, Modal } from "../elements/index";
 import { ReactComponent as VoteIcon } from "../assets/vote/vote.svg";
-import { ReactComponent as ThumbUp } from "../assets/post-select.svg";
+import { ReactComponent as ThumbUp } from "../assets/vote/post-select.svg";
 //컴포넌트
 import ImageVote from "../components/ImageVote";
 import LetterVote from "../components/LetterVote";

@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
 import { Text, Button, Input } from "../elements/index";
 import { BiX } from "react-icons/bi";
-import { ReactComponent as ImageUPload } from "../assets/파일첨부.svg";
+import { ReactComponent as ImageUPload } from "../assets/postList/파일첨부.svg";
 
 import Layout from "../components/Layout";
 

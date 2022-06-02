@@ -7,7 +7,7 @@ import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
 import { Text, ColorBadge, AlarmModal } from "../elements";
 import { CgClose } from "react-icons/cg";
-import { ReactComponent as EmptyMsg } from "../assets/Empty/emptyMsg.svg";
+import { ReactComponent as EmptyMsg } from "../assets/empty/emptyMsg.svg";
 //시간알려주는패키지
 import TimeCounting from "time-counting";
 
