@@ -1,8 +1,11 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import axios from "axios";
+
 import { imgActions } from "./imagePost";
+
 import { apis } from "../../shared/apis";
+
 import Swal from "sweetalert2";
 import "../../styles/libraryStyle/style.css";
 
@@ -49,16 +52,15 @@ const likePost = createAction(LIKE_POST, (postId, likes, list) => ({
 }));
 const resetPost = createAction(RESET_POST, () => ({}));
 
-// 미들웨어
 //postList 서버에서 받아오기
 const getPostDB = (page) => {
-  return function (dispatch, getState, { history }) {
+  return async function (dispatch, getState, { history }) {
     try {
-      axios
-        .get(process.env.REACT_APP_URL + `/anonypost?page=${page}`, {})
-        .then((res) => {
-          dispatch(getPost(res.data.data));
-        });
+      const { data } = await axios.get(
+        process.env.REACT_APP_URL + `/anonypost?page=${page}`,
+        {}
+      );
+      dispatch(getPost(data.data));
     } catch (err) {
       console.log(err);
     }
@@ -67,13 +69,15 @@ const getPostDB = (page) => {
 
 // 게시판 상세페이지 서버에서 받아오기
 const getDetailDB = (postId) => {
-  return function (dispatch, getState, { history }) {
+  return async function (dispatch, getState, { history }) {
     try {
-      axios
-        .get(process.env.REACT_APP_URL + `/anonypost/board/${postId}`, {})
-        .then((res) => {
-          dispatch(getDetail(res.data.data));
-        });
+      const memberId = localStorage.getItem("memberId");
+      const { data } = await axios.get(
+        process.env.REACT_APP_URL + `/anonypost/board/${postId}?id=${memberId}`,
+        {}
+      );
+      console.log(data.data);
+      dispatch(getDetail(data.data));
     } catch (err) {
       console.log(err);
       Swal.fire("게시글 정보를 가져올 수 없습니다.");
@@ -177,6 +181,7 @@ const likeDB = (postId, likes) => {
   return async function (dispatch, getState, { history }) {
     try {
       const { data } = await apis.like(postId, likes);
+      console.log(data);
       dispatch(likePost(postId, data.data.likes, data.data.memberIdList));
     } catch (err) {
       console.log(err);
