@@ -99,7 +99,7 @@ const loginDB = (memberId, pwd) => {
       );
       let accessToken = data.data.accessToken;
 
-      // localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("accessToken", accessToken);
       cookies.set("accessToken", accessToken, {
         path: "/",
         maxAge: 14400, // 4시간
@@ -157,7 +157,7 @@ const kakaoLogin = (code) => {
         maxAge: 14400, // 4시간
       });
 
-      // localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("accessToken", accessToken);
 
       if (tokenData.nick) {
         const nickname = tokenData.nick;
