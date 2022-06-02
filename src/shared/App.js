@@ -1,8 +1,8 @@
 import React, { lazy, Suspense } from "react";
 
-import { Switch } from "react-router-dom";
-import { Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
+
 import { history } from "../redux/configureStore";
 
 import { ThemeProvider } from "styled-components";
