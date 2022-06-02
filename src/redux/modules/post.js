@@ -74,11 +74,20 @@ const getDetailDB = (postId) => {
   return async function (dispatch, getState, { history }) {
     try {
       const memberId = cookies.get("memberId", { path: "/" });
-      const { data } = await axios.get(
-        process.env.REACT_APP_URL + `/anonypost/board/${postId}?id=${memberId}`,
-        {}
-      );
-      dispatch(getDetail(data.data));
+      if (memberId) {
+        const { data } = await axios.get(
+          process.env.REACT_APP_URL +
+            `/anonypost/board/${postId}?id=${memberId}`,
+          {}
+        );
+        dispatch(getDetail(data.data));
+      } else {
+        const { data } = await axios.get(
+          process.env.REACT_APP_URL + `/anonypost/board/${postId}`,
+          {}
+        );
+        dispatch(getDetail(data.data));
+      }
     } catch (err) {
       console.log(err);
       Swal.fire("게시글 정보를 가져올 수 없습니다.");
