@@ -130,11 +130,20 @@ const detailVoteDB = (postId) => {
   return async function (dispatch, getState, { history }) {
     try {
       const memberId = cookies.get("memberId", { path: "/" });
-      console.log(memberId);
-      const { data } = await axios.get(
-        process.env.REACT_APP_URL + `/anonypost/vote/${postId}?id=${memberId}`
-      );
-      dispatch(detailVote(data.data));
+      if (memberId) {
+        const { data } = await axios.get(
+          process.env.REACT_APP_URL +
+            `/anonypost/vote/${postId}?id=${memberId}`,
+          {}
+        );
+        dispatch(detailVote(data.data));
+      } else {
+        const { data } = await axios.get(
+          process.env.REACT_APP_URL + `/anonypost/vote/${postId}`,
+          {}
+        );
+        dispatch(detailVote(data.data));
+      }
     } catch (err) {
       Swal.fire("투표정보 불러오기 실패, 다시 시도해주세요.");
       history.push("/postList");
