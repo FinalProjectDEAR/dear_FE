@@ -1,12 +1,11 @@
 import React from "react";
-
+//스타일
 import styled from "styled-components";
 import { CgClose } from "react-icons/cg";
+import { ReactComponent as SurveyThumb } from "../assets/infoModal/survey.svg";
 
 import { useCookies } from "react-cookie";
 import dayjs from "dayjs";
-
-import { ReactComponent as SurveyThumb } from "../assets/infoModal/survey.svg";
 
 function Survey({ close }) {
   const COOKIE_KEY = "notAgain";

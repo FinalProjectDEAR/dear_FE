@@ -1,5 +1,4 @@
 import React from "react";
-
 //스타일
 import styled from "styled-components";
 import { ReactComponent as Info1 } from "../assets/intro/s-info-1m.svg";

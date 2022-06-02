@@ -1,7 +1,7 @@
 import React from "react";
-
+//라우터
 import { useHistory } from "react-router-dom";
-
+//스타일
 import styled from "styled-components";
 import { TextB, Text } from "../elements";
 import { ReactComponent as Vote } from "../assets/postList/vote.svg";

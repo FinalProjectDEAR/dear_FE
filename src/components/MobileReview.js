@@ -1,5 +1,4 @@
 import React from "react";
-
 //리덕스
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as mainActions } from "../redux/modules/main";
@@ -8,7 +7,6 @@ import styled from "styled-components";
 import { Text } from "../elements";
 //페이지
 import ReviewCard from "../components/ReviewCard";
-
 //Carousel library
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";

@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-
 //리덕스
 import { actionCreators as chatActions } from "../redux/modules/chat";
 import { history } from "../redux/configureStore";
@@ -10,6 +9,8 @@ import { Text, TextB, Button, Modal } from "../elements";
 import { ReactComponent as Arrow } from "../assets/main/arrow.svg";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
+
+import { cookies } from "../shared/cookie";
 
 function ResChatStart() {
   const [audioPermit, setAudioPermit] = React.useState("");
@@ -31,7 +32,7 @@ function ResChatStart() {
   const dispatch = useDispatch();
   const [category, setCategory] = React.useState("");
 
-  const memberId = localStorage.getItem("memberId");
+  const memberId = cookies.get("memberId", { path: "/" });
 
   //모달
   const [modalOpen, setModalOpen] = React.useState(true);

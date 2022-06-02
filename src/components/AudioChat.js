@@ -1,13 +1,12 @@
-import React, { useRef, useIn } from "react";
+import React from "react";
 import { OpenVidu } from "openvidu-browser";
-//라우트
-import { useLocation } from "react-router-dom";
 //리덕스
+import { history } from "../redux/configureStore";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as chatActions } from "../redux/modules/chat";
 //스타일
 import styled from "styled-components";
-import { Text, Button, ColorBadge, Modal } from "../elements";
+import { Text, Button, Modal } from "../elements";
 //페이지
 import UserAudioComponent from "../components/UserAudioComponent";
 import Timer from "../components/Timer";
@@ -22,11 +21,9 @@ function AudioChat() {
   const dispatch = useDispatch();
 
   const nickname = localStorage.getItem("nickname");
-  //세션 입장정보
   const token = useSelector((state) => state.chat.roomAuthInfo.token);
   const sessionId = useSelector((state) => state.chat.roomAuthInfo.sessionId);
   const role = useSelector((state) => state.chat.roomAuthInfo.role);
-  //채팅방 정보
   const chatInfo = useSelector((state) => state.chat.chatInfo);
 
   //채팅
@@ -43,16 +40,11 @@ function AudioChat() {
   const [isContinue, setIsContinue] = React.useState(false);
   const [isTimeOver, setIsTimeOver] = React.useState(false);
 
-  //voice
-  const [mVoice, setMvoice] = React.useState(true);
-  const [wVoice, setWvoice] = React.useState(true);
-
   //모달
   const [modalOpen, setModalOpen] = React.useState(false);
   const [noListener, setNoListener] = React.useState(false);
   const [showReqInfo, setShowReqInfo] = React.useState(false);
   const [showResInfo, setShowResInfo] = React.useState(false);
-  const [showFiveSec, setShowFiveSec] = React.useState(false);
 
   const closeModal = () => {
     setModalOpen(false);
@@ -62,23 +54,34 @@ function AudioChat() {
     setIsContinue(false);
   };
 
-  //브라우저 새로고침, 종료시
+  // 브라우저 새로고침, 종료, 라우트 변경
   const onbeforeunload = (event) => {
     event.preventDefault();
     event.returnValue = "";
-    informClose();
+    leaveSession();
   };
+
+  // 뒤로가기;
+  React.useEffect(() => {
+    window.onpopstate = () => {
+      history.push("/");
+      chatClose();
+    };
+  });
 
   // 채팅중 실시간 시그널
 
   const sendCloseSignal = () => {
     session
       .signal({
-        data: "true", // Any string (optional)
-        to: [connectObj], // Array of Connection objects (optional. Broadcast to everyone if empty)
-        type: "close", // The type of message (optional)
+        data: "true",
+        to: [connectObj],
+        type: "close",
       })
-      .then(() => {})
+      .then(() => {
+        console.log("종료시 세션", session);
+        leaveSession();
+      })
       .catch((error) => {
         console.error(error);
       });
@@ -91,28 +94,15 @@ function AudioChat() {
 
     if (wantMore.agree.length % 2 === 0) {
       let date = new Date();
-      let extend = date.setMinutes(date.getMinutes() + 1); //연장 테스트 1분
+      let extend = date.setMinutes(date.getMinutes() + 10);
       setTargetTime(extend);
     }
 
     session
       .signal({
-        data: "true", // Any string (optional)
-        to: [connectObj], // Array of Connection objects (optional. Broadcast to everyone if empty)
-        type: "continue", // The type of message (optional)
-      })
-      .then(() => {})
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
-  const sendConnectSignal = () => {
-    session
-      .signal({
-        data: "true", // Any string (optional)
-        to: [connectObj], // Array of Connection objects (optional. Broadcast to everyone if empty)
-        type: "connect", // The type of message (optional)
+        data: "true",
+        to: [connectObj],
+        type: "continue",
       })
       .then(() => {})
       .catch((error) => {
@@ -129,29 +119,28 @@ function AudioChat() {
 
       var mySession = OV.initSession();
       setSession(mySession);
+      console.log("세션", mySession);
 
       mySession.on("streamCreated", (event) => {
         var subscriber = mySession.subscribe(event.stream, undefined);
         var subscriberList = subscribers;
         subscriberList.push(subscriber);
         setSubscribers([...subscribers, ...subscriberList]);
+        console.log("스트림 생성", subscribers.length, session);
         let date = new Date();
         let target = date.setMinutes(date.getMinutes() + 10);
         setTargetTime(target);
+
         setIsConnect(true);
-        // sendConnectSignal();
         dispatch(chatActions.getChatInfoDB(sessionId));
-        // setShowFiveSec(true);
-        // setShowFiveSec(false);
       });
 
-      mySession.on("signal:connect", (event) => {
-        // const fiveSecWait = () => {};
-        // setTimeout(fiveSecWait(), 5000);
-        // dispatch(chatActions.getChatInfoDB(sessionId));
+      mySession.on("streamDestroyed", (event) => {
+        setOtherClose(true);
       });
 
       mySession.on("signal:close", (event) => {
+        console.log("세션", mySession);
         setOtherClose(true);
       });
 
@@ -168,12 +157,14 @@ function AudioChat() {
 
       //메세지 송신을 위한 connect Obj 생성
       mySession.on("connectionCreated", (event) => {
+        console.log("커넥트 오브젝트", session);
         setConnectObj(event.connection);
       });
 
       mySession
         .connect(token, { clientData: nickname })
         .then(async () => {
+          console.log("토큰 커넥트");
           var devices = await OV.getDevices();
           var videoDevices = devices.filter(
             (device) => device.kind === "videoinput"
@@ -203,6 +194,7 @@ function AudioChat() {
 
     return () => {
       window.removeEventListener("beforeunload", onbeforeunload);
+      chatClose();
     };
   }, []);
 
@@ -224,8 +216,8 @@ function AudioChat() {
   }, []);
 
   const noMatch = () => {
-    leaveSession();
-    setTimeout(informClose(), 500);
+    informClose();
+    setTimeout(leaveSession(), 500);
   };
 
   const waitTimeOut = () => {
@@ -235,7 +227,7 @@ function AudioChat() {
   // 채팅 종료
   const chatClose = () => {
     sendCloseSignal();
-    setTimeout(leaveSession, 2000); //2000
+    setTimeout(leaveSession, 500); //2000
     informClose();
   };
 
@@ -250,13 +242,6 @@ function AudioChat() {
       dispatch(chatActions.disConnectDB(sessionId));
     }
   };
-
-  // 뒤로가기
-  React.useEffect(() => {
-    window.onpopstate = () => {
-      noMatch();
-    };
-  });
 
   // 채팅종료시간
   function dateFormat(date) {
@@ -382,7 +367,6 @@ function AudioChat() {
               <MobileUserBox>
                 <Ellipsis>
                   <Text body3>{chatInfo.reqNickname}</Text>
-                  {/* <Text body3>비둘기구구절절구구</Text> */}
                 </Ellipsis>
                 <InfoBtn
                   onClick={() => {
@@ -565,7 +549,11 @@ function AudioChat() {
 
       {otherClose ? (
         <Modal>
-          <OtherClose informClose={informClose} leaveSession={leaveSession} noMatch={noMatch}/>
+          <OtherClose
+            informClose={informClose}
+            leaveSession={leaveSession}
+            noMatch={noMatch}
+          />
         </Modal>
       ) : null}
 

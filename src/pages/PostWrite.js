@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-
+//라우터
 import { useParams } from "react-router-dom";
-
+//리덕스
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators } from "../redux/modules/post";
 import { imgActions } from "../redux/modules/imagePost";
-
-import { ReactComponent as ImageUPload } from "../assets/postList/파일첨부.svg";
-import { Input, Button, Text } from "../elements";
+//스타일
 import styled from "styled-components";
+import { Input, Button, Text } from "../elements";
+import { ReactComponent as ImageUPload } from "../assets/postList/파일첨부.svg";
 import { BiX } from "react-icons/bi";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
-
+//컴포넌트
 import Layout from "../components/Layout";
 
 function PostWrite() {

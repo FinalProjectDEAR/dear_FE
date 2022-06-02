@@ -1,9 +1,7 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { actionCreators as voteActions } from "../redux/modules/vote";
-
-import { Text, Button, Input, ColorBadge } from "../elements";
+//스타일
 import styled from "styled-components";
+import { Text, Button, Input, ColorBadge } from "../elements";
 
 function HistoryCard(props) {
   return (

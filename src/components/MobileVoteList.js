@@ -1,5 +1,4 @@
 import React from "react";
-
 //리덕스
 import { useSelector } from "react-redux";
 //스타일
@@ -13,7 +12,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 //스크롤
-import { Link } from "react-scroll";
 
 function MobileVoteList() {
   const hotVoteList = useSelector((state) => state.main.hotVoteList);

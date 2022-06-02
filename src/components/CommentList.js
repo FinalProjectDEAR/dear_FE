@@ -1,10 +1,10 @@
 import React from "react";
-
+//리덕스
 import { useSelector } from "react-redux";
-
+//스타일
 import styled from "styled-components";
 import { Text } from "../elements";
-
+//컴포넌트
 import CommentItem from "./CommentItem";
 
 const CommentList = (props) => {
