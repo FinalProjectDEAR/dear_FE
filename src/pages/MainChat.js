@@ -282,7 +282,10 @@ const TapeCntLine = styled.div`
 `;
 
 const ScrollBox = styled.div`
+  position: absolute;
+  bottom: 3%;
   ${({ theme }) => theme.common.flexCenterColumn};
+
   margin-top: 150px;
   @media ${({ theme }) => theme.device.mobile} {
     display: none;
