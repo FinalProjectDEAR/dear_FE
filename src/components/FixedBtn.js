@@ -71,8 +71,7 @@ function FixedBtn(props) {
 
   //알람 갯수 가져오기
   React.useEffect(() => {
-    const nickname = cookies.get("nickname", { path: "/" });
-    if (!nickname) {
+    if (!isUser) {
       return;
     } else {
       dispatch(actionCreators.getNotiCntDB());

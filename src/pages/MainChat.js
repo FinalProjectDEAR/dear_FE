@@ -28,9 +28,7 @@ function MainChat() {
   const [showChatInfo, setShowChatInfo] = React.useState(false);
 
   React.useEffect(() => {
-    const nickname = cookies.get("nickname", { path: "/" });
-    console.log("닉네임", nickname);
-    if (!nickname) {
+    if (!isUser) {
       return;
     } else {
       dispatch(mainActions.getTapeDB());
