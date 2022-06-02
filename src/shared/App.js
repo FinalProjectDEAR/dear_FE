@@ -11,6 +11,7 @@ import "./App.css";
 
 //HOC
 import PrivateRoute from "../shared/auth/PrivateRoute";
+import PublicRoute from "../shared/auth/PublicRoute";
 
 //컴포넌트
 import ScrollToTop from "../components/ScrollToTop";
@@ -85,8 +86,20 @@ function App() {
               <Route path="/LoadingMatch" exact component={LoadingMatch} />
               <Route path="/resReview" exact component={resReview} />
               <Route path="/reqReview" exact component={reqReview} />
-              <Route path="/signup" exact component={Signup} />
-              <Route path="/login" exact component={Login} />
+              <PublicRoute
+                restricted={true}
+                Component={Login}
+                path="/login"
+                exact
+              />
+              <PublicRoute
+                restricted={true}
+                Component={Signup}
+                path="/signup"
+                exact
+              />
+              {/* <Route path="/signup" exact component={Signup} />
+              <Route path="/login" exact component={Login} /> */}
               <Route path="*" exact component={NotFound} />
             </Switch>
           </Suspense>
