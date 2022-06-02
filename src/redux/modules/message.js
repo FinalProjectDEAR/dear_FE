@@ -1,6 +1,8 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
-import { api, apis } from "../../shared/apis";
+
+import { apis } from "../../shared/apis";
+
 import Swal from "sweetalert2";
 import "../../styles/libraryStyle/style.css";
 
