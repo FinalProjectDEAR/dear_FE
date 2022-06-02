@@ -76,7 +76,6 @@ const getDetailDB = (postId) => {
         process.env.REACT_APP_URL + `/anonypost/board/${postId}?id=${memberId}`,
         {}
       );
-      console.log(data.data);
       dispatch(getDetail(data.data));
     } catch (err) {
       console.log(err);
@@ -181,7 +180,6 @@ const likeDB = (postId, likes) => {
   return async function (dispatch, getState, { history }) {
     try {
       const { data } = await apis.like(postId, likes);
-      console.log(data);
       dispatch(likePost(postId, data.data.likes, data.data.memberIdList));
     } catch (err) {
       console.log(err);
