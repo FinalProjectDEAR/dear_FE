@@ -8,7 +8,7 @@ import { actionCreators as voteActions } from "../redux/modules/vote";
 //스타일
 import { useMediaQuery } from "react-responsive";
 import { Input, Text, TextB, Button, Modal } from "../elements";
-import { ReactComponent as ImageUPload } from "../assets/파일첨부.svg";
+import { ReactComponent as ImageUPload } from "../assets/postList/파일첨부.svg";
 import { ReactComponent as Arrow } from "../assets/main/arrow.svg";
 import uploadImg from "../assets/upload.png";
 import styled from "styled-components";

@@ -9,7 +9,7 @@ import { actionCreators as commentActions } from "../redux/modules/comment";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
-import { Text, Button, Modal } from "../elements/index";
+import { Text, Modal } from "../elements/index";
 import { ReactComponent as ThumbUp } from "../assets/postList/posthumb.svg";
 import { ReactComponent as CommentNum } from "../assets/postList/post.svg";
 import { ReactComponent as LikeUp } from "../assets/postList/postUp.svg";

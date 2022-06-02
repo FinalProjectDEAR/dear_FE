@@ -11,11 +11,11 @@ import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
 import { useMediaQuery } from "react-responsive";
 import { Text, ColorBadge, Tag } from "../elements";
-import { ReactComponent as Setting } from "../assets/설정btn.svg";
-import { ReactComponent as Help } from "../assets/help_outline.svg";
-import { ReactComponent as Sound } from "../assets/surround_sound.svg";
-import { ReactComponent as Left } from "../assets/paging_left.svg";
-import { ReactComponent as Right } from "../assets/paging_right.svg";
+import { ReactComponent as Setting } from "../assets/mypage/설정btn.svg";
+import { ReactComponent as Help } from "../assets/mypage/help_outline.svg";
+import { ReactComponent as Sound } from "../assets/mypage/surround_sound.svg";
+import { ReactComponent as Left } from "../assets/mypage/paging_left.svg";
+import { ReactComponent as Right } from "../assets/mypage/paging_right.svg";
 
 import Layout from "../components/Layout";
 import MessageList from "./MessageList";
