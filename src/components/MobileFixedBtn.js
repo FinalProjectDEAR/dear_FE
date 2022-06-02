@@ -188,6 +188,8 @@ const MBtn = styled.div`
   flex-grow: 0;
   border-radius: 50%;
   background-color: #fafafa;
+  box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
+
   color: white;
   border: none;
   cursor: pointer;

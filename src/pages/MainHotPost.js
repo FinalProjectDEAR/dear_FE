@@ -6,6 +6,8 @@ import { actionCreators as mainActions } from "../redux/modules/main";
 //스타일
 import styled from "styled-components";
 import { Text } from "../elements";
+import ArrowDropDownRoundedIcon from "@mui/icons-material/ArrowDropDownRounded";
+
 //컴포넌트
 import VoteCard from "../components/VoteCard";
 import PostCard from "../components/PostCard";
@@ -64,6 +66,14 @@ function MainHotPost() {
             디어상담소 바로가기 {">"}
           </Text>
         </HotPostWrapper>
+        <ScrollBox>
+          <Text body color="#948A9E">
+            SCROLL
+          </Text>
+          <ArrowDropDownRoundedIcon
+            style={{ width: "30px", color: "#948A9E" }}
+          />
+        </ScrollBox>
       </Background>
     </React.Fragment>
   );
@@ -72,7 +82,10 @@ function MainHotPost() {
 export default MainHotPost;
 
 const Background = styled.div`
+  position: relative;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   width: 100%;
   height: 100vh;
@@ -120,5 +133,14 @@ const BoardBox = styled.div`
     height: 650px;
     margin-top: 5px;
     overflow: hidden;
+  }
+`;
+
+const ScrollBox = styled.div`
+  position: absolute;
+  ${({ theme }) => theme.common.flexCenterColumn};
+  margin-bottom: -40%;
+  @media ${({ theme }) => theme.device.mobile} {
+    display: none;
   }
 `;

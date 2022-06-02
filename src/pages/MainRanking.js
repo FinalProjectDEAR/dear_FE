@@ -8,6 +8,8 @@ import { actionCreators as mainActions } from "../redux/modules/main";
 import styled from "styled-components";
 import { Text, TextB } from "../elements";
 import { ReactComponent as ServiceInfo } from "../assets/main/serviceInfo.svg";
+import ArrowDropDownRoundedIcon from "@mui/icons-material/ArrowDropDownRounded";
+
 //컴포넌트
 import RankingCard from "../components/RankingCard";
 import MobileRanking from "../components/MobileRanking";
@@ -95,6 +97,14 @@ function MainRanking() {
           </RankingContainer>
           <MobileRanking />
         </RankingWrapper>
+        <ScrollBox>
+          <Text body color="#948A9E">
+            SCROLL
+          </Text>
+          <ArrowDropDownRoundedIcon
+            style={{ width: "30px", color: "#948A9E" }}
+          />
+        </ScrollBox>
       </Background>
     </React.Fragment>
   );
@@ -105,6 +115,7 @@ export default MainRanking;
 const Background = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100vh;
 `;
@@ -214,6 +225,15 @@ const ImageBox = styled.div`
     width: 529px;
     height: 122px;
   }
+  @media ${({ theme }) => theme.device.mobile} {
+    display: none;
+  }
+`;
+
+const ScrollBox = styled.div`
+  position: absolute;
+  ${({ theme }) => theme.common.flexCenterColumn};
+  margin-bottom: -43%;
   @media ${({ theme }) => theme.device.mobile} {
     display: none;
   }
