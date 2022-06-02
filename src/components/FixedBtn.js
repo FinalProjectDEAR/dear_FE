@@ -228,6 +228,7 @@ const Desc = styled.div`
   flex-grow: 0;
   border-radius: 50%;
   background-color: white;
+  box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
   border: none;
   color: #61586a;
   overflow: hidden;
@@ -267,6 +268,8 @@ const Event = styled.div`
   margin: 10px 0px;
   border-radius: 50%;
   background-color: #7a37be;
+  box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
+
   border: none;
   cursor: pointer;
 `;
@@ -286,6 +289,8 @@ const Up = styled.div`
   margin: 10px 0px;
   border-radius: 50%;
   background-color: #61586a;
+  box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
+
   color: white;
   border: none;
   cursor: pointer;
@@ -300,6 +305,8 @@ const MBtn = styled.div`
   flex-grow: 0;
   border-radius: 50%;
   background-color: #61586a;
+  box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
+
   color: white;
   border: none;
   cursor: pointer;
@@ -316,6 +323,8 @@ const MEvent = styled.div`
   flex-grow: 0;
   border-radius: 50%;
   background-color: #7a37be;
+  box-shadow: 0px 0px 20px rgba(172, 151, 197, 0.25);
+
   color: white;
   border: none;
   cursor: pointer;

@@ -784,6 +784,7 @@ const MobileButton = styled.div`
   border-radius: 0px;
   @media ${({ theme }) => theme.device.mobile} {
     display: flex;
-    margin-top: 20px;
+    position: fixed;
+    bottom: 0;
   }
 `;

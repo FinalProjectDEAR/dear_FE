@@ -197,7 +197,7 @@ const MHeaderBtn = styled.button`
   display: none;
   justify-content: center;
   align-items: flex-end;
-  margin: 0px 9%;
+  margin: 0px 5%;
   color: #61586a;
   line-height: 15px;
   border: none;
