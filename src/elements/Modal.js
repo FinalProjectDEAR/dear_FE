@@ -21,8 +21,6 @@ const Modal = (props) => {
   }, []);
 
   const oncloseModal = (e) => {
-    console.log("e.target: ", e.target);
-    console.log("e.currentTarget: ", e.currentTarget);
     if (e.target === e.currentTarget) {
       closeModal();
     }
@@ -31,18 +29,21 @@ const Modal = (props) => {
   return (
     <Container>
       <Background onClick={oncloseModal} />
-      <CgClose
-        className="close"
-        size={30}
-        onClick={closeModal}
-        style={{
-          color: "white",
-          position: "absolute",
-          right: "1.5rem",
-          top: "1.5rem",
-          cursor: "pointer",
-        }}
-      />
+      <CloseBox>
+        <CgClose
+          className="close"
+          size={30}
+          onClick={closeModal}
+          style={{
+            color: "white",
+            position: "absolute",
+            right: "20px",
+            top: "-140px",
+            cursor: "pointer",
+          }}
+        />
+      </CloseBox>
+
       <ModalBlock>
         <Contents>{children}</Contents>
       </ModalBlock>
@@ -92,18 +93,15 @@ const Background = styled.div`
 
 const ModalBlock = styled.div`
   position: fixed;
-  display: block;
-  top: 6.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  top: 1rem;
   border-radius: 10px;
   padding: 1.5rem;
-  /* background-color: white; */
   width: 600px;
-  /* @media (max-width: 1120px) {
-    width: 50rem;
-  }
-  @media (max-width: 50rem) {
-    width: 80%;
-  } */
+
   min-height: 35rem;
   animation: modal-show 1s;
   @keyframes modal-show {
@@ -116,12 +114,23 @@ const ModalBlock = styled.div`
       margin-top: 0;
     }
   }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    top: 0rem;
+  }
 `;
 
 const Contents = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const CloseBox = styled.div`
+  display: flex;
+  @media ${({ theme }) => theme.device.mobile} {
+    display: none;
+  }
 `;
 
 export default Modal;

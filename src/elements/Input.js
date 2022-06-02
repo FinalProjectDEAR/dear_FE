@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import theme from "../styles/theme";
+
 import Text from "./Text";
 
 const Input = (props) => {
   const {
-    label,
     placeholder,
     _onChange,
     type,
@@ -27,7 +28,6 @@ const Input = (props) => {
     placeholder_st,
     maxlength,
     _onKeyUp,
-    //추가
     borderRadius,
     shadow,
   } = props;
@@ -49,11 +49,6 @@ const Input = (props) => {
   if (multiLine) {
     return (
       <div>
-        {label && (
-          <Text margin="0px" size={size} center bold>
-            {label}
-          </Text>
-        )}
         <ElTextArea
           {...style}
           ref={_ref}
@@ -73,11 +68,6 @@ const Input = (props) => {
   return (
     <React.Fragment>
       <div style={{ width: "100%" }}>
-        {label && (
-          <Text margin="0px" size={size} center>
-            {label}
-          </Text>
-        )}
         {is_submit ? (
           <ElInput
             {...style}
@@ -93,6 +83,7 @@ const Input = (props) => {
             }}
             onKeyUp={_onKeyUp}
             style={_style}
+            maxLength={maxlength}
           />
         ) : (
           <ElInput
@@ -103,6 +94,7 @@ const Input = (props) => {
             placeholder={placeholder}
             onChange={_onChange}
             style={_style}
+            maxLength={maxlength}
           />
         )}
       </div>
@@ -149,25 +141,34 @@ const ElTextArea = styled.textarea`
   &:focus {
     outline: none;
   }
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.grayScale[300]};
+    font-size: 11px;
+  }
   ${(props) => (props.maxlength ? `maxlength: ${props.maxLength}` : "")};
 `;
 
 const ElInput = styled.input`
-  width: 100%;
-  padding: ${(props) => props.padding};
-  box-sizing: border-box;
-  background-color: ${(props) => props.bg};
-  border: ${(props) => props.border};
+  color: ${({ theme }) => theme.colors.grayScale["700"]};
+  border: 1px solid ${({ theme }) => theme.colors.grayScale["50"]};
   &:focus {
+    box-shadow: 0px 0px 5px rgba(230, 230, 230, 0.75);
     outline: none;
   }
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.grayScale[300]};
+    font-size: 80%;
+  }
+  width: 100%;
+  box-sizing: border-box;
+  padding: ${(props) => props.padding};
+  background-color: ${(props) => props.bg};
   -webkit-appearance: none;
   font-size: ${(props) => props.size};
-  color: ${(props) => props.color};
-  //추가
   margin: ${(props) => props.margin};
   border-radius: ${(props) => props.borderRadius};
   box-shadow: ${(props) => props.shadow};
+  ${(props) => (props.maxlength ? `maxlength: ${props.maxLength}` : "")};
 `;
 
 export default Input;

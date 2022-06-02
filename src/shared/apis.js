@@ -37,7 +37,6 @@ api.interceptors.response.use(
     if (status === 401) {
       if (response.data.accessToken) {
         // access token이 재발급 된 상태,
-        console.log(response);
         localStorage.setItem("access_token", response.data.accessToken);
         originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`;
         return axios(originalRequest);
@@ -45,7 +44,7 @@ api.interceptors.response.use(
       if (response.data.reason === "refreshtoken expired") {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
-        history.replace("/");
+        history.replace("/login");
       }
     }
   }
@@ -58,21 +57,19 @@ export const apis = {
   post: (payload) => api.post("/anonypost/board", payload),
   edit: (postId, payload) => api.put(`/anonypost/board/${postId}`, payload),
   delete: (postId) => api.delete(`/anonypost/board/${postId}`),
-  like: (postId, likeId) =>
-    api.post(`/anonypost/board/${postId}/postLikes`, { likeId }),
+  like: (postId, likes) =>
+    api.post(`/anonypost/board/${postId}/postLikes?likes=${likes}`),
 
   // comment
-  addComment: (postId) => api.get(`/anonypost/${postId}/comment`),
-  postComment: (comment, postId) =>
-    api.post(`/anonypost/board/${postId}/comment`, { comment, postId }),
-  putComment: (postId, commentId) =>
-    api.put(`/anonypost/board/${postId}/comment/${commentId}`),
+  getComment: (postId) => api.get(`/anonypost/${postId}/comment`),
+  postComment: (postId, payload) =>
+    api.post(`anonypost/board/${postId}/comment`, payload),
+  putComment: (postId, commentId, comment) =>
+    api.put(`anonypost/board/${postId}/comment/${commentId}`, { comment }),
   deleteComment: (postId, commentId) =>
-    api.delete(`/anonypost/board/${postId}/comment/${commentId}`),
-  commentLike: (postId, commentId, likeId) =>
-    api.post(`/anonypost/board/${postId}/commentLikes/${commentId}`, {
-      likeId,
-    }),
+    api.delete(`anonypost/board/${postId}/comment/${commentId}`),
+  commentLike: (postId, commentId) =>
+    api.post(`anonypost/board/${postId}/commentLikes/${commentId}`),
 
   //vote
   getVote: (type) => api.get(`/anonypost?type=${type}`),
@@ -81,13 +78,35 @@ export const apis = {
   delVote: (postId) => api.delete(`/anonypost/vote/${postId}`),
   putVote: (postId, vote) =>
     api.post(`/anonypost/vote/${postId}/voteSelect?selectionNum=${vote}`),
-  voteRanking: () => api.get("/anonypost/voteRanking"),
 
   // user
   nickCheck: (nickname) => api.post("/user/nicknameCheck", { nickname }),
   sendInfo: (memberInfo) => api.post("/user/info", memberInfo),
 
   //chat
+  getChat: (sessionId) => api.get(`/chat/info/${sessionId}`),
   reqChat: (formData) => api.post("/chat/request", formData),
   resChat: (category) => api.post("/chat/response", category),
+  closeChat: (sessionId, time) => api.post(`/chat/info/${sessionId}/${time}`),
+  disConnect: (sessionId) => api.delete(`/chat/info/${sessionId}/disconnect`),
+
+  //main
+  getTape: () => api.get(`/user/info/reward`),
+
+  //message
+  getMsg: (page) => api.get(`/user/info/message/${page}`),
+  getDetailMsg: (messageId) => api.get(`/message/detail/${messageId}`),
+  addMsg: (message, resUserId) =>
+    api.post(`/message/request`, { message, resUserId }),
+
+  //myPage
+  getPost: (page) => api.get(`/user/info/board/${page}`),
+  getFollow: (page) => api.get(`/user/info/follow/${page}`),
+  getChatList: () => api.get("/user/info/chatHistory"),
+  getMember: () => api.get("/user/info/profile"),
+  putInfo: (memberInfo) => api.post("/user/info", memberInfo),
+
+  //noti
+  getAlarm: () => api.get("/alarm/all"),
+  getAlarmCnt: () => api.get("/alarm"),
 };
