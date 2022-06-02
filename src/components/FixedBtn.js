@@ -22,6 +22,8 @@ import { Link } from "react-scroll";
 import Survey from "./Survey";
 import MobileFixedBtn from "./MobileFixedBtn";
 
+import { cookies } from "../shared/cookie";
+
 function FixedBtn(props) {
   React.useEffect(() => {
     dispatch(userActions.loginCheckDB());
@@ -69,8 +71,14 @@ function FixedBtn(props) {
 
   //알람 갯수 가져오기
   React.useEffect(() => {
-    dispatch(actionCreators.getNotiCntDB());
+    const nickname = cookies.get("nickname", { path: "/" });
+    if (!nickname) {
+      return;
+    } else {
+      dispatch(actionCreators.getNotiCntDB());
+    }
   }, []);
+
   const alarmNum = useSelector((state) => state.noti.notiCnt);
 
   const gotoMypage = () => {

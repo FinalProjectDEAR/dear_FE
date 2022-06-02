@@ -132,7 +132,7 @@ const Login = () => {
           </LineBox>
         </ButtonBox>
         <KakaoBox>
-          <Kakao onClick={kakaoAuth} />
+          <Kakao onClick={kakaoAuth} style={{ cursor: "pointer" }} />
         </KakaoBox>
       </LoginWrapper>
 

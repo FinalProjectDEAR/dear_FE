@@ -37,7 +37,6 @@ const initialState = {
   memberId: null,
   nickname: null,
   userInfo: null,
-  isLogin: false,
   followList: null,
   historyList: null,
   idMsg: false,
@@ -70,11 +69,19 @@ const signupDB = (memberId, pwd, pwdCheck) => {
 
 const loginCheckDB = () => {
   return function (dispatch, getState, { history }) {
-    const nickname = cookies.get("nickname", { path: "/" });
-    const memberId = cookies.get("memberId", { path: "/" });
-    const tokenCheck = cookies.get("accessToken", { path: "/" });
-    if (tokenCheck) {
+    const nickname = cookies.get("nickname", {
+      path: "/",
+    });
+    const memberId = cookies.get("memberId", {
+      path: "/",
+    });
+    const tokenCheck = cookies.get("accessToken", {
+      path: "/",
+    });
+    // const tokenCheck = localStorage.accessToken;
+    if (tokenCheck && memberId && nickname) {
       dispatch(setUser(memberId, nickname));
+    } else {
       return;
     }
   };
@@ -92,22 +99,31 @@ const loginDB = (memberId, pwd) => {
       );
       let accessToken = data.data.accessToken;
 
-      const tokenData = jwtDecode(accessToken);
       localStorage.setItem("accessToken", accessToken);
+      cookies.set("accessToken", accessToken, {
+        path: "/",
+        maxAge: 14400, // 4시간
+      });
+
+      const tokenData = jwtDecode(accessToken);
+      cookies.set("accessToken", accessToken, {
+        path: "/",
+        maxAge: 14400, // 4시간
+      });
       cookies.set("memberId", memberId, {
         path: "/",
-        maxAge: 14400,
+        maxAge: 14400, // 4시간
       });
+      // localStorage.setItem("accessToken", accessToken);
+      // localStorage.setItem("memberId", memberId);
+
       if (tokenData.nick) {
         history.replace("/");
         const nickname = tokenData.nick;
-        cookies.set("accessToken", accessToken, {
-          path: "/",
-          maxAge: 14400, // 4시간
-        });
+        // localStorage.setItem("nickname", nickname);
         cookies.set("nickname", nickname, {
           path: "/",
-          maxAge: 14400,
+          maxAge: 14400, // 4시간
         });
         dispatch(setUser(memberId, nickname));
       } else {
@@ -127,26 +143,29 @@ const kakaoLogin = (code) => {
         process.env.REACT_APP_URL + `/user/kakao/callback?code=${code}`
       );
       let accessToken = data.data.accessToken;
-      let refreshToken = data.data.refreshToken;
 
       const tokenData = jwtDecode(accessToken);
-      localStorage.setItem("accessToken", accessToken);
+      const memberId = tokenData.sub;
 
       cookies.set("accessToken", accessToken, {
         path: "/",
-        maxAge: 14400,
+        maxAge: 14400, // 4시간
       });
 
+      cookies.set("memberId", memberId, {
+        path: "/",
+        maxAge: 14400, // 4시간
+      });
+
+      localStorage.setItem("accessToken", accessToken);
+
       if (tokenData.nick) {
-        const memberId = tokenData.sub;
         const nickname = tokenData.nick;
-        cookies.set("memberId", memberId, {
-          path: "/",
-          maxAge: 14400,
-        });
+        // localStorage.setItem("nickname", nickname);
+
         cookies.set("nickname", nickname, {
           path: "/",
-          maxAge: 14400,
+          maxAge: 14400, // 4시간
         });
 
         dispatch(setUser(memberId, nickname));
@@ -168,10 +187,21 @@ const memberInfoDB = (memberId, memberInfo) => {
       const { data } = await apis.sendInfo(memberInfo);
 
       const nickname = memberInfo.nickname;
+
+      // localStorage.setItem("memberId", memberId);
+
+      cookies.set("memberId", memberId, {
+        path: "/",
+        maxAge: 14400, // 4시간
+      });
+
+      // localStorage.setItem("nickname", nickname);
+
       cookies.set("nickname", nickname, {
         path: "/",
-        maxAge: 14400,
+        maxAge: 14400, // 4시간
       });
+
       dispatch(setUser(memberId, nickname));
       history.replace("/");
     } catch (err) {
@@ -181,27 +211,27 @@ const memberInfoDB = (memberId, memberInfo) => {
   };
 };
 
-const getUserInfoDB = () => {
-  return async function (dispatch, getState, { history }) {
-    try {
-      const { data } = await apis.getUserInfo();
+// const getUserInfoDB = () => {
+//   return async function (dispatch, getState, { history }) {
+//     try {
+//       const { data } = await apis.getUserInfo();
 
-      const userInfo = {
-        memberId: data.data.memberId,
-        resTag: data.data.resTag,
-        coin: data.data.coin,
-        star: data.data.star,
-      };
-      const followList = data.data.followList;
-      const historyList = data.data.chatHistory;
-      const postList = data.data.postList;
-      dispatch(getInfo(userInfo, followList, historyList, postList));
-    } catch (err) {
-      console.log(err);
-      Swal.fire("유저정보 조회에 실패하였습니다. 다시 시도해주세요.");
-    }
-  };
-};
+//       const userInfo = {
+//         memberId: data.data.memberId,
+//         resTag: data.data.resTag,
+//         coin: data.data.coin,
+//         star: data.data.star,
+//       };
+//       const followList = data.data.followList;
+//       const historyList = data.data.chatHistory;
+//       const postList = data.data.postList;
+//       dispatch(getInfo(userInfo, followList, historyList, postList));
+//     } catch (err) {
+//       console.log(err);
+//       Swal.fire("유저정보 조회에 실패하였습니다. 다시 시도해주세요.");
+//     }
+//   };
+// };
 
 const dupMemberIdDB = (memberId) => {
   return async function (dispatch, getState, { history }) {
@@ -239,18 +269,20 @@ export default handleActions(
       produce(state, (draft) => {
         draft.memberId = action.payload.memberId;
         draft.nickname = action.payload.nickname;
-        draft.msg = false;
         draft.isLogin = true;
+        draft.msg = false;
       }),
     [LOG_OUT]: (state, action) =>
       produce(state, (draft) => {
         draft.memberId = null;
         draft.nickname = null;
-        draft.isLogin = false;
+        draft.isLogin = null;
+
         localStorage.removeItem("accessToken");
-        cookies.remove("accessToken", { path: "/" });
+        localStorage.removeItem("memberId");
         cookies.remove("memberId", { path: "/" });
         cookies.remove("nickname", { path: "/" });
+        cookies.remove("accessToken", { path: "/" });
       }),
     [GET_INFO]: (state, action) =>
       produce(state, (draft) => {
@@ -279,7 +311,7 @@ const actionCreators = {
   dupMemberIdDB,
   dupNicknameDB,
   memberInfoDB,
-  getUserInfoDB,
+  // getUserInfoDB,
   signupDB,
   kakaoLogin,
 };

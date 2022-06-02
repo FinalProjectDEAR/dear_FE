@@ -28,7 +28,13 @@ function MainChat() {
   const [showChatInfo, setShowChatInfo] = React.useState(false);
 
   React.useEffect(() => {
-    dispatch(mainActions.getTapeDB());
+    const nickname = cookies.get("nickname", { path: "/" });
+    console.log("닉네임", nickname);
+    if (!nickname) {
+      return;
+    } else {
+      dispatch(mainActions.getTapeDB());
+    }
   }, []);
 
   const CheckBox = () => {

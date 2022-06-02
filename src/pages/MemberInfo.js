@@ -14,6 +14,12 @@ import { nicknameCheck } from "../shared/Check";
 import { cookies } from "../shared/cookie";
 
 function MemberInfo() {
+  React.useEffect(() => {
+    window.onpopstate = () => {
+      history.push("/");
+    };
+  });
+
   const dispatch = useDispatch();
   const [nickname, setNickname] = React.useState("");
   const [gender, setGender] = React.useState("");
@@ -609,16 +615,16 @@ function MemberInfo() {
                       </Text>
                     </Button>
                   </SubmitBox>
-                  <MobileButton
-                    onClick={() => {
-                      submit(dating);
-                    }}
-                  >
-                    <Text body4 color="#fff" textAlign="center">
-                      디어 시작하기
-                    </Text>
-                  </MobileButton>
                 </InfoContainer>
+                <MobileButton
+                  onClick={() => {
+                    submit(dating);
+                  }}
+                >
+                  <Text body4 color="#fff" textAlign="center">
+                    디어 시작하기
+                  </Text>
+                </MobileButton>
               </InfoWrapper>
             ) : null}
           </React.Fragment>
@@ -638,11 +644,13 @@ const InfoWrapper = styled.div`
   background-color: #fff;
   border-radius: 20px;
   @media ${({ theme }) => theme.device.mobile} {
+    position: relative;
     width: 360px;
-    height: 834px;
-    padding: 45px 0px;
-    overflow: scroll;
+    min-height: 592px;
+    padding: 0px;
+    padding-top: 45px;
     border-radius: 0px;
+    overflow: scroll;
   }
 `;
 
@@ -650,11 +658,9 @@ const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 360px;
+  min-width: 360px;
   margin: auto;
   @media ${({ theme }) => theme.device.mobile} {
-    height: 676px;
-    overflow: scroll;
   }
 `;
 
@@ -783,8 +789,7 @@ const MobileButton = styled.div`
   background: #7a37be;
   border-radius: 0px;
   @media ${({ theme }) => theme.device.mobile} {
+    margin-top: 50px;
     display: flex;
-    position: fixed;
-    bottom: 0;
   }
 `;
