@@ -1,5 +1,4 @@
 import React from "react";
-
 //리덕스
 import { history } from "../redux/configureStore";
 //스타일

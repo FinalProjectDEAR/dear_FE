@@ -5,7 +5,6 @@ import { actionCreators as voteActions } from "../../redux/modules/vote";
 //스타일
 import styled from "styled-components";
 import { Text, TextB, Button } from "../../elements";
-//페이지
 
 function VoteDel(props) {
   const dispatch = useDispatch();

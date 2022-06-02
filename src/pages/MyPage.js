@@ -1,10 +1,10 @@
 import React from "react";
-
+//리덕스
 import { useDispatch, useSelector } from "react-redux";
 import { MsgActionCreators } from "../redux/modules/message";
 import { actionCreators } from "../redux/modules/mypage";
 import { history } from "../redux/configureStore";
-
+//스타일
 import styled from "styled-components";
 import { Modal } from "../elements/index";
 import Swal from "sweetalert2";
@@ -16,7 +16,7 @@ import { ReactComponent as Help } from "../assets/mypage/help_outline.svg";
 import { ReactComponent as Sound } from "../assets/mypage/surround_sound.svg";
 import { ReactComponent as Left } from "../assets/mypage/paging_left.svg";
 import { ReactComponent as Right } from "../assets/mypage/paging_right.svg";
-
+//컴포넌트
 import Layout from "../components/Layout";
 import MessageList from "./MessageList";
 import CounselHistory from "./CounselHistory";

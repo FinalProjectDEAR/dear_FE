@@ -118,16 +118,21 @@ const loginDB = (memberId, pwd) => {
       let accessToken = data.data.accessToken;
 
       const tokenData = jwtDecode(accessToken);
-      localStorage.setItem("memberId", memberId);
       localStorage.setItem("accessToken", accessToken);
-
+      cookies.set("memberId", memberId, {
+        path: "/",
+        maxAge: 14400,
+      });
       if (tokenData.nick) {
         history.replace("/");
         const nickname = tokenData.nick;
-        localStorage.setItem("nickname", nickname);
         cookies.set("accessToken", accessToken, {
           path: "/",
           maxAge: 14400, // 4시간
+        });
+        cookies.set("nickname", memberId, {
+          path: "/",
+          maxAge: 14400,
         });
         dispatch(setUser(memberId, nickname));
       } else {
@@ -151,16 +156,24 @@ const kakaoLogin = (code) => {
 
       const tokenData = jwtDecode(accessToken);
       localStorage.setItem("accessToken", accessToken);
+
       cookies.set("accessToken", accessToken, {
         path: "/",
-        maxAge: 14400, // 4시간
+        maxAge: 14400,
       });
 
       if (tokenData.nick) {
         const memberId = tokenData.sub;
         const nickname = tokenData.nick;
-        localStorage.setItem("memberId", memberId);
-        localStorage.setItem("nickname", nickname);
+        cookies.set("memberId", memberId, {
+          path: "/",
+          maxAge: 14400,
+        });
+        cookies.set("nickname", memberId, {
+          path: "/",
+          maxAge: 14400,
+        });
+
         dispatch(setUser(memberId, nickname));
         history.replace("/");
       } else {
@@ -180,8 +193,10 @@ const memberInfoDB = (memberId, memberInfo) => {
       const { data } = await apis.sendInfo(memberInfo);
 
       const nickname = memberInfo.nickname;
-      localStorage.setItem("memberId", memberId);
-      localStorage.setItem("nickname", nickname);
+      cookies.set("nickname", memberId, {
+        path: "/",
+        maxAge: 14400,
+      });
       dispatch(setUser(memberId, nickname));
       history.replace("/");
     } catch (err) {
@@ -257,10 +272,10 @@ export default handleActions(
         draft.memberId = null;
         draft.nickname = null;
         draft.isLogin = false;
-        localStorage.removeItem("memberId");
-        localStorage.removeItem("nickname");
         localStorage.removeItem("accessToken");
         cookies.remove("accessToken", { path: "/" });
+        cookies.remove("memberId", { path: "/" });
+        cookies.remove("nickname", { path: "/" });
       }),
     [GET_INFO]: (state, action) =>
       produce(state, (draft) => {

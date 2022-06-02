@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-
 //라우트
 import { useParams } from "react-router-dom";
 //리덕스
@@ -8,7 +7,6 @@ import { actionCreators as chatActions } from "../redux/modules/chat";
 //스타일
 import styled from "styled-components";
 import { Text, TextB, Modal } from "../elements";
-
 import { ReactComponent as Empty } from "../assets/chat/empty.svg";
 //컴포넌트
 import Header from "../components/Header";

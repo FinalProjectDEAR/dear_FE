@@ -1,6 +1,4 @@
 import React from "react";
-//리덕스
-import { history } from "../../redux/configureStore";
 //스타일
 import styled from "styled-components";
 import { Text, TextB, Button } from "../../elements";

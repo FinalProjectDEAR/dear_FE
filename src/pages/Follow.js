@@ -1,9 +1,9 @@
 import React from "react";
-
+//리덕스
 import { useDispatch } from "react-redux";
 import { history } from "../redux/configureStore";
 import { actionCreators } from "../redux/modules/mypage";
-
+//스타일
 import styled from "styled-components";
 import { Text, ColorBadge, Modal } from "../elements";
 import { ReactComponent as UnFollower } from "../assets/mypage/찜해제.svg";

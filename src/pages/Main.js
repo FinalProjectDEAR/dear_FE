@@ -1,9 +1,7 @@
 import React from "react";
-
 //스타일
 import styled from "styled-components";
 import ReactPageScroller from "react-page-scroller";
-import { Link } from "react-scroll";
 //페이지
 import MainChat from "./MainChat";
 import MainRanking from "./MainRanking";

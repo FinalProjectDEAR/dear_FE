@@ -1,10 +1,10 @@
 import React from "react";
-
+//라우터
 import { useHistory, useParams } from "react-router-dom";
-
+//리덕스
 import { actionCreators } from "../redux/modules/post";
 import { useDispatch, useSelector } from "react-redux";
-
+//스타일
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
@@ -20,7 +20,7 @@ import { ReactComponent as Again } from "../assets/postList/board-cate6.svg";
 import { ReactComponent as Solo } from "../assets/postList/board-cate3 (1).svg";
 import { ReactComponent as Etc } from "../assets/postList/board-cate8.svg";
 import { ReactComponent as Blogging } from "../assets/postList/Group 573.svg";
-
+//컴포넌트
 import VoteList from "../components/VoteList";
 import MobileVoteList from "../components/MobileVoteList";
 import Layout from "../components/Layout";

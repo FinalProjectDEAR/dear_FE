@@ -1,19 +1,18 @@
 import React, { useRef } from "react";
-
 //리덕스
 import { useSelector, useDispatch } from "react-redux";
 import { history } from "../redux/configureStore";
 import { actionCreators as imageActions } from "../redux/modules/image";
 import { actionCreators as voteActions } from "../redux/modules/vote";
 //스타일
-import { useMediaQuery } from "react-responsive";
+import styled from "styled-components";
 import { Input, Text, TextB, Button, Modal } from "../elements";
+import { useMediaQuery } from "react-responsive";
 import { ReactComponent as ImageUPload } from "../assets/postList/파일첨부.svg";
 import { ReactComponent as Arrow } from "../assets/main/arrow.svg";
-import uploadImg from "../assets/upload.png";
-import styled from "styled-components";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
+import uploadImg from "../assets/upload.png";
 
 function VoteWrite() {
   //모바일 사이즈

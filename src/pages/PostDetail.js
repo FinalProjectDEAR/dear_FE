@@ -1,11 +1,11 @@
 import React from "react";
-
+//라우터
 import { useParams, useHistory } from "react-router-dom";
-
+//리덕스
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators } from "../redux/modules/post";
 import { actionCreators as commentActions } from "../redux/modules/comment";
-
+//스타일
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
@@ -13,7 +13,7 @@ import { Text, Modal } from "../elements/index";
 import { ReactComponent as ThumbUp } from "../assets/postList/posthumb.svg";
 import { ReactComponent as CommentNum } from "../assets/postList/post.svg";
 import { ReactComponent as LikeUp } from "../assets/postList/postUp.svg";
-
+//컴포넌트
 import Layout from "../components/Layout";
 import CommentList from "../components/CommentList";
 import CommentWrite from "../components/CommentWrite";
@@ -21,6 +21,8 @@ import PostRemove from "../components/alert/PostRemove";
 import Pagination from "../elements/Pagination";
 //시간알려주는패키지
 import TimeCounting from "time-counting";
+
+import { cookies } from "../shared/cookie";
 
 function PostDetail(props) {
   const params = useParams();
@@ -58,7 +60,7 @@ function PostDetail(props) {
   };
   const createdAt = TimeCounting(post?.createAt, option);
   const likesList = post?.likesList; //공감 수 로직
-  const loginUser = localStorage.getItem("memberId");
+  const loginUser = cookies.get("memberId", { path: "/" });
 
   //모달
   const [modalOpen, setModalOpen] = React.useState(false);
@@ -68,7 +70,6 @@ function PostDetail(props) {
   };
 
   //본인인지 확인 하기
-  const member = localStorage.getItem("memberId");
   const isUser = useSelector((state) => state.user.isLogin);
   const likePost = () => {
     if (!isUser) {
@@ -76,7 +77,7 @@ function PostDetail(props) {
       history.push(`/login`);
       return;
     }
-    if (post?.memberId === member) {
+    if (post?.memberId === loginUser) {
       Swal.fire("본인 글의 공감은 불가합니다.");
       return;
     }

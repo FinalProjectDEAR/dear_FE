@@ -1,9 +1,9 @@
 import React from "react";
-
+//스타일
 import styled from "styled-components";
 import { Text, TextB, ColorBadge } from "../elements";
 import { useMediaQuery } from "react-responsive";
-
+//컴포넌트
 import ChatTag from "../elements/ChatTag";
 //시간알려주는패키지
 import TimeCounting from "time-counting";

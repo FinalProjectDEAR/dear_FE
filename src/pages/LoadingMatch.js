@@ -1,9 +1,8 @@
 import React from "react";
-
 //스타일
 import styled, { keyframes } from "styled-components";
 import { Text, Button, Modal } from "../elements";
-//페이지
+//컴포넌트
 import NoMatch from "../components/alert/NoMatch";
 
 function LoadingMatch({ informClose, leaveSession }) {

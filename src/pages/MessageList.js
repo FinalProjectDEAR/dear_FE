@@ -1,9 +1,9 @@
 import React from "react";
-
+//리덕스
 import { useDispatch } from "react-redux";
 import { history } from "../redux/configureStore";
 import { MsgActionCreators } from "../redux/modules/message";
-
+//스타일
 import styled from "styled-components";
 import { Text, TextB } from "../elements";
 //시간알려주는패키지

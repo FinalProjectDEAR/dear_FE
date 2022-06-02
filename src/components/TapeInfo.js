@@ -1,5 +1,4 @@
 import React from "react";
-
 //스타일
 import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";

@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { Text } from "../elements";
 import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
-//페이지
 
 function VoteResult(props) {
   const voteResult = useSelector((state) => state.vote.voteResult);

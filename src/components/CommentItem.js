@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-
+//리덕스
 import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/configureStore";
 import { actionCreators } from "../redux/modules/comment";
-
+import { cookies } from "../shared/cookie";
+//스타일
 import styled from "styled-components";
 import { Text, Input, Modal } from "../elements";
 import { ReactComponent as Like } from "../assets/postList/Frame 676.svg";
@@ -11,7 +12,7 @@ import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
 //시간알려주는패키지
 import TimeCounting from "time-counting";
-
+//컴포넌트
 import CommentRemove from "../components/alert/CommentRemove";
 
 const CommentItem = (props) => {
@@ -37,7 +38,7 @@ const CommentItem = (props) => {
   //좋아요!(댓글)
   const commentLike = props.likes;
   //수정을 알 수 있는 방법
-  const memberId = localStorage.getItem("memberId");
+  const memberId = cookies.get("memberId", { path: "/" });
   const post = useSelector((state) => state.post.detailPost);
   //수정하기
   const editComment = () => {

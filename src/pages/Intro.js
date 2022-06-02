@@ -1,5 +1,4 @@
 import React from "react";
-
 //스타일
 import styled from "styled-components";
 import { ReactComponent as Info1 } from "../assets/intro/s-info-1.svg";
@@ -7,7 +6,6 @@ import { ReactComponent as Info2 } from "../assets/intro/s-info-2.svg";
 import { ReactComponent as Info3 } from "../assets/intro/s-info-3.svg";
 import { ReactComponent as Info4 } from "../assets/intro/s-info-4.svg";
 import { ReactComponent as Info5 } from "../assets/intro/s-info-5.svg";
-
 //페이지
 import Header from "../components/Header";
 import MobileIntro from "../pages/MobileIntro";
