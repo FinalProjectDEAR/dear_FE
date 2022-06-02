@@ -80,7 +80,6 @@ function ResReview(props) {
           serviceComment
         )
       );
-      localStorage.removeItem("response");
     }
 
     if (badClick === true) {
@@ -94,7 +93,6 @@ function ResReview(props) {
           serviceComment
         )
       );
-      localStorage.removeItem("response");
     }
   };
 

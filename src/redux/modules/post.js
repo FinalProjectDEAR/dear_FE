@@ -9,6 +9,8 @@ import { apis } from "../../shared/apis";
 import Swal from "sweetalert2";
 import "../../styles/libraryStyle/style.css";
 
+import { cookies } from "../../shared/cookie";
+
 // 액션
 const GET_POST = "GET_POST";
 const GET_DETAIL = "GET_DETAIL";
@@ -71,7 +73,7 @@ const getPostDB = (page) => {
 const getDetailDB = (postId) => {
   return async function (dispatch, getState, { history }) {
     try {
-      const memberId = localStorage.getItem("memberId");
+      const memberId = cookies.get("memberId", { path: "/" });
       const { data } = await axios.get(
         process.env.REACT_APP_URL + `/anonypost/board/${postId}?id=${memberId}`,
         {}

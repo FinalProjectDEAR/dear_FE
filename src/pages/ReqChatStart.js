@@ -22,11 +22,6 @@ function ResChatStart() {
   const [imgFile, setImgFile] = React.useState([]);
   const [audioPermit, setAudioPermit] = React.useState("");
 
-  const token = useSelector((state) => state.chat.token);
-  const sessionId = useSelector((state) => state.chat.sessionId);
-  const memberId = localStorage.getItem("memberId");
-  const ninckname = localStorage.getItem("ninckname");
-
   const fileList = useSelector((state) => state.image.fileList);
   const chatFile = fileList.slice(0, 3);
 

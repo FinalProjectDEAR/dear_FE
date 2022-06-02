@@ -68,21 +68,10 @@ const signupDB = (memberId, pwd, pwdCheck) => {
   };
 };
 
-// export const __loginCheck =
-//   (isLogin, user) =>
-//   async (dispatch, getState, { history }) => {
-//     try {
-//       const {
-//         data: { ok: isLogin, user, tutorial },
-//       } = await userApi.loginCheck();
-//       dispatch(loginCheck(isLogin, user, tutorial));
-//     } catch (e) {}
-//   };
-
 const loginCheckDB = () => {
   return function (dispatch, getState, { history }) {
-    const nickname = localStorage.getItem("nickname");
-    const memberId = localStorage.getItem("memberId");
+    const nickname = cookies.get("nickname", { path: "/" });
+    const memberId = cookies.get("memberId", { path: "/" });
     const tokenCheck = cookies.get("accessToken", { path: "/" });
     if (tokenCheck) {
       dispatch(setUser(memberId, nickname));
@@ -90,20 +79,6 @@ const loginCheckDB = () => {
     }
   };
 };
-
-// const loginCheckDB = () => {
-//   return function (dispatch, getState, { history }) {
-//     const nickname = localStorage.getItem("nickname");
-//     const memberId = localStorage.getItem("memberId");
-//     const tokenCheck = localStorage.accessToken;
-//     const logged = isLogin();
-//     if (logged) {
-//       dispatch(setUser(memberId, nickname));
-//     } else {
-//       dispatch(logOut());
-//     }
-//   };
-// };
 
 const loginDB = (memberId, pwd) => {
   return async function (dispatch, getState, { history }) {
@@ -130,7 +105,7 @@ const loginDB = (memberId, pwd) => {
           path: "/",
           maxAge: 14400, // 4시간
         });
-        cookies.set("nickname", memberId, {
+        cookies.set("nickname", nickname, {
           path: "/",
           maxAge: 14400,
         });
@@ -169,7 +144,7 @@ const kakaoLogin = (code) => {
           path: "/",
           maxAge: 14400,
         });
-        cookies.set("nickname", memberId, {
+        cookies.set("nickname", nickname, {
           path: "/",
           maxAge: 14400,
         });
@@ -193,7 +168,7 @@ const memberInfoDB = (memberId, memberInfo) => {
       const { data } = await apis.sendInfo(memberInfo);
 
       const nickname = memberInfo.nickname;
-      cookies.set("nickname", memberId, {
+      cookies.set("nickname", nickname, {
         path: "/",
         maxAge: 14400,
       });
