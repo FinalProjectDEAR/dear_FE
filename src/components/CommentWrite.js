@@ -1,10 +1,10 @@
 import React from "react";
-
+//라우터
 import { useHistory } from "react-router-dom";
-
+//리덕스
 import { actionCreators } from "../redux/modules/comment";
 import { useSelector, useDispatch } from "react-redux";
-
+//스타일
 import styled from "styled-components";
 import { Button, Input } from "../elements";
 import Swal from "sweetalert2";

@@ -1,5 +1,4 @@
 import React from "react";
-
 //리덕스
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as mainActions } from "../redux/modules/main";

@@ -1,10 +1,10 @@
 import React from "react";
-
+//리덕스
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators } from "../redux/modules/noti";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { useHistory, useLocation } from "react-router-dom";
-
+//스타일
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
@@ -18,7 +18,7 @@ import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import { ReactComponent as Hamburger } from "../assets/etc/Vector (5).svg";
 //id값으로 스크롤
 import { Link } from "react-scroll";
-
+//컴포넌트
 import Survey from "./Survey";
 import MobileFixedBtn from "./MobileFixedBtn";
 

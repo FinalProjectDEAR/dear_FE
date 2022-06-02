@@ -1,16 +1,15 @@
 import React from "react";
-
+//리덕스
 import { history } from "../redux/configureStore";
-
 import { useDispatch, useSelector } from "react-redux";
 import { MsgActionCreators } from "../redux/modules/message";
-
+//스타일
 import styled from "styled-components";
+import { Text, Input, Button, TextB, Modal } from "../elements";
 import { CgClose } from "react-icons/cg";
+import { useMediaQuery } from "react-responsive";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
-import { useMediaQuery } from "react-responsive";
-import { Text, Input, Button, TextB, Modal } from "../elements";
 
 function SendMsg() {
   const Mobile = useMediaQuery({

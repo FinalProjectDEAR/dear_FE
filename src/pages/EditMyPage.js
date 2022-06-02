@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
-
+//리덕스
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { actionCreators } from "../redux/modules/mypage";
 import { nicknameCheck } from "../shared/Check";
-
+//스타일
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
 import { Button, Text, ColorBadge, Input } from "../elements";
 import { useMediaQuery } from "react-responsive";
-
+//컴포넌트
 import Layout from "../components/Layout";
 
 const EditMyPage = () => {

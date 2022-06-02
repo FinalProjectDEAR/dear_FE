@@ -96,7 +96,6 @@ function ResReview(props) {
       );
       localStorage.removeItem("response");
     }
-    // props.informClose();
   };
 
   return (

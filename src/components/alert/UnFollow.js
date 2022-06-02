@@ -1,8 +1,8 @@
 import React from "react";
-
+//리덕스
 import { useDispatch } from "react-redux";
 import { actionCreators } from "../../redux/modules/review";
-
+//스타일
 import styled from "styled-components";
 import { Text, Button, TextB } from "../../elements";
 import { useMediaQuery } from "react-responsive";

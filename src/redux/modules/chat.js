@@ -3,7 +3,6 @@ import { produce } from "immer";
 import { actionCreators as imageActions } from "./image";
 
 import { apis } from "../../shared/apis";
-// import { apis } from "../../shared/apisDev";
 import Swal from "sweetalert2";
 import "../../styles/libraryStyle/style.css";
 
@@ -113,7 +112,6 @@ const disConnectDB = (sessionId, role) => {
   return async function (dispatch, getState, { history }) {
     try {
       const { data } = await apis.disConnect(sessionId);
-
       history.replace("/");
     } catch {
       history.replace("/");

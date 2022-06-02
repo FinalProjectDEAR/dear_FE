@@ -1,5 +1,4 @@
 import React from "react";
-//라우트
 //리덕스
 import { history } from "../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +8,6 @@ import styled from "styled-components";
 import { Text, Input, Button, Modal } from "../elements";
 import { ReactComponent as Logo } from "../assets/main/Logo.svg";
 import { ReactComponent as Kakao } from "../assets/etc/kakao_sns.svg";
-import Footer from "../components/Footer";
 import Survey from "../components/Survey";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";

@@ -1,9 +1,9 @@
 import React from "react";
-
+//리덕스
 import { history } from "../redux/configureStore";
 import { useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
-
+//스타일
 import styled from "styled-components";
 import { Text, ColorBadge, AlarmModal } from "../elements";
 import { CgClose } from "react-icons/cg";

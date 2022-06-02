@@ -1,14 +1,13 @@
 import React from "react";
-
-import { history } from "../redux/configureStore";
 //리덕스관련
+import { history } from "../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux";
 import { MsgActionCreators } from "../redux/modules/message";
 import { useParams } from "react-router-dom";
-
+//스타일
+import styled from "styled-components";
 import { Text, Button, TextB, Modal } from "../elements";
 import { CgClose } from "react-icons/cg";
-import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
 
 //시간알려주는패키지

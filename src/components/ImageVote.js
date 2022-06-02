@@ -13,9 +13,6 @@ import "../styles/libraryStyle/style.css";
 // 페이지
 import VoteResult from "./VoteResult";
 
-import { cookies } from "../shared/cookie";
-import isLogin from "../shared/auth/isLogin";
-
 function ImageVote({ voteInfo }) {
   const isUser = useSelector((state) => state.user.isLogin);
 

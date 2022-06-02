@@ -1,11 +1,9 @@
 import React from "react";
-
 //라우트
 import { useParams, useHistory } from "react-router-dom";
 //리덕스
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as voteActions } from "../redux/modules/vote";
-import { actionCreators as commentActions } from "../redux/modules/comment";
 //스타일
 import styled from "styled-components";
 import { Text, TextB, Modal } from "../elements/index";
@@ -20,7 +18,6 @@ import Layout from "../components/Layout";
 function VoteDetail(props) {
   const params = useParams();
   const postId = params.postId;
-  const history = useHistory();
   const dispatch = useDispatch();
 
   //모달

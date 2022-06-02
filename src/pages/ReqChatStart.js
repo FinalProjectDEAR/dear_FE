@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-
 //리덕스
 import { useSelector, useDispatch } from "react-redux";
 import { history } from "../redux/configureStore";
@@ -31,20 +30,20 @@ function ResChatStart() {
   const fileList = useSelector((state) => state.image.fileList);
   const chatFile = fileList.slice(0, 3);
 
-  //오디오 액세스 요청
-  React.useEffect(() => {
-    navigator.mediaDevices
-      .getUserMedia({ audio: true, video: true })
-      .then((stream) => {
-        setAudioPermit(true);
-        return;
-      })
-      .catch((err) => {
-        Swal.fire("오디오 접근이 거절되었습니다. 설정에서 승인해주세요.");
-        setAudioPermit(false);
-        return;
-      });
-  }, []);
+  // //오디오 액세스 요청
+  // React.useEffect(() => {
+  //   navigator.mediaDevices
+  //     .getUserMedia({ audio: true, video: true })
+  //     .then((stream) => {
+  //       setAudioPermit(true);
+  //       return;
+  //     })
+  //     .catch((err) => {
+  //       Swal.fire("오디오 접근이 거절되었습니다. 설정에서 승인해주세요.");
+  //       setAudioPermit(false);
+  //       return;
+  //     });
+  // }, [audioPermit]);
 
   //모달
   const [modalOpen, setModalOpen] = React.useState(true);
@@ -104,10 +103,10 @@ function ResChatStart() {
 
   //매칭신청
   const submit = () => {
-    if (audioPermit === false) {
-      Swal.fire("오디오와 비디오 권한을 허용해주세요.");
-      return;
-    }
+    // if (audioPermit === false) {
+    //   Swal.fire("오디오와 비디오 권한을 허용해주세요.");
+    //   return;
+    // }
 
     if (chatTitle === "" || gender === "" || category === "") {
       Swal.fire("필수정보를 모두 입력해주세요.");

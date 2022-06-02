@@ -1,6 +1,4 @@
 import React from "react";
-
-//라우트
 //리덕스
 import { history } from "../redux/configureStore";
 import { useSelector, useDispatch } from "react-redux";

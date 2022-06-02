@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-
+//라우터
 import { useHistory, useParams } from "react-router-dom";
-
+//리덕스
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators } from "../redux/modules/post";
 import { imgActions } from "../redux/modules/imagePost";
-
+//스타일
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";

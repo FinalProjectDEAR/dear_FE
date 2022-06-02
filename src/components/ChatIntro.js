@@ -2,16 +2,11 @@ import React from "react";
 //스타일
 import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
-import { Text } from "../elements";
 import { CgClose } from "react-icons/cg";
 import { ReactComponent as ChatInfo } from "../assets/infoModal/ChatIntro.svg";
 import { ReactComponent as MobileChatInfo } from "../assets/infoModal/ChatIntroMobile.svg";
 
 function ChatIntro({ closeChatInfo }) {
-  const setCheckBox = () => {
-    console.log("오늘하루 표시 그만");
-  };
-
   const Mobile = useMediaQuery({
     query: "(max-width:425px)",
   });
@@ -31,18 +26,6 @@ function ChatIntro({ closeChatInfo }) {
           }}
         />
         {Mobile ? <MobileChatInfo /> : <ChatInfo />}
-
-        {/* <InputWrap>
-          <input
-            type="checkbox"
-            name="completed"
-            id="check"
-            onChange={setCheckBox}
-          />
-          <Text sub6 margin="10px" textAlign="left">
-            오늘 하루 그만 보기
-          </Text>
-        </InputWrap> */}
       </Wrapper>
     </React.Fragment>
   );

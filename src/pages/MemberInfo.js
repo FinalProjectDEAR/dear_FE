@@ -1,5 +1,4 @@
 import React from "react";
-
 //리덕스
 import { useSelector, useDispatch } from "react-redux";
 import { history } from "../redux/configureStore";
@@ -12,6 +11,7 @@ import Swal from "sweetalert2";
 import "../styles/libraryStyle/style.css";
 
 import { nicknameCheck } from "../shared/Check";
+import { cookies } from "../shared/cookie";
 
 function MemberInfo() {
   const dispatch = useDispatch();
@@ -29,8 +29,7 @@ function MemberInfo() {
   const [isNext, setIsNext] = React.useState(1);
   const [isDup, setIsDup] = React.useState(true);
 
-  const memberId = localStorage.getItem("memberId");
-
+  const memberId = cookies.get("memberId", { path: "/" });
   const nickErr = useSelector((state) => state.user.nickMsg);
 
   //모달
