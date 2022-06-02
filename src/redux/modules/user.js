@@ -72,7 +72,7 @@ const loginCheckDB = () => {
   return function (dispatch, getState, { history }) {
     const nickname = cookies.get("nickname", { path: "/" });
     const memberId = cookies.get("memberId", { path: "/" });
-    const tokenCheck = cookies.get("accessToken", { path: "/" });
+    const tokenCheck = localStorage.getItem("accessToken");
     if (tokenCheck) {
       dispatch(setUser(memberId, nickname));
       return;
@@ -101,10 +101,6 @@ const loginDB = (memberId, pwd) => {
       if (tokenData.nick) {
         history.replace("/");
         const nickname = tokenData.nick;
-        cookies.set("accessToken", accessToken, {
-          path: "/",
-          maxAge: 14400, // 4시간
-        });
         cookies.set("nickname", nickname, {
           path: "/",
           maxAge: 14400,
@@ -127,23 +123,16 @@ const kakaoLogin = (code) => {
         process.env.REACT_APP_URL + `/user/kakao/callback?code=${code}`
       );
       let accessToken = data.data.accessToken;
-      let refreshToken = data.data.refreshToken;
 
       const tokenData = jwtDecode(accessToken);
+      const memberId = tokenData.sub;
       localStorage.setItem("accessToken", accessToken);
-
-      cookies.set("accessToken", accessToken, {
+      cookies.set("memberId", memberId, {
         path: "/",
         maxAge: 14400,
       });
-
       if (tokenData.nick) {
-        const memberId = tokenData.sub;
         const nickname = tokenData.nick;
-        cookies.set("memberId", memberId, {
-          path: "/",
-          maxAge: 14400,
-        });
         cookies.set("nickname", nickname, {
           path: "/",
           maxAge: 14400,
@@ -248,7 +237,6 @@ export default handleActions(
         draft.nickname = null;
         draft.isLogin = false;
         localStorage.removeItem("accessToken");
-        cookies.remove("accessToken", { path: "/" });
         cookies.remove("memberId", { path: "/" });
         cookies.remove("nickname", { path: "/" });
       }),
