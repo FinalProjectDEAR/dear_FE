@@ -7,6 +7,8 @@ import { ReactComponent as SurveyThumb } from "../assets/infoModal/survey.svg";
 import { useCookies } from "react-cookie";
 import dayjs from "dayjs";
 
+import eventResult from "../assets/infoModal/eventResult.png";
+
 function Survey({ close }) {
   const COOKIE_KEY = "notAgain";
   const [cookies, setCookie] = useCookies([COOKIE_KEY]);
@@ -24,26 +26,29 @@ function Survey({ close }) {
 
   return (
     <React.Fragment>
-      <Wrapper>
-        <CgClose
-          className="close"
-          size={20}
-          onClick={hiddenModal}
-          style={{
-            color: "#948A9E",
-            position: "absolute",
-            right: "30px",
-            top: "30px",
-            cursor: "pointer",
-          }}
-        />
-        <SurveyThumb
+      <img
+        style={{ height: "600px", position: "relative" }}
+        src={eventResult}
+        alt="eventresult"
+      />
+      <CgClose
+        className="close"
+        size={20}
+        onClick={hiddenModal}
+        style={{
+          color: "#948A9E",
+          position: "absolute",
+          right: "125px",
+          top: "35px",
+          cursor: "pointer",
+        }}
+      />
+      {/* <SurveyThumb
           style={{ cursor: "pointer" }}
           onClick={() => {
             window.open("https://respond.listovey.com/rs/EctfU25gC");
           }}
-        />
-      </Wrapper>
+        /> */}
     </React.Fragment>
   );
 }
